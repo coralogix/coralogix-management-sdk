@@ -7,20 +7,12 @@
   "paths": {
     "/data-exploration/views/v1/views": {
       "get": {
-        "tags": [
-          "Views service"
-        ],
-        "summary": "List views service",
         "description": "Lists all company public views",
         "operationId": "ViewsService_ListViews",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListViewsResponse"
-                },
                 "example": {
                   "views": [
                     {
@@ -71,51 +63,59 @@
                       }
                     }
                   ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "List views service",
         "tags": [
           "Views service"
-        ],
-        "summary": "Create a view service",
+        ]
+      },
+      "post": {
         "description": "Creates a new view",
         "operationId": "ViewsService_CreateView",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "ViewFolder",
                 "description": "View folder.",
-                "type": "object",
                 "properties": {
                   "filters": {
                     "$ref": "#/components/schemas/SelectedFilters"
                   },
                   "folderId": {
                     "description": "Unique identifier for folders",
-                    "type": "string",
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "examples": [
+                      "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    ],
+                    "maxLength": 36,
                     "minLength": 36,
-                    "maxLength": 36
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "type": "string"
                   },
                   "name": {
                     "description": "View name",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "examples": [
+                      "Logs view"
+                    ],
+                    "maxLength": 250,
                     "minLength": 1,
-                    "maxLength": 250
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
                   },
                   "searchQuery": {
-                    "description": "The search query.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/SearchQuery"
                       }
-                    ]
+                    ],
+                    "description": "The search query."
                   },
                   "timeSelection": {
                     "$ref": "#/components/schemas/TimeSelection"
@@ -127,7 +127,9 @@
                 "required": [
                   "name",
                   "timeSelection"
-                ]
+                ],
+                "title": "ViewFolder",
+                "type": "object"
               }
             }
           },
@@ -135,12 +137,8 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/View"
-                },
                 "example": {
                   "filters": {
                     "filters": [
@@ -187,29 +185,29 @@
                       "toTime": "2024-01-25T11:37:13.238Z"
                     }
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/View"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Create a view service",
+        "tags": [
+          "Views service"
+        ]
       }
     },
     "/data-exploration/views/v1/views/{id}": {
       "get": {
-        "tags": [
-          "Views service"
-        ],
-        "summary": "Get view service",
         "description": "Gets a view by ID",
         "operationId": "ViewsService_GetView",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/View"
-                },
                 "example": {
                   "filters": {
                     "filters": [
@@ -256,36 +254,41 @@
                       "toTime": "2024-01-25T11:37:13.238Z"
                     }
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/View"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get view service",
         "tags": [
           "Views service"
-        ],
-        "summary": "Replace a view service",
+        ]
+      },
+      "put": {
         "description": "Replaces an existing view",
         "operationId": "ViewsService_ReplaceView",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "View",
                 "description": "Response for views.",
-                "type": "object",
                 "properties": {
                   "filters": {
                     "$ref": "#/components/schemas/SelectedFilters"
                   },
                   "folderId": {
                     "description": "Unique identifier for folders",
-                    "type": "string",
-                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "examples": [
+                      "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    ],
+                    "maxLength": 36,
                     "minLength": 36,
-                    "maxLength": 36
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "type": "string"
                   },
                   "isCompactMode": {
                     "description": "The is compact mode.",
@@ -293,10 +296,13 @@
                   },
                   "name": {
                     "description": "View name",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "examples": [
+                      "Logs view"
+                    ],
+                    "maxLength": 250,
                     "minLength": 1,
-                    "maxLength": 250
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
                   },
                   "searchQuery": {
                     "$ref": "#/components/schemas/SearchQuery"
@@ -311,7 +317,9 @@
                 "required": [
                   "name",
                   "timeSelection"
-                ]
+                ],
+                "title": "View",
+                "type": "object"
               }
             }
           },
@@ -319,12 +327,8 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/View"
-                },
                 "example": {
                   "filters": {
                     "filters": [
@@ -371,46 +375,56 @@
                       "toTime": "2024-01-25T11:37:13.238Z"
                     }
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/View"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Replace a view service",
         "tags": [
           "Views service"
-        ],
-        "summary": "Delete view service",
+        ]
+      },
+      "delete": {
         "description": "Deletes a view by ID",
         "operationId": "ViewsService_DeleteView",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteViewResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Delete view service",
+        "tags": [
+          "Views service"
+        ]
       },
       "parameters": [
         {
-          "in": "path",
           "name": "id",
+          "in": "path",
           "description": "id",
           "required": true,
           "schema": {
-            "description": "id",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 2147483647,
             "minimum": 1,
-            "maximum": 2147483647
-          },
-          "style": "simple"
+            "type": "integer",
+            "description": "id",
+            "format": "int32",
+            "examples": [
+              52
+            ]
+          }
         }
       ]
     }
@@ -418,88 +432,96 @@
   "components": {
     "schemas": {
       "CustomTimeSelection": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Custom time selection.",
-        "type": "object",
-        "properties": {
-          "fromTime": {
-            "description": "The from time.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "maxLength": 35
-          },
-          "toTime": {
-            "description": "The to time.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 1,
-            "maxLength": 35
-          }
-        },
         "required": [
           "fromTime",
           "toTime"
-        ]
-      },
-      "DeleteViewResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response returned after successfully deleting a view.",
-        "type": "object",
-        "additionalProperties": false
-      },
-      "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        ],
         "type": "object",
         "properties": {
+          "fromTime": {
+            "maxLength": 35,
+            "minLength": 1,
+            "type": "string",
+            "description": "The from time.",
+            "format": "date-time",
+            "examples": [
+              "2024-01-25T11:31:43.152Z"
+            ]
+          },
+          "toTime": {
+            "maxLength": 35,
+            "minLength": 1,
+            "type": "string",
+            "description": "The to time.",
+            "format": "date-time",
+            "examples": [
+              "2024-01-25T11:35:43.152Z"
+            ]
+          }
+        },
+        "description": "Custom time selection.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "DeleteViewResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after successfully deleting a view.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "FilterPathAndValues": {
+        "title": "FilterPathAndValues",
+        "required": [
+          "path"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -507,36 +529,40 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "ListViewsResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response containing a list of views.",
+        }
+      },
+      "ListViewsResponse": {
         "type": "object",
         "properties": {
           "views": {
-            "description": "The views.",
+            "maxItems": 100000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/View"
             },
-            "minItems": 0,
-            "maxItems": 100000
+            "description": "The views."
           }
+        },
+        "description": "Response containing a list of views.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -546,98 +572,133 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "QuickTimeSelection": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Quick time selection.",
+        "required": [
+          "seconds"
+        ],
         "type": "object",
         "properties": {
           "caption": {
-            "deprecated": true,
-            "description": "Folder name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 100,
             "minLength": 1,
-            "maxLength": 100
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Folder name",
+            "examples": [
+              "Last Hour"
+            ],
+            "deprecated": true
           },
           "seconds": {
-            "description": "Folder name",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "Folder name",
+            "format": "int64",
+            "examples": [
+              3600
+            ]
           }
         },
-        "required": [
-          "seconds"
-        ]
-      },
-      "SearchQuery": {
+        "description": "Quick time selection.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "SearchQuery": {
         "title": "SearchQuery",
-        "description": "Search query.",
+        "required": [
+          "query"
+        ],
         "type": "object",
         "properties": {
           "query": {
-            "description": "Query string.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 1,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Query string."
           },
           "syntaxType": {
             "$ref": "#/components/schemas/SyntaxType"
           }
         },
-        "required": [
-          "query"
-        ]
-      },
-      "SelectedFilters": {
+        "description": "Search query.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Selected filters.",
+        }
+      },
+      "SelectedFilters": {
         "type": "object",
         "properties": {
           "filters": {
-            "description": "List of filters.",
+            "maxItems": 1000,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/views.v1.Filter"
             },
-            "minItems": 1,
-            "maxItems": 1000
+            "description": "List of filters."
           }
+        },
+        "description": "Selected filters.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SyntaxType": {
-        "description": "Syntax type.",
-        "type": "string",
         "enum": [
           "SYNTAX_TYPE_UNSPECIFIED",
           "SYNTAX_TYPE_LUCENE",
           "SYNTAX_TYPE_DATAPRIME"
-        ]
+        ],
+        "type": "string",
+        "description": "Syntax type."
       },
       "TimeSelection": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Time selection.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "quickSelection"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "customSelection"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "quickSelection"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "customSelection"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "customSelection": {
             "$ref": "#/components/schemas/CustomTimeSelection"
@@ -646,75 +707,56 @@
             "$ref": "#/components/schemas/QuickTimeSelection"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "quickSelection"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "customSelection"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "quickSelection"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "customSelection"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "View": {
+        "description": "Time selection.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "View": {
         "title": "View",
-        "description": "Response for views.",
+        "required": [
+          "name",
+          "id",
+          "timeSelection"
+        ],
         "type": "object",
         "properties": {
           "filters": {
             "$ref": "#/components/schemas/SelectedFilters"
           },
           "folderId": {
-            "description": "Unique identifier for folders",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "type": "string",
+            "description": "Unique identifier for folders",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ]
           },
           "id": {
-            "description": "id",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 2147483647,
             "minimum": 1,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "id",
+            "format": "int32",
+            "examples": [
+              52
+            ]
           },
           "isCompactMode": {
-            "description": "The is compact mode.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is compact mode."
           },
           "name": {
-            "description": "View name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 250,
             "minLength": 1,
-            "maxLength": 250
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "View name",
+            "examples": [
+              "Logs view"
+            ]
           },
           "searchQuery": {
             "$ref": "#/components/schemas/SearchQuery"
@@ -726,65 +768,67 @@
             "$ref": "#/components/schemas/ViewType"
           }
         },
-        "required": [
-          "name",
-          "id",
-          "timeSelection"
-        ]
+        "description": "Response for views.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "ViewType": {
-        "description": "View type.",
-        "type": "string",
         "enum": [
           "VIEW_TYPE_UNSPECIFIED",
           "VIEW_TYPE_LOGS",
           "VIEW_TYPE_TEMPLATES",
           "VIEW_TYPE_ARCHIVE_LOGS",
           "VIEW_TYPE_ARCHIVE_TEMPLATES"
-        ]
+        ],
+        "type": "string",
+        "description": "View type."
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       },
       "views.v1.Filter": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "ViewFolder",
-        "description": "View folder.",
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "Filter name",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 65535
-          },
-          "selectedValues": {
-            "description": "Filter selected values",
-            "type": "object",
-            "additionalProperties": {
-              "type": "boolean"
-            }
-          }
-        },
         "required": [
           "name",
           "selectedValues"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 65535,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Filter name",
+            "examples": [
+              "applicationName"
+            ]
+          },
+          "selectedValues": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "description": "Filter selected values"
+          }
+        },
+        "description": "View folder.",
+        "externalDocs": {
+          "url": ""
+        }
       }
     }
   }

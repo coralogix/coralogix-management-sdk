@@ -42,17 +42,17 @@ type RulesV1Rule struct {
 type _RulesV1Rule RulesV1Rule
 
 // NewRulesV1Rule instantiates a new RulesV1Rule object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewRulesV1Rule() *RulesV1Rule {
 	this := RulesV1Rule{}
 	return &this
 }
 
 // NewRulesV1RuleWithDefaults instantiates a new RulesV1Rule object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewRulesV1RuleWithDefaults() *RulesV1Rule {
 	this := RulesV1Rule{}
 	return &this

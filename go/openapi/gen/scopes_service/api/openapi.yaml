@@ -7,116 +7,124 @@
   "paths": {
     "/aaa/team-scopes/v1": {
       "get": {
-        "tags": [
-          "Scopes Service"
-        ],
-        "summary": "Get Team Scopes By Ids",
         "description": "Returns a data access scope by ID.",
         "operationId": "ScopesService_GetTeamScopesByIds",
         "parameters": [
           {
+            "description": "List of team scope identifiers to retrieve.",
             "in": "query",
             "name": "ids",
-            "description": "List of team scope identifiers to retrieve.",
             "required": true,
             "schema": {
               "description": "List of team scope identifiers to retrieve.",
-              "type": "array",
               "items": {
                 "description": "List of team scope identifiers to retrieve.",
-                "type": "string",
-                "minLength": 0
+                "examples": [
+                  "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
+                ],
+                "minLength": 0,
+                "type": "string"
               },
-              "minItems": 0
-            },
-            "style": "form"
+              "minItems": 0,
+              "type": "array"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetScopesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get Team Scopes By Ids",
         "tags": [
           "Scopes Service"
-        ],
-        "summary": "Update Scope",
+        ]
+      },
+      "put": {
         "description": "Updates an existing data access scope.",
         "operationId": "ScopesService_UpdateScope",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update Scope Request",
                 "description": "This data structure represents a request to update a scope",
-                "type": "object",
                 "properties": {
                   "defaultExpression": {
                     "description": "The default expression.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "<v1>true"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "description": {
                     "description": "Human-readable description.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "The best scope"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "displayName": {
                     "description": "The display name.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "my-scope"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "filters": {
                     "description": "List of filters.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "type": "array"
                   },
                   "id": {
                     "description": "Unique identifier.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -124,7 +132,9 @@
                   "displayName",
                   "filters",
                   "defaultExpression"
-                ]
+                ],
+                "title": "Update Scope Request",
+                "type": "object"
               }
             }
           },
@@ -132,90 +142,99 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateScopeResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Update Scope",
         "tags": [
           "Scopes Service"
-        ],
-        "summary": "Create Scope",
+        ]
+      },
+      "post": {
         "description": "Creates a new data access scope.",
         "operationId": "ScopesService_CreateScope",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create Scope Request",
                 "description": "This data structure represents a request to create a scope",
-                "type": "object",
                 "properties": {
                   "defaultExpression": {
                     "description": "The default expression.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "<v1>true"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "description": {
                     "description": "Human-readable description.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "The best scope"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "displayName": {
                     "description": "The display name.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "my-scope"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "filters": {
                     "description": "List of filters.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "type": "array"
                   }
                 },
                 "required": [
                   "displayName",
                   "filters"
-                ]
+                ],
+                "title": "Create Scope Request",
+                "type": "object"
               }
             }
           },
@@ -223,262 +242,270 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateScopeResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Create Scope",
+        "tags": [
+          "Scopes Service"
+        ]
       }
     },
     "/aaa/team-scopes/v1/all/list": {
       "get": {
-        "tags": [
-          "Scopes Service"
-        ],
-        "summary": "Get Team Scopes",
         "description": "Returns all data access scopes for the team.",
         "operationId": "ScopesService_GetTeamScopes",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetScopesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Team Scopes",
+        "tags": [
+          "Scopes Service"
+        ]
       }
     },
     "/aaa/team-scopes/v1/{id}": {
       "delete": {
-        "tags": [
-          "Scopes Service"
-        ],
-        "summary": "Delete Scope",
         "description": "Deletes the data access scope with the specified ID.",
         "operationId": "ScopesService_DeleteScope",
         "parameters": [
           {
+            "description": "Unique identifier.",
             "in": "path",
             "name": "id",
-            "description": "Unique identifier.",
             "required": true,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "simple"
+              "examples": [
+                "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
+              ],
+              "minLength": 0,
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteScopeResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Delete Scope",
+        "tags": [
+          "Scopes Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "CreateScopeResponse": {
-        "externalDocs": {
-          "description": "Find out more about scopes",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-        },
         "title": "Create Scope Response",
-        "description": "This data structure represents a response to create a scope",
+        "required": [
+          "scope"
+        ],
         "type": "object",
         "properties": {
           "scope": {
             "$ref": "#/components/schemas/v1.Scope"
           }
         },
-        "required": [
-          "scope"
-        ]
+        "description": "This data structure represents a response to create a scope",
+        "externalDocs": {
+          "description": "Find out more about scopes",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+        }
       },
       "DeleteScopeResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after successfully deleting a data access scope.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response returned after successfully deleting a data access scope.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -486,41 +513,45 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetScopesResponse": {
-        "externalDocs": {
-          "description": "Find out more about scopes",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-        },
         "title": "Get Scopes Response",
-        "description": "This data structure represents a response to get scopes",
+        "required": [
+          "scopes"
+        ],
         "type": "object",
         "properties": {
           "scopes": {
-            "description": "List of scopes.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Scope"
             },
-            "minItems": 0
+            "description": "List of scopes."
           }
         },
-        "required": [
-          "scopes"
-        ]
+        "description": "This data structure represents a response to get scopes",
+        "externalDocs": {
+          "description": "Find out more about scopes",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -529,118 +560,136 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "UpdateScopeResponse": {
-        "externalDocs": {
-          "description": "Find out more about scopes",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-        },
         "title": "Update Scope Response",
-        "description": "This data structure represents a response to update a scope",
+        "required": [
+          "scope"
+        ],
         "type": "object",
         "properties": {
           "scope": {
             "$ref": "#/components/schemas/v1.Scope"
           }
         },
-        "required": [
-          "scope"
-        ]
-      },
-      "events.v3.FilterMatcher": {
-        "type": "string",
-        "enum": [
-          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
-          "FILTER_MATCHER_REGEXP"
-        ]
-      },
-      "scopes.v1.Filter": {
+        "description": "This data structure represents a response to update a scope",
         "externalDocs": {
           "description": "Find out more about scopes",
           "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-        },
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ],
+        "type": "string"
+      },
+      "scopes.v1.Filter": {
         "title": "Filter",
-        "description": "This data structure represents a filter",
         "type": "object",
         "properties": {
           "entityType": {
             "$ref": "#/components/schemas/v1.EntityType"
           },
           "expression": {
-            "description": "The expression.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The expression.",
+            "examples": [
+              "<v1>true"
+            ]
           }
+        },
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "description": "Find out more about scopes",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
         }
       },
       "v1.EntityType": {
-        "description": "Entity type.",
-        "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
           "ENTITY_TYPE_LOGS",
           "ENTITY_TYPE_SPANS"
-        ]
+        ],
+        "type": "string",
+        "description": "Entity type."
       },
       "v1.Scope": {
-        "externalDocs": {
-          "description": "Find out more about scopes",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-        },
         "title": "Scope",
-        "description": "This data structure represents a scope",
         "type": "object",
         "properties": {
           "defaultExpression": {
-            "description": "The default expression.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The default expression.",
+            "examples": [
+              "<v1>true"
+            ]
           },
           "description": {
-            "description": "Human-readable description.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Human-readable description.",
+            "examples": [
+              "The best scope"
+            ]
           },
           "displayName": {
-            "description": "The display name.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The display name.",
+            "examples": [
+              "my-scope"
+            ]
           },
           "filters": {
-            "description": "List of filters.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/scopes.v1.Filter"
             },
-            "minItems": 0
+            "description": "List of filters."
           },
           "id": {
-            "description": "Unique identifier.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique identifier.",
+            "examples": [
+              "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
+            ]
           },
           "teamId": {
-            "description": "Team identifier.",
             "type": "integer",
-            "format": "int32"
+            "description": "Team identifier.",
+            "format": "int32",
+            "examples": [
+              1234
+            ]
           }
+        },
+        "description": "This data structure represents a scope",
+        "externalDocs": {
+          "description": "Find out more about scopes",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
         }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

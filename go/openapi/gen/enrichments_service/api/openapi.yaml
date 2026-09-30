@@ -7,30 +7,26 @@
   "paths": {
     "/enrichment-rules/enrichment-rules/v1": {
       "get": {
-        "tags": [
-          "Enrichments Service"
-        ],
-        "summary": "Get Enrichments",
         "description": "Returns all enrichment rules for the team.",
         "operationId": "EnrichmentService_GetEnrichments",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetEnrichmentsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get Enrichments",
         "tags": [
           "Enrichments Service"
-        ],
-        "summary": "Atomic Overwrite for CustomEnrichments only",
+        ]
+      },
+      "put": {
         "description": "Updates enrichment rules.",
         "operationId": "EnrichmentService_AtomicOverwriteEnrichments",
         "requestBody": {
@@ -38,81 +34,81 @@
             "application/json": {
               "schema": {
                 "description": "Request to atomically update enrichment rules.",
-                "type": "object",
                 "properties": {
                   "enrichmentFields": {
                     "deprecated": true,
                     "description": "Deprecated: enrichment field definitions.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentFieldDefinition"
                     },
+                    "maxItems": 100,
                     "minItems": 0,
-                    "maxItems": 100
+                    "type": "array"
                   },
                   "enrichmentType": {
-                    "deprecated": true,
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/EnrichmentType"
                       }
-                    ]
+                    ],
+                    "deprecated": true
                   },
                   "requestEnrichments": {
                     "description": "List of enrichment rules to atomically replace existing rules. The total number of enrichment rules is limited by the account's enrichment limit (5 by default).",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
                     },
+                    "maxItems": 100,
                     "minItems": 0,
-                    "maxItems": 100
+                    "type": "array"
                   }
-                }
+                },
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AtomicOverwriteEnrichmentsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Atomic Overwrite for CustomEnrichments only",
         "tags": [
           "Enrichments Service"
-        ],
-        "summary": "Add Enrichments",
+        ]
+      },
+      "post": {
         "description": "Creates new enrichment rules.",
         "operationId": "EnrichmentService_AddEnrichments",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Enrichments Creation Request",
                 "description": "This response data structure represents a collection of enrichments",
-                "type": "object",
                 "properties": {
                   "requestEnrichments": {
                     "description": "The request enrichments. The total number of enrichment rules is limited by the account's enrichment limit (5 by default).",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
                     },
+                    "maxItems": 100,
                     "minItems": 0,
-                    "maxItems": 100
+                    "type": "array"
                   }
                 },
                 "required": [
                   "requestEnrichments"
-                ]
+                ],
+                "title": "Enrichments Creation Request",
+                "type": "object"
               }
             }
           },
@@ -120,66 +116,72 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AddEnrichmentsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Add Enrichments",
         "tags": [
           "Enrichments Service"
-        ],
-        "summary": "Delete Enrichments",
+        ]
+      },
+      "delete": {
         "description": "Deletes all enrichment rules for the team.",
         "operationId": "EnrichmentService_RemoveEnrichments",
         "parameters": [
           {
+            "description": "The unique identifiers of the enrichment rules to delete.",
             "in": "query",
             "name": "enrichment_ids",
-            "description": "The unique identifiers of the enrichment rules to delete.",
             "required": true,
             "schema": {
               "description": "The unique identifiers of the enrichment rules to delete.",
-              "type": "array",
+              "examples": [
+                [
+                  1,
+                  2,
+                  3
+                ]
+              ],
               "items": {
                 "description": "The unique identifiers of the enrichment rules to delete.",
-                "type": "integer",
                 "format": "int64",
+                "maximum": 2147483647,
                 "minimum": 0,
-                "maximum": 2147483647
+                "type": "integer"
               },
+              "maxItems": 1000,
               "minItems": 0,
-              "maxItems": 1000
-            },
-            "style": "form"
+              "type": "array"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RemoveEnrichmentsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Delete Enrichments",
+        "tags": [
+          "Enrichments Service"
+        ]
       }
     },
     "/enrichment-rules/enrichment-rules/v1/all": {
       "put": {
-        "tags": [
-          "Enrichments Service"
-        ],
-        "summary": "Atomic Overwrite for ALL types of enrichments",
         "description": "Atomic Overwrite for ALL types of enrichments. The request is the desired state which will override ALL enrichments. WARNING: This operation will delete all existing enrichments and replace them with the provided ones.",
         "operationId": "EnrichmentService_AtomicOverwriteAllEnrichments",
         "requestBody": {
@@ -187,405 +189,528 @@
             "application/json": {
               "schema": {
                 "description": "Request to atomically replace all enrichment rules.",
-                "type": "object",
                 "properties": {
                   "requestEnrichments": {
                     "description": "Complete list of enrichment rules to replace all existing rules. The total number of enrichment rules is limited by the account's enrichment limit (5 by default).",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/EnrichmentRequestModel"
                     },
+                    "maxItems": 100,
                     "minItems": 0,
-                    "maxItems": 100
+                    "type": "array"
                   }
-                }
+                },
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AtomicOverwriteAllEnrichmentsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Atomic Overwrite for ALL types of enrichments",
+        "tags": [
+          "Enrichments Service"
+        ]
       }
     },
     "/enrichment-rules/enrichment-rules/v1/limit": {
       "get": {
-        "tags": [
-          "Enrichments Service"
-        ],
-        "summary": "Get Enrichment Limit",
         "description": "Returns the maximum number of enrichment rules allowed.",
         "operationId": "EnrichmentService_GetEnrichmentLimit",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetEnrichmentLimitResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Get Enrichment Limit",
+        "tags": [
+          "Enrichments Service"
+        ]
       }
     },
     "/enrichment-rules/enrichment-rules/v1/settings": {
       "get": {
-        "tags": [
-          "Enrichments Service"
-        ],
-        "summary": "Get Company Enrichment Settings",
         "description": "Returns the current enrichment settings for the team.",
         "operationId": "EnrichmentService_GetCompanyEnrichmentSettings",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetCompanyEnrichmentSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Get Company Enrichment Settings",
+        "tags": [
+          "Enrichments Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "AddEnrichmentsResponse": {
+        "title": "Encrichments Creation Response",
+        "required": [
+          "enrichments"
+        ],
+        "type": "object",
+        "properties": {
+          "enrichments": {
+            "maxItems": 1000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Enrichment"
+            },
+            "description": "List of enrichments."
+          }
+        },
+        "description": "Response data structure for enrichments creation",
         "externalDocs": {
           "description": "Find out more about enrichments",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
-        "title": "Encrichments Creation Response",
-        "description": "Response data structure for enrichments creation",
-        "type": "object",
-        "properties": {
-          "enrichments": {
-            "description": "List of enrichments.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Enrichment"
-            },
-            "minItems": 0,
-            "maxItems": 1000
-          }
-        },
-        "required": [
-          "enrichments"
-        ]
+        }
       },
       "AtomicOverwriteAllEnrichmentsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response returned after atomically replacing all enrichment rules.",
         "type": "object",
         "properties": {
           "enrichments": {
-            "description": "List of enrichments.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "List of enrichments."
           }
+        },
+        "description": "Response returned after atomically replacing all enrichment rules.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "AtomicOverwriteEnrichmentsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response returned after atomically updating enrichment rules.",
         "type": "object",
         "properties": {
           "enrichments": {
-            "description": "List of enrichments.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "List of enrichments."
           }
+        },
+        "description": "Response returned after atomically updating enrichment rules.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "AwsType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Aws type.",
         "type": "object",
         "properties": {
           "resourceType": {
-            "description": "The resource type. Must be one of the AWS resource types available for the account.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The resource type. Must be one of the AWS resource types available for the account.",
+            "examples": [
+              "aws:ec2:instance"
+            ]
           }
+        },
+        "description": "Aws type.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CompanyEnrichmentSettings": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Company enrichment settings.",
         "type": "object",
         "properties": {
           "enrichmentAmountLimit": {
-            "description": "Maximum number of enrichment rules allowed for the account.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 2147483647,
             "minimum": 0,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Maximum number of enrichment rules allowed for the account.",
+            "format": "int64",
+            "examples": [
+              5
+            ]
           },
           "enrichmentsInUse": {
-            "description": "Number of enrichment rules currently in use by the account.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 2147483647,
             "minimum": 0,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Number of enrichment rules currently in use by the account.",
+            "format": "int64",
+            "examples": [
+              2
+            ]
           },
           "queryOnlyRowLimit": {
-            "description": "Row count above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 10000.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 2147483647,
             "minimum": 0,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Row count above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 10000.",
+            "format": "int64",
+            "examples": [
+              10000
+            ]
           },
           "queryOnlySizeLimitBytes": {
-            "description": "File size in bytes above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 524288 (512 KiB).",
-            "type": "string",
-            "pattern": "^[0-9]+$",
+            "maxLength": 20,
             "minLength": 1,
-            "maxLength": 20
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "description": "File size in bytes above which a custom enrichment becomes query-only (usable in queries but not applied at ingest time). Defaults to 524288 (512 KiB).",
+            "examples": [
+              "524288"
+            ]
           },
           "rowLimit": {
-            "description": "Maximum number of rows allowed in a custom enrichment file. Defaults to 150000.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 2147483647,
             "minimum": 0,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Maximum number of rows allowed in a custom enrichment file. Defaults to 150000.",
+            "format": "int64",
+            "examples": [
+              150000
+            ]
           },
           "sizeLimitBytes": {
-            "description": "Maximum custom enrichment file size in bytes. Defaults to 20971520 (20 MiB).",
-            "type": "string",
-            "pattern": "^[0-9]+$",
+            "maxLength": 20,
             "minLength": 1,
-            "maxLength": 20
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "description": "Maximum custom enrichment file size in bytes. Defaults to 20971520 (20 MiB).",
+            "examples": [
+              "20971520"
+            ]
           }
+        },
+        "description": "Company enrichment settings.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CustomEnrichmentType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Custom enrichment type.",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 2147483647,
             "minimum": 0,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Unique identifier.",
+            "format": "int64",
+            "examples": [
+              1
+            ]
           }
+        },
+        "description": "Custom enrichment type.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "DatasetTarget": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Dataset Target",
-        "description": "This data structure represents a target for enrichments. It defines a dataset in which the enrichment will be applied to.",
         "type": "object",
         "properties": {
           "dataset": {
-            "description": "The dataset name in which the enrichment will be applied.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_./-]*$",
+            "maxLength": 100,
             "minLength": 1,
-            "maxLength": 100
+            "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_./-]*$",
+            "type": "string",
+            "description": "The dataset name in which the enrichment will be applied.",
+            "examples": [
+              "dataset1"
+            ]
           }
+        },
+        "description": "This data structure represents a target for enrichments. It defines a dataset in which the enrichment will be applied to.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Enrichment": {
-        "externalDocs": {
-          "description": "Find out more about enrichments",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
         "title": "Enrichment",
-        "description": "This data structure represents an enrichment",
+        "required": [
+          "id",
+          "fieldName",
+          "enrichmentType"
+        ],
         "type": "object",
         "properties": {
           "enrichedFieldName": {
-            "description": "The enriched field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The enriched field name.",
+            "examples": [
+              "1"
+            ]
           },
           "enrichmentType": {
             "$ref": "#/components/schemas/EnrichmentType"
           },
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name.",
+            "examples": [
+              "1"
+            ]
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 2147483647,
             "minimum": 0,
-            "maximum": 2147483647
+            "type": "integer",
+            "description": "Unique identifier.",
+            "format": "int64",
+            "examples": [
+              1
+            ]
           },
           "selectedColumns": {
-            "description": "The selected columns.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The selected columns.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 1024,
               "minLength": 1,
-              "maxLength": 1024
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "The selected columns."
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The selected columns.",
+            "examples": [
+              [
+                "city",
+                "population"
+              ]
+            ]
           },
           "targets": {
-            "description": "The targets for the enrichment",
+            "maxItems": 10,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DatasetTarget"
             },
-            "minItems": 1,
-            "maxItems": 10
+            "description": "The targets for the enrichment",
+            "examples": [
+              [
+                {
+                  "dataset": "dataset1"
+                }
+              ]
+            ]
           }
         },
-        "required": [
-          "id",
-          "fieldName",
-          "enrichmentType"
-        ]
+        "description": "This data structure represents an enrichment",
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        }
       },
       "EnrichmentFieldDefinition": {
         "type": "object",
         "properties": {
           "enrichedFieldName": {
-            "description": "The enriched field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The enriched field name."
           },
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name."
           },
           "selectedColumns": {
-            "description": "The selected columns.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The selected columns.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 1024,
               "minLength": 1,
-              "maxLength": 1024
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "The selected columns."
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The selected columns."
           },
           "targets": {
-            "description": "The targets for the enrichment",
+            "maxItems": 10,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DatasetTarget"
             },
-            "minItems": 1,
-            "maxItems": 10
+            "description": "The targets for the enrichment",
+            "examples": [
+              [
+                {
+                  "dataset": "dataset1"
+                }
+              ]
+            ]
           }
         }
       },
       "EnrichmentRequestModel": {
-        "externalDocs": {
-          "description": "Find out more about enrichments",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
         "title": "Enrichment Prototype",
-        "description": "The enrichment request model",
+        "required": [
+          "fieldName",
+          "enrichmentType"
+        ],
         "type": "object",
         "properties": {
           "enrichedFieldName": {
-            "description": "The enriched field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The enriched field name."
           },
           "enrichmentType": {
             "$ref": "#/components/schemas/EnrichmentType"
           },
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name.",
+            "examples": [
+              "sourceIPs"
+            ]
           },
           "selectedColumns": {
-            "description": "The selected columns.",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The selected columns.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 1024,
               "minLength": 1,
-              "maxLength": 1024
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "The selected columns."
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "The selected columns."
           },
           "targets": {
-            "description": "The targets for the enrichment",
+            "maxItems": 10,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DatasetTarget"
             },
-            "minItems": 1,
-            "maxItems": 10
+            "description": "The targets for the enrichment",
+            "examples": [
+              [
+                {
+                  "dataset": "dataset1"
+                }
+              ]
+            ]
           }
         },
-        "required": [
-          "fieldName",
-          "enrichmentType"
-        ]
+        "description": "The enrichment request model",
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        }
       },
       "EnrichmentType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Enrichment type.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "geoIp"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "suspiciousIp"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "aws"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "customEnrichment"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "geoIp"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "suspiciousIp"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "aws"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "customEnrichment"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "aws": {
             "$ref": "#/components/schemas/AwsType"
@@ -600,112 +725,61 @@
             "$ref": "#/components/schemas/SuspiciousIpType"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "geoIp"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "suspiciousIp"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "aws"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "customEnrichment"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "geoIp"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "suspiciousIp"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "aws"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "customEnrichment"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "FilterPathAndValues": {
+        "description": "Enrichment type.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "FilterPathAndValues": {
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -713,96 +787,106 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GeoIpType": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Geo ip type.",
+        }
+      },
+      "GeoIpType": {
         "type": "object",
         "properties": {
           "withAsn": {
-            "description": "The with asn.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The with asn."
           }
+        },
+        "description": "Geo ip type.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetCompanyEnrichmentSettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the company-level enrichment settings.",
         "type": "object",
         "properties": {
           "enrichmentSettings": {
             "$ref": "#/components/schemas/CompanyEnrichmentSettings"
           }
+        },
+        "description": "Response containing the company-level enrichment settings.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetEnrichmentLimitResponse": {
-        "externalDocs": {
-          "description": "Find out more about enrichments",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
         "title": "Enrichment Limit",
-        "description": "This response data structure represents the enrichments limit",
-        "type": "object",
-        "properties": {
-          "limit": {
-            "description": "Maximum number of enrichment rules allowed for the account. Defaults to 5.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "maximum": 2147483647
-          },
-          "used": {
-            "description": "Number of enrichment rules currently in use.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "maximum": 2147483647
-          }
-        },
         "required": [
           "limit",
           "used"
-        ]
-      },
-      "GetEnrichmentsResponse": {
+        ],
+        "type": "object",
+        "properties": {
+          "limit": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Maximum number of enrichment rules allowed for the account. Defaults to 5.",
+            "format": "int64",
+            "examples": [
+              10
+            ]
+          },
+          "used": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Number of enrichment rules currently in use.",
+            "format": "int64",
+            "examples": [
+              5
+            ]
+          }
+        },
+        "description": "This response data structure represents the enrichments limit",
         "externalDocs": {
           "description": "Find out more about enrichments",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
+        }
+      },
+      "GetEnrichmentsResponse": {
         "title": "Enrichment Collection",
-        "description": "This response data structure represents a collection of enrichments",
+        "required": [
+          "enrichments"
+        ],
         "type": "object",
         "properties": {
           "enrichments": {
-            "description": "List of enrichments.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "List of enrichments."
           }
         },
-        "required": [
-          "enrichments"
-        ]
+        "description": "This response data structure represents a collection of enrichments",
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -811,57 +895,57 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "RemoveEnrichmentsResponse": {
-        "externalDocs": {
-          "description": "Find out more about enrichments",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
         "title": "Encrichments Delettion Response",
-        "description": "Response data structure for enrichments deletion",
         "type": "object",
         "properties": {
           "remainingEnrichments": {
-            "description": "The remaining enrichments.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Enrichment"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "The remaining enrichments."
           }
+        },
+        "description": "Response data structure for enrichments deletion",
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
         }
       },
       "SuspiciousIpType": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Suspicious ip type.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Suspicious ip type.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

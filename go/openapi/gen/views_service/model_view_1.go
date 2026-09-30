@@ -40,9 +40,9 @@ type View1 struct {
 type _View1 View1
 
 // NewView1 instantiates a new View1 object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewView1(name string, timeSelection TimeSelection) *View1 {
 	this := View1{}
 	this.Name = name
@@ -51,8 +51,8 @@ func NewView1(name string, timeSelection TimeSelection) *View1 {
 }
 
 // NewView1WithDefaults instantiates a new View1 object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewView1WithDefaults() *View1 {
 	this := View1{}
 	return &this

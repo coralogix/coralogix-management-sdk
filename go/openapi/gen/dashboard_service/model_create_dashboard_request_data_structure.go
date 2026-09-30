@@ -37,9 +37,9 @@ type CreateDashboardRequestDataStructure struct {
 type _CreateDashboardRequestDataStructure CreateDashboardRequestDataStructure
 
 // NewCreateDashboardRequestDataStructure instantiates a new CreateDashboardRequestDataStructure object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewCreateDashboardRequestDataStructure(dashboard Dashboard, requestId string) *CreateDashboardRequestDataStructure {
 	this := CreateDashboardRequestDataStructure{}
 	this.Dashboard = dashboard
@@ -48,8 +48,8 @@ func NewCreateDashboardRequestDataStructure(dashboard Dashboard, requestId strin
 }
 
 // NewCreateDashboardRequestDataStructureWithDefaults instantiates a new CreateDashboardRequestDataStructure object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewCreateDashboardRequestDataStructureWithDefaults() *CreateDashboardRequestDataStructure {
 	this := CreateDashboardRequestDataStructure{}
 	return &this

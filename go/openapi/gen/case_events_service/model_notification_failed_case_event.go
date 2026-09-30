@@ -31,17 +31,17 @@ type NotificationFailedCaseEvent struct {
 type _NotificationFailedCaseEvent NotificationFailedCaseEvent
 
 // NewNotificationFailedCaseEvent instantiates a new NotificationFailedCaseEvent object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewNotificationFailedCaseEvent() *NotificationFailedCaseEvent {
 	this := NotificationFailedCaseEvent{}
 	return &this
 }
 
 // NewNotificationFailedCaseEventWithDefaults instantiates a new NotificationFailedCaseEvent object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewNotificationFailedCaseEventWithDefaults() *NotificationFailedCaseEvent {
 	this := NotificationFailedCaseEvent{}
 	return &this

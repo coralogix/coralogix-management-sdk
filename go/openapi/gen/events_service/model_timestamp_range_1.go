@@ -35,9 +35,9 @@ type TimestampRange1 struct {
 type _TimestampRange1 TimestampRange1
 
 // NewTimestampRange1 instantiates a new TimestampRange1 object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewTimestampRange1(from time.Time, to time.Time) *TimestampRange1 {
 	this := TimestampRange1{}
 	this.From = from
@@ -46,8 +46,8 @@ func NewTimestampRange1(from time.Time, to time.Time) *TimestampRange1 {
 }
 
 // NewTimestampRange1WithDefaults instantiates a new TimestampRange1 object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewTimestampRange1WithDefaults() *TimestampRange1 {
 	this := TimestampRange1{}
 	return &this

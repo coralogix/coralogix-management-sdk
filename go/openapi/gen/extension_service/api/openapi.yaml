@@ -7,19 +7,13 @@
   "paths": {
     "/integrations/extensions/v1": {
       "post": {
-        "tags": [
-          "Extension service"
-        ],
-        "summary": "Get all extensions",
         "description": "Creates a new extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "operationId": "ExtensionService_GetAllExtensions",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Get all extensions request",
                 "description": "Request to list all extensions",
-                "type": "object",
                 "properties": {
                   "filter": {
                     "$ref": "#/components/schemas/GetAllExtensionsRequest.Filter"
@@ -28,53 +22,59 @@
                     "description": "Whether to include hidden extensions that are not publicly listed in the catalog.",
                     "type": "boolean"
                   }
-                }
+                },
+                "title": "Get all extensions request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAllExtensionsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get all extensions",
+        "tags": [
+          "Extension service"
+        ],
         "x-coralogixPermissions": [
           "extensions:ReadConfig"
         ]
@@ -82,90 +82,89 @@
     },
     "/integrations/extensions/v1/catalog/{id}": {
       "get": {
-        "tags": [
-          "Extension service"
-        ],
-        "summary": "Get extension by ID",
         "description": "Returns the details of the specified extension.\n\nRequires the following permissions:\n- `extensions:ReadConfig`",
         "operationId": "ExtensionService_GetExtension",
         "parameters": [
           {
+            "description": "Unique identifier.",
             "in": "path",
             "name": "id",
-            "description": "Unique identifier.",
             "required": true,
             "schema": {
               "description": "Unique identifier.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "simple"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "Whether to include dashboard binaries in the response.",
             "in": "query",
             "name": "include_dashboard_binaries",
-            "description": "Whether to include dashboard binaries in the response.",
+            "required": false,
             "schema": {
               "description": "Whether to include dashboard binaries in the response.",
               "type": "boolean"
-            },
-            "style": "form"
+            }
           },
           {
+            "description": "Whether to include testing revisions in the response.",
             "in": "query",
             "name": "include_testing_revision",
-            "description": "Whether to include testing revisions in the response.",
+            "required": false,
             "schema": {
               "description": "Whether to include testing revisions in the response.",
               "type": "boolean"
-            },
-            "style": "form"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v1.Extension"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get extension by ID",
+        "tags": [
+          "Extension service"
+        ],
         "x-coralogixPermissions": [
           "extensions:ReadConfig"
         ]
@@ -175,342 +174,344 @@
   "components": {
     "schemas": {
       "ChangelogEntry": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Changelog entry",
         "type": "object",
         "properties": {
           "descriptionMd": {
-            "description": "The description md.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The description md."
           },
           "version": {
-            "description": "Version.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "Deprecation": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Deprecation",
-        "description": "Deprecation.",
         "type": "object",
         "properties": {
           "reason": {
-            "description": "Reason.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Reason."
           },
           "replacementExtensions": {
-            "description": "The replacement extensions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The replacement extensions.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The replacement extensions."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The replacement extensions."
           }
+        },
+        "description": "Deprecation.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "ExtensionBinary": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension binary",
         "type": "object",
         "properties": {
           "data": {
-            "description": "Data payload.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 5000000,
             "minLength": 0,
-            "maxLength": 5000000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Data payload."
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ExtensionBinary.BinaryType": {
-        "description": "Type of binary content stored in the extension.",
-        "type": "string",
         "enum": [
           "KIBANA_INDEX_PATTERN"
-        ]
+        ],
+        "type": "string",
+        "description": "Type of binary content stored in the extension."
       },
       "ExtensionItem": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension item",
         "type": "object",
         "properties": {
           "binaries": {
-            "description": "The binaries.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The binaries."
           },
           "data": {
-            "description": "Data payload.",
-            "type": "object"
+            "type": "object",
+            "description": "Data payload."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "extendedInternalId": {
-            "description": "The extended internal id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The extended internal id."
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "isMandatory": {
-            "description": "The is mandatory.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is mandatory."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
           },
           "stableId": {
-            "description": "The stable id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 63,
             "minLength": 0,
-            "maxLength": 63
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The stable id."
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
           },
           "uniqueId": {
-            "description": "The unique id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The unique id."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ExtensionItemBinary": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension item binary",
         "type": "object",
         "properties": {
           "data": {
-            "description": "Data payload.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 5000000,
             "minLength": 0,
-            "maxLength": 5000000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Data payload."
           },
           "fileName": {
-            "description": "The file name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The file name."
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ExtensionItemBinary.BinaryType": {
-        "description": "Binary type.",
-        "type": "string",
         "enum": [
           "PREVIEW_IMAGE",
           "KIBANA_DASHBOARD_DEFINITION",
           "GRAFANA_DASHBOARD_DEFINITION",
           "ENRICHMENT_CSV",
           "CX_CUSTOM_DASHBOARD_DEFINITION"
-        ]
+        ],
+        "type": "string",
+        "description": "Binary type."
       },
       "ExtensionRevision": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension revision",
         "type": "object",
         "properties": {
           "binaries": {
-            "description": "The binaries.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The binaries."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "excerpt": {
-            "description": "The excerpt.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The excerpt."
           },
           "integrationDetails": {
-            "description": "The integration details.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integration details."
           },
           "isTesting": {
-            "description": "The is testing.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is testing."
           },
           "items": {
-            "description": "List of items.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of items."
           },
           "labels": {
-            "description": "List of labels.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of labels.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "List of labels."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of labels."
           },
           "permissionDeniedItems": {
-            "description": "The permission denied items.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The permission denied items."
           },
           "version": {
-            "description": "Version.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -518,306 +519,310 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GetAllExtensionsRequest.Filter": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "GetAllExtensionsRequest.Filter": {
         "title": "A filter structure for a request to get all extensions",
-        "description": "Filter by integration ids",
         "type": "object",
         "properties": {
           "integrations": {
-            "description": "The integrations.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The integrations.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The integrations."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integrations."
           }
+        },
+        "description": "Filter by integration ids",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetAllExtensionsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get all extensions response",
-        "description": "Response to list all extensions",
         "type": "object",
         "properties": {
           "extensions": {
-            "description": "The extensions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Extension"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The extensions."
           }
+        },
+        "description": "Response to list all extensions",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetAllExtensionsResponse.Extension": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension",
         "type": "object",
         "properties": {
           "darkModeImage": {
-            "description": "The dark mode image.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The dark mode image."
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "image": {
-            "description": "Image reference.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Image reference."
           },
           "integrations": {
-            "description": "The integrations.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The integrations.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The integrations."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integrations."
           },
           "isHidden": {
-            "description": "The is hidden.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is hidden."
           },
           "keywords": {
-            "description": "The keywords.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The keywords.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The keywords."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The keywords."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "revisions": {
-            "description": "The revisions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Revision"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The revisions."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetAllExtensionsResponse.Revision": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Revision",
         "type": "object",
         "properties": {
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "excerpt": {
-            "description": "The excerpt.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The excerpt."
           },
           "integrationDetails": {
-            "description": "The integration details.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integration details."
           },
           "labels": {
-            "description": "List of labels.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of labels.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "List of labels."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of labels."
           },
           "summary": {
             "$ref": "#/components/schemas/GetAllExtensionsResponse.RevisionSummary"
           },
           "version": {
-            "description": "Version number.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version number."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetAllExtensionsResponse.RevisionSummary": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Revision summary",
-        "description": "Revision summary.",
         "type": "object",
         "properties": {
           "isNew": {
-            "description": "The is new.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is new."
           },
           "itemCounts": {
             "$ref": "#/components/schemas/ItemCounts"
           }
+        },
+        "description": "Revision summary.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IntegrationDetail": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Integration detail",
         "type": "object",
         "properties": {
           "link": {
-            "description": "Link.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Link."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ItemCounts": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Item counts",
-        "description": "Item counts.",
         "type": "object",
         "properties": {
           "actions": {
-            "description": "List of actions.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "List of actions.",
+            "format": "int64"
           },
           "alerts": {
-            "description": "List of alerts.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "List of alerts.",
+            "format": "int64"
           },
           "customDashboards": {
-            "description": "The custom dashboards.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The custom dashboards.",
+            "format": "int64"
           },
           "enrichments": {
-            "description": "List of enrichments.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "List of enrichments.",
+            "format": "int64"
           },
           "eventsToMetrics": {
-            "description": "The events to metrics.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The events to metrics.",
+            "format": "int64"
           },
           "grafanaDashboards": {
-            "description": "The grafana dashboards.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The grafana dashboards.",
+            "format": "int64"
           },
           "kibanaDashboards": {
-            "description": "The kibana dashboards.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The kibana dashboards.",
+            "format": "int64"
           },
           "metricsRuleGroup": {
-            "description": "The metrics rule group.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The metrics rule group.",
+            "format": "int64"
           },
           "parsingRules": {
-            "description": "The parsing rules.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The parsing rules.",
+            "format": "int64"
           },
           "savedViews": {
-            "description": "The saved views.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The saved views.",
+            "format": "int64"
           }
+        },
+        "description": "Item counts.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -827,18 +832,16 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "PermissionResource": {
-        "description": "Permission resource.",
-        "type": "string",
         "enum": [
           "UNKNOWN",
           "ACTION",
@@ -855,11 +858,11 @@
           "METRICS_RULE_GROUP",
           "SPAN_EVENTS_TO_METRICS",
           "LOGS_EVENTS_TO_METRICS"
-        ]
+        ],
+        "type": "string",
+        "description": "Permission resource."
       },
       "TargetDomain": {
-        "description": "Target domain.",
-        "type": "string",
         "enum": [
           "ACTION",
           "ALERT",
@@ -872,116 +875,118 @@
           "METRICS_RULE_GROUP",
           "EVENTS_TO_METRICS",
           "ALERT_V3"
-        ]
+        ],
+        "type": "string",
+        "description": "Target domain."
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v1.Extension": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension metadata",
-        "description": "Represents a Coralogix extension package containing pre-built resources.",
         "type": "object",
         "properties": {
           "changelog": {
-            "description": "The changelog.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The changelog."
           },
           "darkModeImage": {
-            "description": "The dark mode image.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The dark mode image."
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
-            "description": "Unique identifier of the extension.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier of the extension."
           },
           "image": {
-            "description": "Image reference.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Image reference."
           },
           "integrations": {
-            "description": "The integrations.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The integrations.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The integrations."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integrations."
           },
           "isHidden": {
-            "description": "The is hidden.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is hidden."
           },
           "keywords": {
-            "description": "The keywords.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The keywords.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The keywords."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The keywords."
           },
           "name": {
-            "description": "Display name of the extension.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name of the extension."
           },
           "permissionDeniedRevisions": {
-            "description": "The permission denied revisions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The permission denied revisions."
           },
           "revisions": {
-            "description": "The revisions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The revisions."
           }
+        },
+        "description": "Represents a Coralogix extension package containing pre-built resources.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

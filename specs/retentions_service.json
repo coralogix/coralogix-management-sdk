@@ -7,82 +7,78 @@
   "paths": {
     "/dataengine/retention-tags/v1": {
       "get": {
-        "tags": [
-          "Retentions Service"
-        ],
-        "summary": "Get Retentions",
         "description": "Returns all available retention tags.",
         "operationId": "RetentionsService_GetRetentions",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetRetentionsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Get Retentions",
         "tags": [
           "Retentions Service"
-        ],
-        "summary": "Update Retentions",
+        ]
+      },
+      "post": {
         "description": "Creates a new retention tag.",
         "operationId": "RetentionsService_UpdateRetentions",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update Retentions Request",
                 "description": "This data structure is used to update retentions",
-                "type": "object",
                 "properties": {
                   "retentionUpdateElements": {
                     "description": "List of retention tag updates to apply.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/RetentionUpdateElement"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "type": "array"
                   }
                 },
                 "required": [
                   "retentionUpdateElements"
-                ]
+                ],
+                "title": "Update Retentions Request",
+                "type": "object"
               }
             }
           },
@@ -90,238 +86,247 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateRetentionsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Update Retentions",
+        "tags": [
+          "Retentions Service"
+        ]
       }
     },
     "/dataengine/retention-tags/v1/activate": {
       "post": {
-        "tags": [
-          "Retentions Service"
-        ],
-        "summary": "Activate Retentions",
         "description": "Activates the specified retention tags.",
         "operationId": "RetentionsService_ActivateRetentions",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ActivateRetentionsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Activate Retentions",
+        "tags": [
+          "Retentions Service"
+        ]
       }
     },
     "/dataengine/retention-tags/v1/enabled": {
       "get": {
-        "tags": [
-          "Retentions Service"
-        ],
-        "summary": "Get Retentions Enabled",
         "description": "Returns the enabled retention tags for the team.",
         "operationId": "RetentionsService_GetRetentionsEnabled",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetRetentionsEnabledResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Retentions Enabled",
+        "tags": [
+          "Retentions Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "ActivateRetentionsResponse": {
-        "externalDocs": {
-          "description": "Find out more about archives",
-          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-        },
         "title": "Activate Retentions Response",
-        "description": "This data structure is obtained after setting the active status of retentions",
         "type": "object",
         "properties": {
           "activateRetentions": {
+            "type": "boolean",
             "description": "List of retentions to activate.",
-            "type": "boolean"
+            "examples": [
+              true
+            ]
           }
+        },
+        "description": "This data structure is obtained after setting the active status of retentions",
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -329,50 +334,54 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetRetentionsEnabledResponse": {
-        "externalDocs": {
-          "description": "Find out more about archives",
-          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-        },
         "title": "Get Retentions Enabled Response",
-        "description": "This data structure is obtained when retrieving the active status of retentions",
         "type": "object",
         "properties": {
           "enableTags": {
-            "description": "The enable tags.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The enable tags."
           }
+        },
+        "description": "This data structure is obtained when retrieving the active status of retentions",
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
         }
       },
       "GetRetentionsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the current data retention settings.",
         "type": "object",
         "properties": {
           "retentions": {
-            "description": "The retentions.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/archive.v1.Retention"
             },
-            "minItems": 0
+            "description": "The retentions."
           }
+        },
+        "description": "Response containing the current data retention settings.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -382,12 +391,12 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
@@ -395,83 +404,83 @@
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique identifier."
           },
           "name": {
-            "description": "Display name.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Display name."
           }
         }
       },
       "UpdateRetentionsResponse": {
-        "externalDocs": {
-          "description": "Find out more about archives",
-          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-        },
         "title": "Update Retentions Response",
-        "description": "This data structure is obtained after updating retentions",
+        "required": [
+          "retentions"
+        ],
         "type": "object",
         "properties": {
           "retentions": {
-            "description": "The retentions.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/archive.v1.Retention"
             },
-            "minItems": 0
+            "description": "The retentions."
           }
         },
-        "required": [
-          "retentions"
-        ]
-      },
-      "archive.v1.Retention": {
+        "description": "This data structure is obtained after updating retentions",
         "externalDocs": {
           "description": "Find out more about archives",
           "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-        },
+        }
+      },
+      "archive.v1.Retention": {
         "title": "Retention",
-        "description": "This data structure represents a retention",
         "type": "object",
         "properties": {
           "editable": {
-            "description": "The editable.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The editable."
           },
           "id": {
-            "description": "Unique identifier.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique identifier."
           },
           "name": {
-            "description": "Display name.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Display name."
           },
           "order": {
-            "description": "Sort order.",
             "type": "integer",
+            "description": "Sort order.",
             "format": "int32"
           }
+        },
+        "description": "This data structure represents a retention",
+        "externalDocs": {
+          "description": "Find out more about archives",
+          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

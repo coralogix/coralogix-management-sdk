@@ -7,432 +7,452 @@
   "paths": {
     "/aaa/team-sec-ip-access/v1": {
       "get": {
-        "tags": [
-          "IP access service"
-        ],
-        "summary": "Get company IP access settings",
         "description": "Returns the current IP access settings for the team.",
         "operationId": "IpAccessService_GetCompanyIpAccessSettings",
         "parameters": [
           {
+            "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
             "in": "query",
             "name": "id",
-            "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
+            "required": false,
             "schema": {
               "description": "The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "form"
+              "minLength": 0,
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetCompanyIpAccessSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get company IP access settings",
         "tags": [
           "IP access service"
-        ],
-        "summary": "Replace company IP access settings",
+        ]
+      },
+      "put": {
         "description": "Updates the IP access restrictions for the team.",
         "operationId": "IpAccessService_ReplaceCompanyIpAccessSettings",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Replace company IP access settings request",
                 "description": "This data structure represents the request to replace company IP access settings.",
-                "type": "object",
                 "properties": {
                   "enableCoralogixCustomerSupportAccess": {
-                    "description": "The Coralogix customer support access setting. Defaults to DISABLED if not provided.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
                       }
+                    ],
+                    "description": "The Coralogix customer support access setting. Defaults to DISABLED if not provided.",
+                    "examples": [
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
                     ]
                   },
                   "id": {
                     "description": "Unique identifier of the existing IP access settings resource to replace.",
-                    "type": "string",
-                    "minLength": 0
+                    "examples": [
+                      "d662a2f1-21c3-493c-8f8a-595d3ab05ef3"
+                    ],
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "ipAccess": {
                     "description": "List of IP access entries to replace.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/IpAccess"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "type": "array"
                   }
-                }
+                },
+                "title": "Replace company IP access settings request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReplaceCompanyIpAccessSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Replace company IP access settings",
         "tags": [
           "IP access service"
-        ],
-        "summary": "Create company IP access settings",
+        ]
+      },
+      "post": {
         "description": "Sets the IP access restrictions for the team.",
         "operationId": "IpAccessService_CreateCompanyIpAccessSettings",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create company IP access settings request",
                 "description": "This data structure represents the request to create company IP access settings.",
-                "type": "object",
                 "properties": {
                   "enableCoralogixCustomerSupportAccess": {
-                    "description": "The Coralogix customer support access setting.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
                       }
+                    ],
+                    "description": "The Coralogix customer support access setting.",
+                    "examples": [
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
                     ]
                   },
                   "ipAccess": {
                     "description": "List of IP access entries to create.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/IpAccess"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "type": "array"
                   }
-                }
+                },
+                "title": "Create company IP access settings request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateCompanyIpAccessSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Create company IP access settings",
         "tags": [
           "IP access service"
-        ],
-        "summary": "Delete company IP access settings",
+        ]
+      },
+      "delete": {
         "description": "Removes the IP access restrictions for the team.",
         "operationId": "IpAccessService_DeleteCompanyIpAccessSettings",
         "parameters": [
           {
+            "description": "The unique identifier of the company IP access settings to delete.",
             "in": "query",
             "name": "id",
-            "description": "The unique identifier of the company IP access settings to delete.",
+            "required": false,
             "schema": {
               "description": "The unique identifier of the company IP access settings to delete.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "form"
+              "examples": [
+                "d662a2f1-21c3-493c-8f8a-595d3ab05ef3"
+              ],
+              "minLength": 0,
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteCompanyIpAccessSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Delete company IP access settings",
+        "tags": [
+          "IP access service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "CompanyIpAccessSettings": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Company IP access settings",
-        "description": "This data structure represents the IP access settings for a company.",
         "type": "object",
         "properties": {
           "enableCoralogixCustomerSupportAccess": {
-            "description": "The Coralogix customer support access setting.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CoralogixCustomerSupportAccess"
               }
+            ],
+            "description": "The Coralogix customer support access setting.",
+            "examples": [
+              "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
             ]
           },
           "id": {
-            "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
+            "examples": [
+              "d662a2f1-21c3-493c-8f8a-595d3ab05ef3"
+            ]
           },
           "ipAccess": {
-            "description": "The list of IP access entries.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/IpAccess"
-            }
+            },
+            "description": "The list of IP access entries."
           }
+        },
+        "description": "This data structure represents the IP access settings for a company.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CoralogixCustomerSupportAccess": {
-        "description": "Coralogix customer support access.",
-        "type": "string",
         "enum": [
           "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED",
           "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED",
           "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
-        ]
+        ],
+        "type": "string",
+        "description": "Coralogix customer support access."
       },
       "CreateCompanyIpAccessSettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Create company IP access settings response",
-        "description": "This data structure represents the response to create company IP access settings.",
         "type": "object",
         "properties": {
           "settings": {
-            "description": "The created company IP access settings.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CompanyIpAccessSettings"
               }
-            ]
+            ],
+            "description": "The created company IP access settings."
           }
+        },
+        "description": "This data structure represents the response to create company IP access settings.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "DeleteCompanyIpAccessSettingsResponse": {
+        "title": "Delete company IP access settings response",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents the response to delete company IP access settings.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Delete company IP access settings response",
-        "description": "This data structure represents the response to delete company IP access settings.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -440,61 +460,74 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GetCompanyIpAccessSettingsResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "GetCompanyIpAccessSettingsResponse": {
         "title": "Get company IP access settings response",
-        "description": "This data structure represents the response to get company IP access settings.",
         "type": "object",
         "properties": {
           "settings": {
-            "description": "The company IP access settings.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CompanyIpAccessSettings"
               }
-            ]
+            ],
+            "description": "The company IP access settings."
           }
+        },
+        "description": "This data structure represents the response to get company IP access settings.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IpAccess": {
-        "externalDocs": {
-          "description": "Find out more about IP access control in our documentation",
-          "url": "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"
-        },
         "title": "IP Access",
-        "description": "Represents a single IP access entry.",
         "type": "object",
         "properties": {
           "enabled": {
+            "type": "boolean",
             "description": "Whether this IP access entry is enabled.",
-            "type": "boolean"
+            "examples": [
+              true
+            ]
           },
           "ipRange": {
-            "description": "The IP range in CIDR notation.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The IP range in CIDR notation.",
+            "examples": [
+              "192.168.0.1/24"
+            ]
           },
           "name": {
-            "description": "The name of the IP access entry.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The name of the IP access entry.",
+            "examples": [
+              "Office Network"
+            ]
           }
+        },
+        "description": "Represents a single IP access entry.",
+        "externalDocs": {
+          "description": "Find out more about IP access control in our documentation",
+          "url": "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"
         }
       },
       "MultipleValues": {
@@ -504,47 +537,47 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "ReplaceCompanyIpAccessSettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Replace company IP access settings response",
-        "description": "This data structure represents the response to replace company IP access settings.",
         "type": "object",
         "properties": {
           "settings": {
-            "description": "The replaced company IP access settings.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CompanyIpAccessSettings"
               }
-            ]
+            ],
+            "description": "The replaced company IP access settings."
           }
+        },
+        "description": "This data structure represents the response to replace company IP access settings.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

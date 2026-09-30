@@ -7,92 +7,93 @@
   "paths": {
     "/alerts/alerts/v3/all/events": {
       "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "List Alert Events",
         "description": "Returns all alert events.",
         "operationId": "EventsService_ListAlertEvents",
         "parameters": [
           {
+            "description": "Alert version IDs to filter events by",
             "in": "query",
             "name": "alert_ids",
-            "description": "Alert version IDs to filter events by",
             "required": true,
             "schema": {
               "description": "Alert version IDs to filter events by",
-              "type": "array",
+              "examples": [
+                [
+                  "32144a8a-7ee0-4c16-a093-2bf1f9c12e1e"
+                ]
+              ],
               "items": {
                 "description": "Alert version IDs to filter events by",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
-              "minItems": 0
-            },
-            "style": "form"
+              "minItems": 0,
+              "type": "array"
+            }
           },
           {
+            "description": "Time range to search for events",
             "in": "query",
             "name": "timestamp_range",
-            "description": "Time range to search for events",
             "required": true,
             "schema": {
+              "description": "This data structure represents a timestamp range",
               "externalDocs": {
                 "url": ""
               },
-              "title": "TimestampRange",
-              "description": "This data structure represents a timestamp range",
-              "type": "object",
               "properties": {
                 "from": {
                   "description": "Inclusive start of the time range.",
-                  "type": "string",
                   "format": "date-time",
-                  "minLength": 0
+                  "minLength": 0,
+                  "type": "string"
                 },
                 "to": {
                   "description": "Inclusive end of the time range.",
-                  "type": "string",
                   "format": "date-time",
-                  "minLength": 0
+                  "minLength": 0,
+                  "type": "string"
                 }
               },
               "required": [
                 "from",
                 "to"
-              ]
-            },
-            "style": "form"
+              ],
+              "title": "TimestampRange",
+              "type": "object"
+            }
           },
           {
+            "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
             "in": "query",
             "name": "cx_event_labels",
-            "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
+            "required": false,
             "schema": {
-              "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
-              "type": "object",
               "additionalProperties": {
-                "type": "string",
-                "minLength": 0
-              }
-            },
-            "style": "form"
+                "minLength": 0,
+                "type": "string"
+              },
+              "description": "Optional event labels to filter by (e.g., app, subsystem, region)",
+              "type": "object"
+            }
           },
           {
+            "description": "Ordering criteria for the returned events.",
             "in": "query",
             "name": "order_bys",
-            "description": "Ordering criteria for the returned events.",
+            "required": false,
             "schema": {
               "description": "Ordering criteria for the returned events.",
-              "type": "array",
               "items": {
-                "type": "object",
                 "properties": {
                   "direction": {
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByDirection"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_DIRECTION_ASC"
                     ]
                   },
                   "fieldName": {
@@ -100,194 +101,220 @@
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByFields"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_FIELDS_TIMESTAMP"
                     ]
                   }
-                }
+                },
+                "type": "object"
               },
-              "minItems": 0
-            },
-            "style": "form"
+              "minItems": 0,
+              "type": "array"
+            }
           },
           {
+            "description": "Pagination parameters for the response.",
             "in": "query",
             "name": "pagination",
-            "description": "Pagination parameters for the response.",
+            "required": false,
             "schema": {
-              "type": "object",
               "properties": {
                 "pageSize": {
                   "description": "Maximum number of results to return per page.",
-                  "type": "integer",
+                  "examples": [
+                    10
+                  ],
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 0,
+                  "type": "integer"
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string",
-                  "minLength": 0
+                  "examples": [
+                    "test"
+                  ],
+                  "minLength": 0,
+                  "type": "string"
                 }
-              }
-            },
-            "style": "form"
+              },
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListAlertEventsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "List Alert Events",
+        "tags": [
+          "Events Service"
+        ]
       }
     },
     "/alerts/events/v3": {
       "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "List Events",
         "description": "Returns a list of alert events matching the specified filters.",
         "operationId": "EventsService_ListEvents",
         "parameters": [
           {
+            "description": "Filter criteria for events.",
             "in": "query",
             "name": "filter",
-            "description": "Filter criteria for events.",
             "required": true,
             "schema": {
+              "description": "This data structure represents an events filter",
               "externalDocs": {
                 "url": ""
               },
-              "title": "EventsFilter",
-              "description": "This data structure represents an events filter",
-              "type": "object",
               "properties": {
                 "cxEventKeys": {
                   "description": "List of event attribute keys to include when retrieving event data.",
-                  "type": "array",
+                  "examples": [
+                    [
+                      "test_key"
+                    ]
+                  ],
                   "items": {
                     "description": "List of event attribute keys to include when retrieving event data.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "type": "array"
                 },
                 "cxEventLabelsFilters": {
-                  "description": "Filters applied to event label fields.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/Filters"
                     }
-                  ]
+                  ],
+                  "description": "Filters applied to event label fields."
                 },
                 "cxEventMetadataFilters": {
-                  "description": "Filters applied to event metadata fields.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/Filters"
                     }
-                  ]
+                  ],
+                  "description": "Filters applied to event metadata fields."
                 },
                 "cxEventTypes": {
                   "description": "List of event type identifiers to include in the results.",
-                  "type": "array",
+                  "examples": [
+                    [
+                      "test_type"
+                    ]
+                  ],
                   "items": {
                     "description": "List of event type identifiers to include in the results.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "type": "array"
                 },
                 "timestamp": {
-                  "description": "Time range to filter events by their occurrence timestamp.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/TimestampRange"
                     }
-                  ]
+                  ],
+                  "description": "Time range to filter events by their occurrence timestamp."
                 }
               },
               "required": [
                 "timestamp",
                 "cxEventTypes",
                 "cxEventKeys"
-              ]
-            },
-            "style": "form"
+              ],
+              "title": "EventsFilter",
+              "type": "object"
+            }
           },
           {
+            "description": "Pagination parameters for the response.",
             "in": "query",
             "name": "pagination",
-            "description": "Pagination parameters for the response.",
             "required": true,
             "schema": {
-              "type": "object",
               "properties": {
                 "pageSize": {
                   "description": "Maximum number of results to return per page.",
-                  "type": "integer",
+                  "examples": [
+                    10
+                  ],
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 0,
+                  "type": "integer"
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string",
-                  "minLength": 0
+                  "examples": [
+                    "test"
+                  ],
+                  "minLength": 0,
+                  "type": "string"
                 }
-              }
-            },
-            "style": "form"
+              },
+              "type": "object"
+            }
           },
           {
+            "description": "Ordering criteria for the returned events.",
             "in": "query",
             "name": "order_bys",
-            "description": "Ordering criteria for the returned events.",
+            "required": false,
             "schema": {
               "description": "Ordering criteria for the returned events.",
-              "type": "array",
               "items": {
-                "type": "object",
                 "properties": {
                   "direction": {
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByDirection"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_DIRECTION_ASC"
                     ]
                   },
                   "fieldName": {
@@ -295,219 +322,234 @@
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByFields"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_FIELDS_TIMESTAMP"
                     ]
                   }
-                }
+                },
+                "type": "object"
               },
-              "minItems": 0
-            },
-            "style": "form"
+              "minItems": 0,
+              "type": "array"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v3.ListEventsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "List Events",
+        "tags": [
+          "Events Service"
+        ]
       }
     },
     "/alerts/events/v3/all/count": {
       "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "List Events Count",
         "description": "Returns the count of alert events matching the given filters.",
         "operationId": "EventsService_ListEventsCount",
         "parameters": [
           {
+            "description": "Filter criteria for events.",
             "in": "query",
             "name": "filter",
-            "description": "Filter criteria for events.",
             "required": true,
             "schema": {
+              "description": "This data structure represents an events filter",
               "externalDocs": {
                 "url": ""
               },
-              "title": "EventsFilter",
-              "description": "This data structure represents an events filter",
-              "type": "object",
               "properties": {
                 "cxEventKeys": {
                   "description": "List of event attribute keys to include when retrieving event data.",
-                  "type": "array",
+                  "examples": [
+                    [
+                      "test_key"
+                    ]
+                  ],
                   "items": {
                     "description": "List of event attribute keys to include when retrieving event data.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "type": "array"
                 },
                 "cxEventLabelsFilters": {
-                  "description": "Filters applied to event label fields.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/Filters"
                     }
-                  ]
+                  ],
+                  "description": "Filters applied to event label fields."
                 },
                 "cxEventMetadataFilters": {
-                  "description": "Filters applied to event metadata fields.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/Filters"
                     }
-                  ]
+                  ],
+                  "description": "Filters applied to event metadata fields."
                 },
                 "cxEventTypes": {
                   "description": "List of event type identifiers to include in the results.",
-                  "type": "array",
+                  "examples": [
+                    [
+                      "test_type"
+                    ]
+                  ],
                   "items": {
                     "description": "List of event type identifiers to include in the results.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "type": "array"
                 },
                 "timestamp": {
-                  "description": "Time range to filter events by their occurrence timestamp.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/TimestampRange"
                     }
-                  ]
+                  ],
+                  "description": "Time range to filter events by their occurrence timestamp."
                 }
               },
               "required": [
                 "timestamp",
                 "cxEventTypes",
                 "cxEventKeys"
-              ]
-            },
-            "style": "form"
+              ],
+              "title": "EventsFilter",
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListEventsCountResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "List Events Count",
+        "tags": [
+          "Events Service"
+        ]
       }
     },
     "/alerts/events/v3/all/list": {
       "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "Batch Get Event",
         "description": "Returns a list of alert events matching the given filters.",
         "operationId": "EventsService_BatchGetEvent",
         "parameters": [
           {
+            "description": "The ids.",
             "in": "query",
             "name": "ids",
-            "description": "The ids.",
+            "required": false,
             "schema": {
               "description": "The ids.",
-              "type": "array",
               "items": {
                 "description": "The ids.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
-              "minItems": 0
-            },
-            "style": "form"
+              "minItems": 0,
+              "type": "array"
+            }
           },
           {
+            "description": "Ordering criteria for the returned events.",
             "in": "query",
             "name": "order_bys",
-            "description": "Ordering criteria for the returned events.",
+            "required": false,
             "schema": {
               "description": "Ordering criteria for the returned events.",
-              "type": "array",
               "items": {
-                "type": "object",
                 "properties": {
                   "direction": {
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByDirection"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_DIRECTION_ASC"
                     ]
                   },
                   "fieldName": {
@@ -515,256 +557,279 @@
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByFields"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_FIELDS_TIMESTAMP"
                     ]
                   }
-                }
+                },
+                "type": "object"
               },
-              "minItems": 0
-            },
-            "style": "form"
+              "minItems": 0,
+              "type": "array"
+            }
           },
           {
+            "description": "Pagination parameters for the response.",
             "in": "query",
             "name": "pagination",
-            "description": "Pagination parameters for the response.",
+            "required": false,
             "schema": {
-              "type": "object",
               "properties": {
                 "pageSize": {
                   "description": "Maximum number of results to return per page.",
-                  "type": "integer",
+                  "examples": [
+                    10
+                  ],
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 0,
+                  "type": "integer"
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string",
-                  "minLength": 0
+                  "examples": [
+                    "test"
+                  ],
+                  "minLength": 0,
+                  "type": "string"
                 }
-              }
-            },
-            "style": "form"
+              },
+              "type": "object"
+            }
           },
           {
+            "description": "Optional filter to narrow the set of returned events.",
             "in": "query",
             "name": "filter",
-            "description": "Optional filter to narrow the set of returned events.",
+            "required": false,
             "schema": {
-              "type": "object",
               "properties": {
                 "timestamp": {
-                  "description": "Time range to filter events by their occurrence timestamp.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/TimestampRange"
                     }
-                  ]
+                  ],
+                  "description": "Time range to filter events by their occurrence timestamp."
                 }
-              }
-            },
-            "style": "form"
+              },
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BatchGetEventResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Batch Get Event",
+        "tags": [
+          "Events Service"
+        ]
       }
     },
     "/alerts/events/v3/all/statistics": {
       "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "Get Events Statistics",
         "description": "Returns statistical aggregates for alert events.",
         "operationId": "EventsService_GetEventsStatistics",
         "parameters": [
           {
+            "description": "Filter criteria for events.",
             "in": "query",
             "name": "filter",
-            "description": "Filter criteria for events.",
             "required": true,
             "schema": {
+              "description": "This data structure represents an events filter",
               "externalDocs": {
                 "url": ""
               },
-              "title": "EventsFilter",
-              "description": "This data structure represents an events filter",
-              "type": "object",
               "properties": {
                 "cxEventKeys": {
                   "description": "List of event attribute keys to include when retrieving event data.",
-                  "type": "array",
+                  "examples": [
+                    [
+                      "test_key"
+                    ]
+                  ],
                   "items": {
                     "description": "List of event attribute keys to include when retrieving event data.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "type": "array"
                 },
                 "cxEventLabelsFilters": {
-                  "description": "Filters applied to event label fields.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/Filters"
                     }
-                  ]
+                  ],
+                  "description": "Filters applied to event label fields."
                 },
                 "cxEventMetadataFilters": {
-                  "description": "Filters applied to event metadata fields.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/Filters"
                     }
-                  ]
+                  ],
+                  "description": "Filters applied to event metadata fields."
                 },
                 "cxEventTypes": {
                   "description": "List of event type identifiers to include in the results.",
-                  "type": "array",
+                  "examples": [
+                    [
+                      "test_type"
+                    ]
+                  ],
                   "items": {
                     "description": "List of event type identifiers to include in the results.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
-                  "minItems": 0
+                  "minItems": 0,
+                  "type": "array"
                 },
                 "timestamp": {
-                  "description": "Time range to filter events by their occurrence timestamp.",
                   "allOf": [
                     {
                       "$ref": "#/components/schemas/TimestampRange"
                     }
-                  ]
+                  ],
+                  "description": "Time range to filter events by their occurrence timestamp."
                 }
               },
               "required": [
                 "timestamp",
                 "cxEventTypes",
                 "cxEventKeys"
-              ]
-            },
-            "style": "form"
+              ],
+              "title": "EventsFilter",
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetEventsStatisticsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Events Statistics",
+        "tags": [
+          "Events Service"
+        ]
       }
     },
     "/alerts/events/v3/{id}": {
       "get": {
-        "tags": [
-          "Events Service"
-        ],
-        "summary": "Get Event",
         "description": "Returns the alert event with the specified ID.",
         "operationId": "EventsService_GetEvent",
         "parameters": [
           {
+            "description": "Unique identifier of the alert event to retrieve.",
             "in": "path",
             "name": "id",
-            "description": "Unique identifier of the alert event to retrieve.",
             "required": true,
             "schema": {
               "description": "Unique identifier of the alert event to retrieve.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "simple"
+              "examples": [
+                "test"
+              ],
+              "minLength": 0,
+              "type": "string"
+            }
           },
           {
+            "description": "The order bys.",
             "in": "query",
             "name": "order_bys",
-            "description": "The order bys.",
+            "required": false,
             "schema": {
               "description": "The order bys.",
-              "type": "array",
               "items": {
-                "type": "object",
                 "properties": {
                   "direction": {
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByDirection"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_DIRECTION_ASC"
                     ]
                   },
                   "fieldName": {
@@ -772,174 +837,129 @@
                       {
                         "$ref": "#/components/schemas/events.v3.OrderByFields"
                       }
+                    ],
+                    "examples": [
+                      "ORDER_BY_FIELDS_TIMESTAMP"
                     ]
                   }
-                }
+                },
+                "type": "object"
               },
-              "minItems": 0
-            },
-            "style": "form"
+              "minItems": 0,
+              "type": "array"
+            }
           },
           {
+            "description": "Pagination parameters for the response.",
             "in": "query",
             "name": "pagination",
-            "description": "Pagination parameters for the response.",
+            "required": false,
             "schema": {
-              "type": "object",
               "properties": {
                 "pageSize": {
                   "description": "Maximum number of results to return per page.",
-                  "type": "integer",
+                  "examples": [
+                    10
+                  ],
                   "format": "int64",
-                  "minimum": 0
+                  "minimum": 0,
+                  "type": "integer"
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
-                  "type": "string",
-                  "minLength": 0
+                  "examples": [
+                    "test"
+                  ],
+                  "minLength": 0,
+                  "type": "string"
                 }
-              }
-            },
-            "style": "form"
+              },
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v3.GetEventResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Event",
+        "tags": [
+          "Events Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "BatchGetEventResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the details of an alert event.",
         "type": "object",
         "properties": {
           "events": {
-            "description": "List of events.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/CxEventSingleOrMultiple"
-            }
+            },
+            "description": "List of events."
           },
           "notFoundIds": {
-            "description": "The not found ids.",
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The not found ids.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The not found ids."
             },
-            "minItems": 0
+            "description": "The not found ids."
           },
           "pagination": {
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
+        },
+        "description": "Response containing the details of an alert event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CxEvent": {
-        "externalDocs": {
-          "description": "Find out more about events",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
         "title": "Event",
-        "description": "This data structure represents an event",
-        "type": "object",
-        "properties": {
-          "companyId": {
-            "description": "The company id.",
-            "type": "integer",
-            "format": "int32"
-          },
-          "cxEventDedupKey": {
-            "description": "The cx event dedup key.",
-            "type": "string",
-            "minLength": 0
-          },
-          "cxEventKey": {
-            "description": "The cx event key.",
-            "type": "string",
-            "minLength": 0
-          },
-          "cxEventLabels": {
-            "description": "The cx event labels.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
-          },
-          "cxEventMetadata": {
-            "description": "The cx event metadata.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
-          },
-          "cxEventPayload": {
-            "description": "The cx event payload.",
-            "type": "object"
-          },
-          "cxEventPayloadType": {
-            "description": "The cx event payload type.",
-            "type": "string",
-            "minLength": 0
-          },
-          "cxEventTimestamp": {
-            "description": "The cx event timestamp.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "cxEventType": {
-            "description": "The cx event type.",
-            "type": "string",
-            "minLength": 0
-          }
-        },
         "required": [
           "cxEventKey",
           "cxEventType",
@@ -948,37 +968,143 @@
           "cxEventTimestamp",
           "cxEventPayloadType",
           "cxEventPayload"
-        ]
-      },
-      "CxEventArray": {
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "integer",
+            "description": "The company id.",
+            "format": "int32",
+            "examples": [
+              1
+            ]
+          },
+          "cxEventDedupKey": {
+            "minLength": 0,
+            "type": "string",
+            "description": "The cx event dedup key.",
+            "examples": [
+              "test_dedup_key"
+            ]
+          },
+          "cxEventKey": {
+            "minLength": 0,
+            "type": "string",
+            "description": "The cx event key.",
+            "examples": [
+              "test"
+            ]
+          },
+          "cxEventLabels": {
+            "type": "object",
+            "additionalProperties": {
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "The cx event labels."
+          },
+          "cxEventMetadata": {
+            "type": "object",
+            "additionalProperties": {
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "The cx event metadata."
+          },
+          "cxEventPayload": {
+            "type": "object",
+            "description": "The cx event payload."
+          },
+          "cxEventPayloadType": {
+            "minLength": 0,
+            "type": "string",
+            "description": "The cx event payload type.",
+            "examples": [
+              "test_payload_type"
+            ]
+          },
+          "cxEventTimestamp": {
+            "minLength": 0,
+            "type": "string",
+            "description": "The cx event timestamp.",
+            "format": "date-time",
+            "examples": [
+              "2024-05-05T00:00:00.000Z"
+            ]
+          },
+          "cxEventType": {
+            "minLength": 0,
+            "type": "string",
+            "description": "The cx event type.",
+            "examples": [
+              "test_type"
+            ]
+          }
+        },
+        "description": "This data structure represents an event",
         "externalDocs": {
           "description": "Find out more about events",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
+        }
+      },
+      "CxEventArray": {
         "title": "CxEventArray",
-        "description": "This data structure represents an array of events",
+        "required": [
+          "events"
+        ],
         "type": "object",
         "properties": {
           "events": {
-            "description": "List of events.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
             },
-            "minItems": 0
+            "description": "List of events."
           }
         },
-        "required": [
-          "events"
-        ]
+        "description": "This data structure represents an array of events",
+        "externalDocs": {
+          "description": "Find out more about events",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        }
       },
       "CxEventSingleOrMultiple": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "CxEventSingleOrMultiple",
-        "description": "This data structure represents a single or multiple events",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "singleEvent"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "multipleEvents"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "singleEvent"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "multipleEvents"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "multipleEvents": {
             "$ref": "#/components/schemas/CxEventArray"
@@ -987,123 +1113,96 @@
             "$ref": "#/components/schemas/CxEvent"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "singleEvent"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "multipleEvents"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "singleEvent"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "multipleEvents"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
+        "description": "This data structure represents a single or multiple events",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FieldStatistics": {
         "type": "object",
         "properties": {
           "fieldStatistics": {
-            "description": "The field statistics.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "pattern": "^-?[0-9]+$",
+              "maxLength": 20,
               "minLength": 1,
-              "maxLength": 20
-            }
+              "pattern": "^-?[0-9]+$",
+              "type": "string"
+            },
+            "description": "The field statistics."
           }
         }
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -1111,92 +1210,102 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GetEventsStatisticsResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "GetEventsStatisticsResponse": {
         "title": "GetEventsStatisticsResponse",
-        "description": "This data structure represents a response to get events statistics",
         "type": "object",
         "properties": {
           "cxEventLabelsFieldStatistics": {
-            "description": "The cx event labels field statistics.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/FieldStatistics"
-            }
+            },
+            "description": "The cx event labels field statistics."
           },
           "cxEventMetadataFieldStatistics": {
-            "description": "The cx event metadata field statistics.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/FieldStatistics"
-            }
+            },
+            "description": "The cx event metadata field statistics."
           }
+        },
+        "description": "This data structure represents a response to get events statistics",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ListAlertEventsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "ListAlertEventsResponse",
-        "description": "Response containing events associated with the alert",
+        "required": [
+          "events"
+        ],
         "type": "object",
         "properties": {
           "events": {
-            "description": "List of events.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
             },
-            "minItems": 0
+            "description": "List of events."
           },
           "pagination": {
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
         },
-        "required": [
-          "events"
-        ]
-      },
-      "ListEventsCountResponse": {
+        "description": "Response containing events associated with the alert",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "ListEventsCountResponse": {
         "title": "ListEventsCountResponse",
-        "description": "This data structure represents a response to list events count",
-        "type": "object",
-        "properties": {
-          "count": {
-            "description": "Number of items.",
-            "type": "string",
-            "pattern": "^[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          },
-          "reachedLimit": {
-            "description": "The reached limit.",
-            "type": "boolean"
-          }
-        },
         "required": [
           "count",
           "reachedLimit"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "count": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "description": "Number of items.",
+            "examples": [
+              "10"
+            ]
+          },
+          "reachedLimit": {
+            "type": "boolean",
+            "description": "The reached limit.",
+            "examples": [
+              false
+            ]
+          }
+        },
+        "description": "This data structure represents a response to list events count",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -1205,98 +1314,100 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "TimestampRange": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "TimestampRange",
-        "description": "This data structure represents a timestamp range",
-        "type": "object",
-        "properties": {
-          "from": {
-            "description": "Inclusive start of the time range.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          },
-          "to": {
-            "description": "Inclusive end of the time range.",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 0
-          }
-        },
         "required": [
           "from",
           "to"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "from": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Inclusive start of the time range.",
+            "format": "date-time"
+          },
+          "to": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Inclusive end of the time range.",
+            "format": "date-time"
+          }
+        },
+        "description": "This data structure represents a timestamp range",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "events.v3.OrderByDirection": {
-        "description": "Order by direction.",
-        "type": "string",
         "enum": [
           "ORDER_BY_DIRECTION_UNSPECIFIED",
           "ORDER_BY_DIRECTION_ASC",
           "ORDER_BY_DIRECTION_DESC"
-        ]
+        ],
+        "type": "string",
+        "description": "Order by direction."
       },
       "events.v3.OrderByFields": {
-        "description": "Order by fields.",
-        "type": "string",
         "enum": [
           "ORDER_BY_FIELDS_UNSPECIFIED",
           "ORDER_BY_FIELDS_TIMESTAMP"
-        ]
+        ],
+        "type": "string",
+        "description": "Order by fields."
       },
       "events.v3.PaginationResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Pagination metadata returned alongside paginated list responses.",
         "type": "object",
         "properties": {
           "nextPageToken": {
-            "description": "Token for fetching the next page of results.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Token for fetching the next page of results.",
+            "examples": [
+              "test"
+            ]
           },
           "totalSize": {
-            "description": "Total number of results.",
+            "minimum": 0,
             "type": "integer",
+            "description": "Total number of results.",
             "format": "int64",
-            "minimum": 0
+            "examples": [
+              10
+            ]
           }
+        },
+        "description": "Pagination metadata returned alongside paginated list responses.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       },
       "v3.GetEventResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the details of an alert event.",
         "type": "object",
         "properties": {
           "event": {
@@ -1305,31 +1416,35 @@
           "pagination": {
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
+        },
+        "description": "Response containing the details of an alert event.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "v3.ListEventsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "ListEventsResponse",
-        "description": "This data structure represents a response to list events",
+        "required": [
+          "events"
+        ],
         "type": "object",
         "properties": {
           "events": {
-            "description": "List of events.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CxEvent"
             },
-            "minItems": 0
+            "description": "List of events."
           },
           "pagination": {
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
         },
-        "required": [
-          "events"
-        ]
+        "description": "This data structure represents a response to list events",
+        "externalDocs": {
+          "url": ""
+        }
       }
     }
   }

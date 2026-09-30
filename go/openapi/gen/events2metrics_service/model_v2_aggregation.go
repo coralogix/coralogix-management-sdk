@@ -39,17 +39,17 @@ type V2Aggregation struct {
 type _V2Aggregation V2Aggregation
 
 // NewV2Aggregation instantiates a new V2Aggregation object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewV2Aggregation() *V2Aggregation {
 	this := V2Aggregation{}
 	return &this
 }
 
 // NewV2AggregationWithDefaults instantiates a new V2Aggregation object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewV2AggregationWithDefaults() *V2Aggregation {
 	this := V2Aggregation{}
 	return &this

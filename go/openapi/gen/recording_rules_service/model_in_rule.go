@@ -38,9 +38,9 @@ type InRule struct {
 type _InRule InRule
 
 // NewInRule instantiates a new InRule object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewInRule(expr string, record string) *InRule {
 	this := InRule{}
 	this.Expr = expr
@@ -49,8 +49,8 @@ func NewInRule(expr string, record string) *InRule {
 }
 
 // NewInRuleWithDefaults instantiates a new InRule object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewInRuleWithDefaults() *InRule {
 	this := InRule{}
 	return &this

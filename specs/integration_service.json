@@ -7,66 +7,66 @@
   "paths": {
     "/integrations/integrations/v1": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get all integrations",
         "description": "Returns all available integration definitions.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetIntegrations",
         "parameters": [
           {
+            "description": "Whether to include testing revisions in the response.",
             "in": "query",
             "name": "include_testing_revision",
-            "description": "Whether to include testing revisions in the response.",
+            "required": false,
             "schema": {
               "description": "Whether to include testing revisions in the response.",
               "type": "boolean"
-            },
-            "style": "form"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetIntegrationsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get all integrations",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -74,80 +74,82 @@
     },
     "/integrations/integrations/v1/definitions/{id}": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get integration definition",
         "description": "Returns the definition for the specified integration type.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetIntegrationDefinition",
         "parameters": [
           {
+            "description": "The unique identifier of the integration definition.",
             "in": "path",
             "name": "id",
-            "description": "The unique identifier of the integration definition.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the integration definition.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "examples": [
+                "aws-sqs"
+              ],
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "simple"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "Whether to include testing revisions in the response.",
             "in": "query",
             "name": "include_testing_revision",
-            "description": "Whether to include testing revisions in the response.",
+            "required": false,
             "schema": {
               "description": "Whether to include testing revisions in the response.",
               "type": "boolean"
-            },
-            "style": "form"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetIntegrationDefinitionResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get integration definition",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -155,70 +157,72 @@
     },
     "/integrations/integrations/v1/deployed/{integration_id}": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get deployed integration",
         "description": "Returns the deployed instance of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetDeployedIntegration",
         "parameters": [
           {
+            "description": "The integration id.",
             "in": "path",
             "name": "integration_id",
-            "description": "The integration id.",
             "required": true,
             "schema": {
               "description": "The integration id.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "examples": [
+                "aws-sqs"
+              ],
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "simple"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetDeployedIntegrationResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get deployed integration",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -226,70 +230,69 @@
     },
     "/integrations/integrations/v1/instances/{integration_id}": {
       "delete": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Delete integration",
         "description": "Removes the specified deployed integration instance.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "operationId": "IntegrationService_DeleteIntegration",
         "parameters": [
           {
+            "description": "The unique identifier of the integration instance to delete.",
             "in": "path",
             "name": "integration_id",
-            "description": "The unique identifier of the integration instance to delete.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the integration instance to delete.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "simple"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteIntegrationResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Delete integration",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:Deploy"
         ]
@@ -297,69 +300,69 @@
     },
     "/integrations/integrations/v1/rum/app-versions": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get RUM integration versions data",
         "description": "Returns RUM application version data.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetRumApplicationVersionData",
         "parameters": [
           {
+            "description": "The name of the RUM application to fetch version data for.",
             "in": "query",
             "name": "application_name",
-            "description": "The name of the RUM application to fetch version data for.",
+            "required": false,
             "schema": {
               "description": "The name of the RUM application to fetch version data for.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "form"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetRumApplicationVersionDataResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get RUM integration versions data",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -367,71 +370,71 @@
     },
     "/integrations/integrations/v1/rum/sync": {
       "post": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Trigger sync of RUM integration data",
         "description": "Syncs RUM data for the team.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_SyncRumData",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Sync RUM data request",
                 "description": "Request for syncing RUM data.",
-                "type": "object",
                 "properties": {
                   "force": {
                     "description": "The force.",
                     "type": "boolean"
                   }
-                }
+                },
+                "title": "Sync RUM data request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SyncRumDataResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Trigger sync of RUM integration data",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -439,80 +442,79 @@
     },
     "/integrations/integrations/v1/{id}": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get integration details",
         "description": "Returns the details of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetIntegrationDetails",
         "parameters": [
           {
+            "description": "The unique identifier of the integration.",
             "in": "path",
             "name": "id",
-            "description": "The unique identifier of the integration.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the integration.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "simple"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "Whether to include testing revisions in the response.",
             "in": "query",
             "name": "include_testing_revision",
-            "description": "Whether to include testing revisions in the response.",
+            "required": false,
             "schema": {
               "description": "Whether to include testing revisions in the response.",
               "type": "boolean"
-            },
-            "style": "form"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetIntegrationDetailsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get integration details",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -520,54 +522,54 @@
     },
     "/integrations/managed/v1": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "List managed integration keys",
         "description": "Returns a list of managed integration keys.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_ListManagedIntegrationKeys",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListManagedIntegrationKeysResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "List managed integration keys",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -575,70 +577,69 @@
     },
     "/integrations/managed/v1/{integration_id}": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get managed integration status",
         "description": "Returns the status of the specified managed integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetManagedIntegrationStatus",
         "parameters": [
           {
+            "description": "The unique identifier of the managed integration.",
             "in": "path",
             "name": "integration_id",
-            "description": "The unique identifier of the managed integration.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the managed integration.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "simple"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetManagedIntegrationStatusResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get managed integration status",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -646,146 +647,146 @@
     },
     "/integrations/metadata/v1": {
       "put": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Update integration",
         "description": "Updates an existing integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "operationId": "IntegrationService_UpdateIntegration",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update integration request",
                 "description": "This data structure represents a list of outgoing webhook types.",
-                "type": "object",
                 "properties": {
                   "id": {
                     "description": "Integration metadata ID generated at creation time.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "maxLength": 65535,
                     "minLength": 0,
-                    "maxLength": 65535
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
                   },
                   "metadata": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
-                }
+                },
+                "title": "Update integration request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateIntegrationResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Update integration",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:Deploy"
         ]
       },
       "post": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Save integration registration metadata",
         "description": "Creates or updates an integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "operationId": "IntegrationService_SaveIntegration",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Save integration request",
                 "description": "Request for creating an integration deployment.",
-                "type": "object",
                 "properties": {
                   "metadata": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
-                }
+                },
+                "title": "Save integration request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SaveIntegrationResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Save integration registration metadata",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:Deploy"
         ]
@@ -793,77 +794,77 @@
     },
     "/integrations/metadata/v1/test": {
       "post": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Test integration",
         "description": "Tests the integration configuration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_TestIntegration",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Test integration request",
                 "description": "Request for testing an integration configuration.",
-                "type": "object",
                 "properties": {
                   "integrationData": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   },
                   "integrationId": {
                     "description": "ID of the existing integration instance to test.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "maxLength": 65535,
                     "minLength": 0,
-                    "maxLength": 65535
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
                   }
-                }
+                },
+                "title": "Test integration request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TestIntegrationResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Test integration",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -871,115 +872,115 @@
     },
     "/integrations/template/v1": {
       "get": {
-        "tags": [
-          "Integration service"
-        ],
-        "summary": "Get integration template",
         "description": "Returns the template for an integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetTemplate",
         "parameters": [
           {
+            "description": "The unique identifier of the integration to fetch a template for.",
             "in": "query",
             "name": "integration_id",
-            "description": "The unique identifier of the integration to fetch a template for.",
+            "required": false,
             "schema": {
               "description": "The unique identifier of the integration to fetch a template for.",
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 65535,
               "minLength": 0,
-              "maxLength": 65535
-            },
-            "style": "form"
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
           },
           {
+            "description": "Common ARM integration parameters (logs URL, API key, cgx domain) supplied when rendering the template.",
             "in": "query",
             "name": "common_arm_params",
-            "description": "Common ARM integration parameters (logs URL, API key, cgx domain) supplied when rendering the template.",
+            "required": false,
             "schema": {
               "externalDocs": {
                 "url": ""
               },
-              "title": "Common ARM integration parameters",
-              "type": "object",
               "properties": {
                 "apiKey": {
                   "description": "API key used to authenticate requests for template access.",
-                  "type": "string",
-                  "pattern": "^[\\s\\S]*$",
+                  "maxLength": 65535,
                   "minLength": 0,
-                  "maxLength": 65535
+                  "pattern": "^[\\s\\S]*$",
+                  "type": "string"
                 },
                 "cgxDomain": {
                   "description": "The cgx domain.",
-                  "type": "string",
-                  "pattern": "^[\\s\\S]*$",
+                  "maxLength": 65535,
                   "minLength": 0,
-                  "maxLength": 65535
+                  "pattern": "^[\\s\\S]*$",
+                  "type": "string"
                 },
                 "logsUrl": {
                   "description": "The logs url.",
-                  "type": "string",
-                  "pattern": "^[\\s\\S]*$",
+                  "maxLength": 65535,
                   "minLength": 0,
-                  "maxLength": 65535
+                  "pattern": "^[\\s\\S]*$",
+                  "type": "string"
                 }
-              }
-            },
-            "style": "form"
+              },
+              "title": "Common ARM integration parameters",
+              "type": "object"
+            }
           },
           {
+            "description": "Empty extra parameters; use when the template does not require additional inputs.",
             "in": "query",
             "name": "empty",
-            "description": "Empty extra parameters; use when the template does not require additional inputs.",
+            "required": false,
             "schema": {
-              "type": "object",
-              "additionalProperties": false
-            },
-            "style": "form"
+              "additionalProperties": false,
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTemplateResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get integration template",
+        "tags": [
+          "Integration service"
+        ],
         "x-coralogixPermissions": [
           "integrations:ReadConfig"
         ]
@@ -989,714 +990,792 @@
   "components": {
     "schemas": {
       "ARMStack": {
-        "externalDocs": {
-          "description": "Find out more about the Azure Resource Manager (ARM) integration in our documentation",
-          "url": "https://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/"
-        },
         "title": "ARM stack",
-        "description": "This data structure represents an Azure Resource Manager stack.",
         "type": "object",
         "properties": {
           "resourceGroupName": {
-            "description": "The resource group name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The resource group name."
           },
           "subscriptionId": {
-            "description": "The subscription id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The subscription id."
           }
+        },
+        "description": "This data structure represents an Azure Resource Manager stack.",
+        "externalDocs": {
+          "description": "Find out more about the Azure Resource Manager (ARM) integration in our documentation",
+          "url": "https://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/"
         }
       },
       "ApiKeyData": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "API key data",
-        "description": "Api key data.",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "value": {
-            "description": "The value.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The value."
           }
+        },
+        "description": "Api key data.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "AzureArm": {
+        "title": "Azure ARM",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents an Azure ARM integration.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Azure ARM",
-        "description": "This data structure represents an Azure ARM integration.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "AzureArmTemplate": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Azure ARM template",
-        "description": "This data structure represents an azure ARM template.",
         "type": "object",
         "properties": {
           "templateUrl": {
-            "description": "The template url.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The template url."
           }
+        },
+        "description": "This data structure represents an azure ARM template.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ChangelogEntry": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Changelog entry",
         "type": "object",
         "properties": {
           "descriptionMd": {
-            "description": "The description md.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The description md."
           },
           "version": {
-            "description": "Version.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "CloudFormationStack": {
-        "externalDocs": {
-          "description": "Find out more about the AWS CloudFormation integration in our documentation",
-          "url": "https://coralogix.com/docs/integrations/aws/aws-cloudformation-logs/"
-        },
         "title": "CloudFormation stack",
-        "description": "This data structure represents a CloudFormation stack.",
         "type": "object",
         "properties": {
           "arn": {
-            "description": "The arn.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The arn."
           },
           "region": {
-            "description": "Region.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Region."
           }
+        },
+        "description": "This data structure represents a CloudFormation stack.",
+        "externalDocs": {
+          "description": "Find out more about the AWS CloudFormation integration in our documentation",
+          "url": "https://coralogix.com/docs/integrations/aws/aws-cloudformation-logs/"
         }
       },
       "CloudFormationTemplate": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "CloudFormation template",
-        "description": "Cloud formation template.",
         "type": "object",
         "properties": {
           "commands": {
-            "description": "The commands.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The commands."
           },
           "parameters": {
-            "description": "The parameters.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "The parameters."
           },
           "postInstallationSteps": {
-            "description": "The post installation steps.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "The post installation steps."
           },
           "templateUrl": {
-            "description": "The template url.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The template url."
           }
+        },
+        "description": "Cloud formation template.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Cloudformation": {
+        "title": "CloudFormation",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents a CloudFormation integration.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "CloudFormation",
-        "description": "This data structure represents a CloudFormation integration.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "CommandInformation": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Command information",
         "type": "object",
         "properties": {
           "command": {
-            "description": "The command.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The command."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "language": {
             "$ref": "#/components/schemas/Language"
           },
           "links": {
-            "description": "List of links.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Link"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of links."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "tooltipText": {
-            "description": "The tooltip text.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The tooltip text."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConfigurationBlock": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Configuration block",
         "type": "object",
         "properties": {
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "value": {
-            "description": "The value.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The value."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ConnectionStatus": {
-        "description": "Connection status.",
-        "type": "string",
         "enum": [
           "PENDING",
           "ACTIVE",
           "FAILING",
           "STATUS_UNKNOWN"
-        ]
+        ],
+        "type": "string",
+        "description": "Connection status."
       },
       "ContextualData": {
+        "title": "Contextual data",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents a contextual data integration.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Contextual data",
-        "description": "This data structure represents a contextual data integration.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "DefaultIntegrationDetails": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Default integration details",
-        "description": "Default integration details.",
         "type": "object",
         "properties": {
           "registered": {
-            "description": "The registered.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RegisteredInstance"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The registered."
           }
+        },
+        "description": "Default integration details.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "DeleteIntegrationResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after successfully removing an integration instance.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response returned after successfully removing an integration instance.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "DeployedIntegrationInformation": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Deployed integration information",
-        "description": "Deployed integration information.",
         "type": "object",
         "properties": {
           "definitionKey": {
-            "description": "The definition key.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The definition key."
           },
           "definitionVersion": {
-            "description": "The definition version.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The definition version."
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
           },
           "parameters": {
-            "description": "The parameters.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The parameters."
           }
+        },
+        "description": "Deployed integration information.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Deprecation": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Deprecation",
-        "description": "Deprecation.",
         "type": "object",
         "properties": {
           "reason": {
-            "description": "Reason.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Reason."
           },
           "replacementExtensions": {
-            "description": "The replacement extensions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The replacement extensions.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The replacement extensions."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The replacement extensions."
           }
+        },
+        "description": "Deprecation.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "ExtensionBinary": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension binary",
         "type": "object",
         "properties": {
           "data": {
-            "description": "Data payload.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 5000000,
             "minLength": 0,
-            "maxLength": 5000000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Data payload."
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ExtensionBinary.BinaryType": {
-        "description": "Type of binary content stored in the extension.",
-        "type": "string",
         "enum": [
           "KIBANA_INDEX_PATTERN"
-        ]
+        ],
+        "type": "string",
+        "description": "Type of binary content stored in the extension."
       },
       "ExtensionItem": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension item",
         "type": "object",
         "properties": {
           "binaries": {
-            "description": "The binaries.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The binaries."
           },
           "data": {
-            "description": "Data payload.",
-            "type": "object"
+            "type": "object",
+            "description": "Data payload."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "extendedInternalId": {
-            "description": "The extended internal id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The extended internal id."
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "isMandatory": {
-            "description": "The is mandatory.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is mandatory."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
           },
           "stableId": {
-            "description": "The stable id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 63,
             "minLength": 0,
-            "maxLength": 63
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The stable id."
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
           },
           "uniqueId": {
-            "description": "The unique id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The unique id."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ExtensionItemBinary": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension item binary",
         "type": "object",
         "properties": {
           "data": {
-            "description": "Data payload.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 5000000,
             "minLength": 0,
-            "maxLength": 5000000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Data payload."
           },
           "fileName": {
-            "description": "The file name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The file name."
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ExtensionItemBinary.BinaryType": {
-        "description": "Binary type.",
-        "type": "string",
         "enum": [
           "PREVIEW_IMAGE",
           "KIBANA_DASHBOARD_DEFINITION",
           "GRAFANA_DASHBOARD_DEFINITION",
           "ENRICHMENT_CSV",
           "CX_CUSTOM_DASHBOARD_DEFINITION"
-        ]
+        ],
+        "type": "string",
+        "description": "Binary type."
       },
       "ExtensionRevision": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Extension revision",
         "type": "object",
         "properties": {
           "binaries": {
-            "description": "The binaries.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The binaries."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "excerpt": {
-            "description": "The excerpt.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The excerpt."
           },
           "integrationDetails": {
-            "description": "The integration details.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integration details."
           },
           "isTesting": {
-            "description": "The is testing.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is testing."
           },
           "items": {
-            "description": "List of items.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of items."
           },
           "labels": {
-            "description": "List of labels.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of labels.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "List of labels."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of labels."
           },
           "permissionDeniedItems": {
-            "description": "The permission denied items.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The permission denied items."
           },
           "version": {
-            "description": "Version.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ExternalUrl": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "External URL",
-        "description": "External url.",
         "type": "object",
         "properties": {
           "url": {
-            "description": "URL.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "URL."
           }
+        },
+        "description": "External url.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "FieldCondition": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Field condition",
-        "description": "Field condition.",
         "type": "object",
         "properties": {
           "type": {
             "$ref": "#/components/schemas/FieldCondition.ConditionType"
           },
           "values": {
-            "description": "List of values.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldCondition.FieldValue"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of values."
           }
+        },
+        "description": "Field condition.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "FieldCondition.ConditionType": {
-        "description": "Condition type.",
-        "type": "string",
         "enum": [
           "UNKNOWN",
           "OR",
           "AND"
-        ]
+        ],
+        "type": "string",
+        "description": "Condition type."
       },
       "FieldCondition.FieldValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Field value",
         "type": "object",
         "properties": {
           "fieldName": {
-            "description": "The field name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The field name."
           },
           "valuePattern": {
-            "description": "The value pattern.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The value pattern."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "FieldInformation": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Field information",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "single"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "multiText"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "multipleSelection"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "singleBoolean"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "selection"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "singleNumber"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "single"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "multiText"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "multipleSelection"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "singleBoolean"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "selection"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "singleNumber"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "allowedPattern": {
-            "description": "Regular expression pattern that the field value must match for validation.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Regular expression pattern that the field value must match for validation."
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
-            "description": "Link to documentation providing more information about this field.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Link to documentation providing more information about this field."
           },
           "groupId": {
-            "description": "Identifier of the UI group this field belongs to for form layout purposes.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Identifier of the UI group this field belongs to for form layout purposes."
           },
           "multiText": {
             "$ref": "#/components/schemas/ListTextValue"
@@ -1705,30 +1784,30 @@
             "$ref": "#/components/schemas/MultipleSelectionValue"
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "placeholder": {
-            "description": "Placeholder text shown in the input field before a value is entered.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Placeholder text shown in the input field before a value is entered."
           },
           "predefined": {
-            "description": "Whether this field has a predefined value that is suggested to the user.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this field has a predefined value that is suggested to the user."
           },
           "readonly": {
-            "description": "Whether this field is read-only and cannot be modified by the user.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this field is read-only and cannot be modified by the user."
           },
           "required": {
-            "description": "Whether this field must be filled in before the integration can be deployed.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this field must be filled in before the integration can be deployed."
           },
           "selection": {
             "$ref": "#/components/schemas/SelectionValue"
@@ -1743,164 +1822,88 @@
             "$ref": "#/components/schemas/IntegrationRevision.SingleNumericValue"
           },
           "templateParamName": {
-            "description": "Name of the template parameter this field maps to in the deployment template.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Name of the template parameter this field maps to in the deployment template."
           },
           "tooltip": {
-            "description": "Tooltip text displayed on hover to provide additional context for this field.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Tooltip text displayed on hover to provide additional context for this field."
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
-            "description": "Notice displayed to users when an upgrade is required to use this field.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Notice displayed to users when an upgrade is required to use this field."
           },
           "visible": {
-            "description": "Whether this field is visible in the integration configuration UI.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this field is visible in the integration configuration UI."
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "single"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "multiText"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "multipleSelection"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "singleBoolean"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "selection"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "singleNumber"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "single"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "multiText"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "multipleSelection"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "singleBoolean"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "selection"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "singleNumber"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "FilterPathAndValues": {
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "FilterPathAndValues": {
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -1908,230 +1911,232 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GenericIntegrationParameters": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "GenericIntegrationParameters": {
         "title": "Generic integration parameters",
-        "description": "Generic integration parameters.",
         "type": "object",
         "properties": {
           "parameters": {
-            "description": "The parameters.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The parameters."
           }
+        },
+        "description": "Generic integration parameters.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GenericWebhook": {
+        "title": "Generic webhook",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents a generic webhook integration.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Generic webhook",
-        "description": "This data structure represents a generic webhook integration.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "GetDeployedIntegrationResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get deployed integration response",
-        "description": "Response containing details of a deployed integration.",
         "type": "object",
         "properties": {
           "integration": {
             "$ref": "#/components/schemas/DeployedIntegrationInformation"
           }
+        },
+        "description": "Response containing details of a deployed integration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetIntegrationDefinitionResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get integration definition response",
-        "description": "This data structure represents a list of outgoing webhook types.",
         "type": "object",
         "properties": {
           "integrationDefinition": {
             "$ref": "#/components/schemas/IntegrationDefinition"
           }
+        },
+        "description": "This data structure represents a list of outgoing webhook types.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetIntegrationDetailsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get integration details response",
-        "description": "Response containing the details of an integration definition.",
         "type": "object",
         "properties": {
           "integrationDetail": {
             "$ref": "#/components/schemas/IntegrationDetails"
           }
+        },
+        "description": "Response containing the details of an integration definition.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetIntegrationsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get integrations response",
-        "description": "This data structure represents a list of outgoing webhook types.",
         "type": "object",
         "properties": {
           "integrations": {
-            "description": "The integrations.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GetIntegrationsResponse.IntegrationWithCounts"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integrations."
           }
+        },
+        "description": "This data structure represents a list of outgoing webhook types.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetIntegrationsResponse.IntegrationWithCounts": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Integration with counts",
         "type": "object",
         "properties": {
           "amountIntegrations": {
-            "description": "The amount integrations.",
-            "type": "integer",
-            "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "description": "The amount integrations.",
+            "format": "int64"
           },
           "errors": {
-            "description": "List of errors.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of errors.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "List of errors."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of errors."
           },
           "integration": {
             "$ref": "#/components/schemas/Integration"
           },
           "isDeprecated": {
-            "description": "The is deprecated.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is deprecated."
           },
           "isNew": {
-            "description": "The is new.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is new."
           },
           "upgradeAvailable": {
-            "description": "The upgrade available.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The upgrade available."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetManagedIntegrationStatusResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get managed integration status response",
-        "description": "Response containing the status of a managed integration.",
         "type": "object",
         "properties": {
           "integrationId": {
-            "description": "The integration id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The integration id."
           },
           "status": {
             "$ref": "#/components/schemas/IntegrationStatus"
           }
+        },
+        "description": "Response containing the status of a managed integration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetRumApplicationVersionDataResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get RUM application version data response",
-        "description": "Response containing RUM application version data.",
         "type": "object",
         "properties": {
           "versionData": {
             "$ref": "#/components/schemas/RumVersionData"
           }
+        },
+        "description": "Response containing RUM application version data.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetTemplateResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get template response",
-        "description": "Response containing an integration template.",
         "type": "object",
         "properties": {
           "templateUrl": {
-            "description": "The template url.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The template url."
           }
+        },
+        "description": "Response containing an integration template.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "HelmChart": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Helm chart",
-        "description": "This data structure represents a Helm chart.",
         "type": "object",
         "properties": {
           "commands": {
-            "description": "The commands.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The commands."
           },
           "guide": {
             "$ref": "#/components/schemas/IntegrationGuide"
           },
           "template": {
-            "description": "The template.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The template."
           }
+        },
+        "description": "This data structure represents a Helm chart.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "InputType": {
-        "description": "Input type.",
-        "type": "string",
         "enum": [
           "API_KEY",
           "TEXT",
@@ -2146,181 +2151,212 @@
           "AWS_REGION_SELECT",
           "AWS_REGION_MULTISELECT",
           "AWS_CLOUDWATCH_NAMESPACE_LIST"
-        ]
+        ],
+        "type": "string",
+        "description": "Input type."
       },
       "Integration": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Integration",
-        "description": "This data structure represents an integration",
         "type": "object",
         "properties": {
           "darkIcon": {
-            "description": "The dark icon.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The dark icon."
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The feature flag."
           },
           "icon": {
-            "description": "Icon identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Icon identifier."
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "revisions": {
-            "description": "The revisions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.RevisionSummary"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The revisions."
           },
           "tags": {
-            "description": "List of tags.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of tags.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "List of tags."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of tags."
           },
           "versions": {
-            "description": "The versions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The versions.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The versions."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The versions."
           }
+        },
+        "description": "This data structure represents an integration",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IntegrationDefinition": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Integration definition",
-        "description": "This data structure represents a definition of an integration.",
         "type": "object",
         "properties": {
           "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The feature flag."
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
           },
           "key": {
-            "description": "The key.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The key."
           },
           "revisions": {
-            "description": "The revisions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The revisions."
           }
+        },
+        "description": "This data structure represents a definition of an integration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IntegrationDetail": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Integration detail",
         "type": "object",
         "properties": {
           "link": {
-            "description": "Link.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Link."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "IntegrationDetails": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Integration details",
-        "description": "This data structure represents a set of integration details.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "local"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "external"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "local"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "external"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "default": {
             "$ref": "#/components/schemas/DefaultIntegrationDetails"
           },
           "docs": {
-            "description": "Documentation links associated with this integration.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationDoc"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "Documentation links associated with this integration."
           },
           "extensions": {
-            "description": "Extensions bundled with this integration for pre-built dashboards and alerts.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.Extension"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "Extensions bundled with this integration for pre-built dashboards and alerts."
           },
           "external": {
             "$ref": "#/components/schemas/ExternalUrl"
@@ -2332,122 +2368,170 @@
             "$ref": "#/components/schemas/LocalChangelog"
           }
         },
+        "description": "This data structure represents a set of integration details.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "IntegrationDoc": {
+        "title": "Integration doc",
+        "type": "object",
+        "properties": {
+          "link": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Link."
+          },
+          "name": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
+          }
+        },
+        "description": "This data structure represents integration documentation.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "IntegrationGuide": {
+        "title": "Integration guide",
+        "type": "object",
+        "properties": {
+          "installationRequirements": {
+            "maxLength": 1048576,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The installation requirements."
+          },
+          "introduction": {
+            "maxLength": 1048576,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The introduction."
+          }
+        },
+        "description": "Integration guide.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "IntegrationMetadata": {
+        "title": "Integration metadata",
+        "type": "object",
+        "properties": {
+          "integrationKey": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The integration key."
+          },
+          "integrationParameters": {
+            "$ref": "#/components/schemas/GenericIntegrationParameters"
+          },
+          "version": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version number."
+          }
+        },
+        "description": "This data structure represents the metadata of an integration.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "IntegrationRevision": {
+        "title": "Integration revision",
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
-              "local"
-            ]
+              "cloudFormation"
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
-              "external"
-            ]
+              "managedService"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "helmChart"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "azureArmTemplate"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "rum"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "terraform"
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
-                    "local"
-                  ]
+                    "cloudFormation"
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
-                    "external"
-                  ]
+                    "managedService"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "helmChart"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "azureArmTemplate"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "rum"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "terraform"
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
-      },
-      "IntegrationDoc": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration doc",
-        "description": "This data structure represents integration documentation.",
-        "type": "object",
-        "properties": {
-          "link": {
-            "description": "Link.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          }
-        }
-      },
-      "IntegrationGuide": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration guide",
-        "description": "Integration guide.",
-        "type": "object",
-        "properties": {
-          "installationRequirements": {
-            "description": "The installation requirements.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 1048576
-          },
-          "introduction": {
-            "description": "The introduction.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 1048576
-          }
-        }
-      },
-      "IntegrationMetadata": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration metadata",
-        "description": "This data structure represents the metadata of an integration.",
-        "type": "object",
-        "properties": {
-          "integrationKey": {
-            "description": "The integration key.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          },
-          "integrationParameters": {
-            "$ref": "#/components/schemas/GenericIntegrationParameters"
-          },
-          "version": {
-            "description": "Version number.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          }
-        }
-      },
-      "IntegrationRevision": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration revision",
-        "description": "This data structure represents an integration revision.",
-        "type": "object",
+        ],
         "properties": {
           "azureArmTemplate": {
             "$ref": "#/components/schemas/AzureArmTemplate"
@@ -2456,46 +2540,46 @@
             "$ref": "#/components/schemas/CloudFormationTemplate"
           },
           "featureFlag": {
-            "description": "The feature flag.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The feature flag."
           },
           "fields": {
-            "description": "Configuration fields that users must fill in to deploy this integration revision.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FieldInformation"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "Configuration fields that users must fill in to deploy this integration revision."
           },
           "groups": {
-            "description": "UI groups used to organize configuration fields into logical sections.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IntegrationRevision.Group"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "UI groups used to organize configuration fields into logical sections."
           },
           "helmChart": {
             "$ref": "#/components/schemas/HelmChart"
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "managedService": {
             "$ref": "#/components/schemas/ManagedService"
           },
           "revisionDeploymentSupported": {
-            "description": "Whether this revision supports automated deployment through the Coralogix platform.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this revision supports automated deployment through the Coralogix platform."
           },
           "rum": {
             "$ref": "#/components/schemas/Rum"
@@ -2504,339 +2588,262 @@
             "$ref": "#/components/schemas/Terraform"
           },
           "upgradeInstructionsMd": {
-            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Markdown-formatted upgrade instructions shown when upgrading from a previous revision."
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "cloudFormation"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "managedService"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "helmChart"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "azureArmTemplate"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "rum"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "terraform"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "cloudFormation"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "managedService"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "helmChart"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "azureArmTemplate"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "rum"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "terraform"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "IntegrationRevision.Group": {
+        "description": "This data structure represents an integration revision.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "IntegrationRevision.Group": {
         "title": "Group",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "IntegrationRevision.SingleNumericValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Single numeric value",
-        "description": "Single numeric value.",
         "type": "object",
         "properties": {
           "defaultValue": {
-            "description": "The default value.",
             "type": "number",
+            "description": "The default value.",
             "format": "double"
           }
+        },
+        "description": "Single numeric value.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IntegrationStatus": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Integration status",
-        "description": "This data structure represents an integration status.",
         "type": "object",
         "properties": {
           "connectionStatus": {
             "$ref": "#/components/schemas/ConnectionStatus"
           },
           "details": {
-            "description": "List of details.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "List of details."
           },
           "messages": {
-            "description": "The messages.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The messages.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The messages."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The messages."
           }
+        },
+        "description": "This data structure represents an integration status.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Language": {
-        "description": "Language.",
-        "type": "string",
         "enum": [
           "UNKNOWN",
           "BASH",
           "JAVASCRIPT"
-        ]
+        ],
+        "type": "string",
+        "description": "Language."
       },
       "Link": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Link",
         "type": "object",
         "properties": {
           "key": {
-            "description": "The key.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The key."
           },
           "text": {
-            "description": "The text.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The text."
           },
           "url": {
-            "description": "URL.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "URL."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "ListManagedIntegrationKeysResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "List managed integration keys response",
-        "description": "Response containing a list of managed integration keys.",
         "type": "object",
         "properties": {
           "integrationKeys": {
-            "description": "The integration keys.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The integration keys.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The integration keys."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The integration keys."
           }
+        },
+        "description": "Response containing a list of managed integration keys.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ListTextValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "List text value",
-        "description": "List text value.",
         "type": "object",
         "properties": {
           "defaultValues": {
-            "description": "The default values.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The default values.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The default values."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The default values."
           },
           "options": {
-            "description": "Options.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "Options.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "Options."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "Options."
           }
+        },
+        "description": "List text value.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "LocalChangelog": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Local changelog",
-        "description": "Local changelog.",
         "type": "object",
         "properties": {
           "changes": {
-            "description": "The changes.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RevisionRef"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The changes."
           }
+        },
+        "description": "Local changelog.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "LogMetadata": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Log metadata",
-        "description": "Log metadata.",
         "type": "object",
         "properties": {
           "firstOccurrence": {
-            "description": "The first occurrence.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "The first occurrence.",
+            "format": "date-time"
           },
           "lastOccurrence": {
-            "description": "The last occurrence.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "The last occurrence.",
+            "format": "date-time"
           }
+        },
+        "description": "Log metadata.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Managed": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Managed",
-        "description": "This data structure represents a managed integration.",
         "type": "object",
         "properties": {
           "variant": {
             "$ref": "#/components/schemas/Variant"
           }
+        },
+        "description": "This data structure represents a managed integration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ManagedService": {
+        "title": "Managed service",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents a managed service.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Managed service",
-        "description": "This data structure represents a managed service.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "MultipleSelectionValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Multiple selection value",
-        "description": "Multiple selection value.",
         "type": "object",
         "properties": {
           "options": {
-            "description": "Options.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "Options.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "Options."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "Options."
           }
+        },
+        "description": "Multiple selection value.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -2846,48 +2853,126 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "NoDeployment": {
+        "title": "No deployment",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents an integration that does not require deployment.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "No deployment",
-        "description": "This data structure represents an integration that does not require deployment.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "Parameter": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Parameter",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "stringValue"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "booleanValue"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "stringList"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "apiKey"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "numericValue"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "sensitiveData"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "stringValue"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "booleanValue"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "stringList"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "apiKey"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "numericValue"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "sensitiveData"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "apiKey": {
             "$ref": "#/components/schemas/ApiKeyData"
           },
           "booleanValue": {
-            "description": "Boolean value for this integration parameter.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Boolean value for this integration parameter."
           },
           "key": {
-            "description": "The key.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The key."
           },
           "numericValue": {
-            "description": "Numeric value for this integration parameter.",
             "type": "number",
+            "description": "Numeric value for this integration parameter.",
             "format": "double"
           },
           "sensitiveData": {
@@ -2897,98 +2982,18 @@
             "$ref": "#/components/schemas/StringList"
           },
           "stringValue": {
-            "description": "String value for this integration parameter.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "String value for this integration parameter."
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "stringValue"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "booleanValue"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "stringList"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "apiKey"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "numericValue"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "sensitiveData"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "stringValue"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "booleanValue"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "stringList"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "apiKey"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "numericValue"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "sensitiveData"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
+        "externalDocs": {
+          "url": ""
+        }
       },
       "PermissionResource": {
-        "description": "Permission resource.",
-        "type": "string",
         "enum": [
           "UNKNOWN",
           "ACTION",
@@ -3005,23 +3010,67 @@
           "METRICS_RULE_GROUP",
           "SPAN_EVENTS_TO_METRICS",
           "LOGS_EVENTS_TO_METRICS"
-        ]
+        ],
+        "type": "string",
+        "description": "Permission resource."
       },
       "PushBasedContextualData": {
+        "title": "Push based contextual data",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents a push based contextual data integration.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Push based contextual data",
-        "description": "This data structure represents a push based contextual data integration.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "RegisteredInstance": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Registered instance",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "empty"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "cloudformation"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "arm"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "empty"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "cloudformation"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "arm"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "arm": {
             "$ref": "#/components/schemas/ARMStack"
@@ -3030,97 +3079,53 @@
             "$ref": "#/components/schemas/CloudFormationStack"
           },
           "definitionVersion": {
-            "description": "The definition version.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The definition version."
           },
           "empty": {
             "$ref": "#/components/schemas/NoDeployment"
           },
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
           },
           "isTesting": {
-            "description": "Whether this is a testing instance used for validation purposes only.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether this is a testing instance used for validation purposes only."
           },
           "lastUpdated": {
-            "description": "Timestamp of the last update to this integration instance.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "Timestamp of the last update to this integration instance.",
+            "format": "date-time"
           },
           "parameters": {
-            "description": "The parameters.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Parameter"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The parameters."
           },
           "revisionLifecycle": {
             "$ref": "#/components/schemas/RevisionLifecycle"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "empty"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "cloudformation"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "arm"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "empty"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "cloudformation"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "arm"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
+        "externalDocs": {
+          "url": ""
+        }
       },
       "RevisionLifecycle": {
-        "description": "Revision lifecycle.",
-        "type": "string",
         "enum": [
           "REVISION_LIFECYCLE_UNSPECIFIED",
           "REVISION_LIFECYCLE_ALPHA",
@@ -3128,88 +3133,87 @@
           "REVISION_LIFECYCLE_PUBLIC_BETA",
           "REVISION_LIFECYCLE_GA",
           "REVISION_LIFECYCLE_DEPRECATED"
-        ]
+        ],
+        "type": "string",
+        "description": "Revision lifecycle."
       },
       "RevisionRef": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Revision reference",
         "type": "object",
         "properties": {
           "descriptionMd": {
-            "description": "The description md.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 1048576,
             "minLength": 0,
-            "maxLength": 1048576
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The description md."
           },
           "version": {
-            "description": "Version number.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version number."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "Rum": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "RUM",
-        "description": "This data structure represents a RUM integration.",
         "type": "object",
         "properties": {
           "browserSdkCommands": {
-            "description": "The browser sdk commands.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The browser sdk commands."
           },
           "sourceMapCommands": {
-            "description": "The source map commands.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CommandInformation"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The source map commands."
           }
+        },
+        "description": "This data structure represents a RUM integration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "RumVersionData": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "RUM version data",
-        "description": "Rum version data.",
         "type": "object",
         "properties": {
           "syncedAt": {
-            "description": "The synced at.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "The synced at.",
+            "format": "date-time"
           },
           "versions": {
-            "description": "The versions.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RumVersionData.Version"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The versions."
           }
+        },
+        "description": "Rum version data.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "RumVersionData.Version": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Version",
         "type": "object",
         "properties": {
@@ -3220,163 +3224,164 @@
             "$ref": "#/components/schemas/SourceMapMetadata"
           },
           "version": {
-            "description": "Version number.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version number."
           }
+        },
+        "externalDocs": {
+          "url": ""
         }
       },
       "SaveIntegrationResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Save integration response",
-        "description": "Response returned after successfully saving an integration deployment.",
         "type": "object",
         "properties": {
           "integrationId": {
-            "description": "The integration id.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The integration id."
           }
+        },
+        "description": "Response returned after successfully saving an integration deployment.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SelectionValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Selection value",
-        "description": "Selection value.",
         "type": "object",
         "properties": {
           "defaultValue": {
-            "description": "The default value.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The default value."
           },
           "options": {
-            "description": "Options.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "Options.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "Options."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "Options."
           }
+        },
+        "description": "Selection value.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SensitiveDataPlaceholder": {
+        "title": "Sensitive data placeholder",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Sensitive data placeholder.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Sensitive data placeholder",
-        "description": "Sensitive data placeholder.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "SingleBooleanValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Single boolean value",
-        "description": "Single boolean value.",
         "type": "object",
         "properties": {
           "defaultValue": {
-            "description": "The default value.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The default value."
           }
+        },
+        "description": "Single boolean value.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SingleValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Single value",
-        "description": "Single value.",
         "type": "object",
         "properties": {
           "defaultValue": {
-            "description": "The default value.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The default value."
           }
+        },
+        "description": "Single value.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SourceMapMetadata": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Source map metadata",
-        "description": "Source map metadata.",
         "type": "object",
         "properties": {
           "createdAt": {
-            "description": "Creation timestamp.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "Creation timestamp.",
+            "format": "date-time"
           },
           "isUploadedSuccessful": {
-            "description": "The is uploaded successful.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The is uploaded successful."
           }
+        },
+        "description": "Source map metadata.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "StringList": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "String list",
-        "description": "String list.",
         "type": "object",
         "properties": {
           "values": {
-            "description": "List of values.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of values.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "List of values."
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "List of values."
           }
+        },
+        "description": "String list.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SyncRumDataResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Sync RUM data response",
-        "description": "Response returned after syncing RUM data.",
         "type": "object",
         "properties": {
           "syncExecuted": {
-            "description": "The sync executed.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The sync executed."
           },
           "syncedAt": {
-            "description": "The synced at.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "The synced at.",
+            "format": "date-time"
           }
+        },
+        "description": "Response returned after syncing RUM data.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "TargetDomain": {
-        "description": "Target domain.",
-        "type": "string",
         "enum": [
           "ACTION",
           "ALERT",
@@ -3389,47 +3394,78 @@
           "METRICS_RULE_GROUP",
           "EVENTS_TO_METRICS",
           "ALERT_V3"
-        ]
+        ],
+        "type": "string",
+        "description": "Target domain."
       },
       "Terraform": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Terraform",
-        "description": "This data structure represents a Terraform integration.",
         "type": "object",
         "properties": {
           "configurationBlocks": {
-            "description": "The configuration blocks.",
+            "maxItems": 10000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ConfigurationBlock"
             },
-            "minItems": 0,
-            "maxItems": 10000
+            "description": "The configuration blocks."
           }
+        },
+        "description": "This data structure represents a Terraform integration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "TestIntegrationResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Test integration response",
-        "description": "Response containing the results of an integration test.",
         "type": "object",
         "properties": {
           "result": {
             "$ref": "#/components/schemas/TestIntegrationResult"
           }
+        },
+        "description": "Response containing the results of an integration test.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "TestIntegrationResult": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Test integration result",
-        "description": "Test integration result.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "success"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "failure"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "success"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "failure"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "failure": {
             "$ref": "#/components/schemas/v1.Failure"
@@ -3438,201 +3474,261 @@
             "$ref": "#/components/schemas/TestIntegrationResult.Success"
           }
         },
+        "description": "Test integration result.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "TestIntegrationResult.Success": {
+        "title": "Success",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Success.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "Untracked": {
+        "title": "Untracked",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "This data structure represents an untracked integration.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "UpdateIntegrationResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after successfully updating an integration.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "Variant": {
+        "enum": [
+          "DEFAULT",
+          "GCP",
+          "OAUTH",
+          "CUSTOM"
+        ],
+        "type": "string",
+        "description": "Variant."
+      },
+      "events.v3.FilterMatcher": {
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ],
+        "type": "string"
+      },
+      "v1.Extension": {
+        "title": "Extension metadata",
+        "type": "object",
+        "properties": {
+          "changelog": {
+            "maxItems": 10000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChangelogEntry"
+            },
+            "description": "The changelog."
+          },
+          "darkModeImage": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The dark mode image."
+          },
+          "deprecation": {
+            "$ref": "#/components/schemas/Deprecation"
+          },
+          "id": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier of the extension."
+          },
+          "image": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Image reference."
+          },
+          "integrations": {
+            "maxItems": 10000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "minLength": 0,
+              "type": "string",
+              "description": "The integrations."
+            },
+            "description": "The integrations."
+          },
+          "isHidden": {
+            "type": "boolean",
+            "description": "The is hidden."
+          },
+          "keywords": {
+            "maxItems": 10000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "minLength": 0,
+              "type": "string",
+              "description": "The keywords."
+            },
+            "description": "The keywords."
+          },
+          "name": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name of the extension."
+          },
+          "permissionDeniedRevisions": {
+            "maxItems": 10000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionRevision"
+            },
+            "description": "The permission denied revisions."
+          },
+          "revisions": {
+            "maxItems": 10000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionRevision"
+            },
+            "description": "The revisions."
+          }
+        },
+        "description": "Represents a Coralogix extension package containing pre-built resources.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "v1.Failure": {
+        "title": "Failure",
+        "type": "object",
+        "properties": {
+          "errorMessage": {
+            "maxLength": 65535,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The error message."
+          }
+        },
+        "description": "Failure.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "v1.IntegrationType": {
+        "title": "Integration type",
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
-              "success"
-            ]
+              "managed"
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
-              "failure"
-            ]
+              "untracked"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "cloudformation"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "arm"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "pushBasedContextualData"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "contextualData"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "genericWebhook"
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
-                    "success"
-                  ]
+                    "managed"
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
-                    "failure"
-                  ]
+                    "untracked"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "cloudformation"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "arm"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "pushBasedContextualData"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "contextualData"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "genericWebhook"
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
-      },
-      "TestIntegrationResult.Success": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Success",
-        "description": "Success.",
-        "type": "object",
-        "additionalProperties": false
-      },
-      "Untracked": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Untracked",
-        "description": "This data structure represents an untracked integration.",
-        "type": "object",
-        "additionalProperties": false
-      },
-      "UpdateIntegrationResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response returned after successfully updating an integration.",
-        "type": "object",
-        "additionalProperties": false
-      },
-      "Variant": {
-        "description": "Variant.",
-        "type": "string",
-        "enum": [
-          "DEFAULT",
-          "GCP",
-          "OAUTH",
-          "CUSTOM"
-        ]
-      },
-      "events.v3.FilterMatcher": {
-        "type": "string",
-        "enum": [
-          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
-          "FILTER_MATCHER_REGEXP"
-        ]
-      },
-      "v1.Extension": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Extension metadata",
-        "description": "Represents a Coralogix extension package containing pre-built resources.",
-        "type": "object",
-        "properties": {
-          "changelog": {
-            "description": "The changelog.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ChangelogEntry"
-            },
-            "minItems": 0,
-            "maxItems": 10000
-          },
-          "darkModeImage": {
-            "description": "The dark mode image.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          },
-          "deprecation": {
-            "$ref": "#/components/schemas/Deprecation"
-          },
-          "id": {
-            "description": "Unique identifier of the extension.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          },
-          "image": {
-            "description": "Image reference.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          },
-          "integrations": {
-            "description": "The integrations.",
-            "type": "array",
-            "items": {
-              "description": "The integrations.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0,
-            "maxItems": 10000
-          },
-          "isHidden": {
-            "description": "The is hidden.",
-            "type": "boolean"
-          },
-          "keywords": {
-            "description": "The keywords.",
-            "type": "array",
-            "items": {
-              "description": "The keywords.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0,
-            "maxItems": 10000
-          },
-          "name": {
-            "description": "Display name of the extension.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          },
-          "permissionDeniedRevisions": {
-            "description": "The permission denied revisions.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExtensionRevision"
-            },
-            "minItems": 0,
-            "maxItems": 10000
-          },
-          "revisions": {
-            "description": "The revisions.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExtensionRevision"
-            },
-            "minItems": 0,
-            "maxItems": 10000
-          }
-        }
-      },
-      "v1.Failure": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Failure",
-        "description": "Failure.",
-        "type": "object",
-        "properties": {
-          "errorMessage": {
-            "description": "The error message.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 0,
-            "maxLength": 65535
-          }
-        }
-      },
-      "v1.IntegrationType": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "Integration type",
-        "description": "This data structure represents an integration type.",
-        "type": "object",
+        ],
         "properties": {
           "arm": {
             "$ref": "#/components/schemas/AzureArm"
@@ -3656,99 +3752,10 @@
             "$ref": "#/components/schemas/Untracked"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "managed"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "untracked"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "cloudformation"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "arm"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "pushBasedContextualData"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "contextualData"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "genericWebhook"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "managed"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "untracked"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "cloudformation"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "arm"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "pushBasedContextualData"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "contextualData"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "genericWebhook"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
+        "description": "This data structure represents an integration type.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "v1.RevisionSummary": {
         "type": "object",
@@ -3757,21 +3764,21 @@
             "$ref": "#/components/schemas/RevisionLifecycle"
           },
           "version": {
-            "description": "Version number.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 65535,
             "minLength": 0,
-            "maxLength": 65535
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Version number."
           }
         }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

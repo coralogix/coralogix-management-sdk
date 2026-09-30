@@ -35,9 +35,9 @@ type QuickTimeSelection struct {
 type _QuickTimeSelection QuickTimeSelection
 
 // NewQuickTimeSelection instantiates a new QuickTimeSelection object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewQuickTimeSelection(seconds int64) *QuickTimeSelection {
 	this := QuickTimeSelection{}
 	this.Seconds = seconds
@@ -45,8 +45,8 @@ func NewQuickTimeSelection(seconds int64) *QuickTimeSelection {
 }
 
 // NewQuickTimeSelectionWithDefaults instantiates a new QuickTimeSelection object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewQuickTimeSelectionWithDefaults() *QuickTimeSelection {
 	this := QuickTimeSelection{}
 	return &this

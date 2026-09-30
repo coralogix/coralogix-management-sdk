@@ -35,9 +35,9 @@ type UsageTimestampRange struct {
 type _UsageTimestampRange UsageTimestampRange
 
 // NewUsageTimestampRange instantiates a new UsageTimestampRange object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewUsageTimestampRange(end time.Time, start time.Time) *UsageTimestampRange {
 	this := UsageTimestampRange{}
 	this.End = end
@@ -46,8 +46,8 @@ func NewUsageTimestampRange(end time.Time, start time.Time) *UsageTimestampRange
 }
 
 // NewUsageTimestampRangeWithDefaults instantiates a new UsageTimestampRange object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewUsageTimestampRangeWithDefaults() *UsageTimestampRange {
 	this := UsageTimestampRange{}
 	return &this

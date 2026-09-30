@@ -34,9 +34,9 @@ type ViewsV1Filter struct {
 type _ViewsV1Filter ViewsV1Filter
 
 // NewViewsV1Filter instantiates a new ViewsV1Filter object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewViewsV1Filter(name string, selectedValues map[string]bool) *ViewsV1Filter {
 	this := ViewsV1Filter{}
 	this.Name = name
@@ -45,8 +45,8 @@ func NewViewsV1Filter(name string, selectedValues map[string]bool) *ViewsV1Filte
 }
 
 // NewViewsV1FilterWithDefaults instantiates a new ViewsV1Filter object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewViewsV1FilterWithDefaults() *ViewsV1Filter {
 	this := ViewsV1Filter{}
 	return &this
