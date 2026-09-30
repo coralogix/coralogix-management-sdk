@@ -809,8 +809,9 @@
         "type": "object",
         "properties": {
           "withAsn": {
+            "description": "The with asn.",
             "type": "boolean",
-            "description": "The with asn."
+            "x-coralogix-presence": true
           }
         },
         "description": "Geo ip type.",

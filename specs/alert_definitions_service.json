@@ -192,7 +192,8 @@
             "required": false,
             "schema": {
               "description": "When true, populate the response's per-alert access map with the caller's access decision and each alert's raw access policy. Defaults to false.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -352,7 +353,8 @@
                     "maxLength": 65536,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "alertDefProperties": {
                     "allOf": [
@@ -917,7 +919,8 @@
             "required": false,
             "schema": {
               "description": "When true, populate the response's access field with the caller's access decision and the alert's raw access policy. Defaults to false.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -1000,7 +1003,8 @@
             "required": false,
             "schema": {
               "description": "When true, populate the response's access field with the caller's access decision and the alert's raw access policy. Defaults to false.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -1288,7 +1292,8 @@
             "description": "The current status of the alert",
             "examples": [
               "ALERT_DEF_STATUS_OK"
-            ]
+            ],
+            "x-coralogix-presence": true
           },
           "updatedTime": {
             "maxLength": 64,
@@ -1313,11 +1318,12 @@
         "type": "object",
         "properties": {
           "accessPolicy": {
+            "description": "The alert's raw access policy as an opaque JSON string. Present only when the caller may read it (alerts:ReadAccessPolicy granted)",
             "maxLength": 65536,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The alert's raw access policy as an opaque JSON string. Present only when the caller may read it (alerts:ReadAccessPolicy granted)"
+            "x-coralogix-presence": true
           },
           "permissions": {
             "allOf": [
@@ -1329,6 +1335,138 @@
           }
         },
         "description": "The caller's access decision for an alert together with the alert's raw access policy",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "AlertDefCaseAutoResolveMode": {
+        "enum": [
+          "ALERT_DEF_CASE_AUTO_RESOLVE_MODE_UNSPECIFIED",
+          "ALERT_DEF_CASE_AUTO_RESOLVE_MODE_ENABLED",
+          "ALERT_DEF_CASE_AUTO_RESOLVE_MODE_DISABLED"
+        ],
+        "type": "string",
+        "description": "Case auto resolve mode."
+      },
+      "AlertDefCaseDestination": {
+        "title": "Alert definition case destination",
+        "required": [
+          "connectorId",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "maxLength": 20000,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Notification Center routing condition, rendered to true or false against the case notification context to decide whether this destination is notified. Use \"true\" to notify on every case notification; otherwise filter on caseMetadata.notificationReason (for example caseActivated, caseResolved, casePriorityChanged, caseUnacknowledged). The expression syntax is documented with Notification Center routing conditions.",
+            "examples": [
+              "(caseMetadata.notificationReason not in [\"caseUnacknowledged\",\"casePriorityChanged\"])"
+            ]
+          },
+          "connectorId": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "description": "ID of the Notification Center connector to notify. The connector must support the CASES entity type; list compatible connectors with GET /notifications/notification-center/v1/connectors?supported_by_entity_type=CASES.",
+            "examples": [
+              "connector_id_example"
+            ]
+          },
+          "presetId": {
+            "description": "Optional Notification Center preset ID used to render the notification. The preset must be defined for the CASES entity type and for the selected connector's type; list compatible presets with GET /notifications/notification-center/v1/presets:summariesList?entity_type=CASES&connector_type=<type>. When omitted, the connector type's default preset is used.",
+            "examples": [
+              "preset_id_example"
+            ],
+            "maxLength": 128,
+            "minLength": 0,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "A Notification Center connector that receives notifications about cases opened by this alert.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "AlertDefCaseEnrichmentQuery": {
+        "title": "Alert definition case enrichment query",
+        "required": [
+          "query"
+        ],
+        "type": "object",
+        "properties": {
+          "query": {
+            "maxLength": 65535,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The enrichment query string"
+          },
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefCaseEnrichmentQueryType"
+              }
+            ],
+            "description": "The query language of the enrichment query. Defaults to DataPrime when omitted.",
+            "examples": [
+              "ALERT_DEF_CASE_ENRICHMENT_QUERY_TYPE_DATAPRIME"
+            ]
+          }
+        },
+        "description": "A query used to enrich the case created by the alert.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "AlertDefCaseEnrichmentQueryType": {
+        "enum": [
+          "ALERT_DEF_CASE_ENRICHMENT_QUERY_TYPE_UNSPECIFIED",
+          "ALERT_DEF_CASE_ENRICHMENT_QUERY_TYPE_DATAPRIME"
+        ],
+        "type": "string",
+        "description": "Enrichment query type."
+      },
+      "AlertDefCaseSettings": {
+        "title": "Alert definition case settings",
+        "type": "object",
+        "properties": {
+          "autoResolveMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefCaseAutoResolveMode"
+              }
+            ],
+            "description": "Controls whether the associated case is automatically resolved when the alert resolves. Defaults to enabled when unspecified.",
+            "examples": [
+              "ALERT_DEF_CASE_AUTO_RESOLVE_MODE_ENABLED"
+            ]
+          },
+          "destinations": {
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefCaseDestination"
+            },
+            "description": "Destinations notified about the cases opened by this alert. Independent of notificationGroup.destinations: both are delivered. Replace is a full overwrite: omitting destinations removes any previously configured case destinations."
+          },
+          "enrichmentQueries": {
+            "maxItems": 1,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlertDefCaseEnrichmentQuery"
+            },
+            "description": "Queries used to enrich the case created by this alert"
+          }
+        },
+        "description": "Settings controlling how the alert interacts with cases.",
         "externalDocs": {
           "url": ""
         }
@@ -1890,7 +2028,8 @@
                 "$ref": "#/components/schemas/AnalyticsImmediateType"
               }
             ],
-            "description": "Configuration for analytics immediate alerts"
+            "description": "Configuration for analytics immediate alerts",
+            "x-stability": "preview"
           },
           "analyticsThreshold": {
             "allOf": [
@@ -1898,7 +2037,17 @@
                 "$ref": "#/components/schemas/AnalyticsThresholdType"
               }
             ],
-            "description": "Configuration for analytics threshold alerts"
+            "description": "Configuration for analytics threshold alerts",
+            "x-stability": "preview"
+          },
+          "caseSettings": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefCaseSettings"
+              }
+            ],
+            "description": "Settings controlling how the alert interacts with cases. When omitted on create, defaults apply (case auto-resolve enabled, no enrichment queries, no case destinations). Replace is a full overwrite: omitting this field on replace resets any previously configured case settings to those defaults. In read responses, this field is absent when no case settings were configured, meaning those same defaults are in effect.",
+            "x-stability": "preview"
           },
           "dataSources": {
             "maxItems": 1,
@@ -1912,6 +2061,7 @@
           "deleted": {
             "type": "boolean",
             "description": "Whether the alert has been marked as deleted",
+            "default": false,
             "examples": [
               false
             ]
@@ -1929,6 +2079,7 @@
           "enabled": {
             "type": "boolean",
             "description": "Whether the alert is currently active and monitoring",
+            "default": true,
             "examples": [
               true
             ]
@@ -2079,6 +2230,7 @@
           "phantomMode": {
             "type": "boolean",
             "description": "Whether the alert is in phantom mode (creating incidents or not)",
+            "default": false,
             "examples": [
               false
             ]
@@ -2216,11 +2368,12 @@
         "type": "object",
         "properties": {
           "accessPolicy": {
+            "description": "The access policy for the alert as a raw JSON string. Optional; requires the alerts:UpdateAccessPolicy permission to set. If omitted, the alert is created without an access policy.",
             "maxLength": 65536,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The access policy for the alert as a raw JSON string. Optional; requires the alerts:UpdateAccessPolicy permission to set. If omitted, the alert is created without an access policy."
+            "x-coralogix-presence": true
           },
           "alertDefProperties": {
             "allOf": [
@@ -2291,7 +2444,7 @@
           "ALERT_DEF_TYPE_ANALYTICS_THRESHOLD"
         ],
         "type": "string",
-        "description": "Alert def type."
+        "description": "Alert def type.\n- ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE: preview\n- ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview"
       },
       "AlertDefTypeFilter": {
         "title": "AlertDef Type Filter",
@@ -2369,7 +2522,8 @@
             "description": "The condition under which the alert should be notified",
             "examples": [
               "NOTIFY_ON_TRIGGERED_AND_RESOLVED"
-            ]
+            ],
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for webhook notifications for an alert",
@@ -5222,13 +5376,14 @@
         "type": "object",
         "properties": {
           "autoRetireSeconds": {
-            "minimum": 60,
-            "type": "integer",
             "description": "The timeframe in seconds for auto retiring values that were detected as no-data. accepts only multiples of 60 seconds",
-            "format": "int32",
             "examples": [
               3600
-            ]
+            ],
+            "format": "int32",
+            "minimum": 60,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "state": {
             "allOf": [
@@ -5282,12 +5437,13 @@
             ]
           },
           "presetId": {
-            "minLength": 0,
-            "type": "string",
             "description": "Optional preset ID for the notification destination",
             "examples": [
               "preset_id_example"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "resolvedRouteOverrides": {
             "allOf": [
@@ -5298,13 +5454,14 @@
             "description": "Optional routing configuration to override from the connector/preset for resolved notifications."
           },
           "retriggeringPeriodMinutes": {
-            "minimum": 0,
-            "type": "integer",
             "description": "The time in minutes before a new notification is sent for this destination",
-            "format": "int64",
             "examples": [
               600
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "triggeredRoutingOverrides": {
             "allOf": [
@@ -5326,12 +5483,13 @@
         "type": "object",
         "properties": {
           "id": {
-            "minLength": 0,
-            "type": "string",
             "description": "The ID of the notification router",
             "examples": [
               "123e4567-e89b-12d3-a456-426614174000"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "notifyOn": {
             "allOf": [
@@ -5342,7 +5500,8 @@
             "description": "The condition under which the notification should be sent",
             "examples": [
               "NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED"
-            ]
+            ],
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for routing notifications",
@@ -6324,7 +6483,8 @@
             "description": "The timeframe for auto-retiring the alert when undetected values are detected",
             "examples": [
               "AUTO_RETIRE_TIMEFRAME_HOURS_24"
-            ]
+            ],
+            "x-coralogix-presence": true
           },
           "triggerUndetectedValues": {
             "type": "boolean",

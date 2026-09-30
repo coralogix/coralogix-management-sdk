@@ -844,7 +844,8 @@
                     "maxLength": 500,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "title": {
                     "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
@@ -854,7 +855,8 @@
                     "maxLength": 512,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Case patch",
@@ -1664,7 +1666,8 @@
                     "maxLength": 4096,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -1764,7 +1767,8 @@
                     "maxLength": 500,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Resolve case request",
@@ -2107,11 +2111,12 @@
             ]
           },
           "resolveWithSignal": {
-            "type": "boolean",
             "description": "When true or omitted, indicates that Case will be resolved together with signal. Otherwise, Case will stay open and wait for manual resolution.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "state": {
             "allOf": [
@@ -2384,14 +2389,15 @@
         "type": "object",
         "properties": {
           "language": {
+            "description": "Programming language of the APM service",
+            "examples": [
+              "go"
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Programming language of the APM service",
-            "examples": [
-              "go"
-            ]
+            "x-coralogix-presence": true
           },
           "name": {
             "maxLength": 4096,
@@ -2835,11 +2841,12 @@
             "format": "date-time"
           },
           "aiSummary": {
+            "description": "AI summary of the case. Leading and trailing whitespace is trimmed before the length limits are applied.",
             "maxLength": 10000,
             "minLength": 1,
             "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
             "type": "string",
-            "description": "AI summary of the case. Leading and trailing whitespace is trimmed before the length limits are applied."
+            "x-coralogix-presence": true
           },
           "assignee": {
             "allOf": [
@@ -2966,14 +2973,15 @@
             "description": "System and override priority details"
           },
           "readableId": {
+            "description": "Readable identifier of the case, available only for the cases that became Active. May be used interchangeably with `id` when calling Cases APIs that target a specific case.",
+            "examples": [
+              "CASE-123"
+            ],
             "maxLength": 64,
             "minLength": 1,
             "pattern": "^[A-Z]+-[0-9]+$",
             "type": "string",
-            "description": "Readable identifier of the case, available only for the cases that became Active. May be used interchangeably with `id` when calling Cases APIs that target a specific case.",
-            "examples": [
-              "CASE-123"
-            ]
+            "x-coralogix-presence": true
           },
           "resolutionDetails": {
             "allOf": [
@@ -3248,14 +3256,15 @@
             "description": "List of case statuses to filter on"
           },
           "textSearch": {
+            "description": "Test search query applied to case titles",
+            "examples": [
+              "Vulnerability"
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Test search query applied to case titles",
-            "examples": [
-              "Vulnerability"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Filters applied when querying cases, including statuses, priorities, categories, groupings, and labels.",
@@ -4676,7 +4685,8 @@
                 "$ref": "#/components/schemas/CasePriority"
               }
             ],
-            "description": "Optional override set by user"
+            "description": "Optional override set by user",
+            "x-coralogix-presence": true
           },
           "system": {
             "allOf": [
@@ -5044,14 +5054,15 @@
         "type": "object",
         "properties": {
           "reason": {
+            "description": "Resolution reason",
+            "examples": [
+              "Case was not applicable."
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Resolution reason",
-            "examples": [
-              "Case was not applicable."
-            ]
+            "x-coralogix-presence": true
           },
           "resolveTime": {
             "maxLength": 30,
@@ -5476,34 +5487,37 @@
         "type": "object",
         "properties": {
           "pageSize": {
+            "description": "Number of items to return per page",
+            "examples": [
+              10
+            ],
+            "format": "int64",
             "maximum": 1000,
             "minimum": 1,
             "type": "integer",
-            "description": "Number of items to return per page",
-            "format": "int64",
-            "examples": [
-              10
-            ]
+            "x-coralogix-presence": true
           },
           "pageToken": {
+            "description": "Token for the next page of results",
+            "examples": [
+              "MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA=="
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Token for the next page of results",
-            "examples": [
-              "MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA=="
-            ]
+            "x-coralogix-presence": true
           },
           "skip": {
+            "description": "Number of items to skip before starting to collect results",
+            "examples": [
+              20
+            ],
+            "format": "int64",
             "maximum": 1000000,
             "minimum": 0,
             "type": "integer",
-            "description": "Number of items to skip before starting to collect results",
-            "format": "int64",
-            "examples": [
-              20
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Pagination parameters for list requests.",
@@ -5516,14 +5530,15 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for the next page of results",
+            "examples": [
+              "MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA=="
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Token for the next page of results",
-            "examples": [
-              "MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA=="
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Pagination information for list responses.",

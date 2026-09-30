@@ -122,7 +122,8 @@
                   "$ref": "#/components/schemas/v1.SourceType"
                 }
               ],
-              "description": "Filter policies by data source type (for example logs or spans)."
+              "description": "Filter policies by data source type (for example logs or spans).",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -671,7 +672,8 @@
                     "maxLength": 20,
                     "minLength": 1,
                     "pattern": "^-?[0-9]+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "week": {
                     "$ref": "#/components/schemas/Week"
@@ -1884,11 +1886,12 @@
         "type": "object",
         "properties": {
           "dpxlExpression": {
+            "description": "The dpxl expression.",
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The dpxl expression."
+            "x-coralogix-presence": true
           },
           "severities": {
             "maxItems": 6,
@@ -2344,11 +2347,12 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "dpxlExpression": {
+            "description": "The dpxl expression.",
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The dpxl expression."
+            "x-coralogix-presence": true
           },
           "serviceRule": {
             "$ref": "#/components/schemas/quota.v1.Rule"
@@ -2641,7 +2645,8 @@
             "description": "The base priority for the target.",
             "examples": [
               "PRIORITY_TYPE_MEDIUM"
-            ]
+            ],
+            "x-coralogix-presence": true
           },
           "priorityOverride": {
             "allOf": [

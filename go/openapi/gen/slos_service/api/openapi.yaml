@@ -331,7 +331,8 @@
             "schema": {
               "deprecated": true,
               "description": "Whether to silence data validations.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -409,7 +410,8 @@
                       "test@domain.com"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description of the SLO.",
@@ -417,7 +419,8 @@
                       "A brief description of my SLO"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "grouping": {
                     "$ref": "#/components/schemas/v1.Grouping"
@@ -428,7 +431,8 @@
                       "b11919d5-ef85-4bb1-8655-02640dbe94d9"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "labels": {
                     "additionalProperties": {
@@ -463,7 +467,8 @@
                     "description": "Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs",
                     "examples": [
                       "SLO_PRODUCT_TYPE_APM"
-                    ]
+                    ],
+                    "x-coralogix-presence": true
                   },
                   "requestBasedMetricSli": {
                     "$ref": "#/components/schemas/RequestBasedMetricSli"
@@ -482,7 +487,8 @@
                     ],
                     "examples": [
                       "SLO_TYPE_REQUEST"
-                    ]
+                    ],
+                    "x-coralogix-presence": true
                   },
                   "targetThresholdPercentage": {
                     "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
@@ -499,7 +505,8 @@
                       "request"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "updateTime": {
                     "description": "Timestamp of the last update.",
@@ -577,7 +584,8 @@
             "schema": {
               "deprecated": true,
               "description": "Whether to silence data validations.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -655,7 +663,8 @@
                       "test@domain.com"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description of the SLO.",
@@ -663,7 +672,8 @@
                       "A brief description of my SLO"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "grouping": {
                     "$ref": "#/components/schemas/v1.Grouping"
@@ -674,7 +684,8 @@
                       "b11919d5-ef85-4bb1-8655-02640dbe94d9"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "labels": {
                     "additionalProperties": {
@@ -709,7 +720,8 @@
                     "description": "Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs",
                     "examples": [
                       "SLO_PRODUCT_TYPE_APM"
-                    ]
+                    ],
+                    "x-coralogix-presence": true
                   },
                   "requestBasedMetricSli": {
                     "$ref": "#/components/schemas/RequestBasedMetricSli"
@@ -728,7 +740,8 @@
                     ],
                     "examples": [
                       "SLO_TYPE_REQUEST"
-                    ]
+                    ],
+                    "x-coralogix-presence": true
                   },
                   "targetThresholdPercentage": {
                     "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
@@ -745,7 +758,8 @@
                       "request"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "updateTime": {
                     "description": "Timestamp of the last update.",
@@ -1152,7 +1166,8 @@
                       "test@domain.com"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description of the SLO.",
@@ -1160,7 +1175,8 @@
                       "A brief description of my SLO"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "grouping": {
                     "$ref": "#/components/schemas/v1.Grouping"
@@ -1171,7 +1187,8 @@
                       "b11919d5-ef85-4bb1-8655-02640dbe94d9"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "labels": {
                     "additionalProperties": {
@@ -1206,7 +1223,8 @@
                     "description": "Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs",
                     "examples": [
                       "SLO_PRODUCT_TYPE_APM"
-                    ]
+                    ],
+                    "x-coralogix-presence": true
                   },
                   "requestBasedMetricSli": {
                     "$ref": "#/components/schemas/RequestBasedMetricSli"
@@ -1225,7 +1243,8 @@
                     ],
                     "examples": [
                       "SLO_TYPE_REQUEST"
-                    ]
+                    ],
+                    "x-coralogix-presence": true
                   },
                   "targetThresholdPercentage": {
                     "description": "Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).",
@@ -1242,7 +1261,8 @@
                       "request"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "updateTime": {
                     "description": "Timestamp of the last update.",
@@ -1693,9 +1713,10 @@
         "type": "object",
         "properties": {
           "silenceDataValidations": {
-            "type": "boolean",
+            "deprecated": true,
             "description": "Whether to silence data validations.",
-            "deprecated": true
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "slo": {
             "$ref": "#/components/schemas/Slo"
@@ -1998,9 +2019,10 @@
         "type": "object",
         "properties": {
           "silenceDataValidations": {
-            "type": "boolean",
+            "deprecated": true,
             "description": "Whether to silence data validations.",
-            "deprecated": true
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "slo": {
             "$ref": "#/components/schemas/Slo"
@@ -2069,9 +2091,10 @@
             "description": "List of details."
           },
           "message": {
+            "description": "Human-readable message.",
             "minLength": 0,
             "type": "string",
-            "description": "Human-readable message."
+            "x-coralogix-presence": true
           },
           "statusCode": {
             "$ref": "#/components/schemas/Code"
@@ -2149,31 +2172,34 @@
             "format": "date-time"
           },
           "creator": {
-            "minLength": 0,
-            "type": "string",
             "description": "Email or identifier of the user who created the SLO.",
             "examples": [
               "test@domain.com"
-            ]
-          },
-          "description": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "description": {
             "description": "Human-readable description of the SLO.",
             "examples": [
               "A brief description of my SLO"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "grouping": {
             "$ref": "#/components/schemas/v1.Grouping"
           },
           "id": {
-            "minLength": 0,
-            "type": "string",
             "description": "Unique identifier of the SLO.",
             "examples": [
               "b11919d5-ef85-4bb1-8655-02640dbe94d9"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "labels": {
             "type": "object",
@@ -2208,7 +2234,8 @@
             "description": "Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs",
             "examples": [
               "SLO_PRODUCT_TYPE_APM"
-            ]
+            ],
+            "x-coralogix-presence": true
           },
           "requestBasedMetricSli": {
             "$ref": "#/components/schemas/RequestBasedMetricSli"
@@ -2227,7 +2254,8 @@
             ],
             "examples": [
               "SLO_TYPE_REQUEST"
-            ]
+            ],
+            "x-coralogix-presence": true
           },
           "targetThresholdPercentage": {
             "type": "number",
@@ -2238,13 +2266,14 @@
             ]
           },
           "type": {
-            "minLength": 0,
-            "type": "string",
+            "deprecated": true,
             "description": "Deprecated: SLO type string. Use slo_type instead.",
             "examples": [
               "request"
             ],
-            "deprecated": true
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "updateTime": {
             "minLength": 0,
@@ -2270,9 +2299,10 @@
             "description": "The alert version id."
           },
           "errorMessage": {
+            "description": "The error message.",
             "minLength": 0,
             "type": "string",
-            "description": "The error message."
+            "x-coralogix-presence": true
           },
           "id": {
             "minLength": 0,

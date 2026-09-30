@@ -11,6 +11,11 @@ model_access_policy_action.go
 model_activity_schedule.go
 model_alert_def.go
 model_alert_def_access.go
+model_alert_def_case_auto_resolve_mode.go
+model_alert_def_case_destination.go
+model_alert_def_case_enrichment_query.go
+model_alert_def_case_enrichment_query_type.go
+model_alert_def_case_settings.go
 model_alert_def_data_source.go
 model_alert_def_enabled_filter.go
 model_alert_def_entity_labels_filter.go

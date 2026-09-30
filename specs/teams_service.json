@@ -98,7 +98,8 @@
                   "dailyQuota": {
                     "description": "Daily quota to assign to the new team, in quota units per day. Defaults to 0.01 when omitted.",
                     "format": "double",
-                    "type": "number"
+                    "type": "number",
+                    "x-coralogix-presence": true
                   },
                   "teamAdminsEmail": {
                     "description": "Email addresses of the users to add to the new team as administrators.",
@@ -276,14 +277,16 @@
                   "dailyQuota": {
                     "description": "New daily quota for the team, in quota units per day. Omit to keep the current quota.",
                     "format": "double",
-                    "type": "number"
+                    "type": "number",
+                    "x-coralogix-presence": true
                   },
                   "teamName": {
                     "description": "New display name for the team. Omit to keep the current name.",
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "type": "object"

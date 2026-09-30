@@ -100,7 +100,8 @@
                       "The best scope"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "displayName": {
                     "description": "The display name.",
@@ -210,7 +211,8 @@
                       "The best scope"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "displayName": {
                     "description": "The display name.",
@@ -637,12 +639,13 @@
             ]
           },
           "description": {
-            "minLength": 0,
-            "type": "string",
             "description": "Human-readable description.",
             "examples": [
               "The best scope"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "displayName": {
             "minLength": 0,

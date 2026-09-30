@@ -161,7 +161,8 @@
                     "maxLength": 65536,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "dashboard": {
                     "$ref": "#/components/schemas/Dashboard"
@@ -256,7 +257,8 @@
                     "maxLength": 65536,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "dashboard": {
                     "$ref": "#/components/schemas/Dashboard"
@@ -1538,7 +1540,8 @@
                 "$ref": "#/components/schemas/XAxisTimeFormat"
               }
             ],
-            "description": "Time format for the X axis (only applicable when X axis is time-based)"
+            "description": "Time format for the X axis (only applicable when X axis is time-based)",
+            "x-coralogix-presence": true
           },
           "yAxisMax": {
             "type": "number",
@@ -2688,7 +2691,8 @@
                 "$ref": "#/components/schemas/ActionDataSourceType"
               }
             ],
-            "description": "Defines the data source type of the action, if applicable"
+            "description": "Defines the data source type of the action, if applicable",
+            "x-coralogix-presence": true
           },
           "definition": {
             "allOf": [
@@ -5047,14 +5051,15 @@
         "type": "object",
         "properties": {
           "accessPolicy": {
+            "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
+            "examples": [
+              "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}"
+            ],
             "maxLength": 65536,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
-            "examples": [
-              "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}"
-            ]
+            "x-coralogix-presence": true
           },
           "authorId": {
             "maxLength": 128,
@@ -5156,14 +5161,15 @@
         "type": "object",
         "properties": {
           "accessPolicy": {
+            "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
+            "examples": [
+              "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}"
+            ],
             "maxLength": 65536,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.",
-            "examples": [
-              "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}"
-            ]
+            "x-coralogix-presence": true
           },
           "authorId": {
             "maxLength": 128,
@@ -5354,7 +5360,8 @@
                 "$ref": "#/components/schemas/HeatmapHistogramBucketUnit"
               }
             ],
-            "description": "Unit used to format histogram bucket boundaries when a heatmap axis represents cumulative histogram buckets"
+            "description": "Unit used to format histogram bucket boundaries when a heatmap axis represents cumulative histogram buckets",
+            "x-coralogix-presence": true
           },
           "preset": {
             "$ref": "#/components/schemas/HeatmapColorPreset"
@@ -5408,7 +5415,8 @@
                 "$ref": "#/components/schemas/XAxisTimeFormat"
               }
             ],
-            "description": "Time format for the X axis (only applicable when X axis contains timestamp fields)"
+            "description": "Time format for the X axis (only applicable when X axis contains timestamp fields)",
+            "x-coralogix-presence": true
           },
           "yAxisFields": {
             "maxItems": 1000,
@@ -7263,7 +7271,8 @@
                 "$ref": "#/components/schemas/XAxisTimeFormat"
               }
             ],
-            "description": "Time format for the X axis"
+            "description": "Time format for the X axis",
+            "x-coralogix-presence": true
           }
         },
         "description": "LineChart represents the configuration of a line chart widget.",
@@ -13311,7 +13320,8 @@
                 "$ref": "#/components/schemas/XAxisTimeFormat"
               }
             ],
-            "description": "Time format for the X axis"
+            "description": "Time format for the X axis",
+            "x-coralogix-presence": true
           },
           "yAxisMax": {
             "type": "number",
@@ -13474,7 +13484,8 @@
                 "$ref": "#/components/schemas/XAxisTimeFormat"
               }
             ],
-            "description": "Time format for the X axis"
+            "description": "Time format for the X axis",
+            "x-coralogix-presence": true
           },
           "yAxisMax": {
             "type": "number",
@@ -13554,7 +13565,8 @@
                 "$ref": "#/components/schemas/XAxisTimeFormat"
               }
             ],
-            "description": "Time format for the X axis"
+            "description": "Time format for the X axis",
+            "x-coralogix-presence": true
           }
         },
         "description": "Time series lines multi.",

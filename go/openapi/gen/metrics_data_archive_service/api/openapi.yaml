@@ -130,7 +130,8 @@
                     "description": "Archive retention period in days.",
                     "format": "int64",
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "s3": {
                     "allOf": [

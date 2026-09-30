@@ -95,6 +95,7 @@
             "name": "item_ids",
             "required": false,
             "schema": {
+              "default": [],
               "description": "The item ids.",
               "items": {
                 "description": "The item ids.",
@@ -112,6 +113,7 @@
             "name": "applications",
             "required": false,
             "schema": {
+              "default": [],
               "description": "The applications.",
               "items": {
                 "description": "The applications.",
@@ -129,6 +131,7 @@
             "name": "subsystems",
             "required": false,
             "schema": {
+              "default": [],
               "description": "The subsystems.",
               "items": {
                 "description": "The subsystems.",
@@ -152,6 +155,7 @@
               },
               "properties": {
                 "applications": {
+                  "default": [],
                   "description": "The applications.",
                   "items": {
                     "description": "The applications.",
@@ -170,6 +174,7 @@
                   "type": "string"
                 },
                 "itemIds": {
+                  "default": [],
                   "description": "The item ids.",
                   "items": {
                     "description": "The item ids.",
@@ -181,6 +186,7 @@
                   "type": "array"
                 },
                 "subsystems": {
+                  "default": [],
                   "description": "The subsystems.",
                   "items": {
                     "description": "The subsystems.",
@@ -290,6 +296,7 @@
             "name": "item_ids",
             "required": false,
             "schema": {
+              "default": [],
               "description": "The item ids.",
               "items": {
                 "description": "The item ids.",
@@ -307,6 +314,7 @@
             "name": "applications",
             "required": false,
             "schema": {
+              "default": [],
               "description": "The applications.",
               "items": {
                 "description": "The applications.",
@@ -324,6 +332,7 @@
             "name": "subsystems",
             "required": false,
             "schema": {
+              "default": [],
               "description": "The subsystems.",
               "items": {
                 "description": "The subsystems.",
@@ -347,6 +356,7 @@
               },
               "properties": {
                 "applications": {
+                  "default": [],
                   "description": "The applications.",
                   "items": {
                     "description": "The applications.",
@@ -365,6 +375,7 @@
                   "type": "string"
                 },
                 "itemIds": {
+                  "default": [],
                   "description": "The item ids.",
                   "items": {
                     "description": "The item ids.",
@@ -376,6 +387,7 @@
                   "type": "array"
                 },
                 "subsystems": {
+                  "default": [],
                   "description": "The subsystems.",
                   "items": {
                     "description": "The subsystems.",
@@ -466,6 +478,7 @@
                     "type": "string"
                   },
                   "keptExtensionItems": {
+                    "default": [],
                     "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
                     "items": {
                       "description": "List of extension item IDs to retain after undeploying; all other items will be removed.",
@@ -563,7 +576,8 @@
               "type": "string",
               "description": "The applications."
             },
-            "description": "The applications."
+            "description": "The applications.",
+            "default": []
           },
           "id": {
             "maxLength": 65535,
@@ -581,7 +595,8 @@
               "type": "string",
               "description": "The item ids."
             },
-            "description": "The item ids."
+            "description": "The item ids.",
+            "default": []
           },
           "subsystems": {
             "maxItems": 10000,
@@ -592,7 +607,8 @@
               "type": "string",
               "description": "The subsystems."
             },
-            "description": "The subsystems."
+            "description": "The subsystems.",
+            "default": []
           },
           "summary": {
             "$ref": "#/components/schemas/DeployedExtensionSummary"
@@ -655,7 +671,8 @@
               "type": "string",
               "description": "The applications."
             },
-            "description": "The applications."
+            "description": "The applications.",
+            "default": []
           },
           "id": {
             "maxLength": 65535,
@@ -673,7 +690,8 @@
               "type": "string",
               "description": "The item ids."
             },
-            "description": "The item ids."
+            "description": "The item ids.",
+            "default": []
           },
           "subsystems": {
             "maxItems": 10000,
@@ -684,7 +702,8 @@
               "type": "string",
               "description": "The subsystems."
             },
-            "description": "The subsystems."
+            "description": "The subsystems.",
+            "default": []
           },
           "version": {
             "maxLength": 65535,
@@ -815,7 +834,8 @@
             "items": {
               "$ref": "#/components/schemas/DeployedExtension"
             },
-            "description": "The deployed extensions."
+            "description": "The deployed extensions.",
+            "default": []
           }
         },
         "description": "Response containing a list of deployed extensions.",
@@ -832,70 +852,80 @@
             "minimum": 0,
             "type": "integer",
             "description": "List of actions.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "alerts": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "List of alerts.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "customDashboards": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The custom dashboards.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "enrichments": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "List of enrichments.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "eventsToMetrics": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The events to metrics.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "grafanaDashboards": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The grafana dashboards.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "kibanaDashboards": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The kibana dashboards.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "metricsRuleGroup": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The metrics rule group.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "parsingRules": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The parsing rules.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "savedViews": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The saved views.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           }
         },
         "description": "Item counts.",
@@ -933,7 +963,8 @@
             "items": {
               "$ref": "#/components/schemas/FailedItem"
             },
-            "description": "The failed items."
+            "description": "The failed items.",
+            "default": []
           }
         },
         "description": "Response returned after successfully undeploying an extension.",

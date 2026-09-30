@@ -724,7 +724,8 @@
         "properties": {
           "isActive": {
             "type": "boolean",
-            "description": "Whether this resource is active."
+            "description": "Whether this resource is active.",
+            "default": false
           },
           "type": {
             "allOf": [
@@ -853,7 +854,8 @@
         "properties": {
           "isActive": {
             "type": "boolean",
-            "description": "Whether this resource is active."
+            "description": "Whether this resource is active.",
+            "default": false
           },
           "type": {
             "allOf": [

@@ -281,14 +281,15 @@
         "type": "object",
         "properties": {
           "evidenceUrl": {
+            "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
+            "examples": [
+              "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456"
+            ],
             "maxLength": 2048,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
-            "examples": [
-              "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Successful delivery outcome with an optional evidence URL.",

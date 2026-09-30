@@ -241,6 +241,7 @@ paths:
                       {"version":"2025-01-01","default":{"permissions":{"data-ingest-api-keys:ReadAccessPolicy":"grant","data-ingest-api-keys:Manage":"deny","data-ingest-api-keys:UpdateAccessPolicy":"deny","data-ingest-api-keys:ReadConfig":"grant"}},"rules":[]}
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 hashed:
                   description: Whether the value is stored as a one-way hash.
                   examples:
@@ -471,6 +472,7 @@ paths:
                       {"version":"2025-01-01","default":{"permissions":{"data-ingest-api-keys:ReadAccessPolicy":"grant","data-ingest-api-keys:Manage":"deny","data-ingest-api-keys:UpdateAccessPolicy":"deny","data-ingest-api-keys:ReadConfig":"grant"}},"rules":[]}
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 isActive:
                   description: >-
                     Whether the API key is active. Set to false to deactivate
@@ -478,12 +480,14 @@ paths:
                   examples:
                     - true
                   type: boolean
+                  x-coralogix-presence: true
                 newName:
                   description: New display name for the API key.
                   examples:
                     - my_new_name
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 permissions:
                   $ref: '#/components/schemas/UpdateApiKeyRequest.Permissions'
                 presets:
@@ -572,6 +576,7 @@ paths:
             format: int64
             minimum: 0
             type: integer
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -655,6 +660,7 @@ paths:
                   format: int64
                   minimum: 0
                   type: integer
+                  x-coralogix-presence: true
               type: object
         required: true
       responses:
@@ -742,10 +748,12 @@ paths:
                   description: The new description.
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 newName:
                   description: The new name.
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 newPermissions:
                   $ref: '#/components/schemas/v2.Permissions'
               type: object
@@ -955,6 +963,7 @@ paths:
             format: int64
             minimum: 0
             type: integer
+            x-coralogix-presence: true
         - description: Page size.
           in: query
           name: page_size
@@ -964,6 +973,7 @@ paths:
             format: int64
             minimum: 0
             type: integer
+            x-coralogix-presence: true
         - description: The page token.
           in: query
           name: page_token
@@ -972,6 +982,7 @@ paths:
             description: The page token.
             minLength: 0
             type: string
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -1016,14 +1027,17 @@ paths:
                   description: Human-readable description of the team group.
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 externalId:
                   description: >-
                     External identifier for the group, used when the group is
                     managed by an external identity provider.
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 groupType:
                   $ref: '#/components/schemas/GroupType'
+                  x-coralogix-presence: true
                 name:
                   description: Unique display name for the new team group.
                   minLength: 0
@@ -1033,6 +1047,7 @@ paths:
                   format: int64
                   minimum: 0
                   type: integer
+                  x-coralogix-presence: true
                 roleName:
                   description: >-
                     Name of the role to assign to this group, as an alternative
@@ -1044,6 +1059,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 scope:
                   $ref: '#/components/schemas/v2.Scope'
                 teamId:
@@ -1053,6 +1069,7 @@ paths:
                   format: int64
                   minimum: 0
                   type: integer
+                  x-coralogix-presence: true
                 userIds:
                   description: The user ids.
                   items:
@@ -1218,16 +1235,20 @@ paths:
                   description: New human-readable description for the team group.
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 externalId:
                   description: New external identifier for the group.
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 groupType:
                   $ref: '#/components/schemas/GroupType'
+                  x-coralogix-presence: true
                 name:
                   description: New display name for the team group.
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 roleUpdate:
                   $ref: '#/components/schemas/RoleUpdate'
                 scopeUpdate:
@@ -1340,6 +1361,7 @@ paths:
             format: int64
             minimum: 0
             type: integer
+            x-coralogix-presence: true
         - description: Optional pagination continuation token.
           in: query
           name: page_token
@@ -1348,6 +1370,7 @@ paths:
             description: Optional pagination continuation token.
             minLength: 0
             type: string
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -1639,6 +1662,7 @@ paths:
                     - The best scope
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 displayName:
                   description: The display name.
                   examples:
@@ -1714,6 +1738,7 @@ paths:
                     - The best scope
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 displayName:
                   description: The display name.
                   examples:
@@ -1852,6 +1877,7 @@ paths:
               provided, the id will be derived from the authorization header.
             minLength: 0
             type: string
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -1907,6 +1933,7 @@ paths:
                     - d662a2f1-21c3-493c-8f8a-595d3ab05ef3
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 ipAccess:
                   description: List of IP access entries to replace.
                   items:
@@ -2010,6 +2037,7 @@ paths:
               - d662a2f1-21c3-493c-8f8a-595d3ab05ef3
             minLength: 0
             type: string
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -2109,6 +2137,7 @@ paths:
                     day. Defaults to 0.01 when omitted.
                   format: double
                   type: number
+                  x-coralogix-presence: true
                 teamAdminsEmail:
                   description: >-
                     Email addresses of the users to add to the new team as
@@ -2234,6 +2263,7 @@ paths:
                     to keep the current quota.
                   format: double
                   type: number
+                  x-coralogix-presence: true
                 teamName:
                   description: >-
                     New display name for the team. Omit to keep the current
@@ -2242,6 +2272,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               type: object
       responses:
         '200':
@@ -2358,6 +2389,7 @@ paths:
             description: Optional filter by username (partial match supported)
             minLength: 0
             type: string
+            x-coralogix-presence: true
         - description: Optional filter by user status (e.g., 'active', 'inactive')
           in: query
           name: status
@@ -2366,6 +2398,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/UserStatus'
             description: Optional filter by user status (e.g., 'active', 'inactive')
+            x-coralogix-presence: true
         - description: Number of results per page
           in: query
           name: page_size
@@ -2808,12 +2841,14 @@ paths:
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 dpxlFilter:
                   description: The dpxl filter.
                   maxLength: 65535
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 isPrivate:
                   description: The is private.
                   type: boolean
@@ -3073,6 +3108,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
+            x-coralogix-presence: true
         - description: Zero-based page offset. Default 0 if omitted.
           in: query
           name: page_offset
@@ -3083,6 +3119,7 @@ paths:
             maximum: 10000
             minimum: 0
             type: integer
+            x-coralogix-presence: true
         - description: >-
             Optional filter: only include applications that have at least one
             evaluation of any of these types.
@@ -3423,6 +3460,7 @@ paths:
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 examples:
                   description: Example conversations and expected scores.
                   items:
@@ -3436,27 +3474,32 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]+$
                   type: string
+                  x-coralogix-presence: true
                 name:
                   description: Display name of the custom evaluation.
                   maxLength: 256
                   minLength: 1
                   pattern: ^[\s\S]+$
                   type: string
+                  x-coralogix-presence: true
                 policyType:
                   description: Policy type identifier.
                   maxLength: 256
                   minLength: 1
                   pattern: ^[\s\S]+$
                   type: string
+                  x-coralogix-presence: true
                 safe:
                   description: Description of what counts as safe.
                   maxLength: 65536
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 shouldIncludeSystemPrompt:
                   description: Whether to include the system prompt in the LLM input.
                   type: boolean
+                  x-coralogix-presence: true
                 updateMask:
                   description: >-
                     Comma-separated list of field paths to update. When
@@ -3473,6 +3516,7 @@ paths:
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               type: object
       responses:
         '200':
@@ -3607,6 +3651,7 @@ paths:
             minLength: 1
             pattern: ^[\s\S]+$
             type: string
+            x-coralogix-presence: true
         - description: Filter by subsystem.
           in: query
           name: subsystem
@@ -3617,6 +3662,7 @@ paths:
             minLength: 1
             pattern: ^[\s\S]+$
             type: string
+            x-coralogix-presence: true
         - description: Filter by evaluation type.
           in: query
           name: evaluation_type
@@ -3625,6 +3671,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/EvaluationType'
             description: Filter by evaluation type.
+            x-coralogix-presence: true
         - description: Number of items per page. Default 200 if omitted.
           in: query
           name: page_size
@@ -3635,6 +3682,7 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
+            x-coralogix-presence: true
         - description: Zero-based page offset. Default 0 if omitted.
           in: query
           name: page_offset
@@ -3645,6 +3693,7 @@ paths:
             maximum: 10000
             minimum: 0
             type: integer
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -3703,12 +3752,14 @@ paths:
                   description: >-
                     What the evaluation runs against: PROMPT, RESPONSE, or
                     CONVERSATION.
+                  x-coralogix-presence: true
                 threshold:
                   description: Score threshold. Must be between 0.0 and 1.0 inclusive.
                   format: double
                   maximum: 1
                   minimum: 0
                   type: number
+                  x-coralogix-presence: true
               type: object
       responses:
         '200':
@@ -3848,6 +3899,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]+$
                   type: string
+                  x-coralogix-presence: true
                 config:
                   allOf:
                     - $ref: '#/components/schemas/EvaluationConfig'
@@ -3855,24 +3907,28 @@ paths:
                 isEnabled:
                   description: Whether the evaluation is active.
                   type: boolean
+                  x-coralogix-presence: true
                 subsystem:
                   description: Subsystem within the application.
                   maxLength: 256
                   minLength: 1
                   pattern: ^[\s\S]+$
                   type: string
+                  x-coralogix-presence: true
                 target:
                   allOf:
                     - $ref: '#/components/schemas/EvaluationTarget'
                   description: >-
                     What the evaluation runs against: PROMPT, RESPONSE, or
                     CONVERSATION.
+                  x-coralogix-presence: true
                 threshold:
                   description: Score threshold. Must be between 0.0 and 1.0 inclusive.
                   format: double
                   maximum: 1
                   minimum: 0
                   type: number
+                  x-coralogix-presence: true
                 updateMask:
                   description: >-
                     Comma-separated list of field paths to update. When
@@ -4110,6 +4166,7 @@ paths:
               caller's access decision and each alert's raw access policy.
               Defaults to false.
             type: boolean
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -4229,6 +4286,7 @@ paths:
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 alertDefProperties:
                   allOf:
                     - $ref: '#/components/schemas/AlertDefProperties'
@@ -4776,6 +4834,7 @@ paths:
               access decision and the alert's raw access policy. Defaults to
               false.
             type: boolean
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -4841,6 +4900,7 @@ paths:
               access decision and the alert's raw access policy. Defaults to
               false.
             type: boolean
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -5429,6 +5489,7 @@ paths:
           schema:
             description: Whether this resource is enabled.
             type: boolean
+            x-coralogix-presence: true
         - description: >-
             Filter results to the specified alert scheduler rule or rule version
             IDs.
@@ -5490,6 +5551,7 @@ paths:
             description: Token for fetching the next page of results.
             minLength: 0
             type: string
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -6284,6 +6346,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               required:
                 - globalIndicatorSettings
               title: Create case settings request
@@ -6501,6 +6564,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               title: Update case settings request
               type: object
       responses:
@@ -7029,6 +7093,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*\S[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 title:
                   description: >-
                     New case title. Leading and trailing whitespace is trimmed
@@ -7039,6 +7104,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*\S[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               title: Case patch
               type: object
       responses:
@@ -7936,6 +8002,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               required:
                 - ids
               title: Bulk resolve request
@@ -8013,6 +8080,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               title: Resolve case request
               type: object
       responses:
@@ -8163,6 +8231,7 @@ paths:
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 dashboard:
                   $ref: '#/components/schemas/Dashboard'
                 isLocked:
@@ -8237,6 +8306,7 @@ paths:
                   minLength: 0
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 dashboard:
                   $ref: '#/components/schemas/Dashboard'
                 isLocked:
@@ -9940,6 +10010,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/v1.SourceType'
             description: Filter policies by data source type (for example logs or spans).
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -10305,6 +10376,7 @@ paths:
                   minLength: 1
                   pattern: ^-?[0-9]+$
                   type: string
+                  x-coralogix-presence: true
                 week:
                   $ref: '#/components/schemas/Week'
               title: Forecast Policy Usage Request
@@ -11813,6 +11885,7 @@ paths:
                       minLength: 0
                       pattern: ^[\s\S]*$
                       type: string
+                      x-coralogix-presence: true
                     family:
                       description: >-
                         Fields used to update the latest configuration family.
@@ -11823,6 +11896,7 @@ paths:
                         active:
                           description: Whether this family is active.
                           type: boolean
+                          x-coralogix-presence: true
                         collectorVersion:
                           description: >-
                             Collector semantic version this configuration family
@@ -11834,12 +11908,14 @@ paths:
                           pattern: >-
                             ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
                           type: string
+                          x-coralogix-presence: true
                         description:
                           description: Human-readable description.
                           maxLength: 4096
                           minLength: 0
                           pattern: ^[\s\S]*$
                           type: string
+                          x-coralogix-presence: true
                         metadata:
                           additionalProperties:
                             maxLength: 4096
@@ -11864,6 +11940,7 @@ paths:
                       minLength: 0
                       pattern: ^[\s\S]*$
                       type: string
+                      x-coralogix-presence: true
                     priorityOrder:
                       description: >-
                         Selection precedence. Higher values win on ties and 0 is
@@ -11872,6 +11949,7 @@ paths:
                       maximum: 2147483647
                       minimum: -2147483648
                       type: integer
+                      x-coralogix-presence: true
                     tags:
                       description: Tags attached to the configuration group.
                       items:
@@ -13847,6 +13925,7 @@ paths:
                 filter:
                   $ref: '#/components/schemas/GetAllExtensionsRequest.Filter'
                 includeHiddenExtensions:
+                  default: false
                   description: >-
                     Whether to include hidden extensions that are not publicly
                     listed in the catalog.
@@ -13907,6 +13986,7 @@ paths:
           name: include_dashboard_binaries
           required: false
           schema:
+            default: false
             description: Whether to include dashboard binaries in the response.
             type: boolean
         - description: Whether to include testing revisions in the response.
@@ -13914,6 +13994,7 @@ paths:
           name: include_testing_revision
           required: false
           schema:
+            default: false
             description: Whether to include testing revisions in the response.
             type: boolean
       responses:
@@ -14017,6 +14098,7 @@ paths:
           name: item_ids
           required: false
           schema:
+            default: []
             description: The item ids.
             items:
               description: The item ids.
@@ -14030,6 +14112,7 @@ paths:
           name: applications
           required: false
           schema:
+            default: []
             description: The applications.
             items:
               description: The applications.
@@ -14043,6 +14126,7 @@ paths:
           name: subsystems
           required: false
           schema:
+            default: []
             description: The subsystems.
             items:
               description: The subsystems.
@@ -14061,6 +14145,7 @@ paths:
               url: ''
             properties:
               applications:
+                default: []
                 description: The applications.
                 items:
                   description: The applications.
@@ -14076,6 +14161,7 @@ paths:
                 pattern: ^[\s\S]*$
                 type: string
               itemIds:
+                default: []
                 description: The item ids.
                 items:
                   description: The item ids.
@@ -14085,6 +14171,7 @@ paths:
                 minItems: 0
                 type: array
               subsystems:
+                default: []
                 description: The subsystems.
                 items:
                   description: The subsystems.
@@ -14164,6 +14251,7 @@ paths:
           name: item_ids
           required: false
           schema:
+            default: []
             description: The item ids.
             items:
               description: The item ids.
@@ -14177,6 +14265,7 @@ paths:
           name: applications
           required: false
           schema:
+            default: []
             description: The applications.
             items:
               description: The applications.
@@ -14190,6 +14279,7 @@ paths:
           name: subsystems
           required: false
           schema:
+            default: []
             description: The subsystems.
             items:
               description: The subsystems.
@@ -14208,6 +14298,7 @@ paths:
               url: ''
             properties:
               applications:
+                default: []
                 description: The applications.
                 items:
                   description: The applications.
@@ -14223,6 +14314,7 @@ paths:
                 pattern: ^[\s\S]*$
                 type: string
               itemIds:
+                default: []
                 description: The item ids.
                 items:
                   description: The item ids.
@@ -14232,6 +14324,7 @@ paths:
                 minItems: 0
                 type: array
               subsystems:
+                default: []
                 description: The subsystems.
                 items:
                   description: The subsystems.
@@ -14298,6 +14391,7 @@ paths:
                   pattern: ^[\s\S]*$
                   type: string
                 keptExtensionItems:
+                  default: []
                   description: >-
                     List of extension item IDs to retain after undeploying; all
                     other items will be removed.
@@ -15674,6 +15768,7 @@ paths:
                   format: int64
                   minimum: 0
                   type: integer
+                  x-coralogix-presence: true
                 s3:
                   allOf:
                     - $ref: '#/components/schemas/S3Config'
@@ -15960,6 +16055,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/notification_center.ConnectorType'
             description: Filter connectors by their type.
+            x-coralogix-presence: true
         - description: Filter connectors by the entity type they support.
           in: query
           name: supported_by_entity_type
@@ -15968,6 +16064,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/notification_center.EntityType'
             description: Filter connectors by the entity type they support.
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -16102,6 +16199,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/notification_center.ConnectorType'
             description: Filter connector summaries by their type.
+            x-coralogix-presence: true
         - description: Filter connector summaries by the entity type they support.
           in: query
           name: supported_by_entity_type
@@ -16110,6 +16208,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/notification_center.EntityType'
             description: Filter connector summaries by the entity type they support.
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -16133,6 +16232,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/notification_center.EntityType'
             description: Filter connector types by the entity type they support.
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -16233,6 +16333,7 @@ paths:
                     - $ref: '#/components/schemas/notification_center.EntityType'
                   examples:
                     - ALERTS
+                  x-coralogix-presence: true
                 fields:
                   description: Fields.
                   items:
@@ -16294,6 +16395,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 entityType:
                   allOf:
                     - $ref: '#/components/schemas/notification_center.EntityType'
@@ -16646,6 +16748,7 @@ paths:
             allOf:
               - $ref: '#/components/schemas/notification_center.ConnectorType'
             description: Filter preset summaries by their connector type.
+            x-coralogix-presence: true
         - description: Filter preset summaries by their entity type.
           in: query
           name: entity_type
@@ -16656,6 +16759,7 @@ paths:
             description: Filter preset summaries by their entity type.
             examples:
               - ALERTS
+            x-coralogix-presence: true
       responses:
         '200':
           content:
@@ -16690,6 +16794,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 entityType:
                   allOf:
                     - $ref: '#/components/schemas/notification_center.EntityType'
@@ -16745,6 +16850,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 entityType:
                   allOf:
                     - $ref: '#/components/schemas/notification_center.EntityType'
@@ -16781,6 +16887,7 @@ paths:
               - $ref: '#/components/schemas/notification_center.EntityType'
             deprecated: true
             description: Deprecated. Filter routers by entity type.
+            x-coralogix-presence: true
         - description: >-
             Filter routers by source entity labels. Each entry restricts results
             to routers whose source entity has the matching label values. If
@@ -17018,6 +17125,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
                 entityType:
                   allOf:
                     - $ref: '#/components/schemas/notification_center.EntityType'
@@ -17527,6 +17635,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               title: Create Rule Group Set
               type: object
       responses:
@@ -17611,6 +17720,7 @@ paths:
                   minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
+                  x-coralogix-presence: true
               title: Update Rule Group Set
               type: object
       responses:
@@ -17899,6 +18009,7 @@ paths:
             deprecated: true
             description: Whether to silence data validations.
             type: boolean
+            x-coralogix-presence: true
       requestBody:
         content:
           application/json:
@@ -17946,12 +18057,14 @@ paths:
                     - test@domain.com
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 description:
                   description: Human-readable description of the SLO.
                   examples:
                     - A brief description of my SLO
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 grouping:
                   $ref: '#/components/schemas/v1.Grouping'
                 id:
@@ -17960,6 +18073,7 @@ paths:
                     - b11919d5-ef85-4bb1-8655-02640dbe94d9
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 labels:
                   additionalProperties:
                     minLength: 0
@@ -17986,6 +18100,7 @@ paths:
                     SLOs, UNSPECIFIED for manual/custom SLOs
                   examples:
                     - SLO_PRODUCT_TYPE_APM
+                  x-coralogix-presence: true
                 requestBasedMetricSli:
                   $ref: '#/components/schemas/RequestBasedMetricSli'
                 revision:
@@ -17997,6 +18112,7 @@ paths:
                     - $ref: '#/components/schemas/SloType'
                   examples:
                     - SLO_TYPE_REQUEST
+                  x-coralogix-presence: true
                 targetThresholdPercentage:
                   description: >-
                     Target compliance percentage threshold for the SLO (e.g.,
@@ -18012,6 +18128,7 @@ paths:
                     - request
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 updateTime:
                   description: Timestamp of the last update.
                   format: date-time
@@ -18062,6 +18179,7 @@ paths:
             deprecated: true
             description: Whether to silence data validations.
             type: boolean
+            x-coralogix-presence: true
       requestBody:
         content:
           application/json:
@@ -18109,12 +18227,14 @@ paths:
                     - test@domain.com
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 description:
                   description: Human-readable description of the SLO.
                   examples:
                     - A brief description of my SLO
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 grouping:
                   $ref: '#/components/schemas/v1.Grouping'
                 id:
@@ -18123,6 +18243,7 @@ paths:
                     - b11919d5-ef85-4bb1-8655-02640dbe94d9
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 labels:
                   additionalProperties:
                     minLength: 0
@@ -18149,6 +18270,7 @@ paths:
                     SLOs, UNSPECIFIED for manual/custom SLOs
                   examples:
                     - SLO_PRODUCT_TYPE_APM
+                  x-coralogix-presence: true
                 requestBasedMetricSli:
                   $ref: '#/components/schemas/RequestBasedMetricSli'
                 revision:
@@ -18160,6 +18282,7 @@ paths:
                     - $ref: '#/components/schemas/SloType'
                   examples:
                     - SLO_TYPE_REQUEST
+                  x-coralogix-presence: true
                 targetThresholdPercentage:
                   description: >-
                     Target compliance percentage threshold for the SLO (e.g.,
@@ -18175,6 +18298,7 @@ paths:
                     - request
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 updateTime:
                   description: Timestamp of the last update.
                   format: date-time
@@ -18430,12 +18554,14 @@ paths:
                     - test@domain.com
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 description:
                   description: Human-readable description of the SLO.
                   examples:
                     - A brief description of my SLO
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 grouping:
                   $ref: '#/components/schemas/v1.Grouping'
                 id:
@@ -18444,6 +18570,7 @@ paths:
                     - b11919d5-ef85-4bb1-8655-02640dbe94d9
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 labels:
                   additionalProperties:
                     minLength: 0
@@ -18470,6 +18597,7 @@ paths:
                     SLOs, UNSPECIFIED for manual/custom SLOs
                   examples:
                     - SLO_PRODUCT_TYPE_APM
+                  x-coralogix-presence: true
                 requestBasedMetricSli:
                   $ref: '#/components/schemas/RequestBasedMetricSli'
                 revision:
@@ -18481,6 +18609,7 @@ paths:
                     - $ref: '#/components/schemas/SloType'
                   examples:
                     - SLO_TYPE_REQUEST
+                  x-coralogix-presence: true
                 targetThresholdPercentage:
                   description: >-
                     Target compliance percentage threshold for the SLO (e.g.,
@@ -18496,6 +18625,7 @@ paths:
                     - request
                   minLength: 0
                   type: string
+                  x-coralogix-presence: true
                 updateTime:
                   description: Timestamp of the last update.
                   format: date-time
@@ -19276,12 +19406,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/EvaluationTarget'
           description: 'What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION.'
+          x-coralogix-presence: true
         threshold:
+          description: Score threshold. Must be between 0.0 and 1.0 inclusive.
+          format: double
           maximum: 1
           minimum: 0
           type: number
-          description: Score threshold. Must be between 0.0 and 1.0 inclusive.
-          format: double
+          x-coralogix-presence: true
         updatedAt:
           maxLength: 35
           minLength: 20
@@ -19338,6 +19470,7 @@ components:
           description: The current status of the alert
           examples:
             - ALERT_DEF_STATUS_OK
+          x-coralogix-presence: true
         updatedTime:
           maxLength: 64
           minLength: 0
@@ -19357,13 +19490,14 @@ components:
       type: object
       properties:
         accessPolicy:
+          description: >-
+            The alert's raw access policy as an opaque JSON string. Present only
+            when the caller may read it (alerts:ReadAccessPolicy granted)
           maxLength: 65536
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: >-
-            The alert's raw access policy as an opaque JSON string. Present only
-            when the caller may read it (alerts:ReadAccessPolicy granted)
+          x-coralogix-presence: true
         permissions:
           allOf:
             - $ref: '#/components/schemas/AlertDefPermissions'
@@ -19371,6 +19505,131 @@ components:
       description: >-
         The caller's access decision for an alert together with the alert's raw
         access policy
+      externalDocs:
+        url: ''
+    AlertDefCaseAutoResolveMode:
+      enum:
+        - ALERT_DEF_CASE_AUTO_RESOLVE_MODE_UNSPECIFIED
+        - ALERT_DEF_CASE_AUTO_RESOLVE_MODE_ENABLED
+        - ALERT_DEF_CASE_AUTO_RESOLVE_MODE_DISABLED
+      type: string
+      description: Case auto resolve mode.
+    AlertDefCaseDestination:
+      title: Alert definition case destination
+      required:
+        - connectorId
+        - condition
+      type: object
+      properties:
+        condition:
+          maxLength: 20000
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Notification Center routing condition, rendered to true or false
+            against the case notification context to decide whether this
+            destination is notified. Use "true" to notify on every case
+            notification; otherwise filter on caseMetadata.notificationReason
+            (for example caseActivated, caseResolved, casePriorityChanged,
+            caseUnacknowledged). The expression syntax is documented with
+            Notification Center routing conditions.
+          examples:
+            - >-
+              (caseMetadata.notificationReason not in
+              ["caseUnacknowledged","casePriorityChanged"])
+        connectorId:
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
+          type: string
+          description: >-
+            ID of the Notification Center connector to notify. The connector
+            must support the CASES entity type; list compatible connectors with
+            GET
+            /notifications/notification-center/v1/connectors?supported_by_entity_type=CASES.
+          examples:
+            - connector_id_example
+        presetId:
+          description: >-
+            Optional Notification Center preset ID used to render the
+            notification. The preset must be defined for the CASES entity type
+            and for the selected connector's type; list compatible presets with
+            GET
+            /notifications/notification-center/v1/presets:summariesList?entity_type=CASES&connector_type=<type>.
+            When omitted, the connector type's default preset is used.
+          examples:
+            - preset_id_example
+          maxLength: 128
+          minLength: 0
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
+          type: string
+          x-coralogix-presence: true
+      description: >-
+        A Notification Center connector that receives notifications about cases
+        opened by this alert.
+      externalDocs:
+        url: ''
+    AlertDefCaseEnrichmentQuery:
+      title: Alert definition case enrichment query
+      required:
+        - query
+      type: object
+      properties:
+        query:
+          maxLength: 65535
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: The enrichment query string
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCaseEnrichmentQueryType'
+          description: >-
+            The query language of the enrichment query. Defaults to DataPrime
+            when omitted.
+          examples:
+            - ALERT_DEF_CASE_ENRICHMENT_QUERY_TYPE_DATAPRIME
+      description: A query used to enrich the case created by the alert.
+      externalDocs:
+        url: ''
+    AlertDefCaseEnrichmentQueryType:
+      enum:
+        - ALERT_DEF_CASE_ENRICHMENT_QUERY_TYPE_UNSPECIFIED
+        - ALERT_DEF_CASE_ENRICHMENT_QUERY_TYPE_DATAPRIME
+      type: string
+      description: Enrichment query type.
+    AlertDefCaseSettings:
+      title: Alert definition case settings
+      type: object
+      properties:
+        autoResolveMode:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCaseAutoResolveMode'
+          description: >-
+            Controls whether the associated case is automatically resolved when
+            the alert resolves. Defaults to enabled when unspecified.
+          examples:
+            - ALERT_DEF_CASE_AUTO_RESOLVE_MODE_ENABLED
+        destinations:
+          maxItems: 100
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertDefCaseDestination'
+          description: >-
+            Destinations notified about the cases opened by this alert.
+            Independent of notificationGroup.destinations: both are delivered.
+            Replace is a full overwrite: omitting destinations removes any
+            previously configured case destinations.
+        enrichmentQueries:
+          maxItems: 1
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertDefCaseEnrichmentQuery'
+          description: Queries used to enrich the case created by this alert
+      description: Settings controlling how the alert interacts with cases.
       externalDocs:
         url: ''
     AlertDefDataSource:
@@ -19746,10 +20005,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnalyticsImmediateType'
           description: Configuration for analytics immediate alerts
+          x-stability: preview
         analyticsThreshold:
           allOf:
             - $ref: '#/components/schemas/AnalyticsThresholdType'
           description: Configuration for analytics threshold alerts
+          x-stability: preview
+        caseSettings:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCaseSettings'
+          description: >-
+            Settings controlling how the alert interacts with cases. When
+            omitted on create, defaults apply (case auto-resolve enabled, no
+            enrichment queries, no case destinations). Replace is a full
+            overwrite: omitting this field on replace resets any previously
+            configured case settings to those defaults. In read responses, this
+            field is absent when no case settings were configured, meaning those
+            same defaults are in effect.
+          x-stability: preview
         dataSources:
           maxItems: 1
           minItems: 0
@@ -19760,6 +20033,7 @@ components:
         deleted:
           type: boolean
           description: Whether the alert has been marked as deleted
+          default: false
           examples:
             - false
         description:
@@ -19775,6 +20049,7 @@ components:
         enabled:
           type: boolean
           description: Whether the alert is currently active and monitoring
+          default: true
           examples:
             - true
         entityLabels:
@@ -19864,6 +20139,7 @@ components:
         phantomMode:
           type: boolean
           description: Whether the alert is in phantom mode (creating incidents or not)
+          default: false
           examples:
             - false
         priority:
@@ -19953,14 +20229,15 @@ components:
       type: object
       properties:
         accessPolicy:
-          maxLength: 65536
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
           description: >-
             The access policy for the alert as a raw JSON string. Optional;
             requires the alerts:UpdateAccessPolicy permission to set. If
             omitted, the alert is created without an access policy.
+          maxLength: 65536
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         alertDefProperties:
           allOf:
             - $ref: '#/components/schemas/AlertDefProperties'
@@ -20014,7 +20291,10 @@ components:
         - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE
         - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD
       type: string
-      description: Alert def type.
+      description: |-
+        Alert def type.
+        - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE: preview
+        - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview
     AlertDefTypeFilter:
       title: AlertDef Type Filter
       type: object
@@ -20066,6 +20346,7 @@ components:
           description: The condition under which the alert should be notified
           examples:
             - NOTIFY_ON_TRIGGERED_AND_RESOLVED
+          x-coralogix-presence: true
       description: Configuration for webhook notifications for an alert
       externalDocs:
         url: ''
@@ -20335,13 +20616,14 @@ components:
           examples:
             - '2025-09-22T11:05:00.000Z'
         resolveWithSignal:
-          type: boolean
           description: >-
             When true or omitted, indicates that Case will be resolved together
             with signal. Otherwise, Case will stay open and wait for manual
             resolution.
           examples:
             - true
+          type: boolean
+          x-coralogix-presence: true
         state:
           allOf:
             - $ref: '#/components/schemas/IndicatorState'
@@ -20445,22 +20727,25 @@ components:
       type: object
       properties:
         createdAt:
-          minLength: 0
-          type: string
           description: Creation timestamp.
-        description:
           minLength: 0
           type: string
+          x-coralogix-presence: true
+        description:
           description: Human-readable description.
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         enabled:
           type: boolean
           description: Whether this resource is enabled.
         filter:
           $ref: '#/components/schemas/alert_scheduler_rule_protobuf.v1.Filter'
         id:
+          description: Unique identifier.
           minLength: 0
           type: string
-          description: Unique identifier.
+          x-coralogix-presence: true
         metaLabels:
           minItems: 0
           type: array
@@ -20474,13 +20759,15 @@ components:
         schedule:
           $ref: '#/components/schemas/Schedule'
         uniqueIdentifier:
-          minLength: 0
-          type: string
           description: Unique identifier.
-        updatedAt:
           minLength: 0
           type: string
+          x-coralogix-presence: true
+        updatedAt:
           description: Last-updated timestamp.
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
       description: Alert scheduler rule.
       externalDocs:
         url: ''
@@ -21238,13 +21525,14 @@ components:
       type: object
       properties:
         language:
+          description: Programming language of the APM service
+          examples:
+            - go
           maxLength: 4096
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Programming language of the APM service
-          examples:
-            - go
+          x-coralogix-presence: true
         name:
           maxLength: 4096
           minLength: 1
@@ -21470,12 +21758,13 @@ components:
           examples:
             - 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
         previousAssigneeUserId:
+          description: Previous assignee user ID (if any)
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
-          description: Previous assignee user ID (if any)
+          x-coralogix-presence: true
       description: Assigned case event.
       externalDocs:
         url: ''
@@ -21713,6 +22002,7 @@ components:
         isActive:
           type: boolean
           description: Whether this resource is active.
+          default: false
         type:
           allOf:
             - $ref: '#/components/schemas/AttachmentType'
@@ -22033,6 +22323,7 @@ components:
           description: >-
             Time format for the X axis (only applicable when X axis is
             time-based)
+          x-coralogix-presence: true
         yAxisMax:
           type: number
           description: Number indicating the upper band for y axis
@@ -22929,13 +23220,14 @@ components:
           description: When the case was acknowledged
           format: date-time
         aiSummary:
+          description: >-
+            AI summary of the case. Leading and trailing whitespace is trimmed
+            before the length limits are applied.
           maxLength: 10000
           minLength: 1
           pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: >-
-            AI summary of the case. Leading and trailing whitespace is trimmed
-            before the length limits are applied.
+          x-coralogix-presence: true
         assignee:
           allOf:
             - $ref: '#/components/schemas/cases.v1.UserDetails'
@@ -23015,16 +23307,17 @@ components:
             - $ref: '#/components/schemas/PriorityDetails'
           description: System and override priority details
         readableId:
-          maxLength: 64
-          minLength: 1
-          pattern: ^[A-Z]+-[0-9]+$
-          type: string
           description: >-
             Readable identifier of the case, available only for the cases that
             became Active. May be used interchangeably with `id` when calling
             Cases APIs that target a specific case.
           examples:
             - CASE-123
+          maxLength: 64
+          minLength: 1
+          pattern: ^[A-Z]+-[0-9]+$
+          type: string
+          x-coralogix-presence: true
         resolutionDetails:
           allOf:
             - $ref: '#/components/schemas/ResolutionDetails'
@@ -23389,13 +23682,14 @@ components:
             $ref: '#/components/schemas/CaseStatus'
           description: List of case statuses to filter on
         textSearch:
+          description: Test search query applied to case titles
+          examples:
+            - Vulnerability
           maxLength: 4096
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Test search query applied to case titles
-          examples:
-            - Vulnerability
+          x-coralogix-presence: true
       description: >-
         Filters applied when querying cases, including statuses, priorities,
         categories, groupings, and labels.
@@ -23690,13 +23984,14 @@ components:
           examples:
             - 3f166e9f-3c88-4af2-b52e-138f339dab3e
         name:
+          description: Human-readable name for the team configuration
+          examples:
+            - Default Team Config
           maxLength: 4096
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable name for the team configuration
-          examples:
-            - Default Team Config
+          x-coralogix-presence: true
         updateTime:
           maxLength: 30
           minLength: 20
@@ -24141,6 +24436,7 @@ components:
           description: Human-readable description.
         language:
           $ref: '#/components/schemas/Language'
+          x-coralogix-presence: true
         links:
           maxItems: 10000
           minItems: 0
@@ -24387,11 +24683,12 @@ components:
         messageConfig:
           $ref: '#/components/schemas/MessageConfig'
         payloadType:
+          description: Connector payload schema type.
           maxLength: 100
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Connector payload schema type.
+          x-coralogix-presence: true
     ConfigurationBlock:
       title: Configuration block
       type: object
@@ -24420,40 +24717,46 @@ components:
       type: object
       properties:
         active:
-          type: boolean
           description: Whether this family is active.
+          type: boolean
+          x-coralogix-presence: true
         basedOnConfigurationFamilyId:
+          description: Configuration family UUID v7 this family is based on.
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
-          description: Configuration family UUID v7 this family is based on.
+          x-coralogix-presence: true
         chartName:
           allOf:
             - $ref: '#/components/schemas/ChartName'
           description: Helm chart name for Helm-backed families.
+          x-coralogix-presence: true
         chartVersion:
+          description: Helm chart or template version used by this family.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Helm chart or template version used by this family.
+          x-coralogix-presence: true
         collectorVersion:
+          description: >-
+            Collector semantic version this configuration family targets,
+            without a leading v prefix.
           maxLength: 256
           minLength: 5
           pattern: >-
             ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
           type: string
-          description: >-
-            Collector semantic version this configuration family targets,
-            without a leading v prefix.
+          x-coralogix-presence: true
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         id:
           maxLength: 36
           minLength: 36
@@ -24462,11 +24765,12 @@ components:
           type: string
           description: Configuration family UUID v7.
         integrationVersion:
+          description: Integration version from the onboarding flow.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Integration version from the onboarding flow.
+          x-coralogix-presence: true
         lastActivatedAt:
           maxLength: 64
           minLength: 0
@@ -24510,31 +24814,35 @@ components:
       type: object
       properties:
         active:
-          type: boolean
           description: Whether this family is active.
+          type: boolean
+          x-coralogix-presence: true
         basedOnConfigurationFamilyId:
+          description: Configuration family UUID v7 this family is based on.
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
-          description: Configuration family UUID v7 this family is based on.
+          x-coralogix-presence: true
         collectorVersion:
+          description: >-
+            Collector semantic version this configuration family targets,
+            without a leading v prefix. The service.version selector must match
+            this value or is added automatically.
           maxLength: 256
           minLength: 5
           pattern: >-
             ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
           type: string
-          description: >-
-            Collector semantic version this configuration family targets,
-            without a leading v prefix. The service.version selector must match
-            this value or is added automatically.
+          x-coralogix-presence: true
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         metadata:
           type: object
           additionalProperties:
@@ -24569,11 +24877,12 @@ components:
       type: object
       properties:
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         families:
           maxItems: 128
           minItems: 0
@@ -24589,19 +24898,21 @@ components:
           type: string
           description: Configuration group UUID v7.
         name:
+          description: Display name.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Display name.
+          x-coralogix-presence: true
         priorityOrder:
-          maximum: 2147483647
-          minimum: -2147483648
-          type: integer
           description: >-
             Selection precedence. Higher values win on ties and 0 is the
             default.
           format: int32
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          x-coralogix-presence: true
         tags:
           maxItems: 64
           minItems: 0
@@ -24620,29 +24931,32 @@ components:
       type: object
       properties:
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         family:
           allOf:
             - $ref: '#/components/schemas/ConfigurationFamilyCreate'
           description: Initial configuration family to create with this group.
         name:
+          description: Display name.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Display name.
+          x-coralogix-presence: true
         priorityOrder:
-          maximum: 2147483647
-          minimum: -2147483648
-          type: integer
           description: >-
             Selection precedence. Higher values win on ties and 0 is the
             default.
           format: int32
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          x-coralogix-presence: true
         tags:
           maxItems: 64
           minItems: 0
@@ -24671,11 +24985,12 @@ components:
           type: string
           description: Configuration overlay UUID v7.
         overlayName:
+          description: Configuration overlay name at read time.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Configuration overlay name at read time.
+          x-coralogix-presence: true
         overlayVersionId:
           maxLength: 36
           minLength: 36
@@ -24725,13 +25040,14 @@ components:
             - $ref: '#/components/schemas/Diagnostics'
           deprecated: true
         id:
+          description: Unique identifier.
+          examples:
+            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           maxLength: 128
           minLength: 1
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
-          description: Unique identifier.
-          examples:
-            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          x-coralogix-presence: true
         name:
           maxLength: 200
           minLength: 1
@@ -24748,13 +25064,14 @@ components:
             fields.
           readOnly: true
         teamId:
+          description: Team identifier.
+          examples:
+            - 12345
+          format: int64
           maximum: 4294967295
           minimum: 1
           type: integer
-          description: Team identifier.
-          format: int64
-          examples:
-            - 12345
+          x-coralogix-presence: true
         type:
           $ref: '#/components/schemas/notification_center.ConnectorType'
         updateTime:
@@ -24812,17 +25129,19 @@ components:
             description: The allowed values.
           description: The allowed values.
         default:
+          description: The default.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: The default.
+          x-coralogix-presence: true
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         fieldName:
           maxLength: 256
           minLength: 1
@@ -24918,13 +25237,14 @@ components:
           examples:
             - Connector for team notifications
         id:
+          description: Unique identifier.
+          examples:
+            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           maxLength: 128
           minLength: 1
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
-          description: Unique identifier.
-          examples:
-            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          x-coralogix-presence: true
         name:
           maxLength: 200
           minLength: 1
@@ -24941,13 +25261,14 @@ components:
             fields.
           readOnly: true
         teamId:
+          description: The team id.
+          examples:
+            - 12345
+          format: int64
           maximum: 4294967295
           minimum: 1
           type: integer
-          description: The team id.
-          format: int64
-          examples:
-            - 12345
+          x-coralogix-presence: true
         type:
           $ref: '#/components/schemas/notification_center.ConnectorType'
         updateTime:
@@ -25206,17 +25527,19 @@ components:
             description: The application names.
           description: The application names.
         description:
-          maxLength: 65535
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
           description: Human-readable description.
-        dpxlFilter:
           maxLength: 65535
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
+          x-coralogix-presence: true
+        dpxlFilter:
           description: The dpxl filter.
+          maxLength: 65535
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         isPrivate:
           type: boolean
           description: The is private.
@@ -25775,9 +26098,10 @@ components:
       type: object
       properties:
         silenceDataValidations:
-          type: boolean
-          description: Whether to silence data validations.
           deprecated: true
+          description: Whether to silence data validations.
+          type: boolean
+          x-coralogix-presence: true
         slo:
           $ref: '#/components/schemas/Slo'
       description: Request to create a new SLO.
@@ -25850,13 +26174,14 @@ components:
       type: object
       properties:
         message:
+          description: >-
+            Human-readable detail about this outcome. Set where a status alone
+            is not enough, such as `CREATE_USER_STATUS_FAILED`.
           maxLength: 1024
           minLength: 1
           pattern: ^[\s\S]+$
           type: string
-          description: >-
-            Human-readable detail about this outcome. Set where a status alone
-            is not enough, such as `CREATE_USER_STATUS_FAILED`.
+          x-coralogix-presence: true
         status:
           $ref: '#/components/schemas/CreateUserStatus'
         user:
@@ -25867,18 +26192,20 @@ components:
             when the outcome produced no user, such as an invited user, who has
             none until the invitation is accepted.
         userAccountId:
+          format: int64
           minimum: 0
           type: integer
-          format: int64
+          x-coralogix-presence: true
         userId:
-          maxLength: 255
-          minLength: 1
-          pattern: ^[\s\S]+$
-          type: string
           description: >-
             Stable id of the user. Absent when the outcome produced no user,
             such as an invited user, who has none until the invitation is
             accepted.
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          x-coralogix-presence: true
         username:
           maxLength: 255
           minLength: 1
@@ -26592,6 +26919,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ActionDataSourceType'
           description: Defines the data source type of the action, if applicable
+          x-coralogix-presence: true
         definition:
           allOf:
             - $ref: '#/components/schemas/ActionDefinition'
@@ -27677,15 +28005,16 @@ components:
       type: object
       properties:
         evidenceUrl:
-          maxLength: 2048
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
           description: >-
             URL to the delivered notification, if available (e.g. Slack message,
             ServiceNow record)
           examples:
             - https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456
+          maxLength: 2048
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
       description: Successful delivery outcome with an optional evidence URL.
       externalDocs:
         url: ''
@@ -27728,6 +28057,7 @@ components:
             type: string
             description: The applications.
           description: The applications.
+          default: []
         id:
           maxLength: 65535
           minLength: 0
@@ -27743,6 +28073,7 @@ components:
             type: string
             description: The item ids.
           description: The item ids.
+          default: []
         subsystems:
           maxItems: 10000
           minItems: 0
@@ -27752,6 +28083,7 @@ components:
             type: string
             description: The subsystems.
           description: The subsystems.
+          default: []
         summary:
           $ref: '#/components/schemas/DeployedExtensionSummary'
         version:
@@ -27824,6 +28156,7 @@ components:
             type: string
             description: The replacement extensions.
           description: The replacement extensions.
+          default: []
       description: Deprecation.
       externalDocs:
         url: ''
@@ -27860,6 +28193,7 @@ components:
         isActive:
           type: boolean
           description: Whether this resource is active.
+          default: false
         type:
           allOf:
             - $ref: '#/components/schemas/DigestType'
@@ -29300,6 +29634,7 @@ components:
             type: string
             description: The applications.
           description: The applications.
+          default: []
         id:
           maxLength: 65535
           minLength: 0
@@ -29315,6 +29650,7 @@ components:
             type: string
             description: The item ids.
           description: The item ids.
+          default: []
         subsystems:
           maxItems: 10000
           minItems: 0
@@ -29324,6 +29660,7 @@ components:
             type: string
             description: The subsystems.
           description: The subsystems.
+          default: []
         version:
           maxLength: 65535
           minLength: 0
@@ -29344,6 +29681,7 @@ components:
           items:
             $ref: '#/components/schemas/ExtensionItemBinary'
           description: The binaries.
+          default: []
         data:
           type: object
           description: Data payload.
@@ -29368,6 +29706,7 @@ components:
         isMandatory:
           type: boolean
           description: The is mandatory.
+          default: false
         name:
           maxLength: 65535
           minLength: 0
@@ -29432,6 +29771,7 @@ components:
           items:
             $ref: '#/components/schemas/ExtensionBinary'
           description: The binaries.
+          default: []
         description:
           maxLength: 65535
           minLength: 0
@@ -29451,9 +29791,11 @@ components:
           items:
             $ref: '#/components/schemas/IntegrationDetail'
           description: The integration details.
+          default: []
         isTesting:
           type: boolean
           description: The is testing.
+          default: false
         items:
           maxItems: 10000
           minItems: 0
@@ -29461,6 +29803,7 @@ components:
           items:
             $ref: '#/components/schemas/ExtensionItem'
           description: List of items.
+          default: []
         labels:
           maxItems: 10000
           minItems: 0
@@ -29470,6 +29813,7 @@ components:
             type: string
             description: List of labels.
           description: List of labels.
+          default: []
         permissionDeniedItems:
           maxItems: 10000
           minItems: 0
@@ -29477,6 +29821,7 @@ components:
           items:
             $ref: '#/components/schemas/ExtensionItem'
           description: The permission denied items.
+          default: []
         version:
           maxLength: 65535
           minLength: 0
@@ -30978,8 +31323,9 @@ components:
       type: object
       properties:
         withAsn:
-          type: boolean
           description: The with asn.
+          type: boolean
+          x-coralogix-presence: true
       description: Geo ip type.
       externalDocs:
         url: ''
@@ -31450,6 +31796,7 @@ components:
             type: string
             description: The integrations.
           description: The integrations.
+          default: []
       description: Filter by integration ids
       externalDocs:
         url: ''
@@ -31464,6 +31811,7 @@ components:
           items:
             $ref: '#/components/schemas/GetAllExtensionsResponse.Extension'
           description: The extensions.
+          default: []
       description: Response to list all extensions
       externalDocs:
         url: ''
@@ -31500,9 +31848,11 @@ components:
             type: string
             description: The integrations.
           description: The integrations.
+          default: []
         isHidden:
           type: boolean
           description: The is hidden.
+          default: false
         keywords:
           maxItems: 10000
           minItems: 0
@@ -31512,6 +31862,7 @@ components:
             type: string
             description: The keywords.
           description: The keywords.
+          default: []
         name:
           maxLength: 65535
           minLength: 0
@@ -31525,6 +31876,7 @@ components:
           items:
             $ref: '#/components/schemas/GetAllExtensionsResponse.Revision'
           description: The revisions.
+          default: []
       externalDocs:
         url: ''
     GetAllExtensionsResponse.Revision:
@@ -31550,6 +31902,7 @@ components:
           items:
             $ref: '#/components/schemas/IntegrationDetail'
           description: The integration details.
+          default: []
         labels:
           maxItems: 10000
           minItems: 0
@@ -31559,6 +31912,7 @@ components:
             type: string
             description: List of labels.
           description: List of labels.
+          default: []
         summary:
           $ref: '#/components/schemas/GetAllExtensionsResponse.RevisionSummary'
         version:
@@ -31576,6 +31930,7 @@ components:
         isNew:
           type: boolean
           description: The is new.
+          default: false
         itemCounts:
           $ref: '#/components/schemas/ItemCounts'
       description: Revision summary.
@@ -31942,16 +32297,17 @@ components:
       type: object
       properties:
         accessPolicy:
-          maxLength: 65536
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
           description: >-
             JSON string representing the access policy for this dashboard.
             Defines granular permissions for users and groups.
           examples:
             - >-
               {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
+          maxLength: 65536
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         authorId:
           maxLength: 128
           minLength: 1
@@ -32046,16 +32402,17 @@ components:
       type: object
       properties:
         accessPolicy:
-          maxLength: 65536
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
           description: >-
             JSON string representing the access policy for this dashboard.
             Defines granular permissions for users and groups.
           examples:
             - >-
               {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
+          maxLength: 65536
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         authorId:
           maxLength: 128
           minLength: 1
@@ -32192,6 +32549,7 @@ components:
           items:
             $ref: '#/components/schemas/DeployedExtension'
           description: The deployed extensions.
+          default: []
       description: Response containing a list of deployed extensions.
       externalDocs:
         url: ''
@@ -32302,14 +32660,16 @@ components:
       type: object
       properties:
         nextPageToken:
+          description: Token for fetching the next page of results.
           minLength: 0
           type: string
-          description: Token for fetching the next page of results.
+          x-coralogix-presence: true
         totalCount:
-          minimum: 0
-          type: integer
           description: The total count.
           format: int64
+          minimum: 0
+          type: integer
+          x-coralogix-presence: true
         users:
           minItems: 0
           type: array
@@ -32766,14 +33126,16 @@ components:
             $ref: '#/components/schemas/TeamGroup'
           description: List of groups.
         nextPageToken:
+          description: Token for fetching the next page of results.
           minLength: 0
           type: string
-          description: Token for fetching the next page of results.
+          x-coralogix-presence: true
         totalCount:
-          minimum: 0
-          type: integer
           description: The total count.
           format: int64
+          minimum: 0
+          type: integer
+          x-coralogix-presence: true
       description: Response containing a paginated list of team groups.
       externalDocs:
         description: Find out more about groups
@@ -32911,8 +33273,9 @@ components:
           type: string
           description: Human-readable description.
         disabled:
-          type: boolean
           description: The disabled.
+          type: boolean
+          x-coralogix-presence: true
         entityLabels:
           type: object
           additionalProperties:
@@ -32923,6 +33286,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/notification_center.EntityType'
           deprecated: true
+          x-coralogix-presence: true
         fallback:
           maxItems: 10
           minItems: 0
@@ -32939,13 +33303,14 @@ components:
             $ref: '#/components/schemas/FallbackTarget'
           description: The fallback targets.
         id:
+          description: Unique identifier.
+          examples:
+            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           maxLength: 128
           minLength: 1
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
-          description: Unique identifier.
-          examples:
-            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          x-coralogix-presence: true
         name:
           maxLength: 200
           minLength: 1
@@ -33127,6 +33492,7 @@ components:
           description: >-
             Unit used to format histogram bucket boundaries when a heatmap axis
             represents cumulative histogram buckets
+          x-coralogix-presence: true
         preset:
           $ref: '#/components/schemas/HeatmapColorPreset'
         scaleType:
@@ -33163,6 +33529,7 @@ components:
           description: >-
             Time format for the X axis (only applicable when X axis contains
             timestamp fields)
+          x-coralogix-presence: true
         yAxisFields:
           maxItems: 1000
           minItems: 0
@@ -34270,6 +34637,7 @@ components:
             - $ref: '#/components/schemas/IbmBucketType'
           examples:
             - '0'
+          x-coralogix-presence: true
         endpoint:
           minLength: 0
           type: string
@@ -34277,11 +34645,12 @@ components:
           examples:
             - http://some.endpoint.com:8081
         serviceCrn:
-          minLength: 0
-          type: string
           description: The service crn.
           examples:
             - service_crn
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
       description: This data structure represents an IBM COS target.
       externalDocs:
         description: Find out more about archives
@@ -34353,14 +34722,15 @@ components:
           examples:
             - https://<...>.okta.com/app/<...>/sso/saml/metadata
         teamEntityId:
-          minimum: 0
-          type: integer
           description: >-
             Coralogix team entity identifier used as the SAML service provider
             entity ID.
-          format: int64
           examples:
             - 1234567
+          format: int64
+          minimum: 0
+          type: integer
+          x-coralogix-presence: true
       description: >-
         This data structure represents a set of SAML identity provider
         parameters
@@ -34501,16 +34871,17 @@ components:
       type: object
       properties:
         evaluationDelayMs:
-          maximum: 1800000
-          minimum: 0
-          type: integer
           description: >-
             The delay in milliseconds before evaluating the recording rule
             expression. Allows late-arriving data to be ingested before
             evaluation.
-          format: int64
           examples:
             - 60000
+          format: int64
+          maximum: 1800000
+          minimum: 0
+          type: integer
+          x-coralogix-presence: true
         expr:
           maxLength: 10000
           minLength: 1
@@ -34543,23 +34914,26 @@ components:
       type: object
       properties:
         id:
+          description: Unique identifier.
           maxLength: 128
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Unique identifier.
+          x-coralogix-presence: true
         interval:
+          description: Interval.
+          format: int64
           maximum: 4294967295
           minimum: 60
           type: integer
-          description: Interval.
-          format: int64
+          x-coralogix-presence: true
         limit:
+          description: Limit.
           maxLength: 20
           minLength: 1
           pattern: ^[0-9]+$
           type: string
-          description: Limit.
+          x-coralogix-presence: true
         name:
           maxLength: 255
           minLength: 1
@@ -34574,11 +34948,12 @@ components:
             $ref: '#/components/schemas/InRule'
           description: List of rules.
         version:
+          description: Version number.
+          format: int64
           maximum: 4294967295
           minimum: 0
           type: integer
-          description: Version number.
-          format: int64
+          x-coralogix-presence: true
       description: A group of recording rules.
       externalDocs:
         description: Find out more about recording rules
@@ -36068,13 +36443,14 @@ components:
         terraform:
           $ref: '#/components/schemas/Terraform'
         upgradeInstructionsMd:
+          description: >-
+            Markdown-formatted upgrade instructions shown when upgrading from a
+            previous revision.
           maxLength: 1048576
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: >-
-            Markdown-formatted upgrade instructions shown when upgrading from a
-            previous revision.
+          x-coralogix-presence: true
       description: This data structure represents an integration revision.
       externalDocs:
         url: ''
@@ -36269,60 +36645,70 @@ components:
           type: integer
           description: List of actions.
           format: int64
+          default: 0
         alerts:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: List of alerts.
           format: int64
+          default: 0
         customDashboards:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: The custom dashboards.
           format: int64
+          default: 0
         enrichments:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: List of enrichments.
           format: int64
+          default: 0
         eventsToMetrics:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: The events to metrics.
           format: int64
+          default: 0
         grafanaDashboards:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: The grafana dashboards.
           format: int64
+          default: 0
         kibanaDashboards:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: The kibana dashboards.
           format: int64
+          default: 0
         metricsRuleGroup:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: The metrics rule group.
           format: int64
+          default: 0
         parsingRules:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: The parsing rules.
           format: int64
+          default: 0
         savedViews:
           maximum: 4294967295
           minimum: 0
           type: integer
           description: The saved views.
           format: int64
+          default: 0
       description: Item counts.
       externalDocs:
         url: ''
@@ -36510,14 +36896,15 @@ components:
       type: object
       properties:
         accessPolicy:
-          minLength: 0
-          type: string
           description: >-
             JSON string representing the access policy for this API key. Defines
             granular permissions for users and groups.
           examples:
             - >-
               {"version":"2025-01-01","default":{"permissions":{"data-ingest-api-keys:ReadAccessPolicy":"grant","data-ingest-api-keys:Manage":"deny","data-ingest-api-keys:UpdateAccessPolicy":"deny","data-ingest-api-keys:ReadConfig":"grant"}},"rules":[]}
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         active:
           type: boolean
           description: Whether this resource is active.
@@ -36546,9 +36933,10 @@ components:
           examples:
             - a_user_id
         value:
+          description: The value.
           minLength: 0
           type: string
-          description: The value.
+          x-coralogix-presence: true
       description: >-
         This data structure represents the information associated with an API
         key.
@@ -36810,6 +37198,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/XAxisTimeFormat'
           description: Time format for the X axis
+          x-coralogix-presence: true
       description: LineChart represents the configuration of a line chart widget.
       externalDocs:
         url: ''
@@ -37982,11 +38371,12 @@ components:
       type: object
       properties:
         dpxlExpression:
+          description: The dpxl expression.
           maxLength: 65535
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: The dpxl expression.
+          x-coralogix-presence: true
         severities:
           maxItems: 6
           minItems: 0
@@ -39308,20 +39698,23 @@ components:
             description: The allowed values.
           description: The allowed values.
         default:
+          description: The default.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: The default.
+          x-coralogix-presence: true
         description:
+          description: Human-readable description.
           maxLength: 4096
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Human-readable description.
+          x-coralogix-presence: true
         disableOverride:
-          type: boolean
           description: The disable override.
+          type: boolean
+          x-coralogix-presence: true
         fieldName:
           maxLength: 256
           minLength: 1
@@ -39881,15 +40274,16 @@ components:
       type: object
       properties:
         coralogixUserId:
-          maxLength: 36
-          minLength: 36
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-          type: string
           description: >-
             If the Microsoft Teams user is linked to a Coralogix user, this
             field contains the Coralogix user ID.
           examples:
             - 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+          type: string
+          x-coralogix-presence: true
         displayName:
           maxLength: 256
           minLength: 1
@@ -39907,13 +40301,14 @@ components:
           examples:
             - 29:1abc123def456
         userEmail:
+          description: Email of the Microsoft Teams user
+          examples:
+            - john.doe@example.com
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Email of the Microsoft Teams user
-          examples:
-            - john.doe@example.com
+          x-coralogix-presence: true
       description: Information about the Microsoft Teams user who initiated the action.
       externalDocs:
         url: ''
@@ -39938,14 +40333,15 @@ components:
           examples:
             - '1616990892312'
         messageUrl:
-          maxLength: 4096
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
           description: Deep link URL to the Microsoft Teams message
           examples:
             - >-
               https://teams.microsoft.com/l/message/19:abcdef@thread.tacv2/1616990892312
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         teamId:
           maxLength: 4096
           minLength: 0
@@ -39963,13 +40359,14 @@ components:
           examples:
             - 72f988bf-86f1-41af-91ab-2d7cd011db47
         userEmail:
+          description: Email of the Microsoft Teams user
+          examples:
+            - john.doe@example.com
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Email of the Microsoft Teams user
-          examples:
-            - john.doe@example.com
+          x-coralogix-presence: true
         userId:
           maxLength: 4096
           minLength: 0
@@ -40401,14 +40798,15 @@ components:
       type: object
       properties:
         autoRetireSeconds:
-          minimum: 60
-          type: integer
           description: >-
             The timeframe in seconds for auto retiring values that were detected
             as no-data. accepts only multiples of 60 seconds
-          format: int32
           examples:
             - 3600
+          format: int32
+          minimum: 60
+          type: integer
+          x-coralogix-presence: true
         state:
           allOf:
             - $ref: '#/components/schemas/NoDataPolicyState'
@@ -40574,11 +40972,12 @@ components:
           examples:
             - NOTIFY_ON_TRIGGERED_AND_RESOLVED
         presetId:
-          minLength: 0
-          type: string
           description: Optional preset ID for the notification destination
           examples:
             - preset_id_example
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         resolvedRouteOverrides:
           allOf:
             - $ref: '#/components/schemas/NotificationRouting'
@@ -40586,14 +40985,15 @@ components:
             Optional routing configuration to override from the connector/preset
             for resolved notifications.
         retriggeringPeriodMinutes:
-          minimum: 0
-          type: integer
           description: >-
             The time in minutes before a new notification is sent for this
             destination
-          format: int64
           examples:
             - 600
+          format: int64
+          minimum: 0
+          type: integer
+          x-coralogix-presence: true
         triggeredRoutingOverrides:
           allOf:
             - $ref: '#/components/schemas/NotificationRouting'
@@ -40639,17 +41039,19 @@ components:
       type: object
       properties:
         id:
-          minLength: 0
-          type: string
           description: The ID of the notification router
           examples:
             - 123e4567-e89b-12d3-a456-426614174000
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         notifyOn:
           allOf:
             - $ref: '#/components/schemas/NotifyOn'
           description: The condition under which the notification should be sent
           examples:
             - NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+          x-coralogix-presence: true
       description: Configuration for routing notifications
       externalDocs:
         url: ''
@@ -40669,14 +41071,15 @@ components:
       type: object
       properties:
         notificationRequestId:
+          description: The notification request ID, as sent to the notifications center.
+          examples:
+            - a1b2c3d4-5678-90ab-cdef-1234567890ab
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           type: string
-          description: The notification request ID, as sent to the notifications center.
-          examples:
-            - a1b2c3d4-5678-90ab-cdef-1234567890ab
+          x-coralogix-presence: true
         notifications:
           maxItems: 1000
           minItems: 0
@@ -40909,11 +41312,12 @@ components:
       type: object
       properties:
         evaluationDelayMs:
+          description: The evaluation delay ms.
+          format: int64
           maximum: 1800000
           minimum: 0
           type: integer
-          description: The evaluation delay ms.
-          format: int64
+          x-coralogix-presence: true
         expr:
           maxLength: 10000
           minLength: 1
@@ -40929,11 +41333,12 @@ components:
             type: string
           description: List of labels.
         lastEvalDurationMs:
+          description: The last eval duration ms.
           maxLength: 20
           minLength: 1
           pattern: ^[0-9]+$
           type: string
-          description: The last eval duration ms.
+          x-coralogix-presence: true
         record:
           maxLength: 4096
           minLength: 1
@@ -40961,23 +41366,26 @@ components:
           type: string
           description: Unique identifier.
         interval:
+          description: Interval.
+          format: int64
           maximum: 4294967295
           minimum: 60
           type: integer
-          description: Interval.
-          format: int64
+          x-coralogix-presence: true
         lastEvalAt:
-          maxLength: 20
-          minLength: 1
-          pattern: ^[0-9]+$
-          type: string
           description: The last eval at.
-        limit:
           maxLength: 20
           minLength: 1
           pattern: ^[0-9]+$
           type: string
+          x-coralogix-presence: true
+        limit:
           description: Limit.
+          maxLength: 20
+          minLength: 1
+          pattern: ^[0-9]+$
+          type: string
+          x-coralogix-presence: true
         name:
           maxLength: 255
           minLength: 1
@@ -41514,15 +41922,16 @@ components:
       type: object
       properties:
         coralogixUserId:
-          maxLength: 36
-          minLength: 36
-          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-          type: string
           description: >-
             If the PagerDuty user is linked to a Coralogix user, this field
             contains the Coralogix user ID.
           examples:
             - 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+          type: string
+          x-coralogix-presence: true
         displayName:
           maxLength: 256
           minLength: 1
@@ -41540,13 +41949,14 @@ components:
           examples:
             - U012AB3CD
         userEmail:
+          description: Email of the PagerDuty user
+          examples:
+            - john.doe@example.com
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Email of the PagerDuty user
-          examples:
-            - john.doe@example.com
+          x-coralogix-presence: true
       description: Information about the PagerDuty user who initiated the action.
       externalDocs:
         url: ''
@@ -42253,13 +42663,14 @@ components:
           examples:
             - ALERTS
         id:
+          description: Unique identifier.
+          examples:
+            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
           maxLength: 128
           minLength: 1
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
-          description: Unique identifier.
-          examples:
-            - a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+          x-coralogix-presence: true
         name:
           maxLength: 200
           minLength: 1
@@ -42269,15 +42680,17 @@ components:
           examples:
             - My Preset
         parentId:
+          description: The parent id.
+          examples:
+            - preset_system_slack_alerts_basic
           maxLength: 128
           minLength: 1
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
-          description: The parent id.
-          examples:
-            - preset_system_slack_alerts_basic
+          x-coralogix-presence: true
         presetType:
           $ref: '#/components/schemas/PresetType'
+          x-coralogix-presence: true
         updateTime:
           minLength: 0
           type: string
@@ -42358,13 +42771,14 @@ components:
           examples:
             - My Preset
         parentId:
+          description: The parent id.
+          examples:
+            - c246e826-10c2-405e-8d3f-afcc24ad4d15
           maxLength: 128
           minLength: 1
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
-          description: The parent id.
-          examples:
-            - c246e826-10c2-405e-8d3f-afcc24ad4d15
+          x-coralogix-presence: true
         presetType:
           $ref: '#/components/schemas/PresetType'
         updateTime:
@@ -42451,6 +42865,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CasePriority'
           description: Optional override set by user
+          x-coralogix-presence: true
         system:
           allOf:
             - $ref: '#/components/schemas/CasePriority'
@@ -44103,9 +44518,10 @@ components:
             every N days, weeks, or months).
           format: int32
         terminationDate:
+          description: ISO 8601 date after which the recurring rule stops being applied.
           minLength: 0
           type: string
-          description: ISO 8601 date after which the recurring rule stops being applied.
+          x-coralogix-presence: true
         timeframe:
           $ref: '#/components/schemas/Timeframe'
         weekly:
@@ -44259,11 +44675,12 @@ components:
             - $ref: '#/components/schemas/AgentSelectorRequest'
           description: Flat agent attributes that match agents for this configuration.
         name:
+          description: Remote configuration name.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Remote configuration name.
+          x-coralogix-presence: true
         rawConfiguration:
           maxLength: 1048576
           minLength: 1
@@ -44283,11 +44700,12 @@ components:
             - $ref: '#/components/schemas/AgentSelectorRequest'
           description: Flat agent attributes that match agents for this configuration.
         name:
+          description: Remote configuration name.
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
-          description: Remote configuration name.
+          x-coralogix-presence: true
         rawConfiguration:
           maxLength: 1048576
           minLength: 1
@@ -44571,9 +44989,10 @@ components:
       type: object
       properties:
         silenceDataValidations:
-          type: boolean
-          description: Whether to silence data validations.
           deprecated: true
+          description: Whether to silence data validations.
+          type: boolean
+          x-coralogix-presence: true
         slo:
           $ref: '#/components/schemas/Slo'
       description: Request to replace an existing SLO.
@@ -44614,13 +45033,14 @@ components:
       type: object
       properties:
         reason:
+          description: Resolution reason
+          examples:
+            - Case was not applicable.
           maxLength: 4096
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Resolution reason
-          examples:
-            - Case was not applicable.
+          x-coralogix-presence: true
         resolveTime:
           maxLength: 30
           minLength: 20
@@ -44641,13 +45061,14 @@ components:
       type: object
       properties:
         from:
+          description: >-
+            Previous resolution reason. Leading and trailing whitespace is
+            trimmed before the length limits are applied.
           maxLength: 500
           minLength: 1
           pattern: ^[\s\S]*\S[\s\S]*$
           type: string
-          description: >-
-            Previous resolution reason. Leading and trailing whitespace is
-            trimmed before the length limits are applied.
+          x-coralogix-presence: true
         to:
           maxLength: 500
           minLength: 1
@@ -44740,9 +45161,10 @@ components:
             type: string
           description: List of details.
         message:
+          description: Human-readable message.
           minLength: 0
           type: string
-          description: Human-readable message.
+          x-coralogix-presence: true
         statusCode:
           $ref: '#/components/schemas/Code'
       description: Status of the response, including error code and message.
@@ -44973,23 +45395,26 @@ components:
       type: object
       properties:
         environment:
-          maxLength: 256
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
           description: The environment.
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         service:
-          maxLength: 256
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
           description: Service name.
-        team:
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
+          x-coralogix-presence: true
+        team:
           description: Team.
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
       description: Allows to configure routing labels which are used for routers resolution
       externalDocs:
         description: Find out more how label based routers work
@@ -45018,12 +45443,14 @@ components:
             - $ref: '#/components/schemas/notification_center.EntityType'
           examples:
             - ALERTS
+          x-coralogix-presence: true
         name:
+          description: Display name.
           maxLength: 200
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Display name.
+          x-coralogix-presence: true
         targets:
           maxItems: 10
           minItems: 0
@@ -45053,19 +45480,21 @@ components:
             type: string
           description: The custom details.
         id:
+          description: Unique identifier.
+          examples:
+            - d4b56246-64bb-4714-a8bd-97c999f1d801
           maxLength: 36
           minLength: 36
           pattern: ^[\s\S]*$
           type: string
-          description: Unique identifier.
-          examples:
-            - d4b56246-64bb-4714-a8bd-97c999f1d801
+          x-coralogix-presence: true
         presetId:
+          description: The preset id.
           maxLength: 128
           minLength: 1
           pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
           type: string
-          description: The preset id.
+          x-coralogix-presence: true
       description: Defines routing target for notifications
       externalDocs:
         description: Find out more about notification center
@@ -45492,23 +45921,26 @@ components:
           examples:
             - bucket
         externalId:
-          minLength: 0
-          type: string
           description: External identifier.
           examples:
             - f47ac10b-58cc-4372-a567-0e02b2c3d479
-        region:
           minLength: 0
           type: string
+          x-coralogix-presence: true
+        region:
           description: Region.
           examples:
             - us-west-2
-        roleArn:
           minLength: 0
           type: string
+          x-coralogix-presence: true
+        roleArn:
           description: The role arn.
           examples:
             - arn:aws:iam::123456789012:role/CoralogixArchive
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
       description: This data structure represents an S3 target.
       externalDocs:
         description: Find out more about archives
@@ -45716,12 +46148,13 @@ components:
       type: object
       properties:
         nextPageToken:
-          minimum: 0
-          type: integer
           description: >-
             Token for the next page of results. Empty if no more pages
             available.
           format: int64
+          minimum: 0
+          type: integer
+          x-coralogix-presence: true
         totalCount:
           minimum: 0
           type: integer
@@ -45895,16 +46328,17 @@ components:
       type: object
       properties:
         coralogixUserId:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-          type: string
           description: >-
             If the Service Now user is linked to a Coralogix user, this field
             contains the Coralogix user ID.
           examples:
             - 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+          x-coralogix-presence: true
         id:
           maxLength: 256
           minLength: 1
@@ -45914,13 +46348,14 @@ components:
           examples:
             - 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
         userEmail:
+          description: Mail of the user
+          examples:
+            - example@coralogix.com
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Mail of the user
-          examples:
-            - example@coralogix.com
+          x-coralogix-presence: true
         username:
           maxLength: 256
           minLength: 1
@@ -46077,16 +46512,17 @@ components:
       type: object
       properties:
         coralogixUserId:
-          maxLength: 36
-          minLength: 36
-          pattern: >-
-            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-          type: string
           description: >-
             If the Slack user is linked to a Coralogix user, this field contains
             the Coralogix user ID.
           examples:
             - 3af152ee-9eaf-4803-87f1-23c5fb2fbaa0
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          type: string
+          x-coralogix-presence: true
         displayName:
           maxLength: 256
           minLength: 1
@@ -46104,13 +46540,14 @@ components:
           examples:
             - U012AB3CD
         userEmail:
+          description: Email of the Slack user
+          examples:
+            - john.doe@example.com
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Email of the Slack user
-          examples:
-            - john.doe@example.com
+          x-coralogix-presence: true
       description: Information about the Slack user who initiated the action.
       externalDocs:
         url: ''
@@ -46135,13 +46572,14 @@ components:
           examples:
             - '1234567890.123456'
         userEmail:
+          description: Email of the Slack user
+          examples:
+            - john.doe@example.com
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Email of the Slack user
-          examples:
-            - john.doe@example.com
+          x-coralogix-presence: true
         userId:
           maxLength: 256
           minLength: 1
@@ -46220,25 +46658,28 @@ components:
           description: RFC3339 timestamp of when the SLO was created.
           format: date-time
         creator:
-          minLength: 0
-          type: string
           description: Email or identifier of the user who created the SLO.
           examples:
             - test@domain.com
-        description:
           minLength: 0
           type: string
+          x-coralogix-presence: true
+        description:
           description: Human-readable description of the SLO.
           examples:
             - A brief description of my SLO
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         grouping:
           $ref: '#/components/schemas/v1.Grouping'
         id:
-          minLength: 0
-          type: string
           description: Unique identifier of the SLO.
           examples:
             - b11919d5-ef85-4bb1-8655-02640dbe94d9
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         labels:
           type: object
           additionalProperties:
@@ -46265,6 +46706,7 @@ components:
             UNSPECIFIED for manual/custom SLOs
           examples:
             - SLO_PRODUCT_TYPE_APM
+          x-coralogix-presence: true
         requestBasedMetricSli:
           $ref: '#/components/schemas/RequestBasedMetricSli'
         revision:
@@ -46276,6 +46718,7 @@ components:
             - $ref: '#/components/schemas/SloType'
           examples:
             - SLO_TYPE_REQUEST
+          x-coralogix-presence: true
         targetThresholdPercentage:
           type: number
           description: >-
@@ -46285,12 +46728,13 @@ components:
           examples:
             - 99.999
         type:
-          minLength: 0
-          type: string
+          deprecated: true
           description: 'Deprecated: SLO type string. Use slo_type instead.'
           examples:
             - request
-          deprecated: true
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         updateTime:
           minLength: 0
           type: string
@@ -46309,9 +46753,10 @@ components:
           type: string
           description: The alert version id.
         errorMessage:
+          description: The error message.
           minLength: 0
           type: string
-          description: The error message.
+          x-coralogix-presence: true
         id:
           minLength: 0
           type: string
@@ -46731,11 +47176,12 @@ components:
         actionRule:
           $ref: '#/components/schemas/quota.v1.Rule'
         dpxlExpression:
+          description: The dpxl expression.
           maxLength: 65535
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: The dpxl expression.
+          x-coralogix-presence: true
         serviceRule:
           $ref: '#/components/schemas/quota.v1.Rule'
         tagRules:
@@ -47679,13 +48125,15 @@ components:
           description: Creation timestamp.
           format: date-time
         description:
-          minLength: 0
-          type: string
           description: Group description
-        externalId:
           minLength: 0
           type: string
+          x-coralogix-presence: true
+        externalId:
           description: Group external identifier. Applies if team is externally defined.
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         groupId:
           minimum: 0
           type: integer
@@ -48052,11 +48500,12 @@ components:
           type: string
           description: Human-readable message.
         statusCode:
+          description: The status code.
+          format: int64
           maximum: 599
           minimum: 100
           type: integer
-          description: The status code.
-          format: int64
+          x-coralogix-presence: true
       description: Failure.
       externalDocs:
         url: ''
@@ -48590,6 +49039,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/XAxisTimeFormat'
           description: Time format for the X axis
+          x-coralogix-presence: true
         yAxisMax:
           type: number
           description: Number indicating the upper band for y axis
@@ -48709,6 +49159,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/XAxisTimeFormat'
           description: Time format for the X axis
+          x-coralogix-presence: true
         yAxisMax:
           type: number
           description: Number indicating the upper band for y axis
@@ -48765,6 +49216,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/XAxisTimeFormat'
           description: Time format for the X axis
+          x-coralogix-presence: true
       description: Time series lines multi.
       externalDocs:
         url: ''
@@ -48816,16 +49268,17 @@ components:
           type: string
           description: Start time.
         submittedStartTime:
-          maxLength: 64
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
           description: >-
             The start time as submitted in the request, before the service
             normalized it to the next valid occurrence. Populated only in create
             and update responses; ignored in requests and omitted from read
             responses.
+          maxLength: 64
+          minLength: 0
+          pattern: ^[\s\S]*$
           readOnly: true
+          type: string
+          x-coralogix-presence: true
         timezone:
           minLength: 0
           type: string
@@ -49314,6 +49767,7 @@ components:
           items:
             $ref: '#/components/schemas/FailedItem'
           description: The failed items.
+          default: []
       description: Response returned after successfully undeploying an extension.
       externalDocs:
         url: ''
@@ -49639,14 +50093,15 @@ components:
           description: User account ID of the user to update
           format: int64
         userId:
-          maxLength: 255
-          minLength: 1
-          pattern: ^[\s\S]+$
-          type: string
           description: >-
             Stable id of the user to update, as an alternative to
             `userAccountId`. Mutually exclusive with `userAccountId`: exactly
             one must be set.
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          x-coralogix-presence: true
         userTemplate:
           allOf:
             - $ref: '#/components/schemas/UserTemplate'
@@ -51629,25 +52084,27 @@ components:
           examples:
             - my-team
         teamUrl:
-          maxLength: 2048
-          minLength: 1
-          pattern: ^https://[^\s/?#]+[^\s]*$
-          type: string
           description: >-
             Full web-app URL of the team. Absent when the team has no URL slug
             configured.
           examples:
             - https://my-team.app.coralogix.com
-        username:
-          maxLength: 320
+          maxLength: 2048
           minLength: 1
-          pattern: ^[\s\S]*$
+          pattern: ^https://[^\s/?#]+[^\s]*$
           type: string
+          x-coralogix-presence: true
+        username:
           description: >-
             Username of the authenticated user. Absent when authenticating with
             an API key, which carries no user identity.
           examples:
             - jane.doe@example.com
+          maxLength: 320
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
       description: >-
         The team, and where available the user, that the presented credentials
         authenticate as.
@@ -52124,30 +52581,33 @@ components:
       type: object
       properties:
         pageSize:
+          description: Number of items to return per page
+          examples:
+            - 10
+          format: int64
           maximum: 1000
           minimum: 1
           type: integer
-          description: Number of items to return per page
-          format: int64
-          examples:
-            - 10
+          x-coralogix-presence: true
         pageToken:
-          maxLength: 4096
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
           description: Token for the next page of results
           examples:
             - >-
               MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA==
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         skip:
+          description: Number of items to skip before starting to collect results
+          examples:
+            - 20
+          format: int64
           maximum: 1000000
           minimum: 0
           type: integer
-          description: Number of items to skip before starting to collect results
-          format: int64
-          examples:
-            - 20
+          x-coralogix-presence: true
       description: Pagination parameters for list requests.
       externalDocs:
         url: ''
@@ -52156,14 +52616,15 @@ components:
       type: object
       properties:
         nextPageToken:
-          maxLength: 4096
-          minLength: 1
-          pattern: ^[\s\S]*$
-          type: string
           description: Token for the next page of results
           examples:
             - >-
               MjAyNS0wOS0yM1QxMjoxMTo0MC43ODcwODVaLDY5YmIxYmFiLWE1NzAtNGU5Ny04MzE2LWFkYzQxYjk2Y2QyNA==
+          maxLength: 4096
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
       description: Pagination information for list responses.
       externalDocs:
         url: ''
@@ -52452,17 +52913,19 @@ components:
       type: object
       properties:
         id:
+          description: Unique identifier.
           minLength: 0
           type: string
-          description: Unique identifier.
+          x-coralogix-presence: true
         key:
           minLength: 0
           type: string
           description: The key.
         value:
+          description: The value.
           minLength: 0
           type: string
-          description: The value.
+          x-coralogix-presence: true
       description: Meta label.
       externalDocs:
         url: ''
@@ -52740,6 +53203,7 @@ components:
           items:
             $ref: '#/components/schemas/ChangelogEntry'
           description: The changelog.
+          default: []
         darkModeImage:
           maxLength: 65535
           minLength: 0
@@ -52769,9 +53233,11 @@ components:
             type: string
             description: The integrations.
           description: The integrations.
+          default: []
         isHidden:
           type: boolean
           description: The is hidden.
+          default: false
         keywords:
           maxItems: 10000
           minItems: 0
@@ -52781,6 +53247,7 @@ components:
             type: string
             description: The keywords.
           description: The keywords.
+          default: []
         name:
           maxLength: 65535
           minLength: 0
@@ -52794,6 +53261,7 @@ components:
           items:
             $ref: '#/components/schemas/ExtensionRevision'
           description: The permission denied revisions.
+          default: []
         revisions:
           maxItems: 10000
           minItems: 0
@@ -52801,6 +53269,7 @@ components:
           items:
             $ref: '#/components/schemas/ExtensionRevision'
           description: The revisions.
+          default: []
       description: Represents a Coralogix extension package containing pre-built resources.
       externalDocs:
         url: ''
@@ -53035,11 +53504,12 @@ components:
           examples:
             - <v1>true
         description:
-          minLength: 0
-          type: string
           description: Human-readable description.
           examples:
             - The best scope
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
         displayName:
           minLength: 0
           type: string
@@ -53107,6 +53577,7 @@ components:
           description: The base priority for the target.
           examples:
             - PRIORITY_TYPE_MEDIUM
+          x-coralogix-presence: true
         priorityOverride:
           allOf:
             - $ref: '#/components/schemas/PriorityOverride'
@@ -53182,17 +53653,19 @@ components:
             The creating user's username. Set by the server; ignored on
             requests.
         description:
-          maxLength: 65535
-          minLength: 0
-          pattern: ^[\s\S]*$
-          type: string
           description: Human-readable description.
-        dpxlFilter:
           maxLength: 65535
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
+          x-coralogix-presence: true
+        dpxlFilter:
           description: The dpxl filter.
+          maxLength: 65535
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
         id:
           maxLength: 36
           minLength: 36
@@ -53788,6 +54261,7 @@ components:
             detected
           examples:
             - AUTO_RETIRE_TIMEFRAME_HOURS_24
+          x-coralogix-presence: true
         triggerUndetectedValues:
           type: boolean
           description: Should trigger the alert when undetected values are detected

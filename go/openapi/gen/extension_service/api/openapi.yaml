@@ -19,6 +19,7 @@
                     "$ref": "#/components/schemas/GetAllExtensionsRequest.Filter"
                   },
                   "includeHiddenExtensions": {
+                    "default": false,
                     "description": "Whether to include hidden extensions that are not publicly listed in the catalog.",
                     "type": "boolean"
                   }
@@ -104,6 +105,7 @@
             "name": "include_dashboard_binaries",
             "required": false,
             "schema": {
+              "default": false,
               "description": "Whether to include dashboard binaries in the response.",
               "type": "boolean"
             }
@@ -114,6 +116,7 @@
             "name": "include_testing_revision",
             "required": false,
             "schema": {
+              "default": false,
               "description": "Whether to include testing revisions in the response.",
               "type": "boolean"
             }
@@ -216,7 +219,8 @@
               "type": "string",
               "description": "The replacement extensions."
             },
-            "description": "The replacement extensions."
+            "description": "The replacement extensions.",
+            "default": []
           }
         },
         "description": "Deprecation.",
@@ -281,7 +285,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItemBinary"
             },
-            "description": "The binaries."
+            "description": "The binaries.",
+            "default": []
           },
           "data": {
             "type": "object",
@@ -310,7 +315,8 @@
           },
           "isMandatory": {
             "type": "boolean",
-            "description": "The is mandatory."
+            "description": "The is mandatory.",
+            "default": false
           },
           "name": {
             "maxLength": 65535,
@@ -392,7 +398,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionBinary"
             },
-            "description": "The binaries."
+            "description": "The binaries.",
+            "default": []
           },
           "description": {
             "maxLength": 65535,
@@ -415,11 +422,13 @@
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             },
-            "description": "The integration details."
+            "description": "The integration details.",
+            "default": []
           },
           "isTesting": {
             "type": "boolean",
-            "description": "The is testing."
+            "description": "The is testing.",
+            "default": false
           },
           "items": {
             "maxItems": 10000,
@@ -428,7 +437,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "description": "List of items."
+            "description": "List of items.",
+            "default": []
           },
           "labels": {
             "maxItems": 10000,
@@ -439,7 +449,8 @@
               "type": "string",
               "description": "List of labels."
             },
-            "description": "List of labels."
+            "description": "List of labels.",
+            "default": []
           },
           "permissionDeniedItems": {
             "maxItems": 10000,
@@ -448,7 +459,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionItem"
             },
-            "description": "The permission denied items."
+            "description": "The permission denied items.",
+            "default": []
           },
           "version": {
             "maxLength": 65535,
@@ -550,7 +562,8 @@
               "type": "string",
               "description": "The integrations."
             },
-            "description": "The integrations."
+            "description": "The integrations.",
+            "default": []
           }
         },
         "description": "Filter by integration ids",
@@ -569,7 +582,8 @@
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Extension"
             },
-            "description": "The extensions."
+            "description": "The extensions.",
+            "default": []
           }
         },
         "description": "Response to list all extensions",
@@ -614,11 +628,13 @@
               "type": "string",
               "description": "The integrations."
             },
-            "description": "The integrations."
+            "description": "The integrations.",
+            "default": []
           },
           "isHidden": {
             "type": "boolean",
-            "description": "The is hidden."
+            "description": "The is hidden.",
+            "default": false
           },
           "keywords": {
             "maxItems": 10000,
@@ -629,7 +645,8 @@
               "type": "string",
               "description": "The keywords."
             },
-            "description": "The keywords."
+            "description": "The keywords.",
+            "default": []
           },
           "name": {
             "maxLength": 65535,
@@ -645,7 +662,8 @@
             "items": {
               "$ref": "#/components/schemas/GetAllExtensionsResponse.Revision"
             },
-            "description": "The revisions."
+            "description": "The revisions.",
+            "default": []
           }
         },
         "externalDocs": {
@@ -677,7 +695,8 @@
             "items": {
               "$ref": "#/components/schemas/IntegrationDetail"
             },
-            "description": "The integration details."
+            "description": "The integration details.",
+            "default": []
           },
           "labels": {
             "maxItems": 10000,
@@ -688,7 +707,8 @@
               "type": "string",
               "description": "List of labels."
             },
-            "description": "List of labels."
+            "description": "List of labels.",
+            "default": []
           },
           "summary": {
             "$ref": "#/components/schemas/GetAllExtensionsResponse.RevisionSummary"
@@ -711,7 +731,8 @@
         "properties": {
           "isNew": {
             "type": "boolean",
-            "description": "The is new."
+            "description": "The is new.",
+            "default": false
           },
           "itemCounts": {
             "$ref": "#/components/schemas/ItemCounts"
@@ -754,70 +775,80 @@
             "minimum": 0,
             "type": "integer",
             "description": "List of actions.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "alerts": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "List of alerts.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "customDashboards": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The custom dashboards.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "enrichments": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "List of enrichments.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "eventsToMetrics": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The events to metrics.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "grafanaDashboards": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The grafana dashboards.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "kibanaDashboards": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The kibana dashboards.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "metricsRuleGroup": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The metrics rule group.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "parsingRules": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The parsing rules.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           },
           "savedViews": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
             "description": "The saved views.",
-            "format": "int64"
+            "format": "int64",
+            "default": 0
           }
         },
         "description": "Item counts.",
@@ -897,7 +928,8 @@
             "items": {
               "$ref": "#/components/schemas/ChangelogEntry"
             },
-            "description": "The changelog."
+            "description": "The changelog.",
+            "default": []
           },
           "darkModeImage": {
             "maxLength": 65535,
@@ -932,11 +964,13 @@
               "type": "string",
               "description": "The integrations."
             },
-            "description": "The integrations."
+            "description": "The integrations.",
+            "default": []
           },
           "isHidden": {
             "type": "boolean",
-            "description": "The is hidden."
+            "description": "The is hidden.",
+            "default": false
           },
           "keywords": {
             "maxItems": 10000,
@@ -947,7 +981,8 @@
               "type": "string",
               "description": "The keywords."
             },
-            "description": "The keywords."
+            "description": "The keywords.",
+            "default": []
           },
           "name": {
             "maxLength": 65535,
@@ -963,7 +998,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "description": "The permission denied revisions."
+            "description": "The permission denied revisions.",
+            "default": []
           },
           "revisions": {
             "maxItems": 10000,
@@ -972,7 +1008,8 @@
             "items": {
               "$ref": "#/components/schemas/ExtensionRevision"
             },
-            "description": "The revisions."
+            "description": "The revisions.",
+            "default": []
           }
         },
         "description": "Represents a Coralogix extension package containing pre-built resources.",

@@ -28,6 +28,8 @@ type AlertDefProperties struct {
 	AnalyticsImmediate *AnalyticsImmediateType `json:"analyticsImmediate,omitempty"`
 	// Configuration for analytics threshold alerts
 	AnalyticsThreshold *AnalyticsThresholdType `json:"analyticsThreshold,omitempty"`
+	// Settings controlling how the alert interacts with cases. When omitted on create, defaults apply (case auto-resolve enabled, no enrichment queries, no case destinations). Replace is a full overwrite: omitting this field on replace resets any previously configured case settings to those defaults. In read responses, this field is absent when no case settings were configured, meaning those same defaults are in effect.
+	CaseSettings *AlertDefCaseSettings `json:"caseSettings,omitempty"`
 	// The sources from which to sample logs
 	DataSources []AlertDefDataSource `json:"dataSources,omitempty"`
 	// Whether the alert has been marked as deleted
@@ -197,6 +199,38 @@ func (o *AlertDefProperties) HasAnalyticsThreshold() bool {
 // SetAnalyticsThreshold gets a reference to the given AnalyticsThresholdType and assigns it to the AnalyticsThreshold field.
 func (o *AlertDefProperties) SetAnalyticsThreshold(v AnalyticsThresholdType) {
 	o.AnalyticsThreshold = &v
+}
+
+// GetCaseSettings returns the CaseSettings field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetCaseSettings() AlertDefCaseSettings {
+	if o == nil || IsNil(o.CaseSettings) {
+		var ret AlertDefCaseSettings
+		return ret
+	}
+	return *o.CaseSettings
+}
+
+// GetCaseSettingsOk returns a tuple with the CaseSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefProperties) GetCaseSettingsOk() (*AlertDefCaseSettings, bool) {
+	if o == nil || IsNil(o.CaseSettings) {
+		return nil, false
+	}
+	return o.CaseSettings, true
+}
+
+// HasCaseSettings returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasCaseSettings() bool {
+	if o != nil && !IsNil(o.CaseSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetCaseSettings gets a reference to the given AlertDefCaseSettings and assigns it to the CaseSettings field.
+func (o *AlertDefProperties) SetCaseSettings(v AlertDefCaseSettings) {
+	o.CaseSettings = &v
 }
 
 // GetDataSources returns the DataSources field value if set, zero value otherwise.
@@ -1050,6 +1084,9 @@ func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AnalyticsThreshold) {
 		toSerialize["analyticsThreshold"] = o.AnalyticsThreshold
 	}
+	if !IsNil(o.CaseSettings) {
+		toSerialize["caseSettings"] = o.CaseSettings
+	}
 	if !IsNil(o.DataSources) {
 		toSerialize["dataSources"] = o.DataSources
 	}
@@ -1299,6 +1336,7 @@ func (o *AlertDefProperties) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "activeOn")
 		delete(additionalProperties, "analyticsImmediate")
 		delete(additionalProperties, "analyticsThreshold")
+		delete(additionalProperties, "caseSettings")
 		delete(additionalProperties, "dataSources")
 		delete(additionalProperties, "deleted")
 		delete(additionalProperties, "description")

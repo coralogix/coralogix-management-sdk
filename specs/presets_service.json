@@ -386,7 +386,8 @@
                   "$ref": "#/components/schemas/notification_center.ConnectorType"
                 }
               ],
-              "description": "Filter preset summaries by their connector type."
+              "description": "Filter preset summaries by their connector type.",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -403,7 +404,8 @@
               "description": "Filter preset summaries by their entity type.",
               "examples": [
                 "ALERTS"
-              ]
+              ],
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -496,11 +498,12 @@
             "$ref": "#/components/schemas/MessageConfig"
           },
           "payloadType": {
+            "description": "Connector payload schema type.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Connector payload schema type."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -759,14 +762,15 @@
             ]
           },
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
+            ],
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
-            ]
+            "x-coralogix-presence": true
           },
           "name": {
             "maxLength": 200,
@@ -779,17 +783,19 @@
             ]
           },
           "parentId": {
+            "description": "The parent id.",
+            "examples": [
+              "preset_system_slack_alerts_basic"
+            ],
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
             "type": "string",
-            "description": "The parent id.",
-            "examples": [
-              "preset_system_slack_alerts_basic"
-            ]
+            "x-coralogix-presence": true
           },
           "presetType": {
-            "$ref": "#/components/schemas/PresetType"
+            "$ref": "#/components/schemas/PresetType",
+            "x-coralogix-presence": true
           },
           "updateTime": {
             "minLength": 0,
@@ -861,14 +867,15 @@
             ]
           },
           "parentId": {
+            "description": "The parent id.",
+            "examples": [
+              "c246e826-10c2-405e-8d3f-afcc24ad4d15"
+            ],
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
             "type": "string",
-            "description": "The parent id.",
-            "examples": [
-              "c246e826-10c2-405e-8d3f-afcc24ad4d15"
-            ]
+            "x-coralogix-presence": true
           },
           "presetType": {
             "$ref": "#/components/schemas/PresetType"
