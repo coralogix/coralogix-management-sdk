@@ -1,0 +1,1408 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/fleet-management/configuration-overlays/v1": {
+      "get": {
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ],
+        "summary": "List configuration overlays",
+        "description": "Lists configuration overlays, newest first. Archived overlays and versions are excluded unless include_archived is true.",
+        "operationId": "ConfigurationOverlayService_ListConfigurationOverlays",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "include_archived",
+            "description": "When true, include archived overlays and archived versions.",
+            "schema": {
+              "description": "When true, include archived overlays and archived versions.",
+              "type": "boolean"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "page_size",
+            "description": "Maximum number of overlays to return. Defaults to 100 and cannot exceed 256.",
+            "schema": {
+              "description": "Maximum number of overlays to return. Defaults to 100 and cannot exceed 256.",
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 256
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "page_token",
+            "description": "Opaque token returned by a previous list response.",
+            "schema": {
+              "description": "Opaque token returned by a previous list response.",
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "minLength": 1,
+              "maxLength": 64
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListConfigurationOverlaysResponse"
+                },
+                "example": {
+                  "overlays": [
+                    {
+                      "active": true,
+                      "archived": false,
+                      "description": "Raises the Collector log level for selected remote configurations.",
+                      "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                      "name": "Debug logging overlay",
+                      "priorityOrder": 100,
+                      "tags": [
+                        "production"
+                      ],
+                      "versions": [
+                        {
+                          "active": true,
+                          "archived": false,
+                          "createdAt": "2026-09-28T10:05:00Z",
+                          "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                          "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                          "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                          "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                          "targets": [
+                            {
+                              "createdAt": "2026-09-28T10:05:00Z",
+                              "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3003",
+                              "overlayConfigurationFamilyId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1011",
+                              "overlayRemoteConfigurationId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1012",
+                              "sourceConfigurationFamilyId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60",
+                              "sourceRemoteConfigurationId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61",
+                              "updatedAt": "2026-09-28T10:05:00Z"
+                            }
+                          ],
+                          "updatedAt": "2026-09-28T10:05:00Z",
+                          "version": "2"
+                        },
+                        {
+                          "active": false,
+                          "archived": false,
+                          "createdAt": "2026-09-28T10:00:00Z",
+                          "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                          "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                          "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                          "updatedAt": "2026-09-28T10:00:00Z",
+                          "version": "1"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ],
+        "summary": "Create configuration overlay",
+        "description": "Creates a raw YAML configuration overlay. Its first version is inactive unless active is true. Names must be unique among unarchived overlays.",
+        "operationId": "ConfigurationOverlayService_CreateConfigurationOverlay",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a raw YAML configuration overlay.",
+                "type": "object",
+                "properties": {
+                  "overlay": {
+                    "description": "Configuration overlay to create.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ConfigurationOverlayCreate"
+                      }
+                    ]
+                  },
+                  "targets": {
+                    "description": "Remote configurations the overlay applies to, as a set: duplicates are rejected. A version needs at least one target to be activated.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ConfigurationOverlayTargetCreate"
+                    },
+                    "minItems": 0,
+                    "maxItems": 256,
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "overlay"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateConfigurationOverlayResponse"
+                },
+                "example": {
+                  "overlay": {
+                    "active": false,
+                    "archived": false,
+                    "description": "Raises the Collector log level for selected remote configurations.",
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Debug logging overlay",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ],
+                    "versions": [
+                      {
+                        "active": false,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:00:00Z",
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "updatedAt": "2026-09-28T10:00:00Z",
+                        "version": "1"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Configuration overlay name already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fleet-management/configuration-overlays/v1/versions/{id}/archive": {
+      "post": {
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ],
+        "summary": "Archive configuration overlay version",
+        "description": "Archives the addressed version. Returns 400 while a version of the overlay is active. Archiving the last unarchived version also archives the overlay.",
+        "operationId": "ConfigurationOverlayService_ArchiveConfigurationOverlayVersion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "Configuration overlay version UUID v7.",
+            "required": true,
+            "schema": {
+              "description": "Configuration overlay version UUID v7.",
+              "type": "string",
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+              "minLength": 36,
+              "maxLength": 36
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchiveConfigurationOverlayVersionResponse"
+                },
+                "example": {
+                  "id": "01975ed4-9c1a-7b3f-8d4e-426614174001"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration overlay version not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fleet-management/configuration-overlays/v1/{id}": {
+      "get": {
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ],
+        "summary": "Get configuration overlay",
+        "description": "Gets a fleet-manager configuration overlay by ID.",
+        "operationId": "ConfigurationOverlayService_GetConfigurationOverlay",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "include_archived",
+            "description": "When true, return an archived overlay and include archived versions. Otherwise an archived overlay returns 404.",
+            "schema": {
+              "description": "When true, return an archived overlay and include archived versions. Otherwise an archived overlay returns 404.",
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigurationOverlayResponse"
+                },
+                "example": {
+                  "overlay": {
+                    "active": true,
+                    "archived": false,
+                    "description": "Raises the Collector log level for selected remote configurations.",
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Debug logging overlay",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ],
+                    "versions": [
+                      {
+                        "active": true,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:05:00Z",
+                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "targets": [
+                          {
+                            "createdAt": "2026-09-28T10:05:00Z",
+                            "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3003",
+                            "overlayConfigurationFamilyId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1011",
+                            "overlayRemoteConfigurationId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1012",
+                            "sourceConfigurationFamilyId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60",
+                            "sourceRemoteConfigurationId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61",
+                            "updatedAt": "2026-09-28T10:05:00Z"
+                          }
+                        ],
+                        "updatedAt": "2026-09-28T10:05:00Z",
+                        "version": "2"
+                      },
+                      {
+                        "active": false,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:00:00Z",
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "updatedAt": "2026-09-28T10:00:00Z",
+                        "version": "1"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration overlay not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ],
+        "summary": "Update configuration overlay",
+        "description": "Updates the supplied fields; omitted fields are unchanged. Payload, parentVersionId, or target changes create a new version. Set active to activate or deactivate the latest version. Returns 400 for an archived overlay.",
+        "operationId": "ConfigurationOverlayService_UpdateConfigurationOverlay",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to update a configuration overlay.",
+                "type": "object",
+                "properties": {
+                  "overlay": {
+                    "externalDocs": {
+                      "url": ""
+                    },
+                    "description": "Fields used to update a configuration overlay. Omitted fields are unchanged.",
+                    "type": "object",
+                    "properties": {
+                      "active": {
+                        "description": "When true, activates the latest version after the update; when false, deactivates it. Omit to keep the current state. Activating without targets returns 400.",
+                        "type": "boolean"
+                      },
+                      "description": {
+                        "description": "Human-readable description. Omit to keep it; send an empty string to clear it.",
+                        "type": "string",
+                        "pattern": "^[\\s\\S]*$",
+                        "minLength": 0,
+                        "maxLength": 4096
+                      },
+                      "name": {
+                        "description": "Display name, unique among unarchived overlays. Omit to keep it; send an empty string to clear it.",
+                        "type": "string",
+                        "pattern": "^[\\s\\S]*$",
+                        "minLength": 0,
+                        "maxLength": 256
+                      },
+                      "parentVersionId": {
+                        "description": "Records the parent of the new version. Creates a new version but does not copy content from the parent.",
+                        "type": "string",
+                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                        "minLength": 36,
+                        "maxLength": 36
+                      },
+                      "priorityOrder": {
+                        "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+                        "type": "integer",
+                        "format": "int32",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647
+                      },
+                      "rawOverlayConfiguration": {
+                        "description": "Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension. Rejected for preset overlays.",
+                        "type": "string",
+                        "pattern": "^[\\s\\S]*$",
+                        "minLength": 1,
+                        "maxLength": 1048576
+                      },
+                      "tags": {
+                        "externalDocs": {
+                          "url": ""
+                        },
+                        "description": "Replacement tags for a configuration overlay.",
+                        "type": "object",
+                        "properties": {
+                          "values": {
+                            "description": "Tags attached to the configuration overlay. An empty list clears tags.",
+                            "type": "array",
+                            "items": {
+                              "description": "Tags attached to the configuration overlay. An empty list clears tags.",
+                              "type": "string",
+                              "pattern": "^[\\s\\S]*$",
+                              "minLength": 0,
+                              "maxLength": 256
+                            },
+                            "minItems": 0,
+                            "maxItems": 64
+                          }
+                        },
+                        "required": [
+                          "values"
+                        ]
+                      }
+                    }
+                  },
+                  "targetReplacement": {
+                    "description": "Replaces the targets. Reordering alone changes nothing; an empty list removes all targets, or returns 400 on an active overlay.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ConfigurationOverlayTargetsReplace"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateConfigurationOverlayResponse"
+                },
+                "example": {
+                  "overlay": {
+                    "active": true,
+                    "archived": false,
+                    "description": "Updated overlay description.",
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Debug logging overlay",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ],
+                    "versions": [
+                      {
+                        "active": true,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:05:00Z",
+                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "targets": [
+                          {
+                            "createdAt": "2026-09-28T10:05:00Z",
+                            "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3003",
+                            "overlayConfigurationFamilyId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1011",
+                            "overlayRemoteConfigurationId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1012",
+                            "sourceConfigurationFamilyId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60",
+                            "sourceRemoteConfigurationId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61",
+                            "updatedAt": "2026-09-28T10:05:00Z"
+                          }
+                        ],
+                        "updatedAt": "2026-09-28T10:05:00Z",
+                        "version": "2"
+                      },
+                      {
+                        "active": false,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:00:00Z",
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "rawOverlayConfiguration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                        "updatedAt": "2026-09-28T10:00:00Z",
+                        "version": "1"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration overlay not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Configuration overlay name already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/configurationOverlayId"
+        }
+      ]
+    },
+    "/fleet-management/configuration-overlays/v1/{id}/archive": {
+      "post": {
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ],
+        "summary": "Archive configuration overlay",
+        "description": "Archives a configuration overlay and all its versions. Returns 400 while the overlay is active; update it with active set to false first. Archiving an archived overlay succeeds.",
+        "operationId": "ConfigurationOverlayService_ArchiveConfigurationOverlay",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/configurationOverlayId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArchiveConfigurationOverlayResponse"
+                },
+                "example": {
+                  "id": "01975ed4-9c1a-7b3f-8d4e-426614174000"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Configuration overlay not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChartName": {
+        "title": "Fleet-manager chart name",
+        "description": "Helm chart name for fleet-manager configuration families.",
+        "type": "string",
+        "enum": [
+          "CHART_NAME_UNSPECIFIED",
+          "CHART_NAME_OTEL_INTEGRATION",
+          "CHART_NAME_OPENTELEMETRY_COLLECTOR",
+          "CHART_NAME_OTEL_LINUX_STANDALONE",
+          "CHART_NAME_OTEL_WINDOWS_STANDALONE",
+          "CHART_NAME_OTEL_MACOS_STANDALONE",
+          "CHART_NAME_OTEL_ECS_EC2"
+        ]
+      },
+      "Error": {
+        "description": "Standard error response body returned for a failed request.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "message": {
+            "description": "Human-readable description of the error.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "FilterPathAndValues",
+        "description": "This data structure represents a filter path and values",
+        "type": "object",
+        "properties": {
+          "filters": {
+            "description": "The filters.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ]
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "type": "string",
+            "minLength": 0
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "multipleValues"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "filters"
+            ]
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ]
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 0
+            },
+            "minItems": 0
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "description": "Filter operator.",
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      },
+      "ArchiveConfigurationOverlayResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the archived configuration overlay ID.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Archived configuration overlay UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ArchiveConfigurationOverlayVersionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the archived configuration overlay version ID.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Archived configuration overlay version UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ConfigurationOverlay": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Fleet-manager configuration overlay.",
+        "type": "object",
+        "properties": {
+          "active": {
+            "description": "Whether a version of this configuration overlay is active.",
+            "type": "boolean"
+          },
+          "archived": {
+            "description": "Whether this configuration overlay is archived.",
+            "type": "boolean"
+          },
+          "createdBy": {
+            "description": "User that created the configuration overlay.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "id": {
+            "description": "Configuration overlay UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "priorityOrder": {
+            "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "tags": {
+            "description": "Tags attached to the configuration overlay.",
+            "type": "array",
+            "items": {
+              "description": "Tags attached to the configuration overlay.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 256
+            },
+            "minItems": 0,
+            "maxItems": 64
+          },
+          "versions": {
+            "description": "All configuration overlay versions, newest first.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlayVersion"
+            },
+            "minItems": 0,
+            "maxItems": 256
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "ConfigurationOverlayCreate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Payload used to create a raw YAML configuration overlay.",
+        "type": "object",
+        "properties": {
+          "active": {
+            "description": "When true, activates the first version. It needs at least one target, or the create returns 400 and nothing is created. Defaults to false.",
+            "type": "boolean"
+          },
+          "description": {
+            "description": "Human-readable description.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 4096
+          },
+          "name": {
+            "description": "Display name.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "priorityOrder": {
+            "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+            "type": "integer",
+            "format": "int32",
+            "minimum": -2147483648,
+            "maximum": 2147483647
+          },
+          "rawOverlayConfiguration": {
+            "description": "OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored in normalized form. Must not configure the OpAMP extension.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "tags": {
+            "description": "Tags attached to the configuration overlay.",
+            "type": "array",
+            "items": {
+              "description": "Tags attached to the configuration overlay.",
+              "type": "string",
+              "pattern": "^[\\s\\S]*$",
+              "minLength": 0,
+              "maxLength": 256
+            },
+            "minItems": 0,
+            "maxItems": 64
+          }
+        },
+        "required": [
+          "rawOverlayConfiguration"
+        ]
+      },
+      "ConfigurationOverlayTarget": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Target snapshot entry for a configuration overlay version.",
+        "type": "object",
+        "properties": {
+          "createdAt": {
+            "description": "Time when this overlay target was created.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 64
+          },
+          "id": {
+            "description": "Overlay target UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "overlayConfigurationFamilyId": {
+            "description": "Generated overlay configuration family UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "overlayRemoteConfigurationId": {
+            "description": "Generated overlay remote configuration UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "sourceConfigurationFamilyId": {
+            "description": "Source configuration family UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "sourceRemoteConfigurationId": {
+            "description": "Source remote configuration UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "updatedAt": {
+            "description": "Time when this overlay target was last updated.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 64
+          }
+        },
+        "required": [
+          "id",
+          "sourceConfigurationFamilyId",
+          "overlayConfigurationFamilyId",
+          "sourceRemoteConfigurationId",
+          "overlayRemoteConfigurationId"
+        ]
+      },
+      "ConfigurationOverlayTargetCreate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Remote-configuration target input used when creating a configuration overlay.",
+        "type": "object",
+        "properties": {
+          "remoteConfigurationId": {
+            "description": "Remote configuration ID (families[].remoteConfigurations[].id in a configuration group, not the group ID). Its family must be active.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        },
+        "required": [
+          "remoteConfigurationId"
+        ]
+      },
+      "ConfigurationOverlayTargetReplace": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Remote-configuration target input used when replacing configuration overlay targets.",
+        "type": "object",
+        "properties": {
+          "remoteConfigurationId": {
+            "description": "Remote configuration ID (families[].remoteConfigurations[].id in a configuration group, not the group ID). Its family must be active.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          }
+        },
+        "required": [
+          "remoteConfigurationId"
+        ]
+      },
+      "ConfigurationOverlayTargetsReplace": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Replacement set of remote-configuration targets for a configuration overlay version.",
+        "type": "object",
+        "properties": {
+          "targets": {
+            "description": "Remote configuration targets, as a set: duplicates are rejected. An empty list removes all targets, or returns 400 on an active overlay.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlayTargetReplace"
+            },
+            "minItems": 0,
+            "maxItems": 256,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "targets"
+        ]
+      },
+      "ConfigurationOverlayVersion": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Configuration overlay version with immutable payload content; lifecycle metadata can change.",
+        "type": "object",
+        "properties": {
+          "active": {
+            "description": "Whether this overlay version is active.",
+            "type": "boolean"
+          },
+          "archived": {
+            "description": "Whether this overlay version is archived.",
+            "type": "boolean"
+          },
+          "chartName": {
+            "description": "Preset chart name for ObservabilityFeatures overlay versions.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChartName"
+              }
+            ]
+          },
+          "createdAt": {
+            "description": "Time when this overlay version was created.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 64
+          },
+          "createdBy": {
+            "description": "User that created this overlay version.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 0,
+            "maxLength": 256
+          },
+          "id": {
+            "description": "Configuration overlay version UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "observabilityFeaturesOverlay": {
+            "description": "Normalized ObservabilityFeatures JSON overlay payload.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "overlayHash": {
+            "description": "Lowercase hexadecimal SHA-256 hash of the normalized payload: the raw YAML, or the preset JSON.",
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "minLength": 64,
+            "maxLength": 64
+          },
+          "parentVersionId": {
+            "description": "Parent overlay version UUID v7.",
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+            "minLength": 36,
+            "maxLength": 36
+          },
+          "rawOverlayConfiguration": {
+            "description": "OpenTelemetry Collector YAML fragment for this version, re-emitted in normalized form (sorted keys, no comments). Set for raw overlays only.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "targets": {
+            "description": "Target snapshot for this overlay version.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlayTarget"
+            },
+            "minItems": 0,
+            "maxItems": 256
+          },
+          "updatedAt": {
+            "description": "Time when this overlay version was last updated.",
+            "type": "string",
+            "format": "date-time",
+            "minLength": 0,
+            "maxLength": 64
+          },
+          "version": {
+            "description": "Monotonic version number within the parent overlay.",
+            "type": "string",
+            "pattern": "^[1-9][0-9]*$",
+            "minLength": 1,
+            "maxLength": 10
+          }
+        },
+        "required": [
+          "id",
+          "version"
+        ],
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "rawOverlayConfiguration"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "observabilityFeaturesOverlay"
+            ]
+          }
+        ]
+      },
+      "CreateConfigurationOverlayResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the created configuration overlay.",
+        "type": "object",
+        "properties": {
+          "overlay": {
+            "description": "Created configuration overlay.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationOverlay"
+              }
+            ]
+          }
+        },
+        "required": [
+          "overlay"
+        ]
+      },
+      "GetConfigurationOverlayResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the requested configuration overlay.",
+        "type": "object",
+        "properties": {
+          "overlay": {
+            "description": "Requested configuration overlay.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationOverlay"
+              }
+            ]
+          }
+        },
+        "required": [
+          "overlay"
+        ]
+      },
+      "ListConfigurationOverlaysResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing configuration overlays.",
+        "type": "object",
+        "properties": {
+          "nextPageToken": {
+            "description": "Token for the next page. Omitted when there are no further results.",
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "overlays": {
+            "description": "Configuration overlays, newest first.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlay"
+            },
+            "minItems": 0,
+            "maxItems": 256
+          }
+        },
+        "required": [
+          "overlays"
+        ]
+      },
+      "UpdateConfigurationOverlayResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Response containing the updated configuration overlay.",
+        "type": "object",
+        "properties": {
+          "overlay": {
+            "description": "Updated configuration overlay.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationOverlay"
+              }
+            ]
+          }
+        },
+        "required": [
+          "overlay"
+        ]
+      }
+    },
+    "parameters": {
+      "configurationOverlayId": {
+        "in": "path",
+        "name": "id",
+        "description": "Configuration overlay UUID v7.",
+        "required": true,
+        "schema": {
+          "description": "Configuration overlay UUID v7.",
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+          "minLength": 36,
+          "maxLength": 36
+        },
+        "style": "simple"
+      }
+    }
+  }
+}
