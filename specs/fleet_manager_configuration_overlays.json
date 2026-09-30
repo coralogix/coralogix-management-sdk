@@ -469,104 +469,83 @@
           "Fleet Manager Configuration Overlays"
         ],
         "summary": "Update configuration overlay",
-        "description": "Updates the supplied fields; omitted fields are unchanged. Payload, parentVersionId, or target changes create a new version. Set active to activate or deactivate the latest version. Returns 400 for an archived overlay.",
+        "description": "Updates the fields listed in update_mask; other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. Changing raw.configuration, raw.targets, or parentVersionId creates a new version. Returns 400 for an archived overlay.",
         "operationId": "ConfigurationOverlayService_UpdateConfigurationOverlay",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "update_mask",
+            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.",
+            "required": true,
+            "schema": {
+              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.",
+              "type": "string",
+              "pattern": "^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "style": "form"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "description": "Request to update a configuration overlay.",
+                "description": "Configuration overlay field values for an update. Only fields listed in update_mask are applied.",
                 "type": "object",
                 "properties": {
-                  "overlay": {
-                    "externalDocs": {
-                      "url": ""
-                    },
-                    "description": "Fields used to update a configuration overlay. Omitted fields are unchanged.",
-                    "type": "object",
-                    "properties": {
-                      "active": {
-                        "description": "When true, activates the latest version after the update; when false, deactivates it. Omit to keep the current state. Activating without targets returns 400.",
-                        "type": "boolean"
-                      },
-                      "description": {
-                        "description": "Human-readable description. Omit to keep it; send an empty string to clear it.",
-                        "type": "string",
-                        "pattern": "^[\\s\\S]*$",
-                        "minLength": 0,
-                        "maxLength": 4096
-                      },
-                      "name": {
-                        "description": "Display name, unique among unarchived overlays. Omit to keep it; send an empty string to clear it.",
-                        "type": "string",
-                        "pattern": "^[\\s\\S]*$",
-                        "minLength": 0,
-                        "maxLength": 256
-                      },
-                      "parentVersionId": {
-                        "description": "Records the parent of the new version. Creates a new version but does not copy content from the parent.",
-                        "type": "string",
-                        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-                        "minLength": 36,
-                        "maxLength": 36
-                      },
-                      "priorityOrder": {
-                        "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
-                        "type": "integer",
-                        "format": "int32",
-                        "minimum": -2147483648,
-                        "maximum": 2147483647
-                      },
-                      "raw": {
-                        "externalDocs": {
-                          "url": ""
-                        },
-                        "description": "Raw overlay fields to update. Omitted fields are unchanged.",
-                        "type": "object",
-                        "properties": {
-                          "configuration": {
-                            "description": "Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.",
-                            "type": "string",
-                            "pattern": "^[\\s\\S]*$",
-                            "minLength": 1,
-                            "maxLength": 1048576
-                          },
-                          "targets": {
-                            "description": "Replaces the targets. Reordering alone changes nothing; an empty list removes all targets, or returns 400 on an active overlay.",
-                            "allOf": [
-                              {
-                                "$ref": "#/components/schemas/ConfigurationOverlayTargetsReplace"
-                              }
-                            ]
-                          }
-                        }
-                      },
-                      "tags": {
-                        "externalDocs": {
-                          "url": ""
-                        },
-                        "description": "Replacement tags for a configuration overlay.",
-                        "type": "object",
-                        "properties": {
-                          "values": {
-                            "description": "Tags attached to the configuration overlay. An empty list clears tags.",
-                            "type": "array",
-                            "items": {
-                              "description": "Tags attached to the configuration overlay. An empty list clears tags.",
-                              "type": "string",
-                              "pattern": "^[\\s\\S]*$",
-                              "minLength": 0,
-                              "maxLength": 256
-                            },
-                            "minItems": 0,
-                            "maxItems": 64
-                          }
-                        },
-                        "required": [
-                          "values"
-                        ]
+                  "active": {
+                    "description": "When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.",
+                    "type": "boolean"
+                  },
+                  "description": {
+                    "description": "Human-readable description.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 4096
+                  },
+                  "name": {
+                    "description": "Display name, unique among unarchived overlays.",
+                    "type": "string",
+                    "pattern": "^[\\s\\S]*$",
+                    "minLength": 0,
+                    "maxLength": 256
+                  },
+                  "parentVersionId": {
+                    "description": "Records the parent of the new version. Creates a new version but does not copy content from the parent.",
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+                    "minLength": 36,
+                    "maxLength": 36
+                  },
+                  "priorityOrder": {
+                    "description": "Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.",
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  },
+                  "raw": {
+                    "description": "Raw overlay fields to update. Rejected for preset overlays.",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RawOverlayUpdate"
                       }
-                    }
+                    ]
+                  },
+                  "tags": {
+                    "description": "Tags attached to the configuration overlay. Replaces all tags.",
+                    "type": "array",
+                    "items": {
+                      "description": "Tags attached to the configuration overlay. Replaces all tags.",
+                      "type": "string",
+                      "pattern": "^[\\s\\S]*$",
+                      "minLength": 0,
+                      "maxLength": 256
+                    },
+                    "minItems": 0,
+                    "maxItems": 64
                   }
                 }
               }
@@ -1176,28 +1155,6 @@
           "remoteConfigurationId"
         ]
       },
-      "ConfigurationOverlayTargetsReplace": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Replacement set of remote-configuration targets for a configuration overlay version.",
-        "type": "object",
-        "properties": {
-          "values": {
-            "description": "Remote configuration targets, as a set: duplicates are rejected. An empty list removes all targets, or returns 400 on an active overlay.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConfigurationOverlayTargetReplace"
-            },
-            "minItems": 0,
-            "maxItems": 256,
-            "uniqueItems": true
-          }
-        },
-        "required": [
-          "values"
-        ]
-      },
       "ConfigurationOverlayVersion": {
         "externalDocs": {
           "url": ""
@@ -1458,6 +1415,32 @@
         "required": [
           "configuration"
         ]
+      },
+      "RawOverlayUpdate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "description": "Raw overlay field values for an update. Only fields listed in update_mask are applied.",
+        "type": "object",
+        "properties": {
+          "configuration": {
+            "description": "Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.",
+            "type": "string",
+            "pattern": "^[\\s\\S]*$",
+            "minLength": 1,
+            "maxLength": 1048576
+          },
+          "targets": {
+            "description": "Replaces the targets, as a set: duplicates are rejected and reordering alone changes nothing. An empty list removes all targets, or returns 400 on an active overlay.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationOverlayTargetReplace"
+            },
+            "minItems": 0,
+            "maxItems": 256,
+            "uniqueItems": true
+          }
+        }
       },
       "UpdateConfigurationOverlayResponse": {
         "externalDocs": {

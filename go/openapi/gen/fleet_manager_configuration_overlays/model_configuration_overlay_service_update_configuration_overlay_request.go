@@ -20,9 +20,22 @@ var _ = bytes.MinRead
 // checks if the ConfigurationOverlayServiceUpdateConfigurationOverlayRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationOverlayServiceUpdateConfigurationOverlayRequest{}
 
-// ConfigurationOverlayServiceUpdateConfigurationOverlayRequest Request to update a configuration overlay.
+// ConfigurationOverlayServiceUpdateConfigurationOverlayRequest Configuration overlay field values for an update. Only fields listed in update_mask are applied.
 type ConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
-	Overlay *ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay `json:"overlay,omitempty"`
+	// When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.
+	Active *bool `json:"active,omitempty"`
+	// Human-readable description.
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Display name, unique among unarchived overlays.
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Records the parent of the new version. Creates a new version but does not copy content from the parent.
+	ParentVersionId *string `json:"parentVersionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
+	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.
+	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
+	// Raw overlay fields to update. Rejected for preset overlays.
+	Raw *RawOverlayUpdate `json:"raw,omitempty"`
+	// Tags attached to the configuration overlay. Replaces all tags.
+	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -46,36 +59,228 @@ func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequestWithDefaults
 	return &this
 }
 
-// GetOverlay returns the Overlay field value if set, zero value otherwise.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetOverlay() ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay {
-	if o == nil || IsNil(o.Overlay) {
-		var ret ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay
+// GetActive returns the Active field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetActive() bool {
+	if o == nil || IsNil(o.Active) {
+		var ret bool
 		return ret
 	}
-	return *o.Overlay
+	return *o.Active
 }
 
-// GetOverlayOk returns a tuple with the Overlay field value if set, nil otherwise
+// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetOverlayOk() (*ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay, bool) {
-	if o == nil || IsNil(o.Overlay) {
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetActiveOk() (*bool, bool) {
+	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
-	return o.Overlay, true
+	return o.Active, true
 }
 
-// HasOverlay returns a boolean if a field has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasOverlay() bool {
-	if o != nil && !IsNil(o.Overlay) {
+// HasActive returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasActive() bool {
+	if o != nil && !IsNil(o.Active) {
 		return true
 	}
 
 	return false
 }
 
-// SetOverlay gets a reference to the given ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay and assigns it to the Overlay field.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetOverlay(v ConfigurationOverlayServiceUpdateConfigurationOverlayRequestOverlay) {
-	o.Overlay = &v
+// SetActive gets a reference to the given bool and assigns it to the Active field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetActive(v bool) {
+	o.Active = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetName(v string) {
+	o.Name = &v
+}
+
+// GetParentVersionId returns the ParentVersionId field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetParentVersionId() string {
+	if o == nil || IsNil(o.ParentVersionId) {
+		var ret string
+		return ret
+	}
+	return *o.ParentVersionId
+}
+
+// GetParentVersionIdOk returns a tuple with the ParentVersionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetParentVersionIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ParentVersionId) {
+		return nil, false
+	}
+	return o.ParentVersionId, true
+}
+
+// HasParentVersionId returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasParentVersionId() bool {
+	if o != nil && !IsNil(o.ParentVersionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetParentVersionId gets a reference to the given string and assigns it to the ParentVersionId field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetParentVersionId(v string) {
+	o.ParentVersionId = &v
+}
+
+// GetPriorityOrder returns the PriorityOrder field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetPriorityOrder() int32 {
+	if o == nil || IsNil(o.PriorityOrder) {
+		var ret int32
+		return ret
+	}
+	return *o.PriorityOrder
+}
+
+// GetPriorityOrderOk returns a tuple with the PriorityOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetPriorityOrderOk() (*int32, bool) {
+	if o == nil || IsNil(o.PriorityOrder) {
+		return nil, false
+	}
+	return o.PriorityOrder, true
+}
+
+// HasPriorityOrder returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasPriorityOrder() bool {
+	if o != nil && !IsNil(o.PriorityOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOrder gets a reference to the given int32 and assigns it to the PriorityOrder field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetPriorityOrder(v int32) {
+	o.PriorityOrder = &v
+}
+
+// GetRaw returns the Raw field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetRaw() RawOverlayUpdate {
+	if o == nil || IsNil(o.Raw) {
+		var ret RawOverlayUpdate
+		return ret
+	}
+	return *o.Raw
+}
+
+// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetRawOk() (*RawOverlayUpdate, bool) {
+	if o == nil || IsNil(o.Raw) {
+		return nil, false
+	}
+	return o.Raw, true
+}
+
+// HasRaw returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasRaw() bool {
+	if o != nil && !IsNil(o.Raw) {
+		return true
+	}
+
+	return false
+}
+
+// SetRaw gets a reference to the given RawOverlayUpdate and assigns it to the Raw field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetRaw(v RawOverlayUpdate) {
+	o.Raw = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetTags() []string {
+	if o == nil || IsNil(o.Tags) {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetTags(v []string) {
+	o.Tags = v
 }
 
 func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) MarshalJSON() ([]byte, error) {
@@ -88,8 +293,26 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) MarshalJSO
 
 func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Overlay) {
-		toSerialize["overlay"] = o.Overlay
+	if !IsNil(o.Active) {
+		toSerialize["active"] = o.Active
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.ParentVersionId) {
+		toSerialize["parentVersionId"] = o.ParentVersionId
+	}
+	if !IsNil(o.PriorityOrder) {
+		toSerialize["priorityOrder"] = o.PriorityOrder
+	}
+	if !IsNil(o.Raw) {
+		toSerialize["raw"] = o.Raw
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -114,7 +337,13 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) Unmarshal
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "overlay")
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "parentVersionId")
+		delete(additionalProperties, "priorityOrder")
+		delete(additionalProperties, "raw")
+		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

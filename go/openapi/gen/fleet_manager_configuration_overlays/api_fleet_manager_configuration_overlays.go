@@ -814,8 +814,15 @@ func (a *FleetManagerConfigurationOverlaysAPIService) ConfigurationOverlayServic
 type ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
 	ctx context.Context
 	ApiService *FleetManagerConfigurationOverlaysAPIService
+	updateMask *string
 	id string
 	configurationOverlayServiceUpdateConfigurationOverlayRequest *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest
+}
+
+// Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.
+func (r ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest) UpdateMask(updateMask string) ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest {
+	r.updateMask = &updateMask
+	return r
 }
 
 func (r ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest) ConfigurationOverlayServiceUpdateConfigurationOverlayRequest(configurationOverlayServiceUpdateConfigurationOverlayRequest ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest {
@@ -830,7 +837,7 @@ func (r ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest) Execute
 /*
 ConfigurationOverlayServiceUpdateConfigurationOverlay Update configuration overlay
 
-Updates the supplied fields; omitted fields are unchanged. Payload, parentVersionId, or target changes create a new version. Set active to activate or deactivate the latest version. Returns 400 for an archived overlay.
+Updates the fields listed in update_mask; other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. Changing raw.configuration, raw.targets, or parentVersionId creates a new version. Returns 400 for an archived overlay.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration overlay UUID v7.
@@ -865,6 +872,15 @@ func (a *FleetManagerConfigurationOverlaysAPIService) ConfigurationOverlayServic
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateMask == nil {
+		return localVarReturnValue, nil, reportError("updateMask is required and must be specified")
+	}
+	if strlen(*r.updateMask) < 1 {
+		return localVarReturnValue, nil, reportError("updateMask must have at least 1 elements")
+	}
+	if strlen(*r.updateMask) > 512 {
+		return localVarReturnValue, nil, reportError("updateMask must have less than 512 elements")
+	}
 	if strlen(r.id) < 36 {
 		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
 	}
@@ -872,6 +888,9 @@ func (a *FleetManagerConfigurationOverlaysAPIService) ConfigurationOverlayServic
 		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "update_mask", r.updateMask, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

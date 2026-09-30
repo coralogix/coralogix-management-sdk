@@ -19029,82 +19029,67 @@ paths:
       tags:
       - Fleet Manager Configuration Overlays
     patch:
-      description: Updates the supplied fields; omitted fields are unchanged. Payload, parentVersionId, or target changes create a new version. Set active to activate or deactivate the latest version. Returns 400 for an archived overlay.
+      description: Updates the fields listed in update_mask; other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. Changing raw.configuration, raw.targets, or parentVersionId creates a new version. Returns 400 for an archived overlay.
       operationId: ConfigurationOverlayService_UpdateConfigurationOverlay
+      parameters:
+      - description: 'Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.'
+        in: query
+        name: update_mask
+        required: true
+        schema:
+          description: 'Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, raw, raw.configuration, raw.targets. A listed field that is omitted from the body is cleared (name, description, tags, raw.targets) or reset to its default (priorityOrder 0, active false); raw.configuration cannot be cleared. Unknown fields and * return 400.'
+          maxLength: 512
+          minLength: 1
+          pattern: ^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$
+          type: string
       requestBody:
         content:
           application/json:
             schema:
-              description: Request to update a configuration overlay.
+              description: Configuration overlay field values for an update. Only fields listed in update_mask are applied.
               properties:
-                overlay:
-                  description: Fields used to update a configuration overlay. Omitted fields are unchanged.
-                  externalDocs:
-                    url: ''
-                  properties:
-                    active:
-                      description: When true, activates the latest version after the update; when false, deactivates it. Omit to keep the current state. Activating without targets returns 400.
-                      type: boolean
-                    description:
-                      description: Human-readable description. Omit to keep it; send an empty string to clear it.
-                      maxLength: 4096
-                      minLength: 0
-                      pattern: ^[\s\S]*$
-                      type: string
-                    name:
-                      description: Display name, unique among unarchived overlays. Omit to keep it; send an empty string to clear it.
-                      maxLength: 256
-                      minLength: 0
-                      pattern: ^[\s\S]*$
-                      type: string
-                    parentVersionId:
-                      description: Records the parent of the new version. Creates a new version but does not copy content from the parent.
-                      maxLength: 36
-                      minLength: 36
-                      pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-                      type: string
-                    priorityOrder:
-                      description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
-                      format: int32
-                      maximum: 2147483647
-                      minimum: -2147483648
-                      type: integer
-                    raw:
-                      description: Raw overlay fields to update. Omitted fields are unchanged.
-                      externalDocs:
-                        url: ''
-                      properties:
-                        configuration:
-                          description: Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.
-                          maxLength: 1048576
-                          minLength: 1
-                          pattern: ^[\s\S]*$
-                          type: string
-                        targets:
-                          allOf:
-                          - $ref: '#/components/schemas/ConfigurationOverlayTargetsReplace'
-                          description: Replaces the targets. Reordering alone changes nothing; an empty list removes all targets, or returns 400 on an active overlay.
-                      type: object
-                    tags:
-                      description: Replacement tags for a configuration overlay.
-                      externalDocs:
-                        url: ''
-                      properties:
-                        values:
-                          description: Tags attached to the configuration overlay. An empty list clears tags.
-                          items:
-                            description: Tags attached to the configuration overlay. An empty list clears tags.
-                            maxLength: 256
-                            minLength: 0
-                            pattern: ^[\s\S]*$
-                            type: string
-                          maxItems: 64
-                          minItems: 0
-                          type: array
-                      required:
-                      - values
-                      type: object
-                  type: object
+                active:
+                  description: When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.
+                  type: boolean
+                description:
+                  description: Human-readable description.
+                  maxLength: 4096
+                  minLength: 0
+                  pattern: ^[\s\S]*$
+                  type: string
+                name:
+                  description: Display name, unique among unarchived overlays.
+                  maxLength: 256
+                  minLength: 0
+                  pattern: ^[\s\S]*$
+                  type: string
+                parentVersionId:
+                  description: Records the parent of the new version. Creates a new version but does not copy content from the parent.
+                  maxLength: 36
+                  minLength: 36
+                  pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+                  type: string
+                priorityOrder:
+                  description: 'Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie. Defaults to 0.'
+                  format: int32
+                  maximum: 2147483647
+                  minimum: -2147483648
+                  type: integer
+                raw:
+                  allOf:
+                  - $ref: '#/components/schemas/RawOverlayUpdate'
+                  description: Raw overlay fields to update. Rejected for preset overlays.
+                tags:
+                  description: Tags attached to the configuration overlay. Replaces all tags.
+                  items:
+                    description: Tags attached to the configuration overlay. Replaces all tags.
+                    maxLength: 256
+                    minLength: 0
+                    pattern: ^[\s\S]*$
+                    type: string
+                  maxItems: 64
+                  minItems: 0
+                  type: array
               type: object
       responses:
         '200':
@@ -54840,22 +54825,6 @@ components:
       description: Remote-configuration target input used when replacing configuration overlay targets.
       externalDocs:
         url: ''
-    ConfigurationOverlayTargetsReplace:
-      required:
-      - values
-      type: object
-      properties:
-        values:
-          maxItems: 256
-          minItems: 0
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigurationOverlayTargetReplace'
-          description: 'Remote configuration targets, as a set: duplicates are rejected. An empty list removes all targets, or returns 400 on an active overlay.'
-      description: Replacement set of remote-configuration targets for a configuration overlay version.
-      externalDocs:
-        url: ''
     ConfigurationOverlayVersion:
       required:
       - id
@@ -55039,6 +55008,26 @@ components:
             $ref: '#/components/schemas/ConfigurationOverlayTargetCreate'
           description: 'Remote configurations the overlay applies to, as a set: duplicates are rejected. A version needs at least one target to be activated.'
       description: Raw OpenTelemetry Collector YAML overlay to create.
+      externalDocs:
+        url: ''
+    RawOverlayUpdate:
+      type: object
+      properties:
+        configuration:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Replacement OpenTelemetry Collector YAML fragment. Always creates a new version, even if unchanged. Must not configure the OpAMP extension.
+        targets:
+          maxItems: 256
+          minItems: 0
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigurationOverlayTargetReplace'
+          description: 'Replaces the targets, as a set: duplicates are rejected and reordering alone changes nothing. An empty list removes all targets, or returns 400 on an active overlay.'
+      description: Raw overlay field values for an update. Only fields listed in update_mask are applied.
       externalDocs:
         url: ''
     UpdateConfigurationOverlayResponse:
