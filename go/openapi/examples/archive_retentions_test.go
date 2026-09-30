@@ -16,6 +16,8 @@ package examples
 
 import (
 	"context"
+	"slices"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -49,9 +51,25 @@ func TestArchiveRetentions(t *testing.T) {
 		updateElems = append(updateElems, elem)
 	}
 
+	var wantName string
 	if len(updateElems) > 1 && updateElems[1].Name != nil {
-		newName := *updateElems[1].Name + "_updated"
-		updateElems[1].Name = &newName
+		// Earlier runs left "_updated" suffixes. Remove them so the name never grows.
+		baseName := *updateElems[1].Name
+		for strings.HasSuffix(baseName, "_updated") {
+			baseName = strings.TrimSuffix(baseName, "_updated")
+		}
+		wantName = baseName + "_updated"
+		updateElems[1].Name = retentions.PtrString(wantName)
+
+		restoreElems := slices.Clone(updateElems)
+		restoreElems[1].Name = retentions.PtrString(baseName)
+		t.Cleanup(func() {
+			_, httpResp, err := client.
+				RetentionsServiceUpdateRetentions(context.Background()).
+				UpdateRetentionsRequest(retentions.UpdateRetentionsRequest{RetentionUpdateElements: restoreElems}).
+				Execute()
+			require.NoError(t, cxsdk.NewAPIError(httpResp, err))
+		})
 	}
 
 	updateReq := retentions.UpdateRetentionsRequest{
@@ -72,8 +90,8 @@ func TestArchiveRetentions(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, verifyResp)
 
-	if len(verifyResp.Retentions) > 1 {
-		require.Contains(t, verifyResp.Retentions[1].GetName(), "_updated")
+	if wantName != "" {
+		require.Equal(t, wantName, verifyResp.Retentions[1].GetName())
 	}
 
 	activateResp, httpResp, err := client.
