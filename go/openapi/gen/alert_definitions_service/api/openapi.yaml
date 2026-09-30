@@ -1635,6 +1635,7 @@
           },
           "analyticsImmediate": {
             "description": "Configuration for analytics immediate alerts",
+            "x-stability": "preview",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AnalyticsImmediateType"
@@ -1643,6 +1644,7 @@
           },
           "analyticsThreshold": {
             "description": "Configuration for analytics threshold alerts",
+            "x-stability": "preview",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AnalyticsThresholdType"
@@ -2172,7 +2174,7 @@
         }
       },
       "AlertDefType": {
-        "description": "Alert def type.",
+        "description": "Alert def type.\n- ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE: preview\n- ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview",
         "type": "string",
         "enum": [
           "ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED",
