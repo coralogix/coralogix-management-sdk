@@ -45,9 +45,9 @@ type ConfigurationOverlayTarget struct {
 type _ConfigurationOverlayTarget ConfigurationOverlayTarget
 
 // NewConfigurationOverlayTarget instantiates a new ConfigurationOverlayTarget object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewConfigurationOverlayTarget(id string, overlayConfigurationFamilyId string, overlayRemoteConfigurationId string, sourceConfigurationFamilyId string, sourceRemoteConfigurationId string) *ConfigurationOverlayTarget {
 	this := ConfigurationOverlayTarget{}
 	this.Id = id
@@ -59,8 +59,8 @@ func NewConfigurationOverlayTarget(id string, overlayConfigurationFamilyId strin
 }
 
 // NewConfigurationOverlayTargetWithDefaults instantiates a new ConfigurationOverlayTarget object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewConfigurationOverlayTargetWithDefaults() *ConfigurationOverlayTarget {
 	this := ConfigurationOverlayTarget{}
 	return &this
