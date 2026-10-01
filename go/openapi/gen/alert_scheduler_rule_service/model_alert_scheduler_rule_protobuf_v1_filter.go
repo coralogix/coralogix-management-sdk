@@ -33,17 +33,17 @@ type AlertSchedulerRuleProtobufV1Filter struct {
 type _AlertSchedulerRuleProtobufV1Filter AlertSchedulerRuleProtobufV1Filter
 
 // NewAlertSchedulerRuleProtobufV1Filter instantiates a new AlertSchedulerRuleProtobufV1Filter object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewAlertSchedulerRuleProtobufV1Filter() *AlertSchedulerRuleProtobufV1Filter {
 	this := AlertSchedulerRuleProtobufV1Filter{}
 	return &this
 }
 
 // NewAlertSchedulerRuleProtobufV1FilterWithDefaults instantiates a new AlertSchedulerRuleProtobufV1Filter object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewAlertSchedulerRuleProtobufV1FilterWithDefaults() *AlertSchedulerRuleProtobufV1Filter {
 	this := AlertSchedulerRuleProtobufV1Filter{}
 	return &this

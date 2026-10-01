@@ -36,9 +36,9 @@ type CreateCaseSettingsRequest struct {
 type _CreateCaseSettingsRequest CreateCaseSettingsRequest
 
 // NewCreateCaseSettingsRequest instantiates a new CreateCaseSettingsRequest object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewCreateCaseSettingsRequest(globalIndicatorSettings GlobalIndicatorSettings) *CreateCaseSettingsRequest {
 	this := CreateCaseSettingsRequest{}
 	this.GlobalIndicatorSettings = globalIndicatorSettings
@@ -46,8 +46,8 @@ func NewCreateCaseSettingsRequest(globalIndicatorSettings GlobalIndicatorSetting
 }
 
 // NewCreateCaseSettingsRequestWithDefaults instantiates a new CreateCaseSettingsRequest object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewCreateCaseSettingsRequestWithDefaults() *CreateCaseSettingsRequest {
 	this := CreateCaseSettingsRequest{}
 	return &this

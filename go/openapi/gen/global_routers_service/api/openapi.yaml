@@ -7,262 +7,258 @@
   "paths": {
     "/notifications/notification-center/v1/routers": {
       "get": {
-        "tags": [
-          "Global routers service"
-        ],
-        "summary": "List Global Routers",
         "description": "Returns all notification routers for the team.",
         "operationId": "GlobalRoutersService_ListGlobalRouters",
         "parameters": [
           {
+            "description": "Deprecated. Filter routers by entity type.",
             "in": "query",
             "name": "entity_type",
-            "description": "Deprecated. Filter routers by entity type.",
+            "required": false,
             "schema": {
-              "deprecated": true,
-              "description": "Deprecated. Filter routers by entity type.",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/notification_center.EntityType"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "deprecated": true,
+              "description": "Deprecated. Filter routers by entity type.",
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "Filter routers by source entity labels. Each entry restricts results to routers whose source entity has the matching label values. If empty, all routers are returned.",
             "in": "query",
             "name": "source_entity_labels",
-            "description": "Filter routers by source entity labels. Each entry restricts results to routers whose source entity has the matching label values. If empty, all routers are returned.",
+            "required": false,
             "schema": {
-              "description": "Filter routers by source entity labels. Each entry restricts results to routers whose source entity has the matching label values. If empty, all routers are returned.",
-              "type": "object",
               "additionalProperties": {
-                "type": "object",
                 "properties": {
                   "values": {
                     "description": "The values.",
-                    "type": "array",
                     "items": {
                       "description": "The values.",
-                      "type": "string",
-                      "minLength": 0
+                      "minLength": 0,
+                      "type": "string"
                     },
+                    "maxItems": 100,
                     "minItems": 1,
-                    "maxItems": 100
+                    "type": "array"
                   }
-                }
-              }
-            },
-            "style": "form"
+                },
+                "type": "object"
+              },
+              "description": "Filter routers by source entity labels. Each entry restricts results to routers whose source entity has the matching label values. If empty, all routers are returned.",
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListGlobalRoutersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "List Global Routers",
         "tags": [
           "Global routers service"
-        ],
-        "summary": "Replace Global Router",
+        ]
+      },
+      "put": {
         "description": "Updates an existing notification router.",
         "operationId": "GlobalRoutersService_ReplaceGlobalRouter",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Replace Global Router Request",
                 "description": "Request which updates an existing global router",
-                "type": "object",
                 "properties": {
                   "router": {
                     "$ref": "#/components/schemas/GlobalRouter"
                   }
-                }
+                },
+                "title": "Replace Global Router Request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ReplaceGlobalRouterResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Replace Global Router",
         "tags": [
           "Global routers service"
-        ],
-        "summary": "Create Global Router",
+        ]
+      },
+      "post": {
         "description": "Creates a new notification router.",
         "operationId": "GlobalRoutersService_CreateGlobalRouter",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create Global Router Request",
                 "description": "Request to create a global router",
-                "type": "object",
                 "properties": {
                   "router": {
                     "$ref": "#/components/schemas/GlobalRouter"
                   }
-                }
+                },
+                "title": "Create Global Router Request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateGlobalRouterResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Create Global Router",
+        "tags": [
+          "Global routers service"
+        ]
       }
     },
     "/notifications/notification-center/v1/routers/all/summaries": {
       "get": {
-        "tags": [
-          "Global routers service"
-        ],
-        "summary": "Batch Get Global Routers",
         "description": "Returns summary information for all notification routers.",
         "operationId": "GlobalRoutersService_BatchGetGlobalRouters",
         "parameters": [
           {
+            "description": "The unique identifiers of the global routers to retrieve summaries for.",
             "in": "query",
             "name": "global_router_ids",
-            "description": "The unique identifiers of the global routers to retrieve summaries for.",
+            "required": false,
             "schema": {
               "description": "The unique identifiers of the global routers to retrieve summaries for.",
-              "type": "array",
               "items": {
                 "description": "The unique identifiers of the global routers to retrieve summaries for.",
-                "type": "string",
-                "minLength": 0
+                "minLength": 0,
+                "type": "string"
               },
+              "maxItems": 200,
               "minItems": 0,
-              "maxItems": 200
-            },
-            "style": "form"
+              "type": "array"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BatchGetGlobalRoutersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Batch Get Global Routers",
+        "tags": [
+          "Global routers service"
+        ]
       }
     },
     "/notifications/notification-center/v1/routers/matcher/validate": {
       "post": {
-        "tags": [
-          "Global routers service"
-        ],
-        "summary": "Validate Entity Label Matcher",
         "description": "Validates a notification router matcher configuration.",
         "operationId": "GlobalRoutersService_ValidateEntityLabelMatcher",
         "parameters": [
           {
+            "description": "Entity label matcher to validate, expressed as a map of label keys to expected values.",
             "in": "query",
             "name": "entity_label_matcher",
-            "description": "Entity label matcher to validate, expressed as a map of label keys to expected values.",
+            "required": false,
             "schema": {
-              "description": "Entity label matcher to validate, expressed as a map of label keys to expected values.",
-              "type": "object",
               "additionalProperties": {
-                "type": "string",
-                "minLength": 0
-              }
-            },
-            "style": "form"
+                "minLength": 0,
+                "type": "string"
+              },
+              "description": "Entity label matcher to validate, expressed as a map of label keys to expected values.",
+              "type": "object"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ValidateEntityLabelMatcherResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Validate Entity Label Matcher",
+        "tags": [
+          "Global routers service"
+        ]
       }
     },
     "/notifications/notification-center/v1/routers/{id}": {
       "get": {
-        "tags": [
-          "Global routers service"
-        ],
-        "summary": "Get Global Router",
         "description": "Returns the details of the specified notification router.",
         "operationId": "GlobalRoutersService_GetGlobalRouter",
         "parameters": [
           {
+            "description": "The unique identifier of the global router to retrieve.",
             "in": "path",
             "name": "id",
-            "description": "The unique identifier of the global router to retrieve.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the global router to retrieve.",
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "maxLength": 128,
               "minLength": 1,
-              "maxLength": 128
-            },
-            "style": "simple"
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetGlobalRouterResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Get Global Router",
         "tags": [
           "Global routers service"
-        ],
-        "summary": "Delete Global Router",
+        ]
+      },
+      "delete": {
         "description": "Deletes the notification router with the specified ID.",
         "operationId": "GlobalRoutersService_DeleteGlobalRouter",
         "parameters": [
@@ -272,79 +268,83 @@
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteGlobalRouterResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Delete Global Router",
+        "tags": [
+          "Global routers service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "BatchGetGlobalRoutersResponse": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Batch Get Global Routers Response",
-        "description": "Response containing requested global routers and missing global routers ids",
         "type": "object",
         "properties": {
           "notFoundIds": {
-            "description": "The not found ids.",
+            "maxItems": 200,
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The not found ids.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The not found ids."
             },
-            "minItems": 0,
-            "maxItems": 200
+            "description": "The not found ids.",
+            "examples": [
+              [
+                "global-router-id-3"
+              ]
+            ]
           },
           "routers": {
-            "description": "The routers.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/GlobalRouter"
-            }
+            },
+            "description": "The routers."
           }
-        }
-      },
-      "CreateGlobalRouterResponse": {
+        },
+        "description": "Response containing requested global routers and missing global routers ids",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "CreateGlobalRouterResponse": {
         "title": "Create Global Router Response",
-        "description": "Response which contains a created global router",
         "type": "object",
         "properties": {
           "router": {
             "$ref": "#/components/schemas/GlobalRouter"
           }
-        }
-      },
-      "DeleteGlobalRouterResponse": {
-        "externalDocs": {
-          "url": ""
         },
-        "description": "Response returned after successfully deleting a notification router.",
-        "type": "object",
-        "additionalProperties": false
-      },
-      "FallbackTarget": {
+        "description": "Response which contains a created global router",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "DeleteGlobalRouterResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after successfully deleting a notification router.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "FallbackTarget": {
         "title": "FallbackTarget",
-        "description": "Defines fallback target for notifications not matching any routing rule",
         "type": "object",
         "properties": {
           "entityType": {
@@ -353,56 +353,63 @@
           "target": {
             "$ref": "#/components/schemas/RoutingTarget"
           }
+        },
+        "description": "Defines fallback target for notifications not matching any routing rule",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -410,147 +417,160 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetGlobalRouterResponse": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Get Global Router Response",
-        "description": "Response containing a requested global router",
         "type": "object",
         "properties": {
           "router": {
             "$ref": "#/components/schemas/GlobalRouter"
           }
-        }
-      },
-      "GlobalRouter": {
+        },
+        "description": "Response containing a requested global router",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "GlobalRouter": {
         "title": "Global Router",
-        "description": "Defines a set of pre-configured routing rules for directing notifications",
         "type": "object",
         "properties": {
           "createTime": {
-            "description": "The create time.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "The create time.",
+            "format": "date-time"
           },
           "description": {
-            "description": "Human-readable description.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 5000,
             "minLength": 0,
-            "maxLength": 5000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description."
           },
           "disabled": {
             "description": "The disabled.",
-            "type": "boolean"
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "entityLabels": {
-            "description": "The entity labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "The entity labels."
           },
           "entityType": {
-            "deprecated": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/notification_center.EntityType"
               }
-            ]
+            ],
+            "deprecated": true,
+            "x-coralogix-presence": true
           },
           "fallback": {
-            "deprecated": true,
-            "description": "The fallback destinations to be used if no rule matches.",
+            "maxItems": 10,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
             },
-            "minItems": 0,
-            "maxItems": 10
+            "description": "The fallback destinations to be used if no rule matches.",
+            "deprecated": true
           },
           "fallbackTargets": {
-            "description": "The fallback targets.",
+            "maxItems": 10,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FallbackTarget"
             },
-            "minItems": 0,
-            "maxItems": 10
+            "description": "The fallback targets."
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "examples": [
+              "a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9"
+            ],
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 200,
             "minLength": 1,
-            "maxLength": 200
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name.",
+            "examples": [
+              "My Router"
+            ]
           },
           "routingLabels": {
             "$ref": "#/components/schemas/RoutingLabels"
           },
           "rules": {
-            "description": "List of rules.",
+            "maxItems": 10,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingRule"
             },
-            "minItems": 0,
-            "maxItems": 10
+            "description": "List of rules."
           },
           "updateTime": {
-            "description": "Timestamp of the last update.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "Timestamp of the last update.",
+            "format": "date-time"
           }
-        }
-      },
-      "ListGlobalRoutersResponse": {
+        },
+        "description": "Defines a set of pre-configured routing rules for directing notifications",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "ListGlobalRoutersResponse": {
         "title": "List Global Routers Response",
-        "description": "Response containing requested global routers",
         "type": "object",
         "properties": {
           "routers": {
-            "description": "The routers.",
+            "maxItems": 200,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GlobalRouter"
             },
-            "minItems": 0,
-            "maxItems": 200
+            "description": "The routers."
           }
+        },
+        "description": "Response containing requested global routers",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "MultipleValues": {
@@ -560,170 +580,215 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "ReplaceGlobalRouterResponse": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Replace Global Router Response",
-        "description": "Response which contains an updated global router",
         "type": "object",
         "properties": {
           "router": {
             "$ref": "#/components/schemas/GlobalRouter"
           }
+        },
+        "description": "Response which contains an updated global router",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "RoutingLabels": {
-        "externalDocs": {
-          "description": "Find out more how label based routers work",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/#how-label-based-routers-work"
-        },
         "title": "Routing Labels",
-        "description": "Allows to configure routing labels which are used for routers resolution",
         "type": "object",
         "properties": {
           "environment": {
             "description": "The environment.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "service": {
             "description": "Service name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "team": {
             "description": "Team.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           }
+        },
+        "description": "Allows to configure routing labels which are used for routers resolution",
+        "externalDocs": {
+          "description": "Find out more how label based routers work",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/#how-label-based-routers-work"
         }
       },
       "RoutingRule": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Routing Rule",
-        "description": "Defines routing rule for notifications",
         "type": "object",
         "properties": {
           "condition": {
-            "description": "Condition.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 20000,
             "minLength": 1,
-            "maxLength": 20000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Condition.",
+            "examples": [
+              "alertDef.priority == 'P3'"
+            ]
           },
           "customDetails": {
-            "description": "The custom details.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "The custom details."
           },
           "entityType": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/notification_center.EntityType"
               }
-            ]
+            ],
+            "examples": [
+              "ALERTS"
+            ],
+            "x-coralogix-presence": true
           },
           "name": {
             "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 200,
             "minLength": 1,
-            "maxLength": 200
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "targets": {
-            "description": "List of targets.",
+            "maxItems": 10,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
             },
-            "minItems": 0,
-            "maxItems": 10
+            "description": "List of targets."
           }
+        },
+        "description": "Defines routing rule for notifications",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "RoutingTarget": {
-        "externalDocs": {
-          "description": "Find out more about notification center",
-          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
         "title": "Routing Target",
-        "description": "Defines routing target for notifications",
         "type": "object",
         "properties": {
           "connectorId": {
-            "description": "The connector id.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "description": "The connector id."
           },
           "customDetails": {
-            "description": "The custom details.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "minLength": 0
-            }
+              "minLength": 0,
+              "type": "string"
+            },
+            "description": "The custom details."
           },
           "id": {
             "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "examples": [
+              "d4b56246-64bb-4714-a8bd-97c999f1d801"
+            ],
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "presetId": {
             "description": "The preset id.",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           }
-        }
-      },
-      "ValidateEntityLabelMatcherResponse": {
+        },
+        "description": "Defines routing target for notifications",
         "externalDocs": {
           "description": "Find out more about notification center",
           "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-        },
+        }
+      },
+      "ValidateEntityLabelMatcherResponse": {
         "title": "Validate Entity Label Matcher Response",
-        "description": "Response which contains whether the given entity label matcher is valid",
         "type": "object",
         "properties": {
           "result": {
             "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult"
           }
+        },
+        "description": "Response which contains whether the given entity label matcher is valid",
+        "externalDocs": {
+          "description": "Find out more about notification center",
+          "url": "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
         }
       },
       "ValidateEntityLabelMatcherResult": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "success"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "failure"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "success"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "failure"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "failure": {
             "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Failure"
@@ -732,105 +797,75 @@
             "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Success"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "success"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "failure"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "success"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "failure"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "ValidateEntityLabelMatcherResult.Failure": {
+        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Test outgoing webhook response.failure.",
+        }
+      },
+      "ValidateEntityLabelMatcherResult.Failure": {
         "type": "object",
         "properties": {
           "message": {
-            "description": "Human-readable message.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 10000,
             "minLength": 1,
-            "maxLength": 10000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable message."
           }
+        },
+        "description": "Test outgoing webhook response.failure.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ValidateEntityLabelMatcherResult.Success": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Test integration result.success.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Test integration result.success.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "notification_center.EntityType": {
-        "description": "Entity type.",
-        "type": "string",
         "enum": [
           "ENTITY_TYPE_UNSPECIFIED",
           "ALERTS",
           "TEST_NOTIFICATIONS",
           "CASES",
           "OLLY_SCHEDULED_TASKS"
-        ]
+        ],
+        "type": "string",
+        "description": "Entity type."
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     },
     "parameters": {
       "id_3": {
-        "in": "path",
         "name": "id",
+        "in": "path",
         "description": "Unique identifier.",
         "required": true,
         "schema": {
-          "description": "Unique identifier.",
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "maxLength": 128,
           "minLength": 1,
-          "maxLength": 128
-        },
-        "style": "simple"
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "type": "string",
+          "description": "Unique identifier."
+        }
       }
     }
   }

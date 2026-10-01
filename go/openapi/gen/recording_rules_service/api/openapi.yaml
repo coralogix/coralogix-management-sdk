@@ -7,329 +7,330 @@
   "paths": {
     "/recording-rules/recording-rules/v1": {
       "get": {
-        "tags": [
-          "Recording Rules Service"
-        ],
-        "summary": "List Recording Rules",
         "description": "Returns all recording rule groups for the team.",
         "operationId": "RuleGroupSets_List",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RuleGroupSetListing"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "List Recording Rules",
         "tags": [
           "Recording Rules Service"
-        ],
-        "summary": "Create Recording Rules",
+        ]
+      },
+      "post": {
         "description": "Creates a new recording rule group.",
         "operationId": "RuleGroupSets_Create",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create Rule Group Set",
                 "description": "A set of rule groups to create.",
-                "type": "object",
                 "properties": {
                   "groups": {
                     "description": "List of groups.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     },
+                    "maxItems": 1000,
                     "minItems": 0,
-                    "maxItems": 1000
+                    "type": "array"
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "maxLength": 255,
                     "minLength": 1,
-                    "maxLength": 255
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
-                }
+                },
+                "title": "Create Rule Group Set",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateRuleGroupSetResult"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Create Recording Rules",
+        "tags": [
+          "Recording Rules Service"
+        ]
       }
     },
     "/recording-rules/recording-rules/v1/{id}": {
       "get": {
-        "tags": [
-          "Recording Rules Service"
-        ],
-        "summary": "Get Recording Rules",
         "description": "Returns the details of the specified recording rule group.",
         "operationId": "RuleGroupSets_Fetch",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OutRuleGroupSet"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get Recording Rules",
         "tags": [
           "Recording Rules Service"
-        ],
-        "summary": "Update Recording Rules",
+        ]
+      },
+      "put": {
         "description": "Updates the specified recording rule group.",
         "operationId": "RuleGroupSets_Update",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update Rule Group Set",
                 "description": "A set of rule groups to update.",
-                "type": "object",
                 "properties": {
                   "groups": {
                     "description": "List of groups.",
-                    "type": "array",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     },
+                    "maxItems": 1000,
                     "minItems": 0,
-                    "maxItems": 1000
+                    "type": "array"
                   },
                   "name": {
                     "description": "Display name.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "maxLength": 255,
                     "minLength": 1,
-                    "maxLength": 255
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
-                }
+                },
+                "title": "Update Rule Group Set",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Update Recording Rules",
         "tags": [
           "Recording Rules Service"
-        ],
-        "summary": "Delete Recording Rules",
+        ]
+      },
+      "delete": {
         "description": "Deletes the recording rule group with the specified ID.",
         "operationId": "RuleGroupSets_Delete",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Delete Recording Rules",
+        "tags": [
+          "Recording Rules Service"
+        ]
       },
       "parameters": [
         {
-          "in": "path",
           "name": "id",
+          "in": "path",
           "description": "Unique identifier.",
           "required": true,
           "schema": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
-          },
-          "style": "simple"
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
+          }
         }
       ]
     }
@@ -337,94 +338,96 @@
   "components": {
     "schemas": {
       "CreateRuleGroupSetResult": {
-        "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
         "title": "Create Rule Group Set Result",
-        "description": "Result of creating a rule group set.",
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
           }
         },
-        "required": [
-          "id"
-        ]
+        "description": "Result of creating a rule group set.",
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -432,123 +435,135 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "InRule": {
-        "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
         "title": "In Rule",
-        "description": "A rule within a group that defines a recording rule expression.",
+        "required": [
+          "record",
+          "expr"
+        ],
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
             "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
-            "type": "integer",
+            "examples": [
+              60000
+            ],
             "format": "int64",
+            "maximum": 1800000,
             "minimum": 0,
-            "maximum": 1800000
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "expr": {
-            "description": "The expr.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 10000,
             "minLength": 1,
-            "maxLength": 10000
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The expr."
           },
           "labels": {
-            "description": "List of labels.",
             "type": "object",
             "additionalProperties": {
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
+              "maxLength": 4096,
               "minLength": 0,
-              "maxLength": 4096
-            }
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "List of labels."
           },
           "record": {
-            "description": "Record.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 1,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Record."
           }
         },
-        "required": [
-          "record",
-          "expr"
-        ]
-      },
-      "InRuleGroup": {
+        "description": "A rule within a group that defines a recording rule expression.",
         "externalDocs": {
           "description": "Find out more about recording rules",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
+        }
+      },
+      "InRuleGroup": {
         "title": "In Rule Group",
-        "description": "A group of recording rules.",
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "id": {
             "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 128,
             "minLength": 1,
-            "maxLength": 128
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "interval": {
             "description": "Interval.",
-            "type": "integer",
             "format": "int64",
+            "maximum": 4294967295,
             "minimum": 60,
-            "maximum": 4294967295
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "limit": {
             "description": "Limit.",
-            "type": "string",
-            "pattern": "^[0-9]+$",
+            "maxLength": 20,
             "minLength": 1,
-            "maxLength": 20
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
           },
           "rules": {
-            "description": "List of rules.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/InRule"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "List of rules."
           },
           "version": {
             "description": "Version number.",
-            "type": "integer",
             "format": "int64",
+            "maximum": 4294967295,
             "minimum": 0,
-            "maximum": 4294967295
+            "type": "integer",
+            "x-coralogix-presence": true
           }
         },
-        "required": [
-          "name"
-        ]
+        "description": "A group of recording rules.",
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -557,213 +572,218 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "OutRule": {
-        "externalDocs": {
-          "description": "Find out more about recording rules",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
         "title": "Out Rule",
-        "description": "A recording rule as returned by the API.",
-        "type": "object",
-        "properties": {
-          "evaluationDelayMs": {
-            "description": "The evaluation delay ms.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "maximum": 1800000
-          },
-          "expr": {
-            "description": "The expr.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 10000
-          },
-          "labels": {
-            "description": "List of labels.",
-            "type": "object",
-            "additionalProperties": {
-              "type": "string",
-              "pattern": "^[\\s\\S]*$",
-              "minLength": 0,
-              "maxLength": 4096
-            }
-          },
-          "lastEvalDurationMs": {
-            "description": "The last eval duration ms.",
-            "type": "string",
-            "pattern": "^[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          },
-          "record": {
-            "description": "Record.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 4096
-          }
-        },
         "required": [
           "record",
           "expr",
           "labels"
-        ]
-      },
-      "OutRuleGroup": {
+        ],
+        "type": "object",
+        "properties": {
+          "evaluationDelayMs": {
+            "description": "The evaluation delay ms.",
+            "format": "int64",
+            "maximum": 1800000,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "expr": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "The expr."
+          },
+          "labels": {
+            "type": "object",
+            "additionalProperties": {
+              "maxLength": 4096,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "List of labels."
+          },
+          "lastEvalDurationMs": {
+            "description": "The last eval duration ms.",
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "record": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Record."
+          }
+        },
+        "description": "A recording rule as returned by the API.",
         "externalDocs": {
           "description": "Find out more about recording rules",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
+        }
+      },
+      "OutRuleGroup": {
         "title": "Out Rule Group",
-        "description": "A group of recording rules as returned by the API.",
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 128
-          },
-          "interval": {
-            "description": "Interval.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 60,
-            "maximum": 4294967295
-          },
-          "lastEvalAt": {
-            "description": "The last eval at.",
-            "type": "string",
-            "pattern": "^[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          },
-          "limit": {
-            "description": "Limit.",
-            "type": "string",
-            "pattern": "^[0-9]+$",
-            "minLength": 1,
-            "maxLength": 20
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 255
-          },
-          "rules": {
-            "description": "List of rules.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OutRule"
-            },
-            "minItems": 0,
-            "maxItems": 1000
-          },
-          "version": {
-            "description": "Version number.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "maximum": 4294967295
-          }
-        },
         "required": [
           "name",
           "rules",
           "version",
           "id"
-        ]
-      },
-      "OutRuleGroupSet": {
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
+          },
+          "interval": {
+            "description": "Interval.",
+            "format": "int64",
+            "maximum": 4294967295,
+            "minimum": 60,
+            "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "lastEvalAt": {
+            "description": "The last eval at.",
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "limit": {
+            "description": "Limit.",
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "name": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
+          },
+          "rules": {
+            "maxItems": 1000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutRule"
+            },
+            "description": "List of rules."
+          },
+          "version": {
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Version number.",
+            "format": "int64"
+          }
+        },
+        "description": "A group of recording rules as returned by the API.",
         "externalDocs": {
           "description": "Find out more about recording rules",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
+        }
+      },
+      "OutRuleGroupSet": {
         "title": "Out Rule Group Set",
-        "description": "An output set of rule groups.",
-        "type": "object",
-        "properties": {
-          "groups": {
-            "description": "List of groups.",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OutRuleGroup"
-            },
-            "minItems": 0,
-            "maxItems": 1000
-          },
-          "id": {
-            "description": "Unique identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 128
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 255
-          }
-        },
         "required": [
           "id",
           "groups",
           "name"
-        ]
-      },
-      "RuleGroupSetListing": {
+        ],
+        "type": "object",
+        "properties": {
+          "groups": {
+            "maxItems": 1000,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OutRuleGroup"
+            },
+            "description": "List of groups."
+          },
+          "id": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Unique identifier."
+          },
+          "name": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name."
+          }
+        },
+        "description": "An output set of rule groups.",
         "externalDocs": {
           "description": "Find out more about recording rules",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
-        },
+        }
+      },
+      "RuleGroupSetListing": {
         "title": "Rule Group Set Listing",
-        "description": "A listing of rule group sets.",
+        "required": [
+          "sets"
+        ],
         "type": "object",
         "properties": {
           "sets": {
-            "description": "The sets.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OutRuleGroupSet"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "The sets."
           }
         },
-        "required": [
-          "sets"
-        ]
+        "description": "A listing of rule group sets.",
+        "externalDocs": {
+          "description": "Find out more about recording rules",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/"
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

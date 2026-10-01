@@ -40,9 +40,9 @@ type CreateUserResult struct {
 type _CreateUserResult CreateUserResult
 
 // NewCreateUserResult instantiates a new CreateUserResult object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewCreateUserResult(username string) *CreateUserResult {
 	this := CreateUserResult{}
 	this.Username = username
@@ -50,8 +50,8 @@ func NewCreateUserResult(username string) *CreateUserResult {
 }
 
 // NewCreateUserResultWithDefaults instantiates a new CreateUserResult object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewCreateUserResultWithDefaults() *CreateUserResult {
 	this := CreateUserResult{}
 	return &this

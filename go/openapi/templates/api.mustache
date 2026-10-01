@@ -228,22 +228,8 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 			return {{#returnType}}localVarReturnValue, {{/returnType}}nil, err
 		}
 	{{/isCollectionFormatMulti}}
-	{{#defaultValue}}} else {
-    {{#isArray}}
-        var defaultValue {{{dataType}}} = {{{dataType}}}{{{.}}}
-        if err := parameterAddToHeaderOrQuery(localVarQueryParams, "{{{baseName}}}", defaultValue, "{{style}}", "{{collectionFormat}}"); err != nil {
-        	return {{#returnType}}localVarReturnValue, {{/returnType}}nil, err
-        }
-        r.{{paramName}} = &defaultValue
-    {{/isArray}}
-    {{^isArray}}
-        var defaultValue {{{dataType}}} = {{{.}}}
-        if err := parameterAddToHeaderOrQuery(localVarQueryParams, "{{{baseName}}}", defaultValue, "{{style}}", "{{collectionFormat}}"); err != nil {
-        	return {{#returnType}}localVarReturnValue, {{/returnType}}nil, err
-        }
-        r.{{paramName}} = &defaultValue
-    {{/isArray}}
-	{{/defaultValue}}}
+	{{! No default branch: a query default is what the server uses when the parameter is not sent. }}
+	}
 	{{/required}}
 	{{/queryParams}}
 	// to determine the Content-Type header

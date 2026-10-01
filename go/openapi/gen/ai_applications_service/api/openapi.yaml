@@ -7,63 +7,57 @@
   "paths": {
     "/ai/applications/v3": {
       "get": {
-        "tags": [
-          "AI Applications Service"
-        ],
-        "summary": "List AI applications",
         "description": "Lists AI applications, optionally filtered by evaluation type.",
         "operationId": "AiApplicationsService_ListAiApplications",
         "parameters": [
           {
+            "description": "Number of items per page. Default 200 if omitted.",
             "in": "query",
             "name": "page_size",
-            "description": "Number of items per page. Default 200 if omitted.",
+            "required": false,
             "schema": {
               "description": "Number of items per page. Default 200 if omitted.",
-              "type": "integer",
               "format": "int32",
+              "maximum": 1000,
               "minimum": 1,
-              "maximum": 1000
-            },
-            "style": "form"
+              "type": "integer",
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "Zero-based page offset. Default 0 if omitted.",
             "in": "query",
             "name": "page_offset",
-            "description": "Zero-based page offset. Default 0 if omitted.",
+            "required": false,
             "schema": {
               "description": "Zero-based page offset. Default 0 if omitted.",
-              "type": "integer",
               "format": "int64",
+              "maximum": 10000,
               "minimum": 0,
-              "maximum": 10000
-            },
-            "style": "form"
+              "type": "integer",
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "Optional filter: only include applications that have at least one evaluation of any of these types.",
             "in": "query",
             "name": "evaluation_types",
-            "description": "Optional filter: only include applications that have at least one evaluation of any of these types.",
+            "required": false,
             "schema": {
               "description": "Optional filter: only include applications that have at least one evaluation of any of these types.",
-              "type": "array",
               "items": {
                 "$ref": "#/components/schemas/EvaluationType"
               },
+              "maxItems": 100,
               "minItems": 0,
-              "maxItems": 100
-            },
-            "style": "form"
+              "type": "array"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListAiApplicationsResponse"
-                },
                 "example": {
                   "aiApplications": [
                     {
@@ -76,45 +70,44 @@
                       "updatedAt": "2026-06-02T15:35:00.000Z"
                     }
                   ]
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ListAiApplicationsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "List AI applications",
+        "tags": [
+          "AI Applications Service"
+        ]
       }
     },
     "/ai/applications/v3/{id}": {
       "get": {
-        "tags": [
-          "AI Applications Service"
-        ],
-        "summary": "Get AI application",
         "description": "Gets an AI application by its unique identifier.",
         "operationId": "AiApplicationsService_GetAiApplicationById",
         "parameters": [
           {
+            "description": "Unique identifier of the AI application.",
             "in": "path",
             "name": "id",
-            "description": "Unique identifier of the AI application.",
             "required": true,
             "schema": {
               "description": "Unique identifier of the AI application.",
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetAiApplicationByIdResponse"
-                },
                 "example": {
                   "aiApplication": {
                     "application": "checkout",
@@ -125,68 +118,67 @@
                     "subsystem": "api",
                     "updatedAt": "2026-06-02T15:35:00.000Z"
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/GetAiApplicationByIdResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Get AI application",
         "tags": [
           "AI Applications Service"
-        ],
-        "summary": "Delete AI application",
+        ]
+      },
+      "delete": {
         "description": "Deletes an AI application by its unique identifier.",
         "operationId": "AiApplicationsService_DeleteAiApplication",
         "parameters": [
           {
+            "description": "Unique identifier of the AI application to delete.",
             "in": "path",
             "name": "id",
-            "description": "Unique identifier of the AI application to delete.",
             "required": true,
             "schema": {
               "description": "Unique identifier of the AI application to delete.",
-              "type": "string",
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteAiApplicationResponse"
-                },
                 "example": {
                   "id": "175677d1-fc90-4a89-9e35-0590b188ebb2"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAiApplicationResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Delete AI application",
+        "tags": [
+          "AI Applications Service"
+        ]
       }
     },
     "/ai/model-pricing/v3": {
       "get": {
-        "tags": [
-          "AI Applications Service"
-        ],
-        "summary": "Get company model pricing",
         "description": "Returns the company-wide custom model pricing configuration.",
         "operationId": "AiApplicationsService_GetCompanyModelPricing",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GetCompanyModelPricingResponse"
-                },
                 "example": {
                   "pricing": {
                     "companyId": "12345",
@@ -198,17 +190,21 @@
                       }
                     }
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/GetCompanyModelPricingResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get company model pricing",
         "tags": [
           "AI Applications Service"
-        ],
-        "summary": "Set company model pricing",
+        ]
+      },
+      "put": {
         "description": "Replaces the company-wide custom model pricing configuration.",
         "operationId": "AiApplicationsService_SetCompanyModelPricing",
         "requestBody": {
@@ -216,19 +212,19 @@
             "application/json": {
               "schema": {
                 "description": "Request to set (replace) the company's custom model pricing.",
-                "type": "object",
                 "properties": {
                   "prices": {
-                    "description": "Full replacement map of model name to custom price.",
-                    "type": "object",
                     "additionalProperties": {
                       "$ref": "#/components/schemas/ModelPrice"
-                    }
+                    },
+                    "description": "Full replacement map of model name to custom price.",
+                    "type": "object"
                   }
                 },
                 "required": [
                   "prices"
-                ]
+                ],
+                "type": "object"
               }
             }
           },
@@ -236,12 +232,8 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SetCompanyModelPricingResponse"
-                },
                 "example": {
                   "pricing": {
                     "companyId": "12345",
@@ -253,158 +245,165 @@
                       }
                     }
                   }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/SetCompanyModelPricingResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Set company model pricing",
         "tags": [
           "AI Applications Service"
-        ],
-        "summary": "Delete company model pricing",
+        ]
+      },
+      "delete": {
         "description": "Deletes the company-wide custom model pricing configuration.",
         "operationId": "AiApplicationsService_DeleteCompanyModelPricing",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteCompanyModelPricingResponse"
-                },
                 "example": {
                   "id": "9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCompanyModelPricingResponse"
                 }
               }
-            }
+            },
+            "description": ""
           }
-        }
+        },
+        "summary": "Delete company model pricing",
+        "tags": [
+          "AI Applications Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "AiApplication": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "AI Application",
         "type": "object",
         "properties": {
           "application": {
-            "description": "Application name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "description": "Application name."
           },
           "companyId": {
-            "description": "Company ID",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "description": "Company ID"
           },
           "createdAt": {
-            "description": "RFC3339 timestamp when the application was first observed.",
-            "type": "string",
-            "format": "date-time",
+            "maxLength": 35,
             "minLength": 20,
-            "maxLength": 35
+            "type": "string",
+            "description": "RFC3339 timestamp when the application was first observed.",
+            "format": "date-time"
           },
           "guardrailsIntegrated": {
-            "description": "Whether guardrails are integrated for this application.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether guardrails are integrated for this application."
           },
           "id": {
-            "description": "Unique identifier of the AI application.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier of the AI application."
           },
           "subsystem": {
-            "description": "Subsystem name",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "description": "Subsystem name"
           },
           "updatedAt": {
-            "description": "RFC3339 timestamp when the application was last updated.",
-            "type": "string",
-            "format": "date-time",
+            "maxLength": 35,
             "minLength": 20,
-            "maxLength": 35
+            "type": "string",
+            "description": "RFC3339 timestamp when the application was last updated.",
+            "format": "date-time"
           }
+        },
+        "description": "AI Application",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CompanyModelPricing": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Company-wide custom model pricing configuration.",
         "type": "object",
         "properties": {
           "companyId": {
-            "description": "Company identifier.",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 256,
             "minLength": 1,
-            "maxLength": 256
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "description": "Company identifier."
           },
           "id": {
-            "description": "Unique identifier of the pricing record.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier of the pricing record."
           },
           "prices": {
-            "description": "Map of model name to custom price. Replaces all existing prices on set.",
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/ModelPrice"
-            }
+            },
+            "description": "Map of model name to custom price. Replaces all existing prices on set."
           }
+        },
+        "description": "Company-wide custom model pricing configuration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "DeleteAiApplicationResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response returned after deleting an AI application.",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier of the deleted AI application.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier of the deleted AI application."
           }
+        },
+        "description": "Response returned after deleting an AI application.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "DeleteCompanyModelPricingResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response returned after deleting company model pricing.",
         "type": "object",
         "properties": {
           "id": {
-            "description": "Unique identifier of the deleted pricing record.",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "Unique identifier of the deleted pricing record."
           }
+        },
+        "description": "Response returned after deleting company model pricing.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "EvaluationType": {
-        "type": "string",
         "enum": [
           "ALLOWED_TOPICS",
           "COMPETITION",
@@ -425,56 +424,59 @@
           "SQL_LOAD",
           "LANGUAGE_MISMATCH",
           "CUSTOM_EVALUATION"
-        ]
+        ],
+        "type": "string"
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -482,99 +484,103 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "GetAiApplicationByIdResponse": {
+        "description": "This data structure represents a filter",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response containing the requested AI application.",
+        }
+      },
+      "GetAiApplicationByIdResponse": {
         "type": "object",
         "properties": {
           "aiApplication": {
-            "description": "The AI application.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AiApplication"
               }
-            ]
+            ],
+            "description": "The AI application."
           }
+        },
+        "description": "Response containing the requested AI application.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "GetCompanyModelPricingResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the company's custom model pricing.",
         "type": "object",
         "properties": {
           "pricing": {
-            "description": "The company's custom model pricing.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CompanyModelPricing"
               }
-            ]
+            ],
+            "description": "The company's custom model pricing."
           }
+        },
+        "description": "Response containing the company's custom model pricing.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ListAiApplicationsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing a page of AI applications.",
         "type": "object",
         "properties": {
           "aiApplications": {
-            "description": "The list of AI applications on this page.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AiApplication"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "The list of AI applications on this page."
           }
+        },
+        "description": "Response containing a page of AI applications.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ModelPrice": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Custom price for a single model, per one million tokens (USD).",
         "type": "object",
         "properties": {
           "cacheReadPricePerMillionTokens": {
-            "description": "Cache read token price per one million tokens (USD).",
             "type": "number",
+            "description": "Cache read token price per one million tokens (USD).",
             "format": "double"
           },
           "cacheWritePricePerMillionTokens": {
-            "description": "Cache write token price per one million tokens (USD).",
             "type": "number",
+            "description": "Cache write token price per one million tokens (USD).",
             "format": "double"
           },
           "inputPricePerMillionTokens": {
-            "description": "Input token price per one million tokens (USD).",
             "type": "number",
+            "description": "Input token price per one million tokens (USD).",
             "format": "double"
           },
           "outputPricePerMillionTokens": {
-            "description": "Output token price per one million tokens (USD).",
             "type": "number",
+            "description": "Output token price per one million tokens (USD).",
             "format": "double"
           }
+        },
+        "description": "Custom price for a single model, per one million tokens (USD).",
+        "externalDocs": {
+          "url": ""
         }
       },
       "MultipleValues": {
@@ -584,46 +590,46 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "SetCompanyModelPricingResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the updated company model pricing.",
         "type": "object",
         "properties": {
           "pricing": {
-            "description": "The updated company model pricing.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CompanyModelPricing"
               }
-            ]
+            ],
+            "description": "The updated company model pricing."
           }
+        },
+        "description": "Response containing the updated company model pricing.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

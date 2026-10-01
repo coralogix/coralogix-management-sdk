@@ -34,9 +34,9 @@ type AllOption struct {
 type _AllOption AllOption
 
 // NewAllOption instantiates a new AllOption object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewAllOption(includeAll bool) *AllOption {
 	this := AllOption{}
 	this.IncludeAll = includeAll
@@ -44,8 +44,8 @@ func NewAllOption(includeAll bool) *AllOption {
 }
 
 // NewAllOptionWithDefaults instantiates a new AllOption object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewAllOptionWithDefaults() *AllOption {
 	this := AllOption{}
 	return &this

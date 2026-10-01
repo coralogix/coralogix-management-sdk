@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: Field Facts Compat
+  version: 1.0.0
+paths:
+  /widgets:
+    get:
+      operationId: listWidgets
+      parameters:
+        - name: labels
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            default: []
+        - name: enabled
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: true
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Widget"
+    post:
+      operationId: createWidget
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Widget"
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Widget"
+components:
+  schemas:
+    Kind:
+      type: string
+      enum:
+        - KIND_UNSPECIFIED
+        - KIND_FAST
+    Widget:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        enabled:
+          type: boolean
+          default: true
+          x-coralogix-presence: true
+        limit:
+          type: string
+          pattern: ^-?[0-9]+$
+          default: "10"
+          x-coralogix-presence: true
+        kind:
+          $ref: "#/components/schemas/Kind"
+          default: KIND_FAST
+          x-coralogix-presence: true
+        labels:
+          type: array
+          items:
+            type: string
+          minItems: 0
+          uniqueItems: true
+          default: []
+          x-coralogix-collection: set
+        createTime:
+          type: string
+          format: date-time
+          readOnly: true

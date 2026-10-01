@@ -35,9 +35,9 @@ type StaticSource struct {
 type _StaticSource StaticSource
 
 // NewStaticSource instantiates a new StaticSource object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewStaticSource(allOption AllOption, values []ValueLabel, valuesOrderDirection OrderDirection) *StaticSource {
 	this := StaticSource{}
 	this.AllOption = allOption
@@ -47,8 +47,8 @@ func NewStaticSource(allOption AllOption, values []ValueLabel, valuesOrderDirect
 }
 
 // NewStaticSourceWithDefaults instantiates a new StaticSource object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewStaticSourceWithDefaults() *StaticSource {
 	this := StaticSource{}
 	return &this

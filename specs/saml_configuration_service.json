@@ -7,19 +7,13 @@
   "paths": {
     "/aaa/team-saml/v1/active": {
       "post": {
-        "tags": [
-          "SAML Configuration Service"
-        ],
-        "summary": "Activate/Deactivate SAML",
         "description": "Activates or deactivates SAML for the team.",
         "operationId": "SamlConfigurationService_SetActive",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Set Active Request",
                 "description": "This data structure is used to activate or deactivate a SAML identity provider",
-                "type": "object",
                 "properties": {
                   "isActive": {
                     "description": "The is active.",
@@ -27,336 +21,347 @@
                   },
                   "teamId": {
                     "description": "Team identifier.",
-                    "type": "integer",
                     "format": "int64",
-                    "minimum": 0
+                    "minimum": 0,
+                    "type": "integer"
                   }
-                }
+                },
+                "title": "Set Active Request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/v2.SetActiveResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Activate/Deactivate SAML",
+        "tags": [
+          "SAML Configuration Service"
+        ]
       }
     },
     "/aaa/team-saml/v1/configuration": {
       "get": {
-        "tags": [
-          "SAML Configuration Service"
-        ],
-        "summary": "Get SAML Configuration",
         "description": "Returns the current SAML configuration for the team.",
         "operationId": "SamlConfigurationService_GetConfiguration",
         "parameters": [
           {
+            "description": "The unique identifier of the team whose SAML configuration to retrieve.",
             "in": "query",
             "name": "team_id",
-            "description": "The unique identifier of the team whose SAML configuration to retrieve.",
+            "required": false,
             "schema": {
               "description": "The unique identifier of the team whose SAML configuration to retrieve.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetConfigurationResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get SAML Configuration",
+        "tags": [
+          "SAML Configuration Service"
+        ]
       }
     },
     "/aaa/team-saml/v1/idp_parameters": {
       "post": {
-        "tags": [
-          "SAML Configuration Service"
-        ],
-        "summary": "Set IDP Parameters",
         "description": "Sets the identity provider parameters for SAML.",
         "operationId": "SamlConfigurationService_SetIDPParameters",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Set IDP Parameters Request",
                 "description": "This data structure is used to set the parameters of a SAML identity provider",
-                "type": "object",
                 "properties": {
                   "params": {
                     "$ref": "#/components/schemas/IDPParameters"
                   },
                   "teamId": {
                     "description": "Team identifier.",
-                    "type": "integer",
                     "format": "int64",
-                    "minimum": 0
+                    "minimum": 0,
+                    "type": "integer"
                   }
-                }
+                },
+                "title": "Set IDP Parameters Request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SetIDPParametersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Set IDP Parameters",
+        "tags": [
+          "SAML Configuration Service"
+        ]
       }
     },
     "/aaa/team-saml/v1/sp_parameters": {
       "get": {
-        "tags": [
-          "SAML Configuration Service"
-        ],
-        "summary": "Get SP Parameters",
         "description": "Returns the service provider parameters for SAML.",
         "operationId": "SamlConfigurationService_GetSPParameters",
         "parameters": [
           {
+            "description": "Team identifier.",
             "in": "query",
             "name": "team_id",
-            "description": "Team identifier.",
+            "required": false,
             "schema": {
               "description": "Team identifier.",
-              "type": "integer",
+              "examples": [
+                1234567
+              ],
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetSPParametersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get SP Parameters",
+        "tags": [
+          "SAML Configuration Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -364,27 +369,26 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetConfigurationResponse": {
-        "externalDocs": {
-          "description": "Find out more about enrichments",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
         "title": "Get Configuration Response",
-        "description": "This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider",
         "type": "object",
         "properties": {
           "idpDetails": {
@@ -397,119 +401,140 @@
             "$ref": "#/components/schemas/SPParameters"
           },
           "teamId": {
-            "description": "The team id.",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "The team id.",
+            "format": "int64"
           }
-        }
-      },
-      "GetSPParametersResponse": {
+        },
+        "description": "This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider",
         "externalDocs": {
           "description": "Find out more about enrichments",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
+        }
+      },
+      "GetSPParametersResponse": {
         "title": "Get SP Parameters Response",
-        "description": "This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider",
         "type": "object",
         "properties": {
           "params": {
             "$ref": "#/components/schemas/SPParameters"
           }
-        }
-      },
-      "IDPDetails": {
-        "externalDocs": {
-          "url": ""
         },
-        "description": "Idp details.",
-        "type": "object",
-        "properties": {
-          "icon": {
-            "description": "Icon identifier.",
-            "type": "string",
-            "minLength": 0
-          },
-          "name": {
-            "description": "Display name.",
-            "type": "string",
-            "minLength": 0
-          }
-        }
-      },
-      "IDPParameters": {
+        "description": "This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider",
         "externalDocs": {
           "description": "Find out more about enrichments",
           "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
-        "title": "IDP Parameters",
-        "description": "This data structure represents a set of SAML identity provider parameters",
+        }
+      },
+      "IDPDetails": {
         "type": "object",
         "properties": {
-          "active": {
-            "description": "Whether SAML SSO is currently active for this team.",
-            "type": "boolean"
-          },
-          "groupNames": {
-            "description": "List of group names mapped from the identity provider for role-based access.",
-            "type": "array",
-            "items": {
-              "description": "List of group names mapped from the identity provider for role-based access.",
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
-          },
-          "metadataContent": {
-            "description": "Raw XML content of the identity provider SAML metadata document.",
+          "icon": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Icon identifier."
           },
-          "metadataUrl": {
-            "description": "URL to the identity provider SAML metadata XML document.",
+          "name": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
-          },
-          "teamEntityId": {
-            "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "Display name."
           }
         },
+        "description": "Idp details.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "IDPParameters": {
+        "title": "IDP Parameters",
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "metadataUrl"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "metadataContent"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "metadataUrl"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "metadataContent"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
+        ],
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "description": "Whether SAML SSO is currently active for this team.",
+            "examples": [
+              true
+            ]
+          },
+          "groupNames": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "minLength": 0,
+              "type": "string",
+              "description": "List of group names mapped from the identity provider for role-based access.",
+              "examples": [
+                "group1"
+              ]
+            },
+            "description": "List of group names mapped from the identity provider for role-based access."
+          },
+          "metadataContent": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Raw XML content of the identity provider SAML metadata document.",
+            "examples": [
+              "<?xml version= ..."
+            ]
+          },
+          "metadataUrl": {
+            "minLength": 0,
+            "type": "string",
+            "description": "URL to the identity provider SAML metadata XML document.",
+            "examples": [
+              "https://<...>.okta.com/app/<...>/sso/saml/metadata"
+            ]
+          },
+          "teamEntityId": {
+            "description": "Coralogix team entity identifier used as the SAML service provider entity ID.",
+            "examples": [
+              1234567
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "This data structure represents a set of SAML identity provider parameters",
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -518,81 +543,96 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "SPParameters": {
-        "externalDocs": {
-          "description": "Find out more about enrichments",
-          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-        },
         "title": "Service Provider Parameters",
-        "description": "This data structure represents the parameters of a SAML service provider",
         "type": "object",
         "properties": {
           "assertionConsumerServiceUrl": {
-            "description": "The assertion consumer service url.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The assertion consumer service url.",
+            "examples": [
+              "assertion"
+            ]
           },
           "binding": {
-            "description": "The binding.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The binding.",
+            "examples": [
+              "binding"
+            ]
           },
           "metadataUrl": {
-            "description": "The metadata url.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The metadata url.",
+            "examples": [
+              "https://<...>.okta.com/app/<...>/sso/saml/metadata"
+            ]
           },
           "nameIdFormat": {
-            "description": "The name id format.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The name id format.",
+            "examples": [
+              "name_id"
+            ]
           },
           "signingCertPem": {
-            "description": "The signing cert pem.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The signing cert pem.",
+            "examples": [
+              "certificate"
+            ]
           }
+        },
+        "description": "This data structure represents the parameters of a SAML service provider",
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
         }
       },
       "SetIDPParametersResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after successfully setting the identity provider parameters.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response returned after successfully setting the identity provider parameters.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v2.SetActiveResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Response returned after updating the SAML active state.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Response returned after updating the SAML active state.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

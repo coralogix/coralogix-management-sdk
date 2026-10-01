@@ -31,17 +31,17 @@ type GeomapAwsRegionConfig struct {
 type _GeomapAwsRegionConfig GeomapAwsRegionConfig
 
 // NewGeomapAwsRegionConfig instantiates a new GeomapAwsRegionConfig object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewGeomapAwsRegionConfig() *GeomapAwsRegionConfig {
 	this := GeomapAwsRegionConfig{}
 	return &this
 }
 
 // NewGeomapAwsRegionConfigWithDefaults instantiates a new GeomapAwsRegionConfig object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewGeomapAwsRegionConfigWithDefaults() *GeomapAwsRegionConfig {
 	this := GeomapAwsRegionConfig{}
 	return &this

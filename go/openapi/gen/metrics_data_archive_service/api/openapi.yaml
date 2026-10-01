@@ -7,146 +7,143 @@
   "paths": {
     "/metrics/data-setup/v1": {
       "get": {
-        "tags": [
-          "Metrics Data Archive Service"
-        ],
-        "summary": "Get Metrics Storage Configuration",
         "description": "Returns the current metrics storage configuration.",
         "operationId": "MetricsConfiguratorPublicService_GetTenantConfig",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTenantConfigResponseV2"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Get Metrics Storage Configuration",
         "tags": [
           "Metrics Data Archive Service"
-        ],
-        "summary": "Update Metrics Storage Configuration",
+        ]
+      },
+      "put": {
         "description": "Updates the metrics storage configuration.",
         "operationId": "MetricsConfiguratorPublicService_Update",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update Tenant Request",
                 "description": "This data structure is used to update the configuration of a tenant.",
-                "type": "object",
+                "oneOf": [
+                  {
+                    "required": [
+                      "ibm"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "s3"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "gcs"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "ibm"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "s3"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "gcs"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "type": "object"
+                  }
+                ],
                 "properties": {
                   "gcs": {
-                    "description": "Google Cloud Storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/GcsConfig"
                       }
-                    ]
+                    ],
+                    "description": "Google Cloud Storage configuration."
                   },
                   "ibm": {
-                    "description": "IBM Cloud Object Storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/IbmConfigV2"
                       }
-                    ]
+                    ],
+                    "description": "IBM Cloud Object Storage configuration."
                   },
                   "retentionDays": {
                     "description": "Archive retention period in days.",
-                    "type": "integer",
                     "format": "int64",
-                    "minimum": 0
+                    "minimum": 0,
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "s3": {
-                    "description": "AWS S3 storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/S3Config"
                       }
-                    ]
+                    ],
+                    "description": "AWS S3 storage configuration."
                   }
                 },
-                "oneOf": [
-                  {
-                    "type": "object",
-                    "required": [
-                      "ibm"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "s3"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "gcs"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "not": {
-                      "anyOf": [
-                        {
-                          "type": "object",
-                          "required": [
-                            "ibm"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "s3"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "gcs"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "title": "Update Tenant Request",
+                "type": "object"
               }
             }
           },
@@ -154,135 +151,135 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Update Metrics Storage Configuration",
         "tags": [
           "Metrics Data Archive Service"
-        ],
-        "summary": "Configure Tenant",
+        ]
+      },
+      "post": {
         "description": "Creates the metrics storage configuration.",
         "operationId": "MetricsConfiguratorPublicService_ConfigureTenant",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Configure Tenant Request",
                 "description": "This data structure is used to configure a tenant.",
-                "type": "object",
+                "oneOf": [
+                  {
+                    "required": [
+                      "ibm"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "s3"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "gcs"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "ibm"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "s3"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "gcs"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "type": "object"
+                  }
+                ],
                 "properties": {
                   "gcs": {
-                    "description": "Google Cloud Storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/GcsConfig"
                       }
-                    ]
+                    ],
+                    "description": "Google Cloud Storage configuration."
                   },
                   "ibm": {
-                    "description": "IBM Cloud Object Storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/IbmConfigV2"
                       }
-                    ]
+                    ],
+                    "description": "IBM Cloud Object Storage configuration."
                   },
                   "retentionPolicy": {
                     "$ref": "#/components/schemas/RetentionPolicyRequest"
                   },
                   "s3": {
-                    "description": "AWS S3 storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/S3Config"
                       }
-                    ]
+                    ],
+                    "description": "AWS S3 storage configuration."
                   }
                 },
-                "oneOf": [
-                  {
-                    "type": "object",
-                    "required": [
-                      "ibm"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "s3"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "gcs"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "not": {
-                      "anyOf": [
-                        {
-                          "type": "object",
-                          "required": [
-                            "ibm"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "s3"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "gcs"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "title": "Configure Tenant Request",
+                "type": "object"
               }
             }
           },
@@ -290,238 +287,238 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Configure Tenant",
+        "tags": [
+          "Metrics Data Archive Service"
+        ]
       }
     },
     "/metrics/data-setup/v1/disable": {
       "post": {
-        "tags": [
-          "Metrics Data Archive Service"
-        ],
-        "summary": "Disable Metrics Archive",
         "description": "Disables the metrics storage configuration.",
         "operationId": "MetricsConfiguratorPublicService_DisableArchive",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Disable Metrics Archive",
+        "tags": [
+          "Metrics Data Archive Service"
+        ]
       }
     },
     "/metrics/data-setup/v1/enable": {
       "post": {
-        "tags": [
-          "Metrics Data Archive Service"
-        ],
-        "summary": "Enable Metrics Archive",
         "description": "Enables the metrics storage configuration.",
         "operationId": "MetricsConfiguratorPublicService_EnableArchive",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Enable Metrics Archive",
+        "tags": [
+          "Metrics Data Archive Service"
+        ]
       }
     },
     "/metrics/data-setup/v1/validate": {
       "post": {
-        "tags": [
-          "Metrics Data Archive Service"
-        ],
-        "summary": "Validate Metrics Storage Bucket",
         "description": "Validates the provided metrics storage configuration.",
         "operationId": "MetricsConfiguratorPublicService_ValidateBucket",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Bucket Validation Request",
                 "description": "This data structure is used to validate a bucket.",
-                "type": "object",
+                "oneOf": [
+                  {
+                    "required": [
+                      "ibm"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "s3"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "required": [
+                      "gcs"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "ibm"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "s3"
+                          ],
+                          "type": "object"
+                        },
+                        {
+                          "required": [
+                            "gcs"
+                          ],
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "type": "object"
+                  }
+                ],
                 "properties": {
                   "gcs": {
-                    "description": "Google Cloud Storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/GcsConfig"
                       }
-                    ]
+                    ],
+                    "description": "Google Cloud Storage configuration."
                   },
                   "ibm": {
-                    "description": "IBM Cloud Object Storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/IbmConfigV2"
                       }
-                    ]
+                    ],
+                    "description": "IBM Cloud Object Storage configuration."
                   },
                   "s3": {
-                    "description": "AWS S3 storage configuration.",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/S3Config"
                       }
-                    ]
+                    ],
+                    "description": "AWS S3 storage configuration."
                   }
                 },
-                "oneOf": [
-                  {
-                    "type": "object",
-                    "required": [
-                      "ibm"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "s3"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "required": [
-                      "gcs"
-                    ]
-                  },
-                  {
-                    "type": "object",
-                    "not": {
-                      "anyOf": [
-                        {
-                          "type": "object",
-                          "required": [
-                            "ibm"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "s3"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "required": [
-                            "gcs"
-                          ]
-                        }
-                      ]
-                    }
-                  }
-                ]
+                "title": "Bucket Validation Request",
+                "type": "object"
               }
             }
           },
@@ -529,119 +526,125 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Validate Metrics Storage Bucket",
+        "tags": [
+          "Metrics Data Archive Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -649,72 +652,85 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GcsConfig": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
         "title": "GCS Configuration",
-        "description": "This data structure represents the GCS configuration for a tenant.",
         "type": "object",
         "properties": {
           "bucket": {
-            "description": "Bucket name.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Bucket name."
           }
+        },
+        "description": "This data structure represents the GCS configuration for a tenant.",
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
         }
       },
       "GetTenantConfigResponseV2": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Response containing the current metrics tenant configuration.",
         "type": "object",
         "properties": {
           "tenantConfig": {
             "$ref": "#/components/schemas/TenantConfigV2"
           }
+        },
+        "description": "Response containing the current metrics tenant configuration.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IbmConfigV2": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
         "title": "IBM Bucket Configuration",
-        "description": "This data structure is used to configure an IBM bucket.",
         "type": "object",
         "properties": {
           "crn": {
-            "description": "The crn.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The crn.",
+            "examples": [
+              "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
+            ]
           },
           "endpoint": {
-            "description": "Endpoint.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Endpoint.",
+            "examples": [
+              "s3.us-south.cloud-object-storage.appdomain.cloud"
+            ]
           },
           "serviceCrn": {
-            "description": "The service crn.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The service crn.",
+            "examples": [
+              "crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::"
+            ]
           }
+        },
+        "description": "This data structure is used to configure an IBM bucket.",
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
         }
       },
       "MultipleValues": {
@@ -724,175 +740,184 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "RetentionPolicyRequest": {
-        "externalDocs": {
-          "description": "Find out more about metrics cost optimization",
-          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
         "title": "Retenion Policy Request",
-        "description": "This data structure is used to set the retention policy for a tenant.",
         "type": "object",
         "properties": {
           "fiveMinutesResolution": {
-            "description": "The five minutes resolution.",
+            "minimum": 0,
             "type": "integer",
+            "description": "The five minutes resolution.",
             "format": "int64",
-            "minimum": 0
+            "examples": [
+              2
+            ]
           },
           "oneHourResolution": {
-            "description": "The one hour resolution.",
+            "minimum": 0,
             "type": "integer",
+            "description": "The one hour resolution.",
             "format": "int64",
-            "minimum": 0
+            "examples": [
+              3
+            ]
           },
           "rawResolution": {
-            "description": "The raw resolution.",
+            "minimum": 0,
             "type": "integer",
+            "description": "The raw resolution.",
             "format": "int64",
-            "minimum": 0
+            "examples": [
+              1
+            ]
           }
-        }
-      },
-      "S3Config": {
+        },
+        "description": "This data structure is used to set the retention policy for a tenant.",
         "externalDocs": {
           "description": "Find out more about metrics cost optimization",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
-        },
+        }
+      },
+      "S3Config": {
         "title": "S3 Configuration",
-        "description": "This data structure represents the S3 configuration for a tenant.",
         "type": "object",
         "properties": {
           "bucket": {
-            "description": "Bucket name.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Bucket name."
           },
           "region": {
-            "description": "Region.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Region."
           }
+        },
+        "description": "This data structure represents the S3 configuration for a tenant.",
+        "externalDocs": {
+          "description": "Find out more about metrics cost optimization",
+          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
         }
       },
       "TenantConfigV2": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Tenant config v2.",
         "type": "object",
-        "properties": {
-          "disabled": {
-            "description": "Whether metrics archiving is disabled for this tenant.",
-            "type": "boolean"
-          },
-          "gcs": {
-            "description": "Google Cloud Storage configuration.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GcsConfig"
-              }
-            ]
-          },
-          "ibm": {
-            "description": "IBM Cloud Object Storage configuration.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/IbmConfigV2"
-              }
-            ]
-          },
-          "prefix": {
-            "description": "Storage path prefix applied to all archived objects.",
-            "type": "string",
-            "minLength": 0
-          },
-          "retentionPolicy": {
-            "$ref": "#/components/schemas/RetentionPolicyRequest"
-          },
-          "s3": {
-            "description": "AWS S3 storage configuration.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/S3Config"
-              }
-            ]
-          },
-          "tenantId": {
-            "description": "Tenant identifier.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
-          }
-        },
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "ibm"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "s3"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "gcs"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "ibm"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "s3"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "gcs"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
+        ],
+        "properties": {
+          "disabled": {
+            "type": "boolean",
+            "description": "Whether metrics archiving is disabled for this tenant."
+          },
+          "gcs": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcsConfig"
+              }
+            ],
+            "description": "Google Cloud Storage configuration."
+          },
+          "ibm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/IbmConfigV2"
+              }
+            ],
+            "description": "IBM Cloud Object Storage configuration."
+          },
+          "prefix": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Storage path prefix applied to all archived objects."
+          },
+          "retentionPolicy": {
+            "$ref": "#/components/schemas/RetentionPolicyRequest"
+          },
+          "s3": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/S3Config"
+              }
+            ],
+            "description": "AWS S3 storage configuration."
+          },
+          "tenantId": {
+            "minimum": 0,
+            "type": "integer",
+            "description": "Tenant identifier.",
+            "format": "int64"
+          }
+        },
+        "description": "Tenant config v2.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

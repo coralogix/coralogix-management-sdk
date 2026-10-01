@@ -7,47 +7,47 @@
   "paths": {
     "/cases/cases/case-settings/v1/configs": {
       "post": {
-        "tags": [
-          "Case Settings service"
-        ],
-        "summary": "Create a case settings team configuration",
         "description": "Create a new case settings team configuration with an optional display name and settings.\n\nRequires the following permissions:\n- `case-config:Update`",
         "operationId": "CaseSettingsService_CreateCaseSettings",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create case settings request",
                 "description": "Request to create a new case settings team configuration.",
-                "type": "object",
                 "properties": {
                   "caseLifecycle": {
-                    "description": "Case lifecycle settings for the team",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/CaseLifecycle"
                       }
-                    ]
+                    ],
+                    "description": "Case lifecycle settings for the team"
                   },
                   "globalIndicatorSettings": {
-                    "description": "Configuration settings",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/GlobalIndicatorSettings"
                       }
-                    ]
+                    ],
+                    "description": "Configuration settings"
                   },
                   "name": {
                     "description": "Optional display name for the case settings team configuration",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "examples": [
+                      "Primary Case Settings"
+                    ],
+                    "maxLength": 4096,
                     "minLength": 1,
-                    "maxLength": 4096
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
                   "globalIndicatorSettings"
-                ]
+                ],
+                "title": "Create case settings request",
+                "type": "object"
               }
             }
           },
@@ -55,66 +55,70 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateCaseSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "409": {
-            "description": "Conflict",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Conflict"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Create a case settings team configuration",
+        "tags": [
+          "Case Settings service"
+        ],
         "x-coralogixPermissions": [
           "case-config:Update"
         ]
@@ -122,304 +126,314 @@
     },
     "/cases/cases/case-settings/v1/configs/{id}": {
       "get": {
-        "tags": [
-          "Case Settings service"
-        ],
-        "summary": "Get a case settings team configuration",
         "description": "Retrieve a single case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Read`",
         "operationId": "CaseSettingsService_GetCaseSettings",
         "parameters": [
           {
+            "description": "ID of the case settings team configuration",
             "in": "path",
             "name": "id",
-            "description": "ID of the case settings team configuration",
             "required": true,
             "schema": {
               "description": "ID of the case settings team configuration",
-              "type": "string",
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "examples": [
+                "8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetCaseSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Case settings not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Case settings not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get a case settings team configuration",
+        "tags": [
+          "Case Settings service"
+        ],
         "x-coralogixPermissions": [
           "case-config:Read"
         ]
       },
       "delete": {
-        "tags": [
-          "Case Settings service"
-        ],
-        "summary": "Delete a case settings team configuration",
         "description": "Delete a case settings team configuration by its identifier.\n\nRequires the following permissions:\n- `case-config:Update`",
         "operationId": "CaseSettingsService_DeleteCaseSettings",
         "parameters": [
           {
+            "description": "ID of the case settings team configuration to delete",
             "in": "path",
             "name": "id",
-            "description": "ID of the case settings team configuration to delete",
             "required": true,
             "schema": {
               "description": "ID of the case settings team configuration to delete",
-              "type": "string",
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "examples": [
+                "8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteCaseSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Case settings not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Case settings not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Delete a case settings team configuration",
+        "tags": [
+          "Case Settings service"
+        ],
         "x-coralogixPermissions": [
           "case-config:Update"
         ]
       },
       "patch": {
-        "tags": [
-          "Case Settings service"
-        ],
-        "summary": "Update a case settings team configuration",
         "description": "Update the display name and/or settings of an existing case settings team configuration.\n\nRequires the following permissions:\n- `case-config:Update`",
         "operationId": "CaseSettingsService_UpdateCaseSettings",
         "parameters": [
           {
+            "description": "ID of the case settings team configuration to update",
             "in": "path",
             "name": "id",
-            "description": "ID of the case settings team configuration to update",
             "required": true,
             "schema": {
               "description": "ID of the case settings team configuration to update",
-              "type": "string",
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "examples": [
+                "8c0c02a3-3c1c-4d56-9a2d-9f6ab6a4b321"
+              ],
+              "maxLength": 36,
               "minLength": 36,
-              "maxLength": 36
-            },
-            "style": "simple"
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "Update case settings request",
                 "description": "Request to update an existing case settings team configuration.",
-                "type": "object",
                 "properties": {
                   "caseLifecycle": {
-                    "description": "Case lifecycle settings to apply",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/CaseLifecycle"
                       }
-                    ]
+                    ],
+                    "description": "Case lifecycle settings to apply"
                   },
                   "globalIndicatorSettings": {
-                    "description": "New configuration settings to apply",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/GlobalIndicatorSettings"
                       }
-                    ]
+                    ],
+                    "description": "New configuration settings to apply"
                   },
                   "name": {
                     "description": "New display name for the case settings team configuration",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "examples": [
+                      "SRE Case Settings"
+                    ],
+                    "maxLength": 4096,
                     "minLength": 1,
-                    "maxLength": 4096
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
-                }
+                },
+                "title": "Update case settings request",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateCaseSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Case settings not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Case settings not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Update a case settings team configuration",
+        "tags": [
+          "Case Settings service"
+        ],
         "x-coralogixPermissions": [
           "case-config:Update"
         ]
@@ -427,64 +441,64 @@
     },
     "/cases/cases/case-settings/v1/configs:getActive": {
       "get": {
-        "tags": [
-          "Case Settings service"
-        ],
-        "summary": "Get the active case settings team configuration",
         "description": "Retrieve the currently active case settings team configuration (after any org- or user-level precedence resolution).\n\nRequires the following permissions:\n- `case-config:Read`",
         "operationId": "CaseSettingsService_GetActiveCaseSettings",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetActiveCaseSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Active team config not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Active team config not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get the active case settings team configuration",
+        "tags": [
+          "Case Settings service"
+        ],
         "x-coralogixPermissions": [
           "case-config:Read"
         ]
@@ -492,54 +506,54 @@
     },
     "/cases/cases/case-settings/v1/configs:getSystemDefaults": {
       "get": {
-        "tags": [
-          "Case Settings service"
-        ],
-        "summary": "Get system default case settings team configuration settings",
         "description": "Retrieve the platform-wide default settings for case settings team configurations.\n\nRequires the following permissions:\n- `case-config:Read`",
         "operationId": "CaseSettingsService_GetSystemDefaultCaseSettings",
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetSystemDefaultCaseSettingsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "403": {
-            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Forbidden"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "Get system default case settings team configuration settings",
+        "tags": [
+          "Case Settings service"
+        ],
         "x-coralogixPermissions": [
           "case-config:Read"
         ]
@@ -549,135 +563,148 @@
   "components": {
     "schemas": {
       "AlertSuppressionStrategy": {
-        "description": "Alert suppression strategy.",
-        "type": "string",
         "enum": [
           "ALERT_SUPPRESSION_STRATEGY_UNSPECIFIED",
           "ALERT_SUPPRESSION_STRATEGY_IGNORE",
           "ALERT_SUPPRESSION_STRATEGY_CREATE_CASE"
-        ]
+        ],
+        "type": "string",
+        "description": "Alert suppression strategy."
       },
       "All": {
+        "title": "All filter values selected",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Represents selection of all items in the filter",
         "externalDocs": {
           "url": ""
-        },
-        "title": "All filter values selected",
-        "description": "Represents selection of all items in the filter",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "AutoCloseConfig": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Auto Close config",
-        "description": "Configuration for automatically closing cases after a certain period past resolution.",
+        "required": [
+          "postResolutionPeriod"
+        ],
         "type": "object",
         "properties": {
           "postResolutionPeriod": {
-            "description": "Period after which resolved cases are automatically closed.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 30,
             "minLength": 2,
-            "maxLength": 30
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Period after which resolved cases are automatically closed.",
+            "examples": [
+              "3600s"
+            ]
           }
         },
-        "required": [
-          "postResolutionPeriod"
-        ]
-      },
-      "AutoResolveConfig": {
+        "description": "Configuration for automatically closing cases after a certain period past resolution.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "AutoResolveConfig": {
         "title": "Auto resolve config",
-        "description": "Configuration for automatically resolving cases after a certain period of inactivity.",
         "type": "object",
         "properties": {
           "enabled": {
-            "description": "Enable/disable automatic resolution",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Enable/disable automatic resolution"
           },
           "inactivePeriod": {
-            "description": "Period of inactivity after which cases are automatically resolved.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Period of inactivity after which cases are automatically resolved.",
+            "examples": [
+              "3600s"
+            ]
           }
+        },
+        "description": "Configuration for automatically resolving cases after a certain period of inactivity.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CaseKPIs": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "KPI settings",
-        "description": "Case lifecycle KPI thresholds grouped first by KPI type and then by case priority.",
         "type": "object",
         "properties": {
           "thresholds": {
-            "description": "List of KPI thresholds for different case priorities.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/KPISettings"
             },
-            "minItems": 0
+            "description": "List of KPI thresholds for different case priorities."
           }
+        },
+        "description": "Case lifecycle KPI thresholds grouped first by KPI type and then by case priority.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CaseLifecycle": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Case lifecycle settings",
-        "description": "Team-level configuration options for the lifecycle of case, such as suppression and snooze periods.",
         "type": "object",
         "properties": {
           "alertSuppressionStrategy": {
-            "description": "Configuration for how cases process suppressed alerts.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AlertSuppressionStrategy"
               }
+            ],
+            "description": "Configuration for how cases process suppressed alerts.",
+            "examples": [
+              "ALERT_SUPPRESSION_STRATEGY_IGNORE"
             ]
           },
           "autoClose": {
-            "description": "Configuration for automatically closing resolved cases after a certain period. If not defined, it will fallback to auto closure after 1 week.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AutoCloseConfig"
               }
-            ]
+            ],
+            "description": "Configuration for automatically closing resolved cases after a certain period. If not defined, it will fallback to auto closure after 1 week."
           },
           "autoResolve": {
-            "description": "Configuration for inactive cases resolution.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AutoResolveConfig"
               }
-            ]
+            ],
+            "description": "Configuration for inactive cases resolution."
           },
           "kpi": {
-            "description": "KPI thresholds for acknowledgement and resolution, grouped by case priority.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseKPIs"
               }
-            ]
+            ],
+            "description": "KPI thresholds for acknowledgement and resolution, grouped by case priority."
           },
           "resolutionSnoozePeriod": {
-            "description": "Period after resolution during which new cases are snoozed.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Period after resolution during which new cases are snoozed.",
+            "examples": [
+              "600s"
+            ]
           },
           "suppressionPeriod": {
-            "description": "Default period during which duplicate or related cases are suppressed.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Default period during which duplicate or related cases are suppressed.",
+            "examples": [
+              "3600s"
+            ]
           }
+        },
+        "description": "Team-level configuration options for the lifecycle of case, such as suppression and snooze periods.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CasePriority": {
-        "description": "Case priority.",
-        "type": "string",
         "enum": [
           "CASE_PRIORITY_UNSPECIFIED",
           "CASE_PRIORITY_P1",
@@ -685,99 +712,140 @@
           "CASE_PRIORITY_P3",
           "CASE_PRIORITY_P4",
           "CASE_PRIORITY_P5"
-        ]
+        ],
+        "type": "string",
+        "description": "Case priority."
       },
       "CaseSettings": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Case settings team configuration",
-        "description": "Team-level configuration entity for case management.",
         "type": "object",
         "properties": {
           "caseLifecycle": {
-            "description": "Case lifecycle settings for the team",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseLifecycle"
               }
-            ]
+            ],
+            "description": "Case lifecycle settings for the team"
           },
           "createTime": {
-            "description": "Timestamp when the team configuration was created",
-            "type": "string",
-            "format": "date-time",
+            "maxLength": 30,
             "minLength": 20,
-            "maxLength": 30
+            "type": "string",
+            "description": "Timestamp when the team configuration was created",
+            "format": "date-time",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ]
           },
           "globalIndicatorSettings": {
-            "description": "Settings for the team",
             "allOf": [
               {
                 "$ref": "#/components/schemas/GlobalIndicatorSettings"
               }
-            ]
+            ],
+            "description": "Settings for the team"
           },
           "id": {
-            "description": "Unique identifier for the team configuration",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "maxLength": 36,
             "minLength": 36,
-            "maxLength": 36
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "type": "string",
+            "description": "Unique identifier for the team configuration",
+            "examples": [
+              "3f166e9f-3c88-4af2-b52e-138f339dab3e"
+            ]
           },
           "name": {
             "description": "Human-readable name for the team configuration",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "examples": [
+              "Default Team Config"
+            ],
+            "maxLength": 4096,
             "minLength": 1,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "updateTime": {
-            "description": "Timestamp when the team configuration was last updated",
-            "type": "string",
-            "format": "date-time",
+            "maxLength": 30,
             "minLength": 20,
-            "maxLength": 30
+            "type": "string",
+            "description": "Timestamp when the team configuration was last updated",
+            "format": "date-time"
           }
+        },
+        "description": "Team-level configuration entity for case management.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CreateCaseSettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Create case settings response",
-        "description": "Response containing the newly created case settings team configuration.",
+        "required": [
+          "caseSettings"
+        ],
         "type": "object",
         "properties": {
           "caseSettings": {
-            "description": "The created case settings team configuration",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseSettings"
               }
-            ]
+            ],
+            "description": "The created case settings team configuration"
           }
         },
-        "required": [
-          "caseSettings"
-        ]
+        "description": "Response containing the newly created case settings team configuration.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "DeleteCaseSettingsResponse": {
+        "title": "Delete case settings response",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Empty response; success indicated by HTTP status",
         "externalDocs": {
           "url": ""
-        },
-        "title": "Delete case settings response",
-        "description": "Empty response; success indicated by HTTP status",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "EntityLabelFilter": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "All or EntityLabel list",
-        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "all"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "values"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "all"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "values"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "all": {
             "$ref": "#/components/schemas/All"
@@ -786,125 +854,98 @@
             "$ref": "#/components/schemas/EntityLabelFilter.Values"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "all"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "values"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "all"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "values"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "EntityLabelFilter.Values": {
+        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
         "externalDocs": {
           "url": ""
-        },
-        "description": "An explicit list of entity label key-value pairs to include in the filter.",
+        }
+      },
+      "EntityLabelFilter.Values": {
         "type": "object",
         "properties": {
           "items": {
-            "description": "List of EntityLabels (Key/Value) to filter to. Passing empty list here means no alerts will be processed.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/v1.KeyValue"
             },
-            "minItems": 0
+            "description": "List of EntityLabels (Key/Value) to filter to. Passing empty list here means no alerts will be processed."
           }
+        },
+        "description": "An explicit list of entity label key-value pairs to include in the filter.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -912,148 +953,150 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetActiveCaseSettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get active case settings response",
-        "description": "Response containing the case settings team configuration currently active for the caller.",
+        "required": [
+          "caseSettings"
+        ],
         "type": "object",
         "properties": {
           "caseSettings": {
-            "description": "The active case settings",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseSettings"
               }
-            ]
+            ],
+            "description": "The active case settings"
           }
         },
-        "required": [
-          "caseSettings"
-        ]
+        "description": "Response containing the case settings team configuration currently active for the caller.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetCaseSettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Get case settings response",
-        "description": "Response containing the requested case settings team configuration.",
+        "required": [
+          "caseSettings"
+        ],
         "type": "object",
         "properties": {
           "caseSettings": {
-            "description": "The requested case settings team configuration",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseSettings"
               }
-            ]
+            ],
+            "description": "The requested case settings team configuration"
           }
         },
-        "required": [
-          "caseSettings"
-        ]
-      },
-      "GetSystemDefaultCaseSettingsResponse": {
+        "description": "Response containing the requested case settings team configuration.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "GetSystemDefaultCaseSettingsResponse": {
         "title": "Get default case settings response",
-        "description": "Response containing platform-wide default case settings team configuration values.",
+        "required": [
+          "globalIndicatorSettings"
+        ],
         "type": "object",
         "properties": {
           "caseLifecycle": {
-            "description": "System-wide default Case lifecycle settings for case settings team configurations",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseLifecycle"
               }
-            ]
+            ],
+            "description": "System-wide default Case lifecycle settings for case settings team configurations"
           },
           "globalIndicatorSettings": {
-            "description": "System-wide default settings for case settings team configurations",
             "allOf": [
               {
                 "$ref": "#/components/schemas/GlobalIndicatorSettings"
               }
-            ]
+            ],
+            "description": "System-wide default settings for case settings team configurations"
           }
         },
-        "required": [
-          "globalIndicatorSettings"
-        ]
-      },
-      "GlobalIndicatorSettings": {
+        "description": "Response containing platform-wide default case settings team configuration values.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "GlobalIndicatorSettings": {
         "title": "Global indicator settings",
-        "description": "Team-level indicator configuration options for case management, including case lifecycle and event filtering conditions.",
         "type": "object",
         "properties": {
           "enabled": {
-            "description": "Enable/disable this setting. When this is disabled, no alerts will be processed for cases.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Enable/disable this setting. When this is disabled, no alerts will be processed for cases."
           },
           "filteringConditions": {
-            "description": "Whitelist conditions for the alerts to be processed. Empty list means all alerts are processed. Filtering_condition evaluations will be OR'ed together",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IndicatorFilter"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "Whitelist conditions for the alerts to be processed. Empty list means all alerts are processed. Filtering_condition evaluations will be OR'ed together"
           }
+        },
+        "description": "Team-level indicator configuration options for case management, including case lifecycle and event filtering conditions.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IndicatorFilter": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Indicator filter",
-        "description": "Object for filtering signals to be processed by the cases pipeline. The filters will be AND'ed together.",
         "type": "object",
         "properties": {
           "enabled": {
-            "description": "Enable/disable this filter",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Enable/disable this filter"
           },
           "entityLabels": {
-            "description": "Selected entity labels for filtering",
             "allOf": [
               {
                 "$ref": "#/components/schemas/EntityLabelFilter"
               }
-            ]
+            ],
+            "description": "Selected entity labels for filtering"
           },
           "priorities": {
-            "description": "Selected priorities for filtering",
             "allOf": [
               {
                 "$ref": "#/components/schemas/IndicatorPriorityFilter"
               }
-            ]
+            ],
+            "description": "Selected priorities for filtering"
           }
+        },
+        "description": "Object for filtering signals to be processed by the cases pipeline. The filters will be AND'ed together.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "IndicatorPriority": {
         "title": "Indicator priority",
-        "description": "Priority of an alert indicator at trigger time.",
-        "type": "string",
         "enum": [
           "INDICATOR_PRIORITY_UNSPECIFIED",
           "INDICATOR_PRIORITY_P1",
@@ -1061,15 +1104,46 @@
           "INDICATOR_PRIORITY_P3",
           "INDICATOR_PRIORITY_P4",
           "INDICATOR_PRIORITY_P5"
-        ]
+        ],
+        "type": "string",
+        "description": "Priority of an alert indicator at trigger time."
       },
       "IndicatorPriorityFilter": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "All or IndicatorPriority list",
-        "description": "Select all priorities or a specific list of IndicatorPriority values.",
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "all"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "values"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "all"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "values"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "all": {
             "$ref": "#/components/schemas/All"
@@ -1078,101 +1152,84 @@
             "$ref": "#/components/schemas/IndicatorPriorityFilter.Values"
           }
         },
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "all"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "values"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "all"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "values"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
-      },
-      "IndicatorPriorityFilter.Values": {
+        "description": "Select all priorities or a specific list of IndicatorPriority values.",
         "externalDocs": {
           "url": ""
-        },
-        "description": "Entity label filter.values.",
+        }
+      },
+      "IndicatorPriorityFilter.Values": {
         "type": "object",
         "properties": {
           "items": {
-            "description": "List of IndicatorPriorities to filter to. Passing empty list here means no alerts will be processed.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/IndicatorPriority"
             },
-            "minItems": 0
+            "description": "List of IndicatorPriorities to filter to. Passing empty list here means no alerts will be processed."
           }
+        },
+        "description": "Entity label filter.values.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "KPISettings": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "KPI threshold entry",
-        "description": "Single KPI breach threshold for a specific case priority.",
         "type": "object",
         "properties": {
           "enabled": {
+            "type": "boolean",
             "description": "Enable or disable this threshold entry.",
-            "type": "boolean"
+            "examples": [
+              true
+            ]
           },
           "priority": {
-            "description": "Case priority level for which this threshold applies.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CasePriority"
               }
+            ],
+            "description": "Case priority level for which this threshold applies.",
+            "examples": [
+              "P1"
             ]
           },
           "threshold": {
-            "description": "Elapsed time after which the KPI is considered breached.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Elapsed time after which the KPI is considered breached.",
+            "examples": [
+              "300s"
+            ]
           },
           "type": {
-            "description": "Type of KPI this threshold applies to (acknowledgement or resolution).",
             "allOf": [
               {
                 "$ref": "#/components/schemas/KPIType"
               }
+            ],
+            "description": "Type of KPI this threshold applies to (acknowledgement or resolution).",
+            "examples": [
+              "KPI_TYPE_ACKNOWLEDGEMENT"
             ]
           }
+        },
+        "description": "Single KPI breach threshold for a specific case priority.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "KPIType": {
-        "description": "Kpi type.",
-        "type": "string",
         "enum": [
           "KPI_TYPE_UNSPECIFIED",
           "KPI_TYPE_TIME_TO_ACKNOWLEDGE",
           "KPI_TYPE_TIME_TO_RESOLVE",
           "KPI_TYPE_TIME_TO_UPDATE"
-        ]
+        ],
+        "type": "string",
+        "description": "Kpi type."
       },
       "MultipleValues": {
         "type": "object",
@@ -1181,78 +1238,84 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "UpdateCaseSettingsResponse": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Update case settings response",
-        "description": "Response containing the updated case settings team configuration.",
+        "required": [
+          "caseSettings"
+        ],
         "type": "object",
         "properties": {
           "caseSettings": {
-            "description": "The updated case settings team configuration",
             "allOf": [
               {
                 "$ref": "#/components/schemas/CaseSettings"
               }
-            ]
+            ],
+            "description": "The updated case settings team configuration"
           }
         },
-        "required": [
-          "caseSettings"
-        ]
+        "description": "Response containing the updated case settings team configuration.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v1.KeyValue": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Key-value pair",
-        "description": "Represents a simple key-value pair, often used for labels or groupings in cases.",
-        "type": "object",
-        "properties": {
-          "key": {
-            "description": "Key of the pair (e.g., label or grouping name)",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 4096
-          },
-          "value": {
-            "description": "Value associated with the key",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 4096
-          }
-        },
         "required": [
           "key",
           "value"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Key of the pair (e.g., label or grouping name)",
+            "examples": [
+              "service"
+            ]
+          },
+          "value": {
+            "maxLength": 4096,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Value associated with the key",
+            "examples": [
+              "payments"
+            ]
+          }
+        },
+        "description": "Represents a simple key-value pair, often used for labels or groupings in cases.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

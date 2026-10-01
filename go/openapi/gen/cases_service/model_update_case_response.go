@@ -32,9 +32,9 @@ type UpdateCaseResponse struct {
 type _UpdateCaseResponse UpdateCaseResponse
 
 // NewUpdateCaseResponse instantiates a new UpdateCaseResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewUpdateCaseResponse(case_ Case) *UpdateCaseResponse {
 	this := UpdateCaseResponse{}
 	this.Case = case_
@@ -42,8 +42,8 @@ func NewUpdateCaseResponse(case_ Case) *UpdateCaseResponse {
 }
 
 // NewUpdateCaseResponseWithDefaults instantiates a new UpdateCaseResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewUpdateCaseResponseWithDefaults() *UpdateCaseResponse {
 	this := UpdateCaseResponse{}
 	return &this

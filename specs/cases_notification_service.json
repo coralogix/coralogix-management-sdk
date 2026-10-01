@@ -7,37 +7,39 @@
   "paths": {
     "/cases/notifications/v1/deliveries": {
       "post": {
-        "tags": [
-          "Cases notification service"
-        ],
-        "summary": "List notification deliveries for cases",
         "description": "Retrieve notification delivery records for one or more cases, including routing, target, and outcome information.\n\nRequires the following permissions:\n- `case:Read`",
         "operationId": "CasesNotificationService_ListNotificationDeliveries",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "List notification deliveries request",
                 "description": "Request to retrieve notification delivery records for one or more cases.",
-                "type": "object",
                 "properties": {
                   "caseIds": {
                     "description": "Case IDs to retrieve notification deliveries for",
-                    "type": "array",
+                    "examples": [
+                      [
+                        "3f166e9f-3c88-4af2-b52e-138f339dab3e",
+                        "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+                      ]
+                    ],
                     "items": {
                       "description": "Case IDs to retrieve notification deliveries for",
-                      "type": "string",
-                      "pattern": "^[\\s\\S]*$",
+                      "maxLength": 64,
                       "minLength": 1,
-                      "maxLength": 64
+                      "pattern": "^[\\s\\S]*$",
+                      "type": "string"
                     },
+                    "maxItems": 1000,
                     "minItems": 1,
-                    "maxItems": 1000
+                    "type": "array"
                   }
                 },
                 "required": [
                   "caseIds"
-                ]
+                ],
+                "title": "List notification deliveries request",
+                "type": "object"
               }
             }
           },
@@ -45,46 +47,50 @@
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ListNotificationDeliveriesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
         },
+        "summary": "List notification deliveries for cases",
+        "tags": [
+          "Cases notification service"
+        ],
         "x-coralogixPermissions": [
           "case:Read"
         ]
@@ -94,258 +100,273 @@
   "components": {
     "schemas": {
       "CaseNotificationDeliveries": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Case notification deliveries",
-        "description": "Notification deliveries for a single case.",
+        "required": [
+          "notificationDeliveries"
+        ],
         "type": "object",
         "properties": {
           "notificationDeliveries": {
-            "description": "Notification deliveries for the case",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/NotificationDelivery"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "Notification deliveries for the case"
           }
         },
-        "required": [
-          "notificationDeliveries"
-        ]
-      },
-      "ConnectorDetails": {
+        "description": "Notification deliveries for a single case.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "ConnectorDetails": {
         "title": "Connector details",
-        "description": "Details of a notification connector.",
-        "type": "object",
-        "properties": {
-          "connectorId": {
-            "description": "Unique identifier of the connector",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
-            "minLength": 1,
-            "maxLength": 128
-          },
-          "connectorName": {
-            "description": "Display name of the connector",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 256
-          },
-          "connectorType": {
-            "description": "Type of the connector",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/v1.ConnectorType"
-              }
-            ]
-          }
-        },
         "required": [
           "connectorId",
           "connectorType",
           "connectorName"
-        ]
-      },
-      "DeliveryAttempt": {
+        ],
+        "type": "object",
+        "properties": {
+          "connectorId": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "description": "Unique identifier of the connector",
+            "examples": [
+              "c1d2e3f4-5678-90ab-cdef-1234567890ab"
+            ]
+          },
+          "connectorName": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name of the connector",
+            "examples": [
+              "Production Slack"
+            ]
+          },
+          "connectorType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.ConnectorType"
+              }
+            ],
+            "description": "Type of the connector"
+          }
+        },
+        "description": "Details of a notification connector.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "DeliveryAttempt": {
         "title": "Delivery attempt",
-        "description": "A single delivery attempt to a specific connector.",
+        "required": [
+          "connector",
+          "outcome"
+        ],
         "type": "object",
         "properties": {
           "connector": {
-            "description": "The connector that the delivery was sent to",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ConnectorDetails"
               }
-            ]
+            ],
+            "description": "The connector that the delivery was sent to"
           },
           "outcome": {
-            "description": "Outcome of the delivery attempt",
             "allOf": [
               {
                 "$ref": "#/components/schemas/DeliveryOutcome"
               }
-            ]
+            ],
+            "description": "Outcome of the delivery attempt"
           }
         },
-        "required": [
-          "connector",
-          "outcome"
-        ]
-      },
-      "DeliveryFailure": {
+        "description": "A single delivery attempt to a specific connector.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "DeliveryFailure": {
         "title": "Delivery failure",
-        "description": "Failed delivery outcome with error details.",
+        "required": [
+          "errorMessage"
+        ],
         "type": "object",
         "properties": {
           "errorMessage": {
-            "description": "Error message describing the failure",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 1,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Error message describing the failure",
+            "examples": [
+              "Connection timeout after 30s"
+            ]
           }
         },
-        "required": [
-          "errorMessage"
-        ]
-      },
-      "DeliveryOutcome": {
+        "description": "Failed delivery outcome with error details.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "DeliveryOutcome": {
         "title": "Delivery outcome",
-        "description": "Outcome of a notification delivery attempt.",
         "type": "object",
-        "properties": {
-          "failure": {
-            "description": "Delivery failed",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DeliveryFailure"
-              }
-            ]
-          },
-          "success": {
-            "description": "Delivery succeeded",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DeliverySuccess"
-              }
-            ]
-          }
-        },
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "success"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "failure"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "success"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "failure"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
-      },
-      "DeliverySuccess": {
+        ],
+        "properties": {
+          "failure": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliveryFailure"
+              }
+            ],
+            "description": "Delivery failed"
+          },
+          "success": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DeliverySuccess"
+              }
+            ],
+            "description": "Delivery succeeded"
+          }
+        },
+        "description": "Outcome of a notification delivery attempt.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "DeliverySuccess": {
         "title": "Delivery success",
-        "description": "Successful delivery outcome with an optional evidence URL.",
         "type": "object",
         "properties": {
           "evidenceUrl": {
             "description": "URL to the delivered notification, if available (e.g. Slack message, ServiceNow record)",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "examples": [
+              "https://workspace.slack.com/archives/C01ABC23DEF/p1234567890123456"
+            ],
+            "maxLength": 2048,
             "minLength": 1,
-            "maxLength": 2048
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           }
+        },
+        "description": "Successful delivery outcome with an optional evidence URL.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -353,39 +374,43 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
-          }
-        },
-        "required": [
-          "pathAndValues"
-        ]
-      },
-      "ListNotificationDeliveriesResponse": {
-        "externalDocs": {
-          "url": ""
-        },
-        "title": "List notification deliveries response",
-        "description": "Response containing a list of notification delivery records for cases.",
-        "type": "object",
-        "properties": {
-          "deliveriesByCase": {
-            "description": "Notification deliveries keyed by case ID",
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/CaseNotificationDeliveries"
             }
           }
         },
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "ListNotificationDeliveriesResponse": {
+        "title": "List notification deliveries response",
         "required": [
           "deliveriesByCase"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "deliveriesByCase": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CaseNotificationDeliveries"
+            },
+            "description": "Notification deliveries keyed by case ID"
+          }
+        },
+        "description": "Response containing a list of notification delivery records for cases.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "MultipleValues": {
         "type": "object",
@@ -394,211 +419,221 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "NoNotificationCreatedResult": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "No notification created result",
-        "description": "Indicates that routers matched but no notification was ultimately created.",
+        "required": [
+          "matchedRouters"
+        ],
         "type": "object",
         "properties": {
           "matchedRouters": {
-            "description": "Routers that matched the notification request",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RouterInfo"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "Routers that matched the notification request"
           }
         },
-        "required": [
-          "matchedRouters"
-        ]
+        "description": "Indicates that routers matched but no notification was ultimately created.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "NoRouterMatchedResult": {
+        "title": "No router matched result",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Indicates that no router matched the notification request.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "No router matched result",
-        "description": "Indicates that no router matched the notification request.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "NotificationDelivery": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Notification delivery",
-        "description": "Delivery results for a single notification.",
-        "type": "object",
-        "properties": {
-          "attempted": {
-            "description": "Delivery was attempted through a router to one or more connectors",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RoutedDelivery"
-              }
-            ]
-          },
-          "noNotificationCreated": {
-            "description": "Routers matched but no notification was created",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/NoNotificationCreatedResult"
-              }
-            ]
-          },
-          "noRouterMatched": {
-            "description": "No router matched the notification request",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/NoRouterMatchedResult"
-              }
-            ]
-          },
-          "requestNotificationId": {
-            "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-            "minLength": 36,
-            "maxLength": 36
-          },
-          "timestamp": {
-            "description": "When the notification was triggered",
-            "type": "string",
-            "format": "date-time",
-            "minLength": 20,
-            "maxLength": 30
-          }
-        },
         "required": [
           "timestamp"
         ],
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "noRouterMatched"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "noNotificationCreated"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "attempted"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "noRouterMatched"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "noNotificationCreated"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "attempted"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
-      },
-      "RoutedDelivery": {
+        ],
+        "properties": {
+          "attempted": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RoutedDelivery"
+              }
+            ],
+            "description": "Delivery was attempted through a router to one or more connectors"
+          },
+          "noNotificationCreated": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoNotificationCreatedResult"
+              }
+            ],
+            "description": "Routers matched but no notification was created"
+          },
+          "noRouterMatched": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NoRouterMatchedResult"
+              }
+            ],
+            "description": "No router matched the notification request"
+          },
+          "requestNotificationId": {
+            "maxLength": 36,
+            "minLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "type": "string",
+            "description": "The notification request ID that triggered this delivery, used to correlate delivery outcomes with their originating requests",
+            "examples": [
+              "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+            ]
+          },
+          "timestamp": {
+            "maxLength": 30,
+            "minLength": 20,
+            "type": "string",
+            "description": "When the notification was triggered",
+            "format": "date-time",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ]
+          }
+        },
+        "description": "Delivery results for a single notification.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "RoutedDelivery": {
         "title": "Routed delivery",
-        "description": "Delivery attempts routed through a single router to one or more connectors.",
+        "required": [
+          "router",
+          "attempts"
+        ],
         "type": "object",
         "properties": {
           "attempts": {
-            "description": "Individual delivery attempts to connectors",
+            "maxItems": 100,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeliveryAttempt"
             },
-            "minItems": 0,
-            "maxItems": 100
+            "description": "Individual delivery attempts to connectors"
           },
           "router": {
-            "description": "The router that handled the notification",
             "allOf": [
               {
                 "$ref": "#/components/schemas/RouterInfo"
               }
-            ]
+            ],
+            "description": "The router that handled the notification"
           }
         },
-        "required": [
-          "router",
-          "attempts"
-        ]
-      },
-      "RouterInfo": {
+        "description": "Delivery attempts routed through a single router to one or more connectors.",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "RouterInfo": {
         "title": "Router info",
-        "description": "Information about a notification router.",
-        "type": "object",
-        "properties": {
-          "routerId": {
-            "description": "Unique identifier of the router",
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
-            "minLength": 1,
-            "maxLength": 128
-          },
-          "routerName": {
-            "description": "Display name of the router",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 256
-          }
-        },
         "required": [
           "routerId",
           "routerName"
-        ]
+        ],
+        "type": "object",
+        "properties": {
+          "routerId": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+            "type": "string",
+            "description": "Unique identifier of the router",
+            "examples": [
+              "d4e5f678-90ab-cdef-1234-567890abcdef"
+            ]
+          },
+          "routerName": {
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name of the router",
+            "examples": [
+              "Production alerts router"
+            ]
+          }
+        },
+        "description": "Information about a notification router.",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "v1.ConnectorType": {
-        "description": "Connector type.",
-        "type": "string",
         "enum": [
           "CONNECTOR_TYPE_UNSPECIFIED",
           "CONNECTOR_TYPE_SLACK",
@@ -607,15 +642,17 @@
           "CONNECTOR_TYPE_EMAIL",
           "CONNECTOR_TYPE_GENERIC_HTTPS",
           "CONNECTOR_TYPE_MICROSOFT_TEAMS"
-        ]
+        ],
+        "type": "string",
+        "description": "Connector type."
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

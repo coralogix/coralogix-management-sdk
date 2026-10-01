@@ -31,17 +31,17 @@ type AtomicBatchExecuteE2MResponse struct {
 type _AtomicBatchExecuteE2MResponse AtomicBatchExecuteE2MResponse
 
 // NewAtomicBatchExecuteE2MResponse instantiates a new AtomicBatchExecuteE2MResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewAtomicBatchExecuteE2MResponse() *AtomicBatchExecuteE2MResponse {
 	this := AtomicBatchExecuteE2MResponse{}
 	return &this
 }
 
 // NewAtomicBatchExecuteE2MResponseWithDefaults instantiates a new AtomicBatchExecuteE2MResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewAtomicBatchExecuteE2MResponseWithDefaults() *AtomicBatchExecuteE2MResponse {
 	this := AtomicBatchExecuteE2MResponse{}
 	return &this

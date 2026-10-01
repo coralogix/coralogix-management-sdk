@@ -7,147 +7,145 @@
   "paths": {
     "/aaa/users/v2": {
       "get": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Search Users",
         "description": "Searches for team members by query.",
         "operationId": "UsersMgmtService_SearchUsers",
         "parameters": [
           {
+            "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
             "in": "query",
             "name": "team_id",
-            "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+            "required": false,
             "schema": {
               "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           },
           {
+            "description": "Optional filter by username (partial match supported)",
             "in": "query",
             "name": "username",
-            "description": "Optional filter by username (partial match supported)",
+            "required": false,
             "schema": {
               "description": "Optional filter by username (partial match supported)",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
-            },
-            "style": "form"
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "Optional filter by user status (e.g., 'active', 'inactive')",
             "in": "query",
             "name": "status",
-            "description": "Optional filter by user status (e.g., 'active', 'inactive')",
+            "required": false,
             "schema": {
-              "description": "Optional filter by user status (e.g., 'active', 'inactive')",
               "allOf": [
                 {
                   "$ref": "#/components/schemas/UserStatus"
                 }
-              ]
-            },
-            "style": "form"
+              ],
+              "description": "Optional filter by user status (e.g., 'active', 'inactive')",
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "Number of results per page",
             "in": "query",
             "name": "page_size",
-            "description": "Number of results per page",
+            "required": false,
             "schema": {
               "description": "Number of results per page",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           },
           {
+            "description": "Token for pagination to retrieve the next page of results",
             "in": "query",
             "name": "page_token",
-            "description": "Token for pagination to retrieve the next page of results",
+            "required": false,
             "schema": {
               "description": "Token for pagination to retrieve the next page of results",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SearchUsersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Team not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "put": {
+        },
+        "summary": "Search Users",
         "tags": [
           "Users Management Service"
-        ],
-        "summary": "Update Users",
+        ]
+      },
+      "put": {
         "description": "Updates team members for the specified team.",
         "operationId": "UsersMgmtService_UpdateUsers",
         "parameters": [
           {
+            "description": "Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
             "in": "query",
             "name": "team_id",
-            "description": "Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+            "required": false,
             "schema": {
               "description": "Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "requestBody": {
@@ -155,87 +153,87 @@
             "application/json": {
               "schema": {
                 "description": "List of users to update. Multiple users can be updated in a single request.",
-                "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/UpdateUserRequest"
                 },
-                "minItems": 0
+                "minItems": 0,
+                "type": "array"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateUsersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "User not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "User not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Update Users",
         "tags": [
           "Users Management Service"
-        ],
-        "summary": "Create Users",
+        ]
+      },
+      "post": {
         "description": "Adds members to the specified team.",
         "operationId": "UsersMgmtService_CreateUsers",
         "parameters": [
           {
+            "description": "Team ID where the users will be created. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
             "in": "query",
             "name": "team_id",
-            "description": "Team ID where the users will be created. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+            "required": false,
             "schema": {
               "description": "Team ID where the users will be created. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "requestBody": {
@@ -243,433 +241,438 @@
             "application/json": {
               "schema": {
                 "description": "List of users to create. Multiple users can be created in a single request.",
-                "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/CreateUserRequest"
                 },
-                "minItems": 0
+                "minItems": 0,
+                "type": "array"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateUsersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Team not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team not found"
           },
           "409": {
-            "description": "User already exists",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "User already exists"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Create Users",
+        "tags": [
+          "Users Management Service"
+        ]
       }
     },
     "/aaa/users/v2/{user_account_id}": {
       "get": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Get User",
         "description": "Returns the details of a specific team member.",
         "operationId": "UsersMgmtService_GetUser",
         "parameters": [
           {
+            "description": "User account ID to retrieve",
             "in": "path",
             "name": "user_account_id",
-            "description": "User account ID to retrieve",
             "required": true,
             "schema": {
               "description": "User account ID to retrieve",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
+              "minimum": 0,
+              "type": "integer"
+            }
           },
           {
+            "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
             "in": "query",
             "name": "team_id",
-            "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
+            "required": false,
             "schema": {
               "description": "Team ID to search within. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetUserResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "User not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "User not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get User",
+        "tags": [
+          "Users Management Service"
+        ]
       }
     },
     "/aaa/users/v2:updateStatuses": {
       "patch": {
-        "tags": [
-          "Users Management Service"
-        ],
-        "summary": "Activate/Revoke Users",
         "description": "Updates the active status of multiple team members.",
         "operationId": "UsersMgmtService_UpdateUsersStatuses",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "UpdateUserStatusRequest",
                 "description": "Request to activate or revoke (deactivate) one or more users within a team. This operation changes the user status to either Active (enables access) or Inactive (disables access).",
-                "type": "object",
                 "properties": {
                   "status": {
-                    "description": "New status for the users: Active (enables system access) or Inactive (disables system access)",
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/UserStatus"
                       }
-                    ]
+                    ],
+                    "description": "New status for the users: Active (enables system access) or Inactive (disables system access)"
                   },
                   "teamId": {
                     "description": "Team ID containing the users to update. Optional on the /aaa/users/v2 routes, which bind no team in the path: omit it and the team of the API key making the call is used.",
-                    "type": "integer",
                     "format": "int64",
-                    "minimum": 0
+                    "minimum": 0,
+                    "type": "integer"
                   },
                   "userAccountIds": {
                     "description": "List of user account IDs to update. All users will be set to the same status.",
-                    "type": "array",
                     "items": {
                       "description": "List of user account IDs to update. All users will be set to the same status.",
-                      "type": "integer",
                       "format": "int64",
-                      "minimum": 0
+                      "minimum": 0,
+                      "type": "integer"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "type": "array"
                   },
                   "userIds": {
                     "description": "Stable ids of the users to update, as an alternative to `userAccountIds`. All users will be set to the same status. Mutually exclusive with `userAccountIds`: set exactly one of the two.",
-                    "type": "array",
                     "items": {
                       "description": "Stable ids of the users to update, as an alternative to `userAccountIds`. All users will be set to the same status. Mutually exclusive with `userAccountIds`: set exactly one of the two.",
-                      "type": "string",
-                      "pattern": "^[\\s\\S]+$",
+                      "maxLength": 255,
                       "minLength": 1,
-                      "maxLength": 255
+                      "pattern": "^[\\s\\S]+$",
+                      "type": "string"
                     },
+                    "maxItems": 1000,
                     "minItems": 1,
-                    "maxItems": 1000
+                    "type": "array"
                   }
-                }
+                },
+                "title": "UpdateUserStatusRequest",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateUsersStatusesResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "User not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "User not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Activate/Revoke Users",
+        "tags": [
+          "Users Management Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "AccessType": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "AccessType",
-        "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
-        "discriminator": {
-          "propertyName": "accessType"
-        },
-        "type": "object",
-        "properties": {
-          "accessType": {
-            "description": "Type of access: 'permanent' or 'temporary'",
-            "type": "string",
-            "minLength": 0
-          },
-          "permanentAccess": {
-            "description": "Permanent access configuration - user has indefinite access",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PermanentAccess"
-              }
-            ]
-          },
-          "temporaryAccess": {
-            "description": "Temporary access configuration - user access expires at a specified time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TemporaryAccess"
-              }
-            ]
-          }
-        },
         "required": [
           "accessType"
         ],
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "permanentAccess"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "temporaryAccess"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "permanentAccess"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "temporaryAccess"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
+        ],
+        "properties": {
+          "accessType": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Type of access: 'permanent' or 'temporary'"
+          },
+          "permanentAccess": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PermanentAccess"
+              }
+            ],
+            "description": "Permanent access configuration - user has indefinite access"
+          },
+          "temporaryAccess": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TemporaryAccess"
+              }
+            ],
+            "description": "Temporary access configuration - user access expires at a specified time"
+          }
+        },
+        "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
+        "discriminator": {
+          "propertyName": "accessType"
+        },
+        "externalDocs": {
+          "url": ""
+        }
       },
       "AllowedLoginMode": {
-        "type": "string",
         "enum": [
           "ALLOWED_LOGIN_MODE_UNSPECIFIED",
           "ALLOWED_LOGIN_MODE_SSO",
           "ALLOWED_LOGIN_MODE_LOCAL"
-        ]
+        ],
+        "type": "string"
       },
       "CreateUserRequest": {
         "type": "object",
         "properties": {
           "onboardingMode": {
-            "description": "Onboarding mode determines whether the user receives an invite link or is created without one",
             "allOf": [
               {
                 "$ref": "#/components/schemas/OnboardingMode"
               }
-            ]
+            ],
+            "description": "Onboarding mode determines whether the user receives an invite link or is created without one"
           },
           "userTemplate": {
-            "description": "Template containing all user properties to set during creation",
             "allOf": [
               {
                 "$ref": "#/components/schemas/UserTemplate"
               }
-            ]
+            ],
+            "description": "Template containing all user properties to set during creation"
           }
         }
       },
       "CreateUserResult": {
-        "externalDocs": {
-          "url": ""
-        },
+        "required": [
+          "username"
+        ],
         "type": "object",
         "properties": {
           "message": {
             "description": "Human-readable detail about this outcome. Set where a status alone is not enough, such as `CREATE_USER_STATUS_FAILED`.",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 1024,
             "minLength": 1,
-            "maxLength": 1024
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "status": {
             "$ref": "#/components/schemas/CreateUserStatus"
           },
           "user": {
-            "description": "Full details of the created user, as returned by GetUser. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/rbac.v2.User"
               }
-            ]
+            ],
+            "description": "Full details of the created user, as returned by GetUser. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted."
           },
           "userAccountId": {
-            "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "userId": {
             "description": "Stable id of the user. Absent when the outcome produced no user, such as an invited user, who has none until the invitation is accepted.",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "username": {
-            "description": "The username from the request this result belongs to",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "description": "The username from the request this result belongs to"
           }
         },
-        "required": [
-          "username"
-        ]
+        "externalDocs": {
+          "url": ""
+        }
       },
       "CreateUserStatus": {
-        "type": "string",
         "enum": [
           "CREATE_USER_STATUS_UNSPECIFIED",
           "CREATE_USER_STATUS_CREATED",
@@ -678,96 +681,99 @@
           "CREATE_USER_STATUS_ALREADY_INVITED",
           "CREATE_USER_STATUS_DOMAIN_NOT_ALLOWED",
           "CREATE_USER_STATUS_FAILED"
-        ]
+        ],
+        "type": "string"
       },
       "CreateUsersResponse": {
-        "externalDocs": {
-          "description": "Find out more about user management",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "CreateUsersResponse",
-        "description": "Empty response indicating successful processing of all user creation and invitation requests. Ensure failures are returned via gRPC status codes.",
         "type": "object",
         "properties": {
           "results": {
-            "description": "Exactly one entry per user in the request, in request order. Each entry also echoes its `username`, so a caller can join on that instead of on position.",
+            "maxItems": 1000,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateUserResult"
             },
-            "minItems": 0,
-            "maxItems": 1000
+            "description": "Exactly one entry per user in the request, in request order. Each entry also echoes its `username`, so a caller can join on that instead of on position."
           }
+        },
+        "description": "Empty response indicating successful processing of all user creation and invitation requests. Ensure failures are returned via gRPC status codes.",
+        "externalDocs": {
+          "description": "Find out more about user management",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -775,37 +781,41 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetUserResponse": {
-        "externalDocs": {
-          "description": "Find out more about user management",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "GetUserResponse",
-        "description": "Response containing the complete details of the requested user, including account information, status, login modes, and access configuration.",
         "type": "object",
         "properties": {
           "user": {
-            "description": "Complete user details",
             "allOf": [
               {
                 "$ref": "#/components/schemas/rbac.v2.User"
               }
-            ]
+            ],
+            "description": "Complete user details"
           }
+        },
+        "description": "Response containing the complete details of the requested user, including account information, status, login modes, and access configuration.",
+        "externalDocs": {
+          "description": "Find out more about user management",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "MultipleValues": {
@@ -815,303 +825,308 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "OnboardingMode": {
-        "description": "Onboarding mode.",
-        "type": "string",
         "enum": [
           "ONBOARDING_MODE_UNSPECIFIED",
           "ONBOARDING_MODE_INVITE_LINK",
           "ONBOARDING_MODE_NO_INVITE"
-        ]
+        ],
+        "type": "string",
+        "description": "Onboarding mode."
       },
       "PermanentAccess": {
+        "title": "PermanentAccess",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "PermanentAccess",
-        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "SearchUsersResponse": {
-        "externalDocs": {
-          "description": "Find out more about user management",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "SearchUsersResponse",
-        "description": "Response containing a paginated list of users matching the search criteria, along with pagination tokens and total count.",
         "type": "object",
         "properties": {
           "nextPageToken": {
             "description": "Token for the next page of results. Empty if no more pages available.",
-            "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "totalCount": {
-            "description": "Total number of users matching the search criteria across all pages",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "Total number of users matching the search criteria across all pages",
+            "format": "int64"
           },
           "users": {
-            "description": "List of users matching the search criteria",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rbac.v2.User"
             },
-            "minItems": 0
+            "description": "List of users matching the search criteria"
           }
+        },
+        "description": "Response containing a paginated list of users matching the search criteria, along with pagination tokens and total count.",
+        "externalDocs": {
+          "description": "Find out more about user management",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "TemporaryAccess": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "TemporaryAccess",
-        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp.",
         "type": "object",
         "properties": {
           "expireAt": {
-            "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
+            "minLength": 0,
             "type": "string",
+            "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
             "format": "date-time",
-            "minLength": 0
+            "examples": [
+              "2021-01-01T00:00:00.000Z"
+            ]
           }
+        },
+        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "UpdateUserRequest": {
         "type": "object",
         "properties": {
           "userAccountId": {
-            "description": "User account ID of the user to update",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "User account ID of the user to update",
+            "format": "int64"
           },
           "userId": {
             "description": "Stable id of the user to update, as an alternative to `userAccountId`. Mutually exclusive with `userAccountId`: exactly one must be set.",
-            "type": "string",
-            "pattern": "^[\\s\\S]+$",
+            "maxLength": 255,
             "minLength": 1,
-            "maxLength": 255
+            "pattern": "^[\\s\\S]+$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "userTemplate": {
-            "description": "Template containing updated user properties. Only provided fields will be updated.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/UserTemplate"
               }
-            ]
+            ],
+            "description": "Template containing updated user properties. Only provided fields will be updated."
           }
         }
       },
       "UpdateUsersResponse": {
-        "externalDocs": {
-          "description": "Find out more about user management",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "UpdateUsersResponse",
-        "description": "Response confirming the successful update of users. Contains the user account IDs of all users that were updated.",
         "type": "object",
         "properties": {
           "userAccountIds": {
-            "description": "List of user account IDs for the successfully updated users",
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of user account IDs for the successfully updated users",
+              "minimum": 0,
               "type": "integer",
-              "format": "int64",
-              "minimum": 0
+              "description": "List of user account IDs for the successfully updated users",
+              "format": "int64"
             },
-            "minItems": 0
+            "description": "List of user account IDs for the successfully updated users"
           },
           "users": {
-            "description": "Full details of the successfully updated users, as returned by GetUser.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rbac.v2.User"
             },
-            "minItems": 0
+            "description": "Full details of the successfully updated users, as returned by GetUser."
           }
-        }
-      },
-      "UpdateUsersStatusesResponse": {
+        },
+        "description": "Response confirming the successful update of users. Contains the user account IDs of all users that were updated.",
         "externalDocs": {
           "description": "Find out more about user management",
           "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
+        }
+      },
+      "UpdateUsersStatusesResponse": {
         "title": "UpdateUserStatusResponse",
-        "description": "Response confirming the successful status update of users. Contains the user account IDs of all users whose status was changed.",
         "type": "object",
         "properties": {
           "userAccountIds": {
-            "description": "List of user account IDs for users whose status was successfully updated",
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "List of user account IDs for users whose status was successfully updated",
+              "minimum": 0,
               "type": "integer",
-              "format": "int64",
-              "minimum": 0
+              "description": "List of user account IDs for users whose status was successfully updated",
+              "format": "int64"
             },
-            "minItems": 0
+            "description": "List of user account IDs for users whose status was successfully updated"
           }
+        },
+        "description": "Response confirming the successful status update of users. Contains the user account IDs of all users whose status was changed.",
+        "externalDocs": {
+          "description": "Find out more about user management",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "UserStatus": {
-        "description": "User status.",
-        "type": "string",
         "enum": [
           "USER_STATUS_UNSPECIFIED",
           "USER_STATUS_ACTIVE",
           "USER_STATUS_INACTIVE"
-        ]
+        ],
+        "type": "string",
+        "description": "User status."
       },
       "UserTemplate": {
+        "title": "UserTemplate",
+        "type": "object",
+        "properties": {
+          "accessType": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AccessType"
+              }
+            ],
+            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration"
+          },
+          "allowedLoginMode": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AllowedLoginMode"
+            },
+            "description": "List of allowed login modes. Can include SSO, local authentication, or both. Not supported in invite onboarding mode"
+          },
+          "firstName": {
+            "minLength": 0,
+            "type": "string",
+            "description": "User's first name"
+          },
+          "lastName": {
+            "minLength": 0,
+            "type": "string",
+            "description": "User's last name"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/UserStatus"
+              }
+            ],
+            "description": "User status: Active (user can access the system) or Inactive (user access is disabled)"
+          },
+          "username": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Unique username for the user. Must be unique within the system. Updating username for existing users is not supported and ignored."
+          }
+        },
+        "description": "Template containing all user properties that can be set when creating or updating a user. Includes personal information, status, authentication methods, and access duration.",
         "externalDocs": {
           "description": "Find out more about user management",
           "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
-        "title": "UserTemplate",
-        "description": "Template containing all user properties that can be set when creating or updating a user. Includes personal information, status, authentication methods, and access duration.",
-        "type": "object",
-        "properties": {
-          "accessType": {
-            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AccessType"
-              }
-            ]
-          },
-          "allowedLoginMode": {
-            "description": "List of allowed login modes. Can include SSO, local authentication, or both. Not supported in invite onboarding mode",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AllowedLoginMode"
-            },
-            "minItems": 0
-          },
-          "firstName": {
-            "description": "User's first name",
-            "type": "string",
-            "minLength": 0
-          },
-          "lastName": {
-            "description": "User's last name",
-            "type": "string",
-            "minLength": 0
-          },
-          "status": {
-            "description": "User status: Active (user can access the system) or Inactive (user access is disabled)",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UserStatus"
-              }
-            ]
-          },
-          "username": {
-            "description": "Unique username for the user. Must be unique within the system. Updating username for existing users is not supported and ignored.",
-            "type": "string",
-            "minLength": 0
-          }
         }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "rbac.v2.User": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "User",
-        "description": "A user is an entity that is always part of a team and has an account associated with it",
         "type": "object",
         "properties": {
           "accessType": {
-            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AccessType"
               }
-            ]
+            ],
+            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration"
           },
           "allowedLoginMode": {
-            "description": "List of allowed login modes. Can include SSO, local authentication, or both.",
+            "maxItems": 2,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AllowedLoginMode"
             },
-            "minItems": 0,
-            "maxItems": 2
+            "description": "List of allowed login modes. Can include SSO, local authentication, or both."
           },
           "firstName": {
-            "description": "User first name",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "User first name"
           },
           "groupIds": {
-            "description": "IDs of the team groups this user is a member of.",
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "IDs of the team groups this user is a member of.",
+              "minimum": 0,
               "type": "integer",
-              "format": "int64",
-              "minimum": 0
+              "description": "IDs of the team groups this user is a member of.",
+              "format": "int64"
             },
-            "minItems": 0
+            "description": "IDs of the team groups this user is a member of."
           },
           "lastName": {
-            "description": "User last name",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "User last name"
           },
           "status": {
-            "description": "User status: [Active, Inactive]",
             "allOf": [
               {
                 "$ref": "#/components/schemas/UserStatus"
               }
-            ]
+            ],
+            "description": "User status: [Active, Inactive]"
           },
           "userAccountId": {
-            "description": "Associated account id. An account can have many users.",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "Associated account id. An account can have many users.",
+            "format": "int64"
           },
           "userId": {
-            "description": "Unique user id",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique user id"
           },
           "username": {
-            "description": "Unique username",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique username"
           }
+        },
+        "description": "A user is an entity that is always part of a team and has an account associated with it",
+        "externalDocs": {
+          "url": ""
         }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }

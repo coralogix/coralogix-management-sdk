@@ -34,9 +34,9 @@ type BatchGetIncidentResponse struct {
 type _BatchGetIncidentResponse BatchGetIncidentResponse
 
 // NewBatchGetIncidentResponse instantiates a new BatchGetIncidentResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewBatchGetIncidentResponse(incidents map[string]Incident, notFoundIds []string) *BatchGetIncidentResponse {
 	this := BatchGetIncidentResponse{}
 	this.Incidents = incidents
@@ -45,8 +45,8 @@ func NewBatchGetIncidentResponse(incidents map[string]Incident, notFoundIds []st
 }
 
 // NewBatchGetIncidentResponseWithDefaults instantiates a new BatchGetIncidentResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewBatchGetIncidentResponseWithDefaults() *BatchGetIncidentResponse {
 	this := BatchGetIncidentResponse{}
 	return &this

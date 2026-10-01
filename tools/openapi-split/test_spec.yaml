@@ -67,3 +67,12 @@ components:
         name:
           type: string
           description: Name of the item.
+        kind:
+          $ref: "#/components/schemas/Kind"
+          x-coralogix-presence: true
+          default: KIND_FAST
+    Kind:
+      type: string
+      enum:
+        - KIND_UNSPECIFIED
+        - KIND_FAST

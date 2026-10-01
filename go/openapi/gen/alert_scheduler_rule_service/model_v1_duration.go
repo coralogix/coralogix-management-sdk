@@ -32,17 +32,17 @@ type V1Duration struct {
 type _V1Duration V1Duration
 
 // NewV1Duration instantiates a new V1Duration object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewV1Duration() *V1Duration {
 	this := V1Duration{}
 	return &this
 }
 
 // NewV1DurationWithDefaults instantiates a new V1Duration object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewV1DurationWithDefaults() *V1Duration {
 	this := V1Duration{}
 	return &this

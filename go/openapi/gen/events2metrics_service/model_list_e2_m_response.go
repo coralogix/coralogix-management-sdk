@@ -32,9 +32,9 @@ type ListE2MResponse struct {
 type _ListE2MResponse ListE2MResponse
 
 // NewListE2MResponse instantiates a new ListE2MResponse object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewListE2MResponse(e2m []E2M) *ListE2MResponse {
 	this := ListE2MResponse{}
 	this.E2m = e2m
@@ -42,8 +42,8 @@ func NewListE2MResponse(e2m []E2M) *ListE2MResponse {
 }
 
 // NewListE2MResponseWithDefaults instantiates a new ListE2MResponse object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewListE2MResponseWithDefaults() *ListE2MResponse {
 	this := ListE2MResponse{}
 	return &this

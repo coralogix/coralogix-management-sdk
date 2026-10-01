@@ -42,17 +42,17 @@ type OutgoingWebhookSummary struct {
 type _OutgoingWebhookSummary OutgoingWebhookSummary
 
 // NewOutgoingWebhookSummary instantiates a new OutgoingWebhookSummary object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewOutgoingWebhookSummary() *OutgoingWebhookSummary {
 	this := OutgoingWebhookSummary{}
 	return &this
 }
 
 // NewOutgoingWebhookSummaryWithDefaults instantiates a new OutgoingWebhookSummary object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewOutgoingWebhookSummaryWithDefaults() *OutgoingWebhookSummary {
 	this := OutgoingWebhookSummary{}
 	return &this

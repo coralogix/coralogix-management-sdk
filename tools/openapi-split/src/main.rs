@@ -1,13 +1,17 @@
-use openapiv3::{OpenAPI, Paths, ReferenceOr};
+use serde_json::{Map, Value};
 use serde_yaml;
 use std::{collections::HashSet, fs};
+
+const OPERATION_METHODS: [&str; 8] = [
+    "get", "put", "post", "delete", "options", "head", "patch", "trace",
+];
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input_path = "openapi.yaml";
     let output_dir = "specs";
     fs::create_dir_all(output_dir)?;
 
-    // 1. Load and Parse the input file using the openapiv3 crate
+    // 1. Load the input file
     println!("Reading and parsing input spec: {}", input_path);
     let content = fs::read_to_string(input_path).map_err(|e| {
         format!(
@@ -32,16 +36,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+// The spec is kept as raw JSON, not as `openapiv3` crate types. The crate
+// models a `$ref` as the link only, so it dropped keys next to a `$ref` (for
+// example `x-coralogix-presence` or `default`), which OpenAPI 3.1 allows.
 fn split_specs_by_tag(
     content: String,
 ) -> Result<Vec<(String, String)>, Box<dyn std::error::Error>> {
-    let full_spec: OpenAPI =
+    let full_spec: Value =
         serde_yaml::from_str(&content).map_err(|e| format!("Failed to parse YAML spec: {}", e))?;
+    let full_spec = full_spec
+        .as_object()
+        .ok_or("Failed to parse YAML spec: the root is not an object")?;
     println!("Identifying unique tags...");
     let all_tags = full_spec
-        .tags
+        .get("tags")
+        .and_then(Value::as_array)
         .into_iter()
-        .map(|tag| tag.name)
+        .flatten()
+        .filter_map(|tag| tag.get("name").and_then(Value::as_str))
+        .map(str::to_string)
         .collect::<HashSet<_>>();
     if all_tags.is_empty() {
         println!("No tags found in any operation. Exiting.");
@@ -49,55 +62,61 @@ fn split_specs_by_tag(
     }
     println!("Found tags: {:?}", all_tags);
 
+    let empty_paths = Map::new();
+    let full_paths = full_spec
+        .get("paths")
+        .and_then(Value::as_object)
+        .unwrap_or(&empty_paths);
+
     let mut specs_by_tag: Vec<(String, String)> = Vec::new();
     for target_tag in &all_tags {
-        let mut new_spec = OpenAPI {
-            openapi: full_spec.openapi.clone(),
-            info: full_spec.info.clone(),
-            paths: Paths::default(),
-            components: full_spec.components.clone(),
-            ..Default::default()
-        };
-        // Copy top-level extensions (servers, security, etc.)
-        new_spec.extensions = full_spec.extensions.clone();
-
-        // 3a. Filter Paths and Collect References
-        for (path_str, path_item_ref_or) in full_spec.paths.iter() {
-            match path_item_ref_or {
-                ReferenceOr::Reference { .. } => todo!(),
-                ReferenceOr::Item(path_item) => {
-                    let operations = [
-                        &path_item.get,
-                        &path_item.put,
-                        &path_item.post,
-                        &path_item.delete,
-                        &path_item.options,
-                        &path_item.head,
-                        &path_item.patch,
-                        &path_item.trace,
-                    ]
-                    .into_iter()
-                    .filter_map(|op| op.as_ref())
-                    .cloned()
-                    .collect::<Vec<_>>();
-                    for operation in operations {
-                        if operation.tags.iter().any(|tag| tag == target_tag) {
-                            // Add path to new spec
-                            new_spec
-                                .paths
-                                .paths
-                                .insert(path_str.clone(), ReferenceOr::Item(path_item.clone()));
-                            break;
-                        }
-                    }
-                }
+        // Copy only openapi, info, the tag's paths, components, and the
+        // top-level x-* extensions, as the crate-based version did.
+        let mut new_spec = Map::new();
+        for key in ["openapi", "info"] {
+            if let Some(value) = full_spec.get(key) {
+                new_spec.insert(key.to_string(), value.clone());
             }
         }
-        let serialized_spec = serde_json::to_string_pretty(&new_spec)?;
+
+        // 3a. Filter Paths
+        let mut paths = Map::new();
+        for (path_str, path_item) in full_paths {
+            if path_str.starts_with("x-") {
+                continue;
+            }
+            if path_item.get("$ref").is_some() {
+                return Err(format!("Path item references are not supported: {}", path_str).into());
+            }
+            if path_has_tag(path_item, target_tag) {
+                paths.insert(path_str.clone(), path_item.clone());
+            }
+        }
+        new_spec.insert("paths".to_string(), Value::Object(paths));
+
+        if let Some(components) = full_spec.get("components") {
+            new_spec.insert("components".to_string(), components.clone());
+        }
+        // Copy top-level extensions
+        for (key, value) in full_spec {
+            if key.starts_with("x-") {
+                new_spec.insert(key.clone(), value.clone());
+            }
+        }
+
+        let serialized_spec = serde_json::to_string_pretty(&Value::Object(new_spec))?;
         specs_by_tag.push((target_tag.to_string(), serialized_spec));
     }
 
     Ok(specs_by_tag)
+}
+
+fn path_has_tag(path_item: &Value, target_tag: &str) -> bool {
+    OPERATION_METHODS
+        .iter()
+        .filter_map(|method| path_item.get(*method))
+        .filter_map(|operation| operation.get("tags").and_then(Value::as_array))
+        .any(|tags| tags.iter().any(|tag| tag.as_str() == Some(target_tag)))
 }
 
 #[cfg(test)]
@@ -105,56 +124,48 @@ mod tests {
     use super::*;
     use std::fs;
 
+    fn spec_for_tag(result: &[(String, String)], tag: &str) -> Value {
+        let spec = &result.iter().find(|(name, _)| name == tag).unwrap().1;
+        serde_json::from_str(spec).unwrap()
+    }
+
     #[test]
     fn test_split_specs_by_tag() {
         let sample_spec = fs::read_to_string("test_spec.yaml").unwrap();
         let result = split_specs_by_tag(sample_spec).unwrap();
         assert!(result.len() == 2);
-        let users_spec: OpenAPI = serde_json::from_str(
-            result
-                .iter()
-                .filter(|(tag, _)| tag == "users")
-                .next()
-                .unwrap()
-                .1
-                .as_str(),
-        )
-        .unwrap();
-        assert!(users_spec.paths.paths.len() == 1);
-        assert!(
-            users_spec.paths.paths["/users"]
-                .as_item()
-                .unwrap()
-                .get
-                .is_some()
-        );
 
-        assert!(
-            users_spec.paths.paths["/users"]
-                .as_item()
-                .unwrap()
-                .post
-                .is_some()
-        );
+        let users_spec = spec_for_tag(&result, "users");
+        let users_paths = users_spec["paths"].as_object().unwrap();
+        assert!(users_paths.len() == 1);
+        assert!(users_paths["/users"].get("get").is_some());
+        assert!(users_paths["/users"].get("post").is_some());
 
-        let product_spec: OpenAPI = serde_json::from_str(
-            result
-                .iter()
-                .filter(|(tag, _)| tag == "products")
-                .next()
-                .unwrap()
-                .1
-                .as_str(),
-        )
-        .unwrap();
+        let product_spec = spec_for_tag(&result, "products");
+        let product_paths = product_spec["paths"].as_object().unwrap();
+        assert!(product_paths.len() == 1);
+        assert!(product_paths["/products/{productId}"].get("get").is_some());
+    }
 
-        assert!(product_spec.paths.paths.len() == 1);
-        assert!(
-            product_spec.paths.paths["/products/{productId}"]
-                .as_item()
-                .unwrap()
-                .get
-                .is_some()
-        );
+    #[test]
+    fn test_split_keeps_keys_next_to_ref() {
+        let sample_spec = fs::read_to_string("test_spec.yaml").unwrap();
+        let result = split_specs_by_tag(sample_spec).unwrap();
+
+        let users_spec = spec_for_tag(&result, "users");
+        let kind = &users_spec["components"]["schemas"]["Item"]["properties"]["kind"];
+        assert_eq!(kind["$ref"], "#/components/schemas/Kind");
+        assert_eq!(kind["x-coralogix-presence"], true);
+        assert_eq!(kind["default"], "KIND_FAST");
+    }
+
+    #[test]
+    fn test_split_keeps_only_the_same_top_level_keys() {
+        let sample_spec = fs::read_to_string("test_spec.yaml").unwrap();
+        let result = split_specs_by_tag(sample_spec).unwrap();
+
+        let users_spec = spec_for_tag(&result, "users");
+        let keys = users_spec.as_object().unwrap().keys().cloned().collect::<Vec<_>>();
+        assert_eq!(keys, ["openapi", "info", "paths", "components"]);
     }
 }

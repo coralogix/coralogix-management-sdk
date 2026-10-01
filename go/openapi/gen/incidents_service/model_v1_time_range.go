@@ -35,9 +35,9 @@ type V1TimeRange struct {
 type _V1TimeRange V1TimeRange
 
 // NewV1TimeRange instantiates a new V1TimeRange object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
+// This constructor makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed.
+// It does not set properties that have a default: the server fills them in.
 func NewV1TimeRange(endTime time.Time, startTime time.Time) *V1TimeRange {
 	this := V1TimeRange{}
 	this.EndTime = endTime
@@ -46,8 +46,8 @@ func NewV1TimeRange(endTime time.Time, startTime time.Time) *V1TimeRange {
 }
 
 // NewV1TimeRangeWithDefaults instantiates a new V1TimeRange object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
+// This constructor does not set properties that have a default: the server fills them in.
+// It doesn't guarantee that properties required by API are set
 func NewV1TimeRangeWithDefaults() *V1TimeRange {
 	this := V1TimeRange{}
 	return &this

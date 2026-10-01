@@ -7,417 +7,421 @@
   "paths": {
     "/aaa/team-groups/v2": {
       "get": {
-        "tags": [
-          "Team Groups Management Service"
-        ],
-        "summary": "Get Team Groups",
         "description": "Returns all team groups.",
         "operationId": "GroupsMgmtService_GetTeamGroups",
         "parameters": [
           {
+            "description": "Team to fetch team groups for. If not set, fetches groups associated with the logged in team.",
             "in": "query",
             "name": "team_id",
-            "description": "Team to fetch team groups for. If not set, fetches groups associated with the logged in team.",
+            "required": false,
             "schema": {
               "description": "Team to fetch team groups for. If not set, fetches groups associated with the logged in team.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer",
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "Page size.",
             "in": "query",
             "name": "page_size",
-            "description": "Page size.",
+            "required": false,
             "schema": {
               "description": "Page size.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer",
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "The page token.",
             "in": "query",
             "name": "page_token",
-            "description": "The page token.",
+            "required": false,
             "schema": {
               "description": "The page token.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
-            },
-            "style": "form"
+              "x-coralogix-presence": true
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTeamGroupsResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "post": {
+        },
+        "summary": "Get Team Groups",
         "tags": [
           "Team Groups Management Service"
-        ],
-        "summary": "Create Team Group",
+        ]
+      },
+      "post": {
         "description": "Creates a new team group.",
         "operationId": "GroupsMgmtService_CreateTeamGroup",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "CreateTeamGroupRequest",
                 "description": "Request to create a new team group with specified name, description, roles, users, and optional scope filters. Can be associated with a specific team or the authenticated team.",
-                "type": "object",
                 "properties": {
                   "description": {
                     "description": "Human-readable description of the team group.",
+                    "minLength": 0,
                     "type": "string",
-                    "minLength": 0
+                    "x-coralogix-presence": true
                   },
                   "externalId": {
                     "description": "External identifier for the group, used when the group is managed by an external identity provider.",
+                    "minLength": 0,
                     "type": "string",
-                    "minLength": 0
+                    "x-coralogix-presence": true
                   },
                   "groupType": {
-                    "$ref": "#/components/schemas/GroupType"
+                    "$ref": "#/components/schemas/GroupType",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Unique display name for the new team group.",
-                    "type": "string",
-                    "minLength": 0
+                    "minLength": 0,
+                    "type": "string"
                   },
                   "roleId": {
                     "description": "Identifier of the role to assign to this group.",
-                    "type": "integer",
                     "format": "int64",
-                    "minimum": 0
+                    "minimum": 0,
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "roleName": {
                     "description": "Name of the role to assign to this group, as an alternative to `roleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name. Mutually exclusive with `roleId`: setting both is rejected.",
-                    "type": "string",
-                    "pattern": "^[\\s\\S]*$",
+                    "maxLength": 255,
                     "minLength": 1,
-                    "maxLength": 255
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "scope": {
                     "$ref": "#/components/schemas/v2.Scope"
                   },
                   "teamId": {
                     "description": "Team to associate the group with. If not set, uses the authenticated team.",
-                    "type": "integer",
                     "format": "int64",
-                    "minimum": 0
+                    "minimum": 0,
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "userIds": {
                     "description": "The user ids.",
-                    "type": "array",
                     "items": {
                       "description": "The user ids.",
-                      "type": "string",
-                      "minLength": 0
+                      "minLength": 0,
+                      "type": "string"
                     },
-                    "minItems": 0
+                    "minItems": 0,
+                    "type": "array"
                   }
-                }
+                },
+                "title": "CreateTeamGroupRequest",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/CreateTeamGroupResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "409": {
-            "description": "Team group already exists",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team group already exists"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Create Team Group",
+        "tags": [
+          "Team Groups Management Service"
+        ]
       }
     },
     "/aaa/team-groups/v2/id/{group_id}": {
       "get": {
-        "tags": [
-          "Team Groups Management Service"
-        ],
-        "summary": "Get Team Group",
         "description": "Returns the team group with the specified ID.",
         "operationId": "GroupsMgmtService_GetTeamGroup",
         "parameters": [
           {
+            "description": "The unique identifier of the team group.",
             "in": "path",
             "name": "group_id",
-            "description": "The unique identifier of the team group.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the team group.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTeamGroupResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Team group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Team Group",
+        "tags": [
+          "Team Groups Management Service"
+        ]
       }
     },
     "/aaa/team-groups/v2/name/{name}": {
       "get": {
-        "tags": [
-          "Team Groups Management Service"
-        ],
-        "summary": "Get Team Group By Name",
         "description": "Returns the team group with the specified name.",
         "operationId": "GroupsMgmtService_GetTeamGroupByName",
         "parameters": [
           {
+            "description": "The name of the team group to retrieve.",
             "in": "path",
             "name": "name",
-            "description": "The name of the team group to retrieve.",
             "required": true,
             "schema": {
               "description": "The name of the team group to retrieve.",
-              "type": "string",
-              "minLength": 0
-            },
-            "style": "simple"
+              "minLength": 0,
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetTeamGroupByNameResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Team group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Team Group By Name",
+        "tags": [
+          "Team Groups Management Service"
+        ]
       }
     },
     "/aaa/team-groups/v2/{group_id}": {
       "put": {
-        "tags": [
-          "Team Groups Management Service"
-        ],
-        "summary": "Update Team Group",
         "description": "Updates the specified team group.",
         "operationId": "GroupsMgmtService_UpdateTeamGroup",
         "parameters": [
           {
+            "description": "Unique identifier of the team group to update.",
             "in": "path",
             "name": "group_id",
-            "description": "Unique identifier of the team group to update.",
             "required": true,
             "schema": {
               "description": "Unique identifier of the team group to update.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "title": "UpdateTeamGroupRequest",
                 "description": "Request to modify an existing team group's details, including its name, description, roles, users, and scope settings.",
-                "type": "object",
                 "properties": {
                   "description": {
                     "description": "New human-readable description for the team group.",
+                    "minLength": 0,
                     "type": "string",
-                    "minLength": 0
+                    "x-coralogix-presence": true
                   },
                   "externalId": {
                     "description": "New external identifier for the group.",
+                    "minLength": 0,
                     "type": "string",
-                    "minLength": 0
+                    "x-coralogix-presence": true
                   },
                   "groupType": {
-                    "$ref": "#/components/schemas/GroupType"
+                    "$ref": "#/components/schemas/GroupType",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "New display name for the team group.",
+                    "minLength": 0,
                     "type": "string",
-                    "minLength": 0
+                    "x-coralogix-presence": true
                   },
                   "roleUpdate": {
                     "$ref": "#/components/schemas/RoleUpdate"
@@ -428,446 +432,454 @@
                   "userUpdates": {
                     "$ref": "#/components/schemas/UserUpdates"
                   }
-                }
+                },
+                "title": "UpdateTeamGroupRequest",
+                "type": "object"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UpdateTeamGroupResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Team group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
-      },
-      "delete": {
+        },
+        "summary": "Update Team Group",
         "tags": [
           "Team Groups Management Service"
-        ],
-        "summary": "Delete Team Group",
+        ]
+      },
+      "delete": {
         "description": "Deletes the team group with the specified ID.",
         "operationId": "GroupsMgmtService_DeleteTeamGroup",
         "parameters": [
           {
+            "description": "The unique identifier of the team group to delete.",
             "in": "path",
             "name": "group_id",
-            "description": "The unique identifier of the team group to delete.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the team group to delete.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
+              "minimum": 0,
+              "type": "integer"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/DeleteTeamGroupResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Team group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Delete Team Group",
+        "tags": [
+          "Team Groups Management Service"
+        ]
       }
     },
     "/aaa/team-groups/v2/{group_id}/users/list": {
       "get": {
-        "tags": [
-          "Team Groups Management Service"
-        ],
-        "summary": "Get Group Users",
         "description": "Returns all users in the specified team group.",
         "operationId": "GroupsMgmtService_GetGroupUsers",
         "parameters": [
           {
+            "description": "The unique identifier of the team group whose users to list.",
             "in": "path",
             "name": "group_id",
-            "description": "The unique identifier of the team group whose users to list.",
             "required": true,
             "schema": {
               "description": "The unique identifier of the team group whose users to list.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "simple"
+              "minimum": 0,
+              "type": "integer"
+            }
           },
           {
+            "description": "Pagination size. Defaults to 100 if empty.",
             "in": "query",
             "name": "page_size",
-            "description": "Pagination size. Defaults to 100 if empty.",
+            "required": false,
             "schema": {
               "description": "Pagination size. Defaults to 100 if empty.",
-              "type": "integer",
               "format": "int64",
-              "minimum": 0
-            },
-            "style": "form"
+              "minimum": 0,
+              "type": "integer",
+              "x-coralogix-presence": true
+            }
           },
           {
+            "description": "Optional pagination continuation token.",
             "in": "query",
             "name": "page_token",
-            "description": "Optional pagination continuation token.",
+            "required": false,
             "schema": {
               "description": "Optional pagination continuation token.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
-            },
-            "style": "form"
+              "x-coralogix-presence": true
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetGroupUsersResponse"
                 }
               }
-            }
+            },
+            "description": ""
           },
           "400": {
-            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Bad Request"
           },
           "401": {
-            "description": "Unauthorized request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Unauthorized request"
           },
           "404": {
-            "description": "Team group not found",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Team group not found"
           },
           "500": {
-            "description": "Internal server error",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
               }
-            }
+            },
+            "description": "Internal server error"
           }
-        }
+        },
+        "summary": "Get Group Users",
+        "tags": [
+          "Team Groups Management Service"
+        ]
       }
     }
   },
   "components": {
     "schemas": {
       "AccessType": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "AccessType",
-        "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
-        "discriminator": {
-          "propertyName": "accessType"
-        },
-        "type": "object",
-        "properties": {
-          "accessType": {
-            "description": "Type of access: 'permanent' or 'temporary'",
-            "type": "string",
-            "minLength": 0
-          },
-          "permanentAccess": {
-            "description": "Permanent access configuration - user has indefinite access",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PermanentAccess"
-              }
-            ]
-          },
-          "temporaryAccess": {
-            "description": "Temporary access configuration - user access expires at a specified time",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TemporaryAccess"
-              }
-            ]
-          }
-        },
         "required": [
           "accessType"
         ],
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "permanentAccess"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "temporaryAccess"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "permanentAccess"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "temporaryAccess"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
+        ],
+        "properties": {
+          "accessType": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Type of access: 'permanent' or 'temporary'"
+          },
+          "permanentAccess": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PermanentAccess"
+              }
+            ],
+            "description": "Permanent access configuration - user has indefinite access"
+          },
+          "temporaryAccess": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TemporaryAccess"
+              }
+            ],
+            "description": "Temporary access configuration - user access expires at a specified time"
+          }
+        },
+        "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
+        "discriminator": {
+          "propertyName": "accessType"
+        },
+        "externalDocs": {
+          "url": ""
+        }
       },
       "AllowedLoginMode": {
-        "type": "string",
         "enum": [
           "ALLOWED_LOGIN_MODE_UNSPECIFIED",
           "ALLOWED_LOGIN_MODE_SSO",
           "ALLOWED_LOGIN_MODE_LOCAL"
-        ]
+        ],
+        "type": "string"
       },
       "ClearRole": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Clear role.",
         "type": "object",
         "properties": {
           "clear": {
-            "description": "The clear.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The clear."
           }
+        },
+        "description": "Clear role.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "ClearScope": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Clear scope.",
         "type": "object",
         "properties": {
           "clear": {
-            "description": "The clear.",
-            "type": "boolean"
+            "type": "boolean",
+            "description": "The clear."
           }
+        },
+        "description": "Clear scope.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "CreateTeamGroupResponse": {
-        "externalDocs": {
-          "description": "Find out more about groups",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "CreateTeamGroupResponse",
-        "description": "Response containing the newly created team group.",
         "type": "object",
         "properties": {
           "group": {
             "$ref": "#/components/schemas/TeamGroup"
           }
-        }
-      },
-      "DeleteTeamGroupResponse": {
+        },
+        "description": "Response containing the newly created team group.",
         "externalDocs": {
           "description": "Find out more about groups",
           "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
+        }
+      },
+      "DeleteTeamGroupResponse": {
         "title": "DeleteTeamGroupResponse",
-        "description": "Response confirming the successful deletion of a team group and its associated configurations.",
         "type": "object",
         "properties": {
           "groupId": {
-            "description": "The group id.",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "The group id.",
+            "format": "int64"
           }
+        },
+        "description": "Response confirming the successful deletion of a team group and its associated configurations.",
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "Error": {
-        "description": "Standard error response body returned for a failed request.",
         "type": "object",
         "properties": {
           "code": {
-            "description": "HTTP status code of the error (for example 400, 404, 500).",
-            "type": "integer",
-            "format": "int32",
+            "maximum": 599,
             "minimum": 100,
-            "maximum": 599
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
           },
           "message": {
-            "description": "Human-readable description of the error.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
+            "maxLength": 4096,
             "minLength": 0,
-            "maxLength": 4096
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
           }
-        }
+        },
+        "description": "Standard error response body returned for a failed request."
       },
       "FilterPathAndValues": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "FilterPathAndValues",
-        "description": "This data structure represents a filter path and values",
+        "required": [
+          "path"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
         "properties": {
           "filters": {
-            "description": "The filters.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Filters"
               }
-            ]
+            ],
+            "description": "The filters."
           },
           "multipleValues": {
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "examples": [
+              "test"
+            ]
           }
         },
-        "required": [
-          "path"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "multipleValues"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "filters"
-            ]
-          }
-        ]
-      },
-      "Filters": {
+        "description": "This data structure represents a filter path and values",
         "externalDocs": {
           "url": ""
-        },
+        }
+      },
+      "Filters": {
         "title": "Filters",
-        "description": "This data structure represents a filter",
+        "required": [
+          "pathAndValues"
+        ],
         "type": "object",
         "properties": {
           "operator": {
@@ -875,126 +887,134 @@
               {
                 "$ref": "#/components/schemas/v3.FilterOperator"
               }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
             ]
           },
           "pathAndValues": {
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FilterPathAndValues"
-            },
-            "minItems": 0
+            }
           }
         },
-        "required": [
-          "pathAndValues"
-        ]
+        "description": "This data structure represents a filter",
+        "externalDocs": {
+          "url": ""
+        }
       },
       "GetGroupUsersResponse": {
-        "externalDocs": {
-          "description": "Find out more about groups",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "GetGroupUsersResponse",
-        "description": "Response containing the list of all users currently assigned to the requested team group.",
         "type": "object",
         "properties": {
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "x-coralogix-presence": true
           },
           "totalCount": {
             "description": "The total count.",
-            "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "users": {
-            "description": "List of users.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rbac.v2.User"
             },
-            "minItems": 0
+            "description": "List of users."
           }
+        },
+        "description": "Response containing the list of all users currently assigned to the requested team group.",
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "GetTeamGroupByNameResponse": {
-        "externalDocs": {
-          "description": "Find out more about groups",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "GetTeamGroupByNameResponse",
-        "description": "Response containing the complete details of a team group that matches the requested name, including its members, roles, and scope settings.",
         "type": "object",
         "properties": {
           "group": {
             "$ref": "#/components/schemas/TeamGroup"
           }
+        },
+        "description": "Response containing the complete details of a team group that matches the requested name, including its members, roles, and scope settings.",
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "GetTeamGroupResponse": {
-        "externalDocs": {
-          "description": "Find out more about groups",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "GetTeamGroupResponse",
-        "description": "Response containing the complete details of a requested team group, including its members, assigned roles, and scope configuration.",
         "type": "object",
         "properties": {
           "group": {
             "$ref": "#/components/schemas/TeamGroup"
           }
-        }
-      },
-      "GetTeamGroupsResponse": {
+        },
+        "description": "Response containing the complete details of a requested team group, including its members, assigned roles, and scope configuration.",
         "externalDocs": {
           "description": "Find out more about groups",
           "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
+        }
+      },
+      "GetTeamGroupsResponse": {
         "title": "GetTeamGroupsResponse",
-        "description": "Response containing a paginated list of team groups.",
         "type": "object",
         "properties": {
           "groups": {
-            "description": "List of groups.",
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TeamGroup"
             },
-            "minItems": 0
+            "description": "List of groups."
           },
           "nextPageToken": {
             "description": "Token for fetching the next page of results.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "x-coralogix-presence": true
           },
           "totalCount": {
             "description": "The total count.",
-            "type": "integer",
             "format": "int64",
-            "minimum": 0
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           }
+        },
+        "description": "Response containing a paginated list of team groups.",
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "GroupOrigin": {
-        "description": "Group origin.",
-        "type": "string",
         "enum": [
           "GROUP_ORIGIN_UNSPECIFIED",
           "GROUP_ORIGIN_BUILT_IN",
           "GROUP_ORIGIN_USER_DEFINED"
-        ]
+        ],
+        "type": "string",
+        "description": "Group origin."
       },
       "GroupType": {
-        "description": "Group type.",
-        "type": "string",
         "enum": [
           "GROUP_TYPE_UNSPECIFIED",
           "GROUP_TYPE_OPEN",
           "GROUP_TYPE_CLOSED",
           "GROUP_TYPE_RESTRICTED"
-        ]
+        ],
+        "type": "string",
+        "description": "Group type."
       },
       "MultipleValues": {
         "type": "object",
@@ -1003,454 +1023,500 @@
             "$ref": "#/components/schemas/events.v3.FilterMatcher"
           },
           "values": {
+            "minItems": 0,
             "type": "array",
             "items": {
-              "type": "string",
-              "minLength": 0
-            },
-            "minItems": 0
+              "minLength": 0,
+              "type": "string"
+            }
           }
         }
       },
       "PermanentAccess": {
+        "title": "PermanentAccess",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
         "externalDocs": {
           "url": ""
-        },
-        "title": "PermanentAccess",
-        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
-        "type": "object",
-        "additionalProperties": false
+        }
       },
       "Role": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "Role",
-        "description": "A role that can be assigned to a group. Each role has a collection of permissions associated with it.",
         "type": "object",
         "properties": {
           "description": {
-            "description": "Role description",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Role description"
           },
           "name": {
-            "description": "Unique role name",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique role name"
           },
           "roleId": {
-            "description": "Unique role identifier",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "Unique role identifier",
+            "format": "int64"
           }
+        },
+        "description": "A role that can be assigned to a group. Each role has a collection of permissions associated with it.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "RoleUpdate": {
-        "externalDocs": {
-          "description": "Find out more about groups",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "RoleUpdate",
-        "description": "Update the role assigned to the group. Either set a new role or clear the existing one.",
         "type": "object",
         "properties": {
           "action": {
             "$ref": "#/components/schemas/RoleUpdateAction"
           }
+        },
+        "description": "Update the role assigned to the group. Either set a new role or clear the existing one.",
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "RoleUpdateAction": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Clear role.",
-        "discriminator": {
-          "propertyName": "actionType"
-        },
+        "required": [
+          "actionType"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "setRoleId"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "clear"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "setRoleByName"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "setRoleId"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "clear"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "setRoleByName"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "actionType": {
-            "description": "Discriminator indicating the role update action type (set_role_id or clear).",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Discriminator indicating the role update action type (set_role_id or clear)."
           },
           "clear": {
-            "description": "The clear.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/ClearRole"
               }
-            ]
+            ],
+            "description": "The clear."
           },
           "setRoleByName": {
-            "description": "Set the role by name rather than by id. Select this arm by sending `actionType: \"set_role_by_name\"`.",
             "allOf": [
               {
                 "$ref": "#/components/schemas/SetRoleByName"
               }
-            ]
+            ],
+            "description": "Set the role by name rather than by id. Select this arm by sending `actionType: \"set_role_by_name\"`."
           },
           "setRoleId": {
             "$ref": "#/components/schemas/SetRoleId"
           }
         },
-        "required": [
-          "actionType"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "setRoleId"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "clear"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "setRoleByName"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "setRoleId"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "clear"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "setRoleByName"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
+        "description": "Clear role.",
+        "discriminator": {
+          "propertyName": "actionType"
+        },
+        "externalDocs": {
+          "url": ""
+        }
       },
       "ScopeUpdate": {
-        "externalDocs": {
-          "description": "Find out more about scopes",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-        },
         "title": "ScopeUpdate",
-        "description": "Update the scope assigned to the group. Either reference an existing scope by ID or clear the scope.",
         "type": "object",
         "properties": {
           "action": {
             "$ref": "#/components/schemas/ScopeUpdateAction"
           }
+        },
+        "description": "Update the scope assigned to the group. Either reference an existing scope by ID or clear the scope.",
+        "externalDocs": {
+          "description": "Find out more about scopes",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
         }
       },
       "ScopeUpdateAction": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Set scope id.",
-        "discriminator": {
-          "propertyName": "actionType"
-        },
-        "type": "object",
-        "properties": {
-          "actionType": {
-            "description": "Discriminator indicating the scope update action type (set_scope_id or clear).",
-            "type": "string",
-            "minLength": 0
-          },
-          "clear": {
-            "description": "The clear.",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ClearScope"
-              }
-            ]
-          },
-          "setScopeId": {
-            "$ref": "#/components/schemas/SetScopeId"
-          }
-        },
         "required": [
           "actionType"
         ],
+        "type": "object",
         "oneOf": [
           {
-            "type": "object",
             "required": [
               "setScopeId"
-            ]
+            ],
+            "type": "object"
           },
           {
-            "type": "object",
             "required": [
               "clear"
-            ]
+            ],
+            "type": "object"
           },
           {
             "type": "object",
             "not": {
               "anyOf": [
                 {
-                  "type": "object",
                   "required": [
                     "setScopeId"
-                  ]
+                  ],
+                  "type": "object"
                 },
                 {
-                  "type": "object",
                   "required": [
                     "clear"
-                  ]
+                  ],
+                  "type": "object"
                 }
               ]
             }
           }
-        ]
+        ],
+        "properties": {
+          "actionType": {
+            "minLength": 0,
+            "type": "string",
+            "description": "Discriminator indicating the scope update action type (set_scope_id or clear)."
+          },
+          "clear": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ClearScope"
+              }
+            ],
+            "description": "The clear."
+          },
+          "setScopeId": {
+            "$ref": "#/components/schemas/SetScopeId"
+          }
+        },
+        "description": "Set scope id.",
+        "discriminator": {
+          "propertyName": "actionType"
+        },
+        "externalDocs": {
+          "url": ""
+        }
       },
       "SetRoleByName": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Set role by name.",
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "Name of the role to assign to this group, as an alternative to `setRoleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name.",
-            "type": "string",
-            "pattern": "^[\\s\\S]*$",
-            "minLength": 1,
-            "maxLength": 255
-          }
-        },
         "required": [
           "value"
-        ]
-      },
-      "SetRoleId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Set role id.",
+        ],
         "type": "object",
         "properties": {
           "value": {
-            "description": "The value.",
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Name of the role to assign to this group, as an alternative to `setRoleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name."
           }
+        },
+        "description": "Set role by name.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
+      "SetRoleId": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "minimum": 0,
+            "type": "integer",
+            "description": "The value.",
+            "format": "int64"
+          }
+        },
+        "description": "Set role id.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "SetScopeId": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "Set scope id.",
         "type": "object",
         "properties": {
           "value": {
-            "description": "The value.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "The value."
           }
+        },
+        "description": "Set scope id.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "TeamGroup": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "TeamGroup",
-        "description": "A Team Group entity.",
         "type": "object",
         "properties": {
           "createdAt": {
-            "description": "Creation timestamp.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "Creation timestamp.",
+            "format": "date-time"
           },
           "description": {
             "description": "Group description",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "x-coralogix-presence": true
           },
           "externalId": {
             "description": "Group external identifier. Applies if team is externally defined.",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "x-coralogix-presence": true
           },
           "groupId": {
-            "description": "Unique team group identifier",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "Unique team group identifier",
+            "format": "int64"
           },
           "groupOrigin": {
-            "description": "Origin of the group: built-in (system-managed) or user-defined",
             "allOf": [
               {
                 "$ref": "#/components/schemas/GroupOrigin"
               }
-            ]
+            ],
+            "description": "Origin of the group: built-in (system-managed) or user-defined"
           },
           "groupType": {
-            "description": "Group type defines the level of access to the group itself",
             "allOf": [
               {
                 "$ref": "#/components/schemas/GroupType"
               }
-            ]
+            ],
+            "description": "Group type defines the level of access to the group itself"
           },
           "name": {
-            "description": "Unique name",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique name"
           },
           "role": {
-            "description": "Role assigned to this group",
             "allOf": [
               {
                 "$ref": "#/components/schemas/Role"
               }
-            ]
+            ],
+            "description": "Role assigned to this group"
           },
           "scope": {
-            "description": "Scope assigned to this group",
             "allOf": [
               {
                 "$ref": "#/components/schemas/v2.Scope"
               }
-            ]
+            ],
+            "description": "Scope assigned to this group"
           },
           "teamId": {
-            "description": "Team this group belongs to",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "Team this group belongs to",
+            "format": "int64"
           },
           "updatedAt": {
-            "description": "Last-updated timestamp.",
+            "minLength": 0,
             "type": "string",
-            "format": "date-time",
-            "minLength": 0
+            "description": "Last-updated timestamp.",
+            "format": "date-time"
           },
           "userIds": {
-            "description": "IDs of the users that are members of this group.",
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "IDs of the users that are members of this group.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "IDs of the users that are members of this group."
             },
-            "minItems": 0
+            "description": "IDs of the users that are members of this group."
           }
+        },
+        "description": "A Team Group entity.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "TemporaryAccess": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "TemporaryAccess",
-        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp.",
         "type": "object",
         "properties": {
           "expireAt": {
-            "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
+            "minLength": 0,
             "type": "string",
+            "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
             "format": "date-time",
-            "minLength": 0
+            "examples": [
+              "2021-01-01T00:00:00.000Z"
+            ]
           }
+        },
+        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "UpdateTeamGroupResponse": {
-        "externalDocs": {
-          "description": "Find out more about groups",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "UpdateTeamGroupResponse",
-        "description": "Response containing the updated team group.",
         "type": "object",
         "properties": {
           "group": {
             "$ref": "#/components/schemas/TeamGroup"
           }
+        },
+        "description": "Response containing the updated team group.",
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "UserIdList": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "User id list.",
         "type": "object",
         "properties": {
           "userIds": {
-            "description": "The user ids.",
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "The user ids.",
+              "minLength": 0,
               "type": "string",
-              "minLength": 0
+              "description": "The user ids."
             },
-            "minItems": 0
+            "description": "The user ids."
           }
+        },
+        "description": "User id list.",
+        "externalDocs": {
+          "url": ""
         }
       },
       "UserStatus": {
-        "description": "User status.",
-        "type": "string",
         "enum": [
           "USER_STATUS_UNSPECIFIED",
           "USER_STATUS_ACTIVE",
           "USER_STATUS_INACTIVE"
-        ]
+        ],
+        "type": "string",
+        "description": "User status."
       },
       "UserUpdates": {
-        "externalDocs": {
-          "description": "Find out more about groups",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
-        },
         "title": "UserUpdates",
-        "description": "Patch object for updating group user membership. Choose one operation: add, remove, or replace all users.",
         "type": "object",
         "properties": {
           "operation": {
             "$ref": "#/components/schemas/UserUpdatesOperation"
           }
+        },
+        "description": "Patch object for updating group user membership. Choose one operation: add, remove, or replace all users.",
+        "externalDocs": {
+          "description": "Find out more about groups",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         }
       },
       "UserUpdatesOperation": {
-        "externalDocs": {
-          "url": ""
-        },
-        "description": "User id list.",
-        "discriminator": {
-          "propertyName": "operationType"
-        },
+        "required": [
+          "operationType"
+        ],
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "add"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "remove"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "set"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "add"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "remove"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "set"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "add": {
             "$ref": "#/components/schemas/UserIdList"
           },
           "operationType": {
-            "description": "Discriminator indicating the user update operation type (add, remove, or set).",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Discriminator indicating the user update operation type (add, remove, or set)."
           },
           "remove": {
             "$ref": "#/components/schemas/UserIdList"
@@ -1459,157 +1525,116 @@
             "$ref": "#/components/schemas/UserIdList"
           }
         },
-        "required": [
-          "operationType"
-        ],
-        "oneOf": [
-          {
-            "type": "object",
-            "required": [
-              "add"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "remove"
-            ]
-          },
-          {
-            "type": "object",
-            "required": [
-              "set"
-            ]
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "required": [
-                    "add"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "remove"
-                  ]
-                },
-                {
-                  "type": "object",
-                  "required": [
-                    "set"
-                  ]
-                }
-              ]
-            }
-          }
-        ]
+        "description": "User id list.",
+        "discriminator": {
+          "propertyName": "operationType"
+        },
+        "externalDocs": {
+          "url": ""
+        }
       },
       "events.v3.FilterMatcher": {
-        "type": "string",
         "enum": [
           "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
           "FILTER_MATCHER_REGEXP"
-        ]
+        ],
+        "type": "string"
       },
       "rbac.v2.User": {
-        "externalDocs": {
-          "url": ""
-        },
         "title": "User",
-        "description": "A user is an entity that is always part of a team and has an account associated with it",
         "type": "object",
         "properties": {
           "accessType": {
-            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration",
             "allOf": [
               {
                 "$ref": "#/components/schemas/AccessType"
               }
-            ]
+            ],
+            "description": "Access type configuration - defines whether user access is permanent or temporary with expiration"
           },
           "allowedLoginMode": {
-            "description": "List of allowed login modes. Can include SSO, local authentication, or both.",
+            "maxItems": 2,
+            "minItems": 0,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AllowedLoginMode"
             },
-            "minItems": 0,
-            "maxItems": 2
+            "description": "List of allowed login modes. Can include SSO, local authentication, or both."
           },
           "firstName": {
-            "description": "User first name",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "User first name"
           },
           "groupIds": {
-            "description": "IDs of the team groups this user is a member of.",
+            "minItems": 0,
             "type": "array",
             "items": {
-              "description": "IDs of the team groups this user is a member of.",
+              "minimum": 0,
               "type": "integer",
-              "format": "int64",
-              "minimum": 0
+              "description": "IDs of the team groups this user is a member of.",
+              "format": "int64"
             },
-            "minItems": 0
+            "description": "IDs of the team groups this user is a member of."
           },
           "lastName": {
-            "description": "User last name",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "User last name"
           },
           "status": {
-            "description": "User status: [Active, Inactive]",
             "allOf": [
               {
                 "$ref": "#/components/schemas/UserStatus"
               }
-            ]
+            ],
+            "description": "User status: [Active, Inactive]"
           },
           "userAccountId": {
-            "description": "Associated account id. An account can have many users.",
+            "minimum": 0,
             "type": "integer",
-            "format": "int64",
-            "minimum": 0
+            "description": "Associated account id. An account can have many users.",
+            "format": "int64"
           },
           "userId": {
-            "description": "Unique user id",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique user id"
           },
           "username": {
-            "description": "Unique username",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Unique username"
           }
+        },
+        "description": "A user is an entity that is always part of a team and has an account associated with it",
+        "externalDocs": {
+          "url": ""
         }
       },
       "v2.Scope": {
-        "externalDocs": {
-          "description": "Find out more about scopes",
-          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-        },
         "title": "Scope",
-        "description": "Scope assignment for a group. References an existing scope by ID. Scopes can be created via the Scopes API.",
         "type": "object",
         "properties": {
           "scopeId": {
-            "description": "Reference to an existing scope by ID",
+            "minLength": 0,
             "type": "string",
-            "minLength": 0
+            "description": "Reference to an existing scope by ID"
           }
+        },
+        "description": "Scope assignment for a group. References an existing scope by ID. Scopes can be created via the Scopes API.",
+        "externalDocs": {
+          "description": "Find out more about scopes",
+          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
         }
       },
       "v3.FilterOperator": {
-        "description": "Filter operator.",
-        "type": "string",
         "enum": [
           "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
           "FILTER_OPERATOR_OR"
-        ]
+        ],
+        "type": "string",
+        "description": "Filter operator."
       }
     }
   }
