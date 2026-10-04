@@ -78,9 +78,11 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceActivateConfigurationOverlayVersion**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayserviceactivateconfigurationoverlayversion) | **Post** /fleet-management/configuration-overlays/v1/versions/{id}/activate | Activate configuration overlay version
 *FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceArchiveConfigurationOverlay**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayservicearchiveconfigurationoverlay) | **Post** /fleet-management/configuration-overlays/v1/{id}/archive | Archive configuration overlay
 *FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceArchiveConfigurationOverlayVersion**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayservicearchiveconfigurationoverlayversion) | **Post** /fleet-management/configuration-overlays/v1/versions/{id}/archive | Archive configuration overlay version
 *FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceCreateConfigurationOverlay**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayservicecreateconfigurationoverlay) | **Post** /fleet-management/configuration-overlays/v1 | Create configuration overlay
+*FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceDeactivateConfigurationOverlayVersion**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayservicedeactivateconfigurationoverlayversion) | **Post** /fleet-management/configuration-overlays/v1/versions/{id}/deactivate | Deactivate configuration overlay version
 *FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceGetConfigurationOverlay**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayservicegetconfigurationoverlay) | **Get** /fleet-management/configuration-overlays/v1/{id} | Get configuration overlay
 *FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceListConfigurationOverlays**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayservicelistconfigurationoverlays) | **Get** /fleet-management/configuration-overlays/v1 | List configuration overlays
 *FleetManagerConfigurationOverlaysAPI* | [**ConfigurationOverlayServiceUpdateConfigurationOverlay**](docs/FleetManagerConfigurationOverlaysAPI.md#configurationoverlayserviceupdateconfigurationoverlay) | **Patch** /fleet-management/configuration-overlays/v1/{id} | Update configuration overlay
@@ -88,6 +90,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ActivateConfigurationOverlayVersionResponse](docs/ActivateConfigurationOverlayVersionResponse.md)
  - [ArchiveConfigurationOverlayResponse](docs/ArchiveConfigurationOverlayResponse.md)
  - [ArchiveConfigurationOverlayVersionResponse](docs/ArchiveConfigurationOverlayVersionResponse.md)
  - [ChartName](docs/ChartName.md)
@@ -103,6 +106,7 @@ Class | Method | HTTP request | Description
  - [CustomConfigurationOverlay](docs/CustomConfigurationOverlay.md)
  - [CustomConfigurationOverlayCreate](docs/CustomConfigurationOverlayCreate.md)
  - [CustomConfigurationOverlayUpdate](docs/CustomConfigurationOverlayUpdate.md)
+ - [DeactivateConfigurationOverlayVersionResponse](docs/DeactivateConfigurationOverlayVersionResponse.md)
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)

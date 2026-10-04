@@ -7,6 +7,7 @@ api_fleet_manager_configuration_overlays.go
 client.go
 configuration.go
 git_push.sh
+model_activate_configuration_overlay_version_response.go
 model_archive_configuration_overlay_response.go
 model_archive_configuration_overlay_version_response.go
 model_chart_name.go
@@ -22,6 +23,7 @@ model_create_configuration_overlay_response.go
 model_custom_configuration_overlay.go
 model_custom_configuration_overlay_create.go
 model_custom_configuration_overlay_update.go
+model_deactivate_configuration_overlay_version_response.go
 model_error.go
 model_events_v3_filter_matcher.go
 model_filter_path_and_values.go

@@ -151,7 +151,7 @@
         ]
       },
       "post": {
-        "description": "Creates a custom configuration overlay (OpenTelemetry Collector YAML). Its first version is inactive unless active is true. Names must be unique among unarchived overlays.",
+        "description": "Creates a custom configuration overlay (OpenTelemetry Collector YAML). Its first version is inactive. Names must be unique among unarchived overlays.",
         "operationId": "ConfigurationOverlayService_CreateConfigurationOverlay",
         "requestBody": {
           "content": {
@@ -262,23 +262,131 @@
         ]
       }
     },
+    "/fleet-management/configuration-overlays/v1/versions/{id}/activate": {
+      "post": {
+        "description": "Activates the addressed version and deactivates any other active version of the overlay. Activating an older version creates a new latest version copied from it. Activating an already-active version changes nothing. Returns 400 when the version has no targets or is archived.",
+        "operationId": "ConfigurationOverlayService_ActivateConfigurationOverlayVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/configurationOverlayVersionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "overlay": {
+                    "active": true,
+                    "archived": false,
+                    "description": "Raises the Collector log level for selected remote configurations.",
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Debug logging overlay",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ],
+                    "versions": [
+                      {
+                        "active": true,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:05:00Z",
+                        "custom": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                          "targets": [
+                            {
+                              "createdAt": "2026-09-28T10:05:00Z",
+                              "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3003",
+                              "overlayConfigurationFamilyId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1011",
+                              "overlayRemoteConfigurationId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1012",
+                              "sourceConfigurationFamilyId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60",
+                              "sourceRemoteConfigurationId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61",
+                              "updatedAt": "2026-09-28T10:05:00Z"
+                            }
+                          ]
+                        },
+                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "updatedAt": "2026-09-28T10:05:00Z",
+                        "version": "2"
+                      },
+                      {
+                        "active": false,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:00:00Z",
+                        "custom": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                        },
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "updatedAt": "2026-09-28T10:00:00Z",
+                        "version": "1"
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ActivateConfigurationOverlayVersionResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Configuration overlay version not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Activate configuration overlay version",
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ]
+      }
+    },
     "/fleet-management/configuration-overlays/v1/versions/{id}/archive": {
       "post": {
         "description": "Archives the addressed version. Returns 400 while a version of the overlay is active. Archiving the last unarchived version also archives the overlay.",
         "operationId": "ConfigurationOverlayService_ArchiveConfigurationOverlayVersion",
         "parameters": [
           {
-            "description": "Configuration overlay version UUID v7.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "description": "Configuration overlay version UUID v7.",
-              "maxLength": 36,
-              "minLength": 36,
-              "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/configurationOverlayVersionId"
           }
         ],
         "responses": {
@@ -337,6 +445,124 @@
           }
         },
         "summary": "Archive configuration overlay version",
+        "tags": [
+          "Fleet Manager Configuration Overlays"
+        ]
+      }
+    },
+    "/fleet-management/configuration-overlays/v1/versions/{id}/deactivate": {
+      "post": {
+        "description": "Deactivates the addressed version. Deactivating an inactive version changes nothing. Returns 400 for an archived version.",
+        "operationId": "ConfigurationOverlayService_DeactivateConfigurationOverlayVersion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/configurationOverlayVersionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "overlay": {
+                    "active": false,
+                    "archived": false,
+                    "description": "Raises the Collector log level for selected remote configurations.",
+                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                    "name": "Debug logging overlay",
+                    "priorityOrder": 100,
+                    "tags": [
+                      "production"
+                    ],
+                    "versions": [
+                      {
+                        "active": false,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:05:00Z",
+                        "custom": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n",
+                          "targets": [
+                            {
+                              "createdAt": "2026-09-28T10:05:00Z",
+                              "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3003",
+                              "overlayConfigurationFamilyId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1011",
+                              "overlayRemoteConfigurationId": "01975ed5-2a11-7a01-8b02-0c0d0e0f1012",
+                              "sourceConfigurationFamilyId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60",
+                              "sourceRemoteConfigurationId": "01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61",
+                              "updatedAt": "2026-09-28T10:05:00Z"
+                            }
+                          ]
+                        },
+                        "id": "01975ed5-2a10-7c44-9b1e-5d2c8a7f3002",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "parentVersionId": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "updatedAt": "2026-09-28T10:05:00Z",
+                        "version": "2"
+                      },
+                      {
+                        "active": false,
+                        "archived": false,
+                        "createdAt": "2026-09-28T10:00:00Z",
+                        "custom": {
+                          "configuration": "service:\n  telemetry:\n    logs:\n      level: debug\n"
+                        },
+                        "id": "01975ed4-9c1a-7b3f-8d4e-426614174001",
+                        "overlayHash": "b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b",
+                        "updatedAt": "2026-09-28T10:00:00Z",
+                        "version": "1"
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/DeactivateConfigurationOverlayVersionResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Configuration overlay version not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Deactivate configuration overlay version",
         "tags": [
           "Fleet Manager Configuration Overlays"
         ]
@@ -472,12 +698,12 @@
         "operationId": "ConfigurationOverlayService_UpdateConfigurationOverlay",
         "parameters": [
           {
-            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, custom, custom.configuration, custom.targets. A listed field that is omitted from the body is cleared (name, description, tags, custom.targets) or reset to its default (priorityOrder 0, active false); custom.configuration cannot be cleared. Unknown fields and * return 400.",
+            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, parentVersionId, custom, custom.configuration, custom.targets. A listed field that is omitted from the body is cleared (name, description, tags, custom.targets) or reset to its default (priorityOrder 0); custom.configuration cannot be cleared. Unknown fields and * return 400.",
             "in": "query",
             "name": "update_mask",
             "required": true,
             "schema": {
-              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, active, parentVersionId, custom, custom.configuration, custom.targets. A listed field that is omitted from the body is cleared (name, description, tags, custom.targets) or reset to its default (priorityOrder 0, active false); custom.configuration cannot be cleared. Unknown fields and * return 400.",
+              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, parentVersionId, custom, custom.configuration, custom.targets. A listed field that is omitted from the body is cleared (name, description, tags, custom.targets) or reset to its default (priorityOrder 0); custom.configuration cannot be cleared. Unknown fields and * return 400.",
               "maxLength": 512,
               "minLength": 1,
               "pattern": "^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$",
@@ -491,11 +717,6 @@
               "schema": {
                 "description": "Configuration overlay field values for an update. Only fields listed in update_mask are applied.",
                 "properties": {
-                  "active": {
-                    "description": "When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.",
-                    "type": "boolean",
-                    "x-coralogix-presence": true
-                  },
                   "custom": {
                     "allOf": [
                       {
@@ -682,7 +903,7 @@
     },
     "/fleet-management/configuration-overlays/v1/{id}/archive": {
       "post": {
-        "description": "Archives a configuration overlay and all its versions. Returns 400 while the overlay is active; update it with active set to false first. Archiving an archived overlay succeeds.",
+        "description": "Archives a configuration overlay and all its versions. Returns 400 while the overlay is active. Archiving an archived overlay succeeds.",
         "operationId": "ConfigurationOverlayService_ArchiveConfigurationOverlay",
         "parameters": [
           {
@@ -893,6 +1114,26 @@
         "type": "string",
         "description": "Filter operator."
       },
+      "ActivateConfigurationOverlayVersionResponse": {
+        "required": [
+          "overlay"
+        ],
+        "type": "object",
+        "properties": {
+          "overlay": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationOverlay"
+              }
+            ],
+            "description": "Configuration overlay after activation."
+          }
+        },
+        "description": "Response containing the configuration overlay after activation.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
       "ArchiveConfigurationOverlayResponse": {
         "required": [
           "id"
@@ -1020,11 +1261,6 @@
         ],
         "type": "object",
         "properties": {
-          "active": {
-            "description": "When true, activates the first version. It needs at least one target, or the create returns 400 and nothing is created. Defaults to false.",
-            "type": "boolean",
-            "x-coralogix-presence": true
-          },
           "custom": {
             "allOf": [
               {
@@ -1391,6 +1627,26 @@
           "url": ""
         }
       },
+      "DeactivateConfigurationOverlayVersionResponse": {
+        "required": [
+          "overlay"
+        ],
+        "type": "object",
+        "properties": {
+          "overlay": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationOverlay"
+              }
+            ],
+            "description": "Configuration overlay after deactivation."
+          }
+        },
+        "description": "Response containing the configuration overlay after deactivation.",
+        "externalDocs": {
+          "url": ""
+        }
+      },
       "GetConfigurationOverlayResponse": {
         "required": [
           "overlay"
@@ -1511,6 +1767,19 @@
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
           "type": "string",
           "description": "Configuration overlay UUID v7."
+        }
+      },
+      "configurationOverlayVersionId": {
+        "name": "id",
+        "in": "path",
+        "description": "Configuration overlay version UUID v7.",
+        "required": true,
+        "schema": {
+          "maxLength": 36,
+          "minLength": 36,
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+          "type": "string",
+          "description": "Configuration overlay version UUID v7."
         }
       }
     }

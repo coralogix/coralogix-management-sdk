@@ -23,8 +23,6 @@ var _ MappedNullable = &ConfigurationOverlayCreate{}
 
 // ConfigurationOverlayCreate Payload used to create a custom configuration overlay.
 type ConfigurationOverlayCreate struct {
-	// When true, activates the first version. It needs at least one target, or the create returns 400 and nothing is created. Defaults to false.
-	Active *bool `json:"active,omitempty"`
 	// Custom overlay: an OpenTelemetry Collector YAML fragment and its targets.
 	Custom CustomConfigurationOverlayCreate `json:"custom"`
 	// Human-readable description.
@@ -57,38 +55,6 @@ func NewConfigurationOverlayCreate(custom CustomConfigurationOverlayCreate) *Con
 func NewConfigurationOverlayCreateWithDefaults() *ConfigurationOverlayCreate {
 	this := ConfigurationOverlayCreate{}
 	return &this
-}
-
-// GetActive returns the Active field value if set, zero value otherwise.
-func (o *ConfigurationOverlayCreate) GetActive() bool {
-	if o == nil || IsNil(o.Active) {
-		var ret bool
-		return ret
-	}
-	return *o.Active
-}
-
-// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayCreate) GetActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.Active) {
-		return nil, false
-	}
-	return o.Active, true
-}
-
-// HasActive returns a boolean if a field has been set.
-func (o *ConfigurationOverlayCreate) HasActive() bool {
-	if o != nil && !IsNil(o.Active) {
-		return true
-	}
-
-	return false
-}
-
-// SetActive gets a reference to the given bool and assigns it to the Active field.
-func (o *ConfigurationOverlayCreate) SetActive(v bool) {
-	o.Active = &v
 }
 
 // GetCustom returns the Custom field value
@@ -253,9 +219,6 @@ func (o ConfigurationOverlayCreate) MarshalJSON() ([]byte, error) {
 
 func (o ConfigurationOverlayCreate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Active) {
-		toSerialize["active"] = o.Active
-	}
 	toSerialize["custom"] = o.Custom
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
@@ -313,7 +276,6 @@ func (o *ConfigurationOverlayCreate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "active")
 		delete(additionalProperties, "custom")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "name")

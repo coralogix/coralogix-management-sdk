@@ -22,8 +22,6 @@ var _ MappedNullable = &ConfigurationOverlayServiceUpdateConfigurationOverlayReq
 
 // ConfigurationOverlayServiceUpdateConfigurationOverlayRequest Configuration overlay field values for an update. Only fields listed in update_mask are applied.
 type ConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
-	// When true, activates the latest version after the update; when false, deactivates it. Activating without targets returns 400.
-	Active *bool `json:"active,omitempty"`
 	// Custom overlay fields to update. Rejected for preset overlays.
 	Custom *CustomConfigurationOverlayUpdate `json:"custom,omitempty"`
 	// Human-readable description.
@@ -57,38 +55,6 @@ func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequest() *Configur
 func NewConfigurationOverlayServiceUpdateConfigurationOverlayRequestWithDefaults() *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest {
 	this := ConfigurationOverlayServiceUpdateConfigurationOverlayRequest{}
 	return &this
-}
-
-// GetActive returns the Active field value if set, zero value otherwise.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetActive() bool {
-	if o == nil || IsNil(o.Active) {
-		var ret bool
-		return ret
-	}
-	return *o.Active
-}
-
-// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) GetActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.Active) {
-		return nil, false
-	}
-	return o.Active, true
-}
-
-// HasActive returns a boolean if a field has been set.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) HasActive() bool {
-	if o != nil && !IsNil(o.Active) {
-		return true
-	}
-
-	return false
-}
-
-// SetActive gets a reference to the given bool and assigns it to the Active field.
-func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) SetActive(v bool) {
-	o.Active = &v
 }
 
 // GetCustom returns the Custom field value if set, zero value otherwise.
@@ -293,9 +259,6 @@ func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) MarshalJSO
 
 func (o ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Active) {
-		toSerialize["active"] = o.Active
-	}
 	if !IsNil(o.Custom) {
 		toSerialize["custom"] = o.Custom
 	}
@@ -337,7 +300,6 @@ func (o *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest) Unmarshal
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "active")
 		delete(additionalProperties, "custom")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "name")
