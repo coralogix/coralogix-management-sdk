@@ -306,10 +306,7 @@
             "description": "List of enrichments."
           }
         },
-        "description": "Response returned after atomically replacing all enrichment rules.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after atomically replacing all enrichment rules."
       },
       "AtomicOverwriteEnrichmentsResponse": {
         "type": "object",
@@ -324,10 +321,7 @@
             "description": "List of enrichments."
           }
         },
-        "description": "Response returned after atomically updating enrichment rules.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after atomically updating enrichment rules."
       },
       "AwsType": {
         "type": "object",
@@ -343,10 +337,7 @@
             ]
           }
         },
-        "description": "Aws type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Aws type."
       },
       "CompanyEnrichmentSettings": {
         "type": "object",
@@ -412,10 +403,7 @@
             ]
           }
         },
-        "description": "Company enrichment settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Company enrichment settings."
       },
       "CustomEnrichmentType": {
         "type": "object",
@@ -431,10 +419,7 @@
             ]
           }
         },
-        "description": "Custom enrichment type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom enrichment type."
       },
       "DatasetTarget": {
         "title": "Dataset Target",
@@ -451,10 +436,7 @@
             ]
           }
         },
-        "description": "This data structure represents a target for enrichments. It defines a dataset in which the enrichment will be applied to.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a target for enrichments. It defines a dataset in which the enrichment will be applied to."
       },
       "Enrichment": {
         "title": "Enrichment",
@@ -725,10 +707,7 @@
             "$ref": "#/components/schemas/SuspiciousIpType"
           }
         },
-        "description": "Enrichment type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Enrichment type."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -770,10 +749,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -800,10 +776,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GeoIpType": {
         "type": "object",
@@ -814,10 +787,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Geo ip type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geo ip type."
       },
       "GetCompanyEnrichmentSettingsResponse": {
         "type": "object",
@@ -826,10 +796,7 @@
             "$ref": "#/components/schemas/CompanyEnrichmentSettings"
           }
         },
-        "description": "Response containing the company-level enrichment settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the company-level enrichment settings."
       },
       "GetEnrichmentLimitResponse": {
         "title": "Enrichment Limit",
@@ -928,10 +895,7 @@
       "SuspiciousIpType": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Suspicious ip type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Suspicious ip type."
       },
       "events.v3.FilterMatcher": {
         "enum": [

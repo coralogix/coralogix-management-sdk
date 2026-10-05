@@ -1847,10 +1847,7 @@
             "description": "Case after acknowledgment."
           }
         },
-        "description": "Response containing the case after it has been acknowledged.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case after it has been acknowledged."
       },
       "ActiveSuppressionRules": {
         "title": "Active suppression rules",
@@ -1879,19 +1876,13 @@
             ]
           }
         },
-        "description": "Data describing the active suppression rules for an alert indicator.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Data describing the active suppression rules for an alert indicator."
       },
       "AlertDefinitionMuted": {
         "title": "Alert definition is muted",
         "type": "object",
         "additionalProperties": false,
-        "description": "Object indicating the muted state of the alert definition for an alert indicator.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Object indicating the muted state of the alert definition for an alert indicator."
       },
       "AlertFilters": {
         "title": "Alert filters",
@@ -1936,10 +1927,7 @@
             ]
           }
         },
-        "description": "Filters applied to cases based on alert properties.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filters applied to cases based on alert properties."
       },
       "AlertGroupingType": {
         "title": "Alert grouping type",
@@ -1977,10 +1965,7 @@
             ]
           }
         },
-        "description": "Count of cases associated with a single alert definition ID.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count of cases associated with a single alert definition ID."
       },
       "AlertIndicator": {
         "title": "Alert indicator",
@@ -2148,10 +2133,7 @@
             ]
           }
         },
-        "description": "Data describing a triggered alert instance and its lifecycle relative to a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Data describing a triggered alert instance and its lifecycle relative to a case."
       },
       "AlertIndicator.Permutation": {
         "title": "Alert permutation",
@@ -2166,10 +2148,7 @@
             "description": "A single permutation represented as map<string, string>."
           }
         },
-        "description": "Single alert permutation captured as a map of label keys to label values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Single alert permutation captured as a map of label keys to label values."
       },
       "AlertIndicatorDeepLink": {
         "title": "Alert indicator deep link",
@@ -2267,10 +2246,7 @@
             "$ref": "#/components/schemas/TracingLink"
           }
         },
-        "description": "Deep links derived from a single alert indicator on a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deep links derived from a single alert indicator on a case."
       },
       "AlertSuppression": {
         "title": "Alert suppression details",
@@ -2326,10 +2302,7 @@
             ]
           }
         },
-        "description": "Data describing the suppression status of an alert indicator, including active suppression rules and muted state.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Data describing the suppression status of an alert indicator, including active suppression rules and muted state."
       },
       "ApmDatabaseEntity": {
         "title": "APM database entity",
@@ -2356,10 +2329,7 @@
             ]
           }
         },
-        "description": "Application Performance Monitoring database identified as impacted by a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Application Performance Monitoring database identified as impacted by a case."
       },
       "ApmDatabaseEntityFilter": {
         "title": "APM database entity filter",
@@ -2379,10 +2349,7 @@
             ]
           }
         },
-        "description": "Selects cases impacting the APM database with this name (matched case-insensitively).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Selects cases impacting the APM database with this name (matched case-insensitively)."
       },
       "ApmServiceEntity": {
         "title": "APM service entity",
@@ -2410,10 +2377,7 @@
             ]
           }
         },
-        "description": "Application Performance Monitoring service identified as impacted by a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Application Performance Monitoring service identified as impacted by a case."
       },
       "ApmServiceEntityFilter": {
         "title": "APM service entity filter",
@@ -2433,10 +2397,7 @@
             ]
           }
         },
-        "description": "Selects cases impacting the APM service with this name (matched case-insensitively).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Selects cases impacting the APM service with this name (matched case-insensitively)."
       },
       "AssignCaseResponse": {
         "title": "Assign case response",
@@ -2454,10 +2415,7 @@
             "description": "Case after assigning a user to it."
           }
         },
-        "description": "Response containing the case after a user assignment.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case after a user assignment."
       },
       "AssigneeAggregation": {
         "title": "Assignee aggregation",
@@ -2483,10 +2441,7 @@
             "format": "int64"
           }
         },
-        "description": "Case counts broken down by assignee plus the count of unassigned cases.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Case counts broken down by assignee plus the count of unassigned cases."
       },
       "AssigneeCount": {
         "title": "Assignee count",
@@ -2507,10 +2462,7 @@
             "format": "int64"
           }
         },
-        "description": "Count of cases for a single assignee.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count of cases for a single assignee."
       },
       "AssigneeOption": {
         "title": "Assignee option",
@@ -2568,10 +2520,7 @@
             "description": "Selects cases that have no assignee"
           }
         },
-        "description": "Assignee filter option representing either a specific assignee or unassigned cases.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Assignee filter option representing either a specific assignee or unassigned cases."
       },
       "BreachStatus": {
         "title": "Breach status",
@@ -2659,10 +2608,7 @@
             ]
           }
         },
-        "description": "Breached KPI details, including the type of KPI, the case priority at the time of breach, and when the breach occurred together with current status. This information helps understand which KPIs were not met for a case and when.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Breached KPI details, including the type of KPI, the case priority at the time of breach, and when the breach occurred together with current status. This information helps understand which KPIs were not met for a case and when."
       },
       "BulkAcknowledgeResponse": {
         "title": "Bulk acknowledge response",
@@ -2681,10 +2627,7 @@
             "description": "Updated cases"
           }
         },
-        "description": "Response containing the updated cases",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated cases"
       },
       "BulkAssignResponse": {
         "title": "Bulk assign response",
@@ -2703,10 +2646,7 @@
             "description": "Updated cases"
           }
         },
-        "description": "Response containing the updated cases",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated cases"
       },
       "BulkClearPriorityOverrideResponse": {
         "title": "Bulk clear priority override response",
@@ -2725,10 +2665,7 @@
             "description": "Updated cases"
           }
         },
-        "description": "Response containing the updated cases",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated cases"
       },
       "BulkCloseResponse": {
         "title": "Bulk close response",
@@ -2747,10 +2684,7 @@
             "description": "Updated cases"
           }
         },
-        "description": "Response containing the updated cases",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated cases"
       },
       "BulkResolveResponse": {
         "title": "Bulk resolve response",
@@ -2769,10 +2703,7 @@
             "description": "Updated cases"
           }
         },
-        "description": "Response containing the updated cases",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated cases"
       },
       "BulkSetPriorityOverrideResponse": {
         "title": "Bulk override priority response",
@@ -2791,10 +2722,7 @@
             "description": "Updated cases"
           }
         },
-        "description": "Response containing the updated cases",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated cases"
       },
       "BulkUnassignResponse": {
         "title": "Bulk unassign response",
@@ -2813,10 +2741,7 @@
             "description": "Updated cases"
           }
         },
-        "description": "Response containing the updated cases",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated cases"
       },
       "Case": {
         "title": "Case",
@@ -3020,10 +2945,7 @@
             "format": "date-time"
           }
         },
-        "description": "Represents a case within the Cases service.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a case within the Cases service."
       },
       "CaseCategory": {
         "title": "Case category",
@@ -3063,10 +2985,7 @@
             "description": "Per-impacted-entity drilldown links."
           }
         },
-        "description": "Pre-built URLs that navigate from a case to the relevant views.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pre-built URLs that navigate from a case to the relevant views."
       },
       "CaseFilters": {
         "title": "Case filters",
@@ -3267,10 +3186,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Filters applied when querying cases, including statuses, priorities, categories, groupings, and labels.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filters applied when querying cases, including statuses, priorities, categories, groupings, and labels."
       },
       "CaseIndicators": {
         "title": "Case indicators",
@@ -3307,10 +3223,7 @@
             "description": "List of Prometheus alert indicators contributing to the case"
           }
         },
-        "description": "Grouped indicators contributing to the case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Grouped indicators contributing to the case."
       },
       "CaseLabelsFilter": {
         "title": "Case Labels Filter",
@@ -3334,10 +3247,7 @@
             ]
           }
         },
-        "description": "Filters applied against Case's labels when queries/filters counted",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filters applied against Case's labels when queries/filters counted"
       },
       "CaseOrderBy": {
         "title": "Case ordering specification",
@@ -3366,10 +3276,7 @@
             ]
           }
         },
-        "description": "Defines how cases should be sorted in the response. By default, cases are sorted by creation time and id in descending order. With this field, one can specify the primary sorting field and direction.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines how cases should be sorted in the response. By default, cases are sorted by creation time and id in descending order. With this field, one can specify the primary sorting field and direction."
       },
       "CaseOrderByDirection": {
         "title": "Case order direction",
@@ -3546,19 +3453,13 @@
             "$ref": "#/components/schemas/System"
           }
         },
-        "description": "Entity responsible for resolving the case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Entity responsible for resolving the case."
       },
       "CaseResolver.ApiKey": {
         "title": "API key resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved using an API key.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved using an API key."
       },
       "CaseStatus": {
         "enum": [
@@ -3595,10 +3496,7 @@
             ]
           }
         },
-        "description": "Count of cases grouped by case category.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count of cases grouped by case category."
       },
       "ClearPriorityOverrideResponse": {
         "title": "Clear priority override response",
@@ -3616,10 +3514,7 @@
             "description": "Case after removing the priority override."
           }
         },
-        "description": "Response containing the case after clearing its priority override.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case after clearing its priority override."
       },
       "CloseCaseResponse": {
         "title": "Close case response",
@@ -3637,10 +3532,7 @@
             "description": "Case after closing it."
           }
         },
-        "description": "Response containing the case after it has been closed.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case after it has been closed."
       },
       "ConnectorTypeFilter": {
         "title": "Connector type filters",
@@ -3686,19 +3578,13 @@
             "$ref": "#/components/schemas/NoConnector"
           }
         },
-        "description": "Filters applied to cases based on connector types.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filters applied to cases based on connector types."
       },
       "CoralogixUser": {
         "title": "Coralogix user resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved by a Coralogix user.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved by a Coralogix user."
       },
       "DateRangeFilter": {
         "title": "Date Range Filter",
@@ -3740,10 +3626,7 @@
             ]
           }
         },
-        "description": "A filter defining a date range with 'from' and 'to' timestamps.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A filter defining a date range with 'from' and 'to' timestamps."
       },
       "DateRangeMode": {
         "title": "Date range mode",
@@ -3773,10 +3656,7 @@
             ]
           }
         },
-        "description": "A URL reference to an entity in the originating system.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A URL reference to an entity in the originating system."
       },
       "Error": {
         "type": "object",
@@ -3818,10 +3698,7 @@
             "description": "Key/value filter that this count corresponds to"
           }
         },
-        "description": "Count of cases matching a single key/value filter combination.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count of cases matching a single key/value filter combination."
       },
       "FilterGroup": {
         "title": "Filter group",
@@ -3860,10 +3737,7 @@
             ]
           }
         },
-        "description": "A filter group containing a key and its possible values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A filter group containing a key and its possible values."
       },
       "FilterGroupAggregation": {
         "title": "Filter group aggregation",
@@ -3892,10 +3766,7 @@
             "description": "Aggregations per value"
           }
         },
-        "description": "Aggregated case counts for a single filter group key, with one entry per observed value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Aggregated case counts for a single filter group key, with one entry per observed value."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -3937,10 +3808,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -3967,10 +3835,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GenericIndicator": {
         "title": "Generic indicator",
@@ -4084,10 +3949,7 @@
             ]
           }
         },
-        "description": "An indicator sourced from a generic external system (e.g. Error Tracking).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "An indicator sourced from a generic external system (e.g. Error Tracking)."
       },
       "GenericIndicatorStatus": {
         "title": "Generic indicator status",
@@ -4124,10 +3986,7 @@
             "description": "The case associated with the indicator."
           }
         },
-        "description": "Response containing the case associated with the given indicator.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case associated with the given indicator."
       },
       "GetCaseDeepLinksResponse": {
         "title": "Get case deep links response",
@@ -4145,10 +4004,7 @@
             "description": "Deep links for the case."
           }
         },
-        "description": "Response containing the deep links for the requested case",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the deep links for the requested case"
       },
       "GetCaseResponse": {
         "title": "Get case response",
@@ -4166,10 +4022,7 @@
             "description": "The requested case"
           }
         },
-        "description": "Response containing the requested case",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested case"
       },
       "GetGroupingKeysResponse": {
         "title": "Get grouping keys response",
@@ -4201,10 +4054,7 @@
             ]
           }
         },
-        "description": "Response containing available grouping keys",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing available grouping keys"
       },
       "ImpactedEntity": {
         "title": "Impacted entity",
@@ -4250,10 +4100,7 @@
             "$ref": "#/components/schemas/ApmServiceEntity"
           }
         },
-        "description": "Entity affected by a case (e.g., an APM service or database).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Entity affected by a case (e.g., an APM service or database)."
       },
       "ImpactedEntityFilter": {
         "title": "Impacted entity filter",
@@ -4280,10 +4127,7 @@
             "$ref": "#/components/schemas/ApmServiceEntityFilter"
           }
         },
-        "description": "Selects cases by an impacted APM entity (service or database).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Selects cases by an impacted APM entity (service or database)."
       },
       "ImpactedEntityLink": {
         "title": "Impacted entity link",
@@ -4305,10 +4149,7 @@
             "description": "Absolute URL to the entity drilldown view."
           }
         },
-        "description": "An impacted entity decorated with a deep link into the relevant product view.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "An impacted entity decorated with a deep link into the relevant product view."
       },
       "IndicatorPriority": {
         "title": "Indicator priority",
@@ -4369,10 +4210,7 @@
             ]
           }
         },
-        "description": "Current or final KPI breach timestamps for the case. A value is present only when the KPI has been breached.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Current or final KPI breach timestamps for the case. A value is present only when the KPI has been breached."
       },
       "KPIFilter": {
         "enum": [
@@ -4437,10 +4275,7 @@
             "description": "Indicates whether the list of cases was truncated due to PBAC (Policy-Based Access Control) restrictions. If true, the user may not have access to all cases that match the filters."
           }
         },
-        "description": "Response containing a list of cases and pagination information",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of cases and pagination information"
       },
       "LogsLink": {
         "title": "Logs link",
@@ -4454,10 +4289,7 @@
             "description": "Explore logs URL pre-filtered to the alert query and case time window."
           }
         },
-        "description": "Deep link to explore logs related to an alert indicator on a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deep link to explore logs related to an alert indicator on a case."
       },
       "MetricLink": {
         "title": "Metric link",
@@ -4471,19 +4303,13 @@
             "description": "Explore metrics URL pre-filtered to the alert query and case time window."
           }
         },
-        "description": "Deep link to explore metrics related to an alert indicator on a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deep link to explore metrics related to an alert indicator on a case."
       },
       "MicrosoftTeams": {
         "title": "Microsoft Teams resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved through a Microsoft Teams integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved through a Microsoft Teams integration."
       },
       "MultipleValues": {
         "type": "object",
@@ -4504,10 +4330,7 @@
       "NoConnector": {
         "type": "object",
         "additionalProperties": false,
-        "description": "No connector.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "No connector."
       },
       "OllyAnalysis": {
         "title": "Olly analysis",
@@ -4543,10 +4366,7 @@
             ]
           }
         },
-        "description": "Result of an automated Olly analysis attached to a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Result of an automated Olly analysis attached to a case."
       },
       "OllyAnalysisPayload": {
         "title": "Olly analysis payload",
@@ -4613,10 +4433,7 @@
             ]
           }
         },
-        "description": "Typed analysis payload returned by Olly. Present only when status = STATUS_OK.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Typed analysis payload returned by Olly. Present only when status = STATUS_OK."
       },
       "OllyAnalysisRootCauseConfidence": {
         "enum": [
@@ -4642,10 +4459,7 @@
         "title": "PagerDuty resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved through a PagerDuty integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved through a PagerDuty integration."
       },
       "PriorityAggregation": {
         "title": "Priority aggregation",
@@ -4670,10 +4484,7 @@
             "description": "Case priority"
           }
         },
-        "description": "Count of cases grouped by case priority.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count of cases grouped by case priority."
       },
       "PriorityDetails": {
         "title": "Priority details",
@@ -4697,10 +4508,7 @@
             "description": "System computed priority"
           }
         },
-        "description": "Priority details, including system computed and user override values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Priority details, including system computed and user override values."
       },
       "PrometheusAlert": {
         "title": "Prometheus alert",
@@ -4822,10 +4630,7 @@
             ]
           }
         },
-        "description": "Data describing a single Prometheus alert within an alert group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Data describing a single Prometheus alert within an alert group."
       },
       "PrometheusAlertIndicator": {
         "title": "Prometheus alert indicator",
@@ -4929,19 +4734,13 @@
             ]
           }
         },
-        "description": "Data describing a triggered Prometheus alert group and its constituent alerts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Data describing a triggered Prometheus alert group and its constituent alerts."
       },
       "PrometheusAlertManager": {
         "title": "Prometheus AlertManager resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved through a Prometheus AlertManager integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved through a Prometheus AlertManager integration."
       },
       "PrometheusAlertManagerIndicator": {
         "title": "Prometheus AlertManager indicator",
@@ -4972,10 +4771,7 @@
             ]
           }
         },
-        "description": "Lookup keys identifying a specific Prometheus AlertManager alert episode.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Lookup keys identifying a specific Prometheus AlertManager alert episode."
       },
       "PrometheusAlertQuery": {
         "title": "Prometheus alert query",
@@ -4995,10 +4791,7 @@
             ]
           }
         },
-        "description": "Query backing a Prometheus alert.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query backing a Prometheus alert."
       },
       "PrometheusAlertStatus": {
         "title": "Prometheus alert status",
@@ -5044,10 +4837,7 @@
             "$ref": "#/components/schemas/Triggered"
           }
         },
-        "description": "Lifecycle status of a Prometheus alert or alert group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Lifecycle status of a Prometheus alert or alert group."
       },
       "ResolutionDetails": {
         "title": "Resolution details",
@@ -5083,10 +4873,7 @@
             "description": "Entity that resolved the case"
           }
         },
-        "description": "Information about how and when a case was resolved.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about how and when a case was resolved."
       },
       "ResolveCaseResponse": {
         "title": "Resolve case response",
@@ -5104,10 +4891,7 @@
             "description": "Case after resolution."
           }
         },
-        "description": "Response containing the case after it has been resolved.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case after it has been resolved."
       },
       "Resolved": {
         "title": "Resolved Prometheus alert status",
@@ -5138,10 +4922,7 @@
             ]
           }
         },
-        "description": "Status payload for a resolved Prometheus alert.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Status payload for a resolved Prometheus alert."
       },
       "RumLink": {
         "title": "RUM link",
@@ -5155,19 +4936,13 @@
             "description": "RUM errors URL pre-filtered to the alert applications and case time window."
           }
         },
-        "description": "Deep link to the RUM errors view scoped to an alert indicator on a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deep link to the RUM errors view scoped to an alert indicator on a case."
       },
       "ServiceNow": {
         "title": "ServiceNow resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved through a ServiceNow integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved through a ServiceNow integration."
       },
       "SetPriorityOverrideResponse": {
         "title": "Set priority override response",
@@ -5185,19 +4960,13 @@
             "description": "Case after applying the priority override."
           }
         },
-        "description": "Response containing the case with its updated priority override.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case with its updated priority override."
       },
       "Slack": {
         "title": "Slack resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved through a Slack integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved through a Slack integration."
       },
       "SloLink": {
         "title": "SLO link",
@@ -5211,10 +4980,7 @@
             "description": "SLO overview URL with the permutation preselected."
           }
         },
-        "description": "Deep link to the SLO overview for an alert indicator on a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deep link to the SLO overview for an alert indicator on a case."
       },
       "StatusAggregation": {
         "title": "Status aggregation",
@@ -5236,19 +5002,13 @@
             "description": "Case status"
           }
         },
-        "description": "Count of cases grouped by case status.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count of cases grouped by case status."
       },
       "System": {
         "title": "System resolver",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker indicating that the case was resolved automatically by the Cases system.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker indicating that the case was resolved automatically by the Cases system."
       },
       "TracingLink": {
         "title": "Tracing link",
@@ -5262,10 +5022,7 @@
             "description": "Explore traces URL pre-filtered to the alert query and case time window."
           }
         },
-        "description": "Deep link to explore traces related to an alert indicator on a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deep link to explore traces related to an alert indicator on a case."
       },
       "Triggered": {
         "title": "Triggered Prometheus alert status",
@@ -5285,10 +5042,7 @@
             ]
           }
         },
-        "description": "Status payload for an active Prometheus alert.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Status payload for an active Prometheus alert."
       },
       "UnacknowledgeCaseResponse": {
         "title": "Unacknowledge case response",
@@ -5306,10 +5060,7 @@
             "description": "Case after acknowledgment was removed."
           }
         },
-        "description": "Response containing the case after acknowledgment was removed.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case after acknowledgment was removed."
       },
       "UnassignCaseResponse": {
         "title": "Unassign case response",
@@ -5327,19 +5078,13 @@
             "description": "Case after removing its assignee."
           }
         },
-        "description": "Response containing the case after removing its assignee.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case after removing its assignee."
       },
       "Unassigned": {
         "title": "Unassigned",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker selecting cases that have no assignee.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker selecting cases that have no assignee."
       },
       "UpdateCaseResponse": {
         "title": "Update case response",
@@ -5357,10 +5102,7 @@
             "description": "Updated case"
           }
         },
-        "description": "Response containing the updated case",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated case"
       },
       "ValueCount": {
         "title": "Filter value count",
@@ -5387,10 +5129,7 @@
             ]
           }
         },
-        "description": "Number of cases that share a single filter group value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Number of cases that share a single filter group value."
       },
       "cases.v1.GetFilterValuesResponse": {
         "title": "Get case filter values response",
@@ -5477,10 +5216,7 @@
             "description": "Aggregated case counts grouped by status."
           }
         },
-        "description": "Aggregated counts for building filters in the UI",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Aggregated counts for building filters in the UI"
       },
       "cases.v1.PaginationRequest": {
         "title": "Pagination request",
@@ -5520,10 +5256,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Pagination parameters for list requests.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pagination parameters for list requests."
       },
       "cases.v1.PaginationResponse": {
         "title": "Pagination response",
@@ -5541,10 +5274,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Pagination information for list responses.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pagination information for list responses."
       },
       "cases.v1.UserDetails": {
         "title": "User details",
@@ -5561,10 +5291,7 @@
             ]
           }
         },
-        "description": "Minimal user identity information used in case assignments.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Minimal user identity information used in case assignments."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -5615,10 +5342,7 @@
             ]
           }
         },
-        "description": "Represents a simple key-value pair, often used for labels or groupings in cases.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a simple key-value pair, often used for labels or groupings in cases."
       },
       "v3.FilterOperator": {
         "enum": [

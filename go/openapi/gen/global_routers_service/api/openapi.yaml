@@ -83,11 +83,15 @@
                     "$ref": "#/components/schemas/GlobalRouter"
                   }
                 },
+                "required": [
+                  "router"
+                ],
                 "title": "Replace Global Router Request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -119,11 +123,15 @@
                     "$ref": "#/components/schemas/GlobalRouter"
                   }
                 },
+                "required": [
+                  "router"
+                ],
                 "title": "Create Global Router Request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -338,13 +346,14 @@
       "DeleteGlobalRouterResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting a notification router.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a notification router."
       },
       "FallbackTarget": {
         "title": "FallbackTarget",
+        "required": [
+          "entityType",
+          "target"
+        ],
         "type": "object",
         "properties": {
           "entityType": {
@@ -400,10 +409,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -430,10 +436,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetGlobalRouterResponse": {
         "title": "Get Global Router Response",
@@ -451,13 +454,17 @@
       },
       "GlobalRouter": {
         "title": "Global Router",
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "createTime": {
             "minLength": 0,
             "type": "string",
-            "description": "The create time.",
-            "format": "date-time"
+            "description": "The create time. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
+            "readOnly": true
           },
           "description": {
             "maxLength": 5000,
@@ -467,7 +474,8 @@
             "description": "Human-readable description."
           },
           "disabled": {
-            "description": "The disabled.",
+            "default": false,
+            "description": "Whether the router is disabled.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
@@ -495,7 +503,7 @@
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
             },
-            "description": "The fallback destinations to be used if no rule matches.",
+            "description": "The fallback destinations to be used if no rule matches. Deprecated: use fallbackTargets. A router cannot set both fallback and fallbackTargets. The server does not keep the order of the targets.",
             "deprecated": true
           },
           "fallbackTargets": {
@@ -505,7 +513,7 @@
             "items": {
               "$ref": "#/components/schemas/FallbackTarget"
             },
-            "description": "The fallback targets."
+            "description": "The fallback targets. A router cannot set both fallback and fallbackTargets. The server does not keep the order of the fallback targets."
           },
           "id": {
             "description": "Unique identifier.",
@@ -543,8 +551,9 @@
           "updateTime": {
             "minLength": 0,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
+            "readOnly": true
           }
         },
         "description": "Defines a set of pre-configured routing rules for directing notifications",
@@ -608,31 +617,31 @@
         "type": "object",
         "properties": {
           "environment": {
-            "description": "The environment.",
-            "maxLength": 256,
+            "description": "The environment. The limit is 255 bytes.",
+            "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
           },
           "service": {
-            "description": "Service name.",
-            "maxLength": 256,
+            "description": "Service name. The limit is 255 bytes.",
+            "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
           },
           "team": {
-            "description": "Team.",
-            "maxLength": 256,
+            "description": "Team. The limit is 255 bytes.",
+            "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Allows to configure routing labels which are used for routers resolution",
+        "description": "Allows to configure routing labels which are used for routers resolution. Every router needs at least one label, except the default router, whose `id` is `router_default`. The default router must have no labels.",
         "externalDocs": {
           "description": "Find out more how label based routers work",
           "url": "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/#how-label-based-routers-work"
@@ -640,6 +649,10 @@
       },
       "RoutingRule": {
         "title": "Routing Rule",
+        "required": [
+          "condition",
+          "name"
+        ],
         "type": "object",
         "properties": {
           "condition": {
@@ -666,6 +679,7 @@
                 "$ref": "#/components/schemas/notification_center.EntityType"
               }
             ],
+            "default": "ALERTS",
             "examples": [
               "ALERTS"
             ],
@@ -686,7 +700,7 @@
             "items": {
               "$ref": "#/components/schemas/RoutingTarget"
             },
-            "description": "List of targets."
+            "description": "List of targets. The server does not keep the order of the targets."
           }
         },
         "description": "Defines routing rule for notifications",
@@ -697,6 +711,9 @@
       },
       "RoutingTarget": {
         "title": "Routing Target",
+        "required": [
+          "connectorId"
+        ],
         "type": "object",
         "properties": {
           "connectorId": {
@@ -715,13 +732,14 @@
             "description": "The custom details."
           },
           "id": {
-            "description": "Unique identifier.",
+            "description": "Unique identifier. Set by the server, which assigns a new value on every create and replace; a value sent by the client is ignored.",
             "examples": [
               "d4b56246-64bb-4714-a8bd-97c999f1d801"
             ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -797,10 +815,7 @@
             "$ref": "#/components/schemas/ValidateEntityLabelMatcherResult.Success"
           }
         },
-        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Result of validating an entity label matcher, indicating whether it is valid or contains errors."
       },
       "ValidateEntityLabelMatcherResult.Failure": {
         "type": "object",
@@ -813,18 +828,12 @@
             "description": "Human-readable message."
           }
         },
-        "description": "Test outgoing webhook response.failure.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Test outgoing webhook response.failure."
       },
       "ValidateEntityLabelMatcherResult.Success": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Test integration result.success.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Test integration result.success."
       },
       "events.v3.FilterMatcher": {
         "enum": [

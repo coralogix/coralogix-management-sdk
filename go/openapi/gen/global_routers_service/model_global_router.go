@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,28 +24,28 @@ var _ MappedNullable = &GlobalRouter{}
 
 // GlobalRouter Defines a set of pre-configured routing rules for directing notifications
 type GlobalRouter struct {
-	// The create time.
+	// The create time. Set by the server; a value sent by the client is ignored.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// The disabled.
+	// Whether the router is disabled.
 	Disabled *bool `json:"disabled,omitempty"`
 	// The entity labels.
 	EntityLabels map[string]string `json:"entityLabels,omitempty"`
 	// Deprecated
 	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
-	// The fallback destinations to be used if no rule matches.
+	// The fallback destinations to be used if no rule matches. Deprecated: use fallbackTargets. A router cannot set both fallback and fallbackTargets. The server does not keep the order of the targets.
 	Fallback []RoutingTarget `json:"fallback,omitempty"`
-	// The fallback targets.
+	// The fallback targets. A router cannot set both fallback and fallbackTargets. The server does not keep the order of the fallback targets.
 	FallbackTargets []FallbackTarget `json:"fallbackTargets,omitempty"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	RoutingLabels *RoutingLabels `json:"routingLabels,omitempty"`
 	// List of rules.
 	Rules []RoutingRule `json:"rules,omitempty"`
-	// Timestamp of the last update.
+	// Timestamp of the last update. Set by the server; a value sent by the client is ignored.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -56,8 +57,9 @@ type _GlobalRouter GlobalRouter
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewGlobalRouter() *GlobalRouter {
+func NewGlobalRouter(name string) *GlobalRouter {
 	this := GlobalRouter{}
+	this.Name = name
 	return &this
 }
 
@@ -328,36 +330,28 @@ func (o *GlobalRouter) SetId(v string) {
 	o.Id = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *GlobalRouter) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *GlobalRouter) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *GlobalRouter) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *GlobalRouter) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetRoutingLabels returns the RoutingLabels field value if set, zero value otherwise.
@@ -490,9 +484,7 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.RoutingLabels) {
 		toSerialize["routingLabels"] = o.RoutingLabels
 	}
@@ -511,6 +503,27 @@ func (o GlobalRouter) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GlobalRouter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGlobalRouter := _GlobalRouter{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

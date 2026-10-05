@@ -737,9 +737,6 @@
               "1"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "AttachmentType": {
@@ -793,10 +790,7 @@
             ]
           }
         },
-        "description": "Aws event bridge config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Aws event bridge config."
       },
       "CreateOutgoingWebhookResponse": {
         "title": "Create outgoing webhook response",
@@ -811,19 +805,13 @@
             ]
           }
         },
-        "description": "Response returned after successfully creating an outgoing webhook.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully creating an outgoing webhook."
       },
       "DeleteOutgoingWebhookResponse": {
         "title": "Delete outgoing webhook response",
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting an outgoing webhook.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting an outgoing webhook."
       },
       "DemistoConfig": {
         "title": "Demisto configuration",
@@ -843,10 +831,7 @@
             ]
           }
         },
-        "description": "Demisto config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Demisto config."
       },
       "Digest": {
         "title": "Slack digest configuration",
@@ -867,9 +852,6 @@
               "1"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "DigestType": {
@@ -903,10 +885,7 @@
             ]
           }
         },
-        "description": "Email group config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Email group config."
       },
       "EndpointType": {
         "enum": [
@@ -976,10 +955,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -1006,10 +982,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GenericWebhookConfig": {
         "title": "Generic webhook configuration",
@@ -1047,10 +1020,7 @@
             ]
           }
         },
-        "description": "Generic webhook config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Generic webhook config."
       },
       "GetOutgoingWebhookResponse": {
         "title": "Get outgoing webhook response",
@@ -1060,10 +1030,7 @@
             "$ref": "#/components/schemas/OutgoingWebhook"
           }
         },
-        "description": "Response containing the details of an outgoing webhook.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of an outgoing webhook."
       },
       "GetOutgoingWebhookTypeDetailsResponse": {
         "title": "Get outgoing webhook type details response",
@@ -1073,10 +1040,7 @@
             "$ref": "#/components/schemas/OutgoingWebhookDetails"
           }
         },
-        "description": "Response containing the details of an outgoing webhook type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of an outgoing webhook type."
       },
       "IbmEventNotificationsConfig": {
         "title": "IBM event notification configuration",
@@ -1106,10 +1070,7 @@
             "description": "The source name."
           }
         },
-        "description": "Ibm event notifications config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Ibm event notifications config."
       },
       "JiraConfig": {
         "title": "Jira configuration",
@@ -1140,10 +1101,7 @@
             ]
           }
         },
-        "description": "Jira config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Jira config."
       },
       "ListAllOutgoingWebhooksResponse": {
         "title": "List all outgoing webhooks response",
@@ -1158,10 +1116,7 @@
             "description": "The deployed."
           }
         },
-        "description": "Response containing a list of all outgoing webhooks.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of all outgoing webhooks."
       },
       "ListOutboundWebhooksSummaryResponse": {
         "title": "List outbound webhooks summary response",
@@ -1176,10 +1131,7 @@
             "description": "The outbound webhook summaries."
           }
         },
-        "description": "Response containing summary information for outgoing webhooks.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing summary information for outgoing webhooks."
       },
       "ListOutgoingWebhookTypesResponse": {
         "title": "List outgoing webhook types response",
@@ -1194,10 +1146,7 @@
             "description": "List of webhooks."
           }
         },
-        "description": "Response containing a list of available outgoing webhook types.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of available outgoing webhook types."
       },
       "ListOutgoingWebhooksResponse": {
         "title": "List outgoing webhooks response",
@@ -1212,19 +1161,13 @@
             "description": "The deployed."
           }
         },
-        "description": "Response containing a list of outgoing webhooks.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of outgoing webhooks."
       },
       "MSTeamsWorkflowConfig": {
         "title": "Microsoft Teams workflow configuration",
         "type": "object",
         "additionalProperties": false,
-        "description": "Ms teams workflow config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Ms teams workflow config."
       },
       "MethodType": {
         "enum": [
@@ -1240,10 +1183,7 @@
         "title": "Microsoft Teams configuration",
         "type": "object",
         "additionalProperties": false,
-        "description": "Microsoft teams config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Microsoft teams config."
       },
       "MultipleValues": {
         "type": "object",
@@ -1265,10 +1205,7 @@
         "title": "Opsgenie configuration",
         "type": "object",
         "additionalProperties": false,
-        "description": "Opsgenie config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Opsgenie config."
       },
       "OutboundWebhookSummary": {
         "title": "Outbound webhook summary",
@@ -1305,9 +1242,6 @@
             "description": "Last-updated timestamp.",
             "format": "date-time"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "OutgoingWebhook": {
@@ -1559,10 +1493,7 @@
             ]
           }
         },
-        "description": "Outgoing webhook.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Outgoing webhook."
       },
       "OutgoingWebhookDetails": {
         "title": "Outgoing webhook details",
@@ -1580,10 +1511,7 @@
             "$ref": "#/components/schemas/WebhookType"
           }
         },
-        "description": "Outgoing webhook details.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Outgoing webhook details."
       },
       "OutgoingWebhookExtendedSummary": {
         "title": "Outgoing webhook extended summary",
@@ -1644,9 +1572,6 @@
               "slack.webhook.com"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "OutgoingWebhookInputData": {
@@ -1869,10 +1794,7 @@
             ]
           }
         },
-        "description": "Outgoing webhook input data.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Outgoing webhook input data."
       },
       "OutgoingWebhookSummary": {
         "title": "Outgoing webhook summary",
@@ -1923,9 +1845,6 @@
               "slack.webhook.com"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "OutgoingWebhookType": {
@@ -1952,9 +1871,6 @@
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "PagerDutyConfig": {
@@ -1970,10 +1886,7 @@
             ]
           }
         },
-        "description": "Pager duty config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pager duty config."
       },
       "SendLogConfig": {
         "title": "Send log configuration",
@@ -1993,10 +1906,7 @@
             ]
           }
         },
-        "description": "Send log config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Send log config."
       },
       "SlackConfig": {
         "title": "Slack configuration",
@@ -2019,10 +1929,7 @@
             "description": "The digests."
           }
         },
-        "description": "Slack config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Slack config."
       },
       "TestOutgoingWebhookResponse": {
         "title": "Test outgoing webhook response",
@@ -2068,10 +1975,7 @@
             "$ref": "#/components/schemas/TestOutgoingWebhookResponse.Success"
           }
         },
-        "description": "Response containing the results of an outgoing webhook test.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of an outgoing webhook test."
       },
       "TestOutgoingWebhookResponse.Failure": {
         "title": "Test outgoing webhook failure",
@@ -2103,28 +2007,19 @@
             ]
           }
         },
-        "description": "Failure.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Failure."
       },
       "TestOutgoingWebhookResponse.Success": {
         "title": "Test outgoing webhook success",
         "type": "object",
         "additionalProperties": false,
-        "description": "Success.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Success."
       },
       "UpdateOutgoingWebhookResponse": {
         "title": "Update outgoing webhook response",
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully updating an outgoing webhook.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully updating an outgoing webhook."
       },
       "WebhookType": {
         "enum": [

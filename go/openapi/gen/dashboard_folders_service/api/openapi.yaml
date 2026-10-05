@@ -421,10 +421,7 @@
             "description": "The parent id. A UUID that must differ from this folder's own id."
           }
         },
-        "description": "Dashboard folder.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dashboard folder."
       },
       "DeleteDashboardFolderResponse": {
         "title": "Delete dashboard folder response data structure",
@@ -496,10 +493,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -526,10 +520,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetDashboardFolderResponse": {
         "title": "Get dashboard folder response data structure",

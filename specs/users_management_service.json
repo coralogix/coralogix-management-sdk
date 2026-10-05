@@ -587,9 +587,6 @@
         "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
         "discriminator": {
           "propertyName": "accessType"
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "AllowedLoginMode": {
@@ -667,9 +664,6 @@
             "type": "string",
             "description": "The username from the request this result belongs to"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "CreateUserStatus": {
@@ -764,10 +758,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -794,10 +785,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetUserResponse": {
         "title": "GetUserResponse",
@@ -847,10 +835,7 @@
         "title": "PermanentAccess",
         "type": "object",
         "additionalProperties": false,
-        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated."
       },
       "SearchUsersResponse": {
         "title": "SearchUsersResponse",
@@ -898,10 +883,7 @@
             ]
           }
         },
-        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp."
       },
       "UpdateUserRequest": {
         "type": "object",
@@ -1115,10 +1097,7 @@
             "description": "Unique username"
           }
         },
-        "description": "A user is an entity that is always part of a team and has an account associated with it",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A user is an entity that is always part of a team and has an account associated with it"
       },
       "v3.FilterOperator": {
         "enum": [

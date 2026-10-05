@@ -507,10 +507,7 @@
             "format": "int64"
           }
         },
-        "description": "Response returned after successfully creating a custom role.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully creating a custom role."
       },
       "CustomRole": {
         "type": "object",
@@ -559,18 +556,12 @@
             "format": "int64"
           }
         },
-        "description": "Custom role.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom role."
       },
       "DeleteRoleResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting a custom role.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a custom role."
       },
       "Error": {
         "type": "object",
@@ -632,10 +623,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -662,10 +650,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetCustomRoleResponse": {
         "type": "object",
@@ -674,10 +659,7 @@
             "$ref": "#/components/schemas/CustomRole"
           }
         },
-        "description": "Response containing the details of a custom role.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of a custom role."
       },
       "ListCustomRolesResponse": {
         "type": "object",
@@ -691,10 +673,7 @@
             "description": "List of roles."
           }
         },
-        "description": "Response containing a list of custom roles.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of custom roles."
       },
       "ListSystemRolesResponse": {
         "type": "object",
@@ -708,10 +687,7 @@
             "description": "List of roles."
           }
         },
-        "description": "Response containing a list of system roles.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of system roles."
       },
       "MultipleValues": {
         "type": "object",
@@ -763,10 +739,7 @@
       "UpdateRoleResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully updating a custom role.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully updating a custom role."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -789,10 +762,7 @@
             "description": "List of permissions."
           }
         },
-        "description": "Permissions.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Permissions."
       },
       "v3.FilterOperator": {
         "enum": [

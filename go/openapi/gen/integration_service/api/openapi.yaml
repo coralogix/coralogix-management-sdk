@@ -894,9 +894,6 @@
             "name": "common_arm_params",
             "required": false,
             "schema": {
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "apiKey": {
                   "description": "API key used to authenticate requests for template access.",
@@ -1033,19 +1030,13 @@
             "description": "The value."
           }
         },
-        "description": "Api key data.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Api key data."
       },
       "AzureArm": {
         "title": "Azure ARM",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents an Azure ARM integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an Azure ARM integration."
       },
       "AzureArmTemplate": {
         "title": "Azure ARM template",
@@ -1059,10 +1050,7 @@
             "description": "The template url."
           }
         },
-        "description": "This data structure represents an azure ARM template.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an azure ARM template."
       },
       "ChangelogEntry": {
         "title": "Changelog entry",
@@ -1082,9 +1070,6 @@
             "type": "string",
             "description": "Version."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "CloudFormationStack": {
@@ -1149,19 +1134,13 @@
             "description": "The template url."
           }
         },
-        "description": "Cloud formation template.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Cloud formation template."
       },
       "Cloudformation": {
         "title": "CloudFormation",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents a CloudFormation integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a CloudFormation integration."
       },
       "CommandInformation": {
         "title": "Command information",
@@ -1208,9 +1187,6 @@
             "type": "string",
             "description": "The tooltip text."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ConfigurationBlock": {
@@ -1238,9 +1214,6 @@
             "type": "string",
             "description": "The value."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ConnectionStatus": {
@@ -1257,10 +1230,7 @@
         "title": "Contextual data",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents a contextual data integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a contextual data integration."
       },
       "DefaultIntegrationDetails": {
         "title": "Default integration details",
@@ -1276,18 +1246,12 @@
             "description": "The registered."
           }
         },
-        "description": "Default integration details.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Default integration details."
       },
       "DeleteIntegrationResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully removing an integration instance.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully removing an integration instance."
       },
       "DeployedIntegrationInformation": {
         "title": "Deployed integration information",
@@ -1327,10 +1291,7 @@
             "description": "The parameters."
           }
         },
-        "description": "Deployed integration information.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deployed integration information."
       },
       "Deprecation": {
         "title": "Deprecation",
@@ -1356,10 +1317,7 @@
             "default": []
           }
         },
-        "description": "Deprecation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deprecation."
       },
       "Error": {
         "type": "object",
@@ -1395,9 +1353,6 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ExtensionBinary.BinaryType": {
@@ -1478,9 +1433,6 @@
             "type": "string",
             "description": "The unique id."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ExtensionItemBinary": {
@@ -1504,9 +1456,6 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ExtensionItemBinary.BinaryType": {
@@ -1602,9 +1551,6 @@
             "type": "string",
             "description": "Version."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ExternalUrl": {
@@ -1619,10 +1565,7 @@
             "description": "URL."
           }
         },
-        "description": "External url.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "External url."
       },
       "FieldCondition": {
         "title": "Field condition",
@@ -1641,10 +1584,7 @@
             "description": "List of values."
           }
         },
-        "description": "Field condition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Field condition."
       },
       "FieldCondition.ConditionType": {
         "enum": [
@@ -1673,9 +1613,6 @@
             "type": "string",
             "description": "The value pattern."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "FieldInformation": {
@@ -1859,9 +1796,6 @@
             "type": "boolean",
             "description": "Whether this field is visible in the integration configuration UI."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "FilterPathAndValues": {
@@ -1904,10 +1838,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -1934,10 +1865,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GenericIntegrationParameters": {
         "title": "Generic integration parameters",
@@ -1953,19 +1881,13 @@
             "description": "The parameters."
           }
         },
-        "description": "Generic integration parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Generic integration parameters."
       },
       "GenericWebhook": {
         "title": "Generic webhook",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents a generic webhook integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a generic webhook integration."
       },
       "GetDeployedIntegrationResponse": {
         "title": "Get deployed integration response",
@@ -1975,10 +1897,7 @@
             "$ref": "#/components/schemas/DeployedIntegrationInformation"
           }
         },
-        "description": "Response containing details of a deployed integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing details of a deployed integration."
       },
       "GetIntegrationDefinitionResponse": {
         "title": "Get integration definition response",
@@ -1988,10 +1907,7 @@
             "$ref": "#/components/schemas/IntegrationDefinition"
           }
         },
-        "description": "This data structure represents a list of outgoing webhook types.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a list of outgoing webhook types."
       },
       "GetIntegrationDetailsResponse": {
         "title": "Get integration details response",
@@ -2001,10 +1917,7 @@
             "$ref": "#/components/schemas/IntegrationDetails"
           }
         },
-        "description": "Response containing the details of an integration definition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of an integration definition."
       },
       "GetIntegrationsResponse": {
         "title": "Get integrations response",
@@ -2020,10 +1933,7 @@
             "description": "The integrations."
           }
         },
-        "description": "This data structure represents a list of outgoing webhook types.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a list of outgoing webhook types."
       },
       "GetIntegrationsResponse.IntegrationWithCounts": {
         "title": "Integration with counts",
@@ -2062,9 +1972,6 @@
             "type": "boolean",
             "description": "The upgrade available."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "GetManagedIntegrationStatusResponse": {
@@ -2082,10 +1989,7 @@
             "$ref": "#/components/schemas/IntegrationStatus"
           }
         },
-        "description": "Response containing the status of a managed integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the status of a managed integration."
       },
       "GetRumApplicationVersionDataResponse": {
         "title": "Get RUM application version data response",
@@ -2095,10 +1999,7 @@
             "$ref": "#/components/schemas/RumVersionData"
           }
         },
-        "description": "Response containing RUM application version data.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing RUM application version data."
       },
       "GetTemplateResponse": {
         "title": "Get template response",
@@ -2112,10 +2013,7 @@
             "description": "The template url."
           }
         },
-        "description": "Response containing an integration template.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing an integration template."
       },
       "HelmChart": {
         "title": "Helm chart",
@@ -2141,10 +2039,7 @@
             "description": "The template."
           }
         },
-        "description": "This data structure represents a Helm chart.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a Helm chart."
       },
       "InputType": {
         "enum": [
@@ -2246,10 +2141,7 @@
             "description": "The versions."
           }
         },
-        "description": "This data structure represents an integration",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an integration"
       },
       "IntegrationDefinition": {
         "title": "Integration definition",
@@ -2282,10 +2174,7 @@
             "description": "The revisions."
           }
         },
-        "description": "This data structure represents a definition of an integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a definition of an integration."
       },
       "IntegrationDetail": {
         "title": "Integration detail",
@@ -2305,9 +2194,6 @@
             "type": "string",
             "description": "Display name."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IntegrationDetails": {
@@ -2378,10 +2264,7 @@
             "$ref": "#/components/schemas/LocalChangelog"
           }
         },
-        "description": "This data structure represents a set of integration details.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a set of integration details."
       },
       "IntegrationDoc": {
         "title": "Integration doc",
@@ -2402,10 +2285,7 @@
             "description": "Display name."
           }
         },
-        "description": "This data structure represents integration documentation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents integration documentation."
       },
       "IntegrationGuide": {
         "title": "Integration guide",
@@ -2426,10 +2306,7 @@
             "description": "The introduction."
           }
         },
-        "description": "Integration guide.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Integration guide."
       },
       "IntegrationMetadata": {
         "title": "Integration metadata",
@@ -2453,10 +2330,7 @@
             "description": "Version number."
           }
         },
-        "description": "This data structure represents the metadata of an integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the metadata of an integration."
       },
       "IntegrationRevision": {
         "title": "Integration revision",
@@ -2606,10 +2480,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "This data structure represents an integration revision.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an integration revision."
       },
       "IntegrationRevision.Group": {
         "title": "Group",
@@ -2629,9 +2500,6 @@
             "type": "string",
             "description": "Display name."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IntegrationRevision.SingleNumericValue": {
@@ -2644,10 +2512,7 @@
             "format": "double"
           }
         },
-        "description": "Single numeric value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Single numeric value."
       },
       "IntegrationStatus": {
         "title": "Integration status",
@@ -2676,10 +2541,7 @@
             "description": "The messages."
           }
         },
-        "description": "This data structure represents an integration status.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an integration status."
       },
       "Language": {
         "enum": [
@@ -2715,9 +2577,6 @@
             "type": "string",
             "description": "URL."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ListManagedIntegrationKeysResponse": {
@@ -2736,10 +2595,7 @@
             "description": "The integration keys."
           }
         },
-        "description": "Response containing a list of managed integration keys.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of managed integration keys."
       },
       "ListTextValue": {
         "title": "List text value",
@@ -2768,10 +2624,7 @@
             "description": "Options."
           }
         },
-        "description": "List text value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "List text value."
       },
       "LocalChangelog": {
         "title": "Local changelog",
@@ -2787,10 +2640,7 @@
             "description": "The changes."
           }
         },
-        "description": "Local changelog.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Local changelog."
       },
       "LogMetadata": {
         "title": "Log metadata",
@@ -2809,10 +2659,7 @@
             "format": "date-time"
           }
         },
-        "description": "Log metadata.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Log metadata."
       },
       "Managed": {
         "title": "Managed",
@@ -2822,19 +2669,13 @@
             "$ref": "#/components/schemas/Variant"
           }
         },
-        "description": "This data structure represents a managed integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a managed integration."
       },
       "ManagedService": {
         "title": "Managed service",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents a managed service.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a managed service."
       },
       "MultipleSelectionValue": {
         "title": "Multiple selection value",
@@ -2852,10 +2693,7 @@
             "description": "Options."
           }
         },
-        "description": "Multiple selection value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Multiple selection value."
       },
       "MultipleValues": {
         "type": "object",
@@ -2877,10 +2715,7 @@
         "title": "No deployment",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents an integration that does not require deployment.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an integration that does not require deployment."
       },
       "Parameter": {
         "title": "Parameter",
@@ -2999,9 +2834,6 @@
             "type": "string",
             "description": "String value for this integration parameter."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "PermissionResource": {
@@ -3029,10 +2861,7 @@
         "title": "Push based contextual data",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents a push based contextual data integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a push based contextual data integration."
       },
       "RegisteredInstance": {
         "title": "Registered instance",
@@ -3131,9 +2960,6 @@
           "revisionLifecycle": {
             "$ref": "#/components/schemas/RevisionLifecycle"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "RevisionLifecycle": {
@@ -3166,9 +2992,6 @@
             "type": "string",
             "description": "Version number."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "Rum": {
@@ -3194,10 +3017,7 @@
             "description": "The source map commands."
           }
         },
-        "description": "This data structure represents a RUM integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a RUM integration."
       },
       "RumVersionData": {
         "title": "RUM version data",
@@ -3219,10 +3039,7 @@
             "description": "The versions."
           }
         },
-        "description": "Rum version data.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Rum version data."
       },
       "RumVersionData.Version": {
         "title": "Version",
@@ -3241,9 +3058,6 @@
             "type": "string",
             "description": "Version number."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "SaveIntegrationResponse": {
@@ -3258,10 +3072,7 @@
             "description": "The integration id."
           }
         },
-        "description": "Response returned after successfully saving an integration deployment.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully saving an integration deployment."
       },
       "SelectionValue": {
         "title": "Selection value",
@@ -3286,19 +3097,13 @@
             "description": "Options."
           }
         },
-        "description": "Selection value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Selection value."
       },
       "SensitiveDataPlaceholder": {
         "title": "Sensitive data placeholder",
         "type": "object",
         "additionalProperties": false,
-        "description": "Sensitive data placeholder.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Sensitive data placeholder."
       },
       "SingleBooleanValue": {
         "title": "Single boolean value",
@@ -3309,10 +3114,7 @@
             "description": "The default value."
           }
         },
-        "description": "Single boolean value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Single boolean value."
       },
       "SingleValue": {
         "title": "Single value",
@@ -3326,10 +3128,7 @@
             "description": "The default value."
           }
         },
-        "description": "Single value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Single value."
       },
       "SourceMapMetadata": {
         "title": "Source map metadata",
@@ -3346,10 +3145,7 @@
             "description": "The is uploaded successful."
           }
         },
-        "description": "Source map metadata.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Source map metadata."
       },
       "StringList": {
         "title": "String list",
@@ -3367,10 +3163,7 @@
             "description": "List of values."
           }
         },
-        "description": "String list.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "String list."
       },
       "SyncRumDataResponse": {
         "title": "Sync RUM data response",
@@ -3387,10 +3180,7 @@
             "format": "date-time"
           }
         },
-        "description": "Response returned after syncing RUM data.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after syncing RUM data."
       },
       "TargetDomain": {
         "enum": [
@@ -3423,10 +3213,7 @@
             "description": "The configuration blocks."
           }
         },
-        "description": "This data structure represents a Terraform integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a Terraform integration."
       },
       "TestIntegrationResponse": {
         "title": "Test integration response",
@@ -3436,10 +3223,7 @@
             "$ref": "#/components/schemas/TestIntegrationResult"
           }
         },
-        "description": "Response containing the results of an integration test.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of an integration test."
       },
       "TestIntegrationResult": {
         "title": "Test integration result",
@@ -3485,36 +3269,24 @@
             "$ref": "#/components/schemas/TestIntegrationResult.Success"
           }
         },
-        "description": "Test integration result.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Test integration result."
       },
       "TestIntegrationResult.Success": {
         "title": "Success",
         "type": "object",
         "additionalProperties": false,
-        "description": "Success.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Success."
       },
       "Untracked": {
         "title": "Untracked",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents an untracked integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an untracked integration."
       },
       "UpdateIntegrationResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully updating an integration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully updating an integration."
       },
       "Variant": {
         "enum": [
@@ -3628,10 +3400,7 @@
             "default": []
           }
         },
-        "description": "Represents a Coralogix extension package containing pre-built resources.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a Coralogix extension package containing pre-built resources."
       },
       "v1.Failure": {
         "title": "Failure",
@@ -3645,10 +3414,7 @@
             "description": "The error message."
           }
         },
-        "description": "Failure.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Failure."
       },
       "v1.IntegrationType": {
         "title": "Integration type",
@@ -3769,10 +3535,7 @@
             "$ref": "#/components/schemas/Untracked"
           }
         },
-        "description": "This data structure represents an integration type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an integration type."
       },
       "v1.RevisionSummary": {
         "type": "object",

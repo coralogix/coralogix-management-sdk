@@ -150,9 +150,6 @@
             "required": false,
             "schema": {
               "description": "Extension deployment.",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "applications": {
                   "default": [],
@@ -351,9 +348,6 @@
             "required": false,
             "schema": {
               "description": "Extension deployment.",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "applications": {
                   "default": [],
@@ -558,10 +552,7 @@
             "$ref": "#/components/schemas/ExtensionDeployment"
           }
         },
-        "description": "Response returned after successfully deploying an extension.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deploying an extension."
       },
       "DeployedExtension": {
         "title": "Deployed extension",
@@ -620,9 +611,6 @@
             "type": "string",
             "description": "Version number."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "DeployedExtensionSummary": {
@@ -633,10 +621,7 @@
             "$ref": "#/components/schemas/ItemCounts"
           }
         },
-        "description": "Deployed extension summary.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deployed extension summary."
       },
       "Error": {
         "type": "object",
@@ -713,10 +698,7 @@
             "description": "Version number."
           }
         },
-        "description": "Extension deployment.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Extension deployment."
       },
       "FailedItem": {
         "title": "Failed item",
@@ -743,9 +725,6 @@
             "type": "string",
             "description": "The remote id."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "FilterPathAndValues": {
@@ -788,10 +767,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -818,10 +794,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetDeployedExtensionsResponse": {
         "title": "Get deployed extensions response",
@@ -838,10 +811,7 @@
             "default": []
           }
         },
-        "description": "Response containing a list of deployed extensions.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of deployed extensions."
       },
       "ItemCounts": {
         "title": "Item counts",
@@ -928,10 +898,7 @@
             "default": 0
           }
         },
-        "description": "Item counts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Item counts."
       },
       "MultipleValues": {
         "type": "object",
@@ -967,10 +934,7 @@
             "default": []
           }
         },
-        "description": "Response returned after successfully undeploying an extension.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully undeploying an extension."
       },
       "UpdateExtensionResponse": {
         "title": "Update extension response",
@@ -980,10 +944,7 @@
             "$ref": "#/components/schemas/ExtensionDeployment"
           }
         },
-        "description": "Response returned after successfully updating a deployed extension.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully updating a deployed extension."
       },
       "events.v3.FilterMatcher": {
         "enum": [

@@ -89,9 +89,6 @@
               "properties": {
                 "alertSchedulerIds": {
                   "description": "Alert scheduler rule ids.",
-                  "externalDocs": {
-                    "url": ""
-                  },
                   "properties": {
                     "alertSchedulerRuleIds": {
                       "description": "List of alert scheduler rule IDs.",
@@ -108,9 +105,6 @@
                 },
                 "alertSchedulerVersionIds": {
                   "description": "Alert scheduler rule version ids.",
-                  "externalDocs": {
-                    "url": ""
-                  },
                   "properties": {
                     "alertSchedulerRuleVersionIds": {
                       "description": "The alert scheduler rule version ids.",
@@ -690,10 +684,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Alert scheduler rule.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert scheduler rule."
       },
       "AlertSchedulerRuleWithActiveTimeframe": {
         "type": "object",
@@ -725,18 +716,12 @@
             "description": "The value."
           }
         },
-        "description": "Alert unique ids.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert unique ids."
       },
       "Always": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Always.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Always."
       },
       "CreateAlertSchedulerRuleRequest": {
         "title": "Create alert scheduler rule request data structure",
@@ -797,18 +782,12 @@
       "Daily": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Daily.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Daily."
       },
       "DeleteAlertSchedulerRuleResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting an alert suppression rule.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting an alert suppression rule."
       },
       "DurationFrequency": {
         "enum": [
@@ -880,10 +859,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -910,10 +886,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetAlertSchedulerRuleResponse": {
         "title": "Get alert scheduler rule response data structure",
@@ -971,10 +944,7 @@
             "description": "The value."
           }
         },
-        "description": "Meta labels.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Meta labels."
       },
       "Monthly": {
         "type": "object",
@@ -990,10 +960,7 @@
             "description": "The days of month."
           }
         },
-        "description": "Monthly.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Monthly."
       },
       "MultipleValues": {
         "type": "object",
@@ -1018,10 +985,7 @@
             "$ref": "#/components/schemas/Timeframe"
           }
         },
-        "description": "One time.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "One time."
       },
       "Recurring": {
         "type": "object",
@@ -1066,10 +1030,7 @@
             "$ref": "#/components/schemas/Recurring.Dynamic"
           }
         },
-        "description": "Recurring schedule that activates the alert scheduler rule on a repeating cadence.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Recurring schedule that activates the alert scheduler rule on a repeating cadence."
       },
       "Recurring.Dynamic": {
         "type": "object",
@@ -1143,10 +1104,7 @@
             "$ref": "#/components/schemas/Weekly"
           }
         },
-        "description": "Dynamic.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dynamic."
       },
       "Schedule": {
         "type": "object",
@@ -1194,10 +1152,7 @@
             "$ref": "#/components/schemas/ScheduleOperation"
           }
         },
-        "description": "Schedule.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Schedule."
       },
       "ScheduleOperation": {
         "enum": [
@@ -1272,10 +1227,7 @@
             "description": "Timezone."
           }
         },
-        "description": "Timeframe.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Timeframe."
       },
       "UpdateAlertSchedulerRuleRequest": {
         "title": "Update alert scheduler rule request data structure",
@@ -1347,10 +1299,7 @@
             "description": "The days of week."
           }
         },
-        "description": "Weekly.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Weekly."
       },
       "alert_scheduler_rule_protobuf.v1.Filter": {
         "type": "object",
@@ -1400,10 +1349,7 @@
             "description": "Dataprime expression that filters the alerts by group-by values."
           }
         },
-        "description": "Alert scheduler rule protobuf.v1.filter.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert scheduler rule protobuf.v1.filter."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -1433,10 +1379,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Meta label.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Meta label."
       },
       "v1.Duration": {
         "type": "object",
@@ -1450,10 +1393,7 @@
             "$ref": "#/components/schemas/DurationFrequency"
           }
         },
-        "description": "Duration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Duration."
       },
       "v3.FilterOperator": {
         "enum": [

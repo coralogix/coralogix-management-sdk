@@ -352,10 +352,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -382,10 +379,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetConfigurationResponse": {
         "title": "Get Configuration Response",
@@ -441,10 +435,7 @@
             "description": "Display name."
           }
         },
-        "description": "Idp details.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Idp details."
       },
       "IDPParameters": {
         "title": "IDP Parameters",
@@ -606,10 +597,7 @@
       "SetIDPParametersResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully setting the identity provider parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully setting the identity provider parameters."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -621,10 +609,7 @@
       "v2.SetActiveResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after updating the SAML active state.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after updating the SAML active state."
       },
       "v3.FilterOperator": {
         "enum": [

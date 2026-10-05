@@ -336,10 +336,7 @@
             "format": "date-time"
           }
         },
-        "description": "AI Application",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "AI Application"
       },
       "CompanyModelPricing": {
         "type": "object",
@@ -366,10 +363,7 @@
             "description": "Map of model name to custom price. Replaces all existing prices on set."
           }
         },
-        "description": "Company-wide custom model pricing configuration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Company-wide custom model pricing configuration."
       },
       "DeleteAiApplicationResponse": {
         "type": "object",
@@ -382,10 +376,7 @@
             "description": "Unique identifier of the deleted AI application."
           }
         },
-        "description": "Response returned after deleting an AI application.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after deleting an AI application."
       },
       "DeleteCompanyModelPricingResponse": {
         "type": "object",
@@ -398,10 +389,7 @@
             "description": "Unique identifier of the deleted pricing record."
           }
         },
-        "description": "Response returned after deleting company model pricing.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after deleting company model pricing."
       },
       "EvaluationType": {
         "enum": [
@@ -467,10 +455,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -497,10 +482,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetAiApplicationByIdResponse": {
         "type": "object",
@@ -514,10 +496,7 @@
             "description": "The AI application."
           }
         },
-        "description": "Response containing the requested AI application.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested AI application."
       },
       "GetCompanyModelPricingResponse": {
         "type": "object",
@@ -531,10 +510,7 @@
             "description": "The company's custom model pricing."
           }
         },
-        "description": "Response containing the company's custom model pricing.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the company's custom model pricing."
       },
       "ListAiApplicationsResponse": {
         "type": "object",
@@ -549,10 +525,7 @@
             "description": "The list of AI applications on this page."
           }
         },
-        "description": "Response containing a page of AI applications.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a page of AI applications."
       },
       "ModelPrice": {
         "type": "object",
@@ -578,10 +551,7 @@
             "format": "double"
           }
         },
-        "description": "Custom price for a single model, per one million tokens (USD).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom price for a single model, per one million tokens (USD)."
       },
       "MultipleValues": {
         "type": "object",
@@ -611,10 +581,7 @@
             "description": "The updated company model pricing."
           }
         },
-        "description": "Response containing the updated company model pricing.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated company model pricing."
       },
       "events.v3.FilterMatcher": {
         "enum": [

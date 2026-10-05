@@ -323,10 +323,7 @@
             "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
         },
-        "description": "Response confirming quota allocation rule set has been successfully created",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response confirming quota allocation rule set has been successfully created"
       },
       "DeleteQuotaAllocationRuleSetResponse": {
         "title": "Delete quota allocation rule set response",
@@ -338,10 +335,7 @@
             "description": "Unique identifier."
           }
         },
-        "description": "Response confirming quota allocation rule set has been successfully deleted",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response confirming quota allocation rule set has been successfully deleted"
       },
       "Error": {
         "type": "object",
@@ -403,10 +397,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -433,10 +424,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetQuotaAllocationRuleSetResponse": {
         "title": "Get quota allocation rule set response",
@@ -446,10 +434,7 @@
             "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
         },
-        "description": "Response containing quota allocation rule set",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing quota allocation rule set"
       },
       "MultipleValues": {
         "type": "object",
@@ -509,10 +494,7 @@
             "description": "The entity type."
           }
         },
-        "description": "Defines quota allocation rule for a specific entity type",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines quota allocation rule for a specific entity type"
       },
       "QuotaAllocationEntityTypeRuleSet": {
         "title": "Quota allocation entity type rule set",
@@ -535,10 +517,7 @@
             "description": "List of rules."
           }
         },
-        "description": "Contains a collection of quota allocation rules for entity types",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Contains a collection of quota allocation rules for entity types"
       },
       "QuotaAllocationType": {
         "title": "Quota allocation type",
@@ -558,10 +537,7 @@
             "$ref": "#/components/schemas/QuotaAllocationEntityTypeRuleSet"
           }
         },
-        "description": "Response confirming quota allocation rule set has been successfully replaced",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response confirming quota allocation rule set has been successfully replaced"
       },
       "events.v3.FilterMatcher": {
         "enum": [

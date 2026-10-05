@@ -17,9 +17,6 @@
             "required": false,
             "schema": {
               "description": "Filter configuration for alert defs",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "enabledFilter": {
                   "allOf": [
@@ -138,17 +135,11 @@
             "required": false,
             "schema": {
               "description": "List of fields to order alert definitions by",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "orderBys": {
                   "description": "Order by fields for alert definitions",
                   "items": {
                     "description": "A data structure that specifies the field and direction for ordering alert definitions",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "direction": {
                         "allOf": [
@@ -434,9 +425,6 @@
             "required": false,
             "schema": {
               "description": "Filter configuration for counting filter options",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "enabledFilter": {
                   "allOf": [
@@ -1186,10 +1174,7 @@
             "description": "Raw access policy JSON to set on the alert"
           }
         },
-        "description": "A change to the alert's access policy: upsert a raw policy, or delete (remove) the existing policy. Changing the access policy requires the alerts:UpdateAccessPolicy permission.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A change to the alert's access policy: upsert a raw policy, or delete (remove) the existing policy. Changing the access policy requires the alerts:UpdateAccessPolicy permission."
       },
       "ActivitySchedule": {
         "title": "Alert activity schedule",
@@ -1227,10 +1212,7 @@
             "description": "Start time of the alert activity"
           }
         },
-        "description": "Defines when an alert should be active based on days of the week and time windows",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines when an alert should be active based on days of the week and time windows"
       },
       "AlertDef": {
         "title": "Alert definition",
@@ -1334,10 +1316,7 @@
             "description": "The caller's access decision (permission booleans) for the alert"
           }
         },
-        "description": "The caller's access decision for an alert together with the alert's raw access policy",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "The caller's access decision for an alert together with the alert's raw access policy"
       },
       "AlertDefCaseAutoResolveMode": {
         "enum": [
@@ -1388,10 +1367,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "A Notification Center connector that receives notifications about cases opened by this alert.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Notification Center connector that receives notifications about cases opened by this alert."
       },
       "AlertDefCaseEnrichmentQuery": {
         "title": "Alert definition case enrichment query",
@@ -1419,10 +1395,7 @@
             ]
           }
         },
-        "description": "A query used to enrich the case created by the alert.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A query used to enrich the case created by the alert."
       },
       "AlertDefCaseEnrichmentQueryType": {
         "enum": [
@@ -1466,10 +1439,7 @@
             "description": "Queries used to enrich the case created by this alert"
           }
         },
-        "description": "Settings controlling how the alert interacts with cases.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Settings controlling how the alert interacts with cases."
       },
       "AlertDefDataSource": {
         "type": "object",
@@ -1499,10 +1469,7 @@
             "description": "Whether to filter for enabled (true) or disabled (false) alerts"
           }
         },
-        "description": "Filter by alert definition enabled status",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition enabled status"
       },
       "AlertDefEntityLabelsFilter": {
         "title": "AlertDef Entity Labels Filter",
@@ -1525,10 +1492,7 @@
             "description": "Whether all labels must match (AND) or any label can match (OR)"
           }
         },
-        "description": "Filter by alert definition entity labels",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition entity labels"
       },
       "AlertDefIdFilter": {
         "title": "AlertDef ID Filter",
@@ -1561,10 +1525,7 @@
             "description": "Whether to include or exclude the specified alert definition IDs"
           }
         },
-        "description": "Filter by alert definition IDs",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition IDs"
       },
       "AlertDefIdFilterMatchType": {
         "enum": [
@@ -1600,10 +1561,7 @@
             ]
           }
         },
-        "description": "Alert def incident settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert def incident settings."
       },
       "AlertDefLastTriggeredTimeFilter": {
         "title": "AlertDef Last Triggered Time Filter",
@@ -1613,10 +1571,7 @@
             "$ref": "#/components/schemas/v3.TimeRange"
           }
         },
-        "description": "Filter by alert definition last triggered times",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition last triggered times"
       },
       "AlertDefModifiedTimeFilter": {
         "title": "AlertDef Modified Time Filter",
@@ -1626,10 +1581,7 @@
             "$ref": "#/components/schemas/v3.TimeRange"
           }
         },
-        "description": "Filter by alert definition modification times",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition modification times"
       },
       "AlertDefNameFilter": {
         "title": "AlertDef Name Filter",
@@ -1657,10 +1609,7 @@
             "description": "The name(s) of the alert definition - multiple values are OR'd together"
           }
         },
-        "description": "Filter by alert definition names",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition names"
       },
       "AlertDefNotificationGroup": {
         "title": "Alert definition notification group",
@@ -1712,10 +1661,7 @@
             "description": "The settings for webhooks associated with the alert definition"
           }
         },
-        "description": "Alert def notification group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert def notification group."
       },
       "AlertDefOrderByDirection": {
         "enum": [
@@ -1752,10 +1698,7 @@
             ]
           }
         },
-        "description": "Alert def override.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert def override."
       },
       "AlertDefPermissions": {
         "title": "Alert definition permissions",
@@ -1778,10 +1721,7 @@
             "description": "Whether the caller may change this alert's access policy (alerts:UpdateAccessPolicy granted)"
           }
         },
-        "description": "The calling user's access decision for an alert",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "The calling user's access decision for an alert"
       },
       "AlertDefPriority": {
         "enum": [
@@ -1816,10 +1756,7 @@
             "description": "The priority(ies) of the alert definition - multiple values are OR'd together"
           }
         },
-        "description": "Filter by alert definition priorities",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition priorities"
       },
       "AlertDefProperties": {
         "title": "Alert definition properties",
@@ -2282,10 +2219,7 @@
             ]
           }
         },
-        "description": "User-configurable properties of an alert definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "User-configurable properties of an alert definition"
       },
       "AlertDefSloSpecificFilter": {
         "title": "AlertDef SLO Specific Filter",
@@ -2318,10 +2252,7 @@
             ]
           }
         },
-        "description": "Filter SLO-based alerts by SLO-specific fields",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter SLO-based alerts by SLO-specific fields"
       },
       "AlertDefStatus": {
         "enum": [
@@ -2355,10 +2286,7 @@
             "description": "The status(es) of the alert definition - multiple values are OR'd together"
           }
         },
-        "description": "Filter by alert definition status",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition status"
       },
       "AlertDefToCreate": {
         "title": "Alert definition to create",
@@ -2384,10 +2312,7 @@
             "description": "The properties of the alert definition"
           }
         },
-        "description": "A single alert definition to create as part of a bulk create request",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A single alert definition to create as part of a bulk create request"
       },
       "AlertDefToReplace": {
         "title": "Alert definition to replace",
@@ -2420,10 +2345,7 @@
             ]
           }
         },
-        "description": "An alert definition along with its ID for replacement",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "An alert definition along with its ID for replacement"
       },
       "AlertDefType": {
         "enum": [
@@ -2468,10 +2390,7 @@
             "description": "The alert type(s) - multiple values are OR'd together"
           }
         },
-        "description": "Filter by alert definition types",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition types"
       },
       "AlertDefTypeSpecificFilter": {
         "title": "AlertDef Type Specific Filter",
@@ -2486,10 +2405,7 @@
             "description": "Filter SLO-based alerts by SLO-specific fields"
           }
         },
-        "description": "Filter by fields specific to alert type definitions",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by fields specific to alert type definitions"
       },
       "AlertDefWebhooksSettings": {
         "title": "Alert definition webhook settings",
@@ -2526,10 +2442,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Configuration for webhook notifications for an alert",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for webhook notifications for an alert"
       },
       "AlertsOp": {
         "enum": [
@@ -2587,10 +2500,7 @@
             ]
           }
         },
-        "description": "Configuration for analytics alerts that fire immediately when a DataPrime query returns a result",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for analytics alerts that fire immediately when a DataPrime query returns a result"
       },
       "AnalyticsThresholdOperator": {
         "enum": [
@@ -2625,10 +2535,7 @@
             "description": "The override settings for the alert"
           }
         },
-        "description": "A rule that defines a threshold condition and its priority override",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A rule that defines a threshold condition and its priority override"
       },
       "AnalyticsThresholdRuleCondition": {
         "title": "Analytics threshold rule condition",
@@ -2643,10 +2550,7 @@
             ]
           }
         },
-        "description": "Defines the threshold value to compare against",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the threshold value to compare against"
       },
       "AnalyticsThresholdType": {
         "title": "Analytics threshold alert type",
@@ -2726,10 +2630,7 @@
             ]
           }
         },
-        "description": "Configuration for alerts that fire when a numeric column in a DataPrime query result violates a threshold",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for alerts that fire when a numeric column in a DataPrime query result violates a threshold"
       },
       "AnomalyAlertSettings": {
         "title": "Anomaly alert settings",
@@ -2742,10 +2643,7 @@
             "format": "float"
           }
         },
-        "description": "Common settings for anomaly-based alerts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Common settings for anomaly-based alerts."
       },
       "BulkCreateAlertDefsResponse": {
         "title": "Bulk create alert definitions response",
@@ -2770,10 +2668,7 @@
             "description": "List of request entries that failed to be created, each identified by its zero-based index in the request list"
           }
         },
-        "description": "A response that contains the results of the bulk create operation",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response that contains the results of the bulk create operation"
       },
       "BulkDeleteAlertDefsResponse": {
         "title": "Bulk delete alert definitions response",
@@ -2816,10 +2711,7 @@
             ]
           }
         },
-        "description": "A response to the bulk deletion of alert definitions. The operation is atomic - either all alerts are deleted or none are.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response to the bulk deletion of alert definitions. The operation is atomic - either all alerts are deleted or none are."
       },
       "BulkReplaceAlertDefsResponse": {
         "title": "Bulk replace alert definitions response",
@@ -2880,10 +2772,7 @@
             ]
           }
         },
-        "description": "A response that contains the results of the bulk replace operation",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response that contains the results of the bulk replace operation"
       },
       "BurnRateThreshold": {
         "title": "Burn Rate Threshold",
@@ -2948,10 +2837,7 @@
             "description": "Burn rate type single"
           }
         },
-        "description": "Burn rate threshold definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Burn rate threshold definition"
       },
       "BurnRateTypeDual": {
         "title": "Burn Rate Type Dual",
@@ -2961,10 +2847,7 @@
             "$ref": "#/components/schemas/TimeDuration"
           }
         },
-        "description": "Burn rate type dual definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Burn rate type dual definition"
       },
       "BurnRateTypeSingle": {
         "title": "Burn Rate Type Single",
@@ -2974,10 +2857,7 @@
             "$ref": "#/components/schemas/TimeDuration"
           }
         },
-        "description": "Burn rate type single definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Burn rate type single definition"
       },
       "CreateAlertDefResponse": {
         "title": "Create alert definition response",
@@ -2992,10 +2872,7 @@
             "description": "The newly created alert definition"
           }
         },
-        "description": "A response that contains the newly created alert definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response that contains the newly created alert definition"
       },
       "DataprimeAlertQuery": {
         "title": "DataPrime alert query",
@@ -3012,10 +2889,7 @@
             ]
           }
         },
-        "description": "A DataPrime query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A DataPrime query"
       },
       "DayOfWeek": {
         "enum": [
@@ -3033,19 +2907,13 @@
         "title": "Delete access policy",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker to remove the alert's access policy entirely; carries no fields. Removal does not assign any replacement — a new access policy and policy owner can be assigned afterward.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker to remove the alert's access policy entirely; carries no fields. Removal does not assign any replacement — a new access policy and policy owner can be assigned afterward."
       },
       "DeleteAlertDefResponse": {
         "title": "Delete alert definition response",
         "type": "object",
         "additionalProperties": false,
-        "description": "A response to the deletion of an alert definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response to the deletion of an alert definition"
       },
       "DownloadAlertsResponse": {
         "title": "Download alerts response",
@@ -3080,10 +2948,7 @@
             ]
           }
         },
-        "description": "A response containing the downloaded alert data",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response containing the downloaded alert data"
       },
       "DurationUnit": {
         "enum": [
@@ -3115,10 +2980,7 @@
             ]
           }
         },
-        "description": "Count for a specific alert enabled status",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count for a specific alert enabled status"
       },
       "EntityLabelCount": {
         "title": "Entity label count",
@@ -3155,10 +3017,7 @@
             ]
           }
         },
-        "description": "Count for a specific entity label value",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count for a specific entity label value"
       },
       "Error": {
         "type": "object",
@@ -3194,10 +3053,7 @@
             "description": "The rules for the error budget threshold"
           }
         },
-        "description": "Error budget threshold definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Error budget threshold definition"
       },
       "FailedToCreateAlertDef": {
         "title": "Failed to create alert definition",
@@ -3228,10 +3084,7 @@
             ]
           }
         },
-        "description": "A reference to an alert definition in the request that failed to be created",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A reference to an alert definition in the request that failed to be created"
       },
       "FailedToReplaceAlertDef": {
         "title": "Failed to replace alert definition",
@@ -3258,10 +3111,7 @@
             ]
           }
         },
-        "description": "An alert definition id that failed to be replaced",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "An alert definition id that failed to be replaced"
       },
       "FilterOptionCounts": {
         "title": "Filter option counts",
@@ -3313,10 +3163,7 @@
             "description": "Counts for different alert types"
           }
         },
-        "description": "Counts for different filter options",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Counts for different filter options"
       },
       "FilterOptionCountsEnabledFilter": {
         "title": "Filter option counts enabled filter",
@@ -3330,10 +3177,7 @@
             ]
           }
         },
-        "description": "Filter by alert definition enabled status for counting options",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition enabled status for counting options"
       },
       "FilterOptionCountsEntityLabelsFilter": {
         "title": "Filter option counts entity labels filter",
@@ -3359,10 +3203,7 @@
             ]
           }
         },
-        "description": "Filter by alert definition entity labels with And/Or options",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition entity labels with And/Or options"
       },
       "FilterOptionCountsNameFilter": {
         "title": "Filter option counts name filter",
@@ -3399,10 +3240,7 @@
             ]
           }
         },
-        "description": "Filter by alert definition names for counting options",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition names for counting options"
       },
       "FilterOptionCountsPriorityFilter": {
         "title": "Filter option counts priority filter",
@@ -3425,10 +3263,7 @@
             ]
           }
         },
-        "description": "Filter by alert definition priorities",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition priorities"
       },
       "FilterOptionCountsResponse": {
         "title": "Filter option counts response",
@@ -3443,10 +3278,7 @@
             "description": "The counts for different filter options"
           }
         },
-        "description": "Response containing counts for different filter options",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing counts for different filter options"
       },
       "FilterOptionCountsStatusFilter": {
         "title": "Filter option counts status filter",
@@ -3480,10 +3312,7 @@
             ]
           }
         },
-        "description": "Filter by alert definition status for counting options",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition status for counting options"
       },
       "FilterOptionCountsTypeFilter": {
         "title": "Filter option counts type filter",
@@ -3507,10 +3336,7 @@
             ]
           }
         },
-        "description": "Filter by alert definition types for counting options",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by alert definition types for counting options"
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -3552,10 +3378,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "FilterValuesOperator": {
         "enum": [
@@ -3590,10 +3413,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "FlowStages": {
         "title": "Flow stages",
@@ -3626,10 +3446,7 @@
             ]
           }
         },
-        "description": "Defines stages in a flow alert",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines stages in a flow alert"
       },
       "FlowStagesGroup": {
         "title": "Flow stage group",
@@ -3667,10 +3484,7 @@
             ]
           }
         },
-        "description": "Defines a group of stages in a flow alert",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines a group of stages in a flow alert"
       },
       "FlowStagesGroups": {
         "title": "Flow stage groups",
@@ -3686,10 +3500,7 @@
             "description": "List of groups."
           }
         },
-        "description": "Groups of stages in a flow alert",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Groups of stages in a flow alert"
       },
       "FlowStagesGroupsAlertDefs": {
         "title": "Flow stage group alert definitions",
@@ -3713,10 +3524,7 @@
             ]
           }
         },
-        "description": "Alert definitions for a flow stage group",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert definitions for a flow stage group"
       },
       "FlowType": {
         "title": "Flow alert type",
@@ -3763,10 +3571,7 @@
             "description": "The requested alert definition"
           }
         },
-        "description": "A response that contains an alert definition for the requested version",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response that contains an alert definition for the requested version"
       },
       "GetAlertDefResponse": {
         "title": "Get alert definition response",
@@ -3789,10 +3594,7 @@
             "description": "The requested alert definition"
           }
         },
-        "description": "A response containing the requested alert definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response containing the requested alert definition"
       },
       "LabelFilterType": {
         "title": "Label filter type",
@@ -3818,10 +3620,7 @@
             ]
           }
         },
-        "description": "Label filter type for log entries",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Label filter type for log entries"
       },
       "LabelFilters": {
         "title": "Label filters",
@@ -3852,10 +3651,7 @@
             "description": "The subsystem name."
           }
         },
-        "description": "Filters for application name, subsystem name, and log severities",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filters for application name, subsystem name, and log severities"
       },
       "ListAlertDefsResponse": {
         "title": "List alert definitions response",
@@ -3886,10 +3682,7 @@
             "description": "Pagination settings for the list of alert definitions"
           }
         },
-        "description": "A response that contains a list of alert definitions",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response that contains a list of alert definitions"
       },
       "LogFilterOperationType": {
         "enum": [
@@ -3944,10 +3737,7 @@
             "description": "The time window for the alert condition"
           }
         },
-        "description": "Defines conditions for detecting log anomalies",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines conditions for detecting log anomalies"
       },
       "LogsAnomalyConditionType": {
         "enum": [
@@ -3969,10 +3759,7 @@
             "description": "The condition for the threshold alert"
           }
         },
-        "description": "Defines a rule for detecting log anomalies",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines a rule for detecting log anomalies"
       },
       "LogsAnomalyType": {
         "title": "Log-based anomaly alert type",
@@ -4085,10 +3872,7 @@
             "description": "The time window for detecting new values"
           }
         },
-        "description": "Defines conditions for detecting new values in logs",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines conditions for detecting new values in logs"
       },
       "LogsNewValueRule": {
         "title": "Log-based new value rule",
@@ -4103,10 +3887,7 @@
             "description": "The condition for detecting new values in logs."
           }
         },
-        "description": "Defines the condition for detecting new values in logs",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the condition for detecting new values in logs"
       },
       "LogsNewValueTimeWindow": {
         "title": "Log-based new value alert time window",
@@ -4124,10 +3905,7 @@
             ]
           }
         },
-        "description": "Time window configuration for log-based new value alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time window configuration for log-based new value alerts"
       },
       "LogsNewValueTimeWindowValue": {
         "enum": [
@@ -4180,10 +3958,7 @@
             "description": "The rules for the log new value alert."
           }
         },
-        "description": "Configuration for alerts triggered by new values appearing in logs",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for alerts triggered by new values appearing in logs"
       },
       "LogsRatioCondition": {
         "title": "Log-based ratio condition",
@@ -4221,10 +3996,7 @@
             ]
           }
         },
-        "description": "Defines conditions for ratio-based alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines conditions for ratio-based alerts"
       },
       "LogsRatioConditionType": {
         "enum": [
@@ -4264,10 +4036,7 @@
             "description": "The override settings for the alert"
           }
         },
-        "description": "Defines the rules for log-based ratio alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the rules for log-based ratio alerts"
       },
       "LogsRatioThresholdType": {
         "title": "Log-based ratio threshold alert type",
@@ -4426,10 +4195,7 @@
             "description": "The lucene query."
           }
         },
-        "description": "Basic filter configuration using a Lucene query and label filters",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Basic filter configuration using a Lucene query and label filters"
       },
       "LogsThresholdCondition": {
         "title": "Logs Threshold Condition",
@@ -4464,10 +4230,7 @@
             "description": "The time window for the alert condition"
           }
         },
-        "description": "LogsThresholdCondition is a message that defines the condition for log-based threshold alerts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "LogsThresholdCondition is a message that defines the condition for log-based threshold alerts."
       },
       "LogsThresholdConditionType": {
         "enum": [
@@ -4500,10 +4263,7 @@
             "description": "The override settings for the alert"
           }
         },
-        "description": "LogsThresholdRule is a message that defines a rule for log-based threshold alerts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "LogsThresholdRule is a message that defines a rule for log-based threshold alerts."
       },
       "LogsThresholdType": {
         "title": "Log-based threshold alert type",
@@ -4619,10 +4379,7 @@
             "format": "double"
           }
         },
-        "description": "Defines conditions for time-relative comparison alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines conditions for time-relative comparison alerts"
       },
       "LogsTimeRelativeConditionType": {
         "enum": [
@@ -4653,10 +4410,7 @@
             "description": "The override settings for the alert."
           }
         },
-        "description": "LogsTimeRelativeRule is a message that defines a rule for log-based time-relative alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "LogsTimeRelativeRule is a message that defines a rule for log-based time-relative alerts"
       },
       "LogsTimeRelativeThresholdType": {
         "title": "Log-based time-relative threshold alert type",
@@ -4742,10 +4496,7 @@
             ]
           }
         },
-        "description": "Time window configuration for log-based alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time window configuration for log-based alerts"
       },
       "LogsTimeWindowValue": {
         "enum": [
@@ -4788,10 +4539,7 @@
             "description": "The time window for the unique count alert."
           }
         },
-        "description": "Defines conditions for unique count alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines conditions for unique count alerts"
       },
       "LogsUniqueCountRule": {
         "title": "Log-based unique count rule",
@@ -4806,10 +4554,7 @@
             "description": "The condition for detecting unique counts in logs."
           }
         },
-        "description": "Defines the rule for detecting unique counts in logs",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the rule for detecting unique counts in logs"
       },
       "LogsUniqueCountType": {
         "title": "Log-based unique count alert type",
@@ -4888,10 +4633,7 @@
             ]
           }
         },
-        "description": "Time window configuration for log-based unique value alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time window configuration for log-based unique value alerts"
       },
       "LogsUniqueValueTimeWindowValue": {
         "enum": [
@@ -4964,10 +4706,7 @@
             ]
           }
         },
-        "description": "Metric anomaly condition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Metric anomaly condition."
       },
       "MetricAnomalyConditionType": {
         "enum": [
@@ -4990,10 +4729,7 @@
             "description": "The condition for the metric anomaly alert."
           }
         },
-        "description": "A rule for metric-based anomaly detection alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A rule for metric-based anomaly detection alerts"
       },
       "MetricAnomalyType": {
         "title": "Metric-based anomaly alert type",
@@ -5055,10 +4791,7 @@
             ]
           }
         },
-        "description": "Metric filter.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Metric filter."
       },
       "MetricMissingValues": {
         "title": "Metric Missing Values Configuration",
@@ -5115,10 +4848,7 @@
             ]
           }
         },
-        "description": "Configuration for handling missing values in metric threshold alerts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for handling missing values in metric threshold alerts."
       },
       "MetricThresholdCondition": {
         "title": "Metric Threshold Condition",
@@ -5162,10 +4892,7 @@
             ]
           }
         },
-        "description": "Defines conditions for metric threshold alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines conditions for metric threshold alerts"
       },
       "MetricThresholdConditionType": {
         "enum": [
@@ -5200,10 +4927,7 @@
             "description": "Alert override settings"
           }
         },
-        "description": "Defines a rule for metric-based threshold alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines a rule for metric-based threshold alerts"
       },
       "MetricThresholdType": {
         "title": "Metric-based threshold alert type",
@@ -5324,10 +5048,7 @@
             ]
           }
         },
-        "description": "Metric time window.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Metric time window."
       },
       "MetricTimeWindowValue": {
         "enum": [
@@ -5397,10 +5118,7 @@
             ]
           }
         },
-        "description": "No data policy.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "No data policy."
       },
       "NoDataPolicyState": {
         "enum": [
@@ -5504,10 +5222,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Configuration for routing notifications",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for routing notifications"
       },
       "NotificationRouting": {
         "title": "Notification routing",
@@ -5522,10 +5237,7 @@
             "description": "Configuration for routing notifications"
           }
         },
-        "description": "Notification routing.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Notification routing."
       },
       "NotifyOn": {
         "enum": [
@@ -5561,10 +5273,7 @@
             ]
           }
         },
-        "description": "Count for a specific alert priority",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count for a specific alert priority"
       },
       "Recipients": {
         "title": "Recipients",
@@ -5589,10 +5298,7 @@
             ]
           }
         },
-        "description": "List of email recipients for alert notifications",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "List of email recipients for alert notifications"
       },
       "ReplaceAlertDefResponse": {
         "title": "Replace alert definition response",
@@ -5607,10 +5313,7 @@
             "description": "The updated alert definition"
           }
         },
-        "description": "A response that contains the updated alert definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response that contains the updated alert definition"
       },
       "SloThresholdCondition": {
         "title": "SLO Threshold Condition",
@@ -5623,10 +5326,7 @@
             "format": "double"
           }
         },
-        "description": "Condition for the SLO threshold rule",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Condition for the SLO threshold rule"
       },
       "SloThresholdRule": {
         "title": "SLO Threshold Rule",
@@ -5649,10 +5349,7 @@
             "description": "The override settings for the alert"
           }
         },
-        "description": "SLO threshold rule definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "SLO threshold rule definition"
       },
       "SloThresholdType": {
         "title": "SLO Threshold Type",
@@ -5716,10 +5413,7 @@
             "description": "SLO definition"
           }
         },
-        "description": "SLO threshold type definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "SLO threshold type definition"
       },
       "StatusCount": {
         "title": "Status count",
@@ -5747,10 +5441,7 @@
             ]
           }
         },
-        "description": "Count for a specific alert status",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count for a specific alert status"
       },
       "TimeDuration": {
         "title": "Time duration",
@@ -5778,10 +5469,7 @@
             ]
           }
         },
-        "description": "Configuration for time duration",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for time duration"
       },
       "TimeOfDay": {
         "title": "Time of day",
@@ -5808,10 +5496,7 @@
             ]
           }
         },
-        "description": "Represents a specific time in a 24-hour format",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a specific time in a 24-hour format"
       },
       "TimeframeType": {
         "enum": [
@@ -5834,10 +5519,7 @@
             "description": "Simple filter using latency threshold and label filters"
           }
         },
-        "description": "Filter configuration for tracing-based alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter configuration for tracing-based alerts"
       },
       "TracingFilterOperationType": {
         "enum": [
@@ -5882,10 +5564,7 @@
             ]
           }
         },
-        "description": "Filter type for trace entries",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter type for trace entries"
       },
       "TracingImmediateType": {
         "title": "Trace-based immediate alert type",
@@ -5966,10 +5645,7 @@
             "description": "Filter by subsystem names"
           }
         },
-        "description": "Filters for application name, subsystem name, service name, operation name and span fields",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filters for application name, subsystem name, service name, operation name and span fields"
       },
       "TracingSimpleFilter": {
         "title": "Simple tracing filter",
@@ -5994,10 +5670,7 @@
             "description": "Trace label filters"
           }
         },
-        "description": "Basic filter configuration using a latency threshold and label filters",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Basic filter configuration using a latency threshold and label filters"
       },
       "TracingSpanFieldsFilterType": {
         "title": "Tracing span fields filter type",
@@ -6020,10 +5693,7 @@
             ]
           }
         },
-        "description": "A filter for span fields in trace entries",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A filter for span fields in trace entries"
       },
       "TracingThresholdCondition": {
         "title": "Trace-based alert threshold condition",
@@ -6058,10 +5728,7 @@
             "description": "The time window for the alert condition"
           }
         },
-        "description": "Tracing threshold condition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Tracing threshold condition."
       },
       "TracingThresholdConditionType": {
         "enum": [
@@ -6083,10 +5750,7 @@
             "description": "The condition for the threshold alert."
           }
         },
-        "description": "A rule for trace-based threshold alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A rule for trace-based threshold alerts"
       },
       "TracingThresholdType": {
         "title": "Trace-based threshold alert type",
@@ -6147,10 +5811,7 @@
             ]
           }
         },
-        "description": "Tracing time window.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Tracing time window."
       },
       "TracingTimeWindowValue": {
         "enum": [
@@ -6196,10 +5857,7 @@
             ]
           }
         },
-        "description": "Count for a specific alert type",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count for a specific alert type"
       },
       "alerts.v3.FilterMatcher": {
         "enum": [
@@ -6228,10 +5886,7 @@
             "format": "int64"
           }
         },
-        "description": "Pagination response.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pagination response."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -6274,9 +5929,6 @@
               "template_example"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "v3.FilterOperator": {
@@ -6342,10 +5994,7 @@
             "description": "The recipients for the notification."
           }
         },
-        "description": "Defines the type of integration to use for notifications",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the type of integration to use for notifications"
       },
       "v3.LogsFilter": {
         "title": "Log filter",
@@ -6360,10 +6009,7 @@
             "description": "A simple filter that uses a Lucene query and label filters"
           }
         },
-        "description": "Filter configuration for log-based alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter configuration for log-based alerts"
       },
       "v3.MessageConfigField": {
         "title": "Message config field",
@@ -6386,10 +6032,7 @@
             ]
           }
         },
-        "description": "Configuration field for a notification message",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration field for a notification message"
       },
       "v3.SloDefinition": {
         "title": "SLO Definition",
@@ -6405,10 +6048,7 @@
             ]
           }
         },
-        "description": "Configuration for SLO definition",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for SLO definition"
       },
       "v3.SourceOverrides": {
         "title": "Source overrides",
@@ -6439,10 +6079,7 @@
             ]
           }
         },
-        "description": "Source overrides.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Source overrides."
       },
       "v3.TimeRange": {
         "title": "Time range",
@@ -6465,10 +6102,7 @@
             "format": "date-time"
           }
         },
-        "description": "Represents a time range with start and end timestamps",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a time range with start and end timestamps"
       },
       "v3.UndetectedValuesManagement": {
         "title": "Undetected value management",
@@ -6494,10 +6128,7 @@
             ]
           }
         },
-        "description": "Configuration for handling undetected values in alerts",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for handling undetected values in alerts"
       }
     }
   }

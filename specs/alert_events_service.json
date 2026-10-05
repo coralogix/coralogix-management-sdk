@@ -248,10 +248,7 @@
             "description": "Status."
           }
         },
-        "description": "Configuration for alert activity analysis, containing rules and status.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for alert activity analysis, containing rules and status."
       },
       "ActivityAnalysisStats": {
         "title": "Event activity analysis statistics",
@@ -278,10 +275,7 @@
             "description": "List of rules."
           }
         },
-        "description": "Activity analysis stats.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Activity analysis stats."
       },
       "ActivityAnalysisStatus": {
         "enum": [
@@ -370,10 +364,7 @@
             "format": "date-time"
           }
         },
-        "description": "Alert event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert event."
       },
       "AlertEventMultiplePermutation": {
         "type": "object",
@@ -388,10 +379,7 @@
             "description": "List of alert events for multiple permutations."
           }
         },
-        "description": "Alert event multiple permutation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Alert event multiple permutation."
       },
       "AlertStatus": {
         "enum": [
@@ -468,9 +456,6 @@
             },
             "description": "The triggered permutations samples."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "FilterPathAndValues": {
@@ -513,10 +498,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -543,10 +525,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetAlertEventResponse": {
         "title": "Get alert event response",
@@ -602,10 +581,7 @@
             "$ref": "#/components/schemas/AlertEvent"
           }
         },
-        "description": "Response containing the details of an alert event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of an alert event."
       },
       "GetAlertEventStatsResponse": {
         "title": "Get alert event statistics response",
@@ -619,10 +595,7 @@
             "description": "The events stats."
           }
         },
-        "description": "Response containing statistical data for alert events.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing statistical data for alert events."
       },
       "MultipleValues": {
         "type": "object",
@@ -675,10 +648,7 @@
             "format": "int64"
           }
         },
-        "description": "Pagination response.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pagination response."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -707,9 +677,6 @@
             },
             "description": "Labels for the permutation."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       }
     }

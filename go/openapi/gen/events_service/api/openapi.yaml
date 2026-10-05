@@ -38,9 +38,6 @@
             "required": true,
             "schema": {
               "description": "This data structure represents a timestamp range",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "from": {
                   "description": "Inclusive start of the time range.",
@@ -202,9 +199,6 @@
             "required": true,
             "schema": {
               "description": "This data structure represents an events filter",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "cxEventKeys": {
                   "description": "List of event attribute keys to include when retrieving event data.",
@@ -395,9 +389,6 @@
             "required": true,
             "schema": {
               "description": "This data structure represents an events filter",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "cxEventKeys": {
                   "description": "List of event attribute keys to include when retrieving event data.",
@@ -677,9 +668,6 @@
             "required": true,
             "schema": {
               "description": "This data structure represents an events filter",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "cxEventKeys": {
                   "description": "List of event attribute keys to include when retrieving event data.",
@@ -953,10 +941,7 @@
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
         },
-        "description": "Response containing the details of an alert event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of an alert event."
       },
       "CxEvent": {
         "title": "Event",
@@ -1113,10 +1098,7 @@
             "$ref": "#/components/schemas/CxEvent"
           }
         },
-        "description": "This data structure represents a single or multiple events",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a single or multiple events"
       },
       "Error": {
         "type": "object",
@@ -1193,10 +1175,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -1223,10 +1202,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetEventsStatisticsResponse": {
         "title": "GetEventsStatisticsResponse",
@@ -1247,10 +1223,7 @@
             "description": "The cx event metadata field statistics."
           }
         },
-        "description": "This data structure represents a response to get events statistics",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a response to get events statistics"
       },
       "ListAlertEventsResponse": {
         "title": "ListAlertEventsResponse",
@@ -1271,10 +1244,7 @@
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
         },
-        "description": "Response containing events associated with the alert",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing events associated with the alert"
       },
       "ListEventsCountResponse": {
         "title": "ListEventsCountResponse",
@@ -1302,10 +1272,7 @@
             ]
           }
         },
-        "description": "This data structure represents a response to list events count",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a response to list events count"
       },
       "MultipleValues": {
         "type": "object",
@@ -1344,10 +1311,7 @@
             "format": "date-time"
           }
         },
-        "description": "This data structure represents a timestamp range",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a timestamp range"
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -1394,10 +1358,7 @@
             ]
           }
         },
-        "description": "Pagination metadata returned alongside paginated list responses.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pagination metadata returned alongside paginated list responses."
       },
       "v3.FilterOperator": {
         "enum": [
@@ -1417,10 +1378,7 @@
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
         },
-        "description": "Response containing the details of an alert event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of an alert event."
       },
       "v3.ListEventsResponse": {
         "title": "ListEventsResponse",
@@ -1441,10 +1399,7 @@
             "$ref": "#/components/schemas/events.v3.PaginationResponse"
           }
         },
-        "description": "This data structure represents a response to list events",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a response to list events"
       }
     }
   }

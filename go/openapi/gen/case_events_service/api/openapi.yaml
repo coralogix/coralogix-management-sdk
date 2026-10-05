@@ -628,10 +628,7 @@
             ]
           }
         },
-        "description": "Information about the API key that initiated the action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about the API key that initiated the action."
       },
       "AssignedCaseEvent": {
         "title": "Assigned event",
@@ -656,10 +653,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Assigned case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Assigned case event."
       },
       "CaseEvent": {
         "title": "Case event",
@@ -723,10 +717,7 @@
             "format": "date-time"
           }
         },
-        "description": "Represents an immutable entry in a case's event timeline.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents an immutable entry in a case's event timeline."
       },
       "CaseEventData": {
         "title": "Case event data",
@@ -982,10 +973,7 @@
             "description": "Case unassigned from a user"
           }
         },
-        "description": "One-of wrapper for concrete case event types.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "One-of wrapper for concrete case event types."
       },
       "CasePriority": {
         "enum": [
@@ -1024,10 +1012,7 @@
             "description": "Error for unknown assignee"
           }
         },
-        "description": "Event recorded when an attempt to reassign a case fails.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Event recorded when an attempt to reassign a case fails."
       },
       "CommentAttachment": {
         "title": "Comment attachment",
@@ -1077,9 +1062,6 @@
             ],
             "description": "Log entry attachment with content and metadata"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "CommentCaseEvent": {
@@ -1155,10 +1137,7 @@
             ]
           }
         },
-        "description": "Event recorded when a user posts a comment on a case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Event recorded when a user posts a comment on a case."
       },
       "CreateCommentResponse": {
         "title": "Create comment event response",
@@ -1176,10 +1155,7 @@
             "description": "The created event"
           }
         },
-        "description": "Response returned after successfully creating a comment.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully creating a comment."
       },
       "CreatedCaseEvent": {
         "title": "Created event",
@@ -1197,10 +1173,7 @@
             ]
           }
         },
-        "description": "Created case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Created case event."
       },
       "CustomDashboardWidgetAttachment": {
         "title": "Custom dashboard widget attachment",
@@ -1250,19 +1223,13 @@
             "description": "Screenshot of the widget at the time of attachment"
           }
         },
-        "description": "Attachment containing custom dashboard widget data and screenshot",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Attachment containing custom dashboard widget data and screenshot"
       },
       "DeleteCommentResponse": {
         "title": "Delete comment response",
         "type": "object",
         "additionalProperties": false,
-        "description": "Empty response; success indicated by HTTP status",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Empty response; success indicated by HTTP status"
       },
       "Error": {
         "type": "object",
@@ -1458,10 +1425,7 @@
             "description": "User-generated event"
           }
         },
-        "description": "Actor that initiated the event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Actor that initiated the event."
       },
       "FileAttachment": {
         "title": "File attachment",
@@ -1500,10 +1464,7 @@
             ]
           }
         },
-        "description": "Attachment representing a file with metadata",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Attachment representing a file with metadata"
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -1545,10 +1506,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -1575,10 +1533,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "KPIBreachedCaseEvent": {
         "title": "KPI breached event",
@@ -1615,10 +1570,7 @@
             ]
           }
         },
-        "description": "Kpi breached case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Kpi breached case event."
       },
       "KPIType": {
         "enum": [
@@ -1679,10 +1631,7 @@
             ]
           }
         },
-        "description": "Attachment containing log data and related information",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Attachment containing log data and related information"
       },
       "MicrosoftTeamsActor": {
         "title": "Microsoft Teams actor",
@@ -1731,10 +1680,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Information about the Microsoft Teams user who initiated the action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about the Microsoft Teams user who initiated the action."
       },
       "MicrosoftTeamsCommentMetadata": {
         "title": "Microsoft Teams comment metadata",
@@ -1813,10 +1759,7 @@
             ]
           }
         },
-        "description": "Microsoft Teams source metadata attached to a comment that was synced from Microsoft Teams.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Microsoft Teams source metadata attached to a comment that was synced from Microsoft Teams."
       },
       "MultipleValues": {
         "type": "object",
@@ -1849,10 +1792,7 @@
             ]
           }
         },
-        "description": "Notification failed case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Notification failed case event."
       },
       "NotificationMetadata": {
         "title": "Notification metadata",
@@ -1868,9 +1808,6 @@
               "4c8ba1ec-acee-4bc7-ad6c-d35476b58541"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "NotificationSentCaseEvent": {
@@ -1898,10 +1835,7 @@
             "description": "List of notifications produced by this action"
           }
         },
-        "description": "Notification sent case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Notification sent case event."
       },
       "PagerDutyActor": {
         "title": "PagerDuty actor",
@@ -1950,10 +1884,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Information about the PagerDuty user who initiated the action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about the PagerDuty user who initiated the action."
       },
       "PriorityDetails": {
         "title": "Priority details",
@@ -1977,10 +1908,7 @@
             "description": "System computed priority"
           }
         },
-        "description": "Priority details, including system computed and user override values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Priority details, including system computed and user override values."
       },
       "PriorityDetailsChangedCaseEvent": {
         "title": "Priority details changed event",
@@ -2003,10 +1931,7 @@
             "description": "New priority details"
           }
         },
-        "description": "Priority details changed case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Priority details changed case event."
       },
       "PrometheusAlertManagerActor": {
         "title": "Prometheus Alert Manager actor",
@@ -2023,10 +1948,7 @@
             ]
           }
         },
-        "description": "Information about the Prometheus Alert Manager instance that initiated the action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about the Prometheus Alert Manager instance that initiated the action."
       },
       "ResolutionReasonChangedCaseEvent": {
         "title": "Resolution reason changed event",
@@ -2048,10 +1970,7 @@
             "description": "New resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied."
           }
         },
-        "description": "Resolution reason changed case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Resolution reason changed case event."
       },
       "ServiceNowActor": {
         "title": "Service Now actor",
@@ -2097,10 +2016,7 @@
             "description": "Username"
           }
         },
-        "description": "Information about the user who initiated the action in Service Now platform",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about the user who initiated the action in Service Now platform"
       },
       "SlackActor": {
         "title": "Slack actor",
@@ -2149,10 +2065,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Information about the Slack user who initiated the action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about the Slack user who initiated the action."
       },
       "SlackCommentMetadata": {
         "title": "Slack comment metadata",
@@ -2210,10 +2123,7 @@
             ]
           }
         },
-        "description": "Comment case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Comment case event."
       },
       "StatusChangedCaseEvent": {
         "title": "Status changed event",
@@ -2242,10 +2152,7 @@
             ]
           }
         },
-        "description": "Status changed case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Status changed case event."
       },
       "SyncExternalCaseEventsResponse": {
         "title": "Sync external Case events response",
@@ -2259,19 +2166,13 @@
             "description": "Indicates whether the sync was successfully registered"
           }
         },
-        "description": "Response returned after syncing external case events.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after syncing external case events."
       },
       "SystemActor": {
         "title": "System actor",
         "type": "object",
         "additionalProperties": false,
-        "description": "Empty message indicating system-initiated action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Empty message indicating system-initiated action."
       },
       "TitleChangedCaseEvent": {
         "title": "Title changed event",
@@ -2292,10 +2193,7 @@
             "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied."
           }
         },
-        "description": "Title changed case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Title changed case event."
       },
       "UnassignedCaseEvent": {
         "title": "Unassigned event",
@@ -2309,10 +2207,7 @@
             "description": "User ID that was unassigned"
           }
         },
-        "description": "Unassigned case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Unassigned case event."
       },
       "UnknownAssigneeError": {
         "title": "Unknown assignee error",
@@ -2329,10 +2224,7 @@
             ]
           }
         },
-        "description": "Change assignee failed event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Change assignee failed event."
       },
       "UpdateCommentResponse": {
         "title": "Update comment event response",
@@ -2350,10 +2242,7 @@
             "description": "Updated comment event"
           }
         },
-        "description": "Response returned after successfully updating a comment.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully updating a comment."
       },
       "UserActor": {
         "title": "User actor",
@@ -2370,10 +2259,7 @@
             ]
           }
         },
-        "description": "Information about the user who initiated the action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about the user who initiated the action."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -2398,10 +2284,7 @@
             "description": "The requested event"
           }
         },
-        "description": "Response containing the details of a case event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of a case event."
       },
       "v1.ListEventsResponse": {
         "title": "List events response",
@@ -2419,10 +2302,7 @@
             "description": "Events for the case"
           }
         },
-        "description": "Response containing a list of case events.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of case events."
       },
       "v3.FilterOperator": {
         "enum": [

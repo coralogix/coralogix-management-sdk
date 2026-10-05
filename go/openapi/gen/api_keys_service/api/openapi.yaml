@@ -628,10 +628,7 @@
       "DeleteApiKeyResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting an API key.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting an API key."
       },
       "Error": {
         "type": "object",
@@ -693,10 +690,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -723,10 +717,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetApiKeyResponse": {
         "title": "Get Api Key Response",
@@ -975,10 +966,7 @@
             "description": "User identifier of the API key owner."
           }
         },
-        "description": "Owner.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Owner."
       },
       "PermissionsPreset": {
         "title": "Permissions Preset",
@@ -1097,10 +1085,7 @@
       "UpdateApiKeyResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully updating an API key.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully updating an API key."
       },
       "events.v3.FilterMatcher": {
         "enum": [

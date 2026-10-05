@@ -19,15 +19,9 @@
               "description": "The filters.",
               "items": {
                 "description": "A filter for SLOs, consisting of a field and a predicate",
-                "externalDocs": {
-                  "url": ""
-                },
                 "properties": {
                   "field": {
                     "description": "Field used for filtering SLOs",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "oneOf": [
                       {
                         "required": [
@@ -191,15 +185,9 @@
                   },
                   "predicate": {
                     "description": "Predicate used for filtering SLOs",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "is": {
                         "description": "Predicate for SLO filters that checks if a field is equal to one of multiple values",
-                        "externalDocs": {
-                          "url": ""
-                        },
                         "oneOf": [
                           {
                             "required": [
@@ -1388,10 +1376,7 @@
         "title": "ApmErrorSli",
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for error-based APM SLI",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for error-based APM SLI"
       },
       "ApmFilter": {
         "title": "ApmFilter",
@@ -1428,19 +1413,13 @@
             "description": "Preferred: multiple values to match (OR semantics, e.g. status IN [500, 503])"
           }
         },
-        "description": "Key-value filter for APM metrics. Supports single value (legacy) or multiple values (OR semantics)",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Key-value filter for APM metrics. Supports single value (legacy) or multiple values (OR semantics)"
       },
       "ApmLatencyAverage": {
         "title": "ApmLatencyAverage",
         "type": "object",
         "additionalProperties": false,
-        "description": "Average/mean-based latency measurement",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Average/mean-based latency measurement"
       },
       "ApmLatencyQuantile": {
         "title": "ApmLatencyQuantile",
@@ -1455,10 +1434,7 @@
             ]
           }
         },
-        "description": "Quantile/percentile-based latency measurement",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Quantile/percentile-based latency measurement"
       },
       "ApmLatencySli": {
         "title": "ApmLatencySli",
@@ -1523,10 +1499,7 @@
             ]
           }
         },
-        "description": "Configuration for latency-based APM SLI",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for latency-based APM SLI"
       },
       "ApmSli": {
         "title": "ApmSli",
@@ -1612,10 +1585,7 @@
             ]
           }
         },
-        "description": "Definition of an APM-based SLI with automatic query generation",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of an APM-based SLI with automatic query generation"
       },
       "BatchExecuteSloResponse": {
         "title": "BatchExecuteSloResponse",
@@ -1636,10 +1606,7 @@
             "$ref": "#/components/schemas/ResponseStatus"
           }
         },
-        "description": "Response containing the results of batch executed SLO operations.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of batch executed SLO operations."
       },
       "BatchGetSlosResponse": {
         "title": "BatchGetSlosResponse",
@@ -1667,10 +1634,7 @@
             "description": "The slos."
           }
         },
-        "description": "Response containing a batch of SLOs and any IDs not found.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a batch of SLOs and any IDs not found."
       },
       "Code": {
         "enum": [
@@ -1722,10 +1686,7 @@
             "$ref": "#/components/schemas/Slo"
           }
         },
-        "description": "Request to create a new SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Request to create a new SLO."
       },
       "CreateSloResponse": {
         "title": "CreateSloResponse",
@@ -1738,10 +1699,7 @@
             "$ref": "#/components/schemas/Slo"
           }
         },
-        "description": "Response after creating a new SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response after creating a new SLO."
       },
       "DeleteSloRequest": {
         "title": "DeleteSloRequest",
@@ -1756,10 +1714,7 @@
             "description": "Unique identifier."
           }
         },
-        "description": "Request to delete an existing SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Request to delete an existing SLO."
       },
       "DeleteSloResponse": {
         "title": "DeleteSloResponse",
@@ -1776,10 +1731,7 @@
             "description": "The effected slo alert ids."
           }
         },
-        "description": "Response after deleting an existing SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response after deleting an existing SLO."
       },
       "Error": {
         "type": "object",
@@ -1841,10 +1793,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -1871,10 +1820,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetSloResponse": {
         "title": "GetSloResponse",
@@ -1887,10 +1833,7 @@
             "$ref": "#/components/schemas/Slo"
           }
         },
-        "description": "Response containing the details of a specific SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of a specific SLO."
       },
       "GetZeroStateResponse": {
         "title": "GetZeroStateResponse",
@@ -1904,10 +1847,7 @@
             "description": "The zero state."
           }
         },
-        "description": "Response with Zero State.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response with Zero State."
       },
       "ListSlosResponse": {
         "title": "ListSlosResponse",
@@ -1925,10 +1865,7 @@
             "description": "The slos."
           }
         },
-        "description": "Response containing a list of SLOs.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of SLOs."
       },
       "Metric": {
         "title": "Metric",
@@ -1943,10 +1880,7 @@
             ]
           }
         },
-        "description": "Definition of a metric used in SLOs",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of a metric used in SLOs"
       },
       "MissingDataStrategy": {
         "enum": [
@@ -1985,10 +1919,7 @@
             "description": "The values."
           }
         },
-        "description": "Product type values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Product type values."
       },
       "ReplaceSloAlertsValidationsResponse": {
         "title": "ReplaceSloAlertsValidationsResponse",
@@ -2006,10 +1937,7 @@
             "description": "The alerts validation result."
           }
         },
-        "description": "Response with validated alerts before replacing an existing SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response with validated alerts before replacing an existing SLO."
       },
       "ReplaceSloRequest": {
         "title": "ReplaceSloRequest",
@@ -2028,10 +1956,7 @@
             "$ref": "#/components/schemas/Slo"
           }
         },
-        "description": "Request to replace an existing SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Request to replace an existing SLO."
       },
       "ReplaceSloResponse": {
         "title": "ReplaceSloResponse",
@@ -2054,10 +1979,7 @@
             "$ref": "#/components/schemas/Slo"
           }
         },
-        "description": "Response after replacing an existing SLO.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response after replacing an existing SLO."
       },
       "RequestBasedMetricSli": {
         "title": "RequestBasedMetricSli",
@@ -2070,10 +1992,7 @@
             "$ref": "#/components/schemas/Metric"
           }
         },
-        "description": "Definition of a request-based SLI based on metrics",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of a request-based SLI based on metrics"
       },
       "ResponseStatus": {
         "title": "ResponseStatus",
@@ -2100,10 +2019,7 @@
             "$ref": "#/components/schemas/Code"
           }
         },
-        "description": "Status of the response, including error code and message.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Status of the response, including error code and message."
       },
       "Slo": {
         "title": "Slo",
@@ -2285,10 +2201,7 @@
             "$ref": "#/components/schemas/WindowBasedMetricSli"
           }
         },
-        "description": "Definition of an SLO",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of an SLO"
       },
       "SloAlertValidityResult": {
         "type": "object",
@@ -2359,10 +2272,7 @@
             "$ref": "#/components/schemas/ReplaceSloRequest"
           }
         },
-        "description": "Request for executing an SLO operation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Request for executing an SLO operation."
       },
       "SloExecutionResponse": {
         "title": "SloExecutionResponse",
@@ -2423,10 +2333,7 @@
             "$ref": "#/components/schemas/ReplaceSloResponse"
           }
         },
-        "description": "Response for an executed SLO operation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response for an executed SLO operation."
       },
       "SloOwnershipTag": {
         "title": "SloOwnershipTag",
@@ -2482,10 +2389,7 @@
             ]
           }
         },
-        "description": "Ownership for one dimension (service, environment, or team). static_values are group-wide (broad) assignments. label_keys are metric label names whose values are read per permutation (label-driven). Both may be set; when both lists are empty, that dimension is unset.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Ownership for one dimension (service, environment, or team). static_values are group-wide (broad) assignments. label_keys are metric label names whose values are read per permutation (label-driven). Both may be set; when both lists are empty, that dimension is unset."
       },
       "SloOwnershipTags": {
         "title": "SloOwnershipTags",
@@ -2501,10 +2405,7 @@
             "$ref": "#/components/schemas/SloOwnershipTag"
           }
         },
-        "description": "Service, environment, and team ownership for the SLO group. At most one SloOwnershipTag per dimension; omit a dimension when unset.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Service, environment, and team ownership for the SLO group. At most one SloOwnershipTag per dimension; omit a dimension when unset."
       },
       "SloProductType": {
         "enum": [
@@ -2547,10 +2448,7 @@
             "description": "The values."
           }
         },
-        "description": "String values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "String values."
       },
       "TypeValues": {
         "type": "object",
@@ -2564,10 +2462,7 @@
             "description": "The values."
           }
         },
-        "description": "Type values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Type values."
       },
       "WindowBasedMetricSli": {
         "title": "WindowBasedMetricSli",
@@ -2594,10 +2489,7 @@
             "$ref": "#/components/schemas/WindowSloWindow"
           }
         },
-        "description": "Definition of a window-based SLI based on metrics",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of a window-based SLI based on metrics"
       },
       "WindowSloWindow": {
         "enum": [
@@ -2630,10 +2522,7 @@
             "description": "List of labels."
           }
         },
-        "description": "Definition of the SLO grouping fields",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of the SLO grouping fields"
       },
       "v1.Revision": {
         "title": "Revision",
@@ -2654,10 +2543,7 @@
             "format": "date-time"
           }
         },
-        "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "The revision of the slo, used to differentiate between different versions of the same SLO"
       },
       "v3.FilterOperator": {
         "enum": [

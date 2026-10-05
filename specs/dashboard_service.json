@@ -975,10 +975,7 @@
             "description": "Object defining one of the pre-defined template actions - go to specific dashboard"
           }
         },
-        "description": "Defines the behavior of a dashboard action, either a custom URL or a built-in template.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the behavior of a dashboard action, either a custom URL or a built-in template."
       },
       "AllOption": {
         "required": [
@@ -998,18 +995,12 @@
             "description": "The label."
           }
         },
-        "description": "Synthetic 'All' option configuration. Required for static and query sources; never present for textbox sources.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Synthetic 'All' option configuration. Required for static and query sources; never present for textbox sources."
       },
       "AllValue": {
         "type": "object",
         "additionalProperties": false,
-        "description": "All value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "All value."
       },
       "Annotation": {
         "type": "object",
@@ -1153,10 +1144,7 @@
             "$ref": "#/components/schemas/SpansSource"
           }
         },
-        "description": "Source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Source."
       },
       "Annotation.WidgetScope": {
         "type": "object",
@@ -1201,18 +1189,12 @@
             "$ref": "#/components/schemas/Annotation.WidgetScope.SpecificWidgets"
           }
         },
-        "description": "Widget scope.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Widget scope."
       },
       "Annotation.WidgetScope.AllWidgets": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Indicates that the annotation applies to all widgets in the dashboard.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Indicates that the annotation applies to all widgets in the dashboard."
       },
       "Annotation.WidgetScope.SpecificWidgets": {
         "type": "object",
@@ -1231,10 +1213,7 @@
             "description": "The widget ids."
           }
         },
-        "description": "Specific widgets.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Specific widgets."
       },
       "AnnotationColor": {
         "enum": [
@@ -1279,10 +1258,7 @@
             ]
           }
         },
-        "description": "Arc display settings; the presence of this object indicates the gauge arcs are shown while its absence hides all arcs, and the fields control which individual arcs are displayed",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Arc display settings; the presence of this object indicates the gauge arcs are shown while its absence hides all arcs, and the fields control which individual arcs are displayed"
       },
       "AssignDashboardFolderResponse": {
         "title": "Assign dashboard to folder response data structure",
@@ -1316,50 +1292,32 @@
             "description": "Minimum interval duration. The calculated interval will not be smaller than this value."
           }
         },
-        "description": "Automatic interval resolution that calculates optimal time buckets based on the widget width, time range, and specified constraints.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Automatic interval resolution that calculates optimal time buckets based on the widget width, time range, and specified constraints."
       },
       "AutoRefreshFifteenMinutes": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Auto refresh fifteen minutes.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Auto refresh fifteen minutes."
       },
       "AutoRefreshFiveMinutes": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Auto refresh five minutes.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Auto refresh five minutes."
       },
       "AutoRefreshOff": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Auto refresh off.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Auto refresh off."
       },
       "AutoRefreshOneMinute": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Auto refresh one minute.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Auto refresh one minute."
       },
       "AutoRefreshTwoMinutes": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Auto refresh two minutes.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Auto refresh two minutes."
       },
       "Average": {
         "type": "object",
@@ -1375,10 +1333,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Average.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Average."
       },
       "BarChart": {
         "title": "BarChart",
@@ -1560,10 +1515,7 @@
             ]
           }
         },
-        "description": "BarChart represents the configuration of a vertical bar chart widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "BarChart represents the configuration of a vertical bar chart widget."
       },
       "BarChart.DataprimeQuery": {
         "title": "DataprimeQuery",
@@ -1615,10 +1567,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "BarChart.LogsQuery": {
         "title": "LogsQuery",
@@ -1695,10 +1644,7 @@
             "description": "Specifies the time period for which the results should be returned"
           }
         },
-        "description": "A logs variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A logs variant of the query"
       },
       "BarChart.MetricsQuery": {
         "title": "MetricsQuery",
@@ -1777,10 +1723,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A metrics variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A metrics variant of the query"
       },
       "BarChart.Query": {
         "type": "object",
@@ -1855,10 +1798,7 @@
             "$ref": "#/components/schemas/BarChart.SpansQuery"
           }
         },
-        "description": "Query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query."
       },
       "BarChart.SpansQuery": {
         "title": "SpansQuery",
@@ -1932,10 +1872,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A spans variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A spans variant of the query"
       },
       "BarChart.StackDefinition": {
         "type": "object",
@@ -1955,10 +1892,7 @@
             "description": "Custom template name of an individual stack"
           }
         },
-        "description": "Bar chart.stack definition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Bar chart.stack definition."
       },
       "CheckDashboardResponse": {
         "title": "Check dashboard response data structure",
@@ -2087,10 +2021,7 @@
             "description": "Exact value-based color mapping"
           }
         },
-        "description": "Reusable color and label mapping configuration supporting range, value, and regex-based mappings",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Reusable color and label mapping configuration supporting range, value, and regex-based mappings"
       },
       "ColorLabelMapping.ValueMapping": {
         "title": "ValueMapping",
@@ -2106,10 +2037,7 @@
             "description": "List of exact value-to-display mapping sections"
           }
         },
-        "description": "Exact value-based color and label mapping",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Exact value-based color and label mapping"
       },
       "ColorSolidType": {
         "enum": [
@@ -2214,50 +2142,32 @@
             "$ref": "#/components/schemas/ColorsByStack"
           }
         },
-        "description": "Defines the coloring strategy applied to widget data series.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the coloring strategy applied to widget data series."
       },
       "ColorsByAggregation": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Colors by aggregation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Colors by aggregation."
       },
       "ColorsByCategory": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Colors by category.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Colors by category."
       },
       "ColorsByGroupBy": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Colors by group by.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Colors by group by."
       },
       "ColorsByQuery": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Colors by query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Colors by query."
       },
       "ColorsByStack": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Colors by stack.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Colors by stack."
       },
       "ColumnWidthEntry": {
         "type": "object",
@@ -2289,10 +2199,7 @@
             "description": "The value."
           }
         },
-        "description": "Constant.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Constant."
       },
       "ConstantListSource": {
         "type": "object",
@@ -2311,18 +2218,12 @@
             "description": "List of values."
           }
         },
-        "description": "Constant list source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Constant list source."
       },
       "Count": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Count.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count."
       },
       "CountDistinct": {
         "type": "object",
@@ -2338,10 +2239,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Count distinct.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Count distinct."
       },
       "CreateDashboardResponse": {
         "title": "Create dashboard response data structure",
@@ -2372,10 +2270,7 @@
             "description": "Static URL that may contain variables using {{variable_name}} syntax"
           }
         },
-        "description": "Custom action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom action."
       },
       "CustomSectionOptions": {
         "type": "object",
@@ -2418,10 +2313,7 @@
             "description": "Variable name that can be applied on section making it repetitive section and other metadata"
           }
         },
-        "description": "Custom section options.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom section options."
       },
       "Dashboard": {
         "title": "Dashboard",
@@ -2819,9 +2711,6 @@
             "description": "Timestamp of the last update.",
             "format": "date-time"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "DashboardFolder": {
@@ -2849,10 +2738,7 @@
             "description": "The parent id. A UUID that must differ from this folder's own id."
           }
         },
-        "description": "Dashboard folder.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dashboard folder."
       },
       "DataTable": {
         "type": "object",
@@ -2909,10 +2795,7 @@
             "description": "Specifies how rows are displayed"
           }
         },
-        "description": "Data table.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Data table."
       },
       "DataTable.Column": {
         "type": "object",
@@ -2963,10 +2846,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "DataTable.LogsQuery": {
         "title": "LogsQuery",
@@ -3006,10 +2886,7 @@
             "description": "Specifies the time period for which the results should be returned"
           }
         },
-        "description": "A logs variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A logs variant of the query"
       },
       "DataTable.MetricsQuery": {
         "title": "MetricsQuery",
@@ -3060,10 +2937,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A metrics variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A metrics variant of the query"
       },
       "DataTable.Query": {
         "type": "object",
@@ -3138,10 +3012,7 @@
             "$ref": "#/components/schemas/DataTable.SpansQuery"
           }
         },
-        "description": "Discriminated union of possible query types for the data table widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of possible query types for the data table widget."
       },
       "DataTable.SpansQuery": {
         "title": "SpansQuery",
@@ -3181,10 +3052,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A spans variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A spans variant of the query"
       },
       "Dataprime": {
         "title": "DataprimeQuery",
@@ -3207,10 +3075,7 @@
             "description": "Dataprime query text"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "DataprimeQuery.Type": {
         "type": "object",
@@ -3219,10 +3084,7 @@
             "$ref": "#/components/schemas/QueryText"
           }
         },
-        "description": "Discriminated union specifying the type of Dataprime query used to fetch variable values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union specifying the type of Dataprime query used to fetch variable values."
       },
       "DataprimeSource": {
         "type": "object",
@@ -3256,10 +3118,7 @@
             "$ref": "#/components/schemas/DataprimeSource.Strategy"
           }
         },
-        "description": "Dataprime source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dataprime source."
       },
       "DataprimeSource.Strategy": {
         "type": "object",
@@ -3324,10 +3183,7 @@
             "$ref": "#/components/schemas/DataprimeSource.Strategy.Range"
           }
         },
-        "description": "Determines the time strategy for fetching Dataprime results (instant snapshot, fixed range, or sliding window).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Determines the time strategy for fetching Dataprime results (instant snapshot, fixed range, or sliding window)."
       },
       "DataprimeSource.Strategy.Duration": {
         "type": "object",
@@ -3339,10 +3195,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Duration strategy: uses a start timestamp and a duration field to define the annotation span.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Duration strategy: uses a start timestamp and a duration field to define the annotation span."
       },
       "DataprimeSource.Strategy.Instant": {
         "type": "object",
@@ -3351,10 +3204,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Instant snapshot strategy: uses a single timestamp field to define the annotation point.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Instant snapshot strategy: uses a single timestamp field to define the annotation point."
       },
       "DataprimeSource.Strategy.Range": {
         "type": "object",
@@ -3366,10 +3216,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Range strategy: uses start and end timestamp fields to define the annotation span.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Range strategy: uses start and end timestamp fields to define the annotation span."
       },
       "DatasetScope": {
         "enum": [
@@ -3401,10 +3248,7 @@
             "$ref": "#/components/schemas/DimensionField"
           }
         },
-        "description": "Dimension aggregation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dimension aggregation."
       },
       "DimensionAggregationType": {
         "enum": [
@@ -3477,10 +3321,7 @@
             "description": "Resolve the variable from a query datashape field"
           }
         },
-        "description": "A variable that can be referenced inside the display name template, backed by either an observation field or mapped values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A variable that can be referenced inside the display name template, backed by either an observation field or mapped values"
       },
       "Dynamic.Query": {
         "type": "object",
@@ -3555,10 +3396,7 @@
             "$ref": "#/components/schemas/Spans"
           }
         },
-        "description": "Discriminated union of possible query types for the dynamic widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of possible query types for the dynamic widget."
       },
       "Dynamic.QueryDefinition": {
         "title": "QueryDefinition",
@@ -3591,10 +3429,7 @@
             "description": "Query object"
           }
         },
-        "description": "Query definition for dynamic widget",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query definition for dynamic widget"
       },
       "Equals.Selection": {
         "title": "Selection",
@@ -3650,19 +3485,13 @@
             "description": "Represents a selection from a list of values."
           }
         },
-        "description": "This data structure defines the values for the equality comparison.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure defines the values for the equality comparison."
       },
       "Equals.Selection.AllSelection": {
         "title": "AllSelection",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure indicates that all values are selected.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure indicates that all values are selected."
       },
       "Equals.Selection.ListSelection": {
         "title": "ListSelection",
@@ -3682,10 +3511,7 @@
             "description": "A list of selected values."
           }
         },
-        "description": "This data structure represents a selection from a list of specific values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a selection from a list of specific values."
       },
       "Error": {
         "type": "object",
@@ -3724,10 +3550,7 @@
             "$ref": "#/components/schemas/EventRecurrenceSource.Strategy"
           }
         },
-        "description": "Annotation source driven by recurring calendar events such as weekly deployments or maintenance windows.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Annotation source driven by recurring calendar events such as weekly deployments or maintenance windows."
       },
       "EventRecurrenceSource.Strategy": {
         "type": "object",
@@ -3777,10 +3600,7 @@
             "$ref": "#/components/schemas/EventRecurrenceSource.Strategy.Instant"
           }
         },
-        "description": "Determines how the recurrence event is rendered: as an instant point or a sliding window duration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Determines how the recurrence event is rendered: as an instant point or a sliding window duration."
       },
       "EventRecurrenceSource.Strategy.Duration": {
         "type": "object",
@@ -3800,10 +3620,7 @@
             "format": "int32"
           }
         },
-        "description": "Renders the recurrence event as a sliding window starting at the configured hour and spanning the given duration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Renders the recurrence event as a sliding window starting at the configured hour and spanning the given duration."
       },
       "EventRecurrenceSource.Strategy.Instant": {
         "type": "object",
@@ -3816,10 +3633,7 @@
             "format": "int32"
           }
         },
-        "description": "Renders the recurrence event as an instant snapshot at the configured start hour.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Renders the recurrence event as an instant snapshot at the configured start hour."
       },
       "FieldDataType": {
         "enum": [
@@ -3850,10 +3664,7 @@
             "description": "The selection criteria for the equality comparison."
           }
         },
-        "description": "This data structure represents an equality comparison operation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an equality comparison operation."
       },
       "Filter.LogsFilter": {
         "title": "LogsFilter",
@@ -3883,10 +3694,7 @@
             "description": "An operator used for filtering the logs."
           }
         },
-        "description": "This data structure represents the filter criteria for logs.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the filter criteria for logs."
       },
       "Filter.NotEquals": {
         "title": "NotEquals",
@@ -3901,10 +3709,7 @@
             "description": "The selection criteria for the non-equality comparison."
           }
         },
-        "description": "This data structure represents a non-equality comparison operation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a non-equality comparison operation."
       },
       "Filter.Operator": {
         "title": "Operator",
@@ -3960,10 +3765,7 @@
             "description": "Non-equality comparison."
           }
         },
-        "description": "This data structure defines the comparison operation for the filter.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure defines the comparison operation for the filter."
       },
       "Filter.Source": {
         "title": "Source",
@@ -4039,10 +3841,7 @@
             "description": "Filter configuration for spans."
           }
         },
-        "description": "Defines the type of data the filter applies to.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the type of data the filter applies to."
       },
       "Filter.WidgetScope": {
         "type": "object",
@@ -4054,18 +3853,12 @@
             "$ref": "#/components/schemas/Filter.WidgetScope.SpecificWidgets"
           }
         },
-        "description": "Annotation.widget scope.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Annotation.widget scope."
       },
       "Filter.WidgetScope.AllWidgets": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Annotation.widget scope.all widgets.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Annotation.widget scope.all widgets."
       },
       "Filter.WidgetScope.SpecificWidgets": {
         "type": "object",
@@ -4080,10 +3873,7 @@
             "description": "The widget ids."
           }
         },
-        "description": "Annotation.widget scope.specific widgets.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Annotation.widget scope.specific widgets."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -4125,10 +3915,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -4155,10 +3942,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "FolderPath": {
         "type": "object",
@@ -4177,10 +3961,7 @@
             "description": "The segments."
           }
         },
-        "description": "Folder path.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Folder path."
       },
       "Gauge.Aggregation": {
         "enum": [
@@ -4224,10 +4005,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "Gauge.LogsQuery": {
         "title": "LogsQuery",
@@ -4284,10 +4062,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A logs variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A logs variant of the query"
       },
       "Gauge.MetricsQuery": {
         "title": "MetricsQuery",
@@ -4346,10 +4121,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A metrics variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A metrics variant of the query"
       },
       "Gauge.Query": {
         "type": "object",
@@ -4424,10 +4196,7 @@
             "$ref": "#/components/schemas/Gauge.SpansQuery"
           }
         },
-        "description": "Discriminated union of possible query types for the gauge widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of possible query types for the gauge widget."
       },
       "Gauge.SpansQuery": {
         "title": "SpansQuery",
@@ -4493,10 +4262,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A spans variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A spans variant of the query"
       },
       "Gauge.Threshold": {
         "title": "Threshold",
@@ -4522,10 +4288,7 @@
             "description": "Optional label of the threshold"
           }
         },
-        "description": "Definition of a single gauge threshold",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of a single gauge threshold"
       },
       "Gauge.ThresholdBy": {
         "enum": [
@@ -4644,10 +4407,7 @@
             ]
           }
         },
-        "description": "Geomap.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap."
       },
       "GeomapAggregation": {
         "type": "object",
@@ -4762,10 +4522,7 @@
             "description": "Option that will use selected field in data results, perform SUM aggregation on it across all nodes in a cluster and display that value."
           }
         },
-        "description": "Geomap aggregation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap aggregation."
       },
       "GeomapAggregationFieldBased": {
         "type": "object",
@@ -4774,18 +4531,12 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Geomap aggregation field based.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap aggregation field based."
       },
       "GeomapAggregationSimple": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Geomap aggregation simple.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap aggregation simple."
       },
       "GeomapAllRegionConfig": {
         "type": "object",
@@ -4799,10 +4550,7 @@
             "description": "Data for this field should always return valid region strings from any supported cloud provider, aggregating every provider's regions."
           }
         },
-        "description": "Geomap all region config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap all region config."
       },
       "GeomapAwsRegionConfig": {
         "type": "object",
@@ -4816,10 +4564,7 @@
             "description": "Data for this field should always return valid AWS region strings (e.g. us-east-1, us-west-2)."
           }
         },
-        "description": "Geomap aws region config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap aws region config."
       },
       "GeomapColor": {
         "type": "object",
@@ -4874,10 +4619,7 @@
             "description": "Geomap clusters will scale according to data values and/or applied aggregation, using a solid color"
           }
         },
-        "description": "Geomap color.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap color."
       },
       "GeomapCoordinateConfig": {
         "type": "object",
@@ -4899,10 +4641,7 @@
             "description": "Data for this field should always return valid numeric coordinate (e.g. -122.4194)."
           }
         },
-        "description": "Geomap coordinate config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap coordinate config."
       },
       "GeomapFieldConfig": {
         "type": "object",
@@ -4999,10 +4738,7 @@
             "x-stability": "preview"
           }
         },
-        "description": "Geomap field config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap field config."
       },
       "GeomapIbmRegionConfig": {
         "type": "object",
@@ -5016,10 +4752,7 @@
             "description": "Data for this field should always return valid IBM Cloud region strings (e.g. us-south, eu-de)."
           }
         },
-        "description": "Geomap ibm region config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap ibm region config."
       },
       "GeomapTooltip": {
         "type": "object",
@@ -5041,10 +4774,7 @@
             "description": "Custom template for the geomap tooltip"
           }
         },
-        "description": "Geomap tooltip.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Geomap tooltip."
       },
       "GetDashboardBySlugResponse": {
         "title": "Get dashboard by URL slug response data structure",
@@ -5151,10 +4881,7 @@
             "description": "List of items."
           }
         },
-        "description": "Response containing the dashboard catalog.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the dashboard catalog."
       },
       "GetDashboardResponse": {
         "title": "Get dashboard response data structure",
@@ -5265,10 +4992,7 @@
             "description": "Reference to specific dashboard"
           }
         },
-        "description": "Go to dashboard template action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Go to dashboard template action."
       },
       "Heatmap": {
         "type": "object",
@@ -5428,10 +5152,7 @@
             "description": "List of observation fields used as y-axis categories in the heatmap grid."
           }
         },
-        "description": "Heatmap.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Heatmap."
       },
       "HeatmapColorPreset": {
         "enum": [
@@ -5487,10 +5208,7 @@
             "description": "Custom template for the heatmap tooltip"
           }
         },
-        "description": "Heatmap tooltip.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Heatmap tooltip."
       },
       "Hexagon": {
         "type": "object",
@@ -5596,10 +5314,7 @@
             ]
           }
         },
-        "description": "Hexagon.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Hexagon."
       },
       "Hexagon.DataprimeQuery": {
         "title": "DataprimeQuery",
@@ -5631,10 +5346,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "Hexagon.LogsQuery": {
         "title": "LogsQuery",
@@ -5683,10 +5395,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A logs variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A logs variant of the query"
       },
       "Hexagon.MetricsQuery": {
         "title": "MetricsQuery",
@@ -5745,10 +5454,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A metrics variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A metrics variant of the query"
       },
       "Hexagon.Query": {
         "type": "object",
@@ -5823,10 +5529,7 @@
             "$ref": "#/components/schemas/Hexagon.SpansQuery"
           }
         },
-        "description": "Discriminated union of possible query types for the hexagon widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of possible query types for the hexagon widget."
       },
       "Hexagon.SpansQuery": {
         "title": "SpansQuery",
@@ -5884,10 +5587,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A spans variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A spans variant of the query"
       },
       "HexagonBins": {
         "type": "object",
@@ -5989,10 +5689,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Hexagon bins.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Hexagon bins."
       },
       "HorizontalBarChart": {
         "type": "object",
@@ -6151,10 +5848,7 @@
             "description": "Specifies how to organize the y-axis view"
           }
         },
-        "description": "Horizontal bar chart.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Horizontal bar chart."
       },
       "HorizontalBarChart.DataprimeQuery": {
         "title": "DataprimeQuery",
@@ -6206,10 +5900,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "HorizontalBarChart.LogsQuery": {
         "title": "LogsQuery",
@@ -6286,10 +5977,7 @@
             "description": "Specifies the time period for which the results should be returned"
           }
         },
-        "description": "A logs variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A logs variant of the query"
       },
       "HorizontalBarChart.MetricsQuery": {
         "title": "MetricsQuery",
@@ -6368,10 +6056,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A metrics variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A metrics variant of the query"
       },
       "HorizontalBarChart.Query": {
         "type": "object",
@@ -6446,10 +6131,7 @@
             "$ref": "#/components/schemas/HorizontalBarChart.SpansQuery"
           }
         },
-        "description": "Query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query."
       },
       "HorizontalBarChart.SpansQuery": {
         "title": "SpansQuery",
@@ -6523,10 +6205,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A spans variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A spans variant of the query"
       },
       "HorizontalBarChart.StackDefinition": {
         "type": "object",
@@ -6546,10 +6225,7 @@
             "description": "Custom template name of an individual stack"
           }
         },
-        "description": "Stack definition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Stack definition."
       },
       "HorizontalBarChart.YAxisViewBy": {
         "type": "object",
@@ -6604,10 +6280,7 @@
             "description": "Y axis scale divided into value buckets"
           }
         },
-        "description": "Horizontal bar chart.y axis view by.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Horizontal bar chart.y axis view by."
       },
       "HorizontalBars": {
         "type": "object",
@@ -6777,10 +6450,7 @@
             "description": "Specifies how to organize the y-axis view"
           }
         },
-        "description": "Horizontal bars.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Horizontal bars."
       },
       "HorizontalBars.YAxisViewBy": {
         "enum": [
@@ -6939,10 +6609,7 @@
             "description": "Specifies how to organize the y-axis view"
           }
         },
-        "description": "Visualization configuration for horizontal bars with multiple queries.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Visualization configuration for horizontal bars with multiple queries."
       },
       "HorizontalBarsMulti.QueryFieldSettings": {
         "title": "HorizontalBarsMultiQueryFieldSettings",
@@ -6967,10 +6634,7 @@
             "description": "Numeric field for this query - each bar gets one value column"
           }
         },
-        "description": "Per-query field settings for horizontal bars multi-query visualization",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Per-query field settings for horizontal bars multi-query visualization"
       },
       "HorizontalBarsMulti.YAxisViewBy": {
         "enum": [
@@ -6984,10 +6648,7 @@
       "InternalSectionOptions": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Internal section options.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Internal section options."
       },
       "Interpretation": {
         "enum": [
@@ -7061,10 +6722,7 @@
             ]
           }
         },
-        "description": "Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification."
       },
       "IntervalValue": {
         "type": "object",
@@ -7078,10 +6736,7 @@
             "description": "The value."
           }
         },
-        "description": "Interval value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Interval value."
       },
       "Issue": {
         "type": "object",
@@ -7132,10 +6787,7 @@
             "description": "The list of sections in the dashboard"
           }
         },
-        "description": "Layout.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Layout."
       },
       "Legend": {
         "type": "object",
@@ -7173,10 +6825,7 @@
             "description": "Location of the legend in the widget"
           }
         },
-        "description": "Legend.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Legend."
       },
       "LegendBy": {
         "enum": [
@@ -7275,10 +6924,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "LineChart represents the configuration of a line chart widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "LineChart represents the configuration of a line chart widget."
       },
       "LineChart.DataprimeQuery": {
         "title": "DataprimeQuery",
@@ -7310,10 +6956,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "LineChart.LogsQuery": {
         "type": "object",
@@ -7375,10 +7018,7 @@
             "description": "Specifies the time period for which the results should be returned"
           }
         },
-        "description": "Logs query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Logs query."
       },
       "LineChart.MetricsQuery": {
         "type": "object",
@@ -7431,10 +7071,7 @@
             "description": "Specifies the time period for which the results should be returned"
           }
         },
-        "description": "Metrics query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Metrics query."
       },
       "LineChart.Query": {
         "type": "object",
@@ -7509,10 +7146,7 @@
             "$ref": "#/components/schemas/LineChart.SpansQuery"
           }
         },
-        "description": "Discriminated union of possible query types for the line chart widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of possible query types for the line chart widget."
       },
       "LineChart.QueryDefinition": {
         "title": "LineChart",
@@ -7664,10 +7298,7 @@
             ]
           }
         },
-        "description": "LineChart represents the configuration of a line chart widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "LineChart represents the configuration of a line chart widget."
       },
       "LineChart.Resolution": {
         "title": "Resolution",
@@ -7688,10 +7319,7 @@
             "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)"
           }
         },
-        "description": "Resolution settings for query values. (deprecated, use interval_resolution instead).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Resolution settings for query values. (deprecated, use interval_resolution instead)."
       },
       "LineChart.SpansQuery": {
         "type": "object",
@@ -7749,10 +7377,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "Spans query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Spans query."
       },
       "LineChart.StackedLine": {
         "enum": [
@@ -7807,10 +7432,7 @@
             "description": "List of values."
           }
         },
-        "description": "List value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "List value."
       },
       "Logs": {
         "title": "LogsQuery",
@@ -7860,10 +7482,7 @@
             "description": "A Lucene query string to search logs"
           }
         },
-        "description": "A logs variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A logs variant of the query"
       },
       "LogsAggregation": {
         "type": "object",
@@ -7983,10 +7602,7 @@
             "$ref": "#/components/schemas/Sum"
           }
         },
-        "description": "Discriminated union of logs aggregation functions such as count, sum, average, min, max, and percentile.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of logs aggregation functions such as count, sum, average, min, max, and percentile."
       },
       "LogsPathSource": {
         "type": "object",
@@ -8002,10 +7618,7 @@
             "description": "The value."
           }
         },
-        "description": "Logs path source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Logs path source."
       },
       "LogsQuery.Aggregation": {
         "type": "object",
@@ -8037,10 +7650,7 @@
             "description": "Aggregation name"
           }
         },
-        "description": "Aggregation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Aggregation."
       },
       "LogsQuery.Grouping": {
         "type": "object",
@@ -8077,10 +7687,7 @@
             "description": "List of observation fields to group the results"
           }
         },
-        "description": "Logs query.grouping.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Logs query.grouping."
       },
       "LogsSource": {
         "type": "object",
@@ -8111,10 +7718,7 @@
             "$ref": "#/components/schemas/LogsSource.Strategy"
           }
         },
-        "description": "Logs source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Logs source."
       },
       "LogsSource.Strategy": {
         "type": "object",
@@ -8179,10 +7783,7 @@
             "$ref": "#/components/schemas/LogsSource.Strategy.Range"
           }
         },
-        "description": "Determines the time strategy for fetching logs (instant snapshot, fixed range, or sliding window).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Determines the time strategy for fetching logs (instant snapshot, fixed range, or sliding window)."
       },
       "LogsSource.Strategy.Duration": {
         "type": "object",
@@ -8194,10 +7795,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Duration strategy: uses a start timestamp and a duration field to define the annotation span.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Duration strategy: uses a start timestamp and a duration field to define the annotation span."
       },
       "LogsSource.Strategy.Instant": {
         "type": "object",
@@ -8206,10 +7804,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Instant snapshot strategy: uses a single timestamp field to define the annotation point.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Instant snapshot strategy: uses a single timestamp field to define the annotation point."
       },
       "LogsSource.Strategy.Range": {
         "type": "object",
@@ -8221,10 +7816,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Range strategy: uses start and end timestamp fields to define the annotation span.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Range strategy: uses start and end timestamp fields to define the annotation span."
       },
       "LuceneQuery": {
         "type": "object",
@@ -8237,10 +7829,7 @@
             "description": "The value."
           }
         },
-        "description": "Lucene query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Lucene query."
       },
       "LuceneQueryValue": {
         "type": "object",
@@ -8254,10 +7843,7 @@
             "description": "The value."
           }
         },
-        "description": "Lucene query value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Lucene query value."
       },
       "ManualIntervalResolution": {
         "title": "ManualIntervalResolution",
@@ -8291,10 +7877,7 @@
             "description": "Minimum interval duration constraint. The selected interval will not be smaller than this value."
           }
         },
-        "description": "Manual interval resolution with a fixed, user-specified interval for time buckets. Optionally supports minimum interval and maximum data points constraints.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Manual interval resolution with a fixed, user-specified interval for time buckets. Optionally supports minimum interval and maximum data points constraints."
       },
       "ManualSource": {
         "type": "object",
@@ -8313,10 +7896,7 @@
             "$ref": "#/components/schemas/ManualSource.Strategy"
           }
         },
-        "description": "Manual source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Manual source."
       },
       "ManualSource.Strategy": {
         "type": "object",
@@ -8361,10 +7941,7 @@
             "$ref": "#/components/schemas/ManualSource.Strategy.Range"
           }
         },
-        "description": "Defines the time positioning strategy for manually placed annotations (instant point or range).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Defines the time positioning strategy for manually placed annotations (instant point or range)."
       },
       "ManualSource.Strategy.Instant": {
         "type": "object",
@@ -8385,10 +7962,7 @@
             "format": "double"
           }
         },
-        "description": "Instant strategy: places the annotation at a specific absolute timestamp value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Instant strategy: places the annotation at a specific absolute timestamp value."
       },
       "ManualSource.Strategy.Range": {
         "type": "object",
@@ -8414,18 +7988,12 @@
             "$ref": "#/components/schemas/common.Unit"
           }
         },
-        "description": "Range strategy: places the annotation spanning between two absolute timestamp values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Range strategy: places the annotation spanning between two absolute timestamp values."
       },
       "MappedValues": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Mapped values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Mapped values."
       },
       "MappingSection": {
         "title": "MappingSection",
@@ -8454,10 +8022,7 @@
             "description": "Value to match (exact string for value mapping, regex pattern for regex mapping)"
           }
         },
-        "description": "A single mapping entry that maps a value (exact or regex) to a display text and color",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A single mapping entry that maps a value (exact or regex) to a display text and color"
       },
       "Markdown": {
         "type": "object",
@@ -8477,10 +8042,7 @@
             "description": "Tooltip text to display on widget hover"
           }
         },
-        "description": "Markdown.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Markdown."
       },
       "Max": {
         "type": "object",
@@ -8496,10 +8058,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Max.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Max."
       },
       "MetadataField": {
         "enum": [
@@ -8522,10 +8081,7 @@
             "$ref": "#/components/schemas/MetricAggregation.MetricField"
           }
         },
-        "description": "Metric aggregation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Metric aggregation."
       },
       "MetricAggregation.MetricField": {
         "enum": [
@@ -8567,10 +8123,7 @@
             "description": "The metric name."
           }
         },
-        "description": "Metric label source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Metric label source."
       },
       "Metrics": {
         "title": "MetricsQuery",
@@ -8615,10 +8168,7 @@
             ]
           }
         },
-        "description": "A metrics variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A metrics variant of the query"
       },
       "MetricsFilter": {
         "title": "MetricsFilter",
@@ -8647,10 +8197,7 @@
             "description": "An operator used for filtering the metrics."
           }
         },
-        "description": "This data structure represents the filter criteria for metrics.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the filter criteria for metrics."
       },
       "MetricsQueryEditorMode": {
         "enum": [
@@ -8706,10 +8253,7 @@
             "$ref": "#/components/schemas/MetricsSource.Strategy"
           }
         },
-        "description": "Annotation source backed by a PromQL metrics query with a configurable time strategy.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Annotation source backed by a PromQL metrics query with a configurable time strategy."
       },
       "MetricsSource.Strategy": {
         "type": "object",
@@ -8718,10 +8262,7 @@
             "$ref": "#/components/schemas/StartTimeMetric"
           }
         },
-        "description": "Dataprime source.strategy.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dataprime source.strategy."
       },
       "Min": {
         "type": "object",
@@ -8737,10 +8278,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Min.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Min."
       },
       "MinMax": {
         "title": "Min-Max",
@@ -8796,18 +8334,12 @@
             "description": "Define min and/or max limits with custom values to affect widget scaling and/or colors"
           }
         },
-        "description": "Definition of min/max value configuration, can be automatically derived from data or custom",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of min/max value configuration, can be automatically derived from data or custom"
       },
       "MinMaxAuto": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Min max auto.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Min max auto."
       },
       "MinMaxCustom": {
         "type": "object",
@@ -8823,10 +8355,7 @@
             "format": "double"
           }
         },
-        "description": "Min max custom.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Min max custom."
       },
       "MultiSelect": {
         "type": "object",
@@ -8859,10 +8388,7 @@
             "$ref": "#/components/schemas/OrderDirection"
           }
         },
-        "description": "A dashboard variable that allows selecting one or more values from a dynamically or statically populated list.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A dashboard variable that allows selecting one or more values from a dynamically or statically populated list."
       },
       "MultiSelect.Query": {
         "type": "object",
@@ -8922,10 +8448,7 @@
             "$ref": "#/components/schemas/Query.SpansQuery"
           }
         },
-        "description": "Discriminated union specifying whether to query logs, metrics, or spans for variable values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union specifying whether to query logs, metrics, or spans for variable values."
       },
       "MultiSelect.QuerySource": {
         "type": "object",
@@ -8940,10 +8463,7 @@
             "$ref": "#/components/schemas/MultiSelect.ValueDisplayOptions"
           }
         },
-        "description": "Variable source that populates multi-select values by executing a query against logs, metrics, or spans.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable source that populates multi-select values by executing a query against logs, metrics, or spans."
       },
       "MultiSelect.RefreshStrategy": {
         "enum": [
@@ -8997,18 +8517,12 @@
             "$ref": "#/components/schemas/MultiSelect.Selection.ListSelection"
           }
         },
-        "description": "Discriminated union defining the current selection state: all values or a specific list of values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union defining the current selection state: all values or a specific list of values."
       },
       "MultiSelect.Selection.AllSelection": {
         "type": "object",
         "additionalProperties": false,
-        "description": "All selection.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "All selection."
       },
       "MultiSelect.Selection.ListSelection": {
         "type": "object",
@@ -9040,10 +8554,7 @@
             "description": "List of values."
           }
         },
-        "description": "A list-based selection specifying the currently selected values and their display labels.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A list-based selection specifying the currently selected values and their display labels."
       },
       "MultiSelect.Source": {
         "type": "object",
@@ -9133,10 +8644,7 @@
             "$ref": "#/components/schemas/SpanFieldSource"
           }
         },
-        "description": "Source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Source."
       },
       "MultiSelect.ValueDisplayOptions": {
         "type": "object",
@@ -9156,10 +8664,7 @@
             "description": "The value regex."
           }
         },
-        "description": "Value display options.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Value display options."
       },
       "MultiStringValue": {
         "type": "object",
@@ -9219,10 +8724,7 @@
             "$ref": "#/components/schemas/SelectedAllValue"
           }
         },
-        "description": "A variable value representing multiple selected string values: all, a specific list, or selected-all.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A variable value representing multiple selected string values: all, a specific list, or selected-all."
       },
       "MultipleValues": {
         "type": "object",
@@ -9253,10 +8755,7 @@
             "description": "Represents a selection from a list of values."
           }
         },
-        "description": "This data structure defines the values for the non-equality comparison.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure defines the values for the non-equality comparison."
       },
       "NotEquals.Selection.ListSelection": {
         "title": "ListSelection",
@@ -9276,10 +8775,7 @@
             "description": "A list of values for the selection."
           }
         },
-        "description": "This data structure represents a selection from a list of specific values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a selection from a list of specific values."
       },
       "NumericValueLabel": {
         "type": "object",
@@ -9297,10 +8793,7 @@
             "format": "float"
           }
         },
-        "description": "Numeric value label.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Numeric value label."
       },
       "ObservationField": {
         "type": "object",
@@ -9322,10 +8815,7 @@
             "$ref": "#/components/schemas/DatasetScope"
           }
         },
-        "description": "Observation field.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Observation field."
       },
       "OrderDirection": {
         "enum": [
@@ -9359,10 +8849,7 @@
             ]
           }
         },
-        "description": "Ordering field.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Ordering field."
       },
       "Percentile": {
         "type": "object",
@@ -9383,10 +8870,7 @@
             "format": "double"
           }
         },
-        "description": "Percentile.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Percentile."
       },
       "PieChart.DataprimeQuery": {
         "title": "DataprimeQuery",
@@ -9438,10 +8922,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A Dataprime variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Dataprime variant of the query"
       },
       "PieChart.LogsQuery": {
         "title": "LogsQuery",
@@ -9518,10 +8999,7 @@
             "description": "Specifies the time period for which the results should be returned"
           }
         },
-        "description": "A logs variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A logs variant of the query"
       },
       "PieChart.MetricsQuery": {
         "title": "MetricsQuery",
@@ -9600,10 +9078,7 @@
             "description": "Specifies the time period for which the result should be returned"
           }
         },
-        "description": "A metrics variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A metrics variant of the query"
       },
       "PieChart.Query": {
         "type": "object",
@@ -9678,10 +9153,7 @@
             "$ref": "#/components/schemas/PieChart.SpansQuery"
           }
         },
-        "description": "Discriminated union of possible query types for the pie chart widget.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of possible query types for the pie chart widget."
       },
       "PieChart.SpansQuery": {
         "title": "SpansQuery",
@@ -9755,10 +9227,7 @@
             "description": "Specifies the time period for which the records should be returned"
           }
         },
-        "description": "A spans variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A spans variant of the query"
       },
       "PieChart.StackDefinition": {
         "type": "object",
@@ -9778,10 +9247,7 @@
             "description": "Custom template name of an individual slice in the stack"
           }
         },
-        "description": "Configuration of stacked slices in the pie chart, including max slices and naming template.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration of stacked slices in the pie chart, including max slices and naming template."
       },
       "PinDashboardResponse": {
         "title": "Pin dashboard response data structure",
@@ -9813,10 +9279,7 @@
             "description": "The value."
           }
         },
-        "description": "Prom ql query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Prom ql query."
       },
       "PromqlQuery": {
         "type": "object",
@@ -9838,10 +9301,7 @@
             "description": "PromQL query string used to fetch the values for this dashboard variable"
           }
         },
-        "description": "Variable query source that executes a PromQL query to populate variable values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable query source that executes a PromQL query to populate variable values."
       },
       "Property": {
         "type": "object",
@@ -9853,10 +9313,7 @@
             "$ref": "#/components/schemas/UUID"
           }
         },
-        "description": "Property.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Property."
       },
       "PropertyDefinition": {
         "type": "object",
@@ -10017,10 +9474,7 @@
             "$ref": "#/components/schemas/PropertyValuesMapping"
           }
         },
-        "description": "Property definition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Property definition."
       },
       "PropertyLinks": {
         "type": "object",
@@ -10035,10 +9489,7 @@
             "description": "Collection of link actions"
           }
         },
-        "description": "Property links.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Property links."
       },
       "PropertyThresholds": {
         "type": "object",
@@ -10074,10 +9525,7 @@
             "description": "List of thresholds"
           }
         },
-        "description": "Property thresholds.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Property thresholds."
       },
       "PropertyUnits": {
         "type": "object",
@@ -10125,10 +9573,7 @@
             ]
           }
         },
-        "description": "Property units.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Property units."
       },
       "PropertyValuesMapping": {
         "type": "object",
@@ -10143,10 +9588,7 @@
             "description": "The mappings."
           }
         },
-        "description": "Property values mapping.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Property values mapping."
       },
       "PropertyValuesMapping.ValueMapping": {
         "type": "object",
@@ -10177,10 +9619,7 @@
             "$ref": "#/components/schemas/Query.LogsQuery.Type"
           }
         },
-        "description": "Logs query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Logs query."
       },
       "Query.LogsQuery.Type": {
         "type": "object",
@@ -10225,10 +9664,7 @@
             "$ref": "#/components/schemas/Query.LogsQuery.Type.FieldValue"
           }
         },
-        "description": "Type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Type."
       },
       "Query.LogsQuery.Type.FieldName": {
         "type": "object",
@@ -10241,10 +9677,7 @@
             "description": "The log regex."
           }
         },
-        "description": "Fetches distinct log field names matching the given regex pattern.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct log field names matching the given regex pattern."
       },
       "Query.LogsQuery.Type.FieldValue": {
         "type": "object",
@@ -10253,10 +9686,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Fetches distinct values for a specific log observation field.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct values for a specific log observation field."
       },
       "Query.MetricsQuery": {
         "type": "object",
@@ -10265,10 +9695,7 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.Type"
           }
         },
-        "description": "Variable query source that fetches metric names, label names, or label values from the metrics store.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable query source that fetches metric names, label names, or label values from the metrics store."
       },
       "Query.MetricsQuery.Equals": {
         "type": "object",
@@ -10277,10 +9704,7 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.Selection"
           }
         },
-        "description": "Equality filter operator: includes metrics whose label matches the selection.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Equality filter operator: includes metrics whose label matches the selection."
       },
       "Query.MetricsQuery.MetricsLabelFilter": {
         "type": "object",
@@ -10308,10 +9732,7 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.Selection"
           }
         },
-        "description": "Non-equality filter operator: includes metrics whose label does not match the selection.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Non-equality filter operator: includes metrics whose label does not match the selection."
       },
       "Query.MetricsQuery.Operator": {
         "type": "object",
@@ -10356,10 +9777,7 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.NotEquals"
           }
         },
-        "description": "Operator.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Operator."
       },
       "Query.MetricsQuery.Selection": {
         "type": "object",
@@ -10368,10 +9786,7 @@
             "$ref": "#/components/schemas/Query.MetricsQuery.Selection.ListSelection"
           }
         },
-        "description": "Discriminated union of selection types for the filter operator.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of selection types for the filter operator."
       },
       "Query.MetricsQuery.Selection.ListSelection": {
         "type": "object",
@@ -10386,10 +9801,7 @@
             "description": "List of values."
           }
         },
-        "description": "A list-based selection of string-or-variable values for metrics label filtering.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A list-based selection of string-or-variable values for metrics label filtering."
       },
       "Query.MetricsQuery.StringOrVariable": {
         "type": "object",
@@ -10442,10 +9854,7 @@
             "description": "The name of a dashboard variable whose current value will be substituted."
           }
         },
-        "description": "String or variable.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "String or variable."
       },
       "Query.MetricsQuery.Type": {
         "type": "object",
@@ -10510,10 +9919,7 @@
             "description": "The metric name."
           }
         },
-        "description": "Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values."
       },
       "Query.MetricsQuery.Type.LabelName": {
         "type": "object",
@@ -10526,10 +9932,7 @@
             "description": "The metric regex."
           }
         },
-        "description": "Label name.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Label name."
       },
       "Query.MetricsQuery.Type.LabelValue": {
         "type": "object",
@@ -10555,10 +9958,7 @@
             "description": "The metric name."
           }
         },
-        "description": "Label value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Label value."
       },
       "Query.MetricsQuery.Type.MetricName": {
         "type": "object",
@@ -10571,10 +9971,7 @@
             "description": "The metric regex."
           }
         },
-        "description": "Fetches distinct metric names matching the given regex pattern.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct metric names matching the given regex pattern."
       },
       "Query.SpansQuery": {
         "type": "object",
@@ -10583,10 +9980,7 @@
             "$ref": "#/components/schemas/Query.SpansQuery.Type"
           }
         },
-        "description": "Spans query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Spans query."
       },
       "Query.SpansQuery.Type": {
         "type": "object",
@@ -10631,10 +10025,7 @@
             "$ref": "#/components/schemas/Query.SpansQuery.Type.FieldValue"
           }
         },
-        "description": "Discriminated union specifying whether to query span field names or span field values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union specifying whether to query span field names or span field values."
       },
       "Query.SpansQuery.Type.FieldName": {
         "type": "object",
@@ -10647,10 +10038,7 @@
             "description": "The span regex."
           }
         },
-        "description": "Fetches distinct span field names matching the given regex pattern.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct span field names matching the given regex pattern."
       },
       "Query.SpansQuery.Type.FieldValue": {
         "type": "object",
@@ -10667,10 +10055,7 @@
             "description": "The value."
           }
         },
-        "description": "Fetches distinct values for a specific span observation field.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct values for a specific span observation field."
       },
       "QueryDisplaySettings": {
         "title": "TimeSeriesLinesMultiQueryDisplaySettings",
@@ -10800,10 +10185,7 @@
             ]
           }
         },
-        "description": "Query display settings for time series lines multi-query visualization",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query display settings for time series lines multi-query visualization"
       },
       "QuerySource.DataprimeQuery": {
         "type": "object",
@@ -10812,10 +10194,7 @@
             "$ref": "#/components/schemas/DataprimeQuery.Type"
           }
         },
-        "description": "Variable query source that executes a Dataprime query to populate variable values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable query source that executes a Dataprime query to populate variable values."
       },
       "QuerySource.LogsQuery": {
         "type": "object",
@@ -10824,10 +10203,7 @@
             "$ref": "#/components/schemas/QuerySource.LogsQuery.Type"
           }
         },
-        "description": "Logs query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Logs query."
       },
       "QuerySource.LogsQuery.Type": {
         "type": "object",
@@ -10872,10 +10248,7 @@
             "$ref": "#/components/schemas/QuerySource.LogsQuery.Type.FieldValue"
           }
         },
-        "description": "Type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Type."
       },
       "QuerySource.LogsQuery.Type.FieldName": {
         "type": "object",
@@ -10888,10 +10261,7 @@
             "description": "The log regex. Not implemented — see the parent schema."
           }
         },
-        "description": "Not implemented and unusable. Fetching log field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Not implemented and unusable. Fetching log field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead."
       },
       "QuerySource.LogsQuery.Type.FieldValue": {
         "required": [
@@ -10903,10 +10273,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Fetches distinct values for a specific log observation field. observationField is required and must be set.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct values for a specific log observation field. observationField is required and must be set."
       },
       "QuerySource.MetricsQuery": {
         "type": "object",
@@ -10915,10 +10282,7 @@
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.Type"
           }
         },
-        "description": "Variable query source that fetches metric names, label names, or label values from the metrics store.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable query source that fetches metric names, label names, or label values from the metrics store."
       },
       "QuerySource.MetricsQuery.Equals": {
         "type": "object",
@@ -10927,10 +10291,7 @@
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.Selection"
           }
         },
-        "description": "Equals.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Equals."
       },
       "QuerySource.MetricsQuery.MetricsLabelFilter": {
         "type": "object",
@@ -10958,10 +10319,7 @@
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.Selection"
           }
         },
-        "description": "Not equals.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Not equals."
       },
       "QuerySource.MetricsQuery.Operator": {
         "type": "object",
@@ -11006,10 +10364,7 @@
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.NotEquals"
           }
         },
-        "description": "Discriminated union of filter operators: equals or not equals.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union of filter operators: equals or not equals."
       },
       "QuerySource.MetricsQuery.Selection": {
         "type": "object",
@@ -11018,10 +10373,7 @@
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.Selection.ListSelection"
           }
         },
-        "description": "Selection.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Selection."
       },
       "QuerySource.MetricsQuery.Selection.ListSelection": {
         "type": "object",
@@ -11036,10 +10388,7 @@
             "description": "List of values."
           }
         },
-        "description": "A list-based selection of string-or-variable values for metrics label filtering.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A list-based selection of string-or-variable values for metrics label filtering."
       },
       "QuerySource.MetricsQuery.StringOrVariable": {
         "type": "object",
@@ -11092,10 +10441,7 @@
             "description": "The name of a dashboard variable whose current value will be substituted."
           }
         },
-        "description": "Query.metrics query.string or variable.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query.metrics query.string or variable."
       },
       "QuerySource.MetricsQuery.Type": {
         "type": "object",
@@ -11170,10 +10516,7 @@
             "$ref": "#/components/schemas/PromqlQuery"
           }
         },
-        "description": "Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union specifying what kind of metric data to fetch: metric names, label names, or label values."
       },
       "QuerySource.MetricsQuery.Type.LabelName": {
         "type": "object",
@@ -11186,10 +10529,7 @@
             "description": "The metric regex."
           }
         },
-        "description": "Label name.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Label name."
       },
       "QuerySource.MetricsQuery.Type.LabelValue": {
         "required": [
@@ -11213,10 +10553,7 @@
             "$ref": "#/components/schemas/QuerySource.MetricsQuery.StringOrVariable"
           }
         },
-        "description": "Fetches distinct values of a metric label. labelName is required and must be non-empty; metricName selects the metric to read the label from.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct values of a metric label. labelName is required and must be non-empty; metricName selects the metric to read the label from."
       },
       "QuerySource.MetricsQuery.Type.MetricName": {
         "type": "object",
@@ -11229,10 +10566,7 @@
             "description": "The metric regex."
           }
         },
-        "description": "Query.metrics query.type.metric name.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query.metrics query.type.metric name."
       },
       "QuerySource.SpansQuery": {
         "type": "object",
@@ -11241,10 +10575,7 @@
             "$ref": "#/components/schemas/QuerySource.SpansQuery.Type"
           }
         },
-        "description": "Spans query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Spans query."
       },
       "QuerySource.SpansQuery.Type": {
         "type": "object",
@@ -11289,10 +10620,7 @@
             "$ref": "#/components/schemas/QuerySource.SpansQuery.Type.FieldValue"
           }
         },
-        "description": "Discriminated union specifying whether to query span field names or span field values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union specifying whether to query span field names or span field values."
       },
       "QuerySource.SpansQuery.Type.FieldName": {
         "type": "object",
@@ -11305,10 +10633,7 @@
             "description": "The span regex. Not implemented — see the parent schema."
           }
         },
-        "description": "Not implemented and unusable. Fetching span field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Not implemented and unusable. Fetching span field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead."
       },
       "QuerySource.SpansQuery.Type.FieldValue": {
         "type": "object",
@@ -11331,10 +10656,7 @@
             "deprecated": true
           }
         },
-        "description": "Fetches distinct values for a specific span field. Exactly one of observationField or value must be set — setting both is rejected. The exclusivity is enforced when the request is validated, not by this schema: both properties are declared independently and are individually optional, so a both-set or neither-set object is only rejected once the request is sent. Prefer observationField; value is a deprecated legacy alternative.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Fetches distinct values for a specific span field. Exactly one of observationField or value must be set — setting both is rejected. The exclusivity is enforced when the request is validated, not by this schema: both properties are declared independently and are individually optional, so a both-set or neither-set object is only rejected once the request is sent. Prefer observationField; value is a deprecated legacy alternative."
       },
       "QueryText": {
         "type": "object",
@@ -11351,10 +10673,7 @@
             "$ref": "#/components/schemas/common.DataprimeQuery"
           }
         },
-        "description": "Query text.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Query text."
       },
       "RangeMapping": {
         "title": "RangeMapping",
@@ -11386,10 +10705,7 @@
             "description": "List of color thresholds defining color ranges"
           }
         },
-        "description": "Range-based color mapping using min/max bounds and color thresholds",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Range-based color mapping using min/max bounds and color thresholds"
       },
       "Recurrence": {
         "type": "object",
@@ -11398,10 +10714,7 @@
             "$ref": "#/components/schemas/WeeklyRecurrence"
           }
         },
-        "description": "Recurrence.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Recurrence."
       },
       "RegexMapping": {
         "title": "RegexMapping",
@@ -11417,10 +10730,7 @@
             "description": "List of regex pattern-to-display mapping sections"
           }
         },
-        "description": "Regex pattern-based color and label mapping",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Regex pattern-based color and label mapping"
       },
       "RegexValue": {
         "type": "object",
@@ -11434,10 +10744,7 @@
             "description": "The value."
           }
         },
-        "description": "Regex value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Regex value."
       },
       "RepetitiveVar": {
         "type": "object",
@@ -11453,10 +10760,7 @@
             ]
           }
         },
-        "description": "Repetitive var.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Repetitive var."
       },
       "ReplaceDashboardResponse": {
         "title": "Replace dashboard response data structure",
@@ -11519,10 +10823,7 @@
             "format": "int32"
           }
         },
-        "description": "Appearance.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Appearance."
       },
       "RowStyle": {
         "enum": [
@@ -11598,10 +10899,7 @@
             "description": "Regular expression pattern used to scope the rule."
           }
         },
-        "description": "Rule scope.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Rule scope."
       },
       "ScaleType": {
         "enum": [
@@ -11649,10 +10947,7 @@
             "$ref": "#/components/schemas/SectionPredefinedColor"
           }
         },
-        "description": "Section color.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Section color."
       },
       "SectionOptions": {
         "type": "object",
@@ -11702,10 +10997,7 @@
             "$ref": "#/components/schemas/InternalSectionOptions"
           }
         },
-        "description": "Section options.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Section options."
       },
       "SectionPredefinedColor": {
         "enum": [
@@ -11724,10 +11016,7 @@
       "SelectedAllValue": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Selected all value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Selected all value."
       },
       "SelectionType": {
         "enum": [
@@ -11751,18 +11040,12 @@
             "description": "The value."
           }
         },
-        "description": "Single string value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Single string value."
       },
       "SortByCategory": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Sort by category.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Sort by category."
       },
       "SortByQueryValue": {
         "type": "object",
@@ -11775,10 +11058,7 @@
             "description": "Reference to the query id from Dynamic.query_display_settings"
           }
         },
-        "description": "Sort by query value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Sort by query value."
       },
       "SortByType": {
         "enum": [
@@ -11856,9 +11136,6 @@
         "description": "Strategy for determining sort key",
         "discriminator": {
           "propertyName": "strategyType"
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "SpanField": {
@@ -11927,10 +11204,7 @@
             "description": "Name of a span tag field to use as the data source."
           }
         },
-        "description": "Span field.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Span field."
       },
       "SpanFieldSource": {
         "type": "object",
@@ -11944,10 +11218,7 @@
             "description": "The value."
           }
         },
-        "description": "Span field source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Span field source."
       },
       "SpanObservationField": {
         "type": "object",
@@ -11972,10 +11243,7 @@
             "$ref": "#/components/schemas/DatasetScope"
           }
         },
-        "description": "Span observation field.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Span observation field."
       },
       "SpanRelationType": {
         "enum": [
@@ -12035,10 +11303,7 @@
             "description": "Lucene query string to search span records"
           }
         },
-        "description": "A spans variant of the query",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A spans variant of the query"
       },
       "SpansAggregation": {
         "type": "object",
@@ -12083,10 +11348,7 @@
             "$ref": "#/components/schemas/MetricAggregation"
           }
         },
-        "description": "Spans aggregation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Spans aggregation."
       },
       "SpansFilter": {
         "title": "SpansFilter",
@@ -12117,10 +11379,7 @@
             "description": "An operator used for filtering the spans."
           }
         },
-        "description": "This data structure represents the filter criteria for spans.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the filter criteria for spans."
       },
       "SpansQuery.Aggregation": {
         "type": "object",
@@ -12184,10 +11443,7 @@
             "description": "A list of observation fields definitions to group the records by"
           }
         },
-        "description": "Grouping configuration for span query results, defining group-by fields and aggregation functions.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Grouping configuration for span query results, defining group-by fields and aggregation functions."
       },
       "SpansSource": {
         "type": "object",
@@ -12218,10 +11474,7 @@
             "$ref": "#/components/schemas/SpansSource.Strategy"
           }
         },
-        "description": "Spans source.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Spans source."
       },
       "SpansSource.Strategy": {
         "type": "object",
@@ -12286,10 +11539,7 @@
             "$ref": "#/components/schemas/SpansSource.Strategy.Range"
           }
         },
-        "description": "Determines the time strategy for fetching spans (instant snapshot, fixed range, or sliding window).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Determines the time strategy for fetching spans (instant snapshot, fixed range, or sliding window)."
       },
       "SpansSource.Strategy.Duration": {
         "type": "object",
@@ -12301,10 +11551,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Duration strategy: uses a start timestamp and a duration field to define the annotation span.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Duration strategy: uses a start timestamp and a duration field to define the annotation span."
       },
       "SpansSource.Strategy.Instant": {
         "type": "object",
@@ -12313,10 +11560,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Instant snapshot strategy: uses a single timestamp field to define the annotation point.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Instant snapshot strategy: uses a single timestamp field to define the annotation point."
       },
       "SpansSource.Strategy.Range": {
         "type": "object",
@@ -12328,18 +11572,12 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Range strategy: uses start and end timestamp fields to define the annotation span.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Range strategy: uses start and end timestamp fields to define the annotation span."
       },
       "StartTimeMetric": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Start time metric.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Start time metric."
       },
       "Stat": {
         "type": "object",
@@ -12467,10 +11705,7 @@
             "description": "The value fields."
           }
         },
-        "description": "Stat.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Stat."
       },
       "StatCard": {
         "title": "StatCard",
@@ -12578,10 +11813,7 @@
             "description": "Fields to use for the stat card value"
           }
         },
-        "description": "Stat card visualization displaying key values with color mapping and configurable visual elements",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Stat card visualization displaying key values with color mapping and configurable visual elements"
       },
       "StatVisualElement": {
         "title": "StatVisualElement",
@@ -12653,10 +11885,7 @@
             "description": "Variables available for use in the display name template, each referencing either a datashape field or mapped values"
           }
         },
-        "description": "A configurable display element that can show either a query field value or the result of color label mapping, with an optional display name template",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A configurable display element that can show either a query field value or the result of color label mapping, with an optional display name template"
       },
       "StaticSource": {
         "required": [
@@ -12687,10 +11916,7 @@
             "description": "Values sort order. A concrete value is required — ORDER_DIRECTION_UNSPECIFIED is rejected."
           }
         },
-        "description": "Static source — a fixed list of values defined directly on the variable. valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Static source — a fixed list of values defined directly on the variable. valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected."
       },
       "StringValueLabel": {
         "type": "object",
@@ -12710,10 +11936,7 @@
             "description": "The value."
           }
         },
-        "description": "String value label.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "String value label."
       },
       "Sum": {
         "type": "object",
@@ -12729,10 +11952,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Sum.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Sum."
       },
       "Table": {
         "type": "object",
@@ -12759,10 +11979,7 @@
             "$ref": "#/components/schemas/TableSettings"
           }
         },
-        "description": "Visualization configuration for displaying query results as a structured table with columns, rules, and display settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Visualization configuration for displaying query results as a structured table with columns, rules, and display settings."
       },
       "Table.Column": {
         "type": "object",
@@ -12810,10 +12027,7 @@
             "$ref": "#/components/schemas/RuleScope"
           }
         },
-        "description": "Rule.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Rule."
       },
       "TableSettings": {
         "type": "object",
@@ -12839,10 +12053,7 @@
             ]
           }
         },
-        "description": "Table settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Table settings."
       },
       "TextAlignment": {
         "enum": [
@@ -12865,10 +12076,7 @@
             "description": "The value."
           }
         },
-        "description": "Textbox default interval value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Textbox default interval value."
       },
       "TextboxDefaultLuceneValue": {
         "type": "object",
@@ -12889,10 +12097,7 @@
             "description": "The value."
           }
         },
-        "description": "Textbox default lucene value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Textbox default lucene value."
       },
       "TextboxDefaultNumericValue": {
         "type": "object",
@@ -12917,10 +12122,7 @@
             "format": "float"
           }
         },
-        "description": "Textbox default numeric value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Textbox default numeric value."
       },
       "TextboxDefaultRegexValue": {
         "type": "object",
@@ -12933,10 +12135,7 @@
             "description": "The value."
           }
         },
-        "description": "Textbox default regex value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Textbox default regex value."
       },
       "TextboxDefaultStringValue": {
         "type": "object",
@@ -12949,10 +12148,7 @@
             "description": "The value."
           }
         },
-        "description": "Textbox default string value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Textbox default string value."
       },
       "TextboxDefaultValue": {
         "type": "object",
@@ -13080,10 +12276,7 @@
             "deprecated": true
           }
         },
-        "description": "Textbox default value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Textbox default value."
       },
       "TextboxSource": {
         "type": "object",
@@ -13092,10 +12285,7 @@
             "$ref": "#/components/schemas/TextboxDefaultValue"
           }
         },
-        "description": "Variable source backed by a free-text input box, with an optional default value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable source backed by a free-text input box, with an optional default value."
       },
       "ThresholdType": {
         "enum": [
@@ -13124,10 +12314,7 @@
             "format": "date-time"
           }
         },
-        "description": "Time frame.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time frame."
       },
       "TimeFrameSelect": {
         "type": "object",
@@ -13176,10 +12363,7 @@
             "description": "Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes)."
           }
         },
-        "description": "Time frame select.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time frame select."
       },
       "TimeSeriesBars": {
         "type": "object",
@@ -13340,10 +12524,7 @@
             ]
           }
         },
-        "description": "Time series bars.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time series bars."
       },
       "TimeSeriesLines": {
         "type": "object",
@@ -13504,10 +12685,7 @@
             ]
           }
         },
-        "description": "Time series lines.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time series lines."
       },
       "TimeSeriesLinesMulti": {
         "type": "object",
@@ -13569,10 +12747,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Time series lines multi.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time series lines multi."
       },
       "TimeSeriesTooltip": {
         "type": "object",
@@ -13592,10 +12767,7 @@
             ]
           }
         },
-        "description": "Time series tooltip.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time series tooltip."
       },
       "TokenOriginType": {
         "enum": [
@@ -13625,10 +12797,7 @@
             "description": "Type of the tooltip display, can be showing single series value or all series values at once"
           }
         },
-        "description": "Tooltip.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Tooltip."
       },
       "TooltipType": {
         "enum": [
@@ -13650,10 +12819,7 @@
             "description": "The value."
           }
         },
-        "description": "Uuid.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Uuid."
       },
       "UnpinDashboardResponse": {
         "title": "Unpin dashboard response data structure",
@@ -13691,10 +12857,7 @@
             "description": "The value."
           }
         },
-        "description": "A value/label pair for a static source. Both value and label must be set; clients typically default the label to the value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A value/label pair for a static source. Both value and label must be set; clients typically default the label to the value."
       },
       "ValuesMappingType": {
         "enum": [
@@ -13785,10 +12948,7 @@
             "$ref": "#/components/schemas/MultiSelect"
           }
         },
-        "description": "Discriminated union defining the variable type: either a constant value or a multi-select query-driven variable.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union defining the variable type: either a constant value or a multi-select query-driven variable."
       },
       "VariableDisplayType": {
         "enum": [
@@ -13817,10 +12977,7 @@
             "$ref": "#/components/schemas/SelectionType"
           }
         },
-        "description": "Variable selection options.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable selection options."
       },
       "VariableSourceV2": {
         "type": "object",
@@ -13880,10 +13037,7 @@
             "$ref": "#/components/schemas/TextboxSource"
           }
         },
-        "description": "Variable source v2.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable source v2."
       },
       "VariableSourceV2.QuerySource": {
         "required": [
@@ -13979,10 +13133,7 @@
             "description": "Values sort order. A concrete value is required — ORDER_DIRECTION_UNSPECIFIED is rejected."
           }
         },
-        "description": "Variable source backed by a query against logs, metrics, spans, or Dataprime data. Exactly one of logsQuery, metricsQuery, spansQuery, or dataprimeQuery must be set — the service rejects an object with no query arm (this exactly-one rule is enforced by the API, not by the OpenAPI oneOf schema). valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected. PromQL (metricsQuery.type.promqlQuery) and Dataprime (dataprimeQuery.type.queryText) query text is syntax-checked only by POST /dashboards/check/v1 — create and replace accept it without compiling.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Variable source backed by a query against logs, metrics, spans, or Dataprime data. Exactly one of logsQuery, metricsQuery, spansQuery, or dataprimeQuery must be set — the service rejects an object with no query arm (this exactly-one rule is enforced by the API, not by the OpenAPI oneOf schema). valuesOrderDirection is required and must be a concrete value — ORDER_DIRECTION_UNSPECIFIED is rejected. PromQL (metricsQuery.type.promqlQuery) and Dataprime (dataprimeQuery.type.queryText) query text is syntax-checked only by POST /dashboards/check/v1 — create and replace accept it without compiling."
       },
       "VariableSourceV2.RefreshStrategy": {
         "enum": [
@@ -14011,10 +13162,7 @@
             "description": "The value regex."
           }
         },
-        "description": "Value display options.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Value display options."
       },
       "VariableV2": {
         "required": [
@@ -14075,10 +13223,7 @@
             "$ref": "#/components/schemas/VariableValueV2"
           }
         },
-        "description": "Dashboard variable (v2). displayFullRow may be true only when source is a textbox; it is rejected for static and query sources.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dashboard variable (v2). displayFullRow may be true only when source is a textbox; it is rejected for static and query sources."
       },
       "VariableValueV2": {
         "type": "object",
@@ -14188,10 +13333,7 @@
             "$ref": "#/components/schemas/SingleStringValue"
           }
         },
-        "description": "Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Discriminated union representing the current runtime value of a dashboard variable (string, numeric, regex, Lucene, or interval)."
       },
       "VariableValueV2.SingleNumericValue": {
         "type": "object",
@@ -14205,10 +13347,7 @@
             "description": "The value."
           }
         },
-        "description": "Integration revision.single numeric value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Integration revision.single numeric value."
       },
       "VerticalBars": {
         "type": "object",
@@ -14374,10 +13513,7 @@
             ]
           }
         },
-        "description": "Vertical bars.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Vertical bars."
       },
       "VerticalBarsMulti": {
         "type": "object",
@@ -14523,10 +13659,7 @@
             ]
           }
         },
-        "description": "Visualization configuration for vertical bars with multiple queries.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Visualization configuration for vertical bars with multiple queries."
       },
       "VerticalBarsMulti.QueryFieldSettings": {
         "title": "VerticalBarsMultiQueryFieldSettings",
@@ -14551,10 +13684,7 @@
             "description": "Numeric field for this query - each bar gets one value column"
           }
         },
-        "description": "Per-query field settings for vertical bars multi-query visualization",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Per-query field settings for vertical bars multi-query visualization"
       },
       "Visualization": {
         "type": "object",
@@ -14799,10 +13929,7 @@
             "$ref": "#/components/schemas/VerticalBarsMulti"
           }
         },
-        "description": "Visualization.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Visualization."
       },
       "Visualization.BarValueDisplay": {
         "enum": [
@@ -14963,10 +14090,7 @@
             "description": "The value fields."
           }
         },
-        "description": "Gauge.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Gauge."
       },
       "Visualization.PieChart": {
         "type": "object",
@@ -15106,10 +14230,7 @@
             "$ref": "#/components/schemas/ObservationField"
           }
         },
-        "description": "Pie chart.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pie chart."
       },
       "Visualization.PieChart.LabelDefinition": {
         "type": "object",
@@ -15139,10 +14260,7 @@
             "description": "Whether to show value of slice in the label"
           }
         },
-        "description": "Label definition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Label definition."
       },
       "Visualization.PieChart.LabelSource": {
         "enum": [
@@ -15177,10 +14295,7 @@
             "description": "How to determine sort key - by category or by query value"
           }
         },
-        "description": "Sort order with direction and strategy - either by category or by query value",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Sort order with direction and strategy - either by category or by query value"
       },
       "Visualization.StackedLine": {
         "enum": [
@@ -15217,10 +14332,7 @@
             "description": "The days of week."
           }
         },
-        "description": "Weekly recurrence.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Weekly recurrence."
       },
       "Widget": {
         "title": "Widget",
@@ -15316,10 +14428,7 @@
             "format": "int32"
           }
         },
-        "description": "Appearance.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Appearance."
       },
       "Widget.Definition": {
         "type": "object",
@@ -15514,10 +14623,7 @@
             "description": "Pie chart widget definition"
           }
         },
-        "description": "Definition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition."
       },
       "WidgetReference": {
         "title": "WidgetReference",
@@ -15539,10 +14645,7 @@
             "description": "Widget ID within the referenced dashboard"
           }
         },
-        "description": "Reference to a widget from another dashboard",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Reference to a widget from another dashboard"
       },
       "XAxis": {
         "type": "object",
@@ -15618,10 +14721,7 @@
             "description": "X axis scale showing individual group values"
           }
         },
-        "description": "X axis.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "X axis."
       },
       "XAxisByTime": {
         "title": "XAxisByTime",
@@ -15642,18 +14742,12 @@
             "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)"
           }
         },
-        "description": "X axis by time configuration. (deprecated, use time_buckets instead)",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "X axis by time configuration. (deprecated, use time_buckets instead)"
       },
       "XAxisByValue": {
         "type": "object",
         "additionalProperties": false,
-        "description": "X axis by value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "X axis by value."
       },
       "XAxisTimeFormat": {
         "enum": [
@@ -15673,18 +14767,12 @@
       "YAxisViewByCategory": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Y axis view by category.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Y axis view by category."
       },
       "YAxisViewByValue": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Y axis view by value.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Y axis view by value."
       },
       "common.Aggregation": {
         "enum": [
@@ -15709,10 +14797,7 @@
             "description": "The text."
           }
         },
-        "description": "Line chart.dataprime query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Line chart.dataprime query."
       },
       "common.Threshold": {
         "title": "Threshold",
@@ -15738,10 +14823,7 @@
             "description": "Optional label of the threshold"
           }
         },
-        "description": "Definition of a single gauge threshold",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Definition of a single gauge threshold"
       },
       "common.ThresholdBy": {
         "enum": [
@@ -15910,10 +14992,7 @@
             "description": "Specifies how the query results should be visualized"
           }
         },
-        "description": "Dynamic.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Dynamic."
       },
       "widgets.Gauge": {
         "type": "object",
@@ -16062,10 +15141,7 @@
             ]
           }
         },
-        "description": "Gauge.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Gauge."
       },
       "widgets.PieChart": {
         "type": "object",
@@ -16198,10 +15274,7 @@
             ]
           }
         },
-        "description": "Pie chart.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pie chart."
       },
       "widgets.PieChart.LabelDefinition": {
         "type": "object",
@@ -16231,10 +15304,7 @@
             "description": "Whether to show value of slice in the label"
           }
         },
-        "description": "Label definition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Label definition."
       },
       "widgets.PieChart.LabelSource": {
         "enum": [

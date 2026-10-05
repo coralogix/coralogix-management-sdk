@@ -645,10 +645,7 @@
             "format": "date-time"
           }
         },
-        "description": "A summary of a connector, excluding sensitive configuration values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A summary of a connector, excluding sensitive configuration values."
       },
       "ConnectorTypeSummary": {
         "title": "Connector Type Summary",
@@ -691,10 +688,7 @@
       "DeleteConnectorResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting a notification connector.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a notification connector."
       },
       "Delivery": {
         "enum": [
@@ -788,10 +782,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -818,10 +809,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetConnectorResponse": {
         "title": "Get Connector Response",

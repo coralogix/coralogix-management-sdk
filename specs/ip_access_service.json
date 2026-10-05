@@ -345,10 +345,7 @@
             "description": "The list of IP access entries."
           }
         },
-        "description": "This data structure represents the IP access settings for a company.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the IP access settings for a company."
       },
       "CoralogixCustomerSupportAccess": {
         "enum": [
@@ -372,19 +369,13 @@
             "description": "The created company IP access settings."
           }
         },
-        "description": "This data structure represents the response to create company IP access settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to create company IP access settings."
       },
       "DeleteCompanyIpAccessSettingsResponse": {
         "title": "Delete company IP access settings response",
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents the response to delete company IP access settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to delete company IP access settings."
       },
       "Error": {
         "type": "object",
@@ -446,10 +437,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -476,10 +464,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetCompanyIpAccessSettingsResponse": {
         "title": "Get company IP access settings response",
@@ -494,10 +479,7 @@
             "description": "The company IP access settings."
           }
         },
-        "description": "This data structure represents the response to get company IP access settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to get company IP access settings."
       },
       "IpAccess": {
         "title": "IP Access",
@@ -562,10 +544,7 @@
             "description": "The replaced company IP access settings."
           }
         },
-        "description": "This data structure represents the response to replace company IP access settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to replace company IP access settings."
       },
       "events.v3.FilterMatcher": {
         "enum": [

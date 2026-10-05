@@ -13,6 +13,7 @@ package global_routers_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,8 +23,8 @@ var _ MappedNullable = &FallbackTarget{}
 
 // FallbackTarget Defines fallback target for notifications not matching any routing rule
 type FallbackTarget struct {
-	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
-	Target *RoutingTarget `json:"target,omitempty"`
+	EntityType NotificationCenterEntityType `json:"entityType"`
+	Target RoutingTarget `json:"target"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,10 @@ type _FallbackTarget FallbackTarget
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewFallbackTarget() *FallbackTarget {
+func NewFallbackTarget(entityType NotificationCenterEntityType, target RoutingTarget) *FallbackTarget {
 	this := FallbackTarget{}
+	this.EntityType = entityType
+	this.Target = target
 	return &this
 }
 
@@ -47,68 +50,52 @@ func NewFallbackTargetWithDefaults() *FallbackTarget {
 	return &this
 }
 
-// GetEntityType returns the EntityType field value if set, zero value otherwise.
+// GetEntityType returns the EntityType field value
 func (o *FallbackTarget) GetEntityType() NotificationCenterEntityType {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		var ret NotificationCenterEntityType
 		return ret
 	}
-	return *o.EntityType
+
+	return o.EntityType
 }
 
-// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
+// GetEntityTypeOk returns a tuple with the EntityType field value
 // and a boolean to check if the value has been set.
 func (o *FallbackTarget) GetEntityTypeOk() (*NotificationCenterEntityType, bool) {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EntityType, true
+	return &o.EntityType, true
 }
 
-// HasEntityType returns a boolean if a field has been set.
-func (o *FallbackTarget) HasEntityType() bool {
-	if o != nil && !IsNil(o.EntityType) {
-		return true
-	}
-
-	return false
-}
-
-// SetEntityType gets a reference to the given NotificationCenterEntityType and assigns it to the EntityType field.
+// SetEntityType sets field value
 func (o *FallbackTarget) SetEntityType(v NotificationCenterEntityType) {
-	o.EntityType = &v
+	o.EntityType = v
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// GetTarget returns the Target field value
 func (o *FallbackTarget) GetTarget() RoutingTarget {
-	if o == nil || IsNil(o.Target) {
+	if o == nil {
 		var ret RoutingTarget
 		return ret
 	}
-	return *o.Target
+
+	return o.Target
 }
 
-// GetTargetOk returns a tuple with the Target field value if set, nil otherwise
+// GetTargetOk returns a tuple with the Target field value
 // and a boolean to check if the value has been set.
 func (o *FallbackTarget) GetTargetOk() (*RoutingTarget, bool) {
-	if o == nil || IsNil(o.Target) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return &o.Target, true
 }
 
-// HasTarget returns a boolean if a field has been set.
-func (o *FallbackTarget) HasTarget() bool {
-	if o != nil && !IsNil(o.Target) {
-		return true
-	}
-
-	return false
-}
-
-// SetTarget gets a reference to the given RoutingTarget and assigns it to the Target field.
+// SetTarget sets field value
 func (o *FallbackTarget) SetTarget(v RoutingTarget) {
-	o.Target = &v
+	o.Target = v
 }
 
 func (o FallbackTarget) MarshalJSON() ([]byte, error) {
@@ -121,12 +108,8 @@ func (o FallbackTarget) MarshalJSON() ([]byte, error) {
 
 func (o FallbackTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EntityType) {
-		toSerialize["entityType"] = o.EntityType
-	}
-	if !IsNil(o.Target) {
-		toSerialize["target"] = o.Target
-	}
+	toSerialize["entityType"] = o.EntityType
+	toSerialize["target"] = o.Target
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -136,6 +119,28 @@ func (o FallbackTarget) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *FallbackTarget) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"entityType",
+		"target",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varFallbackTarget := _FallbackTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

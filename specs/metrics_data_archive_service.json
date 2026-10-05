@@ -635,10 +635,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -665,10 +662,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GcsConfig": {
         "title": "GCS Configuration",
@@ -693,10 +687,7 @@
             "$ref": "#/components/schemas/TenantConfigV2"
           }
         },
-        "description": "Response containing the current metrics tenant configuration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the current metrics tenant configuration."
       },
       "IbmConfigV2": {
         "title": "IBM Bucket Configuration",
@@ -899,10 +890,7 @@
             "format": "int64"
           }
         },
-        "description": "Tenant config v2.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Tenant config v2."
       },
       "events.v3.FilterMatcher": {
         "enum": [

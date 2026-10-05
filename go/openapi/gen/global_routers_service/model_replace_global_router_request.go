@@ -13,6 +13,7 @@ package global_routers_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &ReplaceGlobalRouterRequest{}
 
 // ReplaceGlobalRouterRequest Request which updates an existing global router
 type ReplaceGlobalRouterRequest struct {
-	Router *GlobalRouter `json:"router,omitempty"`
+	Router GlobalRouter `json:"router"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _ReplaceGlobalRouterRequest ReplaceGlobalRouterRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewReplaceGlobalRouterRequest() *ReplaceGlobalRouterRequest {
+func NewReplaceGlobalRouterRequest(router GlobalRouter) *ReplaceGlobalRouterRequest {
 	this := ReplaceGlobalRouterRequest{}
+	this.Router = router
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewReplaceGlobalRouterRequestWithDefaults() *ReplaceGlobalRouterRequest {
 	return &this
 }
 
-// GetRouter returns the Router field value if set, zero value otherwise.
+// GetRouter returns the Router field value
 func (o *ReplaceGlobalRouterRequest) GetRouter() GlobalRouter {
-	if o == nil || IsNil(o.Router) {
+	if o == nil {
 		var ret GlobalRouter
 		return ret
 	}
-	return *o.Router
+
+	return o.Router
 }
 
-// GetRouterOk returns a tuple with the Router field value if set, nil otherwise
+// GetRouterOk returns a tuple with the Router field value
 // and a boolean to check if the value has been set.
 func (o *ReplaceGlobalRouterRequest) GetRouterOk() (*GlobalRouter, bool) {
-	if o == nil || IsNil(o.Router) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Router, true
+	return &o.Router, true
 }
 
-// HasRouter returns a boolean if a field has been set.
-func (o *ReplaceGlobalRouterRequest) HasRouter() bool {
-	if o != nil && !IsNil(o.Router) {
-		return true
-	}
-
-	return false
-}
-
-// SetRouter gets a reference to the given GlobalRouter and assigns it to the Router field.
+// SetRouter sets field value
 func (o *ReplaceGlobalRouterRequest) SetRouter(v GlobalRouter) {
-	o.Router = &v
+	o.Router = v
 }
 
 func (o ReplaceGlobalRouterRequest) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o ReplaceGlobalRouterRequest) MarshalJSON() ([]byte, error) {
 
 func (o ReplaceGlobalRouterRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Router) {
-		toSerialize["router"] = o.Router
-	}
+	toSerialize["router"] = o.Router
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o ReplaceGlobalRouterRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ReplaceGlobalRouterRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"router",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varReplaceGlobalRouterRequest := _ReplaceGlobalRouterRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -225,10 +225,7 @@
             "description": "Half-open timestamp range for this bucket."
           }
         },
-        "description": "A single time bucket of grouped usage entries.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A single time bucket of grouped usage entries."
       },
       "DataUsageResponse": {
         "type": "object",
@@ -251,10 +248,7 @@
             "description": "Resolved half-open timestamp range of the query after applying absolute or relative interval semantics."
           }
         },
-        "description": "Bucket-first usage results for the resolved query interval.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Bucket-first usage results for the resolved query interval."
       },
       "Date": {
         "required": [
@@ -286,10 +280,7 @@
             "format": "int32"
           }
         },
-        "description": "A full calendar date (year, month, day). All three components are required.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A full calendar date (year, month, day). All three components are required."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -331,10 +322,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -361,10 +349,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetDataUsageCapabilitiesResponse": {
         "type": "object",
@@ -416,10 +401,7 @@
             "description": "Supported measurement kinds and raw units returned by `UsageEntry`."
           }
         },
-        "description": "Capabilities of the public data-usage query surface in v1.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Capabilities of the public data-usage query surface in v1."
       },
       "MultipleValues": {
         "type": "object",
@@ -461,10 +443,7 @@
             "description": "Inclusive start of the range, as a full UTC calendar date."
           }
         },
-        "description": "Half-open UTC calendar date interval `[start, end)`. Both bounds are required full calendar dates.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Half-open UTC calendar date interval `[start, end)`. Both bounds are required full calendar dates."
       },
       "UsageCapabilityLabel": {
         "type": "object",
@@ -500,10 +479,7 @@
             "description": "Stable known values for the label when available. May be incomplete for dynamic or evolving labels."
           }
         },
-        "description": "A label supported by the public data-usage query surface.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A label supported by the public data-usage query surface."
       },
       "UsageCapabilityLabel.LabelValue": {
         "type": "object",
@@ -526,10 +502,7 @@
             ]
           }
         },
-        "description": "A known value for a label, with a short description.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A known value for a label, with a short description."
       },
       "UsageCapabilityMeasurement": {
         "type": "object",
@@ -558,10 +531,7 @@
             "description": "Raw unit returned for this measurement kind."
           }
         },
-        "description": "A measurement kind supported by the public data-usage query surface, with its raw unit.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A measurement kind supported by the public data-usage query surface, with its raw unit."
       },
       "UsageDailyQuery": {
         "type": "object",
@@ -606,10 +576,7 @@
             "$ref": "#/components/schemas/UsageDailyRelativeRange"
           }
         },
-        "description": "Day-oriented query. Always returns 1-day UTC buckets.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Day-oriented query. Always returns 1-day UTC buckets."
       },
       "UsageDailyRelativeRange": {
         "title": "Daily relative range",
@@ -650,10 +617,7 @@
             "description": "Raw usage measurements for this label combination."
           }
         },
-        "description": "One row of usage for a unique combination of grouped label values, with its raw measurements.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "One row of usage for a unique combination of grouped label values, with its raw measurements."
       },
       "UsageGroupBy": {
         "type": "object",
@@ -677,10 +641,7 @@
             ]
           }
         },
-        "description": "Set of canonical label keys to group results by.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Set of canonical label keys to group results by."
       },
       "UsageHourlyQuery": {
         "type": "object",
@@ -725,10 +686,7 @@
             "$ref": "#/components/schemas/UsageTimestampRange"
           }
         },
-        "description": "Hour-oriented query. Always returns 1-hour buckets. Max window: 14 days.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Hour-oriented query. Always returns 1-hour buckets. Max window: 14 days."
       },
       "UsageHourlyRelativeRange": {
         "title": "Hourly relative range",
@@ -767,10 +725,7 @@
             ]
           }
         },
-        "description": "A single label key/value pair in the grouped result.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A single label key/value pair in the grouped result."
       },
       "UsageLabelFilter": {
         "required": [
@@ -817,10 +772,7 @@
             ]
           }
         },
-        "description": "Predicate applied to a single label before aggregation. A complete predicate requires `key`, `operator`, and a non-empty `values` list.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Predicate applied to a single label before aggregation. A complete predicate requires `key`, `operator`, and a non-empty `values` list."
       },
       "UsageLabelFilter.FilterOperator": {
         "title": "Label filter operator",
@@ -843,10 +795,7 @@
             "format": "int64"
           }
         },
-        "description": "Per-bucket result-size cap requested by the client.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Per-bucket result-size cap requested by the client."
       },
       "UsageMeasurement": {
         "type": "object",
@@ -893,10 +842,7 @@
             "description": "Raw measured amount for this usage row, in the unit indicated by `measuredUnit`."
           }
         },
-        "description": "Raw measurement of a single kind for the parent usage row.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Raw measurement of a single kind for the parent usage row."
       },
       "UsageMeasurementKind": {
         "title": "Measurement kind",
@@ -949,10 +895,7 @@
             ]
           }
         },
-        "description": "Half-open timestamp interval `[start, end)`. Both bounds are required.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Half-open timestamp interval `[start, end)`. Both bounds are required."
       },
       "events.v3.FilterMatcher": {
         "enum": [

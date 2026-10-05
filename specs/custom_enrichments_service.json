@@ -417,10 +417,7 @@
             "format": "int64"
           }
         },
-        "description": "Custom enrichment.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom enrichment."
       },
       "CustomEnrichmentData": {
         "type": "object",
@@ -482,10 +479,7 @@
             "description": "Textual content of the enrichment data file as a UTF-8 string. The account's enrichment file size limit applies to the UTF-8 byte size of the content (20971520 bytes / 20 MiB by default); maxLength is an upper bound in characters."
           }
         },
-        "description": "Custom enrichment data including definition and raw content.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom enrichment data including definition and raw content."
       },
       "DeleteCustomEnrichmentResponse": {
         "type": "object",
@@ -511,10 +505,7 @@
             ]
           }
         },
-        "description": "Response returned after successfully deleting a custom enrichment rule.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a custom enrichment rule."
       },
       "File": {
         "title": "File",
@@ -651,10 +642,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -681,10 +669,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetCustomEnrichmentResponse": {
         "title": "Get Custom Enrichment Response",
@@ -752,10 +737,7 @@
             "description": "The custom enrichments data."
           }
         },
-        "description": "Response containing custom enrichment data search results.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing custom enrichment data search results."
       },
       "UpdateCustomEnrichmentResponse": {
         "title": "Update Custom Enrichment Response",

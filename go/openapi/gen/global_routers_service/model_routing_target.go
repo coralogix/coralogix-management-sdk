@@ -13,6 +13,7 @@ package global_routers_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,10 +24,10 @@ var _ MappedNullable = &RoutingTarget{}
 // RoutingTarget Defines routing target for notifications
 type RoutingTarget struct {
 	// The connector id.
-	ConnectorId *string `json:"connectorId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
+	ConnectorId string `json:"connectorId" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// The custom details.
 	CustomDetails map[string]string `json:"customDetails,omitempty"`
-	// Unique identifier.
+	// Unique identifier. Set by the server, which assigns a new value on every create and replace; a value sent by the client is ignored.
 	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The preset id.
 	PresetId *string `json:"presetId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
@@ -40,8 +41,9 @@ type _RoutingTarget RoutingTarget
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRoutingTarget() *RoutingTarget {
+func NewRoutingTarget(connectorId string) *RoutingTarget {
 	this := RoutingTarget{}
+	this.ConnectorId = connectorId
 	return &this
 }
 
@@ -53,36 +55,28 @@ func NewRoutingTargetWithDefaults() *RoutingTarget {
 	return &this
 }
 
-// GetConnectorId returns the ConnectorId field value if set, zero value otherwise.
+// GetConnectorId returns the ConnectorId field value
 func (o *RoutingTarget) GetConnectorId() string {
-	if o == nil || IsNil(o.ConnectorId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConnectorId
+
+	return o.ConnectorId
 }
 
-// GetConnectorIdOk returns a tuple with the ConnectorId field value if set, nil otherwise
+// GetConnectorIdOk returns a tuple with the ConnectorId field value
 // and a boolean to check if the value has been set.
 func (o *RoutingTarget) GetConnectorIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ConnectorId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConnectorId, true
+	return &o.ConnectorId, true
 }
 
-// HasConnectorId returns a boolean if a field has been set.
-func (o *RoutingTarget) HasConnectorId() bool {
-	if o != nil && !IsNil(o.ConnectorId) {
-		return true
-	}
-
-	return false
-}
-
-// SetConnectorId gets a reference to the given string and assigns it to the ConnectorId field.
+// SetConnectorId sets field value
 func (o *RoutingTarget) SetConnectorId(v string) {
-	o.ConnectorId = &v
+	o.ConnectorId = v
 }
 
 // GetCustomDetails returns the CustomDetails field value if set, zero value otherwise.
@@ -191,9 +185,7 @@ func (o RoutingTarget) MarshalJSON() ([]byte, error) {
 
 func (o RoutingTarget) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ConnectorId) {
-		toSerialize["connectorId"] = o.ConnectorId
-	}
+	toSerialize["connectorId"] = o.ConnectorId
 	if !IsNil(o.CustomDetails) {
 		toSerialize["customDetails"] = o.CustomDetails
 	}
@@ -212,6 +204,27 @@ func (o RoutingTarget) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RoutingTarget) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"connectorId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRoutingTarget := _RoutingTarget{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
