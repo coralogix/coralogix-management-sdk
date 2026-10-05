@@ -496,7 +496,7 @@ func TestGlobalRouter(t *testing.T) {
 	presetID := createdPreset.Preset.Id
 
 	router := globalrouters.GlobalRouter{
-		Name: globalrouters.PtrString("global router" + uuid.NewString()),
+		Name: "global router" + uuid.NewString(),
 		RoutingLabels: &globalrouters.RoutingLabels{
 			Environment: globalrouters.PtrString(uuid.NewString()),
 			Service:     globalrouters.PtrString(uuid.NewString()),
@@ -505,11 +505,11 @@ func TestGlobalRouter(t *testing.T) {
 		Description: globalrouters.PtrString("global router example"),
 		Rules: []globalrouters.RoutingRule{
 			{
-				Name:      globalrouters.PtrString("TestRoutingRule"),
-				Condition: globalrouters.PtrString("alertDef.priority == \"P1\""),
+				Name:      "TestRoutingRule",
+				Condition: "alertDef.priority == \"P1\"",
 				Targets: []globalrouters.RoutingTarget{
 					{
-						ConnectorId: connectorID,
+						ConnectorId: *connectorID,
 						PresetId:    presetID,
 					},
 				},
@@ -517,7 +517,7 @@ func TestGlobalRouter(t *testing.T) {
 		},
 	}
 
-	createRouterRequest := globalrouters.CreateGlobalRouterRequest{Router: &router}
+	createRouterRequest := globalrouters.CreateGlobalRouterRequest{Router: router}
 	createdRouter, httpResp, err := routersClient.
 		GlobalRoutersServiceCreateGlobalRouter(context.Background()).
 		CreateGlobalRouterRequest(createRouterRequest).
@@ -525,8 +525,8 @@ func TestGlobalRouter(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	router.Id = createdRouter.Router.Id
-	router.Name = globalrouters.PtrString("global router updated" + uuid.NewString())
-	replaceRouterRequest := globalrouters.ReplaceGlobalRouterRequest{Router: &router}
+	router.Name = "global router updated" + uuid.NewString()
+	replaceRouterRequest := globalrouters.ReplaceGlobalRouterRequest{Router: router}
 	replacedRouter, httpResp, err := routersClient.
 		GlobalRoutersServiceReplaceGlobalRouter(context.Background()).
 		ReplaceGlobalRouterRequest(replaceRouterRequest).
@@ -609,7 +609,7 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 	// ("router_default"); it cannot be set on a regular (labeled) router. The per-rule
 	// and per-fallback-target entityType, plus `disabled`, are set on regular routers.
 	router := globalrouters.GlobalRouter{
-		Name:        globalrouters.PtrString("global router" + uuid.NewString()),
+		Name:        "global router" + uuid.NewString(),
 		Description: globalrouters.PtrString("global router with disabled + fallbackTargets"),
 		RoutingLabels: &globalrouters.RoutingLabels{
 			Environment: globalrouters.PtrString(uuid.NewString()),
@@ -619,12 +619,12 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 		Disabled: globalrouters.PtrBool(true),
 		Rules: []globalrouters.RoutingRule{
 			{
-				Name:       globalrouters.PtrString("TestRoutingRule"),
+				Name:       "TestRoutingRule",
 				EntityType: globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
-				Condition:  globalrouters.PtrString("alertDef.priority == \"P1\""),
+				Condition:  "alertDef.priority == \"P1\"",
 				Targets: []globalrouters.RoutingTarget{
 					{
-						ConnectorId: connectorID,
+						ConnectorId: *connectorID,
 						PresetId:    presetID,
 					},
 				},
@@ -634,15 +634,15 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 		// regular router's fallback target references a connector only.
 		FallbackTargets: []globalrouters.FallbackTarget{
 			{
-				EntityType: globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
-				Target: &globalrouters.RoutingTarget{
-					ConnectorId: connectorID,
+				EntityType: globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
+				Target: globalrouters.RoutingTarget{
+					ConnectorId: *connectorID,
 				},
 			},
 		},
 	}
 
-	createRouterRequest := globalrouters.CreateGlobalRouterRequest{Router: &router}
+	createRouterRequest := globalrouters.CreateGlobalRouterRequest{Router: router}
 	createdRouter, httpResp, err := routersClient.
 		GlobalRoutersServiceCreateGlobalRouter(context.Background()).
 		CreateGlobalRouterRequest(createRouterRequest).
@@ -655,7 +655,7 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.True(t, got.Router.GetDisabled(), "router should be disabled")
 	require.Len(t, got.Router.FallbackTargets, 1)
-	require.Equal(t, globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS, *got.Router.FallbackTargets[0].EntityType)
+	require.Equal(t, globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS, got.Router.FallbackTargets[0].EntityType)
 	require.NotEmpty(t, got.Router.Rules)
 	require.Equal(t, globalrouters.NOTIFICATIONCENTERENTITYTYPE_ALERTS, *got.Router.Rules[0].EntityType)
 
