@@ -116,10 +116,7 @@
             "description": "Notification deliveries for the case"
           }
         },
-        "description": "Notification deliveries for a single case.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Notification deliveries for a single case."
       },
       "ConnectorDetails": {
         "title": "Connector details",
@@ -159,10 +156,7 @@
             "description": "Type of the connector"
           }
         },
-        "description": "Details of a notification connector.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Details of a notification connector."
       },
       "DeliveryAttempt": {
         "title": "Delivery attempt",
@@ -189,10 +183,7 @@
             "description": "Outcome of the delivery attempt"
           }
         },
-        "description": "A single delivery attempt to a specific connector.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A single delivery attempt to a specific connector."
       },
       "DeliveryFailure": {
         "title": "Delivery failure",
@@ -212,10 +203,7 @@
             ]
           }
         },
-        "description": "Failed delivery outcome with error details.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Failed delivery outcome with error details."
       },
       "DeliveryOutcome": {
         "title": "Delivery outcome",
@@ -271,10 +259,7 @@
             "description": "Delivery succeeded"
           }
         },
-        "description": "Outcome of a notification delivery attempt.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Outcome of a notification delivery attempt."
       },
       "DeliverySuccess": {
         "title": "Delivery success",
@@ -292,10 +277,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Successful delivery outcome with an optional evidence URL.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Successful delivery outcome with an optional evidence URL."
       },
       "Error": {
         "type": "object",
@@ -357,10 +339,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -387,10 +366,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "ListNotificationDeliveriesResponse": {
         "title": "List notification deliveries response",
@@ -407,10 +383,7 @@
             "description": "Notification deliveries keyed by case ID"
           }
         },
-        "description": "Response containing a list of notification delivery records for cases.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of notification delivery records for cases."
       },
       "MultipleValues": {
         "type": "object",
@@ -445,19 +418,13 @@
             "description": "Routers that matched the notification request"
           }
         },
-        "description": "Indicates that routers matched but no notification was ultimately created.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Indicates that routers matched but no notification was ultimately created."
       },
       "NoRouterMatchedResult": {
         "title": "No router matched result",
         "type": "object",
         "additionalProperties": false,
-        "description": "Indicates that no router matched the notification request.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Indicates that no router matched the notification request."
       },
       "NotificationDelivery": {
         "title": "Notification delivery",
@@ -556,10 +523,7 @@
             ]
           }
         },
-        "description": "Delivery results for a single notification.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Delivery results for a single notification."
       },
       "RoutedDelivery": {
         "title": "Routed delivery",
@@ -587,10 +551,7 @@
             "description": "The router that handled the notification"
           }
         },
-        "description": "Delivery attempts routed through a single router to one or more connectors.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Delivery attempts routed through a single router to one or more connectors."
       },
       "RouterInfo": {
         "title": "Router info",
@@ -621,10 +582,7 @@
             ]
           }
         },
-        "description": "Information about a notification router.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Information about a notification router."
       },
       "events.v3.FilterMatcher": {
         "enum": [

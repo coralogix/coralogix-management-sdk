@@ -194,9 +194,6 @@
             "type": "string",
             "description": "Version."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "Deprecation": {
@@ -223,10 +220,7 @@
             "default": []
           }
         },
-        "description": "Deprecation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Deprecation."
       },
       "Error": {
         "type": "object",
@@ -262,9 +256,6 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ExtensionBinary.BinaryType": {
@@ -345,9 +336,6 @@
             "type": "string",
             "description": "The unique id."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ExtensionItemBinary": {
@@ -371,9 +359,6 @@
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ExtensionItemBinary.BinaryType": {
@@ -469,9 +454,6 @@
             "type": "string",
             "description": "Version."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "FilterPathAndValues": {
@@ -514,10 +496,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -544,10 +523,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetAllExtensionsRequest.Filter": {
         "title": "A filter structure for a request to get all extensions",
@@ -566,10 +542,7 @@
             "default": []
           }
         },
-        "description": "Filter by integration ids",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter by integration ids"
       },
       "GetAllExtensionsResponse": {
         "title": "Get all extensions response",
@@ -586,10 +559,7 @@
             "default": []
           }
         },
-        "description": "Response to list all extensions",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response to list all extensions"
       },
       "GetAllExtensionsResponse.Extension": {
         "title": "Extension",
@@ -665,9 +635,6 @@
             "description": "The revisions.",
             "default": []
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "GetAllExtensionsResponse.Revision": {
@@ -720,9 +687,6 @@
             "type": "string",
             "description": "Version number."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "GetAllExtensionsResponse.RevisionSummary": {
@@ -738,10 +702,7 @@
             "$ref": "#/components/schemas/ItemCounts"
           }
         },
-        "description": "Revision summary.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Revision summary."
       },
       "IntegrationDetail": {
         "title": "Integration detail",
@@ -761,9 +722,6 @@
             "type": "string",
             "description": "Display name."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ItemCounts": {
@@ -851,10 +809,7 @@
             "default": 0
           }
         },
-        "description": "Item counts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Item counts."
       },
       "MultipleValues": {
         "type": "object",
@@ -1012,10 +967,7 @@
             "default": []
           }
         },
-        "description": "Represents a Coralogix extension package containing pre-built resources.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a Coralogix extension package containing pre-built resources."
       },
       "v3.FilterOperator": {
         "enum": [

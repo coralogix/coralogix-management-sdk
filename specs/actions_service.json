@@ -591,10 +591,7 @@
             "$ref": "#/components/schemas/ReplaceActionRequest"
           }
         },
-        "description": "This data structure represents a request to execute an Action operation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a request to execute an Action operation."
       },
       "ActionExecutionResponse": {
         "type": "object",
@@ -654,10 +651,7 @@
             "$ref": "#/components/schemas/ReplaceActionResponse"
           }
         },
-        "description": "This data structure represents a response to an Action execution request.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a response to an Action execution request."
       },
       "AtomicBatchExecuteActionsResponse": {
         "type": "object",
@@ -672,10 +666,7 @@
             "description": "The matching responses."
           }
         },
-        "description": "This data structure represents the response to a batch Action execution request.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to a batch Action execution request."
       },
       "CreateActionRequest": {
         "type": "object",
@@ -753,10 +744,7 @@
             "description": "The url fields. Each field requires both name and required, and names must be unique within the list."
           }
         },
-        "description": "This data structure represents the request to create an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the request to create an Action."
       },
       "CreateActionResponse": {
         "type": "object",
@@ -765,10 +753,7 @@
             "$ref": "#/components/schemas/v2.Action"
           }
         },
-        "description": "This data structure represents the response to create an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to create an Action."
       },
       "DeleteActionRequest": {
         "type": "object",
@@ -781,18 +766,12 @@
             "description": "Unique identifier."
           }
         },
-        "description": "This data structure represents the request to delete an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the request to delete an Action."
       },
       "DeleteActionResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents the response to delete an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to delete an Action."
       },
       "Error": {
         "type": "object",
@@ -854,10 +833,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -884,10 +860,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetActionResponse": {
         "type": "object",
@@ -896,10 +869,7 @@
             "$ref": "#/components/schemas/v2.Action"
           }
         },
-        "description": "This data structure represents the response to get an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to get an Action."
       },
       "ListActionsResponse": {
         "type": "object",
@@ -914,10 +884,7 @@
             "description": "List of actions."
           }
         },
-        "description": "This data structure represents the response containing a list of Actions.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response containing a list of Actions."
       },
       "MultipleValues": {
         "type": "object",
@@ -938,10 +905,7 @@
       "OrderActionsResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "This data structure represents the response to order Actions.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to order Actions."
       },
       "ReplaceActionRequest": {
         "type": "object",
@@ -950,10 +914,7 @@
             "$ref": "#/components/schemas/v2.Action"
           }
         },
-        "description": "This data structure represents the request to replace an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the request to replace an Action."
       },
       "ReplaceActionResponse": {
         "type": "object",
@@ -962,10 +923,7 @@
             "$ref": "#/components/schemas/v2.Action"
           }
         },
-        "description": "This data structure represents the response to replace an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents the response to replace an Action."
       },
       "UrlField": {
         "required": [
@@ -986,10 +944,7 @@
             "description": "The required."
           }
         },
-        "description": "Declares a URL field that may be required for the Action to be invokable on a log.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Declares a URL field that may be required for the Action to be invokable on a log."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -1092,10 +1047,7 @@
             "description": "The url fields. Each field requires both name and required, and names must be unique within the list."
           }
         },
-        "description": "This data structure represents an Action.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents an Action."
       },
       "v2.SourceType": {
         "enum": [

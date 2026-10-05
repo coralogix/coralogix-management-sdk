@@ -445,18 +445,12 @@
             "description": "Identifier of the created team."
           }
         },
-        "description": "Response containing the identifier of the created team.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the identifier of the created team."
       },
       "DeleteTeamResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Empty response returned after deleting a team.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Empty response returned after deleting a team."
       },
       "Error": {
         "type": "object",
@@ -518,10 +512,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -548,10 +539,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetTeamResponse": {
         "type": "object",
@@ -584,10 +572,7 @@
             "description": "Display name of the team."
           }
         },
-        "description": "Response containing the requested team.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested team."
       },
       "ListTeamsResponse": {
         "type": "object",
@@ -610,10 +595,7 @@
             "description": "Every team in the organization, including the default team."
           }
         },
-        "description": "Response containing the teams in the calling user's organization.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the teams in the calling user's organization."
       },
       "ListTeamsResponse.TeamInfo": {
         "type": "object",
@@ -646,10 +628,7 @@
             "description": "Display name of the team."
           }
         },
-        "description": "A team and the quota and retention settings assigned to it.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A team and the quota and retention settings assigned to it."
       },
       "MultipleValues": {
         "type": "object",
@@ -670,10 +649,7 @@
       "UpdateTeamResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Empty response returned after updating a team.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Empty response returned after updating a team."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -693,10 +669,7 @@
             "format": "int64"
           }
         },
-        "description": "Team id.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Team id."
       },
       "v3.FilterOperator": {
         "enum": [

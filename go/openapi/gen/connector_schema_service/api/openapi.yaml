@@ -59,10 +59,7 @@
             "description": "List of fields."
           }
         },
-        "description": "Connector config schema.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Connector config schema."
       },
       "ConnectorConfigSchemaField": {
         "type": "object",
@@ -144,10 +141,7 @@
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           }
         },
-        "description": "Connector schema.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Connector schema."
       },
       "FieldType": {
         "enum": [
@@ -204,10 +198,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -234,10 +225,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetConnectorSchemaResponse": {
         "type": "object",
@@ -246,10 +234,7 @@
             "$ref": "#/components/schemas/ConnectorSchema"
           }
         },
-        "description": "Response containing the schema definition for a notification connector type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the schema definition for a notification connector type."
       },
       "MessageConfigSchema": {
         "type": "object",

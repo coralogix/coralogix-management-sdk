@@ -20,13 +20,13 @@ var _ = bytes.MinRead
 // checks if the RoutingLabels type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoutingLabels{}
 
-// RoutingLabels Allows to configure routing labels which are used for routers resolution
+// RoutingLabels Allows to configure routing labels which are used for routers resolution. Every router needs at least one label, except the default router, whose `id` is `router_default`. The default router must have no labels.
 type RoutingLabels struct {
-	// The environment.
+	// The environment. The limit is 255 bytes.
 	Environment *string `json:"environment,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Service name.
+	// Service name. The limit is 255 bytes.
 	Service *string `json:"service,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Team.
+	// Team. The limit is 255 bytes.
 	Team *string `json:"team,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

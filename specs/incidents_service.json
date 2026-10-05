@@ -17,9 +17,6 @@
             "required": false,
             "schema": {
               "description": "Filter configuration for incidents",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "applicationName": {
                   "description": "Filter by application names",
@@ -107,9 +104,6 @@
                 },
                 "searchQuery": {
                   "description": "Incident search query.",
-                  "externalDocs": {
-                    "url": ""
-                  },
                   "oneOf": [
                     {
                       "required": [
@@ -220,9 +214,6 @@
             "schema": {
               "description": "Group by fields for aggregation",
               "items": {
-                "externalDocs": {
-                  "url": ""
-                },
                 "oneOf": [
                   {
                     "required": [
@@ -283,9 +274,6 @@
             "required": false,
             "schema": {
               "description": "Pagination parameters for list requests",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "pageSize": {
                   "description": "Number of items to return per page.",
@@ -379,16 +367,10 @@
             "required": false,
             "schema": {
               "description": "Filter configuration for incident events",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "contextualLabels": {
                   "additionalProperties": {
                     "description": "Represents contextual label values for filtering incidents",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "contextualLabelValues": {
                         "description": "The contextual label values.",
@@ -416,9 +398,6 @@
                 "displayLabels": {
                   "additionalProperties": {
                     "description": "Represents display label values for filtering incidents",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "displayLabelValues": {
                         "description": "The display label values.",
@@ -482,9 +461,6 @@
                 },
                 "timestamp": {
                   "description": "Represents a time range with start and end timestamps",
-                  "externalDocs": {
-                    "url": ""
-                  },
                   "properties": {
                     "endTime": {
                       "description": "End time of the range",
@@ -518,9 +494,6 @@
             "required": false,
             "schema": {
               "description": "Pagination parameters for list requests",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "pageSize": {
                   "description": "Number of items to return per page.",
@@ -556,9 +529,6 @@
             "name": "order_by",
             "required": false,
             "schema": {
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "direction": {
                   "allOf": [
@@ -651,16 +621,10 @@
             "required": false,
             "schema": {
               "description": "Filter configuration for incident events",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "contextualLabels": {
                   "additionalProperties": {
                     "description": "Represents contextual label values for filtering incidents",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "contextualLabelValues": {
                         "description": "The contextual label values.",
@@ -688,9 +652,6 @@
                 "displayLabels": {
                   "additionalProperties": {
                     "description": "Represents display label values for filtering incidents",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "displayLabelValues": {
                         "description": "The display label values.",
@@ -754,9 +715,6 @@
                 },
                 "timestamp": {
                   "description": "Represents a time range with start and end timestamps",
-                  "externalDocs": {
-                    "url": ""
-                  },
                   "properties": {
                     "endTime": {
                       "description": "End time of the range",
@@ -1116,16 +1074,10 @@
             "required": false,
             "schema": {
               "description": "Filter configuration for incident events",
-              "externalDocs": {
-                "url": ""
-              },
               "properties": {
                 "contextualLabels": {
                   "additionalProperties": {
                     "description": "Represents contextual label values for filtering incidents",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "contextualLabelValues": {
                         "description": "The contextual label values.",
@@ -1153,9 +1105,6 @@
                 "displayLabels": {
                   "additionalProperties": {
                     "description": "Represents display label values for filtering incidents",
-                    "externalDocs": {
-                      "url": ""
-                    },
                     "properties": {
                       "displayLabelValues": {
                         "description": "The display label values.",
@@ -1219,9 +1168,6 @@
                 },
                 "timestamp": {
                   "description": "Represents a time range with start and end timestamps",
-                  "externalDocs": {
-                    "url": ""
-                  },
                   "properties": {
                     "endTime": {
                       "description": "End time of the range",
@@ -2085,10 +2031,7 @@
             "description": "Incident after acknowledgment"
           }
         },
-        "description": "Response containing the updated incident after acknowledgment",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated incident after acknowledgment"
       },
       "AcknowledgeIncidentsResponse": {
         "title": "Acknowledge incidents response",
@@ -2107,10 +2050,7 @@
             "description": "List of incidents after acknowledgment"
           }
         },
-        "description": "Response containing the updated incidents after acknowledgment",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated incidents after acknowledgment"
       },
       "AssignIncidentsResponse": {
         "title": "Assign incidents response",
@@ -2129,10 +2069,7 @@
             "description": "List of incidents after assignment"
           }
         },
-        "description": "Response containing the updated incidents after assignment",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated incidents after assignment"
       },
       "AssigneeWithCount": {
         "title": "Assignee with count",
@@ -2162,9 +2099,6 @@
               10
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "Assignment": {
@@ -2182,10 +2116,7 @@
             "$ref": "#/components/schemas/incidents.v1.UserDetails"
           }
         },
-        "description": "Details of the user who assigned the incident and the user to whom it was assigned",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Details of the user who assigned the incident and the user to whom it was assigned"
       },
       "BatchGetIncidentResponse": {
         "title": "Batch get incidents response",
@@ -2222,10 +2153,7 @@
             ]
           }
         },
-        "description": "Response containing the requested incidents and any IDs that weren't found",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested incidents and any IDs that weren't found"
       },
       "CloseIncidentsResponse": {
         "title": "Close incidents response",
@@ -2244,10 +2172,7 @@
             "description": "List of incidents after closing"
           }
         },
-        "description": "Response containing the updated incidents after closing",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated incidents after closing"
       },
       "ContextualLabelValueWithCount": {
         "title": "Contextual label value with count",
@@ -2277,9 +2202,6 @@
               10
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ContextualLabelValues": {
@@ -2303,10 +2225,7 @@
             "description": "The contextual label values."
           }
         },
-        "description": "Represents contextual label values for filtering incidents",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents contextual label values for filtering incidents"
       },
       "ContextualLabelValuesWithCount": {
         "title": "Contextual label values with count",
@@ -2324,9 +2243,6 @@
             },
             "description": "The values with count."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ContextualLabels": {
@@ -2358,10 +2274,7 @@
             ]
           }
         },
-        "description": "Contextual labels.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Contextual labels."
       },
       "DisplayLabelValueWithCount": {
         "title": "Display label value with count",
@@ -2391,9 +2304,6 @@
               "display_label_value"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "DisplayLabelValues": {
@@ -2417,10 +2327,7 @@
             "description": "The display label values."
           }
         },
-        "description": "Represents display label values for filtering incidents",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents display label values for filtering incidents"
       },
       "DisplayLabelValuesWithCount": {
         "title": "Display label values with count",
@@ -2438,9 +2345,6 @@
             },
             "description": "The values with count."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "Error": {
@@ -2503,10 +2407,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -2533,10 +2434,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetIncidentByEventIdResponse": {
         "title": "Get incident by event id response",
@@ -2554,10 +2452,7 @@
             "description": "The requested incident"
           }
         },
-        "description": "Response containing the requested incident",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested incident"
       },
       "GetIncidentEventsResponse": {
         "title": "Get incident events response",
@@ -2573,10 +2468,7 @@
             "description": "List of incident events"
           }
         },
-        "description": "Response containing all events associated with the requested incident",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing all events associated with the requested incident"
       },
       "GetIncidentResponse": {
         "title": "Get incident response",
@@ -2594,10 +2486,7 @@
             "description": "The requested incident"
           }
         },
-        "description": "Response containing the requested incident",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested incident"
       },
       "GroupByValues": {
         "type": "object",
@@ -2806,10 +2695,7 @@
             "$ref": "#/components/schemas/IncidentStatus"
           }
         },
-        "description": "Incident.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident."
       },
       "IncidentAggregation": {
         "title": "Incident aggregation",
@@ -2923,9 +2809,6 @@
             },
             "description": "The list incidents id."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentAssignmentCount": {
@@ -2949,9 +2832,6 @@
               10
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentEvent": {
@@ -3076,10 +2956,7 @@
             "$ref": "#/components/schemas/IncidentEventUpsertState"
           }
         },
-        "description": "Incident event.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event."
       },
       "IncidentEventAcknowledge": {
         "type": "object",
@@ -3088,10 +2965,7 @@
             "$ref": "#/components/schemas/incidents.v1.UserDetails"
           }
         },
-        "description": "Incident event acknowledge.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event acknowledge."
       },
       "IncidentEventAlertType": {
         "enum": [
@@ -3116,10 +2990,7 @@
             "$ref": "#/components/schemas/Assignment"
           }
         },
-        "description": "Incident event assign.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event assign."
       },
       "IncidentEventClose": {
         "type": "object",
@@ -3128,10 +2999,7 @@
             "$ref": "#/components/schemas/incidents.v1.UserDetails"
           }
         },
-        "description": "Incident event close.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event close."
       },
       "IncidentEventExtended": {
         "title": "Extended incident event",
@@ -3161,9 +3029,6 @@
           "incidentEventExtendedMetadata": {
             "$ref": "#/components/schemas/IncidentEventExtendedMetadata"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentEventExtendedMetadata": {
@@ -3230,10 +3095,7 @@
             "description": "The is muted."
           }
         },
-        "description": "Incident event extended metadata.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event extended metadata."
       },
       "IncidentEventOrderByFieldType": {
         "enum": [
@@ -3253,10 +3115,7 @@
             "description": "The user id."
           }
         },
-        "description": "Incident event originator administrative.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event originator administrative."
       },
       "IncidentEventOriginatorOperational": {
         "type": "object",
@@ -3269,10 +3128,7 @@
             "description": "The system name."
           }
         },
-        "description": "Incident event originator operational.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event originator operational."
       },
       "IncidentEventSnoozeIndicator": {
         "title": "Incident event snooze indicator",
@@ -3299,10 +3155,7 @@
             "description": "The user id."
           }
         },
-        "description": "Incident event snooze indicator.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event snooze indicator."
       },
       "IncidentEventType": {
         "enum": [
@@ -3321,10 +3174,7 @@
       "IncidentEventUnassign": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Incident event unassign.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event unassign."
       },
       "IncidentEventUpsertState": {
         "title": "Incident event upsert state",
@@ -3345,10 +3195,7 @@
             "$ref": "#/components/schemas/UpsertIncidentStateType"
           }
         },
-        "description": "Incident event upsert state.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident event upsert state."
       },
       "IncidentFieldOneOf": {
         "type": "object",
@@ -3573,10 +3420,7 @@
             "description": "Subsystem associated with the incident."
           }
         },
-        "description": "Incident field one of.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident field one of."
       },
       "IncidentFields": {
         "enum": [
@@ -3617,9 +3461,6 @@
           "metaLabel": {
             "$ref": "#/components/schemas/incidents.v1.MetaLabel"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentMetaLabelsWithCount": {
@@ -3643,9 +3484,6 @@
           "metaLabel": {
             "$ref": "#/components/schemas/incidents.v1.MetaLabel"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentQueryFilter": {
@@ -3792,10 +3630,7 @@
             "description": "Filter by subsystem names"
           }
         },
-        "description": "Filter configuration for incidents",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter configuration for incidents"
       },
       "IncidentQueryFiltersValues": {
         "title": "Incident query filter values",
@@ -3874,10 +3709,7 @@
             "description": "The status with count."
           }
         },
-        "description": "Incident query filters values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident query filters values."
       },
       "IncidentSearchQuery": {
         "title": "Incident search query",
@@ -3929,10 +3761,7 @@
             ]
           }
         },
-        "description": "Incident search query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Incident search query."
       },
       "IncidentSeverity": {
         "enum": [
@@ -3967,9 +3796,6 @@
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentSeverityWithCount": {
@@ -3993,9 +3819,6 @@
           "severity": {
             "$ref": "#/components/schemas/IncidentSeverity"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentState": {
@@ -4028,9 +3851,6 @@
           "state": {
             "$ref": "#/components/schemas/IncidentState"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentStateWithCount": {
@@ -4059,9 +3879,6 @@
             ],
             "description": "The state."
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentStatus": {
@@ -4095,9 +3912,6 @@
           "status": {
             "$ref": "#/components/schemas/IncidentStatus"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "IncidentStatusWithCount": {
@@ -4128,9 +3942,6 @@
               "incident_status"
             ]
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "LabelsFilter": {
@@ -4158,10 +3969,7 @@
             "description": "The operator for the labels filter"
           }
         },
-        "description": "Filter configuration for incident events based on meta labels and their combination operator.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Filter configuration for incident events based on meta labels and their combination operator."
       },
       "ListIncidentAggregationsResponse": {
         "title": "List incident aggregations response",
@@ -4189,10 +3997,7 @@
             "description": "Pagination information for the response"
           }
         },
-        "description": "Response containing aggregated incident data and pagination information",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing aggregated incident data and pagination information"
       },
       "ListIncidentEventsFilterValuesResponse": {
         "title": "List incident events filter values response",
@@ -4207,10 +4012,7 @@
             "description": "Available filter values for incident events"
           }
         },
-        "description": "A response containing available filter values for incident events",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response containing available filter values for incident events"
       },
       "ListIncidentEventsResponse": {
         "title": "List incident events response",
@@ -4237,10 +4039,7 @@
             "description": "Pagination information for the response"
           }
         },
-        "description": "A response containing a list of incident events and pagination information",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response containing a list of incident events and pagination information"
       },
       "ListIncidentEventsTotalCountResponse": {
         "title": "List incident events total count response",
@@ -4264,10 +4063,7 @@
             ]
           }
         },
-        "description": "A response containing the total count of matching incident events and whether the count limit was reached",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A response containing the total count of matching incident events and whether the count limit was reached"
       },
       "ListIncidentsResponse": {
         "title": "List incidents response",
@@ -4290,10 +4086,7 @@
             "$ref": "#/components/schemas/incidents.v1.PaginationResponse"
           }
         },
-        "description": "Response containing a list of incidents and pagination information",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of incidents and pagination information"
       },
       "MultipleValues": {
         "type": "object",
@@ -4336,10 +4129,7 @@
             "description": "Incident after resolution"
           }
         },
-        "description": "Response containing the updated incident after resolution",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated incident after resolution"
       },
       "ResolveIncidentsResponse": {
         "title": "Resolve incidents response",
@@ -4358,10 +4148,7 @@
             "description": "List of incidents after resolution"
           }
         },
-        "description": "Response containing the updated incidents after resolution",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated incidents after resolution"
       },
       "UnassignIncidentsResponse": {
         "title": "Unassign incidents response",
@@ -4380,10 +4167,7 @@
             "description": "List of incidents after unassignment"
           }
         },
-        "description": "Response containing the updated incidents after unassignment",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated incidents after unassignment"
       },
       "UpsertIncidentStatePayload": {
         "type": "object",
@@ -4396,10 +4180,7 @@
             "description": "The CX event key."
           }
         },
-        "description": "Upsert incident state payload.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Upsert incident state payload."
       },
       "UpsertIncidentStateType": {
         "enum": [
@@ -4428,10 +4209,7 @@
             "$ref": "#/components/schemas/IncidentQueryFiltersValues"
           }
         },
-        "description": "Response containing available filter values for incidents",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing available filter values for incidents"
       },
       "incidents.v1.MetaLabel": {
         "title": "Incident meta label",
@@ -4458,10 +4236,7 @@
             ]
           }
         },
-        "description": "Meta label.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Meta label."
       },
       "incidents.v1.PaginationRequest": {
         "title": "Pagination request",
@@ -4491,10 +4266,7 @@
             ]
           }
         },
-        "description": "Pagination parameters for list requests",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pagination parameters for list requests"
       },
       "incidents.v1.PaginationResponse": {
         "title": "Pagination response",
@@ -4524,10 +4296,7 @@
             ]
           }
         },
-        "description": "Pagination information for list responses",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Pagination information for list responses"
       },
       "incidents.v1.UserDetails": {
         "title": "User details",
@@ -4547,10 +4316,7 @@
             ]
           }
         },
-        "description": "User details.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "User details."
       },
       "v1.FilterOperator": {
         "enum": [
@@ -4594,9 +4360,6 @@
           "incidentField": {
             "$ref": "#/components/schemas/IncidentFields"
           }
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "v1.OrderByDirection": {
@@ -4629,10 +4392,7 @@
             "format": "date-time"
           }
         },
-        "description": "Represents a time range with start and end timestamps",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a time range with start and end timestamps"
       },
       "v3.FilterOperator": {
         "enum": [

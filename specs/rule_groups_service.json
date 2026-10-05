@@ -663,10 +663,7 @@
             "description": "Rule."
           }
         },
-        "description": "Allow parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Allow parameters."
       },
       "ApplicationNameConstraint": {
         "type": "object",
@@ -677,10 +674,7 @@
             "description": "The value."
           }
         },
-        "description": "Application name constraint.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Application name constraint."
       },
       "BlockParameters": {
         "type": "object",
@@ -695,18 +689,12 @@
             "description": "Rule."
           }
         },
-        "description": "Block parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Block parameters."
       },
       "BulkDeleteRuleGroupResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after deleting all parsing rule groups.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after deleting all parsing rule groups."
       },
       "Counts": {
         "type": "object",
@@ -727,10 +715,7 @@
             "format": "int32"
           }
         },
-        "description": "Counts.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Counts."
       },
       "CreateRuleGroupRequest.CreateRuleSubgroup": {
         "type": "object",
@@ -795,18 +780,12 @@
             "$ref": "#/components/schemas/RuleGroup"
           }
         },
-        "description": "Response returned after successfully creating a parsing rule group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully creating a parsing rule group."
       },
       "DeleteRuleGroupResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting a parsing rule group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a parsing rule group."
       },
       "DestinationField": {
         "enum": [
@@ -849,10 +828,7 @@
             "description": "Rule."
           }
         },
-        "description": "Extract parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Extract parameters."
       },
       "ExtractTimestampParameters": {
         "type": "object",
@@ -866,10 +842,7 @@
             "$ref": "#/components/schemas/FormatStandard"
           }
         },
-        "description": "Extract timestamp parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Extract timestamp parameters."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -911,10 +884,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -941,10 +911,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "FormatStandard": {
         "enum": [
@@ -974,10 +941,7 @@
             "$ref": "#/components/schemas/Counts"
           }
         },
-        "description": "Response containing the company-level rule usage limits.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the company-level rule usage limits."
       },
       "GetRuleGroupModelMappingRequest.CreateRuleSubgroup": {
         "type": "object",
@@ -1043,10 +1007,7 @@
             "description": "The rule definition."
           }
         },
-        "description": "Response containing the model mapping for a parsing rule group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the model mapping for a parsing rule group."
       },
       "GetRuleGroupResponse": {
         "type": "object",
@@ -1055,10 +1016,7 @@
             "$ref": "#/components/schemas/RuleGroup"
           }
         },
-        "description": "Response containing the details of a parsing rule group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of a parsing rule group."
       },
       "JsonExtractParameters": {
         "type": "object",
@@ -1077,10 +1035,7 @@
             "description": "Rule."
           }
         },
-        "description": "Json extract parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Json extract parameters."
       },
       "JsonParseParameters": {
         "type": "object",
@@ -1103,10 +1058,7 @@
             "description": "The override dest."
           }
         },
-        "description": "Json parse parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Json parse parameters."
       },
       "JsonStringifyParameters": {
         "type": "object",
@@ -1121,10 +1073,7 @@
             "description": "The destination field."
           }
         },
-        "description": "Json stringify parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Json stringify parameters."
       },
       "ListRuleGroupsResponse": {
         "type": "object",
@@ -1138,10 +1087,7 @@
             "description": "The rule groups."
           }
         },
-        "description": "Response containing a list of parsing rule groups.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of parsing rule groups."
       },
       "MultipleValues": {
         "type": "object",
@@ -1173,10 +1119,7 @@
             "description": "Rule."
           }
         },
-        "description": "Parse parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Parse parameters."
       },
       "RemoveFieldsParameters": {
         "type": "object",
@@ -1192,10 +1135,7 @@
             "description": "List of fields."
           }
         },
-        "description": "Remove fields parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Remove fields parameters."
       },
       "ReplaceParameters": {
         "type": "object",
@@ -1216,10 +1156,7 @@
             "description": "Rule."
           }
         },
-        "description": "Replace parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Replace parameters."
       },
       "RuleGroup": {
         "type": "object",
@@ -1275,10 +1212,7 @@
             "description": "The rule subgroups."
           }
         },
-        "description": "Rule group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Rule group."
       },
       "RuleMatcher": {
         "type": "object",
@@ -1502,10 +1436,7 @@
             "$ref": "#/components/schemas/ReplaceParameters"
           }
         },
-        "description": "Rule parameters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Rule parameters."
       },
       "RuleSubgroup": {
         "type": "object",
@@ -1547,10 +1478,7 @@
             "description": "The value."
           }
         },
-        "description": "Severity constraint.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Severity constraint."
       },
       "SubsystemNameConstraint": {
         "type": "object",
@@ -1561,10 +1489,7 @@
             "description": "The value."
           }
         },
-        "description": "Subsystem name constraint.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Subsystem name constraint."
       },
       "UpdateRuleGroupResponse": {
         "type": "object",
@@ -1573,10 +1498,7 @@
             "$ref": "#/components/schemas/RuleGroup"
           }
         },
-        "description": "Response returned after successfully updating a parsing rule group.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully updating a parsing rule group."
       },
       "Value": {
         "enum": [
@@ -1645,10 +1567,7 @@
             "format": "int64"
           }
         },
-        "description": "Team id.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Team id."
       },
       "v3.FilterOperator": {
         "enum": [

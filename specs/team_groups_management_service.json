@@ -740,9 +740,6 @@
         "description": "Defines the access duration for a user. Can be either permanent (indefinite) or temporary (expires at a specific time).",
         "discriminator": {
           "propertyName": "accessType"
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "AllowedLoginMode": {
@@ -761,10 +758,7 @@
             "description": "The clear."
           }
         },
-        "description": "Clear role.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Clear role."
       },
       "ClearScope": {
         "type": "object",
@@ -774,10 +768,7 @@
             "description": "The clear."
           }
         },
-        "description": "Clear scope.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Clear scope."
       },
       "CreateTeamGroupResponse": {
         "title": "CreateTeamGroupResponse",
@@ -870,10 +861,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -900,10 +888,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetGroupUsersResponse": {
         "title": "GetGroupUsersResponse",
@@ -1036,10 +1021,7 @@
         "title": "PermanentAccess",
         "type": "object",
         "additionalProperties": false,
-        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "User with permanent access. The user's access does not expire and remains active until manually revoked or deactivated."
       },
       "Role": {
         "title": "Role",
@@ -1062,10 +1044,7 @@
             "format": "int64"
           }
         },
-        "description": "A role that can be assigned to a group. Each role has a collection of permissions associated with it.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A role that can be assigned to a group. Each role has a collection of permissions associated with it."
       },
       "RoleUpdate": {
         "title": "RoleUpdate",
@@ -1160,9 +1139,6 @@
         "description": "Clear role.",
         "discriminator": {
           "propertyName": "actionType"
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "ScopeUpdate": {
@@ -1238,9 +1214,6 @@
         "description": "Set scope id.",
         "discriminator": {
           "propertyName": "actionType"
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "SetRoleByName": {
@@ -1257,10 +1230,7 @@
             "description": "Name of the role to assign to this group, as an alternative to `setRoleId`. Resolved against this team's custom roles and the global built-in roles. Matching is case-insensitive. The response reports the resolved role's id and canonical name."
           }
         },
-        "description": "Set role by name.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Set role by name."
       },
       "SetRoleId": {
         "type": "object",
@@ -1272,10 +1242,7 @@
             "format": "int64"
           }
         },
-        "description": "Set role id.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Set role id."
       },
       "SetScopeId": {
         "type": "object",
@@ -1286,10 +1253,7 @@
             "description": "The value."
           }
         },
-        "description": "Set scope id.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Set scope id."
       },
       "TeamGroup": {
         "title": "TeamGroup",
@@ -1379,10 +1343,7 @@
             "description": "IDs of the users that are members of this group."
           }
         },
-        "description": "A Team Group entity.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A Team Group entity."
       },
       "TemporaryAccess": {
         "title": "TemporaryAccess",
@@ -1398,10 +1359,7 @@
             ]
           }
         },
-        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "User with temporary access. The user's access will automatically expire at the specified timestamp."
       },
       "UpdateTeamGroupResponse": {
         "title": "UpdateTeamGroupResponse",
@@ -1431,10 +1389,7 @@
             "description": "The user ids."
           }
         },
-        "description": "User id list.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "User id list."
       },
       "UserStatus": {
         "enum": [
@@ -1528,9 +1483,6 @@
         "description": "User id list.",
         "discriminator": {
           "propertyName": "operationType"
-        },
-        "externalDocs": {
-          "url": ""
         }
       },
       "events.v3.FilterMatcher": {
@@ -1607,10 +1559,7 @@
             "description": "Unique username"
           }
         },
-        "description": "A user is an entity that is always part of a team and has an account associated with it",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A user is an entity that is always part of a team and has an account associated with it"
       },
       "v2.Scope": {
         "title": "Scope",

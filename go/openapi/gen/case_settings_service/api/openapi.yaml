@@ -575,10 +575,7 @@
         "title": "All filter values selected",
         "type": "object",
         "additionalProperties": false,
-        "description": "Represents selection of all items in the filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents selection of all items in the filter"
       },
       "AutoCloseConfig": {
         "title": "Auto Close config",
@@ -598,10 +595,7 @@
             ]
           }
         },
-        "description": "Configuration for automatically closing cases after a certain period past resolution.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for automatically closing cases after a certain period past resolution."
       },
       "AutoResolveConfig": {
         "title": "Auto resolve config",
@@ -620,10 +614,7 @@
             ]
           }
         },
-        "description": "Configuration for automatically resolving cases after a certain period of inactivity.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for automatically resolving cases after a certain period of inactivity."
       },
       "CaseKPIs": {
         "title": "KPI settings",
@@ -638,10 +629,7 @@
             "description": "List of KPI thresholds for different case priorities."
           }
         },
-        "description": "Case lifecycle KPI thresholds grouped first by KPI type and then by case priority.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Case lifecycle KPI thresholds grouped first by KPI type and then by case priority."
       },
       "CaseLifecycle": {
         "title": "Case lifecycle settings",
@@ -699,10 +687,7 @@
             ]
           }
         },
-        "description": "Team-level configuration options for the lifecycle of case, such as suppression and snooze periods.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Team-level configuration options for the lifecycle of case, such as suppression and snooze periods."
       },
       "CasePriority": {
         "enum": [
@@ -775,10 +760,7 @@
             "format": "date-time"
           }
         },
-        "description": "Team-level configuration entity for case management.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Team-level configuration entity for case management."
       },
       "CreateCaseSettingsResponse": {
         "title": "Create case settings response",
@@ -796,19 +778,13 @@
             "description": "The created case settings team configuration"
           }
         },
-        "description": "Response containing the newly created case settings team configuration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the newly created case settings team configuration."
       },
       "DeleteCaseSettingsResponse": {
         "title": "Delete case settings response",
         "type": "object",
         "additionalProperties": false,
-        "description": "Empty response; success indicated by HTTP status",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Empty response; success indicated by HTTP status"
       },
       "EntityLabelFilter": {
         "title": "All or EntityLabel list",
@@ -854,10 +830,7 @@
             "$ref": "#/components/schemas/EntityLabelFilter.Values"
           }
         },
-        "description": "Select all items from a specific list of EntityLabels (Key/Values).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Select all items from a specific list of EntityLabels (Key/Values)."
       },
       "EntityLabelFilter.Values": {
         "type": "object",
@@ -871,10 +844,7 @@
             "description": "List of EntityLabels (Key/Value) to filter to. Passing empty list here means no alerts will be processed."
           }
         },
-        "description": "An explicit list of entity label key-value pairs to include in the filter.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "An explicit list of entity label key-value pairs to include in the filter."
       },
       "Error": {
         "type": "object",
@@ -936,10 +906,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -966,10 +933,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetActiveCaseSettingsResponse": {
         "title": "Get active case settings response",
@@ -987,10 +951,7 @@
             "description": "The active case settings"
           }
         },
-        "description": "Response containing the case settings team configuration currently active for the caller.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the case settings team configuration currently active for the caller."
       },
       "GetCaseSettingsResponse": {
         "title": "Get case settings response",
@@ -1008,10 +969,7 @@
             "description": "The requested case settings team configuration"
           }
         },
-        "description": "Response containing the requested case settings team configuration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested case settings team configuration."
       },
       "GetSystemDefaultCaseSettingsResponse": {
         "title": "Get default case settings response",
@@ -1037,10 +995,7 @@
             "description": "System-wide default settings for case settings team configurations"
           }
         },
-        "description": "Response containing platform-wide default case settings team configuration values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing platform-wide default case settings team configuration values."
       },
       "GlobalIndicatorSettings": {
         "title": "Global indicator settings",
@@ -1060,10 +1015,7 @@
             "description": "Whitelist conditions for the alerts to be processed. Empty list means all alerts are processed. Filtering_condition evaluations will be OR'ed together"
           }
         },
-        "description": "Team-level indicator configuration options for case management, including case lifecycle and event filtering conditions.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Team-level indicator configuration options for case management, including case lifecycle and event filtering conditions."
       },
       "IndicatorFilter": {
         "title": "Indicator filter",
@@ -1090,10 +1042,7 @@
             "description": "Selected priorities for filtering"
           }
         },
-        "description": "Object for filtering signals to be processed by the cases pipeline. The filters will be AND'ed together.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Object for filtering signals to be processed by the cases pipeline. The filters will be AND'ed together."
       },
       "IndicatorPriority": {
         "title": "Indicator priority",
@@ -1152,10 +1101,7 @@
             "$ref": "#/components/schemas/IndicatorPriorityFilter.Values"
           }
         },
-        "description": "Select all priorities or a specific list of IndicatorPriority values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Select all priorities or a specific list of IndicatorPriority values."
       },
       "IndicatorPriorityFilter.Values": {
         "type": "object",
@@ -1169,10 +1115,7 @@
             "description": "List of IndicatorPriorities to filter to. Passing empty list here means no alerts will be processed."
           }
         },
-        "description": "Entity label filter.values.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Entity label filter.values."
       },
       "KPISettings": {
         "title": "KPI threshold entry",
@@ -1216,10 +1159,7 @@
             ]
           }
         },
-        "description": "Single KPI breach threshold for a specific case priority.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Single KPI breach threshold for a specific case priority."
       },
       "KPIType": {
         "enum": [
@@ -1263,10 +1203,7 @@
             "description": "The updated case settings team configuration"
           }
         },
-        "description": "Response containing the updated case settings team configuration.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the updated case settings team configuration."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -1304,10 +1241,7 @@
             ]
           }
         },
-        "description": "Represents a simple key-value pair, often used for labels or groupings in cases.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Represents a simple key-value pair, often used for labels or groupings in cases."
       },
       "v3.FilterOperator": {
         "enum": [

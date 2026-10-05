@@ -1370,10 +1370,7 @@
             "description": "Unique identifier."
           }
         },
-        "description": "Archive retention.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Archive retention."
       },
       "AtomicOverwriteLogPoliciesResponse": {
         "title": "Atomic Overwrite Log Policies Response",
@@ -1606,10 +1603,7 @@
         "title": "Day",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker selecting a one-day forecast window.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker selecting a one-day forecast window."
       },
       "DeletePolicyResponse": {
         "title": "Delete Policy Response",
@@ -1695,10 +1689,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -1725,18 +1716,12 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "First": {
         "type": "object",
         "additionalProperties": false,
-        "description": "First.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "First."
       },
       "ForecastPolicyUsageResponse": {
         "title": "Forecast Policy Usage Response",
@@ -1819,18 +1804,12 @@
             "$ref": "#/components/schemas/SpansPolicySettings"
           }
         },
-        "description": "This data structure is returned when getting policy priority settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure is returned when getting policy priority settings."
       },
       "Last": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Last.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Last."
       },
       "LogMetaFieldsValues": {
         "title": "Log Meta Fields Values",
@@ -1917,10 +1896,7 @@
             "$ref": "#/components/schemas/quota.v1.Priority"
           }
         },
-        "description": "This data structure is used to define the default priority for logs policies.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure is used to define the default priority for logs policies."
       },
       "MultipleValues": {
         "type": "object",
@@ -1981,10 +1957,7 @@
             "$ref": "#/components/schemas/Last"
           }
         },
-        "description": "Placement.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Placement."
       },
       "Policy": {
         "title": "Policy",
@@ -2225,10 +2198,7 @@
             "$ref": "#/components/schemas/QuotaBased"
           }
         },
-        "description": "Priority override.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Priority override."
       },
       "PriorityOverrideStatus": {
         "type": "object",
@@ -2237,10 +2207,7 @@
             "$ref": "#/components/schemas/QuotaBasedStatus"
           }
         },
-        "description": "Priority override status.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Priority override status."
       },
       "QuotaBased": {
         "type": "object",
@@ -2263,10 +2230,7 @@
             ]
           }
         },
-        "description": "Quota based.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Quota based."
       },
       "QuotaBasedStatus": {
         "type": "object",
@@ -2285,10 +2249,7 @@
             "format": "double"
           }
         },
-        "description": "Quota based status.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Quota based status."
       },
       "ReorderPoliciesResponse": {
         "title": "Reorder Policies Response",
@@ -2324,10 +2285,7 @@
             "$ref": "#/components/schemas/SpansPolicySettings"
           }
         },
-        "description": "This data structure is returned when replacing policy settings. It contains the complete resource including server-generated fields.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure is returned when replacing policy settings. It contains the complete resource including server-generated fields."
       },
       "RuleTypeId": {
         "enum": [
@@ -2367,10 +2325,7 @@
             "description": "The tag rules."
           }
         },
-        "description": "Span rules.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Span rules."
       },
       "SpansPolicySettings": {
         "title": "Spans Source Policy",
@@ -2380,10 +2335,7 @@
             "$ref": "#/components/schemas/quota.v1.Priority"
           }
         },
-        "description": "This data structure is used to define the default priority for spans policies.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure is used to define the default priority for spans policies."
       },
       "TagRule": {
         "title": "Tag Rule",
@@ -2506,10 +2458,7 @@
             ]
           }
         },
-        "description": "Bytes matched within a single time bucket of the forecast window.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Bytes matched within a single time bucket of the forecast window."
       },
       "UsageTier": {
         "type": "object",
@@ -2540,10 +2489,7 @@
         "title": "Week",
         "type": "object",
         "additionalProperties": false,
-        "description": "Marker selecting a one-week forecast window.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Marker selecting a one-week forecast window."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -2577,10 +2523,7 @@
             "$ref": "#/components/schemas/RuleTypeId"
           }
         },
-        "description": "Rule.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Rule."
       },
       "quota.v1.Severity": {
         "enum": [

@@ -125,10 +125,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -155,10 +152,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "MultipleValues": {
         "type": "object",
@@ -227,10 +221,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "The team, and where available the user, that the presented credentials authenticate as.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "The team, and where available the user, that the presented credentials authenticate as."
       },
       "events.v3.FilterMatcher": {
         "enum": [

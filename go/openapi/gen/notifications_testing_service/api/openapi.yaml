@@ -561,10 +561,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -591,10 +588,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "MatchEntityTypeAndSubTypeCondition": {
         "type": "object",
@@ -607,18 +601,12 @@
             "description": "The entity sub type."
           }
         },
-        "description": "Match entity type and sub type condition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Match entity type and sub type condition."
       },
       "MatchEntityTypeCondition": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Match entity type condition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Match entity type condition."
       },
       "MessageConfig": {
         "type": "object",
@@ -633,10 +621,7 @@
             "description": "List of fields."
           }
         },
-        "description": "Message config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Message config."
       },
       "MultipleValues": {
         "type": "object",
@@ -680,10 +665,7 @@
             "$ref": "#/components/schemas/TestResult"
           }
         },
-        "description": "Response containing the results of a connector configuration test.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of a connector configuration test."
       },
       "TestDestinationResponse": {
         "type": "object",
@@ -692,10 +674,7 @@
             "$ref": "#/components/schemas/TestResult"
           }
         },
-        "description": "Response containing the results of a notification destination test.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of a notification destination test."
       },
       "TestExistingConnectorResponse": {
         "type": "object",
@@ -704,10 +683,7 @@
             "$ref": "#/components/schemas/TestResult"
           }
         },
-        "description": "Response containing the results of testing an existing connector.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of testing an existing connector."
       },
       "TestExistingPresetResponse": {
         "type": "object",
@@ -716,10 +692,7 @@
             "$ref": "#/components/schemas/TestResult"
           }
         },
-        "description": "Response containing the results of testing an existing preset.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of testing an existing preset."
       },
       "TestPresetConfigResponse": {
         "type": "object",
@@ -728,10 +701,7 @@
             "$ref": "#/components/schemas/TestResult"
           }
         },
-        "description": "Response containing the results of a notification preset configuration test.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of a notification preset configuration test."
       },
       "TestResult": {
         "type": "object",
@@ -776,10 +746,7 @@
             "$ref": "#/components/schemas/TestResult.Success"
           }
         },
-        "description": "Result of a notification test, either a success or failure.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Result of a notification test, either a success or failure."
       },
       "TestResult.Failure": {
         "type": "object",
@@ -800,10 +767,7 @@
             "x-coralogix-presence": true
           }
         },
-        "description": "Failure.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Failure."
       },
       "TestResult.Success": {
         "type": "object",
@@ -817,10 +781,7 @@
             "description": "Metadata."
           }
         },
-        "description": "Indicates the notification test succeeded.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Indicates the notification test succeeded."
       },
       "TestRoutingConditionValidResponse": {
         "title": "Test Routing Condition Valid Response",
@@ -886,10 +847,7 @@
             ]
           }
         },
-        "description": "Indicates the routing condition is invalid, with a human-readable error message.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Indicates the routing condition is invalid, with a human-readable error message."
       },
       "TestRoutingConditionValidResponse.Success": {
         "type": "object",
@@ -902,10 +860,7 @@
             ]
           }
         },
-        "description": "Indicates the routing condition is valid, with the evaluated result.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Indicates the routing condition is valid, with the evaluated result."
       },
       "TestTemplateRenderResponse": {
         "type": "object",
@@ -914,10 +869,7 @@
             "$ref": "#/components/schemas/TestTemplateRenderResult"
           }
         },
-        "description": "Response containing the results of a notification template render test.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the results of a notification template render test."
       },
       "TestTemplateRenderResult": {
         "type": "object",
@@ -962,10 +914,7 @@
             "$ref": "#/components/schemas/TestTemplateRenderResult.Success"
           }
         },
-        "description": "Result of a template render test, either a success with rendered output or a failure with reason.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Result of a template render test, either a success with rendered output or a failure with reason."
       },
       "TestTemplateRenderResult.Failure": {
         "type": "object",
@@ -984,10 +933,7 @@
             "$ref": "#/components/schemas/FailureReason"
           }
         },
-        "description": "Indicates the template render test failed, with a message and failure reason.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Indicates the template render test failed, with a message and failure reason."
       },
       "TestTemplateRenderResult.Success": {
         "type": "object",
@@ -1003,10 +949,7 @@
             ]
           }
         },
-        "description": "Success.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Success."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -1058,10 +1001,7 @@
             "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
           }
         },
-        "description": "Field condition.condition type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Field condition.condition type."
       },
       "notification_center.ConnectorConfigField": {
         "type": "object",

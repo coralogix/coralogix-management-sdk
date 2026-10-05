@@ -445,10 +445,7 @@
             ]
           }
         },
-        "description": "Attachment config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Attachment config."
       },
       "AttachmentConfigPolicy": {
         "enum": [
@@ -524,10 +521,7 @@
       "DeleteCustomPresetResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting a custom notification preset.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a custom notification preset."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -569,10 +563,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -599,10 +590,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetDefaultPresetSummaryResponse": {
         "type": "object",
@@ -611,10 +599,7 @@
             "$ref": "#/components/schemas/PresetSummary"
           }
         },
-        "description": "Response containing a summary of the default notification preset.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a summary of the default notification preset."
       },
       "GetPresetResponse": {
         "type": "object",
@@ -623,10 +608,7 @@
             "$ref": "#/components/schemas/Preset"
           }
         },
-        "description": "Response containing the details of a notification preset.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the details of a notification preset."
       },
       "GetSystemDefaultPresetSummaryResponse": {
         "type": "object",
@@ -635,10 +617,7 @@
             "$ref": "#/components/schemas/PresetSummary"
           }
         },
-        "description": "Response containing a summary of the system default notification preset.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a summary of the system default notification preset."
       },
       "ListPresetSummariesResponse": {
         "type": "object",
@@ -653,10 +632,7 @@
             "description": "The preset summaries."
           }
         },
-        "description": "Response containing a list of notification preset summaries.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of notification preset summaries."
       },
       "MatchEntityTypeAndSubTypeCondition": {
         "type": "object",
@@ -669,18 +645,12 @@
             "description": "The entity sub type."
           }
         },
-        "description": "Match entity type and sub type condition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Match entity type and sub type condition."
       },
       "MatchEntityTypeCondition": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Match entity type condition.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Match entity type condition."
       },
       "MessageConfig": {
         "type": "object",
@@ -695,10 +665,7 @@
             "description": "List of fields."
           }
         },
-        "description": "Message config.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Message config."
       },
       "MultipleValues": {
         "type": "object",
@@ -919,18 +886,12 @@
       "SetCustomPresetAsDefaultResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after setting a custom preset as the default.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after setting a custom preset as the default."
       },
       "SetPresetAsDefaultResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after setting a preset as the default.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after setting a preset as the default."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -982,10 +943,7 @@
             "$ref": "#/components/schemas/MatchEntityTypeAndSubTypeCondition"
           }
         },
-        "description": "Field condition.condition type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Field condition.condition type."
       },
       "notification_center.ConnectorType": {
         "enum": [

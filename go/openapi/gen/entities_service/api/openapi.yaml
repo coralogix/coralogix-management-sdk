@@ -139,10 +139,7 @@
             ]
           }
         },
-        "description": "Supported attachment type with its default enabled state.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Supported attachment type with its default enabled state."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -184,10 +181,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -214,10 +208,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "ListEntitySubTypesResponse": {
         "type": "object",
@@ -234,10 +225,7 @@
             "description": "The entity sub types."
           }
         },
-        "description": "Response containing a list of notification entity sub-types.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of notification entity sub-types."
       },
       "ListEntityTypeAttachmentTypesResponse": {
         "type": "object",
@@ -252,10 +240,7 @@
             "description": "The supported attachment types."
           }
         },
-        "description": "Response containing a list of supported attachment types for the entity type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of supported attachment types for the entity type."
       },
       "ListEntityTypesResponse": {
         "type": "object",
@@ -270,10 +255,7 @@
             "description": "The supported payload types."
           }
         },
-        "description": "Response containing a list of notification entity types.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of notification entity types."
       },
       "MultipleValues": {
         "type": "object",

@@ -213,10 +213,7 @@
       "DeleteViewFolderResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting a view folder.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a view folder."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -258,10 +255,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -288,10 +282,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "ListViewFoldersResponse": {
         "type": "object",
@@ -306,10 +297,7 @@
             "description": "The folders."
           }
         },
-        "description": "Response containing a list of view folders.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of view folders."
       },
       "MultipleValues": {
         "type": "object",
@@ -355,10 +343,7 @@
             ]
           }
         },
-        "description": "View folder.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "View folder."
       },
       "events.v3.FilterMatcher": {
         "enum": [

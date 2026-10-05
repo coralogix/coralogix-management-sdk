@@ -317,10 +317,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -347,10 +344,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetRetentionsEnabledResponse": {
         "title": "Get Retentions Enabled Response",
@@ -379,10 +373,7 @@
             "description": "The retentions."
           }
         },
-        "description": "Response containing the current data retention settings.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the current data retention settings."
       },
       "MultipleValues": {
         "type": "object",

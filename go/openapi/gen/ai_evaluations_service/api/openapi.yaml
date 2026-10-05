@@ -1100,10 +1100,7 @@
             "format": "date-time"
           }
         },
-        "description": "A configured AI evaluation that runs against an AI application's spans.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A configured AI evaluation that runs against an AI application's spans."
       },
       "AllowedTopicsConfig": {
         "type": "object",
@@ -1122,10 +1119,7 @@
             "description": "Topics considered allowed."
           }
         },
-        "description": "Configuration for the AllowedTopics evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the AllowedTopics evaluation."
       },
       "CompetitionConfig": {
         "type": "object",
@@ -1144,10 +1138,7 @@
             "description": "Competitor names to watch for."
           }
         },
-        "description": "Configuration for the Competition evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the Competition evaluation."
       },
       "CountAiAppsPerEvalTypeResponse": {
         "type": "object",
@@ -1162,10 +1153,7 @@
             "description": "Map of evaluation-type name to count of AI applications using it."
           }
         },
-        "description": "Response containing counts of AI applications per evaluation type.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing counts of AI applications per evaluation type."
       },
       "CreateAiEvaluationResponse": {
         "type": "object",
@@ -1179,10 +1167,7 @@
             "description": "The newly created AI evaluation."
           }
         },
-        "description": "Response returned after creating an AI evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after creating an AI evaluation."
       },
       "CreateCustomEvaluationResponse": {
         "type": "object",
@@ -1196,10 +1181,7 @@
             "description": "The newly created custom evaluation."
           }
         },
-        "description": "Response returned after creating a custom evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after creating a custom evaluation."
       },
       "CustomEvaluation": {
         "type": "object",
@@ -1247,10 +1229,7 @@
             "description": "Display name of the custom evaluation."
           }
         },
-        "description": "A custom evaluation defined in the catalog.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A custom evaluation defined in the catalog."
       },
       "CustomEvaluationConfig": {
         "type": "object",
@@ -1297,10 +1276,7 @@
             "description": "Description of what counts as violating the policy."
           }
         },
-        "description": "Custom evaluation policy details (instructions + examples for the LLM evaluator).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom evaluation policy details (instructions + examples for the LLM evaluator)."
       },
       "CustomEvaluationExample": {
         "type": "object",
@@ -1320,10 +1296,7 @@
             "description": "Expected score for this example."
           }
         },
-        "description": "A single labeled example for a custom evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "A single labeled example for a custom evaluation."
       },
       "DeleteAiEvaluationResponse": {
         "type": "object",
@@ -1336,10 +1309,7 @@
             "description": "Unique identifier of the deleted AI evaluation."
           }
         },
-        "description": "Response returned after deleting an AI evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after deleting an AI evaluation."
       },
       "DeleteCustomEvaluationResponse": {
         "type": "object",
@@ -1352,10 +1322,7 @@
             "description": "Unique identifier of the deleted custom evaluation."
           }
         },
-        "description": "Response returned after deleting a custom evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after deleting a custom evaluation."
       },
       "EvaluationConfig": {
         "type": "object",
@@ -1655,10 +1622,7 @@
             "$ref": "#/components/schemas/ToxicityConfig"
           }
         },
-        "description": "Type-specific configuration for an evaluation. Exactly one variant is set.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Type-specific configuration for an evaluation. Exactly one variant is set."
       },
       "EvaluationTarget": {
         "enum": [
@@ -1733,10 +1697,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -1763,10 +1724,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetAiEvaluationResponse": {
         "type": "object",
@@ -1780,10 +1738,7 @@
             "description": "The requested AI evaluation."
           }
         },
-        "description": "Response containing the requested AI evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the requested AI evaluation."
       },
       "GetCustomEvaluationsResponse": {
         "type": "object",
@@ -1798,58 +1753,37 @@
             "description": "The custom evaluations in the catalog."
           }
         },
-        "description": "Response containing the custom evaluations in the catalog.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing the custom evaluations in the catalog."
       },
       "HallucinationCompletenessConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the HallucinationCompleteness evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the HallucinationCompleteness evaluation (no fields)."
       },
       "HallucinationContextAdherenceConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the HallucinationContextAdherence evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the HallucinationContextAdherence evaluation (no fields)."
       },
       "HallucinationContextRelevanceConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the HallucinationContextRelevance evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the HallucinationContextRelevance evaluation (no fields)."
       },
       "HallucinationCorrectnessConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the HallucinationCorrectness evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the HallucinationCorrectness evaluation (no fields)."
       },
       "HallucinationTaskAdherenceConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the HallucinationTaskAdherence evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the HallucinationTaskAdherence evaluation (no fields)."
       },
       "LanguageMismatchConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the LanguageMismatch evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the LanguageMismatch evaluation (no fields)."
       },
       "LinkCustomEvaluationResponse": {
         "type": "object",
@@ -1869,10 +1803,7 @@
             "description": "Unique identifier of the custom evaluation."
           }
         },
-        "description": "Response returned after linking.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after linking."
       },
       "ListAiEvaluationsResponse": {
         "type": "object",
@@ -1887,10 +1818,7 @@
             "description": "The list of AI evaluations on this page."
           }
         },
-        "description": "Response containing a page of AI evaluations.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a page of AI evaluations."
       },
       "ListCustomEvaluationsForApplicationResponse": {
         "type": "object",
@@ -1905,10 +1833,7 @@
             "description": "Custom evaluations linked to the application."
           }
         },
-        "description": "Response containing custom evaluations linked to the application.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing custom evaluations linked to the application."
       },
       "MultipleValues": {
         "type": "object",
@@ -1949,10 +1874,7 @@
             "description": "PII categories to detect."
           }
         },
-        "description": "Configuration for the PII evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the PII evaluation."
       },
       "PromptInjectionConfig": {
         "type": "object",
@@ -1965,10 +1887,7 @@
             "description": "Additional context passed to the LLM evaluator."
           }
         },
-        "description": "Configuration for the PromptInjection evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the PromptInjection evaluation."
       },
       "RestrictedTopicsConfig": {
         "type": "object",
@@ -1987,18 +1906,12 @@
             "description": "Topics that should not appear."
           }
         },
-        "description": "Configuration for the RestrictedTopics evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the RestrictedTopics evaluation."
       },
       "SexismConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the Sexism evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the Sexism evaluation (no fields)."
       },
       "SqlAllowedTablesConfig": {
         "type": "object",
@@ -2017,18 +1930,12 @@
             "description": "SQL table names that are allowed."
           }
         },
-        "description": "Configuration for the SqlAllowedTables evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the SqlAllowedTables evaluation."
       },
       "SqlHallucinationConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the SqlHallucination evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the SqlHallucination evaluation (no fields)."
       },
       "SqlLoadConfig": {
         "type": "object",
@@ -2052,18 +1959,12 @@
             "description": "Maximum JOINs allowed in a query."
           }
         },
-        "description": "Configuration for the SqlLoad evaluation: caps on query complexity.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the SqlLoad evaluation: caps on query complexity."
       },
       "SqlReadOnlyConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the SqlReadOnly evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the SqlReadOnly evaluation (no fields)."
       },
       "SqlRestrictedTablesConfig": {
         "type": "object",
@@ -2082,18 +1983,12 @@
             "description": "SQL table names that are not allowed."
           }
         },
-        "description": "Configuration for the SqlRestrictedTables evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the SqlRestrictedTables evaluation."
       },
       "ToxicityConfig": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Configuration for the Toxicity evaluation (no fields).",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Configuration for the Toxicity evaluation (no fields)."
       },
       "UnlinkCustomEvaluationFromAppResponse": {
         "type": "object",
@@ -2113,10 +2008,7 @@
             "description": "Unique identifier of the custom evaluation."
           }
         },
-        "description": "Response returned after unlinking.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after unlinking."
       },
       "UpdateAiEvaluationResponse": {
         "type": "object",
@@ -2130,10 +2022,7 @@
             "description": "The updated AI evaluation."
           }
         },
-        "description": "Response returned after updating an AI evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after updating an AI evaluation."
       },
       "UpdateCustomEvaluationResponse": {
         "type": "object",
@@ -2147,10 +2036,7 @@
             "description": "The updated custom evaluation."
           }
         },
-        "description": "Response returned after updating a custom evaluation.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after updating a custom evaluation."
       },
       "events.v3.FilterMatcher": {
         "enum": [

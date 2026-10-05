@@ -548,10 +548,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -578,10 +575,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "GetTeamMembersApiKeysResponse": {
         "title": "Get Team Members API Keys Response",
@@ -683,10 +677,7 @@
             "description": "User identifier of the API key owner."
           }
         },
-        "description": "Owner.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Owner."
       },
       "PermissionsPreset": {
         "title": "Permissions Preset",

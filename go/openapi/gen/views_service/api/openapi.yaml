@@ -459,18 +459,12 @@
             ]
           }
         },
-        "description": "Custom time selection.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Custom time selection."
       },
       "DeleteViewResponse": {
         "type": "object",
         "additionalProperties": false,
-        "description": "Response returned after successfully deleting a view.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response returned after successfully deleting a view."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -512,10 +506,7 @@
             ]
           }
         },
-        "description": "This data structure represents a filter path and values",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter path and values"
       },
       "Filters": {
         "title": "Filters",
@@ -542,10 +533,7 @@
             }
           }
         },
-        "description": "This data structure represents a filter",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "This data structure represents a filter"
       },
       "ListViewsResponse": {
         "type": "object",
@@ -560,10 +548,7 @@
             "description": "The views."
           }
         },
-        "description": "Response containing a list of views.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response containing a list of views."
       },
       "MultipleValues": {
         "type": "object",
@@ -609,10 +594,7 @@
             ]
           }
         },
-        "description": "Quick time selection.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Quick time selection."
       },
       "SearchQuery": {
         "title": "SearchQuery",
@@ -632,10 +614,7 @@
             "$ref": "#/components/schemas/SyntaxType"
           }
         },
-        "description": "Search query.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Search query."
       },
       "SelectedFilters": {
         "type": "object",
@@ -650,10 +629,7 @@
             "description": "List of filters."
           }
         },
-        "description": "Selected filters.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Selected filters."
       },
       "SyntaxType": {
         "enum": [
@@ -707,10 +683,7 @@
             "$ref": "#/components/schemas/QuickTimeSelection"
           }
         },
-        "description": "Time selection.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Time selection."
       },
       "View": {
         "title": "View",
@@ -768,10 +741,7 @@
             "$ref": "#/components/schemas/ViewType"
           }
         },
-        "description": "Response for views.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "Response for views."
       },
       "ViewType": {
         "enum": [
@@ -825,10 +795,7 @@
             "description": "Filter selected values"
           }
         },
-        "description": "View folder.",
-        "externalDocs": {
-          "url": ""
-        }
+        "description": "View folder."
       }
     }
   }
