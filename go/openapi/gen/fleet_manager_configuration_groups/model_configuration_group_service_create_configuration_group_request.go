@@ -13,6 +13,7 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &ConfigurationGroupServiceCreateConfigurationGroupRequest
 // ConfigurationGroupServiceCreateConfigurationGroupRequest Request to create a fleet-manager configuration group.
 type ConfigurationGroupServiceCreateConfigurationGroupRequest struct {
 	// Configuration group to create.
-	Group *ConfigurationGroupCreate `json:"group,omitempty"`
+	Group ConfigurationGroupCreate `json:"group"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _ConfigurationGroupServiceCreateConfigurationGroupRequest ConfigurationGrou
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroupServiceCreateConfigurationGroupRequest() *ConfigurationGroupServiceCreateConfigurationGroupRequest {
+func NewConfigurationGroupServiceCreateConfigurationGroupRequest(group ConfigurationGroupCreate) *ConfigurationGroupServiceCreateConfigurationGroupRequest {
 	this := ConfigurationGroupServiceCreateConfigurationGroupRequest{}
+	this.Group = group
 	return &this
 }
 
@@ -47,36 +49,28 @@ func NewConfigurationGroupServiceCreateConfigurationGroupRequestWithDefaults() *
 	return &this
 }
 
-// GetGroup returns the Group field value if set, zero value otherwise.
+// GetGroup returns the Group field value
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetGroup() ConfigurationGroupCreate {
-	if o == nil || IsNil(o.Group) {
+	if o == nil {
 		var ret ConfigurationGroupCreate
 		return ret
 	}
-	return *o.Group
+
+	return o.Group
 }
 
-// GetGroupOk returns a tuple with the Group field value if set, nil otherwise
+// GetGroupOk returns a tuple with the Group field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetGroupOk() (*ConfigurationGroupCreate, bool) {
-	if o == nil || IsNil(o.Group) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Group, true
+	return &o.Group, true
 }
 
-// HasGroup returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) HasGroup() bool {
-	if o != nil && !IsNil(o.Group) {
-		return true
-	}
-
-	return false
-}
-
-// SetGroup gets a reference to the given ConfigurationGroupCreate and assigns it to the Group field.
+// SetGroup sets field value
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetGroup(v ConfigurationGroupCreate) {
-	o.Group = &v
+	o.Group = v
 }
 
 func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) MarshalJSON() ([]byte, error) {
@@ -89,9 +83,7 @@ func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) MarshalJSON() 
 
 func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Group) {
-		toSerialize["group"] = o.Group
-	}
+	toSerialize["group"] = o.Group
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) ToMap() (map[s
 }
 
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"group",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varConfigurationGroupServiceCreateConfigurationGroupRequest := _ConfigurationGroupServiceCreateConfigurationGroupRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

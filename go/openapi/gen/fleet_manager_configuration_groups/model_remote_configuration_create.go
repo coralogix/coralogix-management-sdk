@@ -13,6 +13,7 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,7 +28,7 @@ type RemoteConfigurationCreate struct {
 	// Remote configuration name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.
-	RawConfiguration *string `json:"rawConfiguration,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	RawConfiguration string `json:"rawConfiguration" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -38,8 +39,9 @@ type _RemoteConfigurationCreate RemoteConfigurationCreate
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRemoteConfigurationCreate() *RemoteConfigurationCreate {
+func NewRemoteConfigurationCreate(rawConfiguration string) *RemoteConfigurationCreate {
 	this := RemoteConfigurationCreate{}
+	this.RawConfiguration = rawConfiguration
 	return &this
 }
 
@@ -115,36 +117,28 @@ func (o *RemoteConfigurationCreate) SetName(v string) {
 	o.Name = &v
 }
 
-// GetRawConfiguration returns the RawConfiguration field value if set, zero value otherwise.
+// GetRawConfiguration returns the RawConfiguration field value
 func (o *RemoteConfigurationCreate) GetRawConfiguration() string {
-	if o == nil || IsNil(o.RawConfiguration) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RawConfiguration
+
+	return o.RawConfiguration
 }
 
-// GetRawConfigurationOk returns a tuple with the RawConfiguration field value if set, nil otherwise
+// GetRawConfigurationOk returns a tuple with the RawConfiguration field value
 // and a boolean to check if the value has been set.
 func (o *RemoteConfigurationCreate) GetRawConfigurationOk() (*string, bool) {
-	if o == nil || IsNil(o.RawConfiguration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RawConfiguration, true
+	return &o.RawConfiguration, true
 }
 
-// HasRawConfiguration returns a boolean if a field has been set.
-func (o *RemoteConfigurationCreate) HasRawConfiguration() bool {
-	if o != nil && !IsNil(o.RawConfiguration) {
-		return true
-	}
-
-	return false
-}
-
-// SetRawConfiguration gets a reference to the given string and assigns it to the RawConfiguration field.
+// SetRawConfiguration sets field value
 func (o *RemoteConfigurationCreate) SetRawConfiguration(v string) {
-	o.RawConfiguration = &v
+	o.RawConfiguration = v
 }
 
 func (o RemoteConfigurationCreate) MarshalJSON() ([]byte, error) {
@@ -163,9 +157,7 @@ func (o RemoteConfigurationCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.RawConfiguration) {
-		toSerialize["rawConfiguration"] = o.RawConfiguration
-	}
+	toSerialize["rawConfiguration"] = o.RawConfiguration
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -175,6 +167,27 @@ func (o RemoteConfigurationCreate) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RemoteConfigurationCreate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"rawConfiguration",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRemoteConfigurationCreate := _RemoteConfigurationCreate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

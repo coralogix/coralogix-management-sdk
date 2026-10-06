@@ -13,6 +13,7 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -25,7 +26,7 @@ type ConfigurationGroupCreate struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Initial configuration family to create with this group.
-	Family *ConfigurationFamilyCreate `json:"family,omitempty"`
+	Family ConfigurationFamilyCreate `json:"family"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
@@ -42,8 +43,9 @@ type _ConfigurationGroupCreate ConfigurationGroupCreate
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroupCreate() *ConfigurationGroupCreate {
+func NewConfigurationGroupCreate(family ConfigurationFamilyCreate) *ConfigurationGroupCreate {
 	this := ConfigurationGroupCreate{}
+	this.Family = family
 	return &this
 }
 
@@ -87,36 +89,28 @@ func (o *ConfigurationGroupCreate) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetFamily returns the Family field value if set, zero value otherwise.
+// GetFamily returns the Family field value
 func (o *ConfigurationGroupCreate) GetFamily() ConfigurationFamilyCreate {
-	if o == nil || IsNil(o.Family) {
+	if o == nil {
 		var ret ConfigurationFamilyCreate
 		return ret
 	}
-	return *o.Family
+
+	return o.Family
 }
 
-// GetFamilyOk returns a tuple with the Family field value if set, nil otherwise
+// GetFamilyOk returns a tuple with the Family field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationGroupCreate) GetFamilyOk() (*ConfigurationFamilyCreate, bool) {
-	if o == nil || IsNil(o.Family) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Family, true
+	return &o.Family, true
 }
 
-// HasFamily returns a boolean if a field has been set.
-func (o *ConfigurationGroupCreate) HasFamily() bool {
-	if o != nil && !IsNil(o.Family) {
-		return true
-	}
-
-	return false
-}
-
-// SetFamily gets a reference to the given ConfigurationFamilyCreate and assigns it to the Family field.
+// SetFamily sets field value
 func (o *ConfigurationGroupCreate) SetFamily(v ConfigurationFamilyCreate) {
-	o.Family = &v
+	o.Family = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -228,9 +222,7 @@ func (o ConfigurationGroupCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Family) {
-		toSerialize["family"] = o.Family
-	}
+	toSerialize["family"] = o.Family
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -249,6 +241,27 @@ func (o ConfigurationGroupCreate) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ConfigurationGroupCreate) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"family",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varConfigurationGroupCreate := _ConfigurationGroupCreate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

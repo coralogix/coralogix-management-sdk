@@ -13,6 +13,7 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,7 +28,7 @@ type ConfigurationGroup struct {
 	// Configuration families in this group.
 	Families []ConfigurationFamily `json:"families,omitempty"`
 	// Configuration group UUID v7.
-	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
@@ -44,8 +45,9 @@ type _ConfigurationGroup ConfigurationGroup
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroup() *ConfigurationGroup {
+func NewConfigurationGroup(id string) *ConfigurationGroup {
 	this := ConfigurationGroup{}
+	this.Id = id
 	return &this
 }
 
@@ -121,36 +123,28 @@ func (o *ConfigurationGroup) SetFamilies(v []ConfigurationFamily) {
 	o.Families = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ConfigurationGroup) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationGroup) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ConfigurationGroup) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ConfigurationGroup) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -265,9 +259,7 @@ func (o ConfigurationGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Families) {
 		toSerialize["families"] = o.Families
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -286,6 +278,27 @@ func (o ConfigurationGroup) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ConfigurationGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varConfigurationGroup := _ConfigurationGroup{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

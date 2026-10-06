@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -32,7 +33,7 @@ type ConfigurationFamily struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Configuration family UUID v7.
-	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Time when this family was last activated.
 	LastActivatedAt *time.Time `json:"lastActivatedAt,omitempty"`
 	// Configuration template settings; present when the family has a chartName and observability features.
@@ -42,7 +43,7 @@ type ConfigurationFamily struct {
 	// Immutable inputs that produced this configuration family version.
 	Sources []ConfigurationFamilySource `json:"sources,omitempty"`
 	// Monotonic version number of this configuration family within its group.
-	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Version string `json:"version" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -53,8 +54,10 @@ type _ConfigurationFamily ConfigurationFamily
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationFamily() *ConfigurationFamily {
+func NewConfigurationFamily(id string, version string) *ConfigurationFamily {
 	this := ConfigurationFamily{}
+	this.Id = id
+	this.Version = version
 	return &this
 }
 
@@ -194,36 +197,28 @@ func (o *ConfigurationFamily) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ConfigurationFamily) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationFamily) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ConfigurationFamily) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetLastActivatedAt returns the LastActivatedAt field value if set, zero value otherwise.
@@ -354,36 +349,28 @@ func (o *ConfigurationFamily) SetSources(v []ConfigurationFamilySource) {
 	o.Sources = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value
 func (o *ConfigurationFamily) GetVersion() string {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Version
+
+	return o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationFamily) GetVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return &o.Version, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given string and assigns it to the Version field.
+// SetVersion sets field value
 func (o *ConfigurationFamily) SetVersion(v string) {
-	o.Version = &v
+	o.Version = v
 }
 
 func (o ConfigurationFamily) MarshalJSON() ([]byte, error) {
@@ -408,9 +395,7 @@ func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.LastActivatedAt) {
 		toSerialize["lastActivatedAt"] = o.LastActivatedAt
 	}
@@ -423,9 +408,7 @@ func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sources) {
 		toSerialize["sources"] = o.Sources
 	}
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
-	}
+	toSerialize["version"] = o.Version
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["raw"]; exists {
 		optionalOneOfGroup0Matches++
@@ -452,6 +435,39 @@ func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"version",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["raw"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["preset"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+	}
+
 	varConfigurationFamily := _ConfigurationFamily{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -18,11 +18,11 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the RawConfigurationFamilyReplace type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RawConfigurationFamilyReplace{}
+// checks if the RawConfigurationFamilyUpdate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RawConfigurationFamilyUpdate{}
 
-// RawConfigurationFamilyReplace Content that replaces the remote configurations, collector version, and metadata of the latest configuration family; an omitted collectorVersion or metadata is cleared.
-type RawConfigurationFamilyReplace struct {
+// RawConfigurationFamilyUpdate Content that replaces the remote configurations, collector version, and metadata of the latest configuration family; an omitted collectorVersion or metadata is cleared.
+type RawConfigurationFamilyUpdate struct {
 	// Collector semantic version this family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.
 	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Metadata stored with this configuration family.
@@ -33,28 +33,28 @@ type RawConfigurationFamilyReplace struct {
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _RawConfigurationFamilyReplace RawConfigurationFamilyReplace
+type _RawConfigurationFamilyUpdate RawConfigurationFamilyUpdate
 
-// NewRawConfigurationFamilyReplace instantiates a new RawConfigurationFamilyReplace object
+// NewRawConfigurationFamilyUpdate instantiates a new RawConfigurationFamilyUpdate object
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRawConfigurationFamilyReplace(remoteConfigurations []RemoteConfigurationReplace) *RawConfigurationFamilyReplace {
-	this := RawConfigurationFamilyReplace{}
+func NewRawConfigurationFamilyUpdate(remoteConfigurations []RemoteConfigurationReplace) *RawConfigurationFamilyUpdate {
+	this := RawConfigurationFamilyUpdate{}
 	this.RemoteConfigurations = remoteConfigurations
 	return &this
 }
 
-// NewRawConfigurationFamilyReplaceWithDefaults instantiates a new RawConfigurationFamilyReplace object
+// NewRawConfigurationFamilyUpdateWithDefaults instantiates a new RawConfigurationFamilyUpdate object
 // This constructor does not set properties that have a default: the server fills them in.
 // It doesn't guarantee that properties required by API are set
-func NewRawConfigurationFamilyReplaceWithDefaults() *RawConfigurationFamilyReplace {
-	this := RawConfigurationFamilyReplace{}
+func NewRawConfigurationFamilyUpdateWithDefaults() *RawConfigurationFamilyUpdate {
+	this := RawConfigurationFamilyUpdate{}
 	return &this
 }
 
 // GetCollectorVersion returns the CollectorVersion field value if set, zero value otherwise.
-func (o *RawConfigurationFamilyReplace) GetCollectorVersion() string {
+func (o *RawConfigurationFamilyUpdate) GetCollectorVersion() string {
 	if o == nil || IsNil(o.CollectorVersion) {
 		var ret string
 		return ret
@@ -64,7 +64,7 @@ func (o *RawConfigurationFamilyReplace) GetCollectorVersion() string {
 
 // GetCollectorVersionOk returns a tuple with the CollectorVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RawConfigurationFamilyReplace) GetCollectorVersionOk() (*string, bool) {
+func (o *RawConfigurationFamilyUpdate) GetCollectorVersionOk() (*string, bool) {
 	if o == nil || IsNil(o.CollectorVersion) {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *RawConfigurationFamilyReplace) GetCollectorVersionOk() (*string, bool) 
 }
 
 // HasCollectorVersion returns a boolean if a field has been set.
-func (o *RawConfigurationFamilyReplace) HasCollectorVersion() bool {
+func (o *RawConfigurationFamilyUpdate) HasCollectorVersion() bool {
 	if o != nil && !IsNil(o.CollectorVersion) {
 		return true
 	}
@@ -81,12 +81,12 @@ func (o *RawConfigurationFamilyReplace) HasCollectorVersion() bool {
 }
 
 // SetCollectorVersion gets a reference to the given string and assigns it to the CollectorVersion field.
-func (o *RawConfigurationFamilyReplace) SetCollectorVersion(v string) {
+func (o *RawConfigurationFamilyUpdate) SetCollectorVersion(v string) {
 	o.CollectorVersion = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *RawConfigurationFamilyReplace) GetMetadata() map[string]string {
+func (o *RawConfigurationFamilyUpdate) GetMetadata() map[string]string {
 	if o == nil || IsNil(o.Metadata) {
 		var ret map[string]string
 		return ret
@@ -96,7 +96,7 @@ func (o *RawConfigurationFamilyReplace) GetMetadata() map[string]string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RawConfigurationFamilyReplace) GetMetadataOk() (map[string]string, bool) {
+func (o *RawConfigurationFamilyUpdate) GetMetadataOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return map[string]string{}, false
 	}
@@ -104,7 +104,7 @@ func (o *RawConfigurationFamilyReplace) GetMetadataOk() (map[string]string, bool
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *RawConfigurationFamilyReplace) HasMetadata() bool {
+func (o *RawConfigurationFamilyUpdate) HasMetadata() bool {
 	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
@@ -113,12 +113,12 @@ func (o *RawConfigurationFamilyReplace) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *RawConfigurationFamilyReplace) SetMetadata(v map[string]string) {
+func (o *RawConfigurationFamilyUpdate) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
 // GetRemoteConfigurations returns the RemoteConfigurations field value
-func (o *RawConfigurationFamilyReplace) GetRemoteConfigurations() []RemoteConfigurationReplace {
+func (o *RawConfigurationFamilyUpdate) GetRemoteConfigurations() []RemoteConfigurationReplace {
 	if o == nil {
 		var ret []RemoteConfigurationReplace
 		return ret
@@ -129,7 +129,7 @@ func (o *RawConfigurationFamilyReplace) GetRemoteConfigurations() []RemoteConfig
 
 // GetRemoteConfigurationsOk returns a tuple with the RemoteConfigurations field value
 // and a boolean to check if the value has been set.
-func (o *RawConfigurationFamilyReplace) GetRemoteConfigurationsOk() ([]RemoteConfigurationReplace, bool) {
+func (o *RawConfigurationFamilyUpdate) GetRemoteConfigurationsOk() ([]RemoteConfigurationReplace, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -137,11 +137,11 @@ func (o *RawConfigurationFamilyReplace) GetRemoteConfigurationsOk() ([]RemoteCon
 }
 
 // SetRemoteConfigurations sets field value
-func (o *RawConfigurationFamilyReplace) SetRemoteConfigurations(v []RemoteConfigurationReplace) {
+func (o *RawConfigurationFamilyUpdate) SetRemoteConfigurations(v []RemoteConfigurationReplace) {
 	o.RemoteConfigurations = v
 }
 
-func (o RawConfigurationFamilyReplace) MarshalJSON() ([]byte, error) {
+func (o RawConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -149,7 +149,7 @@ func (o RawConfigurationFamilyReplace) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RawConfigurationFamilyReplace) ToMap() (map[string]interface{}, error) {
+func (o RawConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.CollectorVersion) {
 		toSerialize["collectorVersion"] = o.CollectorVersion
@@ -166,7 +166,7 @@ func (o RawConfigurationFamilyReplace) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RawConfigurationFamilyReplace) UnmarshalJSON(data []byte) (err error) {
+func (o *RawConfigurationFamilyUpdate) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -188,16 +188,16 @@ func (o *RawConfigurationFamilyReplace) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRawConfigurationFamilyReplace := _RawConfigurationFamilyReplace{}
+	varRawConfigurationFamilyUpdate := _RawConfigurationFamilyUpdate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varRawConfigurationFamilyReplace)
+	err = decoder.Decode(&varRawConfigurationFamilyUpdate)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RawConfigurationFamilyReplace(varRawConfigurationFamilyReplace)
+	*o = RawConfigurationFamilyUpdate(varRawConfigurationFamilyUpdate)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -212,38 +212,38 @@ func (o *RawConfigurationFamilyReplace) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableRawConfigurationFamilyReplace struct {
-	value *RawConfigurationFamilyReplace
+type NullableRawConfigurationFamilyUpdate struct {
+	value *RawConfigurationFamilyUpdate
 	isSet bool
 }
 
-func (v NullableRawConfigurationFamilyReplace) Get() *RawConfigurationFamilyReplace {
+func (v NullableRawConfigurationFamilyUpdate) Get() *RawConfigurationFamilyUpdate {
 	return v.value
 }
 
-func (v *NullableRawConfigurationFamilyReplace) Set(val *RawConfigurationFamilyReplace) {
+func (v *NullableRawConfigurationFamilyUpdate) Set(val *RawConfigurationFamilyUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRawConfigurationFamilyReplace) IsSet() bool {
+func (v NullableRawConfigurationFamilyUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRawConfigurationFamilyReplace) Unset() {
+func (v *NullableRawConfigurationFamilyUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRawConfigurationFamilyReplace(val *RawConfigurationFamilyReplace) *NullableRawConfigurationFamilyReplace {
-	return &NullableRawConfigurationFamilyReplace{value: val, isSet: true}
+func NewNullableRawConfigurationFamilyUpdate(val *RawConfigurationFamilyUpdate) *NullableRawConfigurationFamilyUpdate {
+	return &NullableRawConfigurationFamilyUpdate{value: val, isSet: true}
 }
 
-func (v NullableRawConfigurationFamilyReplace) MarshalJSON() ([]byte, error) {
+func (v NullableRawConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRawConfigurationFamilyReplace) UnmarshalJSON(src []byte) error {
+func (v *NullableRawConfigurationFamilyUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

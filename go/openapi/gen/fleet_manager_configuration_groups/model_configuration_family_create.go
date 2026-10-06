@@ -32,6 +32,7 @@ type ConfigurationFamilyCreate struct {
 	Raw *RawConfigurationFamilyCreate `json:"raw,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _ConfigurationFamilyCreate ConfigurationFamilyCreate
@@ -203,15 +204,20 @@ func (o ConfigurationFamilyCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Raw) {
 		toSerialize["raw"] = o.Raw
 	}
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["raw"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["preset"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [raw, preset] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [raw, preset] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["raw"]; exists {
@@ -243,14 +249,14 @@ func (o *ConfigurationFamilyCreate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["raw"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["preset"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
 		}
 
@@ -260,6 +266,7 @@ func (o *ConfigurationFamilyCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "raw")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

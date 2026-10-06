@@ -18,11 +18,11 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the PresetConfigurationFamilyReplace type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PresetConfigurationFamilyReplace{}
+// checks if the PresetConfigurationFamilyUpdate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PresetConfigurationFamilyUpdate{}
 
-// PresetConfigurationFamilyReplace Configuration template settings that replace those of the latest configuration family; omitted metadata is cleared, and a new configuration family version is created only when the settings change.
-type PresetConfigurationFamilyReplace struct {
+// PresetConfigurationFamilyUpdate Configuration template settings that replace those of the latest configuration family; omitted metadata is cleared, and a new configuration family version is created only when the settings change.
+type PresetConfigurationFamilyUpdate struct {
 	// Configuration template type: CHART_NAME_OTEL_INTEGRATION for Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or CHART_NAME_OTEL_LINUX_STANDALONE, CHART_NAME_OTEL_WINDOWS_STANDALONE, or CHART_NAME_OTEL_MACOS_STANDALONE for hosts.
 	ChartName ChartName `json:"chartName"`
 	// Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected.
@@ -37,30 +37,30 @@ type PresetConfigurationFamilyReplace struct {
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _PresetConfigurationFamilyReplace PresetConfigurationFamilyReplace
+type _PresetConfigurationFamilyUpdate PresetConfigurationFamilyUpdate
 
-// NewPresetConfigurationFamilyReplace instantiates a new PresetConfigurationFamilyReplace object
+// NewPresetConfigurationFamilyUpdate instantiates a new PresetConfigurationFamilyUpdate object
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewPresetConfigurationFamilyReplace(chartName ChartName, chartVersion string, observabilityFeatures string) *PresetConfigurationFamilyReplace {
-	this := PresetConfigurationFamilyReplace{}
+func NewPresetConfigurationFamilyUpdate(chartName ChartName, chartVersion string, observabilityFeatures string) *PresetConfigurationFamilyUpdate {
+	this := PresetConfigurationFamilyUpdate{}
 	this.ChartName = chartName
 	this.ChartVersion = chartVersion
 	this.ObservabilityFeatures = observabilityFeatures
 	return &this
 }
 
-// NewPresetConfigurationFamilyReplaceWithDefaults instantiates a new PresetConfigurationFamilyReplace object
+// NewPresetConfigurationFamilyUpdateWithDefaults instantiates a new PresetConfigurationFamilyUpdate object
 // This constructor does not set properties that have a default: the server fills them in.
 // It doesn't guarantee that properties required by API are set
-func NewPresetConfigurationFamilyReplaceWithDefaults() *PresetConfigurationFamilyReplace {
-	this := PresetConfigurationFamilyReplace{}
+func NewPresetConfigurationFamilyUpdateWithDefaults() *PresetConfigurationFamilyUpdate {
+	this := PresetConfigurationFamilyUpdate{}
 	return &this
 }
 
 // GetChartName returns the ChartName field value
-func (o *PresetConfigurationFamilyReplace) GetChartName() ChartName {
+func (o *PresetConfigurationFamilyUpdate) GetChartName() ChartName {
 	if o == nil {
 		var ret ChartName
 		return ret
@@ -71,7 +71,7 @@ func (o *PresetConfigurationFamilyReplace) GetChartName() ChartName {
 
 // GetChartNameOk returns a tuple with the ChartName field value
 // and a boolean to check if the value has been set.
-func (o *PresetConfigurationFamilyReplace) GetChartNameOk() (*ChartName, bool) {
+func (o *PresetConfigurationFamilyUpdate) GetChartNameOk() (*ChartName, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,12 +79,12 @@ func (o *PresetConfigurationFamilyReplace) GetChartNameOk() (*ChartName, bool) {
 }
 
 // SetChartName sets field value
-func (o *PresetConfigurationFamilyReplace) SetChartName(v ChartName) {
+func (o *PresetConfigurationFamilyUpdate) SetChartName(v ChartName) {
 	o.ChartName = v
 }
 
 // GetChartVersion returns the ChartVersion field value
-func (o *PresetConfigurationFamilyReplace) GetChartVersion() string {
+func (o *PresetConfigurationFamilyUpdate) GetChartVersion() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -95,7 +95,7 @@ func (o *PresetConfigurationFamilyReplace) GetChartVersion() string {
 
 // GetChartVersionOk returns a tuple with the ChartVersion field value
 // and a boolean to check if the value has been set.
-func (o *PresetConfigurationFamilyReplace) GetChartVersionOk() (*string, bool) {
+func (o *PresetConfigurationFamilyUpdate) GetChartVersionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -103,12 +103,12 @@ func (o *PresetConfigurationFamilyReplace) GetChartVersionOk() (*string, bool) {
 }
 
 // SetChartVersion sets field value
-func (o *PresetConfigurationFamilyReplace) SetChartVersion(v string) {
+func (o *PresetConfigurationFamilyUpdate) SetChartVersion(v string) {
 	o.ChartVersion = v
 }
 
 // GetIntegrationVersion returns the IntegrationVersion field value if set, zero value otherwise.
-func (o *PresetConfigurationFamilyReplace) GetIntegrationVersion() string {
+func (o *PresetConfigurationFamilyUpdate) GetIntegrationVersion() string {
 	if o == nil || IsNil(o.IntegrationVersion) {
 		var ret string
 		return ret
@@ -118,7 +118,7 @@ func (o *PresetConfigurationFamilyReplace) GetIntegrationVersion() string {
 
 // GetIntegrationVersionOk returns a tuple with the IntegrationVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PresetConfigurationFamilyReplace) GetIntegrationVersionOk() (*string, bool) {
+func (o *PresetConfigurationFamilyUpdate) GetIntegrationVersionOk() (*string, bool) {
 	if o == nil || IsNil(o.IntegrationVersion) {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *PresetConfigurationFamilyReplace) GetIntegrationVersionOk() (*string, b
 }
 
 // HasIntegrationVersion returns a boolean if a field has been set.
-func (o *PresetConfigurationFamilyReplace) HasIntegrationVersion() bool {
+func (o *PresetConfigurationFamilyUpdate) HasIntegrationVersion() bool {
 	if o != nil && !IsNil(o.IntegrationVersion) {
 		return true
 	}
@@ -135,12 +135,12 @@ func (o *PresetConfigurationFamilyReplace) HasIntegrationVersion() bool {
 }
 
 // SetIntegrationVersion gets a reference to the given string and assigns it to the IntegrationVersion field.
-func (o *PresetConfigurationFamilyReplace) SetIntegrationVersion(v string) {
+func (o *PresetConfigurationFamilyUpdate) SetIntegrationVersion(v string) {
 	o.IntegrationVersion = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *PresetConfigurationFamilyReplace) GetMetadata() map[string]string {
+func (o *PresetConfigurationFamilyUpdate) GetMetadata() map[string]string {
 	if o == nil || IsNil(o.Metadata) {
 		var ret map[string]string
 		return ret
@@ -150,7 +150,7 @@ func (o *PresetConfigurationFamilyReplace) GetMetadata() map[string]string {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PresetConfigurationFamilyReplace) GetMetadataOk() (map[string]string, bool) {
+func (o *PresetConfigurationFamilyUpdate) GetMetadataOk() (map[string]string, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return map[string]string{}, false
 	}
@@ -158,7 +158,7 @@ func (o *PresetConfigurationFamilyReplace) GetMetadataOk() (map[string]string, b
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *PresetConfigurationFamilyReplace) HasMetadata() bool {
+func (o *PresetConfigurationFamilyUpdate) HasMetadata() bool {
 	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
@@ -167,12 +167,12 @@ func (o *PresetConfigurationFamilyReplace) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *PresetConfigurationFamilyReplace) SetMetadata(v map[string]string) {
+func (o *PresetConfigurationFamilyUpdate) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
 // GetObservabilityFeatures returns the ObservabilityFeatures field value
-func (o *PresetConfigurationFamilyReplace) GetObservabilityFeatures() string {
+func (o *PresetConfigurationFamilyUpdate) GetObservabilityFeatures() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -183,7 +183,7 @@ func (o *PresetConfigurationFamilyReplace) GetObservabilityFeatures() string {
 
 // GetObservabilityFeaturesOk returns a tuple with the ObservabilityFeatures field value
 // and a boolean to check if the value has been set.
-func (o *PresetConfigurationFamilyReplace) GetObservabilityFeaturesOk() (*string, bool) {
+func (o *PresetConfigurationFamilyUpdate) GetObservabilityFeaturesOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -191,11 +191,11 @@ func (o *PresetConfigurationFamilyReplace) GetObservabilityFeaturesOk() (*string
 }
 
 // SetObservabilityFeatures sets field value
-func (o *PresetConfigurationFamilyReplace) SetObservabilityFeatures(v string) {
+func (o *PresetConfigurationFamilyUpdate) SetObservabilityFeatures(v string) {
 	o.ObservabilityFeatures = v
 }
 
-func (o PresetConfigurationFamilyReplace) MarshalJSON() ([]byte, error) {
+func (o PresetConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -203,7 +203,7 @@ func (o PresetConfigurationFamilyReplace) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PresetConfigurationFamilyReplace) ToMap() (map[string]interface{}, error) {
+func (o PresetConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["chartName"] = o.ChartName
 	toSerialize["chartVersion"] = o.ChartVersion
@@ -222,7 +222,7 @@ func (o PresetConfigurationFamilyReplace) ToMap() (map[string]interface{}, error
 	return toSerialize, nil
 }
 
-func (o *PresetConfigurationFamilyReplace) UnmarshalJSON(data []byte) (err error) {
+func (o *PresetConfigurationFamilyUpdate) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -246,16 +246,16 @@ func (o *PresetConfigurationFamilyReplace) UnmarshalJSON(data []byte) (err error
 		}
 	}
 
-	varPresetConfigurationFamilyReplace := _PresetConfigurationFamilyReplace{}
+	varPresetConfigurationFamilyUpdate := _PresetConfigurationFamilyUpdate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varPresetConfigurationFamilyReplace)
+	err = decoder.Decode(&varPresetConfigurationFamilyUpdate)
 
 	if err != nil {
 		return err
 	}
 
-	*o = PresetConfigurationFamilyReplace(varPresetConfigurationFamilyReplace)
+	*o = PresetConfigurationFamilyUpdate(varPresetConfigurationFamilyUpdate)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -272,38 +272,38 @@ func (o *PresetConfigurationFamilyReplace) UnmarshalJSON(data []byte) (err error
 	return err
 }
 
-type NullablePresetConfigurationFamilyReplace struct {
-	value *PresetConfigurationFamilyReplace
+type NullablePresetConfigurationFamilyUpdate struct {
+	value *PresetConfigurationFamilyUpdate
 	isSet bool
 }
 
-func (v NullablePresetConfigurationFamilyReplace) Get() *PresetConfigurationFamilyReplace {
+func (v NullablePresetConfigurationFamilyUpdate) Get() *PresetConfigurationFamilyUpdate {
 	return v.value
 }
 
-func (v *NullablePresetConfigurationFamilyReplace) Set(val *PresetConfigurationFamilyReplace) {
+func (v *NullablePresetConfigurationFamilyUpdate) Set(val *PresetConfigurationFamilyUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePresetConfigurationFamilyReplace) IsSet() bool {
+func (v NullablePresetConfigurationFamilyUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePresetConfigurationFamilyReplace) Unset() {
+func (v *NullablePresetConfigurationFamilyUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePresetConfigurationFamilyReplace(val *PresetConfigurationFamilyReplace) *NullablePresetConfigurationFamilyReplace {
-	return &NullablePresetConfigurationFamilyReplace{value: val, isSet: true}
+func NewNullablePresetConfigurationFamilyUpdate(val *PresetConfigurationFamilyUpdate) *NullablePresetConfigurationFamilyUpdate {
+	return &NullablePresetConfigurationFamilyUpdate{value: val, isSet: true}
 }
 
-func (v NullablePresetConfigurationFamilyReplace) MarshalJSON() ([]byte, error) {
+func (v NullablePresetConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePresetConfigurationFamilyReplace) UnmarshalJSON(src []byte) error {
+func (v *NullablePresetConfigurationFamilyUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

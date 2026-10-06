@@ -17,44 +17,44 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily{}
+// checks if the ConfigurationFamilyUpdate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConfigurationFamilyUpdate{}
 
-// ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily Fields used to update the latest configuration family. Omitted optional fields keep their existing values.
-type ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily struct {
+// ConfigurationFamilyUpdate Latest configuration family field values for an update. Only fields listed in update_mask are applied.
+type ConfigurationFamilyUpdate struct {
 	// Whether this family is active.
 	Active *bool `json:"active,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Configuration template settings; a new configuration family version is created only when they change.
-	Preset *PresetConfigurationFamilyReplace `json:"preset,omitempty"`
+	Preset *PresetConfigurationFamilyUpdate `json:"preset,omitempty"`
 	// Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector.
-	Raw *RawConfigurationFamilyReplace `json:"raw,omitempty"`
+	Raw *RawConfigurationFamilyUpdate `json:"raw,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily
+type _ConfigurationFamilyUpdate ConfigurationFamilyUpdate
 
-// NewConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily instantiates a new ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily object
+// NewConfigurationFamilyUpdate instantiates a new ConfigurationFamilyUpdate object
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily() *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily {
-	this := ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily{}
+func NewConfigurationFamilyUpdate() *ConfigurationFamilyUpdate {
+	this := ConfigurationFamilyUpdate{}
 	return &this
 }
 
-// NewConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamilyWithDefaults instantiates a new ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily object
+// NewConfigurationFamilyUpdateWithDefaults instantiates a new ConfigurationFamilyUpdate object
 // This constructor does not set properties that have a default: the server fills them in.
 // It doesn't guarantee that properties required by API are set
-func NewConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamilyWithDefaults() *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily {
-	this := ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily{}
+func NewConfigurationFamilyUpdateWithDefaults() *ConfigurationFamilyUpdate {
+	this := ConfigurationFamilyUpdate{}
 	return &this
 }
 
 // GetActive returns the Active field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetActive() bool {
+func (o *ConfigurationFamilyUpdate) GetActive() bool {
 	if o == nil || IsNil(o.Active) {
 		var ret bool
 		return ret
@@ -64,7 +64,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetActiveOk() (*bool, bool) {
+func (o *ConfigurationFamilyUpdate) GetActiveOk() (*bool, bool) {
 	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 }
 
 // HasActive returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasActive() bool {
+func (o *ConfigurationFamilyUpdate) HasActive() bool {
 	if o != nil && !IsNil(o.Active) {
 		return true
 	}
@@ -81,12 +81,12 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) H
 }
 
 // SetActive gets a reference to the given bool and assigns it to the Active field.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetActive(v bool) {
+func (o *ConfigurationFamilyUpdate) SetActive(v bool) {
 	o.Active = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetDescription() string {
+func (o *ConfigurationFamilyUpdate) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -96,7 +96,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetDescriptionOk() (*string, bool) {
+func (o *ConfigurationFamilyUpdate) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -104,7 +104,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasDescription() bool {
+func (o *ConfigurationFamilyUpdate) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -113,14 +113,14 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) H
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetDescription(v string) {
+func (o *ConfigurationFamilyUpdate) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetPreset returns the Preset field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetPreset() PresetConfigurationFamilyReplace {
+func (o *ConfigurationFamilyUpdate) GetPreset() PresetConfigurationFamilyUpdate {
 	if o == nil || IsNil(o.Preset) {
-		var ret PresetConfigurationFamilyReplace
+		var ret PresetConfigurationFamilyUpdate
 		return ret
 	}
 	return *o.Preset
@@ -128,7 +128,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 
 // GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetPresetOk() (*PresetConfigurationFamilyReplace, bool) {
+func (o *ConfigurationFamilyUpdate) GetPresetOk() (*PresetConfigurationFamilyUpdate, bool) {
 	if o == nil || IsNil(o.Preset) {
 		return nil, false
 	}
@@ -136,7 +136,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 }
 
 // HasPreset returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasPreset() bool {
+func (o *ConfigurationFamilyUpdate) HasPreset() bool {
 	if o != nil && !IsNil(o.Preset) {
 		return true
 	}
@@ -144,15 +144,15 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) H
 	return false
 }
 
-// SetPreset gets a reference to the given PresetConfigurationFamilyReplace and assigns it to the Preset field.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetPreset(v PresetConfigurationFamilyReplace) {
+// SetPreset gets a reference to the given PresetConfigurationFamilyUpdate and assigns it to the Preset field.
+func (o *ConfigurationFamilyUpdate) SetPreset(v PresetConfigurationFamilyUpdate) {
 	o.Preset = &v
 }
 
 // GetRaw returns the Raw field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetRaw() RawConfigurationFamilyReplace {
+func (o *ConfigurationFamilyUpdate) GetRaw() RawConfigurationFamilyUpdate {
 	if o == nil || IsNil(o.Raw) {
-		var ret RawConfigurationFamilyReplace
+		var ret RawConfigurationFamilyUpdate
 		return ret
 	}
 	return *o.Raw
@@ -160,7 +160,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 
 // GetRawOk returns a tuple with the Raw field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetRawOk() (*RawConfigurationFamilyReplace, bool) {
+func (o *ConfigurationFamilyUpdate) GetRawOk() (*RawConfigurationFamilyUpdate, bool) {
 	if o == nil || IsNil(o.Raw) {
 		return nil, false
 	}
@@ -168,7 +168,7 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) G
 }
 
 // HasRaw returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasRaw() bool {
+func (o *ConfigurationFamilyUpdate) HasRaw() bool {
 	if o != nil && !IsNil(o.Raw) {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) H
 	return false
 }
 
-// SetRaw gets a reference to the given RawConfigurationFamilyReplace and assigns it to the Raw field.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetRaw(v RawConfigurationFamilyReplace) {
+// SetRaw gets a reference to the given RawConfigurationFamilyUpdate and assigns it to the Raw field.
+func (o *ConfigurationFamilyUpdate) SetRaw(v RawConfigurationFamilyUpdate) {
 	o.Raw = &v
 }
 
-func (o ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) MarshalJSON() ([]byte, error) {
+func (o ConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -189,7 +189,7 @@ func (o ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) Ma
 	return json.Marshal(toSerialize)
 }
 
-func (o ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) ToMap() (map[string]interface{}, error) {
+func (o ConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
@@ -228,17 +228,17 @@ func (o ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) To
 	return toSerialize, nil
 }
 
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) UnmarshalJSON(data []byte) (err error) {
-	varConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily := _ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily{}
+func (o *ConfigurationFamilyUpdate) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationFamilyUpdate := _ConfigurationFamilyUpdate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily)
+	err = decoder.Decode(&varConfigurationFamilyUpdate)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily(varConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily)
+	*o = ConfigurationFamilyUpdate(varConfigurationFamilyUpdate)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -265,38 +265,38 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) U
 	return err
 }
 
-type NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily struct {
-	value *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily
+type NullableConfigurationFamilyUpdate struct {
+	value *ConfigurationFamilyUpdate
 	isSet bool
 }
 
-func (v NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) Get() *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily {
+func (v NullableConfigurationFamilyUpdate) Get() *ConfigurationFamilyUpdate {
 	return v.value
 }
 
-func (v *NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) Set(val *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) {
+func (v *NullableConfigurationFamilyUpdate) Set(val *ConfigurationFamilyUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) IsSet() bool {
+func (v NullableConfigurationFamilyUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) Unset() {
+func (v *NullableConfigurationFamilyUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily(val *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) *NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily {
-	return &NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily{value: val, isSet: true}
+func NewNullableConfigurationFamilyUpdate(val *ConfigurationFamilyUpdate) *NullableConfigurationFamilyUpdate {
+	return &NullableConfigurationFamilyUpdate{value: val, isSet: true}
 }
 
-func (v NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) MarshalJSON() ([]byte, error) {
+func (v NullableConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) UnmarshalJSON(src []byte) error {
+func (v *NullableConfigurationFamilyUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
