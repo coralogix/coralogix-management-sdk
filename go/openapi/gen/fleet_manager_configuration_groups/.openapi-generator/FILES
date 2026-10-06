@@ -27,6 +27,12 @@ model_filter_path_and_values.go
 model_filters.go
 model_get_configuration_group_response.go
 model_multiple_values.go
+model_preset_configuration_family.go
+model_preset_configuration_family_create.go
+model_preset_configuration_family_replace.go
+model_raw_configuration_family.go
+model_raw_configuration_family_create.go
+model_raw_configuration_family_replace.go
 model_remote_configuration.go
 model_remote_configuration_create.go
 model_remote_configuration_replace.go

@@ -24,16 +24,12 @@ var _ MappedNullable = &ConfigurationFamilyCreate{}
 type ConfigurationFamilyCreate struct {
 	// Whether this family is active.
 	Active *bool `json:"active,omitempty"`
-	// Configuration family UUID v7 this family is based on.
-	BasedOnConfigurationFamilyId *string `json:"basedOnConfigurationFamilyId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.
-	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Metadata stored with this configuration family.
-	Metadata map[string]string `json:"metadata,omitempty"`
-	// Remote configurations to create in this family.
-	RemoteConfigurations []RemoteConfigurationCreate `json:"remoteConfigurations,omitempty"`
+	// Configuration template settings; Coralogix generates the remote configurations from them.
+	Preset *PresetConfigurationFamilyCreate `json:"preset,omitempty"`
+	// Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector.
+	Raw *RawConfigurationFamilyCreate `json:"raw,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -89,70 +85,6 @@ func (o *ConfigurationFamilyCreate) SetActive(v bool) {
 	o.Active = &v
 }
 
-// GetBasedOnConfigurationFamilyId returns the BasedOnConfigurationFamilyId field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetBasedOnConfigurationFamilyId() string {
-	if o == nil || IsNil(o.BasedOnConfigurationFamilyId) {
-		var ret string
-		return ret
-	}
-	return *o.BasedOnConfigurationFamilyId
-}
-
-// GetBasedOnConfigurationFamilyIdOk returns a tuple with the BasedOnConfigurationFamilyId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetBasedOnConfigurationFamilyIdOk() (*string, bool) {
-	if o == nil || IsNil(o.BasedOnConfigurationFamilyId) {
-		return nil, false
-	}
-	return o.BasedOnConfigurationFamilyId, true
-}
-
-// HasBasedOnConfigurationFamilyId returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasBasedOnConfigurationFamilyId() bool {
-	if o != nil && !IsNil(o.BasedOnConfigurationFamilyId) {
-		return true
-	}
-
-	return false
-}
-
-// SetBasedOnConfigurationFamilyId gets a reference to the given string and assigns it to the BasedOnConfigurationFamilyId field.
-func (o *ConfigurationFamilyCreate) SetBasedOnConfigurationFamilyId(v string) {
-	o.BasedOnConfigurationFamilyId = &v
-}
-
-// GetCollectorVersion returns the CollectorVersion field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetCollectorVersion() string {
-	if o == nil || IsNil(o.CollectorVersion) {
-		var ret string
-		return ret
-	}
-	return *o.CollectorVersion
-}
-
-// GetCollectorVersionOk returns a tuple with the CollectorVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetCollectorVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.CollectorVersion) {
-		return nil, false
-	}
-	return o.CollectorVersion, true
-}
-
-// HasCollectorVersion returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasCollectorVersion() bool {
-	if o != nil && !IsNil(o.CollectorVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetCollectorVersion gets a reference to the given string and assigns it to the CollectorVersion field.
-func (o *ConfigurationFamilyCreate) SetCollectorVersion(v string) {
-	o.CollectorVersion = &v
-}
-
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ConfigurationFamilyCreate) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -185,68 +117,68 @@ func (o *ConfigurationFamilyCreate) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetMetadata() map[string]string {
-	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]string
+// GetPreset returns the Preset field value if set, zero value otherwise.
+func (o *ConfigurationFamilyCreate) GetPreset() PresetConfigurationFamilyCreate {
+	if o == nil || IsNil(o.Preset) {
+		var ret PresetConfigurationFamilyCreate
 		return ret
 	}
-	return o.Metadata
+	return *o.Preset
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetMetadataOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Metadata) {
-		return map[string]string{}, false
-	}
-	return o.Metadata, true
-}
-
-// HasMetadata returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *ConfigurationFamilyCreate) SetMetadata(v map[string]string) {
-	o.Metadata = v
-}
-
-// GetRemoteConfigurations returns the RemoteConfigurations field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetRemoteConfigurations() []RemoteConfigurationCreate {
-	if o == nil || IsNil(o.RemoteConfigurations) {
-		var ret []RemoteConfigurationCreate
-		return ret
-	}
-	return o.RemoteConfigurations
-}
-
-// GetRemoteConfigurationsOk returns a tuple with the RemoteConfigurations field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetRemoteConfigurationsOk() ([]RemoteConfigurationCreate, bool) {
-	if o == nil || IsNil(o.RemoteConfigurations) {
+func (o *ConfigurationFamilyCreate) GetPresetOk() (*PresetConfigurationFamilyCreate, bool) {
+	if o == nil || IsNil(o.Preset) {
 		return nil, false
 	}
-	return o.RemoteConfigurations, true
+	return o.Preset, true
 }
 
-// HasRemoteConfigurations returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasRemoteConfigurations() bool {
-	if o != nil && !IsNil(o.RemoteConfigurations) {
+// HasPreset returns a boolean if a field has been set.
+func (o *ConfigurationFamilyCreate) HasPreset() bool {
+	if o != nil && !IsNil(o.Preset) {
 		return true
 	}
 
 	return false
 }
 
-// SetRemoteConfigurations gets a reference to the given []RemoteConfigurationCreate and assigns it to the RemoteConfigurations field.
-func (o *ConfigurationFamilyCreate) SetRemoteConfigurations(v []RemoteConfigurationCreate) {
-	o.RemoteConfigurations = v
+// SetPreset gets a reference to the given PresetConfigurationFamilyCreate and assigns it to the Preset field.
+func (o *ConfigurationFamilyCreate) SetPreset(v PresetConfigurationFamilyCreate) {
+	o.Preset = &v
+}
+
+// GetRaw returns the Raw field value if set, zero value otherwise.
+func (o *ConfigurationFamilyCreate) GetRaw() RawConfigurationFamilyCreate {
+	if o == nil || IsNil(o.Raw) {
+		var ret RawConfigurationFamilyCreate
+		return ret
+	}
+	return *o.Raw
+}
+
+// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationFamilyCreate) GetRawOk() (*RawConfigurationFamilyCreate, bool) {
+	if o == nil || IsNil(o.Raw) {
+		return nil, false
+	}
+	return o.Raw, true
+}
+
+// HasRaw returns a boolean if a field has been set.
+func (o *ConfigurationFamilyCreate) HasRaw() bool {
+	if o != nil && !IsNil(o.Raw) {
+		return true
+	}
+
+	return false
+}
+
+// SetRaw gets a reference to the given RawConfigurationFamilyCreate and assigns it to the Raw field.
+func (o *ConfigurationFamilyCreate) SetRaw(v RawConfigurationFamilyCreate) {
+	o.Raw = &v
 }
 
 func (o ConfigurationFamilyCreate) MarshalJSON() ([]byte, error) {
@@ -262,20 +194,31 @@ func (o ConfigurationFamilyCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
-	if !IsNil(o.BasedOnConfigurationFamilyId) {
-		toSerialize["basedOnConfigurationFamilyId"] = o.BasedOnConfigurationFamilyId
-	}
-	if !IsNil(o.CollectorVersion) {
-		toSerialize["collectorVersion"] = o.CollectorVersion
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
+	if !IsNil(o.Preset) {
+		toSerialize["preset"] = o.Preset
 	}
-	if !IsNil(o.RemoteConfigurations) {
-		toSerialize["remoteConfigurations"] = o.RemoteConfigurations
+	if !IsNil(o.Raw) {
+		toSerialize["raw"] = o.Raw
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["raw"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["preset"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["raw"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field raw must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["preset"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field preset must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -300,12 +243,21 @@ func (o *ConfigurationFamilyCreate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["raw"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["preset"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+		}
+
 		delete(additionalProperties, "active")
-		delete(additionalProperties, "basedOnConfigurationFamilyId")
-		delete(additionalProperties, "collectorVersion")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "remoteConfigurations")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "raw")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

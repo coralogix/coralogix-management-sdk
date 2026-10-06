@@ -208,18 +208,43 @@
                       },
                       "family": {
                         "description": "Fields used to update the latest configuration family. Omitted optional fields keep their existing values.",
+                        "oneOf": [
+                          {
+                            "required": [
+                              "raw"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "required": [
+                              "preset"
+                            ],
+                            "type": "object"
+                          },
+                          {
+                            "not": {
+                              "anyOf": [
+                                {
+                                  "required": [
+                                    "raw"
+                                  ],
+                                  "type": "object"
+                                },
+                                {
+                                  "required": [
+                                    "preset"
+                                  ],
+                                  "type": "object"
+                                }
+                              ]
+                            },
+                            "type": "object"
+                          }
+                        ],
                         "properties": {
                           "active": {
                             "description": "Whether this family is active.",
                             "type": "boolean",
-                            "x-coralogix-presence": true
-                          },
-                          "collectorVersion": {
-                            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
-                            "maxLength": 256,
-                            "minLength": 5,
-                            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
-                            "type": "string",
                             "x-coralogix-presence": true
                           },
                           "description": {
@@ -230,24 +255,23 @@
                             "type": "string",
                             "x-coralogix-presence": true
                           },
-                          "metadata": {
-                            "additionalProperties": {
-                              "maxLength": 4096,
-                              "minLength": 0,
-                              "pattern": "^[\\s\\S]*$",
-                              "type": "string"
-                            },
-                            "description": "Metadata stored with this configuration family.",
-                            "type": "object"
+                          "preset": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/PresetConfigurationFamilyReplace"
+                              }
+                            ],
+                            "description": "Configuration template settings; a new configuration family version is created only when they change.",
+                            "x-stability": "preview"
                           },
-                          "remoteConfigurations": {
-                            "description": "Remote configurations to use when creating or replacing family content.",
-                            "items": {
-                              "$ref": "#/components/schemas/RemoteConfigurationReplace"
-                            },
-                            "maxItems": 128,
-                            "minItems": 0,
-                            "type": "array"
+                          "raw": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/RawConfigurationFamilyReplace"
+                              }
+                            ],
+                            "description": "Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector.",
+                            "x-stability": "preview"
                           }
                         },
                         "type": "object"
@@ -491,6 +515,39 @@
       },
       "ConfigurationFamily": {
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "raw"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "preset"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "raw"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "preset"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "active": {
             "description": "Whether this family is active.",
@@ -502,23 +559,6 @@
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "chartName": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ChartName"
-              }
-            ],
-            "description": "Helm chart name for Helm-backed families.",
-            "x-coralogix-presence": true
-          },
-          "chartVersion": {
-            "description": "Helm chart or template version used by this family.",
-            "maxLength": 256,
-            "minLength": 0,
-            "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -545,14 +585,6 @@
             "type": "string",
             "description": "Configuration family UUID v7."
           },
-          "integrationVersion": {
-            "description": "Integration version from the onboarding flow.",
-            "maxLength": 256,
-            "minLength": 0,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
           "lastActivatedAt": {
             "maxLength": 64,
             "minLength": 0,
@@ -560,24 +592,23 @@
             "description": "Time when this family was last activated.",
             "format": "date-time"
           },
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "maxLength": 4096,
-              "minLength": 0,
-              "pattern": "^[\\s\\S]*$",
-              "type": "string"
-            },
-            "description": "Metadata stored with this configuration family."
+          "preset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PresetConfigurationFamily"
+              }
+            ],
+            "description": "Configuration template settings; present when the family has a chartName and observability features.",
+            "x-stability": "preview"
           },
-          "remoteConfigurations": {
-            "maxItems": 128,
-            "minItems": 0,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RemoteConfiguration"
-            },
-            "description": "Remote configurations in this family."
+          "raw": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RawConfigurationFamily"
+              }
+            ],
+            "description": "Inputs of a configuration family defined directly by its remote configurations; present when the family has no chartName.",
+            "x-stability": "preview"
           },
           "sources": {
             "maxItems": 128,
@@ -600,26 +631,43 @@
       },
       "ConfigurationFamilyCreate": {
         "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "raw"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "preset"
+            ],
+            "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "raw"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "preset"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
+          }
+        ],
         "properties": {
           "active": {
             "description": "Whether this family is active.",
             "type": "boolean",
-            "x-coralogix-presence": true
-          },
-          "basedOnConfigurationFamilyId": {
-            "description": "Configuration family UUID v7 this family is based on.",
-            "maxLength": 36,
-            "minLength": 36,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "collectorVersion": {
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
-            "maxLength": 256,
-            "minLength": 5,
-            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
-            "type": "string",
             "x-coralogix-presence": true
           },
           "description": {
@@ -630,24 +678,23 @@
             "type": "string",
             "x-coralogix-presence": true
           },
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "maxLength": 4096,
-              "minLength": 0,
-              "pattern": "^[\\s\\S]*$",
-              "type": "string"
-            },
-            "description": "Metadata stored with this configuration family."
+          "preset": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PresetConfigurationFamilyCreate"
+              }
+            ],
+            "description": "Configuration template settings; Coralogix generates the remote configurations from them.",
+            "x-stability": "preview"
           },
-          "remoteConfigurations": {
-            "maxItems": 128,
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RemoteConfigurationCreate"
-            },
-            "description": "Remote configurations to create in this family."
+          "raw": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RawConfigurationFamilyCreate"
+              }
+            ],
+            "description": "Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector.",
+            "x-stability": "preview"
           }
         },
         "description": "Initial configuration family to create."
@@ -943,6 +990,272 @@
             }
           }
         }
+      },
+      "PresetConfigurationFamily": {
+        "required": [
+          "chartVersion",
+          "integrationVersion",
+          "observabilityFeatures"
+        ],
+        "type": "object",
+        "properties": {
+          "chartName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChartName"
+              }
+            ],
+            "description": "Configuration template type: CHART_NAME_OTEL_INTEGRATION for Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or CHART_NAME_OTEL_LINUX_STANDALONE, CHART_NAME_OTEL_WINDOWS_STANDALONE, or CHART_NAME_OTEL_MACOS_STANDALONE for hosts."
+          },
+          "chartVersion": {
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected."
+          },
+          "integrationVersion": {
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "Version of the observability features format used for this configuration family."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "maxLength": 4096,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName."
+          },
+          "observabilityFeatures": {
+            "maxLength": 1048576,
+            "minLength": 2,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion."
+          },
+          "remoteConfigurations": {
+            "maxItems": 128,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RemoteConfiguration"
+            },
+            "description": "Remote configurations Coralogix generated from the configuration template settings."
+          }
+        },
+        "description": "Configuration template settings of a configuration family."
+      },
+      "PresetConfigurationFamilyCreate": {
+        "required": [
+          "chartName",
+          "chartVersion",
+          "observabilityFeatures"
+        ],
+        "type": "object",
+        "properties": {
+          "chartName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChartName"
+              }
+            ],
+            "description": "Configuration template type: CHART_NAME_OTEL_INTEGRATION for Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or CHART_NAME_OTEL_LINUX_STANDALONE, CHART_NAME_OTEL_WINDOWS_STANDALONE, or CHART_NAME_OTEL_MACOS_STANDALONE for hosts."
+          },
+          "chartVersion": {
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected."
+          },
+          "integrationVersion": {
+            "description": "Version of the observability features format. Omit it to use the default for the template type and version.",
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "maxLength": 4096,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here."
+          },
+          "observabilityFeatures": {
+            "maxLength": 1048576,
+            "minLength": 2,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion."
+          }
+        },
+        "description": "Configuration template settings for a new configuration family; Coralogix generates the remote configurations from them."
+      },
+      "PresetConfigurationFamilyReplace": {
+        "required": [
+          "chartName",
+          "chartVersion",
+          "observabilityFeatures"
+        ],
+        "type": "object",
+        "properties": {
+          "chartName": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ChartName"
+              }
+            ],
+            "description": "Configuration template type: CHART_NAME_OTEL_INTEGRATION for Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or CHART_NAME_OTEL_LINUX_STANDALONE, CHART_NAME_OTEL_WINDOWS_STANDALONE, or CHART_NAME_OTEL_MACOS_STANDALONE for hosts."
+          },
+          "chartVersion": {
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected."
+          },
+          "integrationVersion": {
+            "description": "Version of the observability features format. Omit it to use the default for the template type and version.",
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "maxLength": 4096,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here."
+          },
+          "observabilityFeatures": {
+            "maxLength": 1048576,
+            "minLength": 2,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion."
+          }
+        },
+        "description": "Configuration template settings that replace those of the latest configuration family; omitted metadata is cleared, and a new configuration family version is created only when the settings change."
+      },
+      "RawConfigurationFamily": {
+        "type": "object",
+        "properties": {
+          "collectorVersion": {
+            "description": "Collector semantic version this family targets, without a leading v prefix.",
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "maxLength": 4096,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Metadata stored with this configuration family."
+          },
+          "remoteConfigurations": {
+            "maxItems": 128,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RemoteConfiguration"
+            },
+            "description": "Remote configurations of this configuration family."
+          }
+        },
+        "description": "Inputs of a configuration family defined directly by its remote configurations."
+      },
+      "RawConfigurationFamilyCreate": {
+        "required": [
+          "remoteConfigurations"
+        ],
+        "type": "object",
+        "properties": {
+          "collectorVersion": {
+            "description": "Collector semantic version this family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "maxLength": 4096,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Metadata stored with this configuration family."
+          },
+          "remoteConfigurations": {
+            "maxItems": 128,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RemoteConfigurationCreate"
+            },
+            "description": "Remote configurations to create in this family."
+          }
+        },
+        "description": "Configuration family content defined directly by its remote configurations."
+      },
+      "RawConfigurationFamilyReplace": {
+        "required": [
+          "remoteConfigurations"
+        ],
+        "type": "object",
+        "properties": {
+          "collectorVersion": {
+            "description": "Collector semantic version this family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "maxLength": 4096,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            },
+            "description": "Metadata stored with this configuration family."
+          },
+          "remoteConfigurations": {
+            "maxItems": 128,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RemoteConfigurationReplace"
+            },
+            "description": "Remote configurations for the new family version."
+          }
+        },
+        "description": "Content that replaces the remote configurations, collector version, and metadata of the latest configuration family; an omitted collectorVersion or metadata is cleared."
       },
       "RemoteConfiguration": {
         "type": "object",

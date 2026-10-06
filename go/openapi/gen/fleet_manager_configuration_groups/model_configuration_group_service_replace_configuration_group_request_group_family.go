@@ -24,14 +24,12 @@ var _ MappedNullable = &ConfigurationGroupServiceReplaceConfigurationGroupReques
 type ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily struct {
 	// Whether this family is active.
 	Active *bool `json:"active,omitempty"`
-	// Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.
-	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Metadata stored with this configuration family.
-	Metadata map[string]string `json:"metadata,omitempty"`
-	// Remote configurations to use when creating or replacing family content.
-	RemoteConfigurations []RemoteConfigurationReplace `json:"remoteConfigurations,omitempty"`
+	// Configuration template settings; a new configuration family version is created only when they change.
+	Preset *PresetConfigurationFamilyReplace `json:"preset,omitempty"`
+	// Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector.
+	Raw *RawConfigurationFamilyReplace `json:"raw,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -87,38 +85,6 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) S
 	o.Active = &v
 }
 
-// GetCollectorVersion returns the CollectorVersion field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetCollectorVersion() string {
-	if o == nil || IsNil(o.CollectorVersion) {
-		var ret string
-		return ret
-	}
-	return *o.CollectorVersion
-}
-
-// GetCollectorVersionOk returns a tuple with the CollectorVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetCollectorVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.CollectorVersion) {
-		return nil, false
-	}
-	return o.CollectorVersion, true
-}
-
-// HasCollectorVersion returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasCollectorVersion() bool {
-	if o != nil && !IsNil(o.CollectorVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetCollectorVersion gets a reference to the given string and assigns it to the CollectorVersion field.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetCollectorVersion(v string) {
-	o.CollectorVersion = &v
-}
-
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
@@ -151,68 +117,68 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) S
 	o.Description = &v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetMetadata() map[string]string {
-	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]string
+// GetPreset returns the Preset field value if set, zero value otherwise.
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetPreset() PresetConfigurationFamilyReplace {
+	if o == nil || IsNil(o.Preset) {
+		var ret PresetConfigurationFamilyReplace
 		return ret
 	}
-	return o.Metadata
+	return *o.Preset
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetMetadataOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Metadata) {
-		return map[string]string{}, false
-	}
-	return o.Metadata, true
-}
-
-// HasMetadata returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetMetadata(v map[string]string) {
-	o.Metadata = v
-}
-
-// GetRemoteConfigurations returns the RemoteConfigurations field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetRemoteConfigurations() []RemoteConfigurationReplace {
-	if o == nil || IsNil(o.RemoteConfigurations) {
-		var ret []RemoteConfigurationReplace
-		return ret
-	}
-	return o.RemoteConfigurations
-}
-
-// GetRemoteConfigurationsOk returns a tuple with the RemoteConfigurations field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetRemoteConfigurationsOk() ([]RemoteConfigurationReplace, bool) {
-	if o == nil || IsNil(o.RemoteConfigurations) {
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetPresetOk() (*PresetConfigurationFamilyReplace, bool) {
+	if o == nil || IsNil(o.Preset) {
 		return nil, false
 	}
-	return o.RemoteConfigurations, true
+	return o.Preset, true
 }
 
-// HasRemoteConfigurations returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasRemoteConfigurations() bool {
-	if o != nil && !IsNil(o.RemoteConfigurations) {
+// HasPreset returns a boolean if a field has been set.
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasPreset() bool {
+	if o != nil && !IsNil(o.Preset) {
 		return true
 	}
 
 	return false
 }
 
-// SetRemoteConfigurations gets a reference to the given []RemoteConfigurationReplace and assigns it to the RemoteConfigurations field.
-func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetRemoteConfigurations(v []RemoteConfigurationReplace) {
-	o.RemoteConfigurations = v
+// SetPreset gets a reference to the given PresetConfigurationFamilyReplace and assigns it to the Preset field.
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetPreset(v PresetConfigurationFamilyReplace) {
+	o.Preset = &v
+}
+
+// GetRaw returns the Raw field value if set, zero value otherwise.
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetRaw() RawConfigurationFamilyReplace {
+	if o == nil || IsNil(o.Raw) {
+		var ret RawConfigurationFamilyReplace
+		return ret
+	}
+	return *o.Raw
+}
+
+// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) GetRawOk() (*RawConfigurationFamilyReplace, bool) {
+	if o == nil || IsNil(o.Raw) {
+		return nil, false
+	}
+	return o.Raw, true
+}
+
+// HasRaw returns a boolean if a field has been set.
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) HasRaw() bool {
+	if o != nil && !IsNil(o.Raw) {
+		return true
+	}
+
+	return false
+}
+
+// SetRaw gets a reference to the given RawConfigurationFamilyReplace and assigns it to the Raw field.
+func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) SetRaw(v RawConfigurationFamilyReplace) {
+	o.Raw = &v
 }
 
 func (o ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) MarshalJSON() ([]byte, error) {
@@ -228,17 +194,31 @@ func (o ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) To
 	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}
-	if !IsNil(o.CollectorVersion) {
-		toSerialize["collectorVersion"] = o.CollectorVersion
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
+	if !IsNil(o.Preset) {
+		toSerialize["preset"] = o.Preset
 	}
-	if !IsNil(o.RemoteConfigurations) {
-		toSerialize["remoteConfigurations"] = o.RemoteConfigurations
+	if !IsNil(o.Raw) {
+		toSerialize["raw"] = o.Raw
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["raw"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["preset"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["raw"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field raw must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["preset"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field preset must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -263,11 +243,21 @@ func (o *ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily) U
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["raw"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["preset"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+		}
+
 		delete(additionalProperties, "active")
-		delete(additionalProperties, "collectorVersion")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "remoteConfigurations")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "raw")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
