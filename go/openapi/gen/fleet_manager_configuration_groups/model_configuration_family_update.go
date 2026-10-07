@@ -17,45 +17,44 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the ConfigurationFamilyCreate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ConfigurationFamilyCreate{}
+// checks if the ConfigurationFamilyUpdate type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConfigurationFamilyUpdate{}
 
-// ConfigurationFamilyCreate Initial configuration family to create.
-type ConfigurationFamilyCreate struct {
+// ConfigurationFamilyUpdate Latest configuration family field values for an update. Only fields listed in update_mask are applied.
+type ConfigurationFamilyUpdate struct {
 	// Whether this family is active.
 	Active *bool `json:"active,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Configuration template settings; Coralogix generates the remote configurations from them.
-	Preset *PresetConfigurationFamilyCreate `json:"preset,omitempty"`
+	// Configuration template settings; a new configuration family version is created only when they change.
+	Preset *PresetConfigurationFamilyUpdate `json:"preset,omitempty"`
 	// Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector.
-	Raw *RawConfigurationFamilyCreate `json:"raw,omitempty"`
+	Raw *RawConfigurationFamilyUpdate `json:"raw,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
-	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
-type _ConfigurationFamilyCreate ConfigurationFamilyCreate
+type _ConfigurationFamilyUpdate ConfigurationFamilyUpdate
 
-// NewConfigurationFamilyCreate instantiates a new ConfigurationFamilyCreate object
+// NewConfigurationFamilyUpdate instantiates a new ConfigurationFamilyUpdate object
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationFamilyCreate() *ConfigurationFamilyCreate {
-	this := ConfigurationFamilyCreate{}
+func NewConfigurationFamilyUpdate() *ConfigurationFamilyUpdate {
+	this := ConfigurationFamilyUpdate{}
 	return &this
 }
 
-// NewConfigurationFamilyCreateWithDefaults instantiates a new ConfigurationFamilyCreate object
+// NewConfigurationFamilyUpdateWithDefaults instantiates a new ConfigurationFamilyUpdate object
 // This constructor does not set properties that have a default: the server fills them in.
 // It doesn't guarantee that properties required by API are set
-func NewConfigurationFamilyCreateWithDefaults() *ConfigurationFamilyCreate {
-	this := ConfigurationFamilyCreate{}
+func NewConfigurationFamilyUpdateWithDefaults() *ConfigurationFamilyUpdate {
+	this := ConfigurationFamilyUpdate{}
 	return &this
 }
 
 // GetActive returns the Active field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetActive() bool {
+func (o *ConfigurationFamilyUpdate) GetActive() bool {
 	if o == nil || IsNil(o.Active) {
 		var ret bool
 		return ret
@@ -65,7 +64,7 @@ func (o *ConfigurationFamilyCreate) GetActive() bool {
 
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetActiveOk() (*bool, bool) {
+func (o *ConfigurationFamilyUpdate) GetActiveOk() (*bool, bool) {
 	if o == nil || IsNil(o.Active) {
 		return nil, false
 	}
@@ -73,7 +72,7 @@ func (o *ConfigurationFamilyCreate) GetActiveOk() (*bool, bool) {
 }
 
 // HasActive returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasActive() bool {
+func (o *ConfigurationFamilyUpdate) HasActive() bool {
 	if o != nil && !IsNil(o.Active) {
 		return true
 	}
@@ -82,12 +81,12 @@ func (o *ConfigurationFamilyCreate) HasActive() bool {
 }
 
 // SetActive gets a reference to the given bool and assigns it to the Active field.
-func (o *ConfigurationFamilyCreate) SetActive(v bool) {
+func (o *ConfigurationFamilyUpdate) SetActive(v bool) {
 	o.Active = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetDescription() string {
+func (o *ConfigurationFamilyUpdate) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -97,7 +96,7 @@ func (o *ConfigurationFamilyCreate) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetDescriptionOk() (*string, bool) {
+func (o *ConfigurationFamilyUpdate) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -105,7 +104,7 @@ func (o *ConfigurationFamilyCreate) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasDescription() bool {
+func (o *ConfigurationFamilyUpdate) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -114,14 +113,14 @@ func (o *ConfigurationFamilyCreate) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *ConfigurationFamilyCreate) SetDescription(v string) {
+func (o *ConfigurationFamilyUpdate) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetPreset returns the Preset field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetPreset() PresetConfigurationFamilyCreate {
+func (o *ConfigurationFamilyUpdate) GetPreset() PresetConfigurationFamilyUpdate {
 	if o == nil || IsNil(o.Preset) {
-		var ret PresetConfigurationFamilyCreate
+		var ret PresetConfigurationFamilyUpdate
 		return ret
 	}
 	return *o.Preset
@@ -129,7 +128,7 @@ func (o *ConfigurationFamilyCreate) GetPreset() PresetConfigurationFamilyCreate 
 
 // GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetPresetOk() (*PresetConfigurationFamilyCreate, bool) {
+func (o *ConfigurationFamilyUpdate) GetPresetOk() (*PresetConfigurationFamilyUpdate, bool) {
 	if o == nil || IsNil(o.Preset) {
 		return nil, false
 	}
@@ -137,7 +136,7 @@ func (o *ConfigurationFamilyCreate) GetPresetOk() (*PresetConfigurationFamilyCre
 }
 
 // HasPreset returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasPreset() bool {
+func (o *ConfigurationFamilyUpdate) HasPreset() bool {
 	if o != nil && !IsNil(o.Preset) {
 		return true
 	}
@@ -145,15 +144,15 @@ func (o *ConfigurationFamilyCreate) HasPreset() bool {
 	return false
 }
 
-// SetPreset gets a reference to the given PresetConfigurationFamilyCreate and assigns it to the Preset field.
-func (o *ConfigurationFamilyCreate) SetPreset(v PresetConfigurationFamilyCreate) {
+// SetPreset gets a reference to the given PresetConfigurationFamilyUpdate and assigns it to the Preset field.
+func (o *ConfigurationFamilyUpdate) SetPreset(v PresetConfigurationFamilyUpdate) {
 	o.Preset = &v
 }
 
 // GetRaw returns the Raw field value if set, zero value otherwise.
-func (o *ConfigurationFamilyCreate) GetRaw() RawConfigurationFamilyCreate {
+func (o *ConfigurationFamilyUpdate) GetRaw() RawConfigurationFamilyUpdate {
 	if o == nil || IsNil(o.Raw) {
-		var ret RawConfigurationFamilyCreate
+		var ret RawConfigurationFamilyUpdate
 		return ret
 	}
 	return *o.Raw
@@ -161,7 +160,7 @@ func (o *ConfigurationFamilyCreate) GetRaw() RawConfigurationFamilyCreate {
 
 // GetRawOk returns a tuple with the Raw field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationFamilyCreate) GetRawOk() (*RawConfigurationFamilyCreate, bool) {
+func (o *ConfigurationFamilyUpdate) GetRawOk() (*RawConfigurationFamilyUpdate, bool) {
 	if o == nil || IsNil(o.Raw) {
 		return nil, false
 	}
@@ -169,7 +168,7 @@ func (o *ConfigurationFamilyCreate) GetRawOk() (*RawConfigurationFamilyCreate, b
 }
 
 // HasRaw returns a boolean if a field has been set.
-func (o *ConfigurationFamilyCreate) HasRaw() bool {
+func (o *ConfigurationFamilyUpdate) HasRaw() bool {
 	if o != nil && !IsNil(o.Raw) {
 		return true
 	}
@@ -177,12 +176,12 @@ func (o *ConfigurationFamilyCreate) HasRaw() bool {
 	return false
 }
 
-// SetRaw gets a reference to the given RawConfigurationFamilyCreate and assigns it to the Raw field.
-func (o *ConfigurationFamilyCreate) SetRaw(v RawConfigurationFamilyCreate) {
+// SetRaw gets a reference to the given RawConfigurationFamilyUpdate and assigns it to the Raw field.
+func (o *ConfigurationFamilyUpdate) SetRaw(v RawConfigurationFamilyUpdate) {
 	o.Raw = &v
 }
 
-func (o ConfigurationFamilyCreate) MarshalJSON() ([]byte, error) {
+func (o ConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -190,7 +189,7 @@ func (o ConfigurationFamilyCreate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ConfigurationFamilyCreate) ToMap() (map[string]interface{}, error) {
+func (o ConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Active) {
 		toSerialize["active"] = o.Active
@@ -204,20 +203,15 @@ func (o ConfigurationFamilyCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Raw) {
 		toSerialize["raw"] = o.Raw
 	}
-	requiredOneOfGroup0Matches := 0
+	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["raw"]; exists {
-		requiredOneOfGroup0Matches++
+		optionalOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["preset"]; exists {
-		requiredOneOfGroup0Matches++
+		optionalOneOfGroup0Matches++
 	}
-	if requiredOneOfGroup0Matches == 0 {
-		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
-			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [raw, preset] must be set"}
-		}
-	}
-	if requiredOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [raw, preset] must be set"}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["raw"]; exists {
@@ -234,29 +228,29 @@ func (o ConfigurationFamilyCreate) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ConfigurationFamilyCreate) UnmarshalJSON(data []byte) (err error) {
-	varConfigurationFamilyCreate := _ConfigurationFamilyCreate{}
+func (o *ConfigurationFamilyUpdate) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationFamilyUpdate := _ConfigurationFamilyUpdate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varConfigurationFamilyCreate)
+	err = decoder.Decode(&varConfigurationFamilyUpdate)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ConfigurationFamilyCreate(varConfigurationFamilyCreate)
+	*o = ConfigurationFamilyUpdate(varConfigurationFamilyUpdate)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		requiredOneOfGroup0MatchesInPayload := 0
+		optionalOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["raw"]; exists {
-			requiredOneOfGroup0MatchesInPayload++
+			optionalOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["preset"]; exists {
-			requiredOneOfGroup0MatchesInPayload++
+			optionalOneOfGroup0MatchesInPayload++
 		}
-		if requiredOneOfGroup0MatchesInPayload > 1 {
+		if optionalOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
 		}
 
@@ -266,44 +260,43 @@ func (o *ConfigurationFamilyCreate) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "raw")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
-		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err
 }
 
-type NullableConfigurationFamilyCreate struct {
-	value *ConfigurationFamilyCreate
+type NullableConfigurationFamilyUpdate struct {
+	value *ConfigurationFamilyUpdate
 	isSet bool
 }
 
-func (v NullableConfigurationFamilyCreate) Get() *ConfigurationFamilyCreate {
+func (v NullableConfigurationFamilyUpdate) Get() *ConfigurationFamilyUpdate {
 	return v.value
 }
 
-func (v *NullableConfigurationFamilyCreate) Set(val *ConfigurationFamilyCreate) {
+func (v *NullableConfigurationFamilyUpdate) Set(val *ConfigurationFamilyUpdate) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConfigurationFamilyCreate) IsSet() bool {
+func (v NullableConfigurationFamilyUpdate) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConfigurationFamilyCreate) Unset() {
+func (v *NullableConfigurationFamilyUpdate) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConfigurationFamilyCreate(val *ConfigurationFamilyCreate) *NullableConfigurationFamilyCreate {
-	return &NullableConfigurationFamilyCreate{value: val, isSet: true}
+func NewNullableConfigurationFamilyUpdate(val *ConfigurationFamilyUpdate) *NullableConfigurationFamilyUpdate {
+	return &NullableConfigurationFamilyUpdate{value: val, isSet: true}
 }
 
-func (v NullableConfigurationFamilyCreate) MarshalJSON() ([]byte, error) {
+func (v NullableConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableConfigurationFamilyCreate) UnmarshalJSON(src []byte) error {
+func (v *NullableConfigurationFamilyUpdate) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

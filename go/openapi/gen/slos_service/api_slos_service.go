@@ -18,6 +18,7 @@ import (
 	"net/url"
 	"strings"
 	"reflect"
+	"time"
 )
 
 
@@ -720,6 +721,216 @@ func (a *SlosServiceAPIService) SlosServiceGetSloExecute(r ApiSlosServiceGetSloR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSlosServiceGetSloStatusRequest struct {
+	ctx context.Context
+	ApiService *SlosServiceAPIService
+	id string
+	groupingKeyValue *[]string
+	from *time.Time
+	to *time.Time
+	targetThresholdPercentage *float32
+}
+
+// Grouping label pairs that identify the slice to evaluate, passed as repeated query values. Each entry is one pair: the substring before the first comma is the label name (must not contain a comma), and the remainder of the entry (which may contain commas, or be empty) is the label value. Example: grouping_key_value&#x3D;service,api&amp;grouping_key_value&#x3D;region,eu-west-1 or grouping_key_value&#x3D;service, for an empty value. When omitted or empty, every permutation is considered. When provided, each label name must appear at most once and must be one of the SLO configured grouping labels; the slice includes every atomic permutation whose labels match the given pairs (a proper subset of grouping dimensions matches all permutations that agree on those labels). &#x60;lowestCompliance&#x60; and &#x60;lowestRemainingErrorBudget&#x60; are the minimum ratio across those matching permutations, not ratios recomputed from summed events across omitted dimensions.
+func (r ApiSlosServiceGetSloStatusRequest) GroupingKeyValue(groupingKeyValue []string) ApiSlosServiceGetSloStatusRequest {
+	r.groupingKeyValue = &groupingKeyValue
+	return r
+}
+
+// Inclusive lower bound of the evaluation window. When omitted, defaults to the start of the SLO configured rolling time frame ending at the effective upper bound. RFC 3339 UTC date-time on a whole-minute instant (suffix &#x60;Z&#x60;, seconds &#x60;00&#x60;, no fractional seconds).
+func (r ApiSlosServiceGetSloStatusRequest) From(from time.Time) ApiSlosServiceGetSloStatusRequest {
+	r.from = &from
+	return r
+}
+
+// Exclusive upper bound of the evaluation window. When omitted, defaults to the current time with sub-minute precision truncated toward zero to the preceding whole UTC minute (for example 12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a whole-minute instant (suffix &#x60;Z&#x60;, seconds &#x60;00&#x60;, no fractional seconds).
+func (r ApiSlosServiceGetSloStatusRequest) To(to time.Time) ApiSlosServiceGetSloStatusRequest {
+	r.to = &to
+	return r
+}
+
+// Optional override of the target threshold percentage for this evaluation, in the range 0-100. When omitted, the target threshold percentage configured on the SLO is used.
+func (r ApiSlosServiceGetSloStatusRequest) TargetThresholdPercentage(targetThresholdPercentage float32) ApiSlosServiceGetSloStatusRequest {
+	r.targetThresholdPercentage = &targetThresholdPercentage
+	return r
+}
+
+func (r ApiSlosServiceGetSloStatusRequest) Execute() (*GetSloStatusResponse, *http.Response, error) {
+	return r.ApiService.SlosServiceGetSloStatusExecute(r)
+}
+
+/*
+SlosServiceGetSloStatus Get Slo Status
+
+Returns lowest compliance and remaining error budget (0-1 ratios) for an SLO grouping slice over a time window.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Unique identifier of the SLO.
+ @return ApiSlosServiceGetSloStatusRequest
+*/
+func (a *SlosServiceAPIService) SlosServiceGetSloStatus(ctx context.Context, id string) ApiSlosServiceGetSloStatusRequest {
+	return ApiSlosServiceGetSloStatusRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return GetSloStatusResponse
+func (a *SlosServiceAPIService) SlosServiceGetSloStatusExecute(r ApiSlosServiceGetSloStatusRequest) (*GetSloStatusResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetSloStatusResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SlosServiceAPIService.SlosServiceGetSloStatus")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/slo/slos/v1/{id}/status"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if strlen(r.id) < 1 {
+		return localVarReturnValue, nil, reportError("id must have at least 1 elements")
+	}
+	if strlen(r.id) > 256 {
+		return localVarReturnValue, nil, reportError("id must have less than 256 elements")
+	}
+
+	if r.groupingKeyValue != nil {
+		t := *r.groupingKeyValue
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				if err := parameterAddToHeaderOrQuery(localVarQueryParams, "grouping_key_value", s.Index(i).Interface(), "form", "multi"); err != nil {
+					return localVarReturnValue, nil, err
+				}
+			}
+		} else {
+			if err := parameterAddToHeaderOrQuery(localVarQueryParams, "grouping_key_value", t, "form", "multi"); err != nil {
+				return localVarReturnValue, nil, err
+			}
+		}
+	}
+	if r.from != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "from", r.from, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	if r.to != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "to", r.to, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	if r.targetThresholdPercentage != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "target_threshold_percentage", r.targetThresholdPercentage, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

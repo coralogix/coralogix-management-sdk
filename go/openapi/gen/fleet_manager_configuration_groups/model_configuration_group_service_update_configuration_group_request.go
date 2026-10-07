@@ -17,15 +17,15 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the ConfigurationGroupCreate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ConfigurationGroupCreate{}
+// checks if the ConfigurationGroupServiceUpdateConfigurationGroupRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ConfigurationGroupServiceUpdateConfigurationGroupRequest{}
 
-// ConfigurationGroupCreate Payload used to create a fleet-manager configuration group.
-type ConfigurationGroupCreate struct {
+// ConfigurationGroupServiceUpdateConfigurationGroupRequest Configuration group field values for an update. Only fields listed in update_mask are applied.
+type ConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Initial configuration family to create with this group.
-	Family *ConfigurationFamilyCreate `json:"family,omitempty"`
+	// Latest configuration family field values.
+	Family *ConfigurationFamilyUpdate `json:"family,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
@@ -36,27 +36,27 @@ type ConfigurationGroupCreate struct {
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _ConfigurationGroupCreate ConfigurationGroupCreate
+type _ConfigurationGroupServiceUpdateConfigurationGroupRequest ConfigurationGroupServiceUpdateConfigurationGroupRequest
 
-// NewConfigurationGroupCreate instantiates a new ConfigurationGroupCreate object
+// NewConfigurationGroupServiceUpdateConfigurationGroupRequest instantiates a new ConfigurationGroupServiceUpdateConfigurationGroupRequest object
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroupCreate() *ConfigurationGroupCreate {
-	this := ConfigurationGroupCreate{}
+func NewConfigurationGroupServiceUpdateConfigurationGroupRequest() *ConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	this := ConfigurationGroupServiceUpdateConfigurationGroupRequest{}
 	return &this
 }
 
-// NewConfigurationGroupCreateWithDefaults instantiates a new ConfigurationGroupCreate object
+// NewConfigurationGroupServiceUpdateConfigurationGroupRequestWithDefaults instantiates a new ConfigurationGroupServiceUpdateConfigurationGroupRequest object
 // This constructor does not set properties that have a default: the server fills them in.
 // It doesn't guarantee that properties required by API are set
-func NewConfigurationGroupCreateWithDefaults() *ConfigurationGroupCreate {
-	this := ConfigurationGroupCreate{}
+func NewConfigurationGroupServiceUpdateConfigurationGroupRequestWithDefaults() *ConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	this := ConfigurationGroupServiceUpdateConfigurationGroupRequest{}
 	return &this
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *ConfigurationGroupCreate) GetDescription() string {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -66,7 +66,7 @@ func (o *ConfigurationGroupCreate) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupCreate) GetDescriptionOk() (*string, bool) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -74,7 +74,7 @@ func (o *ConfigurationGroupCreate) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *ConfigurationGroupCreate) HasDescription() bool {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -83,14 +83,14 @@ func (o *ConfigurationGroupCreate) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *ConfigurationGroupCreate) SetDescription(v string) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetFamily returns the Family field value if set, zero value otherwise.
-func (o *ConfigurationGroupCreate) GetFamily() ConfigurationFamilyCreate {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetFamily() ConfigurationFamilyUpdate {
 	if o == nil || IsNil(o.Family) {
-		var ret ConfigurationFamilyCreate
+		var ret ConfigurationFamilyUpdate
 		return ret
 	}
 	return *o.Family
@@ -98,7 +98,7 @@ func (o *ConfigurationGroupCreate) GetFamily() ConfigurationFamilyCreate {
 
 // GetFamilyOk returns a tuple with the Family field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupCreate) GetFamilyOk() (*ConfigurationFamilyCreate, bool) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetFamilyOk() (*ConfigurationFamilyUpdate, bool) {
 	if o == nil || IsNil(o.Family) {
 		return nil, false
 	}
@@ -106,7 +106,7 @@ func (o *ConfigurationGroupCreate) GetFamilyOk() (*ConfigurationFamilyCreate, bo
 }
 
 // HasFamily returns a boolean if a field has been set.
-func (o *ConfigurationGroupCreate) HasFamily() bool {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) HasFamily() bool {
 	if o != nil && !IsNil(o.Family) {
 		return true
 	}
@@ -114,13 +114,13 @@ func (o *ConfigurationGroupCreate) HasFamily() bool {
 	return false
 }
 
-// SetFamily gets a reference to the given ConfigurationFamilyCreate and assigns it to the Family field.
-func (o *ConfigurationGroupCreate) SetFamily(v ConfigurationFamilyCreate) {
+// SetFamily gets a reference to the given ConfigurationFamilyUpdate and assigns it to the Family field.
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) SetFamily(v ConfigurationFamilyUpdate) {
 	o.Family = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *ConfigurationGroupCreate) GetName() string {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -130,7 +130,7 @@ func (o *ConfigurationGroupCreate) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupCreate) GetNameOk() (*string, bool) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -138,7 +138,7 @@ func (o *ConfigurationGroupCreate) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *ConfigurationGroupCreate) HasName() bool {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -147,12 +147,12 @@ func (o *ConfigurationGroupCreate) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *ConfigurationGroupCreate) SetName(v string) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) SetName(v string) {
 	o.Name = &v
 }
 
 // GetPriorityOrder returns the PriorityOrder field value if set, zero value otherwise.
-func (o *ConfigurationGroupCreate) GetPriorityOrder() int32 {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetPriorityOrder() int32 {
 	if o == nil || IsNil(o.PriorityOrder) {
 		var ret int32
 		return ret
@@ -162,7 +162,7 @@ func (o *ConfigurationGroupCreate) GetPriorityOrder() int32 {
 
 // GetPriorityOrderOk returns a tuple with the PriorityOrder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupCreate) GetPriorityOrderOk() (*int32, bool) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetPriorityOrderOk() (*int32, bool) {
 	if o == nil || IsNil(o.PriorityOrder) {
 		return nil, false
 	}
@@ -170,7 +170,7 @@ func (o *ConfigurationGroupCreate) GetPriorityOrderOk() (*int32, bool) {
 }
 
 // HasPriorityOrder returns a boolean if a field has been set.
-func (o *ConfigurationGroupCreate) HasPriorityOrder() bool {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) HasPriorityOrder() bool {
 	if o != nil && !IsNil(o.PriorityOrder) {
 		return true
 	}
@@ -179,12 +179,12 @@ func (o *ConfigurationGroupCreate) HasPriorityOrder() bool {
 }
 
 // SetPriorityOrder gets a reference to the given int32 and assigns it to the PriorityOrder field.
-func (o *ConfigurationGroupCreate) SetPriorityOrder(v int32) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) SetPriorityOrder(v int32) {
 	o.PriorityOrder = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
-func (o *ConfigurationGroupCreate) GetTags() []string {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetTags() []string {
 	if o == nil || IsNil(o.Tags) {
 		var ret []string
 		return ret
@@ -194,7 +194,7 @@ func (o *ConfigurationGroupCreate) GetTags() []string {
 
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupCreate) GetTagsOk() ([]string, bool) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) GetTagsOk() ([]string, bool) {
 	if o == nil || IsNil(o.Tags) {
 		return nil, false
 	}
@@ -202,7 +202,7 @@ func (o *ConfigurationGroupCreate) GetTagsOk() ([]string, bool) {
 }
 
 // HasTags returns a boolean if a field has been set.
-func (o *ConfigurationGroupCreate) HasTags() bool {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) HasTags() bool {
 	if o != nil && !IsNil(o.Tags) {
 		return true
 	}
@@ -211,11 +211,11 @@ func (o *ConfigurationGroupCreate) HasTags() bool {
 }
 
 // SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *ConfigurationGroupCreate) SetTags(v []string) {
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) SetTags(v []string) {
 	o.Tags = v
 }
 
-func (o ConfigurationGroupCreate) MarshalJSON() ([]byte, error) {
+func (o ConfigurationGroupServiceUpdateConfigurationGroupRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -223,7 +223,7 @@ func (o ConfigurationGroupCreate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ConfigurationGroupCreate) ToMap() (map[string]interface{}, error) {
+func (o ConfigurationGroupServiceUpdateConfigurationGroupRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
@@ -248,17 +248,17 @@ func (o ConfigurationGroupCreate) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ConfigurationGroupCreate) UnmarshalJSON(data []byte) (err error) {
-	varConfigurationGroupCreate := _ConfigurationGroupCreate{}
+func (o *ConfigurationGroupServiceUpdateConfigurationGroupRequest) UnmarshalJSON(data []byte) (err error) {
+	varConfigurationGroupServiceUpdateConfigurationGroupRequest := _ConfigurationGroupServiceUpdateConfigurationGroupRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varConfigurationGroupCreate)
+	err = decoder.Decode(&varConfigurationGroupServiceUpdateConfigurationGroupRequest)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ConfigurationGroupCreate(varConfigurationGroupCreate)
+	*o = ConfigurationGroupServiceUpdateConfigurationGroupRequest(varConfigurationGroupServiceUpdateConfigurationGroupRequest)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -275,38 +275,38 @@ func (o *ConfigurationGroupCreate) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableConfigurationGroupCreate struct {
-	value *ConfigurationGroupCreate
+type NullableConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
+	value *ConfigurationGroupServiceUpdateConfigurationGroupRequest
 	isSet bool
 }
 
-func (v NullableConfigurationGroupCreate) Get() *ConfigurationGroupCreate {
+func (v NullableConfigurationGroupServiceUpdateConfigurationGroupRequest) Get() *ConfigurationGroupServiceUpdateConfigurationGroupRequest {
 	return v.value
 }
 
-func (v *NullableConfigurationGroupCreate) Set(val *ConfigurationGroupCreate) {
+func (v *NullableConfigurationGroupServiceUpdateConfigurationGroupRequest) Set(val *ConfigurationGroupServiceUpdateConfigurationGroupRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableConfigurationGroupCreate) IsSet() bool {
+func (v NullableConfigurationGroupServiceUpdateConfigurationGroupRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableConfigurationGroupCreate) Unset() {
+func (v *NullableConfigurationGroupServiceUpdateConfigurationGroupRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableConfigurationGroupCreate(val *ConfigurationGroupCreate) *NullableConfigurationGroupCreate {
-	return &NullableConfigurationGroupCreate{value: val, isSet: true}
+func NewNullableConfigurationGroupServiceUpdateConfigurationGroupRequest(val *ConfigurationGroupServiceUpdateConfigurationGroupRequest) *NullableConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	return &NullableConfigurationGroupServiceUpdateConfigurationGroupRequest{value: val, isSet: true}
 }
 
-func (v NullableConfigurationGroupCreate) MarshalJSON() ([]byte, error) {
+func (v NullableConfigurationGroupServiceUpdateConfigurationGroupRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableConfigurationGroupCreate) UnmarshalJSON(src []byte) error {
+func (v *NullableConfigurationGroupServiceUpdateConfigurationGroupRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

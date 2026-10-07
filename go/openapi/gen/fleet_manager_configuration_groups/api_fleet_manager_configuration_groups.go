@@ -186,7 +186,7 @@ func (r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) Configurati
 	return r
 }
 
-func (r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) Execute() (*CreateConfigurationGroupResponse, *http.Response, error) {
+func (r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
 	return r.ApiService.ConfigurationGroupServiceCreateConfigurationGroupExecute(r)
 }
 
@@ -206,13 +206,13 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCre
 }
 
 // Execute executes the request
-//  @return CreateConfigurationGroupResponse
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCreateConfigurationGroupExecute(r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) (*CreateConfigurationGroupResponse, *http.Response, error) {
+//  @return ConfigurationGroup
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCreateConfigurationGroupExecute(r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) (*ConfigurationGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateConfigurationGroupResponse
+		localVarReturnValue  *ConfigurationGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceCreateConfigurationGroup")
@@ -225,6 +225,9 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCre
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.configurationGroupServiceCreateConfigurationGroupRequest == nil {
+		return localVarReturnValue, nil, reportError("configurationGroupServiceCreateConfigurationGroupRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -338,7 +341,7 @@ func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) LatestFamilyOn
 	return r
 }
 
-func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*GetConfigurationGroupResponse, *http.Response, error) {
+func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
 	return r.ApiService.ConfigurationGroupServiceGetConfigurationGroupExecute(r)
 }
 
@@ -360,13 +363,13 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 }
 
 // Execute executes the request
-//  @return GetConfigurationGroupResponse
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGetConfigurationGroupExecute(r ApiConfigurationGroupServiceGetConfigurationGroupRequest) (*GetConfigurationGroupResponse, *http.Response, error) {
+//  @return ConfigurationGroup
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGetConfigurationGroupExecute(r ApiConfigurationGroupServiceGetConfigurationGroupRequest) (*ConfigurationGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetConfigurationGroupResponse
+		localVarReturnValue  *ConfigurationGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceGetConfigurationGroup")
@@ -489,33 +492,40 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfigurationGroupServiceReplaceConfigurationGroupRequest struct {
+type ApiConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
 	ctx context.Context
 	ApiService *FleetManagerConfigurationGroupsAPIService
+	updateMask *string
 	id string
-	configurationGroupServiceReplaceConfigurationGroupRequest *ConfigurationGroupServiceReplaceConfigurationGroupRequest
+	configurationGroupServiceUpdateConfigurationGroupRequest *ConfigurationGroupServiceUpdateConfigurationGroupRequest
 }
 
-func (r ApiConfigurationGroupServiceReplaceConfigurationGroupRequest) ConfigurationGroupServiceReplaceConfigurationGroupRequest(configurationGroupServiceReplaceConfigurationGroupRequest ConfigurationGroupServiceReplaceConfigurationGroupRequest) ApiConfigurationGroupServiceReplaceConfigurationGroupRequest {
-	r.configurationGroupServiceReplaceConfigurationGroupRequest = &configurationGroupServiceReplaceConfigurationGroupRequest
+// Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (name, description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.
+func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) UpdateMask(updateMask string) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	r.updateMask = &updateMask
 	return r
 }
 
-func (r ApiConfigurationGroupServiceReplaceConfigurationGroupRequest) Execute() (*ReplaceConfigurationGroupResponse, *http.Response, error) {
-	return r.ApiService.ConfigurationGroupServiceReplaceConfigurationGroupExecute(r)
+func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) ConfigurationGroupServiceUpdateConfigurationGroupRequest(configurationGroupServiceUpdateConfigurationGroupRequest ConfigurationGroupServiceUpdateConfigurationGroupRequest) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	r.configurationGroupServiceUpdateConfigurationGroupRequest = &configurationGroupServiceUpdateConfigurationGroupRequest
+	return r
+}
+
+func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
+	return r.ApiService.ConfigurationGroupServiceUpdateConfigurationGroupExecute(r)
 }
 
 /*
-ConfigurationGroupServiceReplaceConfigurationGroup Update configuration group
+ConfigurationGroupServiceUpdateConfigurationGroup Update configuration group
 
-Updates provided fleet-manager configuration group fields and optionally updates the latest family.
+Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.
- @return ApiConfigurationGroupServiceReplaceConfigurationGroupRequest
+ @return ApiConfigurationGroupServiceUpdateConfigurationGroupRequest
 */
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceReplaceConfigurationGroup(ctx context.Context, id string) ApiConfigurationGroupServiceReplaceConfigurationGroupRequest {
-	return ApiConfigurationGroupServiceReplaceConfigurationGroupRequest{
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceUpdateConfigurationGroup(ctx context.Context, id string) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	return ApiConfigurationGroupServiceUpdateConfigurationGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -523,16 +533,16 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceRep
 }
 
 // Execute executes the request
-//  @return ReplaceConfigurationGroupResponse
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceReplaceConfigurationGroupExecute(r ApiConfigurationGroupServiceReplaceConfigurationGroupRequest) (*ReplaceConfigurationGroupResponse, *http.Response, error) {
+//  @return ConfigurationGroup
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceUpdateConfigurationGroupExecute(r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) (*ConfigurationGroup, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
+		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *ReplaceConfigurationGroupResponse
+		localVarReturnValue  *ConfigurationGroup
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceReplaceConfigurationGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceUpdateConfigurationGroup")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -543,6 +553,15 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceRep
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateMask == nil {
+		return localVarReturnValue, nil, reportError("updateMask is required and must be specified")
+	}
+	if strlen(*r.updateMask) < 1 {
+		return localVarReturnValue, nil, reportError("updateMask must have at least 1 elements")
+	}
+	if strlen(*r.updateMask) > 512 {
+		return localVarReturnValue, nil, reportError("updateMask must have less than 512 elements")
+	}
 	if strlen(r.id) < 36 {
 		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
 	}
@@ -550,6 +569,9 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceRep
 		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "update_mask", r.updateMask, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -568,7 +590,7 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceRep
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.configurationGroupServiceReplaceConfigurationGroupRequest
+	localVarPostBody = r.configurationGroupServiceUpdateConfigurationGroupRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -614,6 +636,17 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceRep
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

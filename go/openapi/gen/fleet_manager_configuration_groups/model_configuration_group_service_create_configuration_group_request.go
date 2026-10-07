@@ -13,6 +13,7 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,18 @@ var _ = bytes.MinRead
 // checks if the ConfigurationGroupServiceCreateConfigurationGroupRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationGroupServiceCreateConfigurationGroupRequest{}
 
-// ConfigurationGroupServiceCreateConfigurationGroupRequest Request to create a fleet-manager configuration group.
+// ConfigurationGroupServiceCreateConfigurationGroupRequest Payload used to create a fleet-manager configuration group.
 type ConfigurationGroupServiceCreateConfigurationGroupRequest struct {
-	// Configuration group to create.
-	Group *ConfigurationGroupCreate `json:"group,omitempty"`
+	// Human-readable description.
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Initial configuration family to create with this group.
+	Family ConfigurationFamilyCreate `json:"family"`
+	// Display name.
+	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Selection precedence. Higher values win on ties and 0 is the default.
+	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
+	// Tags attached to the configuration group.
+	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +43,9 @@ type _ConfigurationGroupServiceCreateConfigurationGroupRequest ConfigurationGrou
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroupServiceCreateConfigurationGroupRequest() *ConfigurationGroupServiceCreateConfigurationGroupRequest {
+func NewConfigurationGroupServiceCreateConfigurationGroupRequest(family ConfigurationFamilyCreate) *ConfigurationGroupServiceCreateConfigurationGroupRequest {
 	this := ConfigurationGroupServiceCreateConfigurationGroupRequest{}
+	this.Family = family
 	return &this
 }
 
@@ -47,36 +57,156 @@ func NewConfigurationGroupServiceCreateConfigurationGroupRequestWithDefaults() *
 	return &this
 }
 
-// GetGroup returns the Group field value if set, zero value otherwise.
-func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetGroup() ConfigurationGroupCreate {
-	if o == nil || IsNil(o.Group) {
-		var ret ConfigurationGroupCreate
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
 		return ret
 	}
-	return *o.Group
+	return *o.Description
 }
 
-// GetGroupOk returns a tuple with the Group field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetGroupOk() (*ConfigurationGroupCreate, bool) {
-	if o == nil || IsNil(o.Group) {
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return o.Group, true
+	return o.Description, true
 }
 
-// HasGroup returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) HasGroup() bool {
-	if o != nil && !IsNil(o.Group) {
+// HasDescription returns a boolean if a field has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
 	return false
 }
 
-// SetGroup gets a reference to the given ConfigurationGroupCreate and assigns it to the Group field.
-func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetGroup(v ConfigurationGroupCreate) {
-	o.Group = &v
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetFamily returns the Family field value
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetFamily() ConfigurationFamilyCreate {
+	if o == nil {
+		var ret ConfigurationFamilyCreate
+		return ret
+	}
+
+	return o.Family
+}
+
+// GetFamilyOk returns a tuple with the Family field value
+// and a boolean to check if the value has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetFamilyOk() (*ConfigurationFamilyCreate, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Family, true
+}
+
+// SetFamily sets field value
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetFamily(v ConfigurationFamilyCreate) {
+	o.Family = v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetName(v string) {
+	o.Name = &v
+}
+
+// GetPriorityOrder returns the PriorityOrder field value if set, zero value otherwise.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetPriorityOrder() int32 {
+	if o == nil || IsNil(o.PriorityOrder) {
+		var ret int32
+		return ret
+	}
+	return *o.PriorityOrder
+}
+
+// GetPriorityOrderOk returns a tuple with the PriorityOrder field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetPriorityOrderOk() (*int32, bool) {
+	if o == nil || IsNil(o.PriorityOrder) {
+		return nil, false
+	}
+	return o.PriorityOrder, true
+}
+
+// HasPriorityOrder returns a boolean if a field has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) HasPriorityOrder() bool {
+	if o != nil && !IsNil(o.PriorityOrder) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriorityOrder gets a reference to the given int32 and assigns it to the PriorityOrder field.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetPriorityOrder(v int32) {
+	o.PriorityOrder = &v
+}
+
+// GetTags returns the Tags field value if set, zero value otherwise.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetTags() []string {
+	if o == nil || IsNil(o.Tags) {
+		var ret []string
+		return ret
+	}
+	return o.Tags
+}
+
+// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Tags) {
+		return nil, false
+	}
+	return o.Tags, true
+}
+
+// HasTags returns a boolean if a field has been set.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) HasTags() bool {
+	if o != nil && !IsNil(o.Tags) {
+		return true
+	}
+
+	return false
+}
+
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetTags(v []string) {
+	o.Tags = v
 }
 
 func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) MarshalJSON() ([]byte, error) {
@@ -89,8 +219,18 @@ func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) MarshalJSON() 
 
 func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Group) {
-		toSerialize["group"] = o.Group
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	toSerialize["family"] = o.Family
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.PriorityOrder) {
+		toSerialize["priorityOrder"] = o.PriorityOrder
+	}
+	if !IsNil(o.Tags) {
+		toSerialize["tags"] = o.Tags
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -101,6 +241,27 @@ func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) ToMap() (map[s
 }
 
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"family",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varConfigurationGroupServiceCreateConfigurationGroupRequest := _ConfigurationGroupServiceCreateConfigurationGroupRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -115,7 +276,11 @@ func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) UnmarshalJSON
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "group")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "family")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "priorityOrder")
+		delete(additionalProperties, "tags")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

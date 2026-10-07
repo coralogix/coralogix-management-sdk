@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,28 +28,22 @@ type ConfigurationFamily struct {
 	Active *bool `json:"active,omitempty"`
 	// Configuration family UUID v7 this family is based on.
 	BasedOnConfigurationFamilyId *string `json:"basedOnConfigurationFamilyId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Helm chart name for Helm-backed families.
-	ChartName *ChartName `json:"chartName,omitempty"`
-	// Helm chart or template version used by this family.
-	ChartVersion *string `json:"chartVersion,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Collector semantic version this configuration family targets, without a leading v prefix.
 	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Configuration family UUID v7.
-	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Integration version from the onboarding flow.
-	IntegrationVersion *string `json:"integrationVersion,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Time when this family was last activated.
 	LastActivatedAt *time.Time `json:"lastActivatedAt,omitempty"`
-	// Metadata stored with this configuration family.
-	Metadata map[string]string `json:"metadata,omitempty"`
-	// Remote configurations in this family.
-	RemoteConfigurations []RemoteConfiguration `json:"remoteConfigurations,omitempty"`
+	// Configuration template settings; present when the family has a chartName and observability features.
+	Preset *PresetConfigurationFamily `json:"preset,omitempty"`
+	// Inputs of a configuration family defined directly by its remote configurations; present when the family has no chartName.
+	Raw *RawConfigurationFamily `json:"raw,omitempty"`
 	// Immutable inputs that produced this configuration family version.
 	Sources []ConfigurationFamilySource `json:"sources,omitempty"`
 	// Monotonic version number of this configuration family within its group.
-	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Version string `json:"version" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -59,8 +54,10 @@ type _ConfigurationFamily ConfigurationFamily
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationFamily() *ConfigurationFamily {
+func NewConfigurationFamily(id string, version string) *ConfigurationFamily {
 	this := ConfigurationFamily{}
+	this.Id = id
+	this.Version = version
 	return &this
 }
 
@@ -136,70 +133,6 @@ func (o *ConfigurationFamily) SetBasedOnConfigurationFamilyId(v string) {
 	o.BasedOnConfigurationFamilyId = &v
 }
 
-// GetChartName returns the ChartName field value if set, zero value otherwise.
-func (o *ConfigurationFamily) GetChartName() ChartName {
-	if o == nil || IsNil(o.ChartName) {
-		var ret ChartName
-		return ret
-	}
-	return *o.ChartName
-}
-
-// GetChartNameOk returns a tuple with the ChartName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamily) GetChartNameOk() (*ChartName, bool) {
-	if o == nil || IsNil(o.ChartName) {
-		return nil, false
-	}
-	return o.ChartName, true
-}
-
-// HasChartName returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasChartName() bool {
-	if o != nil && !IsNil(o.ChartName) {
-		return true
-	}
-
-	return false
-}
-
-// SetChartName gets a reference to the given ChartName and assigns it to the ChartName field.
-func (o *ConfigurationFamily) SetChartName(v ChartName) {
-	o.ChartName = &v
-}
-
-// GetChartVersion returns the ChartVersion field value if set, zero value otherwise.
-func (o *ConfigurationFamily) GetChartVersion() string {
-	if o == nil || IsNil(o.ChartVersion) {
-		var ret string
-		return ret
-	}
-	return *o.ChartVersion
-}
-
-// GetChartVersionOk returns a tuple with the ChartVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamily) GetChartVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.ChartVersion) {
-		return nil, false
-	}
-	return o.ChartVersion, true
-}
-
-// HasChartVersion returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasChartVersion() bool {
-	if o != nil && !IsNil(o.ChartVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetChartVersion gets a reference to the given string and assigns it to the ChartVersion field.
-func (o *ConfigurationFamily) SetChartVersion(v string) {
-	o.ChartVersion = &v
-}
-
 // GetCollectorVersion returns the CollectorVersion field value if set, zero value otherwise.
 func (o *ConfigurationFamily) GetCollectorVersion() string {
 	if o == nil || IsNil(o.CollectorVersion) {
@@ -264,68 +197,28 @@ func (o *ConfigurationFamily) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ConfigurationFamily) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationFamily) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ConfigurationFamily) SetId(v string) {
-	o.Id = &v
-}
-
-// GetIntegrationVersion returns the IntegrationVersion field value if set, zero value otherwise.
-func (o *ConfigurationFamily) GetIntegrationVersion() string {
-	if o == nil || IsNil(o.IntegrationVersion) {
-		var ret string
-		return ret
-	}
-	return *o.IntegrationVersion
-}
-
-// GetIntegrationVersionOk returns a tuple with the IntegrationVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamily) GetIntegrationVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.IntegrationVersion) {
-		return nil, false
-	}
-	return o.IntegrationVersion, true
-}
-
-// HasIntegrationVersion returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasIntegrationVersion() bool {
-	if o != nil && !IsNil(o.IntegrationVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationVersion gets a reference to the given string and assigns it to the IntegrationVersion field.
-func (o *ConfigurationFamily) SetIntegrationVersion(v string) {
-	o.IntegrationVersion = &v
+	o.Id = v
 }
 
 // GetLastActivatedAt returns the LastActivatedAt field value if set, zero value otherwise.
@@ -360,68 +253,68 @@ func (o *ConfigurationFamily) SetLastActivatedAt(v time.Time) {
 	o.LastActivatedAt = &v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *ConfigurationFamily) GetMetadata() map[string]string {
-	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]string
+// GetPreset returns the Preset field value if set, zero value otherwise.
+func (o *ConfigurationFamily) GetPreset() PresetConfigurationFamily {
+	if o == nil || IsNil(o.Preset) {
+		var ret PresetConfigurationFamily
 		return ret
 	}
-	return o.Metadata
+	return *o.Preset
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationFamily) GetMetadataOk() (map[string]string, bool) {
-	if o == nil || IsNil(o.Metadata) {
-		return map[string]string{}, false
-	}
-	return o.Metadata, true
-}
-
-// HasMetadata returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *ConfigurationFamily) SetMetadata(v map[string]string) {
-	o.Metadata = v
-}
-
-// GetRemoteConfigurations returns the RemoteConfigurations field value if set, zero value otherwise.
-func (o *ConfigurationFamily) GetRemoteConfigurations() []RemoteConfiguration {
-	if o == nil || IsNil(o.RemoteConfigurations) {
-		var ret []RemoteConfiguration
-		return ret
-	}
-	return o.RemoteConfigurations
-}
-
-// GetRemoteConfigurationsOk returns a tuple with the RemoteConfigurations field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamily) GetRemoteConfigurationsOk() ([]RemoteConfiguration, bool) {
-	if o == nil || IsNil(o.RemoteConfigurations) {
+func (o *ConfigurationFamily) GetPresetOk() (*PresetConfigurationFamily, bool) {
+	if o == nil || IsNil(o.Preset) {
 		return nil, false
 	}
-	return o.RemoteConfigurations, true
+	return o.Preset, true
 }
 
-// HasRemoteConfigurations returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasRemoteConfigurations() bool {
-	if o != nil && !IsNil(o.RemoteConfigurations) {
+// HasPreset returns a boolean if a field has been set.
+func (o *ConfigurationFamily) HasPreset() bool {
+	if o != nil && !IsNil(o.Preset) {
 		return true
 	}
 
 	return false
 }
 
-// SetRemoteConfigurations gets a reference to the given []RemoteConfiguration and assigns it to the RemoteConfigurations field.
-func (o *ConfigurationFamily) SetRemoteConfigurations(v []RemoteConfiguration) {
-	o.RemoteConfigurations = v
+// SetPreset gets a reference to the given PresetConfigurationFamily and assigns it to the Preset field.
+func (o *ConfigurationFamily) SetPreset(v PresetConfigurationFamily) {
+	o.Preset = &v
+}
+
+// GetRaw returns the Raw field value if set, zero value otherwise.
+func (o *ConfigurationFamily) GetRaw() RawConfigurationFamily {
+	if o == nil || IsNil(o.Raw) {
+		var ret RawConfigurationFamily
+		return ret
+	}
+	return *o.Raw
+}
+
+// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationFamily) GetRawOk() (*RawConfigurationFamily, bool) {
+	if o == nil || IsNil(o.Raw) {
+		return nil, false
+	}
+	return o.Raw, true
+}
+
+// HasRaw returns a boolean if a field has been set.
+func (o *ConfigurationFamily) HasRaw() bool {
+	if o != nil && !IsNil(o.Raw) {
+		return true
+	}
+
+	return false
+}
+
+// SetRaw gets a reference to the given RawConfigurationFamily and assigns it to the Raw field.
+func (o *ConfigurationFamily) SetRaw(v RawConfigurationFamily) {
+	o.Raw = &v
 }
 
 // GetSources returns the Sources field value if set, zero value otherwise.
@@ -456,36 +349,28 @@ func (o *ConfigurationFamily) SetSources(v []ConfigurationFamilySource) {
 	o.Sources = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value
 func (o *ConfigurationFamily) GetVersion() string {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Version
+
+	return o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationFamily) GetVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return &o.Version, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given string and assigns it to the Version field.
+// SetVersion sets field value
 func (o *ConfigurationFamily) SetVersion(v string) {
-	o.Version = &v
+	o.Version = v
 }
 
 func (o ConfigurationFamily) MarshalJSON() ([]byte, error) {
@@ -504,38 +389,42 @@ func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BasedOnConfigurationFamilyId) {
 		toSerialize["basedOnConfigurationFamilyId"] = o.BasedOnConfigurationFamilyId
 	}
-	if !IsNil(o.ChartName) {
-		toSerialize["chartName"] = o.ChartName
-	}
-	if !IsNil(o.ChartVersion) {
-		toSerialize["chartVersion"] = o.ChartVersion
-	}
 	if !IsNil(o.CollectorVersion) {
 		toSerialize["collectorVersion"] = o.CollectorVersion
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.IntegrationVersion) {
-		toSerialize["integrationVersion"] = o.IntegrationVersion
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.LastActivatedAt) {
 		toSerialize["lastActivatedAt"] = o.LastActivatedAt
 	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
+	if !IsNil(o.Preset) {
+		toSerialize["preset"] = o.Preset
 	}
-	if !IsNil(o.RemoteConfigurations) {
-		toSerialize["remoteConfigurations"] = o.RemoteConfigurations
+	if !IsNil(o.Raw) {
+		toSerialize["raw"] = o.Raw
 	}
 	if !IsNil(o.Sources) {
 		toSerialize["sources"] = o.Sources
 	}
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
+	toSerialize["version"] = o.Version
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["raw"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["preset"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["raw"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field raw must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["preset"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field preset must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -546,6 +435,39 @@ func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"version",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["raw"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["preset"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+	}
+
 	varConfigurationFamily := _ConfigurationFamily{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -560,17 +482,25 @@ func (o *ConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["raw"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["preset"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+		}
+
 		delete(additionalProperties, "active")
 		delete(additionalProperties, "basedOnConfigurationFamilyId")
-		delete(additionalProperties, "chartName")
-		delete(additionalProperties, "chartVersion")
 		delete(additionalProperties, "collectorVersion")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "integrationVersion")
 		delete(additionalProperties, "lastActivatedAt")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "remoteConfigurations")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "raw")
 		delete(additionalProperties, "sources")
 		delete(additionalProperties, "version")
 		o.AdditionalProperties = additionalProperties
