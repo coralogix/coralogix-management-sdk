@@ -11983,6 +11983,137 @@ paths:
       tags:
         - Fleet Manager Configuration Groups
       x-stability: preview
+    patch:
+      description: >-
+        Updates the fields listed in update_mask; other fields are unchanged.
+        Changing family.raw or family.preset creates a new configuration family
+        version only when the content changes.
+      operationId: ConfigurationGroupService_UpdateConfigurationGroup
+      parameters:
+        - description: >-
+            Comma-separated fields to update: name, description, tags,
+            priorityOrder, family.description, family.active, family.raw,
+            family.preset. A listed field that is omitted from the body is
+            cleared (name, description, tags, family.description) or reset to
+            its default (priorityOrder 0, family.active false); family.raw and
+            family.preset replace the family content as a whole and cannot be
+            cleared. Paths inside family.raw or family.preset, a bare family,
+            unknown paths, and * return 400.
+          in: query
+          name: update_mask
+          required: true
+          schema:
+            description: >-
+              Comma-separated fields to update: name, description, tags,
+              priorityOrder, family.description, family.active, family.raw,
+              family.preset. A listed field that is omitted from the body is
+              cleared (name, description, tags, family.description) or reset to
+              its default (priorityOrder 0, family.active false); family.raw and
+              family.preset replace the family content as a whole and cannot be
+              cleared. Paths inside family.raw or family.preset, a bare family,
+              unknown paths, and * return 400.
+            maxLength: 512
+            minLength: 1
+            pattern: ^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Configuration group field values for an update. Only fields
+                listed in update_mask are applied.
+              properties:
+                description:
+                  description: Human-readable description.
+                  maxLength: 4096
+                  minLength: 0
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                family:
+                  allOf:
+                    - $ref: '#/components/schemas/ConfigurationFamilyUpdate'
+                  description: Latest configuration family field values.
+                name:
+                  description: Display name.
+                  maxLength: 256
+                  minLength: 0
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                priorityOrder:
+                  description: >-
+                    Selection precedence. Higher values win on ties and 0 is the
+                    default.
+                  format: int32
+                  maximum: 2147483647
+                  minimum: -2147483648
+                  type: integer
+                  x-coralogix-presence: true
+                tags:
+                  description: Tags attached to the configuration group.
+                  items:
+                    description: Tags attached to the configuration group.
+                    maxLength: 256
+                    minLength: 0
+                    pattern: ^[\s\S]*$
+                    type: string
+                  maxItems: 64
+                  minItems: 0
+                  type: array
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                description: Updated collector configuration group.
+                families: []
+                id: 01975ed4-9c1a-7b3f-8d4e-426614174000
+                name: Production collectors
+                priorityOrder: 100
+                tags:
+                  - production
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ConfigurationGroup'
+                description: Updated configuration group.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Configuration group not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Configuration group name already exists
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update configuration group
+      tags:
+        - Fleet Manager Configuration Groups
+      x-stability: preview
     parameters:
       - $ref: '#/components/parameters/id'
   /fleet-management/configuration-groups/v1/{id}/archive:
@@ -16020,8 +16151,11 @@ paths:
               properties:
                 connector:
                   $ref: '#/components/schemas/Connector'
+              required:
+                - connector
               title: Replace Connector Request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -16043,8 +16177,11 @@ paths:
               properties:
                 connector:
                   $ref: '#/components/schemas/Connector'
+              required:
+                - connector
               title: Create Connector Request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -18435,6 +18572,190 @@ paths:
           minLength: 0
           type: string
           description: Unique identifier.
+  /slo/slos/v1/{id}/status:
+    get:
+      description: >-
+        Returns lowest compliance and remaining error budget (0-1 ratios) for an
+        SLO grouping slice over a time window.
+      operationId: SlosService_GetSloStatus
+      parameters:
+        - description: Unique identifier of the SLO.
+          in: path
+          name: id
+          required: true
+          schema:
+            description: Unique identifier of the SLO.
+            maxLength: 256
+            minLength: 1
+            pattern: ^[\s\S]*$
+            type: string
+        - description: >-
+            Grouping label pairs that identify the slice to evaluate, passed as
+            repeated query values. Each entry is one pair: the substring before
+            the first comma is the label name (must not contain a comma), and
+            the remainder of the entry (which may contain commas, or be empty)
+            is the label value. Example:
+            grouping_key_value=service,api&grouping_key_value=region,eu-west-1
+            or grouping_key_value=service, for an empty value. When omitted or
+            empty, every permutation is considered. When provided, each label
+            name must appear at most once and must be one of the SLO configured
+            grouping labels; the slice includes every atomic permutation whose
+            labels match the given pairs (a proper subset of grouping dimensions
+            matches all permutations that agree on those labels).
+            `lowestCompliance` and `lowestRemainingErrorBudget` are the minimum
+            ratio across those matching permutations, not ratios recomputed from
+            summed events across omitted dimensions.
+          in: query
+          name: grouping_key_value
+          required: false
+          schema:
+            description: >-
+              Grouping label pairs that identify the slice to evaluate, passed
+              as repeated query values. Each entry is one pair: the substring
+              before the first comma is the label name (must not contain a
+              comma), and the remainder of the entry (which may contain commas,
+              or be empty) is the label value. Example:
+              grouping_key_value=service,api&grouping_key_value=region,eu-west-1
+              or grouping_key_value=service, for an empty value. When omitted or
+              empty, every permutation is considered. When provided, each label
+              name must appear at most once and must be one of the SLO
+              configured grouping labels; the slice includes every atomic
+              permutation whose labels match the given pairs (a proper subset of
+              grouping dimensions matches all permutations that agree on those
+              labels). `lowestCompliance` and `lowestRemainingErrorBudget` are
+              the minimum ratio across those matching permutations, not ratios
+              recomputed from summed events across omitted dimensions.
+            items:
+              description: >-
+                Grouping label pairs that identify the slice to evaluate, passed
+                as repeated query values. Each entry is one pair: the substring
+                before the first comma is the label name (must not contain a
+                comma), and the remainder of the entry (which may contain
+                commas, or be empty) is the label value. Example:
+                grouping_key_value=service,api&grouping_key_value=region,eu-west-1
+                or grouping_key_value=service, for an empty value. When omitted
+                or empty, every permutation is considered. When provided, each
+                label name must appear at most once and must be one of the SLO
+                configured grouping labels; the slice includes every atomic
+                permutation whose labels match the given pairs (a proper subset
+                of grouping dimensions matches all permutations that agree on
+                those labels). `lowestCompliance` and
+                `lowestRemainingErrorBudget` are the minimum ratio across those
+                matching permutations, not ratios recomputed from summed events
+                across omitted dimensions.
+              maxLength: 769
+              minLength: 2
+              pattern: ^[^,]+,.*$
+              type: string
+            maxItems: 50
+            minItems: 0
+            type: array
+        - description: >-
+            Inclusive lower bound of the evaluation window. When omitted,
+            defaults to the start of the SLO configured rolling time frame
+            ending at the effective upper bound. RFC 3339 UTC date-time on a
+            whole-minute instant (suffix `Z`, seconds `00`, no fractional
+            seconds).
+          in: query
+          name: from
+          required: false
+          schema:
+            description: >-
+              Inclusive lower bound of the evaluation window. When omitted,
+              defaults to the start of the SLO configured rolling time frame
+              ending at the effective upper bound. RFC 3339 UTC date-time on a
+              whole-minute instant (suffix `Z`, seconds `00`, no fractional
+              seconds).
+            format: date-time
+            maxLength: 20
+            minLength: 20
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$
+            type: string
+        - description: >-
+            Exclusive upper bound of the evaluation window. When omitted,
+            defaults to the current time with sub-minute precision truncated
+            toward zero to the preceding whole UTC minute (for example 12:30:37Z
+            becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a
+            whole-minute instant (suffix `Z`, seconds `00`, no fractional
+            seconds).
+          in: query
+          name: to
+          required: false
+          schema:
+            description: >-
+              Exclusive upper bound of the evaluation window. When omitted,
+              defaults to the current time with sub-minute precision truncated
+              toward zero to the preceding whole UTC minute (for example
+              12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on
+              a whole-minute instant (suffix `Z`, seconds `00`, no fractional
+              seconds).
+            format: date-time
+            maxLength: 20
+            minLength: 20
+            pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$
+            type: string
+        - description: >-
+            Optional override of the target threshold percentage for this
+            evaluation, in the range 0-100. When omitted, the target threshold
+            percentage configured on the SLO is used.
+          in: query
+          name: target_threshold_percentage
+          required: false
+          schema:
+            description: >-
+              Optional override of the target threshold percentage for this
+              evaluation, in the range 0-100. When omitted, the target threshold
+              percentage configured on the SLO is used.
+            format: float
+            maximum: 100
+            minimum: 0
+            type: number
+            x-coralogix-presence: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                computedAt: '2026-06-30T12:30:00.000Z'
+                effectiveFrom: '2026-06-01T00:00:00.000Z'
+                effectiveTo: '2026-06-30T12:30:00.000Z'
+                effectiveWindowCompleteData: true
+                lowestCompliance: 0.995
+                lowestRemainingErrorBudget: 0.42
+              schema:
+                $ref: '#/components/schemas/GetSloStatusResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: >-
+            Bad Request (for example invalid grouping slice, an evaluation
+            window wider than 28 days after applying defaults for `from` and/or
+            `to`, or `from` and `to` that normalize to an empty window with
+            `effectiveFrom` >= `effectiveTo`).
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: SLO not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get Slo Status
+      tags:
+        - Slos Service
   /slo/validated/v1:
     put:
       description: Validates and updates an SLO.
@@ -24295,6 +24616,22 @@ components:
           description: The value.
     ConfigurationFamily:
       type: object
+      oneOf:
+        - required:
+            - raw
+          type: object
+        - required:
+            - preset
+          type: object
+        - type: object
+          not:
+            anyOf:
+              - required:
+                  - raw
+                type: object
+              - required:
+                  - preset
+                type: object
       properties:
         active:
           description: Whether this family is active.
@@ -24365,6 +24702,18 @@ components:
             pattern: ^[\s\S]*$
             type: string
           description: Metadata stored with this configuration family.
+        preset:
+          allOf:
+            - $ref: '#/components/schemas/PresetConfigurationFamily'
+          description: >-
+            Configuration template settings; present when the family has a
+            chartName and observability features.
+        raw:
+          allOf:
+            - $ref: '#/components/schemas/RawConfigurationFamily'
+          description: >-
+            Inputs of a configuration family defined directly by its remote
+            configurations; present when the family has no chartName.
         remoteConfigurations:
           maxItems: 128
           minItems: 0
@@ -24390,6 +24739,22 @@ components:
       description: Configuration family returned by Fleet Manager.
     ConfigurationFamilyCreate:
       type: object
+      oneOf:
+        - required:
+            - raw
+          type: object
+        - required:
+            - preset
+          type: object
+        - type: object
+          not:
+            anyOf:
+              - required:
+                  - raw
+                type: object
+              - required:
+                  - preset
+                type: object
       properties:
         active:
           description: Whether this family is active.
@@ -24429,6 +24794,18 @@ components:
             pattern: ^[\s\S]*$
             type: string
           description: Metadata stored with this configuration family.
+        preset:
+          allOf:
+            - $ref: '#/components/schemas/PresetConfigurationFamilyCreate'
+          description: >-
+            Configuration template settings; Coralogix generates the remote
+            configurations from them.
+        raw:
+          allOf:
+            - $ref: '#/components/schemas/RawConfigurationFamilyCreate'
+          description: >-
+            Configuration family defined directly by its remote configurations,
+            each with an OTel Collector configuration and an agent selector.
         remoteConfigurations:
           maxItems: 128
           minItems: 1
@@ -24447,6 +24824,51 @@ components:
             - $ref: '#/components/schemas/ConfigurationOverlaySource'
           description: Configuration overlay that produced this family version.
       description: An immutable input that produced a configuration family version.
+    ConfigurationFamilyUpdate:
+      type: object
+      oneOf:
+        - required:
+            - raw
+          type: object
+        - required:
+            - preset
+          type: object
+        - type: object
+          not:
+            anyOf:
+              - required:
+                  - raw
+                type: object
+              - required:
+                  - preset
+                type: object
+      properties:
+        active:
+          description: Whether this family is active.
+          type: boolean
+          x-coralogix-presence: true
+        description:
+          description: Human-readable description.
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        preset:
+          allOf:
+            - $ref: '#/components/schemas/PresetConfigurationFamilyUpdate'
+          description: >-
+            Configuration template settings; a new configuration family version
+            is created only when they change.
+        raw:
+          allOf:
+            - $ref: '#/components/schemas/RawConfigurationFamilyUpdate'
+          description: >-
+            Configuration family defined directly by its remote configurations,
+            each with an OTel Collector configuration and an agent selector.
+      description: >-
+        Latest configuration family field values for an update. Only fields
+        listed in update_mask are applied.
     ConfigurationGroup:
       type: object
       properties:
@@ -24579,6 +25001,9 @@ components:
       description: Connection status.
     Connector:
       title: Connector
+      required:
+        - name
+        - type
       type: object
       properties:
         configOverrides:
@@ -24593,8 +25018,11 @@ components:
         createTime:
           minLength: 0
           type: string
-          description: The create time.
+          description: >-
+            The create time. Set by the server; a value sent by the client is
+            ignored.
           format: date-time
+          readOnly: true
         description:
           maxLength: 5000
           minLength: 0
@@ -24629,15 +25057,18 @@ components:
             - $ref: '#/components/schemas/ConnectorConfig'
           description: >-
             Read-only full effective config, including backend auto-resolved
-            fields.
+            fields. Set by the server; a value sent by the client is ignored.
           readOnly: true
         teamId:
-          description: Team identifier.
+          description: >-
+            Team identifier. Set by the server; a value sent by the client is
+            ignored.
           examples:
             - 12345
           format: int64
           maximum: 4294967295
           minimum: 1
+          readOnly: true
           type: integer
           x-coralogix-presence: true
         type:
@@ -24645,8 +25076,11 @@ components:
         updateTime:
           minLength: 0
           type: string
-          description: Timestamp of the last update.
+          description: >-
+            Timestamp of the last update. Set by the server; a value sent by the
+            client is ignored.
           format: date-time
+          readOnly: true
       description: A connector configuration for sending notifications
       externalDocs:
         description: Find out more about notification center
@@ -24657,12 +25091,14 @@ components:
       type: object
       properties:
         fields:
+          description: List of fields. The server does not keep the order of the fields.
+          items:
+            $ref: '#/components/schemas/notification_center.ConnectorConfigField'
           maxItems: 100
           minItems: 0
           type: array
-          items:
-            $ref: '#/components/schemas/notification_center.ConnectorConfigField'
-          description: List of fields.
+          uniqueItems: true
+          x-coralogix-collection: set
       description: Configuration for a specific output schema of a connector
       externalDocs:
         description: Find out more about notification center
@@ -24774,6 +25210,9 @@ components:
       description: Connector schema.
     ConnectorSummary:
       title: Connector Summary
+      required:
+        - name
+        - type
       type: object
       properties:
         configOverrides:
@@ -24788,8 +25227,11 @@ components:
         createTime:
           minLength: 0
           type: string
-          description: The create time.
+          description: >-
+            The create time. Set by the server; a value sent by the client is
+            ignored.
           format: date-time
+          readOnly: true
         description:
           maxLength: 5000
           minLength: 0
@@ -24820,15 +25262,18 @@ components:
             - $ref: '#/components/schemas/ConnectorConfig'
           description: >-
             Read-only full effective config, including backend auto-resolved
-            fields.
+            fields. Set by the server; a value sent by the client is ignored.
           readOnly: true
         teamId:
-          description: The team id.
+          description: >-
+            The team id. Set by the server; a value sent by the client is
+            ignored.
           examples:
             - 12345
           format: int64
           maximum: 4294967295
           minimum: 1
+          readOnly: true
           type: integer
           x-coralogix-presence: true
         type:
@@ -24836,8 +25281,11 @@ components:
         updateTime:
           minLength: 0
           type: string
-          description: Timestamp of the last update.
+          description: >-
+            Timestamp of the last update. Set by the server; a value sent by the
+            client is ignored.
           format: date-time
+          readOnly: true
       description: A summary of a connector, excluding sensitive configuration values.
     ConnectorTypeFilter:
       title: Connector type filters
@@ -28406,6 +28854,9 @@ components:
             - alert_graph
       description: Supported attachment type with its default enabled state.
     EntityTypeConfigOverrides:
+      title: Entity Type Config Overrides
+      required:
+        - entityType
       type: object
       properties:
         entityType:
@@ -28414,12 +28865,15 @@ components:
           examples:
             - ALERTS
         fields:
+          description: List of fields. The server does not keep the order of the fields.
+          items:
+            $ref: '#/components/schemas/TemplatedConnectorConfigField'
           maxItems: 100
           minItems: 0
           type: array
-          items:
-            $ref: '#/components/schemas/TemplatedConnectorConfigField'
-          description: List of fields.
+          uniqueItems: true
+          x-coralogix-collection: set
+      description: Configuration field overrides for a specific entity type
     Equals.Selection:
       title: Selection
       type: object
@@ -32117,6 +32571,91 @@ components:
         slo:
           $ref: '#/components/schemas/Slo'
       description: Response containing the details of a specific SLO.
+    GetSloStatusResponse:
+      title: GetSloStatusResponse
+      required:
+        - computedAt
+        - effectiveFrom
+        - effectiveTo
+        - lowestCompliance
+        - lowestRemainingErrorBudget
+        - effectiveWindowCompleteData
+      type: object
+      properties:
+        computedAt:
+          maxLength: 20
+          minLength: 20
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$
+          type: string
+          description: >-
+            Time at which the evaluation was performed, as an RFC 3339 UTC
+            timestamp on a whole-minute instant (suffix `Z`, no fractional
+            seconds).
+          format: date-time
+        effectiveFrom:
+          maxLength: 20
+          minLength: 20
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$
+          type: string
+          description: >-
+            Inclusive lower bound of the evaluation window that was applied,
+            after defaults, as an RFC 3339 UTC whole-minute instant (suffix
+            `Z`).
+          format: date-time
+        effectiveTo:
+          maxLength: 20
+          minLength: 20
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$
+          type: string
+          description: >-
+            Exclusive upper bound of the evaluation window that was applied,
+            after defaults, as an RFC 3339 UTC whole-minute instant (suffix
+            `Z`).
+          format: date-time
+        effectiveWindowCompleteData:
+          type: boolean
+          description: >-
+            When true, recorded source metrics for the evaluated grouping slice
+            fully cover the applied evaluation window between `effectiveFrom`
+            and `effectiveTo`, so `lowestCompliance` and
+            `lowestRemainingErrorBudget` may be treated as final for that
+            window. When false, the evaluation used partial data within that
+            window. Completeness is determined only from `effectiveFrom` and
+            `effectiveTo` (including after request defaults); it is independent
+            of whether the SLO configured rolling time frame has matured since
+            creation or last revision. For example, a short, fully recorded
+            custom window may report true here while permutations in the
+            configured rolling window still have incomplete historical coverage.
+        lowestCompliance:
+          maximum: 1
+          minimum: 0
+          type: number
+          description: >-
+            Lowest compliance ratio among atomic permutations that match the
+            evaluated grouping slice for the applied evaluation window, in the
+            range 0-1 (minimum of per-permutation compliance ratios, not
+            compliance from pooled good/total counts). When the slice is a
+            single atomic permutation, this equals that permutation's
+            compliance. When there are no events in the window, the value is 0.
+          format: float
+        lowestRemainingErrorBudget:
+          maximum: 1
+          minimum: 0
+          type: number
+          description: >-
+            Lowest remaining error budget ratio among atomic permutations that
+            match the evaluated grouping slice for the applied evaluation
+            window, in the range 0-1 (minimum of per-permutation remaining error
+            budget ratios). When the slice is a single atomic permutation, this
+            equals that permutation's remaining error budget. When there are no
+            events in the window, the value is 0.
+          format: float
+      description: >-
+        Lowest compliance and remaining error budget over the atomic
+        permutations that match the requested grouping slice (minimum of each
+        permutation's ratio, not a recomputed ratio from pooled event counts),
+        for the applied evaluation window (`effectiveFrom` inclusive,
+        `effectiveTo` exclusive). Values are normalized ratios in the range 0-1.
     GetSystemDefaultCaseSettingsResponse:
       title: Get default case settings response
       required:
@@ -41231,6 +41770,194 @@ components:
         description: Find out more about notification center
         url: >-
           https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+    PresetConfigurationFamily:
+      required:
+        - chartVersion
+        - integrationVersion
+        - observabilityFeatures
+      type: object
+      properties:
+        chartName:
+          allOf:
+            - $ref: '#/components/schemas/ChartName'
+          description: >-
+            Configuration template type: CHART_NAME_OTEL_INTEGRATION for
+            Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or
+            CHART_NAME_OTEL_LINUX_STANDALONE,
+            CHART_NAME_OTEL_WINDOWS_STANDALONE, or
+            CHART_NAME_OTEL_MACOS_STANDALONE for hosts.
+        chartVersion:
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          description: >-
+            Configuration template version. It determines the OTel Collector
+            version, the generated collector configuration, and which
+            integrationVersion values are supported. Unsupported versions are
+            rejected.
+        integrationVersion:
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          description: >-
+            Version of the observability features format used for this
+            configuration family.
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: >-
+            Environment setup values for the configuration template, such as
+            ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
+        observabilityFeatures:
+          maxLength: 1048576
+          minLength: 2
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Observability feature settings for the configuration template, as a
+            JSON object string; the available features depend on chartName and
+            integrationVersion.
+        remoteConfigurations:
+          maxItems: 128
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfiguration'
+          description: >-
+            Remote configurations Coralogix generated from the configuration
+            template settings.
+      description: Configuration template settings of a configuration family.
+    PresetConfigurationFamilyCreate:
+      required:
+        - chartName
+        - chartVersion
+        - observabilityFeatures
+      type: object
+      properties:
+        chartName:
+          allOf:
+            - $ref: '#/components/schemas/ChartName'
+          description: >-
+            Configuration template type: CHART_NAME_OTEL_INTEGRATION for
+            Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or
+            CHART_NAME_OTEL_LINUX_STANDALONE,
+            CHART_NAME_OTEL_WINDOWS_STANDALONE, or
+            CHART_NAME_OTEL_MACOS_STANDALONE for hosts.
+        chartVersion:
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          description: >-
+            Configuration template version. It determines the OTel Collector
+            version, the generated collector configuration, and which
+            integrationVersion values are supported. Unsupported versions are
+            rejected.
+        integrationVersion:
+          description: >-
+            Version of the observability features format. Omit it to use the
+            default for the template type and version.
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          x-coralogix-presence: true
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: >-
+            Environment setup values for the configuration template, such as
+            ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
+            Set the observability features in observabilityFeatures, not under
+            an ObservabilityFeatures key here.
+        observabilityFeatures:
+          maxLength: 1048576
+          minLength: 2
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Observability feature settings for the configuration template, as a
+            JSON object string; the available features depend on chartName and
+            integrationVersion.
+      description: >-
+        Configuration template settings for a new configuration family;
+        Coralogix generates the remote configurations from them.
+    PresetConfigurationFamilyUpdate:
+      required:
+        - chartName
+        - chartVersion
+        - observabilityFeatures
+      type: object
+      properties:
+        chartName:
+          allOf:
+            - $ref: '#/components/schemas/ChartName'
+          description: >-
+            Configuration template type: CHART_NAME_OTEL_INTEGRATION for
+            Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or
+            CHART_NAME_OTEL_LINUX_STANDALONE,
+            CHART_NAME_OTEL_WINDOWS_STANDALONE, or
+            CHART_NAME_OTEL_MACOS_STANDALONE for hosts.
+        chartVersion:
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          description: >-
+            Configuration template version. It determines the OTel Collector
+            version, the generated collector configuration, and which
+            integrationVersion values are supported. Unsupported versions are
+            rejected.
+        integrationVersion:
+          description: >-
+            Version of the observability features format. Omit it to use the
+            default for the template type and version.
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          x-coralogix-presence: true
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: >-
+            Environment setup values for the configuration template, such as
+            ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
+            Set the observability features in observabilityFeatures, not under
+            an ObservabilityFeatures key here.
+        observabilityFeatures:
+          maxLength: 1048576
+          minLength: 2
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Observability feature settings for the configuration template, as a
+            JSON object string; the available features depend on chartName and
+            integrationVersion.
+      description: >-
+        Configuration template settings that replace those of the latest
+        configuration family; omitted metadata is cleared, and a new
+        configuration family version is created only when the settings change.
     PresetInfo:
       title: Preset Info
       type: object
@@ -42814,6 +43541,106 @@ components:
             $ref: '#/components/schemas/common.Threshold'
           description: List of color thresholds defining color ranges
       description: Range-based color mapping using min/max bounds and color thresholds
+    RawConfigurationFamily:
+      type: object
+      properties:
+        collectorVersion:
+          description: >-
+            Collector semantic version this family targets, without a leading v
+            prefix.
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          x-coralogix-presence: true
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: Metadata stored with this configuration family.
+        remoteConfigurations:
+          maxItems: 128
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfiguration'
+          description: Remote configurations of this configuration family.
+      description: >-
+        Inputs of a configuration family defined directly by its remote
+        configurations.
+    RawConfigurationFamilyCreate:
+      required:
+        - remoteConfigurations
+      type: object
+      properties:
+        collectorVersion:
+          description: >-
+            Collector semantic version this family targets, without a leading v
+            prefix. The service.version selector must match this value or is
+            added automatically.
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          x-coralogix-presence: true
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: Metadata stored with this configuration family.
+        remoteConfigurations:
+          maxItems: 128
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfigurationCreate'
+          description: Remote configurations to create in this family.
+      description: >-
+        Configuration family content defined directly by its remote
+        configurations.
+    RawConfigurationFamilyUpdate:
+      required:
+        - remoteConfigurations
+      type: object
+      properties:
+        collectorVersion:
+          description: >-
+            Collector semantic version this family targets, without a leading v
+            prefix. The service.version selector must match this value or is
+            added automatically.
+          maxLength: 256
+          minLength: 5
+          pattern: >-
+            ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$
+          type: string
+          x-coralogix-presence: true
+        metadata:
+          type: object
+          additionalProperties:
+            maxLength: 4096
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+          description: Metadata stored with this configuration family.
+        remoteConfigurations:
+          maxItems: 128
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoteConfigurationReplace'
+          description: Remote configurations for the new family version.
+      description: >-
+        Content that replaces the remote configurations, collector version, and
+        metadata of the latest configuration family; an omitted collectorVersion
+        or metadata is cleared.
     Recipients:
       title: Recipients
       type: object
@@ -46327,6 +47154,9 @@ components:
       type: string
       description: Template rendering mode.
     TemplatedConnectorConfigField:
+      title: Templated Connector Config Field
+      required:
+        - fieldName
       type: object
       properties:
         fieldName:
@@ -46341,6 +47171,7 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: Template.
+      description: A templated connector configuration field
     TemporaryAccess:
       title: TemporaryAccess
       type: object
@@ -50793,6 +51624,9 @@ components:
           $ref: '#/components/schemas/MatchEntityTypeAndSubTypeCondition'
       description: Field condition.condition type.
     notification_center.ConnectorConfigField:
+      title: Connector Config Field
+      required:
+        - fieldName
       type: object
       properties:
         fieldName:
@@ -50807,6 +51641,7 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: The value.
+      description: A connector configuration field
     notification_center.ConnectorType:
       enum:
         - CONNECTOR_TYPE_UNSPECIFIED
@@ -52471,10 +53306,12 @@ components:
       name: Authorization
       description: API key authentication
 servers:
-  - url: https://api.coralogix.com/mgmt/openapi/5
+  - url: https://api.eu1.coralogix.com/mgmt/openapi/5
   - url: https://api.eu2.coralogix.com/mgmt/openapi/5
-  - url: https://api.coralogix.us/mgmt/openapi/5
-  - url: https://api.cx498.coralogix.com/mgmt/openapi/5
-  - url: https://api.coralogix.in/mgmt/openapi/5
-  - url: https://api.coralogixsg.com/mgmt/openapi/5
+  - url: https://api.us1.coralogix.com/mgmt/openapi/5
+  - url: https://api.us2.coralogix.com/mgmt/openapi/5
+  - url: https://api.us3.coralogix.com/mgmt/openapi/5
+  - url: https://api.ap1.coralogix.com/mgmt/openapi/5
+  - url: https://api.ap2.coralogix.com/mgmt/openapi/5
   - url: https://api.ap3.coralogix.com/mgmt/openapi/5
+  - url: https://api.gov1.coralogixgov.us/mgmt/openapi/5

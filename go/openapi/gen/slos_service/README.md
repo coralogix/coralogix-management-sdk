@@ -83,6 +83,7 @@ Class | Method | HTTP request | Description
 *SlosServiceAPI* | [**SlosServiceCreateSlo**](docs/SlosServiceAPI.md#slosservicecreateslo) | **Post** /slo/slos/v1 | Create Slo
 *SlosServiceAPI* | [**SlosServiceDeleteSlo**](docs/SlosServiceAPI.md#slosservicedeleteslo) | **Delete** /slo/slos/v1/{id} | Delete Slo
 *SlosServiceAPI* | [**SlosServiceGetSlo**](docs/SlosServiceAPI.md#slosservicegetslo) | **Get** /slo/slos/v1/{id} | Get Slo
+*SlosServiceAPI* | [**SlosServiceGetSloStatus**](docs/SlosServiceAPI.md#slosservicegetslostatus) | **Get** /slo/slos/v1/{id}/status | Get Slo Status
 *SlosServiceAPI* | [**SlosServiceGetZeroState**](docs/SlosServiceAPI.md#slosservicegetzerostate) | **Get** /slo/zero-state/v1 | Get Slo Zero State
 *SlosServiceAPI* | [**SlosServiceListSlos**](docs/SlosServiceAPI.md#slosservicelistslos) | **Get** /slo/slos/v1 | List Slos
 *SlosServiceAPI* | [**SlosServiceReplaceSlo**](docs/SlosServiceAPI.md#slosservicereplaceslo) | **Put** /slo/slos/v1 | Replace Slo
@@ -109,6 +110,7 @@ Class | Method | HTTP request | Description
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [Filters](docs/Filters.md)
  - [GetSloResponse](docs/GetSloResponse.md)
+ - [GetSloStatusResponse](docs/GetSloStatusResponse.md)
  - [GetZeroStateResponse](docs/GetZeroStateResponse.md)
  - [IsFilterPredicate](docs/IsFilterPredicate.md)
  - [ListSlosResponse](docs/ListSlosResponse.md)

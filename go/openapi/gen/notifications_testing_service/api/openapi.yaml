@@ -640,6 +640,10 @@
         }
       },
       "TemplatedConnectorConfigField": {
+        "title": "Templated Connector Config Field",
+        "required": [
+          "fieldName"
+        ],
         "type": "object",
         "properties": {
           "fieldName": {
@@ -656,7 +660,8 @@
             "type": "string",
             "description": "Template."
           }
-        }
+        },
+        "description": "A templated connector configuration field"
       },
       "TestConnectorConfigResponse": {
         "type": "object",
@@ -1004,6 +1009,10 @@
         "description": "Field condition.condition type."
       },
       "notification_center.ConnectorConfigField": {
+        "title": "Connector Config Field",
+        "required": [
+          "fieldName"
+        ],
         "type": "object",
         "properties": {
           "fieldName": {
@@ -1020,7 +1029,8 @@
             "type": "string",
             "description": "The value."
           }
-        }
+        },
+        "description": "A connector configuration field"
       },
       "notification_center.ConnectorType": {
         "enum": [

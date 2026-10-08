@@ -25,6 +25,7 @@ model_events_v3_filter_matcher.go
 model_filter_path_and_values.go
 model_filters.go
 model_get_slo_response.go
+model_get_slo_status_response.go
 model_get_zero_state_response.go
 model_is_filter_predicate.go
 model_list_slos_response.go

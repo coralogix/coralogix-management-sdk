@@ -22,7 +22,7 @@ var _ MappedNullable = &ConnectorConfig{}
 
 // ConnectorConfig Configuration for a specific output schema of a connector
 type ConnectorConfig struct {
-	// List of fields.
+	// List of fields. The server does not keep the order of the fields.
 	Fields []NotificationCenterConnectorConfigField `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

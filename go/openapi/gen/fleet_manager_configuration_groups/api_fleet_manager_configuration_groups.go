@@ -648,3 +648,193 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceRep
 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
+
+type ApiConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
+	ctx context.Context
+	ApiService *FleetManagerConfigurationGroupsAPIService
+	updateMask *string
+	id string
+	configurationGroupServiceUpdateConfigurationGroupRequest *ConfigurationGroupServiceUpdateConfigurationGroupRequest
+}
+
+// Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (name, description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.
+func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) UpdateMask(updateMask string) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	r.updateMask = &updateMask
+	return r
+}
+
+func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) ConfigurationGroupServiceUpdateConfigurationGroupRequest(configurationGroupServiceUpdateConfigurationGroupRequest ConfigurationGroupServiceUpdateConfigurationGroupRequest) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	r.configurationGroupServiceUpdateConfigurationGroupRequest = &configurationGroupServiceUpdateConfigurationGroupRequest
+	return r
+}
+
+func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
+	return r.ApiService.ConfigurationGroupServiceUpdateConfigurationGroupExecute(r)
+}
+
+/*
+ConfigurationGroupServiceUpdateConfigurationGroup Update configuration group
+
+Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Configuration group UUID v7.
+ @return ApiConfigurationGroupServiceUpdateConfigurationGroupRequest
+*/
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceUpdateConfigurationGroup(ctx context.Context, id string) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
+	return ApiConfigurationGroupServiceUpdateConfigurationGroupRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return ConfigurationGroup
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceUpdateConfigurationGroupExecute(r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) (*ConfigurationGroup, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ConfigurationGroup
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceUpdateConfigurationGroup")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/fleet-management/configuration-groups/v1/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateMask == nil {
+		return localVarReturnValue, nil, reportError("updateMask is required and must be specified")
+	}
+	if strlen(*r.updateMask) < 1 {
+		return localVarReturnValue, nil, reportError("updateMask must have at least 1 elements")
+	}
+	if strlen(*r.updateMask) > 512 {
+		return localVarReturnValue, nil, reportError("updateMask must have less than 512 elements")
+	}
+	if strlen(r.id) < 36 {
+		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
+	}
+	if strlen(r.id) > 36 {
+		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
+	}
+
+	if err := parameterAddToHeaderOrQuery(localVarQueryParams, "update_mask", r.updateMask, "form", ""); err != nil {
+		return localVarReturnValue, nil, err
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.configurationGroupServiceUpdateConfigurationGroupRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}

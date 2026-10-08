@@ -13,6 +13,7 @@ package connectors_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,10 @@ var _ = bytes.MinRead
 // checks if the EntityTypeConfigOverrides type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &EntityTypeConfigOverrides{}
 
-// EntityTypeConfigOverrides struct for EntityTypeConfigOverrides
+// EntityTypeConfigOverrides Configuration field overrides for a specific entity type
 type EntityTypeConfigOverrides struct {
-	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
-	// List of fields.
+	EntityType NotificationCenterEntityType `json:"entityType"`
+	// List of fields. The server does not keep the order of the fields.
 	Fields []TemplatedConnectorConfigField `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -35,8 +36,9 @@ type _EntityTypeConfigOverrides EntityTypeConfigOverrides
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewEntityTypeConfigOverrides() *EntityTypeConfigOverrides {
+func NewEntityTypeConfigOverrides(entityType NotificationCenterEntityType) *EntityTypeConfigOverrides {
 	this := EntityTypeConfigOverrides{}
+	this.EntityType = entityType
 	return &this
 }
 
@@ -48,36 +50,28 @@ func NewEntityTypeConfigOverridesWithDefaults() *EntityTypeConfigOverrides {
 	return &this
 }
 
-// GetEntityType returns the EntityType field value if set, zero value otherwise.
+// GetEntityType returns the EntityType field value
 func (o *EntityTypeConfigOverrides) GetEntityType() NotificationCenterEntityType {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		var ret NotificationCenterEntityType
 		return ret
 	}
-	return *o.EntityType
+
+	return o.EntityType
 }
 
-// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
+// GetEntityTypeOk returns a tuple with the EntityType field value
 // and a boolean to check if the value has been set.
 func (o *EntityTypeConfigOverrides) GetEntityTypeOk() (*NotificationCenterEntityType, bool) {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EntityType, true
+	return &o.EntityType, true
 }
 
-// HasEntityType returns a boolean if a field has been set.
-func (o *EntityTypeConfigOverrides) HasEntityType() bool {
-	if o != nil && !IsNil(o.EntityType) {
-		return true
-	}
-
-	return false
-}
-
-// SetEntityType gets a reference to the given NotificationCenterEntityType and assigns it to the EntityType field.
+// SetEntityType sets field value
 func (o *EntityTypeConfigOverrides) SetEntityType(v NotificationCenterEntityType) {
-	o.EntityType = &v
+	o.EntityType = v
 }
 
 // GetFields returns the Fields field value if set, zero value otherwise.
@@ -122,9 +116,7 @@ func (o EntityTypeConfigOverrides) MarshalJSON() ([]byte, error) {
 
 func (o EntityTypeConfigOverrides) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EntityType) {
-		toSerialize["entityType"] = o.EntityType
-	}
+	toSerialize["entityType"] = o.EntityType
 	if !IsNil(o.Fields) {
 		toSerialize["fields"] = o.Fields
 	}
@@ -137,6 +129,27 @@ func (o EntityTypeConfigOverrides) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *EntityTypeConfigOverrides) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"entityType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varEntityTypeConfigOverrides := _EntityTypeConfigOverrides{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

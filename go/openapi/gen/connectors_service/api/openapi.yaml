@@ -71,11 +71,15 @@
                     "$ref": "#/components/schemas/Connector"
                   }
                 },
+                "required": [
+                  "connector"
+                ],
                 "title": "Replace Connector Request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -107,11 +111,15 @@
                     "$ref": "#/components/schemas/Connector"
                   }
                 },
+                "required": [
+                  "connector"
+                ],
                 "title": "Create Connector Request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -447,6 +455,10 @@
       },
       "Connector": {
         "title": "Connector",
+        "required": [
+          "name",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "configOverrides": {
@@ -464,8 +476,9 @@
           "createTime": {
             "minLength": 0,
             "type": "string",
-            "description": "The create time.",
-            "format": "date-time"
+            "description": "The create time. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
+            "readOnly": true
           },
           "description": {
             "maxLength": 5000,
@@ -512,17 +525,18 @@
                 "$ref": "#/components/schemas/ConnectorConfig"
               }
             ],
-            "description": "Read-only full effective config, including backend auto-resolved fields.",
+            "description": "Read-only full effective config, including backend auto-resolved fields. Set by the server; a value sent by the client is ignored.",
             "readOnly": true
           },
           "teamId": {
-            "description": "Team identifier.",
+            "description": "Team identifier. Set by the server; a value sent by the client is ignored.",
             "examples": [
               12345
             ],
             "format": "int64",
             "maximum": 4294967295,
             "minimum": 1,
+            "readOnly": true,
             "type": "integer",
             "x-coralogix-presence": true
           },
@@ -532,8 +546,9 @@
           "updateTime": {
             "minLength": 0,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
+            "readOnly": true
           }
         },
         "description": "A connector configuration for sending notifications",
@@ -547,13 +562,15 @@
         "type": "object",
         "properties": {
           "fields": {
-            "maxItems": 100,
-            "minItems": 0,
-            "type": "array",
+            "description": "List of fields. The server does not keep the order of the fields.",
             "items": {
               "$ref": "#/components/schemas/notification_center.ConnectorConfigField"
             },
-            "description": "List of fields."
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true,
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Configuration for a specific output schema of a connector",
@@ -564,6 +581,10 @@
       },
       "ConnectorSummary": {
         "title": "Connector Summary",
+        "required": [
+          "name",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "configOverrides": {
@@ -581,8 +602,9 @@
           "createTime": {
             "minLength": 0,
             "type": "string",
-            "description": "The create time.",
-            "format": "date-time"
+            "description": "The create time. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
+            "readOnly": true
           },
           "description": {
             "maxLength": 5000,
@@ -621,17 +643,18 @@
                 "$ref": "#/components/schemas/ConnectorConfig"
               }
             ],
-            "description": "Read-only full effective config, including backend auto-resolved fields.",
+            "description": "Read-only full effective config, including backend auto-resolved fields. Set by the server; a value sent by the client is ignored.",
             "readOnly": true
           },
           "teamId": {
-            "description": "The team id.",
+            "description": "The team id. Set by the server; a value sent by the client is ignored.",
             "examples": [
               12345
             ],
             "format": "int64",
             "maximum": 4294967295,
             "minimum": 1,
+            "readOnly": true,
             "type": "integer",
             "x-coralogix-presence": true
           },
@@ -641,8 +664,9 @@
           "updateTime": {
             "minLength": 0,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
+            "readOnly": true
           }
         },
         "description": "A summary of a connector, excluding sensitive configuration values."
@@ -719,6 +743,10 @@
         }
       },
       "EntityTypeConfigOverrides": {
+        "title": "Entity Type Config Overrides",
+        "required": [
+          "entityType"
+        ],
         "type": "object",
         "properties": {
           "entityType": {
@@ -732,15 +760,18 @@
             ]
           },
           "fields": {
-            "maxItems": 100,
-            "minItems": 0,
-            "type": "array",
+            "description": "List of fields. The server does not keep the order of the fields.",
             "items": {
               "$ref": "#/components/schemas/TemplatedConnectorConfigField"
             },
-            "description": "List of fields."
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true,
+            "x-coralogix-collection": "set"
           }
-        }
+        },
+        "description": "Configuration field overrides for a specific entity type"
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -916,6 +947,10 @@
         }
       },
       "TemplatedConnectorConfigField": {
+        "title": "Templated Connector Config Field",
+        "required": [
+          "fieldName"
+        ],
         "type": "object",
         "properties": {
           "fieldName": {
@@ -932,7 +967,8 @@
             "type": "string",
             "description": "Template."
           }
-        }
+        },
+        "description": "A templated connector configuration field"
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -942,6 +978,10 @@
         "type": "string"
       },
       "notification_center.ConnectorConfigField": {
+        "title": "Connector Config Field",
+        "required": [
+          "fieldName"
+        ],
         "type": "object",
         "properties": {
           "fieldName": {
@@ -958,7 +998,8 @@
             "type": "string",
             "description": "The value."
           }
-        }
+        },
+        "description": "A connector configuration field"
       },
       "notification_center.ConnectorType": {
         "enum": [

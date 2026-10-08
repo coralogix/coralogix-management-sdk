@@ -32,6 +32,10 @@ type ConfigurationFamilyCreate struct {
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Metadata stored with this configuration family.
 	Metadata map[string]string `json:"metadata,omitempty"`
+	// Configuration template settings; Coralogix generates the remote configurations from them.
+	Preset *PresetConfigurationFamilyCreate `json:"preset,omitempty"`
+	// Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector.
+	Raw *RawConfigurationFamilyCreate `json:"raw,omitempty"`
 	// Remote configurations to create in this family.
 	RemoteConfigurations []RemoteConfigurationCreate `json:"remoteConfigurations,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -217,6 +221,70 @@ func (o *ConfigurationFamilyCreate) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
+// GetPreset returns the Preset field value if set, zero value otherwise.
+func (o *ConfigurationFamilyCreate) GetPreset() PresetConfigurationFamilyCreate {
+	if o == nil || IsNil(o.Preset) {
+		var ret PresetConfigurationFamilyCreate
+		return ret
+	}
+	return *o.Preset
+}
+
+// GetPresetOk returns a tuple with the Preset field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationFamilyCreate) GetPresetOk() (*PresetConfigurationFamilyCreate, bool) {
+	if o == nil || IsNil(o.Preset) {
+		return nil, false
+	}
+	return o.Preset, true
+}
+
+// HasPreset returns a boolean if a field has been set.
+func (o *ConfigurationFamilyCreate) HasPreset() bool {
+	if o != nil && !IsNil(o.Preset) {
+		return true
+	}
+
+	return false
+}
+
+// SetPreset gets a reference to the given PresetConfigurationFamilyCreate and assigns it to the Preset field.
+func (o *ConfigurationFamilyCreate) SetPreset(v PresetConfigurationFamilyCreate) {
+	o.Preset = &v
+}
+
+// GetRaw returns the Raw field value if set, zero value otherwise.
+func (o *ConfigurationFamilyCreate) GetRaw() RawConfigurationFamilyCreate {
+	if o == nil || IsNil(o.Raw) {
+		var ret RawConfigurationFamilyCreate
+		return ret
+	}
+	return *o.Raw
+}
+
+// GetRawOk returns a tuple with the Raw field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigurationFamilyCreate) GetRawOk() (*RawConfigurationFamilyCreate, bool) {
+	if o == nil || IsNil(o.Raw) {
+		return nil, false
+	}
+	return o.Raw, true
+}
+
+// HasRaw returns a boolean if a field has been set.
+func (o *ConfigurationFamilyCreate) HasRaw() bool {
+	if o != nil && !IsNil(o.Raw) {
+		return true
+	}
+
+	return false
+}
+
+// SetRaw gets a reference to the given RawConfigurationFamilyCreate and assigns it to the Raw field.
+func (o *ConfigurationFamilyCreate) SetRaw(v RawConfigurationFamilyCreate) {
+	o.Raw = &v
+}
+
 // GetRemoteConfigurations returns the RemoteConfigurations field value if set, zero value otherwise.
 func (o *ConfigurationFamilyCreate) GetRemoteConfigurations() []RemoteConfigurationCreate {
 	if o == nil || IsNil(o.RemoteConfigurations) {
@@ -274,8 +342,31 @@ func (o ConfigurationFamilyCreate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
+	if !IsNil(o.Preset) {
+		toSerialize["preset"] = o.Preset
+	}
+	if !IsNil(o.Raw) {
+		toSerialize["raw"] = o.Raw
+	}
 	if !IsNil(o.RemoteConfigurations) {
 		toSerialize["remoteConfigurations"] = o.RemoteConfigurations
+	}
+	optionalOneOfGroup0Matches := 0
+	if _, exists := toSerialize["raw"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := toSerialize["preset"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+	}
+
+	if _, exists := o.AdditionalProperties["raw"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field raw must be set through the typed field, not AdditionalProperties"}
+	}
+	if _, exists := o.AdditionalProperties["preset"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field preset must be set through the typed field, not AdditionalProperties"}
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -300,11 +391,24 @@ func (o *ConfigurationFamilyCreate) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		optionalOneOfGroup0MatchesInPayload := 0
+		if _, exists := additionalProperties["raw"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if _, exists := additionalProperties["preset"]; exists {
+			optionalOneOfGroup0MatchesInPayload++
+		}
+		if optionalOneOfGroup0MatchesInPayload > 1 {
+			return GenericOpenAPIError{error: "at most one of [raw, preset] may be set"}
+		}
+
 		delete(additionalProperties, "active")
 		delete(additionalProperties, "basedOnConfigurationFamilyId")
 		delete(additionalProperties, "collectorVersion")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "preset")
+		delete(additionalProperties, "raw")
 		delete(additionalProperties, "remoteConfigurations")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

@@ -316,6 +316,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceCreateConnectorExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createConnectorRequest == nil {
+		return localVarReturnValue, nil, reportError("createConnectorRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -998,6 +1001,9 @@ func (a *ConnectorsServiceAPIService) ConnectorsServiceReplaceConnectorExecute(r
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.replaceConnectorRequest == nil {
+		return localVarReturnValue, nil, reportError("replaceConnectorRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
