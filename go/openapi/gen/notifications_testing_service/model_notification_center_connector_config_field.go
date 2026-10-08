@@ -13,6 +13,7 @@ package notifications_testing_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,10 @@ var _ = bytes.MinRead
 // checks if the NotificationCenterConnectorConfigField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &NotificationCenterConnectorConfigField{}
 
-// NotificationCenterConnectorConfigField struct for NotificationCenterConnectorConfigField
+// NotificationCenterConnectorConfigField A connector configuration field
 type NotificationCenterConnectorConfigField struct {
 	// The field name.
-	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	FieldName string `json:"fieldName" validate:"regexp=^[\\s\\S]*$"`
 	// The value.
 	Value *string `json:"value,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
@@ -36,8 +37,9 @@ type _NotificationCenterConnectorConfigField NotificationCenterConnectorConfigFi
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewNotificationCenterConnectorConfigField() *NotificationCenterConnectorConfigField {
+func NewNotificationCenterConnectorConfigField(fieldName string) *NotificationCenterConnectorConfigField {
 	this := NotificationCenterConnectorConfigField{}
+	this.FieldName = fieldName
 	return &this
 }
 
@@ -49,36 +51,28 @@ func NewNotificationCenterConnectorConfigFieldWithDefaults() *NotificationCenter
 	return &this
 }
 
-// GetFieldName returns the FieldName field value if set, zero value otherwise.
+// GetFieldName returns the FieldName field value
 func (o *NotificationCenterConnectorConfigField) GetFieldName() string {
-	if o == nil || IsNil(o.FieldName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FieldName
+
+	return o.FieldName
 }
 
-// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
+// GetFieldNameOk returns a tuple with the FieldName field value
 // and a boolean to check if the value has been set.
 func (o *NotificationCenterConnectorConfigField) GetFieldNameOk() (*string, bool) {
-	if o == nil || IsNil(o.FieldName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FieldName, true
+	return &o.FieldName, true
 }
 
-// HasFieldName returns a boolean if a field has been set.
-func (o *NotificationCenterConnectorConfigField) HasFieldName() bool {
-	if o != nil && !IsNil(o.FieldName) {
-		return true
-	}
-
-	return false
-}
-
-// SetFieldName gets a reference to the given string and assigns it to the FieldName field.
+// SetFieldName sets field value
 func (o *NotificationCenterConnectorConfigField) SetFieldName(v string) {
-	o.FieldName = &v
+	o.FieldName = v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -123,9 +117,7 @@ func (o NotificationCenterConnectorConfigField) MarshalJSON() ([]byte, error) {
 
 func (o NotificationCenterConnectorConfigField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldName) {
-		toSerialize["fieldName"] = o.FieldName
-	}
+	toSerialize["fieldName"] = o.FieldName
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
@@ -138,6 +130,27 @@ func (o NotificationCenterConnectorConfigField) ToMap() (map[string]interface{},
 }
 
 func (o *NotificationCenterConnectorConfigField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fieldName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varNotificationCenterConnectorConfigField := _NotificationCenterConnectorConfigField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

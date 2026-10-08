@@ -25,8 +25,8 @@ var _ MappedNullable = &ConfigurationGroup{}
 type ConfigurationGroup struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Configuration families in this group.
-	Families []ConfigurationFamily `json:"families,omitempty"`
+	// Latest configuration family of the group.
+	Family *ConfigurationFamily `json:"family,omitempty"`
 	// Configuration group UUID v7.
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Display name.
@@ -91,36 +91,36 @@ func (o *ConfigurationGroup) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetFamilies returns the Families field value if set, zero value otherwise.
-func (o *ConfigurationGroup) GetFamilies() []ConfigurationFamily {
-	if o == nil || IsNil(o.Families) {
-		var ret []ConfigurationFamily
+// GetFamily returns the Family field value if set, zero value otherwise.
+func (o *ConfigurationGroup) GetFamily() ConfigurationFamily {
+	if o == nil || IsNil(o.Family) {
+		var ret ConfigurationFamily
 		return ret
 	}
-	return o.Families
+	return *o.Family
 }
 
-// GetFamiliesOk returns a tuple with the Families field value if set, nil otherwise
+// GetFamilyOk returns a tuple with the Family field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroup) GetFamiliesOk() ([]ConfigurationFamily, bool) {
-	if o == nil || IsNil(o.Families) {
+func (o *ConfigurationGroup) GetFamilyOk() (*ConfigurationFamily, bool) {
+	if o == nil || IsNil(o.Family) {
 		return nil, false
 	}
-	return o.Families, true
+	return o.Family, true
 }
 
-// HasFamilies returns a boolean if a field has been set.
-func (o *ConfigurationGroup) HasFamilies() bool {
-	if o != nil && !IsNil(o.Families) {
+// HasFamily returns a boolean if a field has been set.
+func (o *ConfigurationGroup) HasFamily() bool {
+	if o != nil && !IsNil(o.Family) {
 		return true
 	}
 
 	return false
 }
 
-// SetFamilies gets a reference to the given []ConfigurationFamily and assigns it to the Families field.
-func (o *ConfigurationGroup) SetFamilies(v []ConfigurationFamily) {
-	o.Families = v
+// SetFamily gets a reference to the given ConfigurationFamily and assigns it to the Family field.
+func (o *ConfigurationGroup) SetFamily(v ConfigurationFamily) {
+	o.Family = &v
 }
 
 // GetId returns the Id field value
@@ -256,8 +256,8 @@ func (o ConfigurationGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Families) {
-		toSerialize["families"] = o.Families
+	if !IsNil(o.Family) {
+		toSerialize["family"] = o.Family
 	}
 	toSerialize["id"] = o.Id
 	if !IsNil(o.Name) {
@@ -314,7 +314,7 @@ func (o *ConfigurationGroup) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "families")
+		delete(additionalProperties, "family")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "priorityOrder")

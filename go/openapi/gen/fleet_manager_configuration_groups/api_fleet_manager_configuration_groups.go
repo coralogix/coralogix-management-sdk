@@ -332,13 +332,6 @@ type ApiConfigurationGroupServiceGetConfigurationGroupRequest struct {
 	ctx context.Context
 	ApiService *FleetManagerConfigurationGroupsAPIService
 	id string
-	latestFamilyOnly *bool
-}
-
-// Return only the latest configuration family when true.
-func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) LatestFamilyOnly(latestFamilyOnly bool) ApiConfigurationGroupServiceGetConfigurationGroupRequest {
-	r.latestFamilyOnly = &latestFamilyOnly
-	return r
 }
 
 func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
@@ -390,11 +383,6 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
-	if r.latestFamilyOnly != nil {
-		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "latest_family_only", r.latestFamilyOnly, "form", ""); err != nil {
-			return localVarReturnValue, nil, err
-		}
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

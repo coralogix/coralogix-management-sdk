@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -26,20 +27,20 @@ type ConnectorSummary struct {
 	// The config overrides.
 	ConfigOverrides []EntityTypeConfigOverrides `json:"configOverrides,omitempty"`
 	ConnectorConfig *ConnectorConfig `json:"connectorConfig,omitempty"`
-	// The create time.
+	// The create time. Set by the server; a value sent by the client is ignored.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]+$"`
-	// Read-only full effective config, including backend auto-resolved fields.
+	Name string `json:"name" validate:"regexp=^[\\s\\S]+$"`
+	// Read-only full effective config, including backend auto-resolved fields. Set by the server; a value sent by the client is ignored.
 	ResolvedConnectorConfig *ConnectorConfig `json:"resolvedConnectorConfig,omitempty"`
-	// The team id.
+	// The team id. Set by the server; a value sent by the client is ignored.
 	TeamId *int64 `json:"teamId,omitempty"`
-	Type *NotificationCenterConnectorType `json:"type,omitempty"`
-	// Timestamp of the last update.
+	Type NotificationCenterConnectorType `json:"type"`
+	// Timestamp of the last update. Set by the server; a value sent by the client is ignored.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -51,8 +52,10 @@ type _ConnectorSummary ConnectorSummary
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConnectorSummary() *ConnectorSummary {
+func NewConnectorSummary(name string, type_ NotificationCenterConnectorType) *ConnectorSummary {
 	this := ConnectorSummary{}
+	this.Name = name
+	this.Type = type_
 	return &this
 }
 
@@ -224,36 +227,28 @@ func (o *ConnectorSummary) SetId(v string) {
 	o.Id = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *ConnectorSummary) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *ConnectorSummary) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ConnectorSummary) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *ConnectorSummary) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetResolvedConnectorConfig returns the ResolvedConnectorConfig field value if set, zero value otherwise.
@@ -320,36 +315,28 @@ func (o *ConnectorSummary) SetTeamId(v int64) {
 	o.TeamId = &v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *ConnectorSummary) GetType() NotificationCenterConnectorType {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		var ret NotificationCenterConnectorType
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *ConnectorSummary) GetTypeOk() (*NotificationCenterConnectorType, bool) {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *ConnectorSummary) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given NotificationCenterConnectorType and assigns it to the Type field.
+// SetType sets field value
 func (o *ConnectorSummary) SetType(v NotificationCenterConnectorType) {
-	o.Type = &v
+	o.Type = v
 }
 
 // GetUpdateTime returns the UpdateTime field value if set, zero value otherwise.
@@ -409,18 +396,14 @@ func (o ConnectorSummary) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.ResolvedConnectorConfig) {
 		toSerialize["resolvedConnectorConfig"] = o.ResolvedConnectorConfig
 	}
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
+	toSerialize["type"] = o.Type
 	if !IsNil(o.UpdateTime) {
 		toSerialize["updateTime"] = o.UpdateTime
 	}
@@ -433,6 +416,28 @@ func (o ConnectorSummary) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ConnectorSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varConnectorSummary := _ConnectorSummary{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

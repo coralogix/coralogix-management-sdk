@@ -11784,7 +11784,6 @@ paths:
             application/json:
               example:
                 description: Collector configuration group for production.
-                families: []
                 id: 01975ed4-9c1a-7b3f-8d4e-426614174000
                 name: Production collectors
                 priorityOrder: 100
@@ -11827,21 +11826,12 @@ paths:
     get:
       description: Gets a fleet-manager configuration group by ID.
       operationId: ConfigurationGroupService_GetConfigurationGroup
-      parameters:
-        - description: Return only the latest configuration family when true.
-          in: query
-          name: latest_family_only
-          required: false
-          schema:
-            description: Return only the latest configuration family when true.
-            type: boolean
       responses:
         '200':
           content:
             application/json:
               example:
                 description: Collector configuration group for production.
-                families: []
                 id: 01975ed4-9c1a-7b3f-8d4e-426614174000
                 name: Production collectors
                 priorityOrder: 100
@@ -11966,7 +11956,6 @@ paths:
             application/json:
               example:
                 description: Updated collector configuration group.
-                families: []
                 id: 01975ed4-9c1a-7b3f-8d4e-426614174000
                 name: Production collectors
                 priorityOrder: 100
@@ -15899,8 +15888,11 @@ paths:
               properties:
                 connector:
                   $ref: '#/components/schemas/Connector'
+              required:
+                - connector
               title: Replace Connector Request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -15922,8 +15914,11 @@ paths:
               properties:
                 connector:
                   $ref: '#/components/schemas/Connector'
+              required:
+                - connector
               title: Create Connector Request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -24549,13 +24544,10 @@ components:
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
-        families:
-          maxItems: 128
-          minItems: 0
-          type: array
-          items:
-            $ref: '#/components/schemas/ConfigurationFamily'
-          description: Configuration families in this group.
+        family:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationFamily'
+          description: Latest configuration family of the group.
         id:
           maxLength: 36
           minLength: 36
@@ -24629,6 +24621,9 @@ components:
       description: Connection status.
     Connector:
       title: Connector
+      required:
+        - name
+        - type
       type: object
       properties:
         configOverrides:
@@ -24643,8 +24638,11 @@ components:
         createTime:
           minLength: 0
           type: string
-          description: The create time.
+          description: >-
+            The create time. Set by the server; a value sent by the client is
+            ignored.
           format: date-time
+          readOnly: true
         description:
           maxLength: 5000
           minLength: 0
@@ -24679,15 +24677,18 @@ components:
             - $ref: '#/components/schemas/ConnectorConfig'
           description: >-
             Read-only full effective config, including backend auto-resolved
-            fields.
+            fields. Set by the server; a value sent by the client is ignored.
           readOnly: true
         teamId:
-          description: Team identifier.
+          description: >-
+            Team identifier. Set by the server; a value sent by the client is
+            ignored.
           examples:
             - 12345
           format: int64
           maximum: 4294967295
           minimum: 1
+          readOnly: true
           type: integer
           x-coralogix-presence: true
         type:
@@ -24695,8 +24696,11 @@ components:
         updateTime:
           minLength: 0
           type: string
-          description: Timestamp of the last update.
+          description: >-
+            Timestamp of the last update. Set by the server; a value sent by the
+            client is ignored.
           format: date-time
+          readOnly: true
       description: A connector configuration for sending notifications
       externalDocs:
         description: Find out more about notification center
@@ -24707,12 +24711,14 @@ components:
       type: object
       properties:
         fields:
+          description: List of fields. The server does not keep the order of the fields.
+          items:
+            $ref: '#/components/schemas/notification_center.ConnectorConfigField'
           maxItems: 100
           minItems: 0
           type: array
-          items:
-            $ref: '#/components/schemas/notification_center.ConnectorConfigField'
-          description: List of fields.
+          uniqueItems: true
+          x-coralogix-collection: set
       description: Configuration for a specific output schema of a connector
       externalDocs:
         description: Find out more about notification center
@@ -24824,6 +24830,9 @@ components:
       description: Connector schema.
     ConnectorSummary:
       title: Connector Summary
+      required:
+        - name
+        - type
       type: object
       properties:
         configOverrides:
@@ -24838,8 +24847,11 @@ components:
         createTime:
           minLength: 0
           type: string
-          description: The create time.
+          description: >-
+            The create time. Set by the server; a value sent by the client is
+            ignored.
           format: date-time
+          readOnly: true
         description:
           maxLength: 5000
           minLength: 0
@@ -24870,15 +24882,18 @@ components:
             - $ref: '#/components/schemas/ConnectorConfig'
           description: >-
             Read-only full effective config, including backend auto-resolved
-            fields.
+            fields. Set by the server; a value sent by the client is ignored.
           readOnly: true
         teamId:
-          description: The team id.
+          description: >-
+            The team id. Set by the server; a value sent by the client is
+            ignored.
           examples:
             - 12345
           format: int64
           maximum: 4294967295
           minimum: 1
+          readOnly: true
           type: integer
           x-coralogix-presence: true
         type:
@@ -24886,8 +24901,11 @@ components:
         updateTime:
           minLength: 0
           type: string
-          description: Timestamp of the last update.
+          description: >-
+            Timestamp of the last update. Set by the server; a value sent by the
+            client is ignored.
           format: date-time
+          readOnly: true
       description: A summary of a connector, excluding sensitive configuration values.
     ConnectorTypeFilter:
       title: Connector type filters
@@ -28448,6 +28466,9 @@ components:
             - alert_graph
       description: Supported attachment type with its default enabled state.
     EntityTypeConfigOverrides:
+      title: Entity Type Config Overrides
+      required:
+        - entityType
       type: object
       properties:
         entityType:
@@ -28456,12 +28477,15 @@ components:
           examples:
             - ALERTS
         fields:
+          description: List of fields. The server does not keep the order of the fields.
+          items:
+            $ref: '#/components/schemas/TemplatedConnectorConfigField'
           maxItems: 100
           minItems: 0
           type: array
-          items:
-            $ref: '#/components/schemas/TemplatedConnectorConfigField'
-          description: List of fields.
+          uniqueItems: true
+          x-coralogix-collection: set
+      description: Configuration field overrides for a specific entity type
     Equals.Selection:
       title: Selection
       type: object
@@ -46734,6 +46758,9 @@ components:
       type: string
       description: Template rendering mode.
     TemplatedConnectorConfigField:
+      title: Templated Connector Config Field
+      required:
+        - fieldName
       type: object
       properties:
         fieldName:
@@ -46748,6 +46775,7 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: Template.
+      description: A templated connector configuration field
     TemporaryAccess:
       title: TemporaryAccess
       type: object
@@ -51200,6 +51228,9 @@ components:
           $ref: '#/components/schemas/MatchEntityTypeAndSubTypeCondition'
       description: Field condition.condition type.
     notification_center.ConnectorConfigField:
+      title: Connector Config Field
+      required:
+        - fieldName
       type: object
       properties:
         fieldName:
@@ -51214,6 +51245,7 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: The value.
+      description: A connector configuration field
     notification_center.ConnectorType:
       enum:
         - CONNECTOR_TYPE_UNSPECIFIED

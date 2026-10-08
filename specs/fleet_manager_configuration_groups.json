@@ -76,7 +76,6 @@
               "application/json": {
                 "example": {
                   "description": "Collector configuration group for production.",
-                  "families": [],
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
                   "priorityOrder": 100,
@@ -148,25 +147,12 @@
       "get": {
         "description": "Gets a fleet-manager configuration group by ID.",
         "operationId": "ConfigurationGroupService_GetConfigurationGroup",
-        "parameters": [
-          {
-            "description": "Return only the latest configuration family when true.",
-            "in": "query",
-            "name": "latest_family_only",
-            "required": false,
-            "schema": {
-              "description": "Return only the latest configuration family when true.",
-              "type": "boolean"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "example": {
                   "description": "Collector configuration group for production.",
-                  "families": [],
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
                   "priorityOrder": 100,
@@ -314,7 +300,6 @@
               "application/json": {
                 "example": {
                   "description": "Updated collector configuration group.",
-                  "families": [],
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
                   "priorityOrder": 100,
@@ -786,14 +771,13 @@
             "type": "string",
             "x-coralogix-presence": true
           },
-          "families": {
-            "maxItems": 128,
-            "minItems": 0,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConfigurationFamily"
-            },
-            "description": "Configuration families in this group."
+          "family": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationFamily"
+              }
+            ],
+            "description": "Latest configuration family of the group."
           },
           "id": {
             "maxLength": 36,
