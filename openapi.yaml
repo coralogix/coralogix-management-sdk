@@ -43168,7 +43168,7 @@ components:
           description: Metadata stored with this configuration family.
         remoteConfigurations:
           maxItems: 128
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/RemoteConfiguration'
