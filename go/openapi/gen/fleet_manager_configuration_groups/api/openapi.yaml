@@ -146,8 +146,21 @@
     },
     "/fleet-management/configuration-groups/v1/{id}": {
       "get": {
-        "description": "Gets a fleet-manager configuration group by ID.",
+        "description": "Gets a fleet-manager configuration group by ID. An archived group returns 404 unless include_archived is true.",
         "operationId": "ConfigurationGroupService_GetConfigurationGroup",
+        "parameters": [
+          {
+            "description": "When true, return an archived group, without a family. Otherwise an archived group returns 404.",
+            "in": "query",
+            "name": "include_archived",
+            "required": false,
+            "schema": {
+              "description": "When true, return an archived group, without a family. Otherwise an archived group returns 404.",
+              "type": "boolean",
+              "x-coralogix-presence": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -201,7 +214,7 @@
                 }
               }
             },
-            "description": "Configuration group not found"
+            "description": "Configuration group not found or archived"
           },
           "500": {
             "content": {
@@ -221,7 +234,7 @@
         "x-stability": "preview"
       },
       "patch": {
-        "description": "Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes.",
+        "description": "Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes. An archived group returns 404.",
         "operationId": "ConfigurationGroupService_UpdateConfigurationGroup",
         "parameters": [
           {
@@ -349,7 +362,7 @@
                 }
               }
             },
-            "description": "Configuration group not found"
+            "description": "Configuration group not found or archived"
           },
           "409": {
             "content": {
@@ -386,7 +399,7 @@
     },
     "/fleet-management/configuration-groups/v1/{id}/archive": {
       "post": {
-        "description": "Archives a fleet-manager configuration group.",
+        "description": "Archives a fleet-manager configuration group. An already archived group returns 404.",
         "operationId": "ConfigurationGroupService_ArchiveConfigurationGroup",
         "parameters": [
           {
@@ -433,7 +446,7 @@
                 }
               }
             },
-            "description": "Configuration group not found"
+            "description": "Configuration group not found or archived"
           },
           "500": {
             "content": {

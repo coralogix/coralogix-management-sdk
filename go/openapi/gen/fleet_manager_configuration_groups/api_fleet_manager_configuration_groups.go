@@ -36,7 +36,7 @@ func (r ApiConfigurationGroupServiceArchiveConfigurationGroupRequest) Execute() 
 /*
 ConfigurationGroupServiceArchiveConfigurationGroup Archive configuration group
 
-Archives a fleet-manager configuration group.
+Archives a fleet-manager configuration group. An already archived group returns 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.
@@ -332,6 +332,13 @@ type ApiConfigurationGroupServiceGetConfigurationGroupRequest struct {
 	ctx context.Context
 	ApiService *FleetManagerConfigurationGroupsAPIService
 	id string
+	includeArchived *bool
+}
+
+// When true, return an archived group, without a family. Otherwise an archived group returns 404.
+func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) IncludeArchived(includeArchived bool) ApiConfigurationGroupServiceGetConfigurationGroupRequest {
+	r.includeArchived = &includeArchived
+	return r
 }
 
 func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
@@ -341,7 +348,7 @@ func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*Co
 /*
 ConfigurationGroupServiceGetConfigurationGroup Get configuration group
 
-Gets a fleet-manager configuration group by ID.
+Gets a fleet-manager configuration group by ID. An archived group returns 404 unless include_archived is true.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.
@@ -383,6 +390,11 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
+	if r.includeArchived != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_archived", r.includeArchived, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -506,7 +518,7 @@ func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) Execute() (
 /*
 ConfigurationGroupServiceUpdateConfigurationGroup Update configuration group
 
-Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes.
+Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes. An archived group returns 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.
