@@ -13,6 +13,7 @@ package connectors_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &ReplaceConnectorRequest{}
 
 // ReplaceConnectorRequest Request to replace an existing connector
 type ReplaceConnectorRequest struct {
-	Connector *Connector `json:"connector,omitempty"`
+	Connector Connector `json:"connector"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _ReplaceConnectorRequest ReplaceConnectorRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewReplaceConnectorRequest() *ReplaceConnectorRequest {
+func NewReplaceConnectorRequest(connector Connector) *ReplaceConnectorRequest {
 	this := ReplaceConnectorRequest{}
+	this.Connector = connector
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewReplaceConnectorRequestWithDefaults() *ReplaceConnectorRequest {
 	return &this
 }
 
-// GetConnector returns the Connector field value if set, zero value otherwise.
+// GetConnector returns the Connector field value
 func (o *ReplaceConnectorRequest) GetConnector() Connector {
-	if o == nil || IsNil(o.Connector) {
+	if o == nil {
 		var ret Connector
 		return ret
 	}
-	return *o.Connector
+
+	return o.Connector
 }
 
-// GetConnectorOk returns a tuple with the Connector field value if set, nil otherwise
+// GetConnectorOk returns a tuple with the Connector field value
 // and a boolean to check if the value has been set.
 func (o *ReplaceConnectorRequest) GetConnectorOk() (*Connector, bool) {
-	if o == nil || IsNil(o.Connector) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Connector, true
+	return &o.Connector, true
 }
 
-// HasConnector returns a boolean if a field has been set.
-func (o *ReplaceConnectorRequest) HasConnector() bool {
-	if o != nil && !IsNil(o.Connector) {
-		return true
-	}
-
-	return false
-}
-
-// SetConnector gets a reference to the given Connector and assigns it to the Connector field.
+// SetConnector sets field value
 func (o *ReplaceConnectorRequest) SetConnector(v Connector) {
-	o.Connector = &v
+	o.Connector = v
 }
 
 func (o ReplaceConnectorRequest) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o ReplaceConnectorRequest) MarshalJSON() ([]byte, error) {
 
 func (o ReplaceConnectorRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Connector) {
-		toSerialize["connector"] = o.Connector
-	}
+	toSerialize["connector"] = o.Connector
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o ReplaceConnectorRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ReplaceConnectorRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"connector",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varReplaceConnectorRequest := _ReplaceConnectorRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

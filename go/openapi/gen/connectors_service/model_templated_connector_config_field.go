@@ -13,6 +13,7 @@ package connectors_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,10 @@ var _ = bytes.MinRead
 // checks if the TemplatedConnectorConfigField type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TemplatedConnectorConfigField{}
 
-// TemplatedConnectorConfigField struct for TemplatedConnectorConfigField
+// TemplatedConnectorConfigField A templated connector configuration field
 type TemplatedConnectorConfigField struct {
 	// The field name.
-	FieldName *string `json:"fieldName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	FieldName string `json:"fieldName" validate:"regexp=^[\\s\\S]*$"`
 	// Template.
 	Template *string `json:"template,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
@@ -36,8 +37,9 @@ type _TemplatedConnectorConfigField TemplatedConnectorConfigField
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewTemplatedConnectorConfigField() *TemplatedConnectorConfigField {
+func NewTemplatedConnectorConfigField(fieldName string) *TemplatedConnectorConfigField {
 	this := TemplatedConnectorConfigField{}
+	this.FieldName = fieldName
 	return &this
 }
 
@@ -49,36 +51,28 @@ func NewTemplatedConnectorConfigFieldWithDefaults() *TemplatedConnectorConfigFie
 	return &this
 }
 
-// GetFieldName returns the FieldName field value if set, zero value otherwise.
+// GetFieldName returns the FieldName field value
 func (o *TemplatedConnectorConfigField) GetFieldName() string {
-	if o == nil || IsNil(o.FieldName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FieldName
+
+	return o.FieldName
 }
 
-// GetFieldNameOk returns a tuple with the FieldName field value if set, nil otherwise
+// GetFieldNameOk returns a tuple with the FieldName field value
 // and a boolean to check if the value has been set.
 func (o *TemplatedConnectorConfigField) GetFieldNameOk() (*string, bool) {
-	if o == nil || IsNil(o.FieldName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FieldName, true
+	return &o.FieldName, true
 }
 
-// HasFieldName returns a boolean if a field has been set.
-func (o *TemplatedConnectorConfigField) HasFieldName() bool {
-	if o != nil && !IsNil(o.FieldName) {
-		return true
-	}
-
-	return false
-}
-
-// SetFieldName gets a reference to the given string and assigns it to the FieldName field.
+// SetFieldName sets field value
 func (o *TemplatedConnectorConfigField) SetFieldName(v string) {
-	o.FieldName = &v
+	o.FieldName = v
 }
 
 // GetTemplate returns the Template field value if set, zero value otherwise.
@@ -123,9 +117,7 @@ func (o TemplatedConnectorConfigField) MarshalJSON() ([]byte, error) {
 
 func (o TemplatedConnectorConfigField) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FieldName) {
-		toSerialize["fieldName"] = o.FieldName
-	}
+	toSerialize["fieldName"] = o.FieldName
 	if !IsNil(o.Template) {
 		toSerialize["template"] = o.Template
 	}
@@ -138,6 +130,27 @@ func (o TemplatedConnectorConfigField) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *TemplatedConnectorConfigField) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fieldName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTemplatedConnectorConfigField := _TemplatedConnectorConfigField{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

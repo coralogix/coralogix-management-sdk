@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 *FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceCreateConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupservicecreateconfigurationgroup) | **Post** /fleet-management/configuration-groups/v1 | Create configuration group
 *FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceGetConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupservicegetconfigurationgroup) | **Get** /fleet-management/configuration-groups/v1/{id} | Get configuration group
 *FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceReplaceConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupservicereplaceconfigurationgroup) | **Put** /fleet-management/configuration-groups/v1/{id} | Update configuration group
+*FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceUpdateConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupserviceupdateconfigurationgroup) | **Patch** /fleet-management/configuration-groups/v1/{id} | Update configuration group
 
 
 ## Documentation For Models
@@ -92,12 +93,14 @@ Class | Method | HTTP request | Description
  - [ConfigurationFamily](docs/ConfigurationFamily.md)
  - [ConfigurationFamilyCreate](docs/ConfigurationFamilyCreate.md)
  - [ConfigurationFamilySource](docs/ConfigurationFamilySource.md)
+ - [ConfigurationFamilyUpdate](docs/ConfigurationFamilyUpdate.md)
  - [ConfigurationGroup](docs/ConfigurationGroup.md)
  - [ConfigurationGroupCreate](docs/ConfigurationGroupCreate.md)
  - [ConfigurationGroupServiceCreateConfigurationGroupRequest](docs/ConfigurationGroupServiceCreateConfigurationGroupRequest.md)
  - [ConfigurationGroupServiceReplaceConfigurationGroupRequest](docs/ConfigurationGroupServiceReplaceConfigurationGroupRequest.md)
  - [ConfigurationGroupServiceReplaceConfigurationGroupRequestGroup](docs/ConfigurationGroupServiceReplaceConfigurationGroupRequestGroup.md)
  - [ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily](docs/ConfigurationGroupServiceReplaceConfigurationGroupRequestGroupFamily.md)
+ - [ConfigurationGroupServiceUpdateConfigurationGroupRequest](docs/ConfigurationGroupServiceUpdateConfigurationGroupRequest.md)
  - [ConfigurationOverlaySource](docs/ConfigurationOverlaySource.md)
  - [CreateConfigurationGroupResponse](docs/CreateConfigurationGroupResponse.md)
  - [Error](docs/Error.md)
@@ -106,6 +109,12 @@ Class | Method | HTTP request | Description
  - [Filters](docs/Filters.md)
  - [GetConfigurationGroupResponse](docs/GetConfigurationGroupResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
+ - [PresetConfigurationFamily](docs/PresetConfigurationFamily.md)
+ - [PresetConfigurationFamilyCreate](docs/PresetConfigurationFamilyCreate.md)
+ - [PresetConfigurationFamilyUpdate](docs/PresetConfigurationFamilyUpdate.md)
+ - [RawConfigurationFamily](docs/RawConfigurationFamily.md)
+ - [RawConfigurationFamilyCreate](docs/RawConfigurationFamilyCreate.md)
+ - [RawConfigurationFamilyUpdate](docs/RawConfigurationFamilyUpdate.md)
  - [RemoteConfiguration](docs/RemoteConfiguration.md)
  - [RemoteConfigurationCreate](docs/RemoteConfigurationCreate.md)
  - [RemoteConfigurationReplace](docs/RemoteConfigurationReplace.md)
