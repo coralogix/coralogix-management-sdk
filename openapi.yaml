@@ -11755,6 +11755,7 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 priorityOrder:
+                  default: 0
                   description: >-
                     Selection precedence. Higher values win on ties and 0 is the
                     default.
@@ -11930,6 +11931,7 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 priorityOrder:
+                  default: 0
                   description: >-
                     Selection precedence. Higher values win on ties and 0 is the
                     default.
@@ -24535,6 +24537,7 @@ components:
     ConfigurationGroup:
       required:
         - id
+        - priorityOrder
       type: object
       properties:
         description:
@@ -24563,6 +24566,7 @@ components:
           type: string
           x-coralogix-presence: true
         priorityOrder:
+          default: 0
           description: >-
             Selection precedence. Higher values win on ties and 0 is the
             default.

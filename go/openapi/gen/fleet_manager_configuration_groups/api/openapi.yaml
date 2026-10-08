@@ -40,6 +40,7 @@
                     "x-coralogix-presence": true
                   },
                   "priorityOrder": {
+                    "default": 0,
                     "description": "Selection precedence. Higher values win on ties and 0 is the default.",
                     "format": "int32",
                     "maximum": 2147483647,
@@ -268,6 +269,7 @@
                     "x-coralogix-presence": true
                   },
                   "priorityOrder": {
+                    "default": 0,
                     "description": "Selection precedence. Higher values win on ties and 0 is the default.",
                     "format": "int32",
                     "maximum": 2147483647,
@@ -759,7 +761,8 @@
       },
       "ConfigurationGroup": {
         "required": [
-          "id"
+          "id",
+          "priorityOrder"
         ],
         "type": "object",
         "properties": {
@@ -795,6 +798,7 @@
             "x-coralogix-presence": true
           },
           "priorityOrder": {
+            "default": 0,
             "description": "Selection precedence. Higher values win on ties and 0 is the default.",
             "format": "int32",
             "maximum": 2147483647,

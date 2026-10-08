@@ -32,7 +32,7 @@ type ConfigurationGroup struct {
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
-	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
+	PriorityOrder int32 `json:"priorityOrder"`
 	// Tags attached to the configuration group.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -45,9 +45,10 @@ type _ConfigurationGroup ConfigurationGroup
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroup(id string) *ConfigurationGroup {
+func NewConfigurationGroup(id string, priorityOrder int32) *ConfigurationGroup {
 	this := ConfigurationGroup{}
 	this.Id = id
+	this.PriorityOrder = priorityOrder
 	return &this
 }
 
@@ -179,36 +180,28 @@ func (o *ConfigurationGroup) SetName(v string) {
 	o.Name = &v
 }
 
-// GetPriorityOrder returns the PriorityOrder field value if set, zero value otherwise.
+// GetPriorityOrder returns the PriorityOrder field value
 func (o *ConfigurationGroup) GetPriorityOrder() int32 {
-	if o == nil || IsNil(o.PriorityOrder) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.PriorityOrder
+
+	return o.PriorityOrder
 }
 
-// GetPriorityOrderOk returns a tuple with the PriorityOrder field value if set, nil otherwise
+// GetPriorityOrderOk returns a tuple with the PriorityOrder field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationGroup) GetPriorityOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.PriorityOrder) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PriorityOrder, true
+	return &o.PriorityOrder, true
 }
 
-// HasPriorityOrder returns a boolean if a field has been set.
-func (o *ConfigurationGroup) HasPriorityOrder() bool {
-	if o != nil && !IsNil(o.PriorityOrder) {
-		return true
-	}
-
-	return false
-}
-
-// SetPriorityOrder gets a reference to the given int32 and assigns it to the PriorityOrder field.
+// SetPriorityOrder sets field value
 func (o *ConfigurationGroup) SetPriorityOrder(v int32) {
-	o.PriorityOrder = &v
+	o.PriorityOrder = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -263,9 +256,7 @@ func (o ConfigurationGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.PriorityOrder) {
-		toSerialize["priorityOrder"] = o.PriorityOrder
-	}
+	toSerialize["priorityOrder"] = o.PriorityOrder
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
@@ -283,6 +274,7 @@ func (o *ConfigurationGroup) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
+		"priorityOrder",
 	}
 
 	allProperties := make(map[string]interface{})
