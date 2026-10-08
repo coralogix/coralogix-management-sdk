@@ -50,7 +50,7 @@ func TestHttpsConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, name, *got.Connector.Name)
+	require.Equal(t, name, got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
@@ -63,22 +63,22 @@ func TestSlackConnector(t *testing.T) {
 	client := cxsdk.NewConnectorsClient(cfg)
 
 	connector := connectors.Connector{
-		Name:        connectors.PtrString("TestSlackConnector"),
-		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_SLACK.Ptr(),
+		Name:        "TestSlackConnector",
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_SLACK,
 		Description: connectors.PtrString("This is the slack connector to use for Notification Center testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
-				{FieldName: connectors.PtrString("integrationId"), Value: connectors.PtrString("60d87305-1110-4a0a-b388-85fb769892ee")},
-				{FieldName: connectors.PtrString("fallbackChannel"), Value: connectors.PtrString("luigis-testing-grounds")},
-				{FieldName: connectors.PtrString("channel"), Value: connectors.PtrString("luigis-testing-grounds")},
+				{FieldName: "integrationId", Value: connectors.PtrString("60d87305-1110-4a0a-b388-85fb769892ee")},
+				{FieldName: "fallbackChannel", Value: connectors.PtrString("luigis-testing-grounds")},
+				{FieldName: "channel", Value: connectors.PtrString("luigis-testing-grounds")},
 			},
 		},
 		ConfigOverrides: []connectors.EntityTypeConfigOverrides{
 			{
-				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
 				Fields: []connectors.TemplatedConnectorConfigField{
 					{
-						FieldName: connectors.PtrString("channel"),
+						FieldName: "channel",
 						Template:  connectors.PtrString("{{alertDef.priority}}"),
 					},
 				},
@@ -87,7 +87,7 @@ func TestSlackConnector(t *testing.T) {
 	}
 
 	createConnectorRequest := connectors.CreateConnectorRequest{
-		Connector: &connector,
+		Connector: connector,
 	}
 
 	created, httpResp, err := client.
@@ -103,7 +103,7 @@ func TestSlackConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, "TestSlackConnector", *got.Connector.Name)
+	require.Equal(t, "TestSlackConnector", got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
@@ -117,20 +117,20 @@ func TestPagerdutyConnector(t *testing.T) {
 
 	name := fmt.Sprintf("TestPagerdutyConnector-%v", uuid.NewString())
 	connector := connectors.Connector{
-		Name:        connectors.PtrString(name),
-		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY.Ptr(),
+		Name:        name,
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY,
 		Description: connectors.PtrString("This is the PagerDuty connector to use for Notification Center testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
-				{FieldName: connectors.PtrString("integrationKey"), Value: connectors.PtrString("test")},
+				{FieldName: "integrationKey", Value: connectors.PtrString("test")},
 			},
 		},
 		ConfigOverrides: []connectors.EntityTypeConfigOverrides{
 			{
-				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
 				Fields: []connectors.TemplatedConnectorConfigField{
 					{
-						FieldName: connectors.PtrString("integrationKey"),
+						FieldName: "integrationKey",
 						Template:  connectors.PtrString("integration_{{alertDef.priority}}"),
 					},
 				},
@@ -139,7 +139,7 @@ func TestPagerdutyConnector(t *testing.T) {
 	}
 
 	createConnectorRequest := connectors.CreateConnectorRequest{
-		Connector: &connector,
+		Connector: connector,
 	}
 
 	created, httpResp, err := client.
@@ -155,7 +155,7 @@ func TestPagerdutyConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, name, *got.Connector.Name)
+	require.Equal(t, name, got.Connector.Name)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
@@ -175,19 +175,19 @@ func TestPagerdutyIncidentsConnector(t *testing.T) {
 	name := fmt.Sprintf("TestPagerdutyIncidentsConnector-%v", uuid.NewString())
 
 	connector := connectors.Connector{
-		Name:        &name,
-		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS.Ptr(),
+		Name:        name,
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS,
 		Description: connectors.PtrString("This is the PagerDuty Incidents connector to use for Notification Center testing."),
 		// PAGERDUTY_INCIDENTS does not support per-entity-type config overrides.
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
-				{FieldName: connectors.PtrString("integrationId"), Value: connectors.PtrString("test-integration")},
-				{FieldName: connectors.PtrString("service"), Value: connectors.PtrString("PXXXXXX")},
+				{FieldName: "integrationId", Value: connectors.PtrString("test-integration")},
+				{FieldName: "service", Value: connectors.PtrString("PXXXXXX")},
 			},
 		},
 	}
 
-	createConnectorRequest := connectors.CreateConnectorRequest{Connector: &connector}
+	createConnectorRequest := connectors.CreateConnectorRequest{Connector: connector}
 
 	created, httpResp, err := client.
 		ConnectorsServiceCreateConnector(context.Background()).
@@ -202,8 +202,8 @@ func TestPagerdutyIncidentsConnector(t *testing.T) {
 		ConnectorsServiceGetConnector(context.Background(), *connectorID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, name, *got.Connector.Name)
-	require.Equal(t, connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS, *got.Connector.Type)
+	require.Equal(t, name, got.Connector.Name)
+	require.Equal(t, connectors.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY_INCIDENTS, got.Connector.Type)
 
 	_, httpResp, err = client.
 		ConnectorsServiceDeleteConnector(context.Background(), *connectorID).
@@ -220,30 +220,30 @@ func TestConnectorCasesConfigOverride(t *testing.T) {
 	name := fmt.Sprintf("TestConnectorCases-%v", uuid.NewString())
 
 	connector := connectors.Connector{
-		Name:        &name,
-		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+		Name:        name,
+		Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS,
 		Description: connectors.PtrString("This is the connector to use for Notification Center CASES testing."),
 		ConnectorConfig: &connectors.ConnectorConfig{
 			Fields: []connectors.NotificationCenterConnectorConfigField{
-				{FieldName: connectors.PtrString("url"), Value: connectors.PtrString("https://httpbun.org/post")},
-				{FieldName: connectors.PtrString("method"), Value: connectors.PtrString("post")},
+				{FieldName: "url", Value: connectors.PtrString("https://httpbun.org/post")},
+				{FieldName: "method", Value: connectors.PtrString("post")},
 			},
 		},
 		ConfigOverrides: []connectors.EntityTypeConfigOverrides{
 			{
-				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
 				Fields: []connectors.TemplatedConnectorConfigField{
 					{
-						FieldName: connectors.PtrString("additionalBodyFields"),
+						FieldName: "additionalBodyFields",
 						Template:  connectors.PtrString("{\"priority\": \"{{alertDef.priority}}\"}"),
 					},
 				},
 			},
 			{
-				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_CASES.Ptr(),
+				EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_CASES,
 				Fields: []connectors.TemplatedConnectorConfigField{
 					{
-						FieldName: connectors.PtrString("additionalBodyFields"),
+						FieldName: "additionalBodyFields",
 						Template:  connectors.PtrString("{\"source\": \"cases\"}"),
 					},
 				},
@@ -251,7 +251,7 @@ func TestConnectorCasesConfigOverride(t *testing.T) {
 		},
 	}
 
-	createConnectorRequest := connectors.CreateConnectorRequest{Connector: &connector}
+	createConnectorRequest := connectors.CreateConnectorRequest{Connector: connector}
 
 	created, httpResp, err := client.
 		ConnectorsServiceCreateConnector(context.Background()).
@@ -269,7 +269,7 @@ func TestConnectorCasesConfigOverride(t *testing.T) {
 
 	foundCases := false
 	for _, o := range got.Connector.ConfigOverrides {
-		if o.EntityType != nil && *o.EntityType == connectors.NOTIFICATIONCENTERENTITYTYPE_CASES {
+		if o.EntityType == connectors.NOTIFICATIONCENTERENTITYTYPE_CASES {
 			foundCases = true
 			break
 		}
@@ -677,22 +677,22 @@ func TestGlobalRouterDisabledAndFallbackTargets(t *testing.T) {
 
 func getHttpsConnector(name string) *connectors.CreateConnectorRequest {
 	return &connectors.CreateConnectorRequest{
-		Connector: &connectors.Connector{
-			Name:        &name,
-			Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+		Connector: connectors.Connector{
+			Name:        name,
+			Type:        connectors.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS,
 			Description: connectors.PtrString("This is the connector to use for Notification Center testing."),
 			ConnectorConfig: &connectors.ConnectorConfig{
 				Fields: []connectors.NotificationCenterConnectorConfigField{
-					{FieldName: connectors.PtrString("url"), Value: connectors.PtrString("https://httpbun.org/post")},
-					{FieldName: connectors.PtrString("method"), Value: connectors.PtrString("post")},
+					{FieldName: "url", Value: connectors.PtrString("https://httpbun.org/post")},
+					{FieldName: "method", Value: connectors.PtrString("post")},
 				},
 			},
 			ConfigOverrides: []connectors.EntityTypeConfigOverrides{
 				{
-					EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+					EntityType: connectors.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
 					Fields: []connectors.TemplatedConnectorConfigField{
 						{
-							FieldName: connectors.PtrString("additionalBodyFields"),
+							FieldName: "additionalBodyFields",
 							Template:  connectors.PtrString("{\"priority\": \"{{alertDef.priority}}\"}"),
 						},
 					},
