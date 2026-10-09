@@ -108,7 +108,8 @@
               "examples": [
                 true
               ],
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -242,14 +243,16 @@
                     "maxLength": 255,
                     "minLength": 0,
                     "pattern": "^[\\x00-\\xFF]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "enabled": {
                     "description": "Indicates whether the policy should be actively evaluated and applied.",
                     "examples": [
                       true
                     ],
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "id": {
                     "description": "Unique identifier of the policy to update.",
@@ -259,7 +262,8 @@
                     "maxLength": 36,
                     "minLength": 36,
                     "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "logRules": {
                     "$ref": "#/components/schemas/LogRules"
@@ -272,7 +276,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\x00-\\xFF]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "priority": {
                     "$ref": "#/components/schemas/quota.v1.Priority"
@@ -424,7 +429,8 @@
                     "maxLength": 255,
                     "minLength": 0,
                     "pattern": "^[\\x00-\\xFF]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "disabled": {
                     "description": "When true, the policy is disabled and will not be evaluated.",
@@ -441,7 +447,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\x00-\\xFF]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "placement": {
                     "$ref": "#/components/schemas/Placement"
@@ -915,7 +922,8 @@
               "maxLength": 36,
               "minLength": 36,
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -983,7 +991,8 @@
               "maxLength": 36,
               "minLength": 36,
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -1363,11 +1372,12 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           }
         },
         "description": "Archive retention."
@@ -1471,28 +1481,30 @@
             "$ref": "#/components/schemas/ArchiveRetention"
           },
           "description": {
+            "description": "Human-readable description. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy Description"
+            ],
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\x00-\\xFF]*$",
             "type": "string",
-            "description": "Human-readable description. Only Latin-1 characters are accepted.",
-            "examples": [
-              "My Policy Description"
-            ]
+            "x-coralogix-presence": true
           },
           "disabled": {
             "type": "boolean",
             "description": "The disabled."
           },
           "name": {
+            "description": "Display name. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\x00-\\xFF]*$",
             "type": "string",
-            "description": "Display name. Only Latin-1 characters are accepted.",
-            "examples": [
-              "My Policy"
-            ]
+            "x-coralogix-presence": true
           },
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
@@ -1613,14 +1625,15 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structue is obtained when deleting a policy by its ID.",
@@ -1682,11 +1695,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1821,34 +1835,37 @@
         "type": "object",
         "properties": {
           "applicationNameValues": {
-            "maxLength": 1024,
-            "minLength": 1,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
             "description": "The application name values.",
             "examples": [
               "application_name"
-            ]
-          },
-          "severityValues": {
+            ],
             "maxLength": 1024,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "severityValues": {
             "description": "The severity values.",
             "examples": [
               "severity"
-            ]
-          },
-          "subsystemNameValues": {
+            ],
             "maxLength": 1024,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "subsystemNameValues": {
             "description": "The subsystem name values.",
             "examples": [
               "subsystem_name"
-            ]
+            ],
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Values for log meta fields.",
@@ -2024,81 +2041,89 @@
             "$ref": "#/components/schemas/ArchiveRetention"
           },
           "companyId": {
+            "description": "Internal Coralogix company/team identifier that owns this policy.",
+            "examples": [
+              1234
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "Internal Coralogix company/team identifier that owns this policy.",
-            "format": "int32",
-            "examples": [
-              1234
-            ]
+            "x-coralogix-presence": true
           },
           "createdAt": {
+            "description": "Timestamp (RFC 3339) when the policy was created.",
+            "examples": [
+              "2021-01-01T00:00:00.000Z"
+            ],
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Timestamp (RFC 3339) when the policy was created.",
-            "examples": [
-              "2021-01-01T00:00:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "deleted": {
-            "type": "boolean",
             "description": "Soft-delete marker; when true the policy has been deleted and is no longer applied.",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy Description"
+            ],
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\x00-\\xFF]*$",
             "type": "string",
-            "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
-            "examples": [
-              "My Policy Description"
-            ]
+            "x-coralogix-presence": true
           },
           "enabled": {
-            "type": "boolean",
             "description": "Indicates whether the policy is actively evaluated and applied.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier for the policy.",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier for the policy.",
-            "examples": [
-              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
-            ]
+            "x-coralogix-presence": true
           },
           "logRules": {
             "$ref": "#/components/schemas/LogRules"
           },
           "name": {
+            "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
+            "examples": [
+              "My Policy"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\x00-\\xFF]*$",
             "type": "string",
-            "description": "Human-readable name for the policy. Only Latin-1 characters are accepted.",
-            "examples": [
-              "My Policy"
-            ]
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.",
+            "examples": [
+              1
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
-            "description": "Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.",
-            "format": "int32",
-            "examples": [
-              1
-            ]
+            "x-coralogix-presence": true
           },
           "priority": {
             "$ref": "#/components/schemas/quota.v1.Priority"
@@ -2140,14 +2165,15 @@
             ]
           },
           "updatedAt": {
+            "description": "Timestamp (RFC 3339) when the policy was last updated.",
+            "examples": [
+              "2021-01-01T00:00:00.000Z"
+            ],
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Timestamp (RFC 3339) when the policy was last updated.",
-            "examples": [
-              "2021-01-01T00:00:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "A policy is a set of rules that define the behavior of the Coralogix system for a specific company.",
@@ -2165,24 +2191,26 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
-            ]
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order. Must be a positive number.",
+            "examples": [
+              1
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Sort order. Must be a positive number.",
-            "format": "int32",
-            "examples": [
-              1
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Order of a policy.",
@@ -2239,14 +2267,16 @@
             "$ref": "#/components/schemas/quota.v1.Priority"
           },
           "currentUsage": {
-            "type": "number",
             "description": "The current usage.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "dailyLimit": {
-            "type": "number",
             "description": "The daily limit.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Quota based status."
@@ -2357,24 +2387,26 @@
             ]
           },
           "tagName": {
+            "description": "The tag name. Must start with \"tags.\".",
+            "examples": [
+              "tags.environment"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^tags\\..*$",
             "type": "string",
-            "description": "The tag name. Must start with \"tags.\".",
-            "examples": [
-              "tags.environment"
-            ]
+            "x-coralogix-presence": true
           },
           "tagValue": {
+            "description": "The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
+            "examples": [
+              "tag_value"
+            ],
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
-            "examples": [
-              "tag_value"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Tag rule for a policy.",
@@ -2393,11 +2425,12 @@
         "type": "object",
         "properties": {
           "matched": {
-            "type": "boolean",
             "description": "The matched.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "metaFieldsValues": {
             "$ref": "#/components/schemas/LogMetaFieldsValues"
@@ -2513,11 +2546,12 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values."
+            "x-coralogix-presence": true
           },
           "ruleTypeId": {
             "$ref": "#/components/schemas/RuleTypeId"

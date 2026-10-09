@@ -61,14 +61,16 @@
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "requestId": {
                     "description": "Optional idempotency key for the check request",
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Check dashboard request data structure",
@@ -169,14 +171,16 @@
                   },
                   "isLocked": {
                     "description": "The is locked.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "requestId": {
                     "description": "Idempotency key for the replace request, used to prevent duplicate updates.",
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -265,14 +269,16 @@
                   },
                   "isLocked": {
                     "description": "The is locked.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "requestId": {
                     "description": "The request id.",
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -407,7 +413,8 @@
               "maxLength": 255,
               "minLength": 1,
               "pattern": "^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -530,7 +537,8 @@
               "maxLength": 128,
               "minLength": 1,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -610,7 +618,8 @@
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -694,14 +703,16 @@
                     "maxLength": 36,
                     "minLength": 36,
                     "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "requestId": {
                     "description": "Idempotency key for the assign folder request, used to prevent duplicate operations.",
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -780,7 +791,8 @@
               "maxLength": 128,
               "minLength": 1,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -848,7 +860,8 @@
               "maxLength": 128,
               "minLength": 1,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -984,15 +997,17 @@
         "type": "object",
         "properties": {
           "includeAll": {
+            "description": "Whether the 'All' option is offered. Must be set explicitly — send false when the option is disabled, do not omit it.",
             "type": "boolean",
-            "description": "Whether the 'All' option is offered. Must be set explicitly — send false when the option is disabled, do not omit it."
+            "x-coralogix-presence": true
           },
           "label": {
+            "description": "The label.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label."
+            "x-coralogix-presence": true
           }
         },
         "description": "Synthetic 'All' option configuration. Required for static and query sources; never present for textbox sources."
@@ -1009,29 +1024,33 @@
             "$ref": "#/components/schemas/AnnotationColor"
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "scope": {
             "$ref": "#/components/schemas/Annotation.WidgetScope"
@@ -1244,18 +1263,20 @@
         "type": "object",
         "properties": {
           "thresholdArc": {
-            "type": "boolean",
             "description": "Whether to show the threshold arc which graphically represents the threshold bands over the min/max range (replaces the deprecated showOuterArc)",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "valueArc": {
-            "type": "boolean",
             "description": "Whether to show the value arc which graphically represents the current value (replaces the deprecated showInnerArc)",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Arc display settings; the presence of this object indicates the gauge arcs are shown while its absence hides all arcs, and the fields control which individual arcs are displayed"
@@ -1275,21 +1296,23 @@
         "type": "object",
         "properties": {
           "maximumDataPoints": {
+            "description": "Maximum number of data points to display. The calculated interval ensures this limit is not exceeded.",
+            "examples": [
+              500
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of data points to display. The calculated interval ensures this limit is not exceeded.",
-            "format": "int32",
-            "examples": [
-              500
-            ]
+            "x-coralogix-presence": true
           },
           "minimumInterval": {
+            "description": "Minimum interval duration. The calculated interval will not be smaller than this value.",
             "maxLength": 30,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Minimum interval duration. The calculated interval will not be smaller than this value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Automatic interval resolution that calculates optimal time buckets based on the widget width, time range, and specified constraints."
@@ -1323,11 +1346,12 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "The field.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field."
+            "x-coralogix-presence": true
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -1348,14 +1372,15 @@
             "description": "Specifies where to display the bar value"
           },
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
+            "examples": [
+              "classic"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values",
-            "examples": [
-              "classic"
-            ]
+            "x-coralogix-presence": true
           },
           "colorsBy": {
             "allOf": [
@@ -1366,14 +1391,15 @@
             "description": "How the bar colors should be organized"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set to custom to take effect)",
+            "examples": [
+              "mph"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set to custom to take effect)",
-            "examples": [
-              "mph"
-            ]
+            "x-coralogix-presence": true
           },
           "dataModeType": {
             "allOf": [
@@ -1384,38 +1410,42 @@
             "description": "Data mode type, either high or archive"
           },
           "decimal": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
-            "type": "boolean",
             "description": "Whether to render numeric value without abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a bar group, can contain variables",
+            "examples": [
+              "Result - {{ variable }}"
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a bar group, can contain variables",
-            "examples": [
-              "Result - {{ variable }}"
-            ]
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -1426,14 +1456,15 @@
             "description": "Widget's legend settings"
           },
           "maxBarsPerChart": {
+            "description": "Maximum number of bars on a chart",
+            "examples": [
+              20
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of bars on a chart",
-            "format": "int32",
-            "examples": [
-              20
-            ]
+            "x-coralogix-presence": true
           },
           "query": {
             "allOf": [
@@ -1499,20 +1530,22 @@
             "x-coralogix-presence": true
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "BarChart represents the configuration of a vertical bar chart widget."
@@ -1552,11 +1585,12 @@
             "description": "List of field names by which results are grouped"
           },
           "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results in groups are divided into subgroups"
+            "x-coralogix-presence": true
           },
           "timeFrame": {
             "allOf": [
@@ -1621,11 +1655,12 @@
             "description": "A Lucene query string to search logs"
           },
           "stackedGroupName": {
+            "description": "Field name by which results are stacked in individual group",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results are stacked in individual group"
+            "x-coralogix-presence": true
           },
           "stackedGroupNameField": {
             "allOf": [
@@ -1708,11 +1743,12 @@
             "description": "Type of the PromQL query, can be Range or Instant"
           },
           "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results in groups are divided into subgroups"
+            "x-coralogix-presence": true
           },
           "timeFrame": {
             "allOf": [
@@ -1878,18 +1914,20 @@
         "type": "object",
         "properties": {
           "maxSlicesPerBar": {
+            "description": "How many slices can fit in a single bar",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "How many slices can fit in a single bar",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "stackNameTemplate": {
+            "description": "Custom template name of an individual stack",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name of an individual stack"
+            "x-coralogix-presence": true
           }
         },
         "description": "Bar chart.stack definition."
@@ -2173,18 +2211,20 @@
         "type": "object",
         "properties": {
           "columnName": {
+            "description": "The column name.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The column name."
+            "x-coralogix-presence": true
           },
           "width": {
+            "description": "The width.",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "The width.",
-            "format": "int32"
+            "x-coralogix-presence": true
           }
         }
       },
@@ -2192,11 +2232,12 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Constant."
@@ -2229,11 +2270,12 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "The field.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field."
+            "x-coralogix-presence": true
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -2246,11 +2288,12 @@
         "type": "object",
         "properties": {
           "dashboardId": {
+            "description": "The dashboard id.",
             "maxLength": 21,
             "minLength": 21,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The dashboard id."
+            "x-coralogix-presence": true
           }
         },
         "description": "This is a response received when a custom dashboard is successfully created",
@@ -2263,11 +2306,12 @@
         "type": "object",
         "properties": {
           "url": {
+            "description": "Static URL that may contain variables using {{variable_name}} syntax",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Static URL that may contain variables using {{variable_name}} syntax"
+            "x-coralogix-presence": true
           }
         },
         "description": "Custom action."
@@ -2276,11 +2320,12 @@
         "type": "object",
         "properties": {
           "collapsed": {
-            "type": "boolean",
             "description": "Indicator if the section is collapsed",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "color": {
             "allOf": [
@@ -2291,18 +2336,20 @@
             "description": "Color of the section header"
           },
           "description": {
+            "description": "Short description of a section",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Short description of a section"
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Section custom name",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Section custom name"
+            "x-coralogix-presence": true
           },
           "repetitiveVar": {
             "allOf": [
@@ -2458,14 +2505,15 @@
             "description": "A list of annotations that can be used within the dashboard's visualizations"
           },
           "description": {
+            "description": "A brief description or summary of the dashboard's purpose or content",
+            "examples": [
+              "Sample description"
+            ],
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "A brief description or summary of the dashboard's purpose or content",
-            "examples": [
-              "Sample description"
-            ]
+            "x-coralogix-presence": true
           },
           "fifteenMinutes": {
             "$ref": "#/components/schemas/AutoRefreshFifteenMinutes"
@@ -2494,14 +2542,15 @@
             "$ref": "#/components/schemas/FolderPath"
           },
           "id": {
+            "description": "A unique identifier of the dashboard",
+            "examples": [
+              "GZLHSeqelCbD3I7HbIDtL"
+            ],
             "maxLength": 21,
             "minLength": 21,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "A unique identifier of the dashboard",
-            "examples": [
-              "GZLHSeqelCbD3I7HbIDtL"
-            ]
+            "x-coralogix-presence": true
           },
           "layout": {
             "allOf": [
@@ -2512,14 +2561,15 @@
             "description": "The layout configuration for the dashboard's visual elements."
           },
           "name": {
+            "description": "The display name of the dashboard",
+            "examples": [
+              "Example Name"
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The display name of the dashboard",
-            "examples": [
-              "Example Name"
-            ]
+            "x-coralogix-presence": true
           },
           "off": {
             "$ref": "#/components/schemas/AutoRefreshOff"
@@ -2528,21 +2578,23 @@
             "$ref": "#/components/schemas/AutoRefreshOneMinute"
           },
           "relativeTimeFrame": {
+            "description": "Relative time frame specifying a duration from the current time",
             "maxLength": 64,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Relative time frame specifying a duration from the current time"
+            "x-coralogix-presence": true
           },
           "slugName": {
+            "description": "A unique slug name serving as an alias for accessing the dashboard",
+            "examples": [
+              "system-health-monitoring"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$",
             "type": "string",
-            "description": "A unique slug name serving as an alias for accessing the dashboard",
-            "examples": [
-              "system-health-monitoring"
-            ]
+            "x-coralogix-presence": true
           },
           "twoMinutes": {
             "$ref": "#/components/schemas/AutoRefreshTwoMinutes"
@@ -2595,36 +2647,41 @@
             "description": "Definition of the action"
           },
           "id": {
+            "description": "A unique identifier of the action",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "A unique identifier of the action"
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "The display name of the action",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The display name of the action"
+            "x-coralogix-presence": true
           },
           "queryId": {
+            "description": "Reference to specific query within a widget, can be null if the action is dashboard wide or related to single query widget",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reference to specific query within a widget, can be null if the action is dashboard wide or related to single query widget"
+            "x-coralogix-presence": true
           },
           "shouldOpenInNewWindow": {
+            "description": "Defines if the action should open in a new window or current window in the browser",
             "type": "boolean",
-            "description": "Defines if the action should open in a new window or current window in the browser"
+            "x-coralogix-presence": true
           },
           "widgetId": {
+            "description": "Reference to specific widget within a dashboard, can be null if the action is dashboard wide",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Reference to specific widget within a dashboard, can be null if the action is dashboard wide"
+            "x-coralogix-presence": true
           }
         },
         "description": "Public actions that are always available within specific dashboard's context.",
@@ -2638,78 +2695,89 @@
         "type": "object",
         "properties": {
           "authorId": {
+            "description": "The author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The author id."
+            "x-coralogix-presence": true
           },
           "createTime": {
+            "description": "The create time.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "The create time.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "folder": {
             "$ref": "#/components/schemas/DashboardFolder"
           },
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "6U1Q8Hpa263Se8PkRKaiE"
+            ],
             "maxLength": 21,
             "minLength": 21,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "6U1Q8Hpa263Se8PkRKaiE"
-            ]
+            "x-coralogix-presence": true
           },
           "isDefault": {
+            "description": "The is default.",
             "type": "boolean",
-            "description": "The is default."
+            "x-coralogix-presence": true
           },
           "isLocked": {
+            "description": "The is locked.",
             "type": "boolean",
-            "description": "The is locked."
+            "x-coralogix-presence": true
           },
           "isPinned": {
+            "description": "The is pinned.",
             "type": "boolean",
-            "description": "The is pinned."
+            "x-coralogix-presence": true
           },
           "lockerAuthorId": {
+            "description": "The locker author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The locker author id."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "slugName": {
+            "description": "The slug name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$",
             "type": "string",
-            "description": "The slug name."
+            "x-coralogix-presence": true
           },
           "updateTime": {
+            "description": "Timestamp of the last update.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         }
       },
@@ -2717,25 +2785,28 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier. A UUID.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier. A UUID."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "parentId": {
+            "description": "The parent id. A UUID that must differ from this folder's own id.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The parent id. A UUID that must differ from this folder's own id."
+            "x-coralogix-presence": true
           }
         },
         "description": "Dashboard folder."
@@ -2777,14 +2848,15 @@
             "description": "A query object containing query definition"
           },
           "resultsPerPage": {
+            "description": "How many results are displayed per table page",
+            "examples": [
+              10
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "How many results are displayed per table page",
-            "format": "int32",
-            "examples": [
-              10
-            ]
+            "x-coralogix-presence": true
           },
           "rowStyle": {
             "allOf": [
@@ -2801,18 +2873,20 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "Name of the field to display in the column",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Name of the field to display in the column"
+            "x-coralogix-presence": true
           },
           "width": {
+            "description": "Custom width of the column, by default it's automatically adjusted",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "Custom width of the column, by default it's automatically adjusted",
-            "format": "int32"
+            "x-coralogix-presence": true
           }
         }
       },
@@ -3102,11 +3176,12 @@
             "description": "The label fields."
           },
           "messageTemplate": {
+            "description": "The message template.",
             "maxLength": 1000,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The message template."
+            "x-coralogix-presence": true
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -3407,18 +3482,20 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique id of the query definition",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique id of the query definition"
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Custom name of the query",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom name of the query"
+            "x-coralogix-presence": true
           },
           "query": {
             "allOf": [
@@ -3537,11 +3614,12 @@
         "type": "object",
         "properties": {
           "messageTemplate": {
+            "description": "The message template.",
             "maxLength": 1000,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The message template."
+            "x-coralogix-presence": true
           },
           "recurrence": {
             "$ref": "#/components/schemas/Recurrence"
@@ -3606,18 +3684,20 @@
         "type": "object",
         "properties": {
           "duration": {
+            "description": "Duration.",
             "maxLength": 30,
             "minLength": 2,
             "pattern": "^\\d+(\\.\\d+)?s$",
             "type": "string",
-            "description": "Duration."
+            "x-coralogix-presence": true
           },
           "startTimeHour": {
+            "description": "The start time hour.",
+            "format": "int32",
             "maximum": 23,
             "minimum": 0,
             "type": "integer",
-            "description": "The start time hour.",
-            "format": "int32"
+            "x-coralogix-presence": true
           }
         },
         "description": "Renders the recurrence event as a sliding window starting at the configured hour and spanning the given duration."
@@ -3626,11 +3706,12 @@
         "type": "object",
         "properties": {
           "startTimeHour": {
+            "description": "The start time hour.",
+            "format": "int32",
             "maximum": 23,
             "minimum": 0,
             "type": "integer",
-            "description": "The start time hour.",
-            "format": "int32"
+            "x-coralogix-presence": true
           }
         },
         "description": "Renders the recurrence event as an instant snapshot at the configured start hour."
@@ -3671,11 +3752,12 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "The log field to which the filter is applied.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The log field to which the filter is applied."
+            "x-coralogix-presence": true
           },
           "observationField": {
             "allOf": [
@@ -3908,11 +3990,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -4269,23 +4352,26 @@
         "type": "object",
         "properties": {
           "color": {
+            "description": "Color of the threshold",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Color of the threshold"
+            "x-coralogix-presence": true
           },
           "from": {
-            "type": "number",
             "description": "Minimum bound value of the threshold",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "label": {
+            "description": "Optional label of the threshold",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Optional label of the threshold"
+            "x-coralogix-presence": true
           }
         },
         "description": "Definition of a single gauge threshold"
@@ -4340,11 +4426,12 @@
             "description": "Determines how data clusters on the geomap will display values. Default should always be set to count to simply provide number of nodes in cluster as a value."
           },
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "color": {
             "allOf": [
@@ -4363,21 +4450,23 @@
             "description": "Defines columns which provide required geographic information for the geomap from the query results. Affects location and grouping of the data displayed."
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "minMax": {
             "allOf": [
@@ -4767,11 +4856,12 @@
             "description": "Labels to display on the tooltip, should reference fields from clusters or points on the map."
           },
           "messageTemplate": {
+            "description": "Custom template for the geomap tooltip",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template for the geomap tooltip"
+            "x-coralogix-presence": true
           }
         },
         "description": "Geomap tooltip."
@@ -4792,25 +4882,28 @@
             "x-coralogix-presence": true
           },
           "authorId": {
+            "description": "The author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The author id."
+            "x-coralogix-presence": true
           },
           "authorName": {
+            "description": "The author name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The author name."
+            "x-coralogix-presence": true
           },
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "createdOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4819,46 +4912,52 @@
             "$ref": "#/components/schemas/Dashboard"
           },
           "isLocked": {
+            "description": "The is locked.",
             "type": "boolean",
-            "description": "The is locked."
+            "x-coralogix-presence": true
           },
           "lockerAuthorId": {
+            "description": "The locker author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The locker author id."
+            "x-coralogix-presence": true
           },
           "lockerName": {
+            "description": "The locker name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The locker name."
+            "x-coralogix-presence": true
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "updatedOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
           },
           "updaterAuthorId": {
+            "description": "The updater author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The updater author id."
+            "x-coralogix-presence": true
           },
           "updaterName": {
+            "description": "The updater name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The updater name."
+            "x-coralogix-presence": true
           }
         },
         "description": "This is a response containing the requested dashboard",
@@ -4899,25 +4998,28 @@
             "x-coralogix-presence": true
           },
           "authorId": {
+            "description": "The author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The author id."
+            "x-coralogix-presence": true
           },
           "authorName": {
+            "description": "The author name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The author name."
+            "x-coralogix-presence": true
           },
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "createdOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
@@ -4926,22 +5028,25 @@
             "$ref": "#/components/schemas/Dashboard"
           },
           "isLocked": {
+            "description": "The is locked.",
             "type": "boolean",
-            "description": "The is locked."
+            "x-coralogix-presence": true
           },
           "lockerAuthorId": {
+            "description": "The locker author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The locker author id."
+            "x-coralogix-presence": true
           },
           "lockerName": {
+            "description": "The locker name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The locker name."
+            "x-coralogix-presence": true
           },
           "resolvedWidgets": {
             "type": "object",
@@ -4951,28 +5056,31 @@
             "description": "Map of resolved widget references for widgets with references in the dashboard"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "updatedOriginType": {
             "$ref": "#/components/schemas/TokenOriginType"
           },
           "updaterAuthorId": {
+            "description": "The updater author id.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The updater author id."
+            "x-coralogix-presence": true
           },
           "updaterName": {
+            "description": "The updater name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The updater name."
+            "x-coralogix-presence": true
           }
         },
         "description": "This is a response containing the requested dashboard",
@@ -4985,11 +5093,12 @@
         "type": "object",
         "properties": {
           "dashboardId": {
+            "description": "Reference to specific dashboard",
             "maxLength": 21,
             "minLength": 21,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reference to specific dashboard"
+            "x-coralogix-presence": true
           }
         },
         "description": "Go to dashboard template action."
@@ -5031,27 +5140,30 @@
         ],
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "colorAxisMax": {
-            "type": "number",
             "description": "Optional number indicating the max value for gradient color axis. Automatically calculated from data if not provided.",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "colorAxisMin": {
-            "type": "number",
             "description": "Optional number indicating the lowest value for gradient color axis. Automatically calculated from data if not provided.",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "colorRange": {
             "allOf": [
@@ -5062,21 +5174,23 @@
             "description": "Color configuration for the heatmap"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "histogramBucketUnit": {
             "allOf": [
@@ -5099,8 +5213,9 @@
             "description": "Scale type - linear/logarithmic"
           },
           "showNumbers": {
+            "description": "Whether to render numeric values inside the heatmap tiles",
             "type": "boolean",
-            "description": "Whether to render numeric values inside the heatmap tiles"
+            "x-coralogix-presence": true
           },
           "tooltip": {
             "allOf": [
@@ -5201,11 +5316,12 @@
             "description": "Labels to display on the tooltip, should reference fields used in x-axis or y-axis"
           },
           "messageTemplate": {
+            "description": "Custom template for the heatmap tooltip",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template for the heatmap tooltip"
+            "x-coralogix-presence": true
           }
         },
         "description": "Heatmap tooltip."
@@ -5214,11 +5330,12 @@
         "type": "object",
         "properties": {
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+            "x-coralogix-presence": true
           },
           "dataModeType": {
             "allOf": [
@@ -5229,21 +5346,23 @@
             "description": "Data mode type, either high or archive"
           },
           "decimal": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              2
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              2
-            ]
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
-            "type": "boolean",
             "description": "Whether to render numeric value without abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -5262,20 +5381,22 @@
             "description": "Indicates how to group the legend elements, either by thresholds or by query groups"
           },
           "max": {
-            "type": "number",
             "description": "A maximum value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               150000
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "A minimum value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               0
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "query": {
             "allOf": [
@@ -5593,11 +5714,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -5609,21 +5731,23 @@
             "description": "The category fields."
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              2
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              2
-            ]
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -5642,20 +5766,22 @@
             "description": "Indicates how to group the legend elements, either by thresholds or by query groups"
           },
           "max": {
-            "type": "number",
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               150000
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               0
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "thresholdType": {
             "allOf": [
@@ -5695,11 +5821,12 @@
         "type": "object",
         "properties": {
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "colorsBy": {
             "allOf": [
@@ -5710,11 +5837,12 @@
             "description": "How the bar colors should be organized"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set to custom to take effect)"
+            "x-coralogix-presence": true
           },
           "dataModeType": {
             "allOf": [
@@ -5725,39 +5853,44 @@
             "description": "Data mode type, either high or archive"
           },
           "decimal": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
-            "type": "boolean",
             "description": "Whether to render numeric value without abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "displayOnBar": {
+            "description": "Specifies where to display the bar value",
             "type": "boolean",
-            "description": "Specifies where to display the bar value"
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a bar group, can contain variables",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a bar group, can contain variables"
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -5768,14 +5901,15 @@
             "description": "Widget's legend settings"
           },
           "maxBarsPerChart": {
+            "description": "Maximum number of bars on a chart",
+            "examples": [
+              20
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of bars on a chart",
-            "format": "int32",
-            "examples": [
-              20
-            ]
+            "x-coralogix-presence": true
           },
           "query": {
             "allOf": [
@@ -5824,20 +5958,22 @@
             ]
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisViewBy": {
             "allOf": [
@@ -5885,11 +6021,12 @@
             "description": "List of field names by which results are grouped"
           },
           "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results in groups are divided into subgroups"
+            "x-coralogix-presence": true
           },
           "timeFrame": {
             "allOf": [
@@ -5954,11 +6091,12 @@
             "description": "A Lucene query string to search logs"
           },
           "stackedGroupName": {
+            "description": "Field name by which results are stacked in individual group",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results are stacked in individual group"
+            "x-coralogix-presence": true
           },
           "stackedGroupNameField": {
             "allOf": [
@@ -6041,11 +6179,12 @@
             "description": "Type of the PromQL query, can be Range or Instant"
           },
           "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results in groups are divided into subgroups"
+            "x-coralogix-presence": true
           },
           "timeFrame": {
             "allOf": [
@@ -6211,18 +6350,20 @@
         "type": "object",
         "properties": {
           "maxSlicesPerBar": {
+            "description": "How many slices can fit in a single bar",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "How many slices can fit in a single bar",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "stackNameTemplate": {
+            "description": "Custom template name of an individual stack",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name of an individual stack"
+            "x-coralogix-presence": true
           }
         },
         "description": "Stack definition."
@@ -6286,11 +6427,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -6302,11 +6444,12 @@
             "description": "The category fields."
           },
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "colorsBy": {
             "allOf": [
@@ -6317,39 +6460,44 @@
             "description": "How the bar colors should be organized"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set to custom to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "displayOnBar": {
+            "description": "Specifies where to display the bar value",
             "type": "boolean",
-            "description": "Specifies where to display the bar value"
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a group, can contain variables",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a group, can contain variables"
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -6360,21 +6508,23 @@
             "description": "Widget's legend settings"
           },
           "maxBarsPerChart": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
             "description": "Maximum number of bars on a chart",
-            "format": "int32",
             "examples": [
               20
-            ]
-          },
-          "maxSlicesPerBar": {
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
-            "format": "int32"
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "scaleType": {
             "allOf": [
@@ -6396,11 +6546,12 @@
             ]
           },
           "stackNameTemplate": {
+            "description": "Custom template name of an individual stack",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name of an individual stack"
+            "x-coralogix-presence": true
           },
           "subCategoryFields": {
             "maxItems": 1000,
@@ -6426,20 +6577,22 @@
             "$ref": "#/components/schemas/ObservationField"
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisViewBy": {
             "allOf": [
@@ -6465,11 +6618,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -6481,11 +6635,12 @@
             "description": "The category fields."
           },
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "colorsBy": {
             "allOf": [
@@ -6496,39 +6651,44 @@
             "description": "How the bar colors should be organized"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set to custom to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "displayOnBar": {
+            "description": "Specifies where to display the bar value",
             "type": "boolean",
-            "description": "Specifies where to display the bar value"
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a group, can contain variables",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a group, can contain variables"
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -6539,14 +6699,15 @@
             "description": "Widget's legend settings"
           },
           "maxBarsPerChart": {
+            "description": "Maximum number of bars on a chart",
+            "examples": [
+              20
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of bars on a chart",
-            "format": "int32",
-            "examples": [
-              20
-            ]
+            "x-coralogix-presence": true
           },
           "queryFieldSettings": {
             "maxItems": 1000,
@@ -6585,20 +6746,22 @@
             ]
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisViewBy": {
             "allOf": [
@@ -6619,11 +6782,12 @@
         "type": "object",
         "properties": {
           "queryId": {
+            "description": "Reference to the query id from Dynamic.query_display_settings",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reference to the query id from Dynamic.query_display_settings"
+            "x-coralogix-presence": true
           },
           "valueField": {
             "allOf": [
@@ -6715,11 +6879,12 @@
             "$ref": "#/components/schemas/ManualIntervalResolution"
           },
           "useAdvancedLimit": {
-            "type": "boolean",
             "description": "Whether the max. data points and min. interval fields are user-editable. When true, users can modify these constraint fields; when false or unset, they are read-only.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for time bucket/interval resolution in time-series widgets. Supports automatic calculation based on widget width and time range, or manual interval specification."
@@ -6742,18 +6907,20 @@
         "type": "object",
         "properties": {
           "location": {
+            "description": "Location of the issue within the dashboard as an RFC 6901 JSON Pointer (e.g. \"/sections/0/rows/1/widgets/2\"). Empty or omitted for root-level issues.",
             "maxLength": 512,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Location of the issue within the dashboard as an RFC 6901 JSON Pointer (e.g. \"/sections/0/rows/1/widgets/2\"). Empty or omitted for root-level issues."
+            "x-coralogix-presence": true
           },
           "message": {
+            "description": "Human-readable description of the issue",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description of the issue"
+            "x-coralogix-presence": true
           },
           "severity": {
             "allOf": [
@@ -6809,12 +6976,14 @@
             ]
           },
           "groupByQuery": {
+            "description": "In case of multiple queries, whether legend items should be grouped by their respective queries",
             "type": "boolean",
-            "description": "In case of multiple queries, whether legend items should be grouped by their respective queries"
+            "x-coralogix-presence": true
           },
           "isVisible": {
+            "description": "Is the legend visible in the widget",
             "type": "boolean",
-            "description": "Is the legend visible in the widget"
+            "x-coralogix-presence": true
           },
           "placement": {
             "allOf": [
@@ -6868,11 +7037,12 @@
         "type": "object",
         "properties": {
           "connectNulls": {
-            "type": "boolean",
             "description": "Whether the line should remain connected instead of producing scattered points when null values are present in between",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -6908,11 +7078,12 @@
             "description": "Tooltip settings"
           },
           "useDataTimeRange": {
-            "type": "boolean",
             "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "xAxisTimeFormat": {
             "allOf": [
@@ -7157,18 +7328,20 @@
         "type": "object",
         "properties": {
           "colorScheme": {
+            "description": "Applied color scheme for this query, one of the predefined values",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme for this query, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "dataModeType": {
             "allOf": [
@@ -7179,35 +7352,39 @@
             "description": "Data mode type, either high or archive"
           },
           "decimal": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
-            "type": "boolean",
             "description": "Whether to render numeric value without abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique id of the query definition. If empty or omitted, it is auto-replaced with a generated UUID.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique id of the query definition. If empty or omitted, it is auto-replaced with a generated UUID."
+            "x-coralogix-presence": true
           },
           "intervalResolution": {
             "allOf": [
@@ -7218,18 +7395,20 @@
             "description": "Interval resolution settings for time bucket calculations, supporting auto or manual modes"
           },
           "isVisible": {
-            "type": "boolean",
             "description": "Is the query visible",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Custom name of the query",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom name of the query"
+            "x-coralogix-presence": true
           },
           "query": {
             "allOf": [
@@ -7257,18 +7436,20 @@
             "description": "Scale type - linear/logarithmic"
           },
           "seriesCountLimit": {
+            "description": "Max count of the series per query",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^-?[0-9]+$",
             "type": "string",
-            "description": "Max count of the series per query"
+            "x-coralogix-presence": true
           },
           "seriesNameTemplate": {
+            "description": "Custom template for the series name",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template for the series name"
+            "x-coralogix-presence": true
           },
           "unit": {
             "allOf": [
@@ -7282,20 +7463,22 @@
             ]
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "LineChart represents the configuration of a line chart widget."
@@ -7305,18 +7488,20 @@
         "type": "object",
         "properties": {
           "bucketsPresented": {
+            "description": "How many buckets to present in the selected timeframe (deprecated)",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "How many buckets to present in the selected timeframe (deprecated)",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "interval": {
+            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
             "maxLength": 30,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)"
+            "x-coralogix-presence": true
           }
         },
         "description": "Resolution settings for query values. (deprecated, use interval_resolution instead)."
@@ -7400,22 +7585,25 @@
             "description": "Unique id of the link action"
           },
           "name": {
+            "description": "Name of the link action",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Name of the link action"
+            "x-coralogix-presence": true
           },
           "shouldOpenInNewWindow": {
+            "description": "Defines if the link action should open in a new window or current window in the browser",
             "type": "boolean",
-            "description": "Defines if the link action should open in a new window or current window in the browser"
+            "x-coralogix-presence": true
           },
           "url": {
+            "description": "Static URL that may contain variables using {{variable_name}} syntax",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Static URL that may contain variables using {{variable_name}} syntax"
+            "x-coralogix-presence": true
           }
         }
       },
@@ -7611,11 +7799,12 @@
             "$ref": "#/components/schemas/ObservationField"
           },
           "value": {
+            "description": "The value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Logs path source."
@@ -7632,22 +7821,25 @@
             "description": "Type of aggregation function"
           },
           "id": {
+            "description": "Aggregation unique identifier",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Aggregation unique identifier"
+            "x-coralogix-presence": true
           },
           "isVisible": {
+            "description": "Whether the aggregation is visible in the table",
             "type": "boolean",
-            "description": "Whether the aggregation is visible in the table"
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Aggregation name",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Aggregation name"
+            "x-coralogix-presence": true
           }
         },
         "description": "Aggregation."
@@ -7708,11 +7900,12 @@
             "$ref": "#/components/schemas/LuceneQuery"
           },
           "messageTemplate": {
+            "description": "The message template.",
             "maxLength": 1000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The message template."
+            "x-coralogix-presence": true
           },
           "strategy": {
             "$ref": "#/components/schemas/LogsSource.Strategy"
@@ -7822,11 +8015,12 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "maxLength": 10000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Lucene query."
@@ -7853,28 +8047,31 @@
         "type": "object",
         "properties": {
           "interval": {
+            "description": "Fixed interval duration for time buckets, specified by the user.",
             "maxLength": 30,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Fixed interval duration for time buckets, specified by the user."
+            "x-coralogix-presence": true
           },
           "maximumDataPoints": {
+            "description": "Maximum number of data points constraint.",
+            "examples": [
+              500
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of data points constraint.",
-            "format": "int32",
-            "examples": [
-              500
-            ]
+            "x-coralogix-presence": true
           },
           "minimumInterval": {
+            "description": "Minimum interval duration constraint. The selected interval will not be smaller than this value.",
             "maxLength": 30,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Minimum interval duration constraint. The selected interval will not be smaller than this value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Manual interval resolution with a fixed, user-specified interval for time buckets. Optionally supports minimum interval and maximum data points constraints."
@@ -7883,11 +8080,12 @@
         "type": "object",
         "properties": {
           "messageTemplate": {
+            "description": "The message template.",
             "maxLength": 1000,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The message template."
+            "x-coralogix-presence": true
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -7947,19 +8145,21 @@
         "type": "object",
         "properties": {
           "customUnit": {
+            "description": "The custom unit.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The custom unit."
+            "x-coralogix-presence": true
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
           },
           "value": {
-            "type": "number",
             "description": "The value.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Instant strategy: places the annotation at a specific absolute timestamp value."
@@ -7968,21 +8168,24 @@
         "type": "object",
         "properties": {
           "customUnit": {
+            "description": "The custom unit.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The custom unit."
+            "x-coralogix-presence": true
           },
           "endValue": {
-            "type": "number",
             "description": "The end value.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "startValue": {
-            "type": "number",
             "description": "The start value.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "unit": {
             "$ref": "#/components/schemas/common.Unit"
@@ -8008,18 +8211,20 @@
             "description": "Color for this mapping section"
           },
           "mapTo": {
+            "description": "Display text to map the matched value to",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display text to map the matched value to"
+            "x-coralogix-presence": true
           },
           "value": {
+            "description": "Value to match (exact string for value mapping, regex pattern for regex mapping)",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Value to match (exact string for value mapping, regex pattern for regex mapping)"
+            "x-coralogix-presence": true
           }
         },
         "description": "A single mapping entry that maps a value (exact or regex) to a display text and color"
@@ -8028,18 +8233,20 @@
         "type": "object",
         "properties": {
           "markdownText": {
+            "description": "Markdown text",
             "maxLength": 65536,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Markdown text"
+            "x-coralogix-presence": true
           },
           "tooltipText": {
+            "description": "Tooltip text to display on widget hover",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Tooltip text to display on widget hover"
+            "x-coralogix-presence": true
           }
         },
         "description": "Markdown."
@@ -8048,11 +8255,12 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "The field.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field."
+            "x-coralogix-presence": true
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -8109,18 +8317,20 @@
         "type": "object",
         "properties": {
           "label": {
+            "description": "The label.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label."
+            "x-coralogix-presence": true
           },
           "metricName": {
+            "description": "The metric name.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The metric name."
+            "x-coralogix-presence": true
           }
         },
         "description": "Metric label source."
@@ -8175,18 +8385,20 @@
         "type": "object",
         "properties": {
           "label": {
+            "description": "The label associated with the metric.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label associated with the metric."
+            "x-coralogix-presence": true
           },
           "metric": {
+            "description": "The name of the metric to which the filter is applied.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The name of the metric to which the filter is applied."
+            "x-coralogix-presence": true
           },
           "operator": {
             "allOf": [
@@ -8237,11 +8449,12 @@
             "description": "List of labels."
           },
           "messageTemplate": {
+            "description": "The message template.",
             "maxLength": 1000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The message template."
+            "x-coralogix-presence": true
           },
           "orientation": {
             "$ref": "#/components/schemas/AnnotationOrientation"
@@ -8268,11 +8481,12 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "The field.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field."
+            "x-coralogix-presence": true
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -8345,14 +8559,16 @@
         "type": "object",
         "properties": {
           "max": {
-            "type": "number",
             "description": "Maximum value.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "Minimum value.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Min max custom."
@@ -8650,18 +8866,20 @@
         "type": "object",
         "properties": {
           "labelRegex": {
+            "description": "The label regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label regex."
+            "x-coralogix-presence": true
           },
           "valueRegex": {
+            "description": "The value regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Value display options."
@@ -8781,16 +8999,18 @@
         "type": "object",
         "properties": {
           "label": {
+            "description": "The label.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label."
+            "x-coralogix-presence": true
           },
           "value": {
-            "type": "number",
             "description": "The value.",
-            "format": "float"
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Numeric value label."
@@ -8831,11 +9051,12 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "Field name to order by",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name to order by"
+            "x-coralogix-presence": true
           },
           "orderDirection": {
             "allOf": [
@@ -8855,19 +9076,21 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "The field.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field."
+            "x-coralogix-presence": true
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
           },
           "percent": {
-            "type": "number",
             "description": "The percent.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Percentile."
@@ -8907,11 +9130,12 @@
             "description": "List of field names by which results are grouped"
           },
           "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results in groups are divided into subgroups"
+            "x-coralogix-presence": true
           },
           "timeFrame": {
             "allOf": [
@@ -8976,11 +9200,12 @@
             "description": "A Lucene query string to search logs"
           },
           "stackedGroupName": {
+            "description": "Field name by which results are stacked in individual group",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results are stacked in individual group"
+            "x-coralogix-presence": true
           },
           "stackedGroupNameField": {
             "allOf": [
@@ -9063,11 +9288,12 @@
             "description": "Type of the PromQL query, can be Range or Instant"
           },
           "stackedGroupName": {
+            "description": "Field name by which results in groups are divided into subgroups",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Field name by which results in groups are divided into subgroups"
+            "x-coralogix-presence": true
           },
           "timeFrame": {
             "allOf": [
@@ -9233,18 +9459,20 @@
         "type": "object",
         "properties": {
           "maxSlicesPerStack": {
+            "description": "How many slices can fit in a single slice stack",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "How many slices can fit in a single slice stack",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "stackNameTemplate": {
+            "description": "Custom template name of an individual slice in the stack",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name of an individual slice in the stack"
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration of stacked slices in the pie chart, including max slices and naming template."
@@ -9272,11 +9500,12 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "maxLength": 10000,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Prom ql query."
@@ -9427,14 +9656,15 @@
             "$ref": "#/components/schemas/TextAlignment"
           },
           "columnDisplayName": {
+            "description": "Column display name property, allows renaming the column header name",
+            "examples": [
+              "Renamed header"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Column display name property, allows renaming the column header name",
-            "examples": [
-              "Renamed header"
-            ]
+            "x-coralogix-presence": true
           },
           "link": {
             "allOf": [
@@ -9445,14 +9675,15 @@
             "description": "Link property (see PropertyLinks for full reference)"
           },
           "regexExtract": {
+            "description": "Value of Regex Extract property, a regex string",
+            "examples": [
+              "gr[ae]y"
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Value of Regex Extract property, a regex string",
-            "examples": [
-              "gr[ae]y"
-            ]
+            "x-coralogix-presence": true
           },
           "thresholds": {
             "$ref": "#/components/schemas/PropertyThresholds"
@@ -9461,14 +9692,15 @@
             "$ref": "#/components/schemas/PropertyUnits"
           },
           "valuesAlias": {
+            "description": "Value alias property, used to give alias names to selected fields",
+            "examples": [
+              "Pod: {{$d.pod}}"
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Value alias property, used to give alias names to selected fields",
-            "examples": [
-              "Pod: {{$d.pod}}"
-            ]
+            "x-coralogix-presence": true
           },
           "valuesMapping": {
             "$ref": "#/components/schemas/PropertyValuesMapping"
@@ -9495,14 +9727,16 @@
         "type": "object",
         "properties": {
           "max": {
-            "type": "number",
             "description": "A maximum value used in relative thresholds to calculate the threshold levels",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "A minimum value used in relative thresholds to calculate the threshold levels",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "type": {
             "allOf": [
@@ -9531,35 +9765,40 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "customUnit": {
+            "description": "Custom unit (requires to set unit field as 'custom' to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to set unit field as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "max": {
-            "type": "number",
             "description": "A maximum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "A minimum value used in percentage type unit (UNIT_PERCENT) for calculating displayed value",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "unit": {
             "allOf": [
@@ -9594,18 +9833,20 @@
         "type": "object",
         "properties": {
           "inputValue": {
+            "description": "The input value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The input value."
+            "x-coralogix-presence": true
           },
           "replaceValue": {
+            "description": "The replace value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The replace value."
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/ValuesMappingType"
@@ -9670,11 +9911,12 @@
         "type": "object",
         "properties": {
           "logRegex": {
+            "description": "The log regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The log regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Fetches distinct log field names matching the given regex pattern."
@@ -9840,18 +10082,20 @@
         ],
         "properties": {
           "stringValue": {
+            "description": "A literal string value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "A literal string value."
+            "x-coralogix-presence": true
           },
           "variableName": {
+            "description": "The name of a dashboard variable whose current value will be substituted.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The name of a dashboard variable whose current value will be substituted."
+            "x-coralogix-presence": true
           }
         },
         "description": "String or variable."
@@ -9925,11 +10169,12 @@
         "type": "object",
         "properties": {
           "metricRegex": {
+            "description": "The metric regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The metric regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Label name."
@@ -9964,11 +10209,12 @@
         "type": "object",
         "properties": {
           "metricRegex": {
+            "description": "The metric regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The metric regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Fetches distinct metric names matching the given regex pattern."
@@ -10031,11 +10277,12 @@
         "type": "object",
         "properties": {
           "spanRegex": {
+            "description": "The span regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The span regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Fetches distinct span field names matching the given regex pattern."
@@ -10065,11 +10312,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -10081,42 +10329,47 @@
             "description": "A list of category fields for grouping the query results"
           },
           "colorScheme": {
+            "description": "Applied color scheme for this query, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme for this query, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "queryId": {
+            "description": "Reference to the query id from Dynamic.query_display_settings",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reference to the query id from Dynamic.query_display_settings"
+            "x-coralogix-presence": true
           },
           "scaleType": {
             "allOf": [
@@ -10127,18 +10380,20 @@
             "description": "Scale type - linear/logarithmic"
           },
           "seriesCountLimit": {
+            "description": "Max count of the series per query",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^-?[0-9]+$",
             "type": "string",
-            "description": "Max count of the series per query"
+            "x-coralogix-presence": true
           },
           "seriesNameTemplate": {
+            "description": "Custom template for the series name",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template for the series name"
+            "x-coralogix-presence": true
           },
           "temporalField": {
             "allOf": [
@@ -10169,20 +10424,22 @@
             "description": "A list of numeric/value observation fields to display from the query results"
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Query display settings for time series lines multi-query visualization"
@@ -10254,11 +10511,12 @@
         "type": "object",
         "properties": {
           "logRegex": {
+            "description": "The log regex. Not implemented — see the parent schema.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The log regex. Not implemented — see the parent schema."
+            "x-coralogix-presence": true
           }
         },
         "description": "Not implemented and unusable. Fetching log field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead."
@@ -10427,18 +10685,20 @@
         ],
         "properties": {
           "stringValue": {
+            "description": "A literal string value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "A literal string value."
+            "x-coralogix-presence": true
           },
           "variableName": {
+            "description": "The name of a dashboard variable whose current value will be substituted.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The name of a dashboard variable whose current value will be substituted."
+            "x-coralogix-presence": true
           }
         },
         "description": "Query.metrics query.string or variable."
@@ -10522,11 +10782,12 @@
         "type": "object",
         "properties": {
           "metricRegex": {
+            "description": "The metric regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The metric regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Label name."
@@ -10559,11 +10820,12 @@
         "type": "object",
         "properties": {
           "metricRegex": {
+            "description": "The metric regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The metric regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Query.metrics query.type.metric name."
@@ -10626,11 +10888,12 @@
         "type": "object",
         "properties": {
           "spanRegex": {
+            "description": "The span regex. Not implemented — see the parent schema.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The span regex. Not implemented — see the parent schema."
+            "x-coralogix-presence": true
           }
         },
         "description": "Not implemented and unusable. Fetching span field names by regex is defined in the API but is not supported by the dashboards product: a dashboard whose variable uses fieldName cannot be created in the UI and fails to render when loaded. Use fieldValue instead."
@@ -10750,14 +11013,15 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "Variable name that can be applied on section making it repetitive section",
+            "examples": [
+              "pod_name"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Variable name that can be applied on section making it repetitive section",
-            "examples": [
-              "pod_name"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Repetitive var."
@@ -10816,11 +11080,12 @@
         "type": "object",
         "properties": {
           "height": {
+            "description": "Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc",
-            "format": "int32"
+            "x-coralogix-presence": true
           }
         },
         "description": "Appearance."
@@ -10892,11 +11157,12 @@
             "$ref": "#/components/schemas/FieldDataType"
           },
           "regex": {
+            "description": "Regular expression pattern used to scope the rule.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Regular expression pattern used to scope the rule."
+            "x-coralogix-presence": true
           }
         },
         "description": "Rule scope."
@@ -11051,11 +11317,12 @@
         "type": "object",
         "properties": {
           "queryId": {
+            "description": "Reference to the query id from Dynamic.query_display_settings",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reference to the query id from Dynamic.query_display_settings"
+            "x-coralogix-presence": true
           }
         },
         "description": "Sort by query value."
@@ -11190,18 +11457,20 @@
             "$ref": "#/components/schemas/MetadataField"
           },
           "processTagField": {
+            "description": "Name of a process-level tag field to use as the data source.",
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Name of a process-level tag field to use as the data source."
+            "x-coralogix-presence": true
           },
           "tagField": {
+            "description": "Name of a span tag field to use as the data source.",
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Name of a span tag field to use as the data source."
+            "x-coralogix-presence": true
           }
         },
         "description": "Span field."
@@ -11393,22 +11662,25 @@
             "description": "Type of spans aggregation function"
           },
           "id": {
+            "description": "Aggregation unique identifier",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Aggregation unique identifier"
+            "x-coralogix-presence": true
           },
           "isVisible": {
+            "description": "Whether the aggregation is visible in the table",
             "type": "boolean",
-            "description": "Whether the aggregation is visible in the table"
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Aggregation name",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Aggregation name"
+            "x-coralogix-presence": true
           }
         }
       },
@@ -11464,11 +11736,12 @@
             "$ref": "#/components/schemas/LuceneQuery"
           },
           "messageTemplate": {
+            "description": "The message template.",
             "maxLength": 1000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The message template."
+            "x-coralogix-presence": true
           },
           "strategy": {
             "$ref": "#/components/schemas/SpansSource.Strategy"
@@ -11583,11 +11856,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -11599,25 +11873,28 @@
             "description": "The category fields."
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              2
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              2
-            ]
+            "x-coralogix-presence": true
           },
           "displaySeriesName": {
+            "description": "(multi-stat display only) Whether to show the series names above the value",
             "type": "boolean",
-            "description": "(multi-stat display only) Whether to show the series names above the value"
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -11636,20 +11913,22 @@
             "description": "Indicates how to group the legend elements, either by thresholds or by query groups"
           },
           "max": {
-            "type": "number",
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               150000
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               0
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "thresholdBy": {
             "allOf": [
@@ -11712,11 +11991,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -11736,21 +12016,23 @@
             "description": "Color and label mapping configuration for the stat card values"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              2
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              2
-            ]
+            "x-coralogix-presence": true
           },
           "label": {
             "allOf": [
@@ -11869,11 +12151,12 @@
             "description": "A field from the query datashape to display"
           },
           "templateText": {
+            "description": "Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Optional display name template with variable support, e.g. 'pod count: {{$d.k8s.pods}}' or '{{$mapped}}'"
+            "x-coralogix-presence": true
           },
           "templateVariables": {
             "maxItems": 1000,
@@ -11922,18 +12205,20 @@
         "type": "object",
         "properties": {
           "label": {
+            "description": "The label.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label."
+            "x-coralogix-presence": true
           },
           "value": {
+            "description": "The value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "String value label."
@@ -11942,11 +12227,12 @@
         "type": "object",
         "properties": {
           "field": {
+            "description": "The field.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field."
+            "x-coralogix-presence": true
           },
           "observationField": {
             "$ref": "#/components/schemas/ObservationField"
@@ -11993,11 +12279,12 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "id": {
             "allOf": [
@@ -12008,11 +12295,12 @@
             "description": "Unique identifier."
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "properties": {
             "maxItems": 1000,
@@ -12069,11 +12357,12 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Textbox default interval value."
@@ -12090,11 +12379,12 @@
             "description": "Data mode. Omitted or DATA_MODE_TYPE_HIGH_UNSPECIFIED queries high-priority ('Frequent Search') data; DATA_MODE_TYPE_ARCHIVE queries archive ('Monitoring') data."
           },
           "value": {
+            "description": "The value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Textbox default lucene value."
@@ -12103,23 +12393,27 @@
         "type": "object",
         "properties": {
           "isInteger": {
+            "description": "The is integer.",
             "type": "boolean",
-            "description": "The is integer."
+            "x-coralogix-presence": true
           },
           "max": {
-            "type": "number",
             "description": "Maximum value.",
-            "format": "float"
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "Minimum value.",
-            "format": "float"
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "value": {
-            "type": "number",
             "description": "The value.",
-            "format": "float"
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Textbox default numeric value."
@@ -12128,11 +12422,12 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Textbox default regex value."
@@ -12141,11 +12436,12 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Textbox default string value."
@@ -12262,18 +12558,20 @@
             "$ref": "#/components/schemas/TextboxDefaultStringValue"
           },
           "singleNumeric": {
-            "type": "number",
+            "deprecated": true,
             "description": "Deprecated. Default numeric value for the textbox variable.",
             "format": "float",
-            "deprecated": true
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "singleString": {
+            "deprecated": true,
+            "description": "Deprecated. Default string value for the textbox variable.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Deprecated. Default string value for the textbox variable.",
-            "deprecated": true
+            "x-coralogix-presence": true
           }
         },
         "description": "Textbox default value."
@@ -12300,18 +12598,20 @@
         "type": "object",
         "properties": {
           "from": {
+            "description": "The from.",
+            "format": "date-time",
             "maxLength": 35,
             "minLength": 20,
             "type": "string",
-            "description": "The from.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "to": {
+            "description": "The to.",
+            "format": "date-time",
             "maxLength": 35,
             "minLength": 20,
             "type": "string",
-            "description": "The to.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Time frame."
@@ -12356,11 +12656,12 @@
             "$ref": "#/components/schemas/TimeFrame"
           },
           "relativeTimeFrame": {
+            "description": "Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes).",
             "maxLength": 64,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Relative time frame expressed as a duration offset from the current time (e.g., last 15 minutes)."
+            "x-coralogix-presence": true
           }
         },
         "description": "Time frame select."
@@ -12369,11 +12670,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "barValueDisplay": {
             "allOf": [
@@ -12396,35 +12698,39 @@
             "description": "The category fields."
           },
           "colorScheme": {
+            "description": "Applied color scheme for this query, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme for this query, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -12435,11 +12741,12 @@
             "description": "Widget's legend settings"
           },
           "maxSlicesPerBar": {
+            "description": "How many slices can fit in a single bar",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "How many slices can fit in a single bar",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "scaleType": {
             "allOf": [
@@ -12450,11 +12757,12 @@
             "description": "Scale type - linear/logarithmic"
           },
           "seriesNameTemplate": {
+            "description": "Custom template for the series name",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template for the series name"
+            "x-coralogix-presence": true
           },
           "sortBy": {
             "allOf": [
@@ -12508,20 +12816,22 @@
             "x-coralogix-presence": true
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Time series bars."
@@ -12530,11 +12840,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -12546,42 +12857,47 @@
             "description": "The category fields."
           },
           "colorScheme": {
+            "description": "Applied color scheme for this query, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme for this query, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "connectNulls": {
-            "type": "boolean",
             "description": "Whether the line should remain connected instead of producing scattered points when null values are present in between",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field as 'custom' to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -12600,18 +12916,20 @@
             "description": "Scale type - linear/logarithmic"
           },
           "seriesCountLimit": {
+            "description": "Max count of the series per query",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^-?[0-9]+$",
             "type": "string",
-            "description": "Max count of the series per query"
+            "x-coralogix-presence": true
           },
           "seriesNameTemplate": {
+            "description": "Custom template for the series name",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template for the series name"
+            "x-coralogix-presence": true
           },
           "stackedLine": {
             "allOf": [
@@ -12644,11 +12962,12 @@
             ]
           },
           "useDataTimeRange": {
-            "type": "boolean",
             "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "valueFields": {
             "maxItems": 1000,
@@ -12669,20 +12988,22 @@
             "x-coralogix-presence": true
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Time series lines."
@@ -12691,11 +13012,12 @@
         "type": "object",
         "properties": {
           "connectNulls": {
-            "type": "boolean",
             "description": "Whether the line should remain connected instead of producing scattered points when null values are present in between",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -12731,11 +13053,12 @@
             "description": "Tooltip settings for the widget"
           },
           "useDataTimeRange": {
-            "type": "boolean",
             "description": "When used, dashboard or widget time frame is ignored and X axis will represent only dates present in received data which can differ significantly from time ranges that were requested.",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "xAxisTimeFormat": {
             "allOf": [
@@ -12753,18 +13076,20 @@
         "type": "object",
         "properties": {
           "showAllSeries": {
-            "type": "boolean",
             "description": "Type of the tooltip display, can be showing single series value or all series values at once",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "showLabels": {
-            "type": "boolean",
             "description": "The show labels.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Time series tooltip."
@@ -12782,11 +13107,12 @@
         "type": "object",
         "properties": {
           "showLabels": {
-            "type": "boolean",
             "description": "The show labels.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "type": {
             "allOf": [
@@ -12839,22 +13165,25 @@
         "type": "object",
         "properties": {
           "isDefault": {
+            "description": "The is default.",
             "type": "boolean",
-            "description": "The is default."
+            "x-coralogix-presence": true
           },
           "label": {
+            "description": "The label.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label."
+            "x-coralogix-presence": true
           },
           "value": {
+            "description": "The value.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "A value/label pair for a static source. Both value and label must be set; clients typically default the label to the value."
@@ -12875,28 +13204,31 @@
             "$ref": "#/components/schemas/Variable.Definition"
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "displayName": {
+            "description": "The display name.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The display name."
+            "x-coralogix-presence": true
           },
           "displayType": {
             "$ref": "#/components/schemas/VariableDisplayType"
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -13148,18 +13480,20 @@
         "type": "object",
         "properties": {
           "labelRegex": {
+            "description": "The label regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The label regex."
+            "x-coralogix-presence": true
           },
           "valueRegex": {
+            "description": "The value regex.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value regex."
+            "x-coralogix-presence": true
           }
         },
         "description": "Value display options."
@@ -13176,22 +13510,25 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "displayFullRow": {
+            "description": "The display full row.",
             "type": "boolean",
-            "description": "The display full row."
+            "x-coralogix-presence": true
           },
           "displayName": {
+            "description": "The display name.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The display name."
+            "x-coralogix-presence": true
           },
           "displayType": {
             "allOf": [
@@ -13210,11 +13547,12 @@
             "description": "Variable's unique identifier"
           },
           "name": {
+            "description": "Variable name, used to reference the variable in widget queries. Should match ^[a-zA-Z0-9_]+$ and be unique within the dashboard.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Variable name, used to reference the variable in widget queries. Should match ^[a-zA-Z0-9_]+$ and be unique within the dashboard."
+            "x-coralogix-presence": true
           },
           "source": {
             "$ref": "#/components/schemas/VariableSourceV2"
@@ -13353,11 +13691,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "barValueDisplay": {
             "allOf": [
@@ -13377,11 +13716,12 @@
             "description": "The category fields."
           },
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "colorsBy": {
             "allOf": [
@@ -13392,35 +13732,39 @@
             "description": "How the bar colors should be organized"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set to custom to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a group, can contain variables",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a group, can contain variables"
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -13431,21 +13775,23 @@
             "description": "Widget's legend settings"
           },
           "maxBarsPerChart": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
             "description": "Maximum number of bars on a chart",
-            "format": "int32",
             "examples": [
               20
-            ]
-          },
-          "maxSlicesPerBar": {
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "maxSlicesPerBar": {
             "description": "How many slices can fit in a single bar",
-            "format": "int32"
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "scaleType": {
             "allOf": [
@@ -13467,11 +13813,12 @@
             ]
           },
           "stackNameTemplate": {
+            "description": "Custom template name of an individual stack",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name of an individual stack"
+            "x-coralogix-presence": true
           },
           "subCategoryFields": {
             "maxItems": 1000,
@@ -13497,20 +13844,22 @@
             "$ref": "#/components/schemas/ObservationField"
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Vertical bars."
@@ -13519,11 +13868,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "barValueDisplay": {
             "allOf": [
@@ -13543,11 +13893,12 @@
             "description": "The category fields."
           },
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "colorsBy": {
             "allOf": [
@@ -13558,35 +13909,39 @@
             "description": "How the bar colors should be organized"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set to custom to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set to custom to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              4
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              4
-            ]
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a group, can contain variables",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a group, can contain variables"
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -13597,14 +13952,15 @@
             "description": "Widget's legend settings"
           },
           "maxBarsPerChart": {
+            "description": "Maximum number of bars on a chart",
+            "examples": [
+              20
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of bars on a chart",
-            "format": "int32",
-            "examples": [
-              20
-            ]
+            "x-coralogix-presence": true
           },
           "queryFieldSettings": {
             "maxItems": 1000,
@@ -13643,20 +13999,22 @@
             ]
           },
           "yAxisMax": {
-            "type": "number",
             "description": "Number indicating the upper band for y axis",
-            "format": "float",
             "examples": [
               1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "yAxisMin": {
-            "type": "number",
             "description": "Number indicating the lower band for y axis",
-            "format": "float",
             "examples": [
               -1000
-            ]
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Visualization configuration for vertical bars with multiple queries."
@@ -13669,11 +14027,12 @@
         "type": "object",
         "properties": {
           "queryId": {
+            "description": "Reference to the query id from Dynamic.query_display_settings",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reference to the query id from Dynamic.query_display_settings"
+            "x-coralogix-presence": true
           },
           "valueField": {
             "allOf": [
@@ -13945,11 +14304,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "arcDisplay": {
             "allOf": [
@@ -13969,25 +14329,28 @@
             "description": "List of observation fields used to split gauge into multiple gauge instances."
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              2
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              2
-            ]
+            "x-coralogix-presence": true
           },
           "displaySeriesName": {
+            "description": "(multigauge display only) Whether to show the series names above the value",
             "type": "boolean",
-            "description": "(multigauge display only) Whether to show the series names above the value"
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -14006,43 +14369,48 @@
             "description": "Indicates how to group the legend elements, either by thresholds or by query groups"
           },
           "max": {
-            "type": "number",
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               150000
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               0
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "showInnerArc": {
-            "type": "boolean",
+            "deprecated": true,
             "description": "Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value",
             "examples": [
               false
             ],
-            "deprecated": true
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "showMinMax": {
-            "type": "boolean",
             "description": "Whether to display the min and max range values on the gauge",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "showOuterArc": {
-            "type": "boolean",
+            "deprecated": true,
             "description": "Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range",
             "examples": [
               true
             ],
-            "deprecated": true
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "thresholdType": {
             "allOf": [
@@ -14096,11 +14464,12 @@
         "type": "object",
         "properties": {
           "allowAbbreviation": {
-            "type": "boolean",
             "description": "Whether to render numeric value with abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "categoryFields": {
             "maxItems": 1000,
@@ -14112,42 +14481,47 @@
             "description": "The category fields."
           },
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "customUnit": {
+            "description": "Custom unit (requires the unit field to be set to custom to take effect)",
             "maxLength": 128,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires the unit field to be set to custom to take effect)"
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              5
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              5
-            ]
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a group, can contain variables",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a group, can contain variables"
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "labelDefinition": {
             "allOf": [
@@ -14166,45 +14540,50 @@
             "description": "Widget's legend settings"
           },
           "maxSlicesPerChart": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
             "description": "Maximum number of slices on a chart",
-            "format": "int32",
             "examples": [
               24
-            ]
-          },
-          "maxSlicesPerStack": {
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "maxSlicesPerStack": {
             "description": "How many slices can fit in a single slice stack",
-            "format": "int32"
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "minSlicePercentage": {
+            "description": "Minimum percentage threshold for slices to be displayed",
+            "examples": [
+              5
+            ],
+            "format": "int32",
             "maximum": 100,
             "minimum": 0,
             "type": "integer",
-            "description": "Minimum percentage threshold for slices to be displayed",
-            "format": "int32",
-            "examples": [
-              5
-            ]
+            "x-coralogix-presence": true
           },
           "showTotal": {
-            "type": "boolean",
             "description": "Whether to show the total amount as a title",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "stackNameTemplate": {
+            "description": "Custom template name of an individual slice in the stack",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name of an individual slice in the stack"
+            "x-coralogix-presence": true
           },
           "subCategoryFields": {
             "maxItems": 1000,
@@ -14236,8 +14615,9 @@
         "type": "object",
         "properties": {
           "isVisible": {
+            "description": "Are labels visible",
             "type": "boolean",
-            "description": "Are labels visible"
+            "x-coralogix-presence": true
           },
           "labelSource": {
             "allOf": [
@@ -14248,16 +14628,19 @@
             "description": "Source of the label"
           },
           "showName": {
+            "description": "Whether to show the name of slice in the label",
             "type": "boolean",
-            "description": "Whether to show the name of slice in the label"
+            "x-coralogix-presence": true
           },
           "showPercentage": {
+            "description": "Whether to show percentage value of slice in the label",
             "type": "boolean",
-            "description": "Whether to show percentage value of slice in the label"
+            "x-coralogix-presence": true
           },
           "showValue": {
+            "description": "Whether to show value of slice in the label",
             "type": "boolean",
-            "description": "Whether to show value of slice in the label"
+            "x-coralogix-presence": true
           }
         },
         "description": "Label definition."
@@ -14347,11 +14730,12 @@
             "deprecated": true
           },
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "definition": {
             "allOf": [
@@ -14362,11 +14746,12 @@
             "description": "Definition of the widget type and details"
           },
           "description": {
+            "description": "Short description of the widget",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Short description of the widget"
+            "x-coralogix-presence": true
           },
           "highlighted": {
             "type": "boolean",
@@ -14382,11 +14767,12 @@
             "description": "Widget unique identifier"
           },
           "layoutColumns": {
+            "description": "Number of columns occupied by the widget in the dashboard layout",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "Number of columns occupied by the widget in the dashboard layout",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "reference": {
             "allOf": [
@@ -14397,18 +14783,20 @@
             "description": "Reference to a widget from another dashboard"
           },
           "title": {
+            "description": "Name of the widget",
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Name of the widget"
+            "x-coralogix-presence": true
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a dashboard widget.",
@@ -14421,11 +14809,12 @@
         "type": "object",
         "properties": {
           "width": {
+            "description": "The width.",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "The width.",
-            "format": "int32"
+            "x-coralogix-presence": true
           }
         },
         "description": "Appearance."
@@ -14630,11 +15019,12 @@
         "type": "object",
         "properties": {
           "dashboardId": {
+            "description": "Dashboard ID containing the referenced widget (21-char NanoIds)",
             "maxLength": 21,
             "minLength": 21,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Dashboard ID containing the referenced widget (21-char NanoIds)"
+            "x-coralogix-presence": true
           },
           "widgetId": {
             "allOf": [
@@ -14728,18 +15118,20 @@
         "type": "object",
         "properties": {
           "bucketsPresented": {
+            "description": "How many buckets to present in the selected timeframe (deprecated)",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "How many buckets to present in the selected timeframe (deprecated)",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "interval": {
+            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)",
             "maxLength": 30,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on (deprecated)"
+            "x-coralogix-presence": true
           }
         },
         "description": "X axis by time configuration. (deprecated, use time_buckets instead)"
@@ -14804,23 +15196,26 @@
         "type": "object",
         "properties": {
           "color": {
+            "description": "Color of the threshold",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Color of the threshold"
+            "x-coralogix-presence": true
           },
           "from": {
-            "type": "number",
             "description": "Minimum bound value of the threshold",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "label": {
+            "description": "Optional label of the threshold",
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Optional label of the threshold"
+            "x-coralogix-presence": true
           }
         },
         "description": "Definition of a single gauge threshold"
@@ -14874,19 +15269,22 @@
         "type": "object",
         "properties": {
           "collapsed": {
+            "description": "Indicates if the filter's UI representation should be collapsed or expanded.",
             "type": "boolean",
-            "description": "Indicates if the filter's UI representation should be collapsed or expanded."
+            "x-coralogix-presence": true
           },
           "displayName": {
+            "description": "A display name for the filter",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "A display name for the filter"
+            "x-coralogix-presence": true
           },
           "enabled": {
+            "description": "Indicates if the filter is currently enabled or not.",
             "type": "boolean",
-            "description": "Indicates if the filter is currently enabled or not."
+            "x-coralogix-presence": true
           },
           "id": {
             "allOf": [
@@ -15006,11 +15404,12 @@
             "description": "Arc display settings; set this object to show the gauge arcs and control the value and threshold arcs, or omit it to hide all arcs"
           },
           "customUnit": {
+            "description": "Custom unit (requires to have unit field set as 'custom' to take effect)",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires to have unit field set as 'custom' to take effect)"
+            "x-coralogix-presence": true
           },
           "dataModeType": {
             "allOf": [
@@ -15021,25 +15420,28 @@
             "description": "Data mode type, either high or archive"
           },
           "decimal": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              3
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              3
-            ]
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
-            "type": "boolean",
             "description": "Whether to render numeric value without abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "displaySeriesName": {
+            "description": "(multigauge display only) Whether to show the series names above the value",
             "type": "boolean",
-            "description": "(multigauge display only) Whether to show the series names above the value"
+            "x-coralogix-presence": true
           },
           "legend": {
             "allOf": [
@@ -15058,20 +15460,22 @@
             "description": "(multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groups"
           },
           "max": {
-            "type": "number",
             "description": "A maximum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               150000
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "min": {
-            "type": "number",
             "description": "A minimum gauge value used in percentage threshold calculation and for visual value representation",
-            "format": "double",
             "examples": [
               0
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "query": {
             "allOf": [
@@ -15082,27 +15486,30 @@
             "description": "A query object containing query definition"
           },
           "showInnerArc": {
-            "type": "boolean",
+            "deprecated": true,
             "description": "Deprecated: use arcDisplay.valueArc instead. Whether to show the inner arc of gauge which graphically represents the value",
             "examples": [
               false
             ],
-            "deprecated": true
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "showMinMax": {
-            "type": "boolean",
             "description": "Whether to display the min and max range values on the gauge",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "showOuterArc": {
-            "type": "boolean",
+            "deprecated": true,
             "description": "Deprecated: use arcDisplay.thresholdArc instead. Whether to show the outer arc of gauge which graphically represents the min/max range",
             "examples": [
               true
             ],
-            "deprecated": true
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "thresholdBy": {
             "allOf": [
@@ -15147,18 +15554,20 @@
         "type": "object",
         "properties": {
           "colorScheme": {
+            "description": "Applied color scheme, one of the predefined values",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Applied color scheme, one of the predefined values"
+            "x-coralogix-presence": true
           },
           "customUnit": {
+            "description": "Custom unit (requires the unit field to be set to custom to take effect)",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom unit (requires the unit field to be set to custom to take effect)"
+            "x-coralogix-presence": true
           },
           "dataModeType": {
             "allOf": [
@@ -15169,35 +15578,39 @@
             "description": "Data mode type, either high or archive"
           },
           "decimal": {
+            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
+            "examples": [
+              5
+            ],
+            "format": "int32",
             "maximum": 15,
             "minimum": 0,
             "type": "integer",
-            "description": "Number indicating the decimal precision of the numeric values, within range 0-15",
-            "format": "int32",
-            "examples": [
-              5
-            ]
+            "x-coralogix-presence": true
           },
           "decimalPrecision": {
-            "type": "boolean",
             "description": "Whether to render numeric value without abbreviation",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "groupNameTemplate": {
+            "description": "Custom template name for a group, can contain variables",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Custom template name for a group, can contain variables"
+            "x-coralogix-presence": true
           },
           "hashColors": {
-            "type": "boolean",
             "description": "Whether to ignore color scheme and derive colors from algorithm",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "labelDefinition": {
             "allOf": [
@@ -15216,24 +15629,26 @@
             "description": "Widget's legend settings"
           },
           "maxSlicesPerChart": {
+            "description": "Maximum number of slices on a chart",
+            "examples": [
+              24
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of slices on a chart",
-            "format": "int32",
-            "examples": [
-              24
-            ]
+            "x-coralogix-presence": true
           },
           "minSlicePercentage": {
+            "description": "Minimum percentage threshold for slices to be displayed",
+            "examples": [
+              5
+            ],
+            "format": "int32",
             "maximum": 100,
             "minimum": 0,
             "type": "integer",
-            "description": "Minimum percentage threshold for slices to be displayed",
-            "format": "int32",
-            "examples": [
-              5
-            ]
+            "x-coralogix-presence": true
           },
           "query": {
             "allOf": [
@@ -15244,15 +15659,17 @@
             "description": "Query object"
           },
           "showLegend": {
+            "description": "Indicates whether to display the legend",
             "type": "boolean",
-            "description": "Indicates whether to display the legend"
+            "x-coralogix-presence": true
           },
           "showTotal": {
-            "type": "boolean",
             "description": "Whether to show the total amount as a title",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "stackDefinition": {
             "allOf": [
@@ -15280,8 +15697,9 @@
         "type": "object",
         "properties": {
           "isVisible": {
+            "description": "Are labels visible",
             "type": "boolean",
-            "description": "Are labels visible"
+            "x-coralogix-presence": true
           },
           "labelSource": {
             "allOf": [
@@ -15292,16 +15710,19 @@
             "description": "Source of the label"
           },
           "showName": {
+            "description": "Whether to show the name of slice in the label",
             "type": "boolean",
-            "description": "Whether to show the name of slice in the label"
+            "x-coralogix-presence": true
           },
           "showPercentage": {
+            "description": "Whether to show percentage value of slice in the label",
             "type": "boolean",
-            "description": "Whether to show percentage value of slice in the label"
+            "x-coralogix-presence": true
           },
           "showValue": {
+            "description": "Whether to show value of slice in the label",
             "type": "boolean",
-            "description": "Whether to show value of slice in the label"
+            "x-coralogix-presence": true
           }
         },
         "description": "Label definition."
@@ -15331,11 +15752,12 @@
         "description": "The dashboard id.",
         "required": true,
         "schema": {
+          "description": "The dashboard id.",
           "maxLength": 21,
           "minLength": 21,
           "pattern": "^[\\s\\S]*$",
           "type": "string",
-          "description": "The dashboard id."
+          "x-coralogix-presence": true
         }
       }
     }

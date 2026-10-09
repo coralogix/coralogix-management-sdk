@@ -361,7 +361,7 @@
         "operationId": "ConnectorsService_DeleteConnector",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_3"
+            "$ref": "#/components/parameters/id_4"
           }
         ],
         "responses": {
@@ -474,11 +474,12 @@
             "$ref": "#/components/schemas/ConnectorConfig"
           },
           "createTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "The create time. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
-            "readOnly": true
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "description": {
             "maxLength": 5000,
@@ -544,11 +545,12 @@
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
-            "readOnly": true
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "A connector configuration for sending notifications",
@@ -569,7 +571,6 @@
             "maxItems": 100,
             "minItems": 0,
             "type": "array",
-            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },
@@ -600,11 +601,12 @@
             "$ref": "#/components/schemas/ConnectorConfig"
           },
           "createTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "The create time. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
-            "readOnly": true
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "description": {
             "maxLength": 5000,
@@ -662,11 +664,12 @@
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "updateTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
-            "readOnly": true
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "A summary of a connector, excluding sensitive configuration values."
@@ -767,7 +770,6 @@
             "maxItems": 100,
             "minItems": 0,
             "type": "array",
-            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },
@@ -806,11 +808,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1039,7 +1042,7 @@
       }
     },
     "parameters": {
-      "id_3": {
+      "id_4": {
         "name": "id",
         "in": "path",
         "description": "Unique identifier.",

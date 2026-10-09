@@ -390,7 +390,8 @@
                     "description": "RFC3339 timestamp of when the SLO was created.",
                     "format": "date-time",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "creator": {
                     "description": "Email or identifier of the user who created the SLO.",
@@ -500,7 +501,8 @@
                     "description": "Timestamp of the last update.",
                     "format": "date-time",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "windowBasedMetricSli": {
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
@@ -643,7 +645,8 @@
                     "description": "RFC3339 timestamp of when the SLO was created.",
                     "format": "date-time",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "creator": {
                     "description": "Email or identifier of the user who created the SLO.",
@@ -753,7 +756,8 @@
                     "description": "Timestamp of the last update.",
                     "format": "date-time",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "windowBasedMetricSli": {
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
@@ -1124,7 +1128,8 @@
               "maxLength": 20,
               "minLength": 20,
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -1138,7 +1143,8 @@
               "maxLength": 20,
               "minLength": 20,
               "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -1292,7 +1298,8 @@
                     "description": "RFC3339 timestamp of when the SLO was created.",
                     "format": "date-time",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "creator": {
                     "description": "Email or identifier of the user who created the SLO.",
@@ -1402,7 +1409,8 @@
                     "description": "Timestamp of the last update.",
                     "format": "date-time",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "windowBasedMetricSli": {
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
@@ -1932,11 +1940,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1994,28 +2003,31 @@
         "type": "object",
         "properties": {
           "computedAt": {
+            "description": "Time at which the evaluation was performed, as an RFC 3339 UTC timestamp on a whole-minute instant (suffix `Z`, no fractional seconds).",
+            "format": "date-time",
             "maxLength": 20,
             "minLength": 20,
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$",
             "type": "string",
-            "description": "Time at which the evaluation was performed, as an RFC 3339 UTC timestamp on a whole-minute instant (suffix `Z`, no fractional seconds).",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "effectiveFrom": {
+            "description": "Inclusive lower bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`).",
+            "format": "date-time",
             "maxLength": 20,
             "minLength": 20,
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$",
             "type": "string",
-            "description": "Inclusive lower bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`).",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "effectiveTo": {
+            "description": "Exclusive upper bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`).",
+            "format": "date-time",
             "maxLength": 20,
             "minLength": 20,
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$",
             "type": "string",
-            "description": "Exclusive upper bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`).",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "effectiveWindowCompleteData": {
             "type": "boolean",
@@ -2285,10 +2297,11 @@
             "description": "APM SLI metadata parallel to materialized metric queries (product_type APM)."
           },
           "createTime": {
+            "description": "RFC3339 timestamp of when the SLO was created.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "RFC3339 timestamp of when the SLO was created.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "creator": {
             "description": "Email or identifier of the user who created the SLO.",
@@ -2395,10 +2408,11 @@
             "x-coralogix-presence": true
           },
           "updateTime": {
+            "description": "Timestamp of the last update.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "windowBasedMetricSli": {
             "$ref": "#/components/schemas/WindowBasedMetricSli"
@@ -2740,10 +2754,11 @@
             ]
           },
           "updateTime": {
+            "description": "Timestamp of the last update.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "The revision of the slo, used to differentiate between different versions of the same SLO"

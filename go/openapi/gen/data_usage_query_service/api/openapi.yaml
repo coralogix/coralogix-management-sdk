@@ -315,11 +315,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -875,24 +876,26 @@
         "type": "object",
         "properties": {
           "end": {
-            "maxLength": 32,
-            "minLength": 0,
-            "type": "string",
             "description": "Exclusive end of the timestamp range, as a UTC timestamp string later than `start`.",
-            "format": "date-time",
             "examples": [
               "2026-06-08T00:00:00.000Z"
-            ]
-          },
-          "start": {
+            ],
+            "format": "date-time",
             "maxLength": 32,
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "start": {
             "description": "Inclusive start of the timestamp range, as a UTC timestamp string.",
-            "format": "date-time",
             "examples": [
               "2026-06-01T00:00:00.000Z"
-            ]
+            ],
+            "format": "date-time",
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Half-open timestamp interval `[start, end)`. Both bounds are required."

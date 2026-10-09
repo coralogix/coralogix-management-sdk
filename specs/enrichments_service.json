@@ -327,14 +327,15 @@
         "type": "object",
         "properties": {
           "resourceType": {
+            "description": "The resource type. Must be one of the AWS resource types available for the account.",
+            "examples": [
+              "aws:ec2:instance"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The resource type. Must be one of the AWS resource types available for the account.",
-            "examples": [
-              "aws:ec2:instance"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Aws type."
@@ -409,14 +410,15 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              1
+            ],
+            "format": "int64",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "Unique identifier.",
-            "format": "int64",
-            "examples": [
-              1
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Custom enrichment type."
@@ -448,14 +450,15 @@
         "type": "object",
         "properties": {
           "enrichedFieldName": {
+            "description": "The enriched field name.",
+            "examples": [
+              "1"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The enriched field name.",
-            "examples": [
-              "1"
-            ]
+            "x-coralogix-presence": true
           },
           "enrichmentType": {
             "$ref": "#/components/schemas/EnrichmentType"
@@ -526,18 +529,20 @@
         "type": "object",
         "properties": {
           "enrichedFieldName": {
+            "description": "The enriched field name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The enriched field name."
+            "x-coralogix-presence": true
           },
           "fieldName": {
+            "description": "The field name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field name."
+            "x-coralogix-presence": true
           },
           "selectedColumns": {
             "maxItems": 100,
@@ -579,24 +584,26 @@
         "type": "object",
         "properties": {
           "enrichedFieldName": {
+            "description": "The enriched field name.",
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The enriched field name."
+            "x-coralogix-presence": true
           },
           "enrichmentType": {
             "$ref": "#/components/schemas/EnrichmentType"
           },
           "fieldName": {
+            "description": "The field name.",
+            "examples": [
+              "sourceIPs"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The field name.",
-            "examples": [
-              "sourceIPs"
-            ]
+            "x-coralogix-presence": true
           },
           "selectedColumns": {
             "maxItems": 100,
@@ -742,11 +749,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"

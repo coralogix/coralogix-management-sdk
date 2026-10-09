@@ -74,7 +74,8 @@
                       "2022-06-30T12:30:00.000Z"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "dataSource": {
                     "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
@@ -84,7 +85,8 @@
                     "maxLength": 300,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description of this E2M.",
@@ -94,7 +96,8 @@
                     "maxLength": 2000,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "id": {
                     "description": "Unique identifier for this E2M. Required on update requests.",
@@ -104,11 +107,13 @@
                     "maxLength": 36,
                     "minLength": 36,
                     "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "isInternal": {
                     "description": "Indicates whether this E2M is for internal use only.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "logsQuery": {
                     "$ref": "#/components/schemas/v2.LogsQuery"
@@ -139,7 +144,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "permutations": {
                     "$ref": "#/components/schemas/E2MPermutations"
@@ -156,7 +162,8 @@
                       "2022-06-30T12:30:00.000Z"
                     ],
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -237,7 +244,8 @@
                     "maxLength": 300,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description for the new E2M.",
@@ -247,7 +255,8 @@
                     "maxLength": 2000,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "logsQuery": {
                     "$ref": "#/components/schemas/v2.LogsQuery"
@@ -278,7 +287,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "permutationsLimit": {
                     "description": "Maximum number of unique metric permutations allowed for this E2M.",
@@ -288,7 +298,8 @@
                     "format": "int32",
                     "maximum": 10000000,
                     "minimum": 1,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "spansQuery": {
                     "$ref": "#/components/schemas/v2.SpansQuery"
@@ -416,14 +427,15 @@
           "description": "Unique identifier.",
           "required": true,
           "schema": {
+            "description": "Unique identifier.",
+            "examples": [
+              "d6a3658e-78d2-47d0-9b81-b2c551f01b09"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "d6a3658e-78d2-47d0-9b81-b2c551f01b09"
-            ]
+            "x-coralogix-presence": true
           }
         }
       ]
@@ -485,7 +497,8 @@
                   "maxLength": 10000,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "serviceFilters": {
                   "description": "The service filters.",
@@ -544,7 +557,8 @@
                   "maxLength": 255,
                   "minLength": 1,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "applicationnameFilters": {
                   "description": "The applicationname filters.",
@@ -570,7 +584,8 @@
                   "maxLength": 10000,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "severityFilters": {
                   "description": "The severity filters.",
@@ -624,7 +639,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "targetLabel": {
                     "description": "The target label.",
@@ -634,7 +650,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\w/-]+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -766,14 +783,15 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
+            "examples": [
+              "d6a3658e-78d2-47d0-9b81-b2c551f01b09"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier.",
-            "examples": [
-              "d6a3658e-78d2-47d0-9b81-b2c551f01b09"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure is used to delete an existing event to metric definition",
@@ -790,11 +808,12 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure is obtained when deleting an existing event to metric definition",
@@ -845,46 +864,51 @@
         ],
         "properties": {
           "createTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "RFC3339 timestamp of when this E2M was created.",
             "examples": [
               "2022-06-30T12:30:00.000Z"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "dataSource": {
+            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
+            "examples": [
+              "my_namespace/my_dataset"
+            ],
             "maxLength": 300,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "examples": [
-              "my_namespace/my_dataset"
-            ]
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description of this E2M.",
+            "examples": [
+              "avg and max the latency of catalog service"
+            ],
             "maxLength": 2000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description of this E2M.",
-            "examples": [
-              "avg and max the latency of catalog service"
-            ]
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier for this E2M. Required on update requests.",
+            "examples": [
+              "d6a3658e-78d2-47d0-9b81-b2c551f01b09"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier for this E2M. Required on update requests.",
-            "examples": [
-              "d6a3658e-78d2-47d0-9b81-b2c551f01b09"
-            ]
+            "x-coralogix-presence": true
           },
           "isInternal": {
+            "description": "Indicates whether this E2M is for internal use only.",
             "type": "boolean",
-            "description": "Indicates whether this E2M is for internal use only."
+            "x-coralogix-presence": true
           },
           "logsQuery": {
             "$ref": "#/components/schemas/v2.LogsQuery"
@@ -908,14 +932,15 @@
             "description": "Metric labels to attach to the generated metrics."
           },
           "name": {
+            "description": "Human-readable name for this E2M.",
+            "examples": [
+              "Service_catalog_latency"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable name for this E2M.",
-            "examples": [
-              "Service_catalog_latency"
-            ]
+            "x-coralogix-presence": true
           },
           "permutations": {
             "$ref": "#/components/schemas/E2MPermutations"
@@ -927,12 +952,13 @@
             "$ref": "#/components/schemas/E2MType"
           },
           "updateTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "RFC3339 timestamp of when this E2M was last updated.",
             "examples": [
               "2022-06-30T12:30:00.000Z"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an Event to Metrics (E2M) object.",
@@ -1021,24 +1047,26 @@
         ],
         "properties": {
           "dataSource": {
+            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
+            "examples": [
+              "my_namespace/my_dataset"
+            ],
             "maxLength": 300,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Optional data source in namespace/dataset_name format. If not set, defaults to the standard logs/spans stream.",
-            "examples": [
-              "my_namespace/my_dataset"
-            ]
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description for the new E2M.",
+            "examples": [
+              "avg and max the latency of catalog service"
+            ],
             "maxLength": 2000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description for the new E2M.",
-            "examples": [
-              "avg and max the latency of catalog service"
-            ]
+            "x-coralogix-presence": true
           },
           "logsQuery": {
             "$ref": "#/components/schemas/v2.LogsQuery"
@@ -1062,24 +1090,26 @@
             "description": "Metric labels to attach to the generated metrics."
           },
           "name": {
+            "description": "Human-readable name for the new E2M.",
+            "examples": [
+              "Service catalog latency"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable name for the new E2M.",
-            "examples": [
-              "Service catalog latency"
-            ]
+            "x-coralogix-presence": true
           },
           "permutationsLimit": {
+            "description": "Maximum number of unique metric permutations allowed for this E2M.",
+            "examples": [
+              30000
+            ],
+            "format": "int32",
             "maximum": 10000000,
             "minimum": 1,
             "type": "integer",
-            "description": "Maximum number of unique metric permutations allowed for this E2M.",
-            "format": "int32",
-            "examples": [
-              30000
-            ]
+            "x-coralogix-presence": true
           },
           "spansQuery": {
             "$ref": "#/components/schemas/v2.SpansQuery"
@@ -1283,11 +1313,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1345,14 +1376,15 @@
         "type": "object",
         "properties": {
           "companyId": {
+            "description": "The company id.",
+            "examples": [
+              "123456"
+            ],
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "The company id.",
-            "examples": [
-              "123456"
-            ]
+            "x-coralogix-presence": true
           },
           "labelsLimit": {
             "maximum": 255,
@@ -1393,18 +1425,20 @@
         "type": "object",
         "properties": {
           "limit": {
+            "description": "Limit.",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "Limit.",
-            "format": "int32"
+            "x-coralogix-presence": true
           },
           "used": {
+            "description": "Used.",
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "Used.",
-            "format": "int32"
+            "x-coralogix-presence": true
           }
         },
         "description": "Limit usage."
@@ -1456,24 +1490,26 @@
         "type": "object",
         "properties": {
           "sourceField": {
+            "description": "The source field.",
+            "examples": [
+              "log_obj.string_value"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The source field.",
-            "examples": [
-              "log_obj.string_value"
-            ]
+            "x-coralogix-presence": true
           },
           "targetLabel": {
+            "description": "The target label.",
+            "examples": [
+              "alias_label_name"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\w/-]+$",
             "type": "string",
-            "description": "The target label.",
-            "examples": [
-              "alias_label_name"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a metric label",
@@ -1664,14 +1700,15 @@
         "type": "object",
         "properties": {
           "alias": {
+            "description": "The alias.",
+            "examples": [
+              "new_query"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The alias.",
-            "examples": [
-              "new_query"
-            ]
+            "x-coralogix-presence": true
           },
           "applicationnameFilters": {
             "maxItems": 1000,
@@ -1690,14 +1727,15 @@
             "description": "The applicationname filters."
           },
           "lucene": {
+            "description": "The lucene.",
+            "examples": [
+              "log_obj.numeric_field: [50 TO 100]"
+            ],
             "maxLength": 10000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The lucene.",
-            "examples": [
-              "log_obj.numeric_field: [50 TO 100]"
-            ]
+            "x-coralogix-presence": true
           },
           "severityFilters": {
             "maxItems": 7,
@@ -1750,24 +1788,26 @@
             "description": "The aggregations."
           },
           "sourceField": {
+            "description": "The source field.",
+            "examples": [
+              "log_obj.numeric_field"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The source field.",
-            "examples": [
-              "log_obj.numeric_field"
-            ]
+            "x-coralogix-presence": true
           },
           "targetBaseMetricName": {
+            "description": "The target base metric name.",
+            "examples": [
+              "alias_field_name"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\w/-]+$",
             "type": "string",
-            "description": "The target base metric name.",
-            "examples": [
-              "alias_field_name"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a metric field",
@@ -1813,14 +1853,15 @@
             "description": "The applicationname filters."
           },
           "lucene": {
+            "description": "The lucene.",
+            "examples": [
+              "applicationName:myApp"
+            ],
             "maxLength": 10000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The lucene.",
-            "examples": [
-              "applicationName:myApp"
-            ]
+            "x-coralogix-presence": true
           },
           "serviceFilters": {
             "maxItems": 1000,

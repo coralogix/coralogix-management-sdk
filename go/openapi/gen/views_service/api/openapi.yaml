@@ -97,7 +97,8 @@
                     "maxLength": 36,
                     "minLength": 36,
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "View name",
@@ -107,7 +108,8 @@
                     "maxLength": 250,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "searchQuery": {
                     "allOf": [
@@ -288,11 +290,13 @@
                     "maxLength": 36,
                     "minLength": 36,
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "isCompactMode": {
                     "description": "The is compact mode.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "View name",
@@ -302,7 +306,8 @@
                     "maxLength": 250,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "searchQuery": {
                     "$ref": "#/components/schemas/SearchQuery"
@@ -416,14 +421,15 @@
           "description": "id",
           "required": true,
           "schema": {
+            "description": "id",
+            "examples": [
+              52
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "id",
-            "format": "int32",
-            "examples": [
-              52
-            ]
+            "x-coralogix-presence": true
           }
         }
       ]
@@ -439,24 +445,26 @@
         "type": "object",
         "properties": {
           "fromTime": {
-            "maxLength": 35,
-            "minLength": 1,
-            "type": "string",
             "description": "The from time.",
-            "format": "date-time",
             "examples": [
               "2024-01-25T11:31:43.152Z"
-            ]
-          },
-          "toTime": {
+            ],
+            "format": "date-time",
             "maxLength": 35,
             "minLength": 1,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "toTime": {
             "description": "The to time.",
-            "format": "date-time",
             "examples": [
               "2024-01-25T11:35:43.152Z"
-            ]
+            ],
+            "format": "date-time",
+            "maxLength": 35,
+            "minLength": 1,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Custom time selection."
@@ -499,11 +507,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -573,15 +582,16 @@
         "type": "object",
         "properties": {
           "caption": {
-            "maxLength": 100,
-            "minLength": 1,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
+            "deprecated": true,
             "description": "Folder name",
             "examples": [
               "Last Hour"
             ],
-            "deprecated": true
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "seconds": {
             "maximum": 4294967295,
@@ -604,11 +614,12 @@
         "type": "object",
         "properties": {
           "query": {
+            "description": "Query string.",
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Query string."
+            "x-coralogix-presence": true
           },
           "syntaxType": {
             "$ref": "#/components/schemas/SyntaxType"
@@ -698,38 +709,42 @@
             "$ref": "#/components/schemas/SelectedFilters"
           },
           "folderId": {
+            "description": "Unique identifier for folders",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "type": "string",
-            "description": "Unique identifier for folders",
-            "examples": [
-              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
-            ]
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "id",
+            "examples": [
+              52
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "id",
-            "format": "int32",
-            "examples": [
-              52
-            ]
+            "x-coralogix-presence": true
           },
           "isCompactMode": {
+            "description": "The is compact mode.",
             "type": "boolean",
-            "description": "The is compact mode."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "View name",
+            "examples": [
+              "Logs view"
+            ],
             "maxLength": 250,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "View name",
-            "examples": [
-              "Logs view"
-            ]
+            "x-coralogix-presence": true
           },
           "searchQuery": {
             "$ref": "#/components/schemas/SearchQuery"
@@ -778,14 +793,15 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "Filter name",
+            "examples": [
+              "applicationName"
+            ],
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Filter name",
-            "examples": [
-              "applicationName"
-            ]
+            "x-coralogix-presence": true
           },
           "selectedValues": {
             "type": "object",

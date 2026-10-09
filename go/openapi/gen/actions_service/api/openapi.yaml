@@ -161,14 +161,16 @@
                   },
                   "isPrivate": {
                     "description": "The is private.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Display name.",
                     "maxLength": 50,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "sourceType": {
                     "$ref": "#/components/schemas/v2.SourceType"
@@ -191,7 +193,8 @@
                     "maxLength": 32768,
                     "minLength": 1,
                     "pattern": "^https?://.*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "urlFields": {
                     "description": "The url fields. Each field requires both name and required, and names must be unique within the list.",
@@ -364,11 +367,12 @@
           "description": "Unique identifier.",
           "required": true,
           "schema": {
+            "description": "Unique identifier.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           }
         }
       ]
@@ -701,15 +705,17 @@
             "x-coralogix-presence": true
           },
           "isPrivate": {
+            "description": "The is private.",
             "type": "boolean",
-            "description": "The is private."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 50,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "sourceType": {
             "$ref": "#/components/schemas/v2.SourceType"
@@ -728,11 +734,12 @@
             "description": "The subsystem names."
           },
           "url": {
+            "description": "URL. Must start with http:// or https://.",
             "maxLength": 32768,
             "minLength": 1,
             "pattern": "^https?://.*$",
             "type": "string",
-            "description": "URL. Must start with http:// or https://."
+            "x-coralogix-presence": true
           },
           "urlFields": {
             "maxItems": 1000,
@@ -759,11 +766,12 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents the request to delete an Action."
@@ -826,11 +834,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -933,15 +942,17 @@
         "type": "object",
         "properties": {
           "name": {
+            "description": "Display name.",
             "maxLength": 1024,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "required": {
+            "description": "The required.",
             "type": "boolean",
-            "description": "The required."
+            "x-coralogix-presence": true
           }
         },
         "description": "Declares a URL field that may be required for the Action to be invokable on a log."
@@ -970,11 +981,12 @@
             "description": "The application names."
           },
           "createdBy": {
+            "description": "The creating user's username. Set by the server; ignored on requests.",
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The creating user's username. Set by the server; ignored on requests."
+            "x-coralogix-presence": true
           },
           "description": {
             "description": "Human-readable description.",
@@ -993,26 +1005,30 @@
             "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "isHidden": {
+            "description": "The is hidden.",
             "type": "boolean",
-            "description": "The is hidden."
+            "x-coralogix-presence": true
           },
           "isPrivate": {
+            "description": "The is private.",
             "type": "boolean",
-            "description": "The is private."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 50,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "sourceType": {
             "$ref": "#/components/schemas/v2.SourceType"
@@ -1031,11 +1047,12 @@
             "description": "The subsystem names."
           },
           "url": {
+            "description": "URL. Must start with http:// or https://.",
             "maxLength": 32768,
             "minLength": 1,
             "pattern": "^https?://.*$",
             "type": "string",
-            "description": "URL. Must start with http:// or https://."
+            "x-coralogix-presence": true
           },
           "urlFields": {
             "maxItems": 1000,
