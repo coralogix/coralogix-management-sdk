@@ -75,11 +75,6 @@ func TestViewFolders(t *testing.T) {
 	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewViewFoldersClient(creator)
 
-	allFolders, e := c.List(context.Background(), &cxsdk.ListViewFoldersRequest{})
-	assertNilAndPrintError(t, e)
-
-	numOfFolders := len(allFolders.Folders)
-
 	createResponse, e := c.Create(context.Background(), &cxsdk.CreateViewFolderRequest{
 		Name: &wrapperspb.StringValue{Value: "GoTestViewFolder"},
 	})
@@ -102,7 +97,7 @@ func TestViewFolders(t *testing.T) {
 	allFoldersWithNewFolder, e := c.List(context.Background(), &cxsdk.ListViewFoldersRequest{})
 
 	assertNilAndPrintError(t, e)
-	assert.Equal(t, numOfFolders+1, len(allFoldersWithNewFolder.Folders))
+	assert.True(t, viewFolderPresent(allFoldersWithNewFolder.Folders, createResponse.Folder.GetId().GetValue()))
 
 	_, e = c.Delete(context.Background(), &cxsdk.DeleteViewFolderRequest{
 		Id: createResponse.Folder.Id,
@@ -111,9 +106,18 @@ func TestViewFolders(t *testing.T) {
 
 	assertNilAndPrintError(t, e)
 
-	allFolders, e = c.List(context.Background(), &cxsdk.ListViewFoldersRequest{})
+	allFolders, e := c.List(context.Background(), &cxsdk.ListViewFoldersRequest{})
 
 	assertNilAndPrintError(t, e)
-	assert.Equal(t, numOfFolders, len(allFolders.Folders))
+	assert.False(t, viewFolderPresent(allFolders.Folders, createResponse.Folder.GetId().GetValue()))
 
+}
+
+func viewFolderPresent(folders []*cxsdk.ViewFolder, id string) bool {
+	for _, folder := range folders {
+		if folder.GetId().GetValue() == id {
+			return true
+		}
+	}
+	return false
 }

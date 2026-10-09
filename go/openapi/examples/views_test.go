@@ -80,12 +80,6 @@ func TestViewsFolders(t *testing.T) {
 	cfg := newTestConfig()
 	client := cxsdk.NewViewsFoldersClient(cfg)
 
-	before, httpResp, err := client.
-		ViewsFoldersServiceListViewFolders(context.Background()).
-		Execute()
-	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	initialCount := len(before.Folders)
-
 	createReq := viewsfolders.CreateViewFolderRequest{
 		Name: viewsfolders.PtrString(fmt.Sprintf("GoTestViewFolder-%s", uuid.NewString())),
 	}
@@ -118,7 +112,7 @@ func TestViewsFolders(t *testing.T) {
 		ViewsFoldersServiceListViewFolders(context.Background()).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, initialCount+1, len(after.Folders))
+	require.True(t, viewFolderListed(after.Folders, *created.Id))
 
 	_, httpResp, err = client.
 		ViewsFoldersServiceDeleteViewFolder(context.Background(), *created.Id).
@@ -129,5 +123,14 @@ func TestViewsFolders(t *testing.T) {
 		ViewsFoldersServiceListViewFolders(context.Background()).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, initialCount, len(final.Folders))
+	require.False(t, viewFolderListed(final.Folders, *created.Id))
+}
+
+func viewFolderListed(folders []viewsfolders.ViewFolder, id string) bool {
+	for _, folder := range folders {
+		if folder.Id != nil && *folder.Id == id {
+			return true
+		}
+	}
+	return false
 }
