@@ -51,7 +51,8 @@
                     "maxLength": 36,
                     "minLength": 36,
                     "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Folder name",
@@ -61,7 +62,8 @@
                     "maxLength": 100,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -112,7 +114,8 @@
                     "maxLength": 100,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "CreateViewFolderRequest",
@@ -195,14 +198,15 @@
           "description": "Unique identifier for folders",
           "required": true,
           "schema": {
+            "description": "Unique identifier for folders",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "type": "string",
-            "description": "Unique identifier for folders",
-            "examples": [
-              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
-            ]
+            "x-coralogix-presence": true
           }
         }
       ]
@@ -248,11 +252,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -323,24 +328,26 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier for folders",
+            "examples": [
+              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "type": "string",
-            "description": "Unique identifier for folders",
-            "examples": [
-              "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
-            ]
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Folder name",
+            "examples": [
+              "My Folder"
+            ],
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Folder name",
-            "examples": [
-              "My Folder"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "View folder."

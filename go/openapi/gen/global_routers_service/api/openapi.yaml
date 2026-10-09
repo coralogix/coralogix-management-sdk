@@ -271,7 +271,7 @@
         "operationId": "GlobalRoutersService_DeleteGlobalRouter",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_3"
+            "$ref": "#/components/parameters/id_4"
           }
         ],
         "responses": {
@@ -402,11 +402,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -460,11 +461,12 @@
         "type": "object",
         "properties": {
           "createTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "The create time. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
-            "readOnly": true
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "description": {
             "maxLength": 5000,
@@ -549,11 +551,12 @@
             "description": "List of rules."
           },
           "updateTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
-            "readOnly": true
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Defines a set of pre-configured routing rules for directing notifications",
@@ -863,7 +866,7 @@
       }
     },
     "parameters": {
-      "id_3": {
+      "id_4": {
         "name": "id",
         "in": "path",
         "description": "Unique identifier.",

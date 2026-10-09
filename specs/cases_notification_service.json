@@ -332,11 +332,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -513,14 +514,15 @@
             ]
           },
           "timestamp": {
+            "description": "When the notification was triggered",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When the notification was triggered",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Delivery results for a single notification."

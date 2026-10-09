@@ -374,7 +374,8 @@
               "maxLength": 512,
               "minLength": 1,
               "pattern": "^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -745,11 +746,12 @@
             "x-coralogix-presence": true
           },
           "lastActivatedAt": {
+            "description": "Time when this family was last activated.",
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
             "type": "string",
-            "description": "Time when this family was last activated.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "metadata": {
             "type": "object",
@@ -1202,11 +1204,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1299,6 +1302,7 @@
             "description": "Version of the observability features format used for this configuration family."
           },
           "metadata": {
+            "maxProperties": 64,
             "type": "object",
             "additionalProperties": {
               "maxLength": 4096,
@@ -1359,6 +1363,7 @@
             "x-coralogix-presence": true
           },
           "metadata": {
+            "maxProperties": 64,
             "type": "object",
             "additionalProperties": {
               "maxLength": 4096,
@@ -1410,6 +1415,7 @@
             "x-coralogix-presence": true
           },
           "metadata": {
+            "maxProperties": 64,
             "type": "object",
             "additionalProperties": {
               "maxLength": 4096,
@@ -1441,6 +1447,7 @@
             "x-coralogix-presence": true
           },
           "metadata": {
+            "maxProperties": 64,
             "type": "object",
             "additionalProperties": {
               "maxLength": 4096,
@@ -1477,6 +1484,7 @@
             "x-coralogix-presence": true
           },
           "metadata": {
+            "maxProperties": 64,
             "type": "object",
             "additionalProperties": {
               "maxLength": 4096,
@@ -1513,6 +1521,7 @@
             "x-coralogix-presence": true
           },
           "metadata": {
+            "maxProperties": 64,
             "type": "object",
             "additionalProperties": {
               "maxLength": 4096,
@@ -1546,11 +1555,12 @@
             "description": "Flat agent attributes that match agents for this configuration."
           },
           "createdAt": {
+            "description": "Time when this remote configuration was created.",
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
             "type": "string",
-            "description": "Time when this remote configuration was created.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "hash": {
             "maxLength": 256,
@@ -1581,11 +1591,12 @@
             "description": "Normalized OpenTelemetry Collector configuration YAML."
           },
           "updatedAt": {
+            "description": "Time when this remote configuration was last updated.",
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
             "type": "string",
-            "description": "Time when this remote configuration was last updated.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Remote configuration returned by Fleet Manager."

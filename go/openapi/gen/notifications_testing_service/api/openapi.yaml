@@ -554,11 +554,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -612,13 +613,14 @@
         "type": "object",
         "properties": {
           "fields": {
-            "maxItems": 100,
-            "minItems": 0,
-            "type": "array",
+            "description": "List of fields. The server does not keep the order of the fields, and a repeated field name keeps one entry.",
             "items": {
               "$ref": "#/components/schemas/notification_center.MessageConfigField"
             },
-            "description": "List of fields."
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Message config."

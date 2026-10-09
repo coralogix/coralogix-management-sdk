@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -26,20 +27,21 @@ type Preset struct {
 	AttachmentConfig *AttachmentConfig `json:"attachmentConfig,omitempty"`
 	// The config overrides.
 	ConfigOverrides []ConfigOverrides `json:"configOverrides,omitempty"`
-	ConnectorType *NotificationCenterConnectorType `json:"connectorType,omitempty"`
-	// The create time.
+	ConnectorType NotificationCenterConnectorType `json:"connectorType"`
+	// The create time. Set by the server; a value sent by the client is ignored.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	EntityType *NotificationCenterEntityType `json:"entityType,omitempty"`
+	EntityType NotificationCenterEntityType `json:"entityType"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Display name.
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// The parent id.
 	ParentId *string `json:"parentId,omitempty" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
+	// Whether the preset is system-provided or custom. Set by the server; a value sent by the client is ignored. Custom presets are stored as CUSTOM.
 	PresetType *PresetType `json:"presetType,omitempty"`
-	// Timestamp of the last update.
+	// Timestamp of the last update. Set by the server; a value sent by the client is ignored.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -51,8 +53,11 @@ type _Preset Preset
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewPreset() *Preset {
+func NewPreset(connectorType NotificationCenterConnectorType, entityType NotificationCenterEntityType, name string) *Preset {
 	this := Preset{}
+	this.ConnectorType = connectorType
+	this.EntityType = entityType
+	this.Name = name
 	return &this
 }
 
@@ -128,36 +133,28 @@ func (o *Preset) SetConfigOverrides(v []ConfigOverrides) {
 	o.ConfigOverrides = v
 }
 
-// GetConnectorType returns the ConnectorType field value if set, zero value otherwise.
+// GetConnectorType returns the ConnectorType field value
 func (o *Preset) GetConnectorType() NotificationCenterConnectorType {
-	if o == nil || IsNil(o.ConnectorType) {
+	if o == nil {
 		var ret NotificationCenterConnectorType
 		return ret
 	}
-	return *o.ConnectorType
+
+	return o.ConnectorType
 }
 
-// GetConnectorTypeOk returns a tuple with the ConnectorType field value if set, nil otherwise
+// GetConnectorTypeOk returns a tuple with the ConnectorType field value
 // and a boolean to check if the value has been set.
 func (o *Preset) GetConnectorTypeOk() (*NotificationCenterConnectorType, bool) {
-	if o == nil || IsNil(o.ConnectorType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConnectorType, true
+	return &o.ConnectorType, true
 }
 
-// HasConnectorType returns a boolean if a field has been set.
-func (o *Preset) HasConnectorType() bool {
-	if o != nil && !IsNil(o.ConnectorType) {
-		return true
-	}
-
-	return false
-}
-
-// SetConnectorType gets a reference to the given NotificationCenterConnectorType and assigns it to the ConnectorType field.
+// SetConnectorType sets field value
 func (o *Preset) SetConnectorType(v NotificationCenterConnectorType) {
-	o.ConnectorType = &v
+	o.ConnectorType = v
 }
 
 // GetCreateTime returns the CreateTime field value if set, zero value otherwise.
@@ -224,36 +221,28 @@ func (o *Preset) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetEntityType returns the EntityType field value if set, zero value otherwise.
+// GetEntityType returns the EntityType field value
 func (o *Preset) GetEntityType() NotificationCenterEntityType {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		var ret NotificationCenterEntityType
 		return ret
 	}
-	return *o.EntityType
+
+	return o.EntityType
 }
 
-// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
+// GetEntityTypeOk returns a tuple with the EntityType field value
 // and a boolean to check if the value has been set.
 func (o *Preset) GetEntityTypeOk() (*NotificationCenterEntityType, bool) {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EntityType, true
+	return &o.EntityType, true
 }
 
-// HasEntityType returns a boolean if a field has been set.
-func (o *Preset) HasEntityType() bool {
-	if o != nil && !IsNil(o.EntityType) {
-		return true
-	}
-
-	return false
-}
-
-// SetEntityType gets a reference to the given NotificationCenterEntityType and assigns it to the EntityType field.
+// SetEntityType sets field value
 func (o *Preset) SetEntityType(v NotificationCenterEntityType) {
-	o.EntityType = &v
+	o.EntityType = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -288,36 +277,28 @@ func (o *Preset) SetId(v string) {
 	o.Id = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *Preset) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *Preset) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Preset) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *Preset) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetParentId returns the ParentId field value if set, zero value otherwise.
@@ -432,24 +413,18 @@ func (o Preset) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConfigOverrides) {
 		toSerialize["configOverrides"] = o.ConfigOverrides
 	}
-	if !IsNil(o.ConnectorType) {
-		toSerialize["connectorType"] = o.ConnectorType
-	}
+	toSerialize["connectorType"] = o.ConnectorType
 	if !IsNil(o.CreateTime) {
 		toSerialize["createTime"] = o.CreateTime
 	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.EntityType) {
-		toSerialize["entityType"] = o.EntityType
-	}
+	toSerialize["entityType"] = o.EntityType
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.ParentId) {
 		toSerialize["parentId"] = o.ParentId
 	}
@@ -468,6 +443,29 @@ func (o Preset) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Preset) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"connectorType",
+		"entityType",
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varPreset := _Preset{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

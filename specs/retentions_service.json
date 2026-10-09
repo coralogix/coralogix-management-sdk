@@ -244,11 +244,12 @@
         "type": "object",
         "properties": {
           "activateRetentions": {
-            "type": "boolean",
             "description": "List of retentions to activate.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure is obtained after setting the active status of retentions",
@@ -310,11 +311,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -351,8 +353,9 @@
         "type": "object",
         "properties": {
           "enableTags": {
+            "description": "The enable tags.",
             "type": "boolean",
-            "description": "The enable tags."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure is obtained when retrieving the active status of retentions",
@@ -395,14 +398,16 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -433,23 +438,27 @@
         "type": "object",
         "properties": {
           "editable": {
+            "description": "The editable.",
             "type": "boolean",
-            "description": "The editable."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "order": {
-            "type": "integer",
             "description": "Sort order.",
-            "format": "int32"
+            "format": "int32",
+            "type": "integer",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a retention",

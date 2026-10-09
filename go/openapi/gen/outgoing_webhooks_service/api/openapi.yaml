@@ -542,7 +542,8 @@
             "schema": {
               "description": "The unique identifier of the outgoing webhook.",
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -601,7 +602,7 @@
         "operationId": "OutgoingWebhooksService_DeleteOutgoingWebhook",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_4"
+            "$ref": "#/components/parameters/id_3"
           }
         ],
         "responses": {
@@ -661,7 +662,7 @@
         "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_4"
+            "$ref": "#/components/parameters/id_3"
           }
         ],
         "responses": {
@@ -723,9 +724,10 @@
         "type": "object",
         "properties": {
           "isActive": {
-            "type": "boolean",
+            "default": false,
             "description": "Whether this resource is active.",
-            "default": false
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "type": {
             "allOf": [
@@ -753,41 +755,46 @@
         "type": "object",
         "properties": {
           "detail": {
+            "description": "Detail.",
             "minLength": 0,
             "type": "string",
-            "description": "Detail."
+            "x-coralogix-presence": true
           },
           "detailType": {
-            "minLength": 0,
-            "type": "string",
             "description": "The detail type.",
             "examples": [
               "detail_type"
-            ]
-          },
-          "eventBusArn": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "eventBusArn": {
             "description": "The event bus arn.",
             "examples": [
               "arn:aws:events:us-east-1:123456789012:event-bus/default"
-            ]
-          },
-          "roleName": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "roleName": {
             "description": "The role name.",
             "examples": [
               "role_name"
-            ]
-          },
-          "source": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "source": {
             "description": "Source.",
             "examples": [
               "source"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Aws event bridge config."
@@ -797,12 +804,13 @@
         "type": "object",
         "properties": {
           "id": {
-            "minLength": 0,
-            "type": "string",
             "description": "Unique identifier.",
             "examples": [
               "example_id"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Response returned after successfully creating an outgoing webhook."
@@ -818,17 +826,19 @@
         "type": "object",
         "properties": {
           "payload": {
+            "description": "Raw payload data.",
             "minLength": 0,
             "type": "string",
-            "description": "Raw payload data."
+            "x-coralogix-presence": true
           },
           "uuid": {
-            "minLength": 0,
-            "type": "string",
             "description": "The uuid.",
             "examples": [
               "d838cd7b-087b-40c6-bc33-80997020f5d0"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Demisto config."
@@ -838,9 +848,10 @@
         "type": "object",
         "properties": {
           "isActive": {
-            "type": "boolean",
+            "default": false,
             "description": "Whether this resource is active.",
-            "default": false
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "type": {
             "allOf": [
@@ -948,11 +959,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1007,17 +1019,19 @@
             ]
           },
           "payload": {
+            "description": "Raw payload data.",
             "minLength": 0,
             "type": "string",
-            "description": "Raw payload data."
+            "x-coralogix-presence": true
           },
           "uuid": {
-            "minLength": 0,
-            "type": "string",
             "description": "The uuid.",
             "examples": [
               "d838cd7b-087b-40c6-bc33-80997020f5d0"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Generic webhook config."
@@ -1050,24 +1064,28 @@
             "$ref": "#/components/schemas/EndpointType"
           },
           "eventNotificationsInstanceId": {
+            "description": "The event notifications instance id.",
             "minLength": 0,
             "type": "string",
-            "description": "The event notifications instance id."
+            "x-coralogix-presence": true
           },
           "regionId": {
+            "description": "The region id.",
             "minLength": 0,
             "type": "string",
-            "description": "The region id."
+            "x-coralogix-presence": true
           },
           "sourceId": {
+            "description": "The source id.",
             "minLength": 0,
             "type": "string",
-            "description": "The source id."
+            "x-coralogix-presence": true
           },
           "sourceName": {
+            "description": "The source name.",
             "minLength": 0,
             "type": "string",
-            "description": "The source name."
+            "x-coralogix-presence": true
           }
         },
         "description": "Ibm event notifications config."
@@ -1077,28 +1095,31 @@
         "type": "object",
         "properties": {
           "apiToken": {
-            "minLength": 0,
-            "type": "string",
             "description": "The api token.",
             "examples": [
               "jira_api_token"
-            ]
-          },
-          "email": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "email": {
             "description": "Email address.",
             "examples": [
               "jira_email"
-            ]
-          },
-          "projectKey": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "projectKey": {
             "description": "The project key.",
             "examples": [
               "jira_project_key"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Jira config."
@@ -1212,35 +1233,40 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "externalId": {
+            "description": "The external id.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "The external id.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1405,10 +1431,11 @@
             "$ref": "#/components/schemas/AwsEventBridgeConfig"
           },
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "demisto": {
             "$ref": "#/components/schemas/DemistoConfig"
@@ -1417,13 +1444,14 @@
             "$ref": "#/components/schemas/EmailGroupConfig"
           },
           "externalId": {
-            "minimum": 0,
-            "type": "integer",
             "description": "External identifier.",
-            "format": "int64",
             "examples": [
               123456
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "genericWebhook": {
             "$ref": "#/components/schemas/GenericWebhookConfig"
@@ -1432,12 +1460,13 @@
             "$ref": "#/components/schemas/IbmEventNotificationsConfig"
           },
           "id": {
-            "minLength": 0,
-            "type": "string",
             "description": "Unique identifier.",
             "examples": [
               "webhook_id"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "jira": {
             "$ref": "#/components/schemas/JiraConfig"
@@ -1449,12 +1478,13 @@
             "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
           },
           "name": {
-            "minLength": 0,
-            "type": "string",
             "description": "Display name.",
             "examples": [
               "my_webhook"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "opsgenie": {
             "$ref": "#/components/schemas/OpsgenieConfig"
@@ -1479,18 +1509,20 @@
             ]
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "url": {
-            "minLength": 0,
-            "type": "string",
             "description": "URL.",
             "examples": [
               "slack.webhook.com"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Outgoing webhook."
@@ -1500,12 +1532,13 @@
         "type": "object",
         "properties": {
           "label": {
-            "minLength": 0,
-            "type": "string",
             "description": "The label.",
             "examples": [
               "example_label"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1518,35 +1551,39 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "externalId": {
-            "minimum": 0,
-            "type": "integer",
             "description": "External identifier.",
-            "format": "int64",
             "examples": [
               123456
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "id": {
-            "minLength": 0,
-            "type": "string",
             "description": "Unique identifier.",
             "examples": [
               "webhook_id"
-            ]
-          },
-          "name": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "name": {
             "description": "Display name.",
             "examples": [
               "my_webhook"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "type": {
             "allOf": [
@@ -1559,18 +1596,20 @@
             ]
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "url": {
-            "minLength": 0,
-            "type": "string",
             "description": "URL.",
             "examples": [
               "slack.webhook.com"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1756,12 +1795,13 @@
             "$ref": "#/components/schemas/MSTeamsWorkflowConfig"
           },
           "name": {
-            "minLength": 0,
-            "type": "string",
             "description": "Display name.",
             "examples": [
               "my_webhook"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "opsgenie": {
             "$ref": "#/components/schemas/OpsgenieConfig"
@@ -1786,12 +1826,13 @@
             ]
           },
           "url": {
-            "minLength": 0,
-            "type": "string",
             "description": "URL.",
             "examples": [
               "slack.webhook.com"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Outgoing webhook input data."
@@ -1801,49 +1842,55 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "externalId": {
-            "minimum": 0,
-            "type": "integer",
             "description": "External identifier.",
-            "format": "int64",
             "examples": [
               123456
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "id": {
-            "minLength": 0,
-            "type": "string",
             "description": "Unique identifier.",
             "examples": [
               "webhook_id"
-            ]
-          },
-          "name": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "name": {
             "description": "Display name.",
             "examples": [
               "my_webhook"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "url": {
-            "minLength": 0,
-            "type": "string",
             "description": "URL.",
             "examples": [
               "slack.webhook.com"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1852,21 +1899,23 @@
         "type": "object",
         "properties": {
           "count": {
-            "minimum": 0,
-            "type": "integer",
             "description": "Number of items.",
-            "format": "int64",
             "examples": [
               3
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "label": {
-            "minLength": 0,
-            "type": "string",
             "description": "The label.",
             "examples": [
               "example_label"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/WebhookType"
@@ -1878,12 +1927,13 @@
         "type": "object",
         "properties": {
           "serviceKey": {
-            "minLength": 0,
-            "type": "string",
             "description": "The service key.",
             "examples": [
               "pager_duty_service_key"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Pager duty config."
@@ -1893,17 +1943,19 @@
         "type": "object",
         "properties": {
           "payload": {
+            "description": "Raw payload data.",
             "minLength": 0,
             "type": "string",
-            "description": "Raw payload data."
+            "x-coralogix-presence": true
           },
           "uuid": {
-            "minLength": 0,
-            "type": "string",
             "description": "The uuid.",
             "examples": [
               "d838cd7b-087b-40c6-bc33-80997020f5d0"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Send log config."
@@ -1982,29 +2034,32 @@
         "type": "object",
         "properties": {
           "displayMessage": {
-            "minLength": 0,
-            "type": "string",
             "description": "The display message.",
             "examples": [
               "example_display_message"
-            ]
-          },
-          "errorMessage": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "errorMessage": {
             "description": "The error message.",
             "examples": [
               "example_error_message"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "statusCode": {
-            "minimum": 0,
-            "type": "integer",
             "description": "The status code.",
-            "format": "int64",
             "examples": [
               400
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           }
         },
         "description": "Failure."
@@ -2057,18 +2112,19 @@
       }
     },
     "parameters": {
-      "id_4": {
+      "id_3": {
         "name": "id",
         "in": "path",
         "description": "Unique identifier.",
         "required": true,
         "schema": {
-          "minLength": 0,
-          "type": "string",
           "description": "Unique identifier.",
           "examples": [
             "example_id"
-          ]
+          ],
+          "minLength": 0,
+          "type": "string",
+          "x-coralogix-presence": true
         }
       }
     }

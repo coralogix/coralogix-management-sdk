@@ -22,7 +22,7 @@ var _ MappedNullable = &MessageConfig{}
 
 // MessageConfig Message config.
 type MessageConfig struct {
-	// List of fields.
+	// List of fields. The server does not keep the order of the fields, and a repeated field name keeps one entry.
 	Fields []NotificationCenterMessageConfigField `json:"fields,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
