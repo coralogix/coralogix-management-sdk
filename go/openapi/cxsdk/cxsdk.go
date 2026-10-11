@@ -29,6 +29,7 @@ import (
 	events2metrics "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/events2metrics_service"
 	extensiondeployments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_deployment_service"
 	extensions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_service"
+	configurationgroups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/fleet_manager_configuration_groups"
 	viewsfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/folders_for_views_service"
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	identity "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/identity_service"
@@ -76,6 +77,7 @@ type ClientSet struct {
 	extensions           *extensions.ExtensionServiceAPIService
 	events2metrics       *events2metrics.Events2MetricsServiceAPIService
 	extensionDeployments *extensiondeployments.ExtensionDeploymentServiceAPIService
+	configurationGroups  *configurationgroups.FleetManagerConfigurationGroupsAPIService
 	integrations         *integrations.IntegrationServiceAPIService
 	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
 	identity             *identity.IdentityServiceAPIService
@@ -193,6 +195,11 @@ func (c *ClientSet) ExtensionDeployments() *extensiondeployments.ExtensionDeploy
 	return c.extensionDeployments
 }
 
+// ConfigurationGroups returns the FleetManagerConfigurationGroupsAPIService client.
+func (c *ClientSet) ConfigurationGroups() *configurationgroups.FleetManagerConfigurationGroupsAPIService {
+	return c.configurationGroups
+}
+
 // Integrations returns the IntegrationServiceAPIService client.
 func (c *ClientSet) Integrations() *integrations.IntegrationServiceAPIService {
 	return c.integrations
@@ -291,6 +298,7 @@ func NewClientSet(c *Config) *ClientSet {
 		events2metrics:       NewEvents2MetricsClient(c),
 		extensions:           NewExtensionsClient(c),
 		extensionDeployments: NewExtensionDeploymentsClient(c),
+		configurationGroups:  NewConfigurationGroupsClient(c),
 		integrations:         NewIntegrationsClient(c),
 		globalRouters:        NewGlobalRoutersClient(c),
 		identity:             NewIdentityClient(c),
@@ -542,6 +550,19 @@ func NewExtensionDeploymentsClient(c *Config) *extensiondeployments.ExtensionDep
 		cfg.AddDefaultHeader(k, v)
 	}
 	return extensiondeployments.NewAPIClient(cfg).ExtensionDeploymentServiceAPI
+}
+
+// NewConfigurationGroupsClient builds a new FleetManagerConfigurationGroupsAPIService from CallPropertiesCreator.
+func NewConfigurationGroupsClient(c *Config) *configurationgroups.FleetManagerConfigurationGroupsAPIService {
+	cfg := configurationgroups.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = configurationgroups.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return configurationgroups.NewAPIClient(cfg).FleetManagerConfigurationGroupsAPI
 }
 
 // NewIntegrationsClient builds a new IntegrationServiceAPIService from CallPropertiesCreator.
