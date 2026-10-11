@@ -585,14 +585,15 @@
         "type": "object",
         "properties": {
           "postResolutionPeriod": {
+            "description": "Period after which resolved cases are automatically closed.",
+            "examples": [
+              "3600s"
+            ],
             "maxLength": 30,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Period after which resolved cases are automatically closed.",
-            "examples": [
-              "3600s"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for automatically closing cases after a certain period past resolution."
@@ -606,12 +607,13 @@
             "description": "Enable/disable automatic resolution"
           },
           "inactivePeriod": {
-            "minLength": 0,
-            "type": "string",
             "description": "Period of inactivity after which cases are automatically resolved.",
             "examples": [
               "3600s"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for automatically resolving cases after a certain period of inactivity."
@@ -671,20 +673,22 @@
             "description": "KPI thresholds for acknowledgement and resolution, grouped by case priority."
           },
           "resolutionSnoozePeriod": {
-            "minLength": 0,
-            "type": "string",
             "description": "Period after resolution during which new cases are snoozed.",
             "examples": [
               "600s"
-            ]
-          },
-          "suppressionPeriod": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "suppressionPeriod": {
             "description": "Default period during which duplicate or related cases are suppressed.",
             "examples": [
               "3600s"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Team-level configuration options for the lifecycle of case, such as suppression and snooze periods."
@@ -714,14 +718,15 @@
             "description": "Case lifecycle settings for the team"
           },
           "createTime": {
+            "description": "Timestamp when the team configuration was created",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the team configuration was created",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "globalIndicatorSettings": {
             "allOf": [
@@ -753,11 +758,12 @@
             "x-coralogix-presence": true
           },
           "updateTime": {
+            "description": "Timestamp when the team configuration was last updated",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the team configuration was last updated",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Team-level configuration entity for case management."
@@ -899,11 +905,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1140,12 +1147,13 @@
             ]
           },
           "threshold": {
-            "minLength": 0,
-            "type": "string",
             "description": "Elapsed time after which the KPI is considered breached.",
             "examples": [
               "300s"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "type": {
             "allOf": [

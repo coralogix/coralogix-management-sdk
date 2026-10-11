@@ -848,7 +848,7 @@
                     "x-coralogix-presence": true
                   },
                   "title": {
-                    "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied.",
+                    "description": "New case title. Leading and trailing whitespace is trimmed before the length limits are applied. A title longer than 512 characters is truncated to 512 characters, ending with \"…\".",
                     "examples": [
                       "Database connection investigation"
                     ],
@@ -2086,14 +2086,15 @@
             ]
           },
           "resolveTime": {
+            "description": "When present, timestamp when the alert resolved.",
+            "examples": [
+              "2025-09-22T11:05:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When present, timestamp when the alert resolved.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T11:05:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "resolveWithSignal": {
             "description": "When true or omitted, indicates that Case will be resolved together with signal. Otherwise, Case will stay open and wait for manual resolution.",
@@ -2123,14 +2124,15 @@
             "description": "When present, details about the suppression status of the alert indicator."
           },
           "triggerTime": {
+            "description": "Timestamp when the alert triggered.",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the alert triggered.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Data describing a triggered alert instance and its lifecycle relative to a case."
@@ -2292,14 +2294,15 @@
             "$ref": "#/components/schemas/AlertDefinitionMuted"
           },
           "suppressedTime": {
+            "description": "Timestamp when the alert got suppressed.",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the alert got suppressed.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Data describing the suppression status of an alert indicator, including active suppression rules and muted state."
@@ -2556,14 +2559,15 @@
             ]
           },
           "breachedAt": {
+            "description": "When the KPI breach occurred",
+            "examples": [
+              "2025-09-22T11:00:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When the KPI breach occurred",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T11:00:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "casePriority": {
             "allOf": [
@@ -2577,14 +2581,15 @@
             ]
           },
           "createdAt": {
+            "description": "When the breached KPI record was created",
+            "examples": [
+              "2025-09-22T11:00:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When the breached KPI record was created",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T11:00:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "id": {
             "maxLength": 36,
@@ -2759,11 +2764,12 @@
         "type": "object",
         "properties": {
           "acknowledgeTime": {
+            "description": "When the case was acknowledged",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When the case was acknowledged",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "aiSummary": {
             "description": "AI summary of the case. Leading and trailing whitespace is trimmed before the length limits are applied.",
@@ -2801,14 +2807,15 @@
             ]
           },
           "createTime": {
+            "description": "When the case was created",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When the case was created",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "duration": {
             "maxLength": 20,
@@ -2938,11 +2945,12 @@
             ]
           },
           "updateTime": {
+            "description": "When the case was last updated",
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When the case was last updated",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Represents a case within the Cases service."
@@ -3595,14 +3603,15 @@
         "type": "object",
         "properties": {
           "from": {
+            "description": "Timestamp marking the start of the date range",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp marking the start of the date range",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "mode": {
             "allOf": [
@@ -3616,14 +3625,15 @@
             ]
           },
           "to": {
+            "description": "Timestamp marking the end of the date range",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp marking the end of the date range",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "A filter defining a date range with 'from' and 'to' timestamps."
@@ -3801,11 +3811,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -3907,24 +3918,26 @@
             ]
           },
           "lastResolvedAt": {
-            "maxLength": 30,
-            "minLength": 20,
-            "type": "string",
             "description": "When present, timestamp when the indicator last resolved.",
-            "format": "date-time",
             "examples": [
               "2025-09-22T11:05:00.000Z"
-            ]
-          },
-          "lastTriggeredAt": {
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "lastTriggeredAt": {
             "description": "Timestamp when the indicator last triggered.",
-            "format": "date-time",
             "examples": [
               "2025-09-22T10:30:00.000Z"
-            ]
+            ],
+            "format": "date-time",
+            "maxLength": 30,
+            "minLength": 20,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "priority": {
             "allOf": [
@@ -4337,14 +4350,15 @@
         "type": "object",
         "properties": {
           "completedAt": {
+            "description": "When the analysis attempt completed.",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "When the analysis attempt completed.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "payload": {
             "allOf": [
@@ -4373,14 +4387,15 @@
         "type": "object",
         "properties": {
           "generatedAt": {
+            "description": "Timestamp when the analysis was generated.",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the analysis was generated.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "investigationSummary": {
             "maxLength": 8192,
@@ -4555,14 +4570,15 @@
             "description": "Annotations attached to the alert."
           },
           "createdAt": {
+            "description": "Timestamp when the alert was first observed.",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the alert was first observed.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "fingerprint": {
             "maxLength": 256,
@@ -4620,14 +4636,15 @@
             "description": "Current status of the alert."
           },
           "updatedAt": {
+            "description": "Timestamp when the alert was last updated.",
+            "examples": [
+              "2025-09-22T11:05:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the alert was last updated.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T11:05:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Data describing a single Prometheus alert within an alert group."
@@ -4696,14 +4713,15 @@
             ]
           },
           "receivedAt": {
+            "description": "Timestamp when the alert group was first received.",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the alert group was first received.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "receiver": {
             "maxLength": 256,
@@ -4724,14 +4742,15 @@
             "description": "Current status of the Prometheus alert group."
           },
           "updatedAt": {
+            "description": "Timestamp when the alert group was last updated.",
+            "examples": [
+              "2025-09-22T11:05:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the alert group was last updated.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T11:05:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Data describing a triggered Prometheus alert group and its constituent alerts."
@@ -4761,14 +4780,15 @@
             ]
           },
           "startedAt": {
+            "description": "ISO-8601 timestamp of when the alert episode began (the `startsAt` field from Prometheus AlertManager).",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "ISO-8601 timestamp of when the alert episode began (the `startsAt` field from Prometheus AlertManager).",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Lookup keys identifying a specific Prometheus AlertManager alert episode."
@@ -4855,14 +4875,15 @@
             "x-coralogix-presence": true
           },
           "resolveTime": {
+            "description": "Timestamp when the case was resolved",
+            "examples": [
+              "2025-09-22T11:15:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the case was resolved",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T11:15:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "resolvedBy": {
             "allOf": [
@@ -4902,24 +4923,26 @@
         "type": "object",
         "properties": {
           "resolvedAt": {
-            "maxLength": 30,
-            "minLength": 20,
-            "type": "string",
             "description": "Timestamp when the alert was resolved.",
-            "format": "date-time",
             "examples": [
               "2025-09-22T11:05:00.000Z"
-            ]
-          },
-          "triggeredAt": {
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "triggeredAt": {
             "description": "Timestamp when the alert was originally triggered.",
-            "format": "date-time",
             "examples": [
               "2025-09-22T10:30:00.000Z"
-            ]
+            ],
+            "format": "date-time",
+            "maxLength": 30,
+            "minLength": 20,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Status payload for a resolved Prometheus alert."
@@ -5032,14 +5055,15 @@
         "type": "object",
         "properties": {
           "triggeredAt": {
+            "description": "Timestamp when the alert was triggered.",
+            "examples": [
+              "2025-09-22T10:30:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 30,
             "minLength": 20,
             "type": "string",
-            "description": "Timestamp when the alert was triggered.",
-            "format": "date-time",
-            "examples": [
-              "2025-09-22T10:30:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "Status payload for an active Prometheus alert."

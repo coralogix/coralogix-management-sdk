@@ -24,7 +24,7 @@ var _ MappedNullable = &CasePatch{}
 type CasePatch struct {
 	// New case resolution reason. Leading and trailing whitespace is trimmed before the length limits are applied.
 	ResolutionReason *string `json:"resolutionReason,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
-	// New case title. Leading and trailing whitespace is trimmed before the length limits are applied.
+	// New case title. Leading and trailing whitespace is trimmed before the length limits are applied. A title longer than 512 characters is truncated to 512 characters, ending with \"…\".
 	Title *string `json:"title,omitempty" validate:"regexp=^[\\s\\S]*\\S[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

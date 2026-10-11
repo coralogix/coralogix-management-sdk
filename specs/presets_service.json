@@ -52,7 +52,7 @@
         "operationId": "PresetsService_DeleteCustomPreset",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_3"
+            "$ref": "#/components/parameters/id_4"
           }
         ],
         "responses": {
@@ -556,11 +556,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -656,13 +657,14 @@
         "type": "object",
         "properties": {
           "fields": {
-            "maxItems": 100,
-            "minItems": 0,
-            "type": "array",
+            "description": "List of fields. The server does not keep the order of the fields, and a repeated field name keeps one entry.",
             "items": {
               "$ref": "#/components/schemas/notification_center.MessageConfigField"
             },
-            "description": "List of fields."
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Message config."
@@ -685,6 +687,11 @@
       },
       "Preset": {
         "title": "Preset",
+        "required": [
+          "name",
+          "connectorType",
+          "entityType"
+        ],
         "type": "object",
         "properties": {
           "attachmentConfig": {
@@ -703,10 +710,12 @@
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "createTime": {
+            "description": "The create time. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
             "minLength": 0,
+            "readOnly": true,
             "type": "string",
-            "description": "The create time.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "description": {
             "maxLength": 5000,
@@ -761,14 +770,22 @@
             "x-coralogix-presence": true
           },
           "presetType": {
-            "$ref": "#/components/schemas/PresetType",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PresetType"
+              }
+            ],
+            "description": "Whether the preset is system-provided or custom. Set by the server; a value sent by the client is ignored. Custom presets are stored as CUSTOM.",
+            "readOnly": true,
             "x-coralogix-presence": true
           },
           "updateTime": {
+            "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
+            "format": "date-time",
             "minLength": 0,
+            "readOnly": true,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Set of preconfigured templates for notification content rendering",
@@ -788,10 +805,11 @@
             "$ref": "#/components/schemas/notification_center.ConnectorType"
           },
           "createTime": {
+            "description": "The create time.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "The create time.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "description": {
             "maxLength": 5000,
@@ -848,10 +866,11 @@
             "$ref": "#/components/schemas/PresetType"
           },
           "updateTime": {
+            "description": "Timestamp of the last update.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Timestamp of the last update.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Provides a concise overview of a preset",
@@ -1014,7 +1033,7 @@
       }
     },
     "parameters": {
-      "id_3": {
+      "id_4": {
         "name": "id",
         "in": "path",
         "description": "Unique identifier.",

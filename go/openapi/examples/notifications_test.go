@@ -303,7 +303,7 @@ func TestHttpsPreset(t *testing.T) {
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, name, *got.Preset.Name)
+	require.Equal(t, name, got.Preset.Name)
 	require.Equal(t, presets.ATTACHMENTCONFIGPOLICY_ENABLED, *got.Preset.AttachmentConfig.Policy)
 
 	_, httpResp, err = client.
@@ -333,12 +333,12 @@ func TestSlackPreset(t *testing.T) {
 	name := fmt.Sprintf("TestGoSlackPreset-%v", uuid.NewString())
 
 	preset := presets.Preset{
-		Name:          &name,
+		Name:          name,
 		Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
-		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
 		ParentId:      presets.PtrString("preset_system_slack_alerts_basic"),
-		ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_SLACK.Ptr(),
+		ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_SLACK,
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
@@ -379,7 +379,7 @@ func TestSlackPreset(t *testing.T) {
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, name, *got.Preset.Name)
+	require.Equal(t, name, got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
@@ -408,12 +408,12 @@ func TestPagerdutyPreset(t *testing.T) {
 	name := fmt.Sprintf("TestPagerDutyPreset-%v", uuid.NewString())
 
 	preset := presets.Preset{
-		Name:          &name,
+		Name:          name,
 		Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 		PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
-		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+		EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
 		ParentId:      presets.PtrString("preset_system_pagerduty_alerts_basic"),
-		ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY.Ptr(),
+		ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_PAGERDUTY,
 		ConfigOverrides: []presets.ConfigOverrides{
 			{
 				ConditionType: &presets.NotificationCenterConditionType{
@@ -450,7 +450,7 @@ func TestPagerdutyPreset(t *testing.T) {
 		PresetsServiceGetPreset(context.Background(), *presetID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, name, *got.Preset.Name)
+	require.Equal(t, name, got.Preset.Name)
 
 	_, httpResp, err = client.
 		PresetsServiceSetPresetAsDefault(context.Background(), *presetID).
@@ -706,12 +706,12 @@ func getHttpsConnector(name string) *connectors.CreateConnectorRequest {
 func getHttpsPreset(name string) *presets.CreateCustomPresetRequest {
 	return &presets.CreateCustomPresetRequest{
 		Preset: &presets.Preset{
-			Name:          &name,
+			Name:          name,
 			Description:   presets.PtrString("This is the preset to use for Notification Center testing."),
 			PresetType:    presets.PRESETTYPE_CUSTOM.Ptr(),
-			EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS.Ptr(),
+			EntityType:    presets.NOTIFICATIONCENTERENTITYTYPE_ALERTS,
 			ParentId:      presets.PtrString("preset_system_generic_https_alerts_empty"),
-			ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS.Ptr(),
+			ConnectorType: presets.NOTIFICATIONCENTERCONNECTORTYPE_GENERIC_HTTPS,
 			// AttachmentConfig controls whether notification payloads include attachments
 			// (AUTO by default). Values: AUTO, ENABLED, DISABLED.
 			AttachmentConfig: &presets.AttachmentConfig{

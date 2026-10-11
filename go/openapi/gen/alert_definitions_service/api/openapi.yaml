@@ -115,14 +115,16 @@
                   "format": "int64",
                   "maximum": 1000,
                   "minimum": 0,
-                  "type": "integer"
+                  "type": "integer",
+                  "x-coralogix-presence": true
                 },
                 "pageToken": {
                   "description": "The page token.",
                   "maxLength": 4096,
                   "minLength": 1,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "type": "object"
@@ -271,7 +273,8 @@
                     "maxLength": 36,
                     "minLength": 0,
                     "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Replace alert definition request",
@@ -897,7 +900,8 @@
               "maxLength": 36,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -981,7 +985,8 @@
               "maxLength": 36,
               "minLength": 0,
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -1063,7 +1068,8 @@
               "maxLength": 36,
               "minLength": 0,
               "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -1227,43 +1233,47 @@
             "description": "The alert definition's properties"
           },
           "alertVersionId": {
+            "description": "The old alert ID",
             "maxLength": 36,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The old alert ID"
+            "x-coralogix-presence": true
           },
           "createdTime": {
+            "description": "The time when the alert definition was created",
+            "examples": [
+              "2023-10-01T12:00:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The time when the alert definition was created",
-            "format": "date-time",
-            "examples": [
-              "2023-10-01T12:00:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "The alert definition's persistent ID",
+            "examples": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
             "maxLength": 36,
             "minLength": 1,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The alert definition's persistent ID",
-            "examples": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ]
+            "x-coralogix-presence": true
           },
           "lastTriggeredTime": {
+            "description": "The last time the alert definition was triggered",
+            "examples": [
+              "2023-10-01T12:00:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The last time the alert definition was triggered",
-            "format": "date-time",
-            "examples": [
-              "2023-10-01T12:00:00.000Z"
-            ]
+            "x-coralogix-presence": true
           },
           "status": {
             "allOf": [
@@ -1278,15 +1288,16 @@
             "x-coralogix-presence": true
           },
           "updatedTime": {
+            "description": "The time when the alert definition was last updated",
+            "examples": [
+              "2023-10-01T12:00:00.000Z"
+            ],
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The time when the alert definition was last updated",
-            "format": "date-time",
-            "examples": [
-              "2023-10-01T12:00:00.000Z"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an alert definition",
@@ -1445,18 +1456,20 @@
         "type": "object",
         "properties": {
           "dataSet": {
+            "description": "File name of the dataset",
             "maxLength": 300,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "File name of the dataset"
+            "x-coralogix-presence": true
           },
           "dataSpace": {
+            "description": "Folder name of the datasource",
             "maxLength": 50,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Folder name of the datasource"
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1465,8 +1478,9 @@
         "type": "object",
         "properties": {
           "enabled": {
+            "description": "Whether to filter for enabled (true) or disabled (false) alerts",
             "type": "boolean",
-            "description": "Whether to filter for enabled (true) or disabled (false) alerts"
+            "x-coralogix-presence": true
           }
         },
         "description": "Filter by alert definition enabled status"
@@ -1540,14 +1554,15 @@
         "type": "object",
         "properties": {
           "minutes": {
+            "description": "The time in minutes before the alert can be retriggered",
+            "examples": [
+              30
+            ],
+            "format": "int64",
             "maximum": 10080,
             "minimum": 1,
             "type": "integer",
-            "description": "The time in minutes before the alert can be retriggered",
-            "format": "int64",
-            "examples": [
-              30
-            ]
+            "x-coralogix-presence": true
           },
           "notifyOn": {
             "allOf": [
@@ -1996,30 +2011,33 @@
             "description": "The sources from which to sample logs"
           },
           "deleted": {
-            "type": "boolean",
-            "description": "Whether the alert has been marked as deleted",
             "default": false,
+            "description": "Whether the alert has been marked as deleted",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "A detailed description of what the alert monitors and when it triggers",
+            "examples": [
+              "Alert description"
+            ],
             "maxLength": 3000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "A detailed description of what the alert monitors and when it triggers",
-            "examples": [
-              "Alert description"
-            ]
+            "x-coralogix-presence": true
           },
           "enabled": {
-            "type": "boolean",
-            "description": "Whether the alert is currently active and monitoring",
             "default": true,
+            "description": "Whether the alert is currently active and monitoring",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "entityLabels": {
             "type": "object",
@@ -2137,14 +2155,15 @@
             "description": "Configuration for metric-based threshold alerts"
           },
           "name": {
+            "description": "The name of the alert definition",
+            "examples": [
+              "My Alert"
+            ],
             "maxLength": 512,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The name of the alert definition",
-            "examples": [
-              "My Alert"
-            ]
+            "x-coralogix-presence": true
           },
           "notificationGroup": {
             "allOf": [
@@ -2165,12 +2184,13 @@
             "deprecated": true
           },
           "phantomMode": {
-            "type": "boolean",
-            "description": "Whether the alert is in phantom mode (creating incidents or not)",
             "default": false,
+            "description": "Whether the alert is in phantom mode (creating incidents or not)",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "priority": {
             "allOf": [
@@ -2335,14 +2355,15 @@
             "description": "The properties of the alert definition"
           },
           "id": {
+            "description": "The alert definition ID",
+            "examples": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
             "maxLength": 36,
             "minLength": 1,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The alert definition ID",
-            "examples": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "An alert definition along with its ID for replacement"
@@ -2420,14 +2441,15 @@
             "description": "The integration type for webhook notifications"
           },
           "minutes": {
+            "description": "The time in minutes before the alert can be retriggered",
+            "examples": [
+              15
+            ],
+            "format": "int64",
             "maximum": 10080,
             "minimum": 1,
             "type": "integer",
-            "description": "The time in minutes before the alert can be retriggered",
-            "format": "int64",
-            "examples": [
-              15
-            ]
+            "x-coralogix-presence": true
           },
           "notifyOn": {
             "allOf": [
@@ -2465,14 +2487,15 @@
             "description": "The DataPrime query to evaluate"
           },
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              300000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              300000
-            ]
+            "x-coralogix-presence": true
           },
           "noDataPolicy": {
             "allOf": [
@@ -2483,21 +2506,23 @@
             "description": "Configuration for how to treat and what state to give to an alert with no data"
           },
           "timeframeMinutes": {
+            "description": "The evaluation window duration in minutes",
+            "examples": [
+              60
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "The evaluation window duration in minutes",
-            "format": "int32",
-            "examples": [
-              60
-            ]
+            "x-coralogix-presence": true
           },
           "useRowsAsPermutations": {
-            "type": "boolean",
             "description": "Whether each result row is treated as a separate permutation. Defaults to false for immediate alerts to avoid high-cardinality alerts by mistake.",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for analytics alerts that fire immediately when a DataPrime query returns a result"
@@ -2542,12 +2567,13 @@
         "type": "object",
         "properties": {
           "threshold": {
-            "type": "number",
             "description": "The threshold value to compare against",
-            "format": "double",
             "examples": [
               100
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Defines the threshold value to compare against"
@@ -2565,14 +2591,15 @@
             "description": "The DataPrime query to evaluate"
           },
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              300000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              300000
-            ]
+            "x-coralogix-presence": true
           },
           "noDataPolicy": {
             "allOf": [
@@ -2603,31 +2630,34 @@
             "description": "The per-priority threshold rules"
           },
           "targetColumn": {
+            "description": "The name of the numeric result column to compare",
+            "examples": [
+              "error_count"
+            ],
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The name of the numeric result column to compare",
-            "examples": [
-              "error_count"
-            ]
+            "x-coralogix-presence": true
           },
           "timeframeMinutes": {
+            "description": "The evaluation window duration in minutes",
+            "examples": [
+              60
+            ],
+            "format": "int32",
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "description": "The evaluation window duration in minutes",
-            "format": "int32",
-            "examples": [
-              60
-            ]
+            "x-coralogix-presence": true
           },
           "useRowsAsPermutations": {
-            "type": "boolean",
             "description": "Whether each result row is treated as a separate permutation. Defaults to true for threshold alerts as permutation count is easier to estimate.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for alerts that fire when a numeric column in a DataPrime query result violates a threshold"
@@ -2637,10 +2667,11 @@
         "type": "object",
         "properties": {
           "percentageOfDeviation": {
+            "description": "The percentage of deviation from the baseline for triggering the alert.",
+            "format": "float",
             "minimum": 0,
             "type": "number",
-            "description": "The percentage of deviation from the baseline for triggering the alert.",
-            "format": "float"
+            "x-coralogix-presence": true
           }
         },
         "description": "Common settings for anomaly-based alerts."
@@ -2879,14 +2910,15 @@
         "type": "object",
         "properties": {
           "query": {
+            "description": "The DataPrime query string",
+            "examples": [
+              "source logs | filter severity == 'error' | count_agg_key by applicationName"
+            ],
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The DataPrime query string",
-            "examples": [
-              "source logs | filter severity == 'error' | count_agg_key by applicationName"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "A DataPrime query"
@@ -2963,21 +2995,23 @@
         "type": "object",
         "properties": {
           "count": {
+            "description": "The count for this enabled status",
+            "examples": [
+              25
+            ],
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The count for this enabled status",
-            "format": "int64",
-            "examples": [
-              25
-            ]
+            "x-coralogix-presence": true
           },
           "enabled": {
-            "type": "boolean",
             "description": "Whether the alert is enabled (true) or disabled (false)",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Count for a specific alert enabled status"
@@ -2987,34 +3021,37 @@
         "type": "object",
         "properties": {
           "count": {
+            "description": "The count for this entity label value",
+            "examples": [
+              28
+            ],
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The count for this entity label value",
-            "format": "int64",
-            "examples": [
-              28
-            ]
+            "x-coralogix-presence": true
           },
           "labelKey": {
-            "maxLength": 1024,
-            "minLength": 1,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
             "description": "The entity label key",
             "examples": [
               "environment"
-            ]
-          },
-          "labelValue": {
+            ],
             "maxLength": 1024,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "labelValue": {
             "description": "The entity label value",
             "examples": [
               "production"
-            ]
+            ],
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Count for a specific entity label value"
@@ -3064,24 +3101,26 @@
         "type": "object",
         "properties": {
           "index": {
+            "description": "Zero-based index of the alert definition in the request list that failed to be created",
+            "examples": [
+              0
+            ],
+            "format": "int32",
             "maximum": 99,
             "minimum": 0,
             "type": "integer",
-            "description": "Zero-based index of the alert definition in the request list that failed to be created",
-            "format": "int32",
-            "examples": [
-              0
-            ]
+            "x-coralogix-presence": true
           },
           "reason": {
+            "description": "Human-readable explanation of why the alert definition failed to be created",
+            "examples": [
+              "Alert definition name must not be empty."
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable explanation of why the alert definition failed to be created",
-            "examples": [
-              "Alert definition name must not be empty."
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "A reference to an alert definition in the request that failed to be created"
@@ -3091,24 +3130,26 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "The alert definition ID",
+            "examples": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
             "maxLength": 36,
             "minLength": 1,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The alert definition ID",
-            "examples": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ]
+            "x-coralogix-presence": true
           },
           "reason": {
+            "description": "Human-readable explanation of why the alert definition failed to be replaced. May be omitted when no further detail is available.",
+            "examples": [
+              "Alert definition failed validation."
+            ],
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable explanation of why the alert definition failed to be replaced. May be omitted when no further detail is available.",
-            "examples": [
-              "Alert definition failed validation."
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "An alert definition id that failed to be replaced"
@@ -3170,11 +3211,12 @@
         "type": "object",
         "properties": {
           "enabled": {
-            "type": "boolean",
             "description": "Whether to filter for enabled (true) or disabled (false) alerts",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Filter by alert definition enabled status for counting options"
@@ -3371,11 +3413,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -3428,11 +3471,12 @@
             "description": "The flow stages groups."
           },
           "timeframeMs": {
+            "description": "The timeframe ms.",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^-?[0-9]+$",
             "type": "string",
-            "description": "The timeframe ms."
+            "x-coralogix-presence": true
           },
           "timeframeType": {
             "allOf": [
@@ -3507,21 +3551,23 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "The alert definition ID",
+            "examples": [
+              "123e4567-e89b-12d3-a456-426614174000"
+            ],
             "maxLength": 36,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The alert definition ID",
-            "examples": [
-              "123e4567-e89b-12d3-a456-426614174000"
-            ]
+            "x-coralogix-presence": true
           },
           "not": {
-            "type": "boolean",
             "description": "Whether to negate the alert definition or not.",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Alert definitions for a flow stage group"
@@ -3531,8 +3577,9 @@
         "type": "object",
         "properties": {
           "enforceSuppression": {
+            "description": "The enforce suppression.",
             "type": "boolean",
-            "description": "The enforce suppression."
+            "x-coralogix-presence": true
           },
           "stages": {
             "maxItems": 30,
@@ -3612,12 +3659,13 @@
             ]
           },
           "value": {
-            "minLength": 0,
-            "type": "string",
             "description": "The value of the label to filter by",
             "examples": [
               "my-app"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Label filter type for log entries"
@@ -3721,12 +3769,13 @@
             ]
           },
           "minimumThreshold": {
-            "type": "number",
             "description": "The threshold value for the alert condition",
-            "format": "double",
             "examples": [
               10
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "timeWindow": {
             "allOf": [
@@ -3774,14 +3823,15 @@
             "description": "Anomaly alert settings configuration"
           },
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              60000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              60000
-            ]
+            "x-coralogix-presence": true
           },
           "logsFilter": {
             "$ref": "#/components/schemas/v3.LogsFilter"
@@ -3856,12 +3906,13 @@
         "type": "object",
         "properties": {
           "keypathToTrack": {
-            "minLength": 0,
-            "type": "string",
             "description": "The keypath to track for new values",
             "examples": [
               "metadata.field"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "timeWindow": {
             "allOf": [
@@ -3976,13 +4027,14 @@
             ]
           },
           "threshold": {
-            "minimum": 0,
-            "type": "number",
             "description": "The threshold value for the alert condition",
-            "format": "double",
             "examples": [
               10
-            ]
+            ],
+            "format": "double",
+            "minimum": 0,
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "timeWindow": {
             "allOf": [
@@ -4051,23 +4103,25 @@
             "description": "The filter to match log entries for the denominator of the ratio"
           },
           "denominatorAlias": {
-            "maxLength": 200,
-            "minLength": 0,
-            "type": "string",
             "description": "The alias for the denominator filter, used for display purposes",
             "examples": [
               "denominator_alias"
-            ]
+            ],
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              60000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              60000
-            ]
+            "x-coralogix-presence": true
           },
           "groupByFor": {
             "allOf": [
@@ -4081,11 +4135,12 @@
             ]
           },
           "ignoreInfinity": {
-            "type": "boolean",
             "description": "The configuration for ignoring infinity values in the ratio",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "notificationPayloadFilter": {
             "minItems": 0,
@@ -4111,13 +4166,14 @@
             "description": "The filter to match log entries for the numerator of the ratio"
           },
           "numeratorAlias": {
-            "maxLength": 200,
-            "minLength": 0,
-            "type": "string",
             "description": "The alias for the numerator filter, used for display purposes",
             "examples": [
               "numerator_alias"
-            ]
+            ],
+            "maxLength": 200,
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "rules": {
             "maxItems": 5,
@@ -4190,9 +4246,10 @@
             "$ref": "#/components/schemas/LabelFilters"
           },
           "luceneQuery": {
+            "description": "The lucene query.",
             "minLength": 0,
             "type": "string",
-            "description": "The lucene query."
+            "x-coralogix-presence": true
           }
         },
         "description": "Basic filter configuration using a Lucene query and label filters"
@@ -4213,13 +4270,14 @@
             ]
           },
           "threshold": {
-            "minimum": 0,
-            "type": "number",
             "description": "The threshold value for the alert condition",
-            "format": "double",
             "examples": [
               100
-            ]
+            ],
+            "format": "double",
+            "minimum": 0,
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "timeWindow": {
             "allOf": [
@@ -4270,14 +4328,15 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              60000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              60000
-            ]
+            "x-coralogix-presence": true
           },
           "logsFilter": {
             "allOf": [
@@ -4373,10 +4432,11 @@
             ]
           },
           "threshold": {
+            "description": "The threshold value for the alert condition.",
+            "format": "double",
             "minimum": 0,
             "type": "number",
-            "description": "The threshold value for the alert condition.",
-            "format": "double"
+            "x-coralogix-presence": true
           }
         },
         "description": "Defines conditions for time-relative comparison alerts"
@@ -4417,21 +4477,23 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              60000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              60000
-            ]
+            "x-coralogix-presence": true
           },
           "ignoreInfinity": {
-            "type": "boolean",
             "description": "Ignore infinity values in the alert",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "logsFilter": {
             "allOf": [
@@ -4521,14 +4583,15 @@
         "type": "object",
         "properties": {
           "maxUniqueCount": {
+            "description": "The maximum unique count",
+            "examples": [
+              "100"
+            ],
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^-?[0-9]+$",
             "type": "string",
-            "description": "The maximum unique count",
-            "examples": [
-              "100"
-            ]
+            "x-coralogix-presence": true
           },
           "timeWindow": {
             "allOf": [
@@ -4569,14 +4632,15 @@
             "description": "The filter to match log entries for the alert."
           },
           "maxUniqueCountPerGroupByKey": {
+            "description": "The maximum unique count per group by key",
+            "examples": [
+              "100"
+            ],
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^-?[0-9]+$",
             "type": "string",
-            "description": "The maximum unique count per group by key",
-            "examples": [
-              "100"
-            ]
+            "x-coralogix-presence": true
           },
           "notificationPayloadFilter": {
             "minItems": 0,
@@ -4603,12 +4667,13 @@
             "description": "The rules for the log unique count alert"
           },
           "uniqueCountKeypath": {
-            "minLength": 1,
-            "type": "string",
             "description": "The keypath in the logs to be used for unique count",
             "examples": [
               "obj.field"
-            ]
+            ],
+            "minLength": 1,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for alerts based on unique value counts in logs",
@@ -4670,24 +4735,26 @@
             ]
           },
           "forOverPct": {
-            "maximum": 100,
-            "minimum": 0,
-            "type": "integer",
             "description": "The percentage of the metric that must exceed the threshold to trigger the alert",
-            "format": "int64",
             "examples": [
               20
-            ]
-          },
-          "minNonNullValuesPct": {
+            ],
+            "format": "int64",
             "maximum": 100,
             "minimum": 0,
             "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "minNonNullValuesPct": {
             "description": "The percentage of non-null values required to trigger the alert",
-            "format": "int64",
             "examples": [
               10
-            ]
+            ],
+            "format": "int64",
+            "maximum": 100,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "ofTheLast": {
             "allOf": [
@@ -4698,12 +4765,13 @@
             "description": "The time window for the alert condition."
           },
           "threshold": {
-            "type": "number",
             "description": "The threshold value for the alert condition",
-            "format": "double",
             "examples": [
               10
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Metric anomaly condition."
@@ -4744,14 +4812,15 @@
             "description": "Configuration for anomaly alert settings."
           },
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              60000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              60000
-            ]
+            "x-coralogix-presence": true
           },
           "metricFilter": {
             "allOf": [
@@ -4782,13 +4851,14 @@
         "type": "object",
         "properties": {
           "promql": {
-            "maxLength": 65535,
-            "minLength": 1,
-            "type": "string",
             "description": "A PromQL filter for metrics",
             "examples": [
               "avg_over_time(metric_name[5m]) > 10"
-            ]
+            ],
+            "maxLength": 65535,
+            "minLength": 1,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Metric filter."
@@ -4831,21 +4901,23 @@
         ],
         "properties": {
           "minNonNullValuesPct": {
+            "description": "If set, specifies the minimum percentage of non-null values required for the alert to be triggered",
+            "examples": [
+              80
+            ],
+            "format": "int64",
             "maximum": 100,
             "minimum": 0,
             "type": "integer",
-            "description": "If set, specifies the minimum percentage of non-null values required for the alert to be triggered",
-            "format": "int64",
-            "examples": [
-              80
-            ]
+            "x-coralogix-presence": true
           },
           "replaceWithZero": {
-            "type": "boolean",
             "description": "If set to true, missing values will be replaced with zero",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for handling missing values in metric threshold alerts."
@@ -4866,14 +4938,15 @@
             ]
           },
           "forOverPct": {
+            "description": "The percentage of values that must exceed the threshold to trigger the alert",
+            "examples": [
+              80
+            ],
+            "format": "int64",
             "maximum": 100,
             "minimum": 0,
             "type": "integer",
-            "description": "The percentage of values that must exceed the threshold to trigger the alert",
-            "format": "int64",
-            "examples": [
-              80
-            ]
+            "x-coralogix-presence": true
           },
           "ofTheLast": {
             "allOf": [
@@ -4884,12 +4957,13 @@
             "description": "The time window for the alert condition"
           },
           "threshold": {
-            "type": "number",
             "description": "The threshold value for the alert condition",
-            "format": "double",
             "examples": [
               100
-            ]
+            ],
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Defines conditions for metric threshold alerts"
@@ -4934,14 +5008,15 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
+            "description": "The delay in milliseconds before evaluating the alert condition",
+            "examples": [
+              60000
+            ],
+            "format": "int32",
             "maximum": 10800000,
             "minimum": 0,
             "type": "integer",
-            "description": "The delay in milliseconds before evaluating the alert condition",
-            "format": "int32",
-            "examples": [
-              60000
-            ]
+            "x-coralogix-presence": true
           },
           "metricFilter": {
             "allOf": [
@@ -5029,12 +5104,13 @@
         ],
         "properties": {
           "metricTimeWindowDynamicDuration": {
-            "minLength": 0,
-            "type": "string",
             "description": "The time window as a dynamic value",
             "examples": [
               "1h30m"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "metricTimeWindowSpecificValue": {
             "allOf": [
@@ -5252,14 +5328,15 @@
         "type": "object",
         "properties": {
           "count": {
+            "description": "The count for this alert priority",
+            "examples": [
+              15
+            ],
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The count for this alert priority",
-            "format": "int64",
-            "examples": [
-              15
-            ]
+            "x-coralogix-presence": true
           },
           "priority": {
             "allOf": [
@@ -5320,10 +5397,11 @@
         "type": "object",
         "properties": {
           "threshold": {
+            "description": "Threshold value.",
+            "format": "double",
             "minimum": 0,
             "type": "number",
-            "description": "Threshold value.",
-            "format": "double"
+            "x-coralogix-presence": true
           }
         },
         "description": "Condition for the SLO threshold rule"
@@ -5420,14 +5498,15 @@
         "type": "object",
         "properties": {
           "count": {
+            "description": "The count for this alert status",
+            "examples": [
+              15
+            ],
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The count for this alert status",
-            "format": "int64",
-            "examples": [
-              15
-            ]
+            "x-coralogix-presence": true
           },
           "status": {
             "allOf": [
@@ -5448,14 +5527,15 @@
         "type": "object",
         "properties": {
           "duration": {
+            "description": "The duration value",
+            "examples": [
+              "24"
+            ],
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "The duration value",
-            "examples": [
-              "24"
-            ]
+            "x-coralogix-presence": true
           },
           "unit": {
             "allOf": [
@@ -5652,14 +5732,15 @@
         "type": "object",
         "properties": {
           "latencyThresholdMs": {
+            "description": "The latency threshold to filter traces in milliseconds",
+            "examples": [
+              "1000"
+            ],
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "The latency threshold to filter traces in milliseconds",
-            "examples": [
-              "1000"
-            ]
+            "x-coralogix-presence": true
           },
           "tracingLabelFilters": {
             "allOf": [
@@ -5685,12 +5766,13 @@
             "description": "The FilterType to filter by."
           },
           "key": {
-            "minLength": 0,
-            "type": "string",
             "description": "The key of the span field to filter by",
             "examples": [
               "span.field.key"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "A filter for span fields in trace entries"
@@ -5711,13 +5793,14 @@
             ]
           },
           "spanAmount": {
-            "minimum": 0,
-            "type": "number",
             "description": "The threshold value for the alert condition",
-            "format": "double",
             "examples": [
               100
-            ]
+            ],
+            "format": "double",
+            "minimum": 0,
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "timeWindow": {
             "allOf": [
@@ -5836,14 +5919,15 @@
         "type": "object",
         "properties": {
           "count": {
+            "description": "The count for this alert type",
+            "examples": [
+              42
+            ],
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The count for this alert type",
-            "format": "int64",
-            "examples": [
-              42
-            ]
+            "x-coralogix-presence": true
           },
           "type": {
             "allOf": [
@@ -5872,18 +5956,20 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Token for fetching the next page of results."
+            "x-coralogix-presence": true
           },
           "totalSize": {
+            "description": "Total number of results.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "Total number of results.",
-            "format": "int64"
+            "x-coralogix-presence": true
           }
         },
         "description": "Pagination response."
@@ -5977,13 +6063,14 @@
         ],
         "properties": {
           "integrationId": {
-            "minimum": 0,
-            "type": "integer",
             "description": "The integration ID for the notification",
-            "format": "int64",
             "examples": [
               123
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "recipients": {
             "allOf": [
@@ -6039,13 +6126,14 @@
         "type": "object",
         "properties": {
           "sloId": {
-            "maxLength": 36,
-            "minLength": 1,
-            "type": "string",
             "description": "The SLO ID",
             "examples": [
               "123e4567-e89b-12d3-a456-426614174000"
-            ]
+            ],
+            "maxLength": 36,
+            "minLength": 1,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for SLO definition"
@@ -6086,20 +6174,22 @@
         "type": "object",
         "properties": {
           "endTime": {
+            "description": "End time of the range",
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "End time of the range",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "startTime": {
+            "description": "Start time of the range",
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Start time of the range",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Represents a time range with start and end timestamps"
@@ -6121,11 +6211,12 @@
             "x-coralogix-presence": true
           },
           "triggerUndetectedValues": {
-            "type": "boolean",
             "description": "Should trigger the alert when undetected values are detected",
             "examples": [
               true
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "Configuration for handling undetected values in alerts"

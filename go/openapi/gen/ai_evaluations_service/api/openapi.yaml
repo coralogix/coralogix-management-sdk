@@ -392,7 +392,8 @@
                     "maxLength": 1024,
                     "minLength": 1,
                     "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "violates": {
                     "description": "Description of what counts as violating the policy.",
@@ -972,7 +973,8 @@
                     "maxLength": 1024,
                     "minLength": 1,
                     "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "type": "object"
@@ -1044,11 +1046,12 @@
             "description": "Type-specific configuration for the evaluation (oneof)."
           },
           "createdAt": {
+            "description": "RFC3339 timestamp when the evaluation was created.",
+            "format": "date-time",
             "maxLength": 35,
             "minLength": 20,
             "type": "string",
-            "description": "RFC3339 timestamp when the evaluation was created.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "createdBy": {
             "maxLength": 36,
@@ -1093,11 +1096,12 @@
             "x-coralogix-presence": true
           },
           "updatedAt": {
+            "description": "RFC3339 timestamp when the evaluation was last updated.",
+            "format": "date-time",
             "maxLength": 35,
             "minLength": 20,
             "type": "string",
-            "description": "RFC3339 timestamp when the evaluation was last updated.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "A configured AI evaluation that runs against an AI application's spans."
@@ -1690,11 +1694,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"

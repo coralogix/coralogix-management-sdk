@@ -304,11 +304,12 @@
             "description": "Company ID"
           },
           "createdAt": {
+            "description": "RFC3339 timestamp when the application was first observed.",
+            "format": "date-time",
             "maxLength": 35,
             "minLength": 20,
             "type": "string",
-            "description": "RFC3339 timestamp when the application was first observed.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "guardrailsIntegrated": {
             "type": "boolean",
@@ -329,11 +330,12 @@
             "description": "Subsystem name"
           },
           "updatedAt": {
+            "description": "RFC3339 timestamp when the application was last updated.",
+            "format": "date-time",
             "maxLength": 35,
             "minLength": 20,
             "type": "string",
-            "description": "RFC3339 timestamp when the application was last updated.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "AI Application"
@@ -448,11 +450,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"

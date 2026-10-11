@@ -70,31 +70,37 @@
                   "creator": {
                     "description": "Creator.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "enabled": {
                     "description": "Whether this resource is enabled.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "hidden": {
                     "description": "Whether to hide this rule group from the standard view.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Display name.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "order": {
                     "description": "Sort order.",
                     "format": "int64",
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "ruleMatchers": {
                     "description": "List of rule matchers that determine which logs this group applies to.",
@@ -229,31 +235,37 @@
                   "creator": {
                     "description": "Creator.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "enabled": {
                     "description": "Whether this resource is enabled.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "hidden": {
                     "description": "The hidden.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Display name.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "order": {
                     "description": "Sort order.",
                     "format": "int64",
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "ruleMatchers": {
                     "description": "The rule matchers.",
@@ -472,7 +484,8 @@
             "schema": {
               "description": "The unique identifier of the parsing rule group to update.",
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -485,31 +498,37 @@
                   "creator": {
                     "description": "Creator.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "Human-readable description.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "enabled": {
                     "description": "Whether this resource is enabled.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "hidden": {
                     "description": "The hidden.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Display name.",
                     "minLength": 0,
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "order": {
                     "description": "Sort order.",
                     "format": "int64",
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "ruleMatchers": {
                     "description": "The rule matchers.",
@@ -654,13 +673,15 @@
         "type": "object",
         "properties": {
           "keepBlockedLogs": {
+            "description": "The keep blocked logs.",
             "type": "boolean",
-            "description": "The keep blocked logs."
+            "x-coralogix-presence": true
           },
           "rule": {
+            "description": "Rule.",
             "minLength": 0,
             "type": "string",
-            "description": "Rule."
+            "x-coralogix-presence": true
           }
         },
         "description": "Allow parameters."
@@ -669,9 +690,10 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "minLength": 0,
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Application name constraint."
@@ -680,13 +702,15 @@
         "type": "object",
         "properties": {
           "keepBlockedLogs": {
+            "description": "The keep blocked logs.",
             "type": "boolean",
-            "description": "The keep blocked logs."
+            "x-coralogix-presence": true
           },
           "rule": {
+            "description": "Rule.",
             "minLength": 0,
             "type": "string",
-            "description": "Rule."
+            "x-coralogix-presence": true
           }
         },
         "description": "Block parameters."
@@ -700,19 +724,22 @@
         "type": "object",
         "properties": {
           "groups": {
-            "type": "integer",
             "description": "List of groups.",
-            "format": "int32"
+            "format": "int32",
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "parsingThemes": {
-            "type": "integer",
             "description": "The parsing themes.",
-            "format": "int32"
+            "format": "int32",
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "rules": {
-            "type": "integer",
             "description": "List of rules.",
-            "format": "int32"
+            "format": "int32",
+            "type": "integer",
+            "x-coralogix-presence": true
           }
         },
         "description": "Counts."
@@ -721,14 +748,16 @@
         "type": "object",
         "properties": {
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Sort order.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "rules": {
             "minItems": 0,
@@ -744,32 +773,37 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "minLength": 0,
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Sort order.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "parameters": {
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
+            "description": "The source field.",
             "minLength": 0,
             "type": "string",
-            "description": "The source field."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -823,9 +857,10 @@
         "type": "object",
         "properties": {
           "rule": {
+            "description": "Rule.",
             "minLength": 0,
             "type": "string",
-            "description": "Rule."
+            "x-coralogix-presence": true
           }
         },
         "description": "Extract parameters."
@@ -834,9 +869,10 @@
         "type": "object",
         "properties": {
           "format": {
+            "description": "The format.",
             "minLength": 0,
             "type": "string",
-            "description": "The format."
+            "x-coralogix-presence": true
           },
           "standard": {
             "$ref": "#/components/schemas/FormatStandard"
@@ -877,11 +913,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -930,9 +967,10 @@
         "type": "object",
         "properties": {
           "companyId": {
+            "description": "The company id.",
             "minLength": 0,
             "type": "string",
-            "description": "The company id."
+            "x-coralogix-presence": true
           },
           "limits": {
             "$ref": "#/components/schemas/Counts"
@@ -947,14 +985,16 @@
         "type": "object",
         "properties": {
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Sort order.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "rules": {
             "minItems": 0,
@@ -970,32 +1010,37 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "minLength": 0,
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Sort order.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "parameters": {
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
+            "description": "The source field.",
             "minLength": 0,
             "type": "string",
-            "description": "The source field."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1022,17 +1067,19 @@
         "type": "object",
         "properties": {
           "destinationFieldText": {
+            "description": "The destination field text.",
             "minLength": 0,
             "type": "string",
-            "description": "The destination field text."
+            "x-coralogix-presence": true
           },
           "destinationFieldType": {
             "$ref": "#/components/schemas/DestinationField"
           },
           "rule": {
+            "description": "Rule.",
             "minLength": 0,
             "type": "string",
-            "description": "Rule."
+            "x-coralogix-presence": true
           }
         },
         "description": "Json extract parameters."
@@ -1041,21 +1088,25 @@
         "type": "object",
         "properties": {
           "deleteSource": {
+            "description": "The delete source.",
             "type": "boolean",
-            "description": "The delete source."
+            "x-coralogix-presence": true
           },
           "destinationField": {
+            "description": "The destination field.",
             "minLength": 0,
             "type": "string",
-            "description": "The destination field."
+            "x-coralogix-presence": true
           },
           "escapedValue": {
+            "description": "The escaped value.",
             "type": "boolean",
-            "description": "The escaped value."
+            "x-coralogix-presence": true
           },
           "overrideDest": {
+            "description": "The override dest.",
             "type": "boolean",
-            "description": "The override dest."
+            "x-coralogix-presence": true
           }
         },
         "description": "Json parse parameters."
@@ -1064,13 +1115,15 @@
         "type": "object",
         "properties": {
           "deleteSource": {
+            "description": "The delete source.",
             "type": "boolean",
-            "description": "The delete source."
+            "x-coralogix-presence": true
           },
           "destinationField": {
+            "description": "The destination field.",
             "minLength": 0,
             "type": "string",
-            "description": "The destination field."
+            "x-coralogix-presence": true
           }
         },
         "description": "Json stringify parameters."
@@ -1109,14 +1162,16 @@
         "type": "object",
         "properties": {
           "destinationField": {
+            "description": "The destination field.",
             "minLength": 0,
             "type": "string",
-            "description": "The destination field."
+            "x-coralogix-presence": true
           },
           "rule": {
+            "description": "Rule.",
             "minLength": 0,
             "type": "string",
-            "description": "Rule."
+            "x-coralogix-presence": true
           }
         },
         "description": "Parse parameters."
@@ -1141,19 +1196,22 @@
         "type": "object",
         "properties": {
           "destinationField": {
+            "description": "The destination field.",
             "minLength": 0,
             "type": "string",
-            "description": "The destination field."
+            "x-coralogix-presence": true
           },
           "replaceNewVal": {
+            "description": "The replace new val.",
             "minLength": 0,
             "type": "string",
-            "description": "The replace new val."
+            "x-coralogix-presence": true
           },
           "rule": {
+            "description": "Rule.",
             "minLength": 0,
             "type": "string",
-            "description": "Rule."
+            "x-coralogix-presence": true
           }
         },
         "description": "Replace parameters."
@@ -1162,38 +1220,45 @@
         "type": "object",
         "properties": {
           "creator": {
+            "description": "Creator.",
             "minLength": 0,
             "type": "string",
-            "description": "Creator."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "minLength": 0,
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "hidden": {
+            "description": "The hidden.",
             "type": "boolean",
-            "description": "The hidden."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Sort order.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "ruleMatchers": {
             "minItems": 0,
@@ -1442,19 +1507,22 @@
         "type": "object",
         "properties": {
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Sort order.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "rules": {
             "minItems": 0,
@@ -1484,9 +1552,10 @@
         "type": "object",
         "properties": {
           "value": {
+            "description": "The value.",
             "minLength": 0,
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Subsystem name constraint."
@@ -1523,37 +1592,43 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "minLength": 0,
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "enabled": {
+            "description": "Whether this resource is enabled.",
             "type": "boolean",
-            "description": "Whether this resource is enabled."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "minLength": 0,
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "order": {
+            "description": "Sort order.",
+            "format": "int64",
             "minimum": 0,
             "type": "integer",
-            "description": "Sort order.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "parameters": {
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
+            "description": "The source field.",
             "minLength": 0,
             "type": "string",
-            "description": "The source field."
+            "x-coralogix-presence": true
           }
         }
       },

@@ -119,7 +119,8 @@
               "maxLength": 36,
               "minLength": 1,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -157,14 +158,16 @@
                   "format": "int64",
                   "maximum": 1000,
                   "minimum": 0,
-                  "type": "integer"
+                  "type": "integer",
+                  "x-coralogix-presence": true
                 },
                 "pageToken": {
                   "description": "The page token.",
                   "maxLength": 4096,
                   "minLength": 1,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "type": "object"
@@ -255,11 +258,12 @@
         "type": "object",
         "properties": {
           "isMutedCount": {
+            "description": "Number of muted items.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "Number of muted items.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "rules": {
             "maxItems": 1000,
@@ -293,11 +297,12 @@
             "$ref": "#/components/schemas/ActivityAnalysis"
           },
           "alertId": {
+            "description": "Unique identifier of the alert.",
             "maxLength": 36,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier of the alert."
+            "x-coralogix-presence": true
           },
           "groupLabels": {
             "type": "object",
@@ -308,29 +313,32 @@
             "description": "Labels for the group."
           },
           "incidentCorrelationKey": {
+            "description": "Key used to correlate incidents.",
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Key used to correlate incidents."
+            "x-coralogix-presence": true
           },
           "payload": {
             "type": "object",
             "description": "Raw payload data."
           },
           "payloadType": {
+            "description": "Type of the payload.",
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Type of the payload."
+            "x-coralogix-presence": true
           },
           "permutationId": {
+            "description": "Unique identifier of the permutation.",
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier of the permutation."
+            "x-coralogix-presence": true
           },
           "permutationLabels": {
             "type": "object",
@@ -341,11 +349,12 @@
             "description": "Labels for the permutation."
           },
           "preGroupingEventId": {
+            "description": "Identifier of the event before grouping.",
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Identifier of the event before grouping."
+            "x-coralogix-presence": true
           },
           "status": {
             "allOf": [
@@ -356,12 +365,13 @@
             "description": "Status."
           },
           "timestamp": {
+            "description": "Timestamp of the event.",
+            "format": "date-time",
             "maxLength": 64,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Timestamp of the event.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Alert event."
@@ -418,18 +428,20 @@
             "$ref": "#/components/schemas/ActivityAnalysisStats"
           },
           "count": {
+            "description": "Number of items.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "Number of items.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "resolvedCount": {
+            "description": "The resolved count.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The resolved count.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "resolvedPermutationsSamples": {
             "maxItems": 1000,
@@ -441,11 +453,12 @@
             "description": "The resolved permutations samples."
           },
           "triggeredCount": {
+            "description": "The triggered count.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The triggered count.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "triggeredPermutationsSamples": {
             "maxItems": 1000,
@@ -491,11 +504,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -565,11 +579,12 @@
         ],
         "properties": {
           "id": {
+            "description": "Unique identifier of the alert event.",
             "maxLength": 36,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier of the alert event."
+            "x-coralogix-presence": true
           },
           "multiplePermutation": {
             "$ref": "#/components/schemas/AlertEventMultiplePermutation"
@@ -634,18 +649,20 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
+            "description": "Token for fetching the next page of results.",
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Token for fetching the next page of results."
+            "x-coralogix-presence": true
           },
           "totalSize": {
+            "description": "Total number of results.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "Total number of results.",
-            "format": "int64"
+            "x-coralogix-presence": true
           }
         },
         "description": "Pagination response."

@@ -43,13 +43,15 @@
                   "description": "Inclusive start of the time range.",
                   "format": "date-time",
                   "minLength": 0,
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "to": {
                   "description": "Inclusive end of the time range.",
                   "format": "date-time",
                   "minLength": 0,
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "required": [
@@ -124,7 +126,8 @@
                   ],
                   "format": "int64",
                   "minimum": 0,
-                  "type": "integer"
+                  "type": "integer",
+                  "x-coralogix-presence": true
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
@@ -132,7 +135,8 @@
                     "test"
                   ],
                   "minLength": 0,
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "type": "object"
@@ -278,7 +282,8 @@
                   ],
                   "format": "int64",
                   "minimum": 0,
-                  "type": "integer"
+                  "type": "integer",
+                  "x-coralogix-presence": true
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
@@ -286,7 +291,8 @@
                     "test"
                   ],
                   "minLength": 0,
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "type": "object"
@@ -574,7 +580,8 @@
                   ],
                   "format": "int64",
                   "minimum": 0,
-                  "type": "integer"
+                  "type": "integer",
+                  "x-coralogix-presence": true
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
@@ -582,7 +589,8 @@
                     "test"
                   ],
                   "minLength": 0,
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "type": "object"
@@ -798,7 +806,8 @@
                 "test"
               ],
               "minLength": 0,
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -851,7 +860,8 @@
                   ],
                   "format": "int64",
                   "minimum": 0,
-                  "type": "integer"
+                  "type": "integer",
+                  "x-coralogix-presence": true
                 },
                 "pageToken": {
                   "description": "Opaque token for fetching the next page of results.",
@@ -859,7 +869,8 @@
                     "test"
                   ],
                   "minLength": 0,
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "type": "object"
@@ -957,28 +968,31 @@
         "type": "object",
         "properties": {
           "companyId": {
-            "type": "integer",
             "description": "The company id.",
-            "format": "int32",
             "examples": [
               1
-            ]
+            ],
+            "format": "int32",
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "cxEventDedupKey": {
-            "minLength": 0,
-            "type": "string",
             "description": "The cx event dedup key.",
             "examples": [
               "test_dedup_key"
-            ]
-          },
-          "cxEventKey": {
+            ],
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "cxEventKey": {
             "description": "The cx event key.",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "cxEventLabels": {
             "type": "object",
@@ -1001,29 +1015,32 @@
             "description": "The cx event payload."
           },
           "cxEventPayloadType": {
-            "minLength": 0,
-            "type": "string",
             "description": "The cx event payload type.",
             "examples": [
               "test_payload_type"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "cxEventTimestamp": {
-            "minLength": 0,
-            "type": "string",
             "description": "The cx event timestamp.",
-            "format": "date-time",
             "examples": [
               "2024-05-05T00:00:00.000Z"
-            ]
-          },
-          "cxEventType": {
+            ],
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "cxEventType": {
             "description": "The cx event type.",
             "examples": [
               "test_type"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an event",
@@ -1168,11 +1185,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1255,21 +1273,23 @@
         "type": "object",
         "properties": {
           "count": {
+            "description": "Number of items.",
+            "examples": [
+              "10"
+            ],
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
             "type": "string",
-            "description": "Number of items.",
-            "examples": [
-              "10"
-            ]
+            "x-coralogix-presence": true
           },
           "reachedLimit": {
-            "type": "boolean",
             "description": "The reached limit.",
             "examples": [
               false
-            ]
+            ],
+            "type": "boolean",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a response to list events count"
@@ -1299,16 +1319,18 @@
         "type": "object",
         "properties": {
           "from": {
+            "description": "Inclusive start of the time range.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Inclusive start of the time range.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "to": {
+            "description": "Inclusive end of the time range.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Inclusive end of the time range.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a timestamp range"
@@ -1341,21 +1363,23 @@
         "type": "object",
         "properties": {
           "nextPageToken": {
-            "minLength": 0,
-            "type": "string",
             "description": "Token for fetching the next page of results.",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "totalSize": {
-            "minimum": 0,
-            "type": "integer",
             "description": "Total number of results.",
-            "format": "int64",
             "examples": [
               10
-            ]
+            ],
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           }
         },
         "description": "Pagination metadata returned alongside paginated list responses."

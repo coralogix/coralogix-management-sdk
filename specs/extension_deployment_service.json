@@ -73,7 +73,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -86,7 +87,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -168,7 +170,8 @@
                   "maxLength": 65535,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "itemIds": {
                   "default": [],
@@ -199,7 +202,8 @@
                   "maxLength": 65535,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "title": "Extension deployment",
@@ -271,7 +275,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -284,7 +289,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -366,7 +372,8 @@
                   "maxLength": 65535,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "itemIds": {
                   "default": [],
@@ -397,7 +404,8 @@
                   "maxLength": 65535,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "title": "Extension deployment",
@@ -469,7 +477,8 @@
                     "maxLength": 65535,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "keptExtensionItems": {
                     "default": [],
@@ -571,11 +580,12 @@
             "default": []
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "itemIds": {
             "maxItems": 10000,
@@ -605,11 +615,12 @@
             "$ref": "#/components/schemas/DeployedExtensionSummary"
           },
           "version": {
+            "description": "Version number.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Version number."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -660,11 +671,12 @@
             "default": []
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "itemIds": {
             "maxItems": 10000,
@@ -691,11 +703,12 @@
             "default": []
           },
           "version": {
+            "description": "Version number.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Version number."
+            "x-coralogix-presence": true
           }
         },
         "description": "Extension deployment."
@@ -705,25 +718,28 @@
         "type": "object",
         "properties": {
           "itemId": {
+            "description": "The item id.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The item id."
+            "x-coralogix-presence": true
           },
           "reason": {
+            "description": "Reason.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reason."
+            "x-coralogix-presence": true
           },
           "remoteId": {
+            "description": "The remote id.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The remote id."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -760,11 +776,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -818,84 +835,94 @@
         "type": "object",
         "properties": {
           "actions": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "List of actions.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "alerts": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "List of alerts.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "customDashboards": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "The custom dashboards.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "enrichments": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "List of enrichments.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "eventsToMetrics": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "The events to metrics.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "grafanaDashboards": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "The grafana dashboards.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "kibanaDashboards": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "The kibana dashboards.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "metricsRuleGroup": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "The metrics rule group.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           },
           "parsingRules": {
-            "maximum": 4294967295,
-            "minimum": 0,
-            "type": "integer",
+            "default": 0,
             "description": "The parsing rules.",
             "format": "int64",
-            "default": 0
-          },
-          "savedViews": {
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "savedViews": {
+            "default": 0,
             "description": "The saved views.",
             "format": "int64",
-            "default": 0
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
           }
         },
         "description": "Item counts."

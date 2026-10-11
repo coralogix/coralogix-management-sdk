@@ -17,7 +17,8 @@
             "required": false,
             "schema": {
               "description": "Whether to include testing revisions in the response.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -90,7 +91,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -100,7 +102,8 @@
             "required": false,
             "schema": {
               "description": "Whether to include testing revisions in the response.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -173,7 +176,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -243,7 +247,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -313,7 +318,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -380,7 +386,8 @@
                 "properties": {
                   "force": {
                     "description": "The force.",
-                    "type": "boolean"
+                    "type": "boolean",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Sync RUM data request",
@@ -455,7 +462,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -465,7 +473,8 @@
             "required": false,
             "schema": {
               "description": "Whether to include testing revisions in the response.",
-              "type": "boolean"
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -660,7 +669,8 @@
                     "maxLength": 65535,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "metadata": {
                     "$ref": "#/components/schemas/IntegrationMetadata"
@@ -810,7 +820,8 @@
                     "maxLength": 65535,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Test integration request",
@@ -885,7 +896,8 @@
               "maxLength": 65535,
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           },
           {
@@ -900,21 +912,24 @@
                   "maxLength": 65535,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "cgxDomain": {
                   "description": "The cgx domain.",
                   "maxLength": 65535,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 },
                 "logsUrl": {
                   "description": "The logs url.",
                   "maxLength": 65535,
                   "minLength": 0,
                   "pattern": "^[\\s\\S]*$",
-                  "type": "string"
+                  "type": "string",
+                  "x-coralogix-presence": true
                 }
               },
               "title": "Common ARM integration parameters",
@@ -991,18 +1006,20 @@
         "type": "object",
         "properties": {
           "resourceGroupName": {
+            "description": "The resource group name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The resource group name."
+            "x-coralogix-presence": true
           },
           "subscriptionId": {
+            "description": "The subscription id.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The subscription id."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an Azure Resource Manager stack.",
@@ -1016,18 +1033,20 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "value": {
+            "description": "The value.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Api key data."
@@ -1043,11 +1062,12 @@
         "type": "object",
         "properties": {
           "templateUrl": {
+            "description": "The template url.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The template url."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents an azure ARM template."
@@ -1057,18 +1077,20 @@
         "type": "object",
         "properties": {
           "descriptionMd": {
+            "description": "The description md.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The description md."
+            "x-coralogix-presence": true
           },
           "version": {
+            "description": "Version.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Version."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1077,18 +1099,20 @@
         "type": "object",
         "properties": {
           "arn": {
+            "description": "The arn.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The arn."
+            "x-coralogix-presence": true
           },
           "region": {
+            "description": "Region.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Region."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a CloudFormation stack.",
@@ -1127,11 +1151,12 @@
             "description": "The post installation steps."
           },
           "templateUrl": {
+            "description": "The template url.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The template url."
+            "x-coralogix-presence": true
           }
         },
         "description": "Cloud formation template."
@@ -1147,18 +1172,20 @@
         "type": "object",
         "properties": {
           "command": {
+            "description": "The command.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The command."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "language": {
             "$ref": "#/components/schemas/Language",
@@ -1174,18 +1201,20 @@
             "description": "List of links."
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "tooltipText": {
+            "description": "The tooltip text.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The tooltip text."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1194,25 +1223,28 @@
         "type": "object",
         "properties": {
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "value": {
+            "description": "The value.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The value."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1258,25 +1290,28 @@
         "type": "object",
         "properties": {
           "definitionKey": {
+            "description": "The definition key.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The definition key."
+            "x-coralogix-presence": true
           },
           "definitionVersion": {
+            "description": "The definition version.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The definition version."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
@@ -1298,11 +1333,12 @@
         "type": "object",
         "properties": {
           "reason": {
+            "description": "Reason.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Reason."
+            "x-coralogix-presence": true
           },
           "replacementExtensions": {
             "maxItems": 10000,
@@ -1344,11 +1380,12 @@
         "type": "object",
         "properties": {
           "data": {
+            "description": "Data payload.",
             "maxLength": 5000000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Data payload."
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
@@ -1381,57 +1418,64 @@
             "description": "Data payload."
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "extendedInternalId": {
+            "description": "The extended internal id.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The extended internal id."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "isMandatory": {
-            "type": "boolean",
+            "default": false,
             "description": "The is mandatory.",
-            "default": false
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "permissionResource": {
             "$ref": "#/components/schemas/PermissionResource"
           },
           "stableId": {
+            "description": "The stable id.",
             "maxLength": 63,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The stable id."
+            "x-coralogix-presence": true
           },
           "targetDomain": {
             "$ref": "#/components/schemas/TargetDomain"
           },
           "uniqueId": {
+            "description": "The unique id.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The unique id."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1440,18 +1484,20 @@
         "type": "object",
         "properties": {
           "data": {
+            "description": "Data payload.",
             "maxLength": 5000000,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Data payload."
+            "x-coralogix-presence": true
           },
           "fileName": {
+            "description": "The file name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The file name."
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
@@ -1484,18 +1530,20 @@
             "default": []
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "excerpt": {
+            "description": "The excerpt.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The excerpt."
+            "x-coralogix-presence": true
           },
           "integrationDetails": {
             "maxItems": 10000,
@@ -1508,9 +1556,10 @@
             "default": []
           },
           "isTesting": {
-            "type": "boolean",
+            "default": false,
             "description": "The is testing.",
-            "default": false
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "items": {
             "maxItems": 10000,
@@ -1545,11 +1594,12 @@
             "default": []
           },
           "version": {
+            "description": "Version.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Version."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1701,28 +1751,31 @@
         ],
         "properties": {
           "allowedPattern": {
+            "description": "Regular expression pattern that the field value must match for validation.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Regular expression pattern that the field value must match for validation."
+            "x-coralogix-presence": true
           },
           "applicableIf": {
             "$ref": "#/components/schemas/FieldCondition"
           },
           "documentationReference": {
+            "description": "Link to documentation providing more information about this field.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Link to documentation providing more information about this field."
+            "x-coralogix-presence": true
           },
           "groupId": {
+            "description": "Identifier of the UI group this field belongs to for form layout purposes.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Identifier of the UI group this field belongs to for form layout purposes."
+            "x-coralogix-presence": true
           },
           "multiText": {
             "$ref": "#/components/schemas/ListTextValue"
@@ -1731,30 +1784,35 @@
             "$ref": "#/components/schemas/MultipleSelectionValue"
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "placeholder": {
+            "description": "Placeholder text shown in the input field before a value is entered.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Placeholder text shown in the input field before a value is entered."
+            "x-coralogix-presence": true
           },
           "predefined": {
+            "description": "Whether this field has a predefined value that is suggested to the user.",
             "type": "boolean",
-            "description": "Whether this field has a predefined value that is suggested to the user."
+            "x-coralogix-presence": true
           },
           "readonly": {
+            "description": "Whether this field is read-only and cannot be modified by the user.",
             "type": "boolean",
-            "description": "Whether this field is read-only and cannot be modified by the user."
+            "x-coralogix-presence": true
           },
           "required": {
+            "description": "Whether this field must be filled in before the integration can be deployed.",
             "type": "boolean",
-            "description": "Whether this field must be filled in before the integration can be deployed."
+            "x-coralogix-presence": true
           },
           "selection": {
             "$ref": "#/components/schemas/SelectionValue"
@@ -1769,32 +1827,36 @@
             "$ref": "#/components/schemas/IntegrationRevision.SingleNumericValue"
           },
           "templateParamName": {
+            "description": "Name of the template parameter this field maps to in the deployment template.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Name of the template parameter this field maps to in the deployment template."
+            "x-coralogix-presence": true
           },
           "tooltip": {
+            "description": "Tooltip text displayed on hover to provide additional context for this field.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Tooltip text displayed on hover to provide additional context for this field."
+            "x-coralogix-presence": true
           },
           "type": {
             "$ref": "#/components/schemas/InputType"
           },
           "upgradeNotice": {
+            "description": "Notice displayed to users when an upgrade is required to use this field.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Notice displayed to users when an upgrade is required to use this field."
+            "x-coralogix-presence": true
           },
           "visible": {
+            "description": "Whether this field is visible in the integration configuration UI.",
             "type": "boolean",
-            "description": "Whether this field is visible in the integration configuration UI."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -1831,11 +1893,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1940,11 +2003,12 @@
         "type": "object",
         "properties": {
           "amountIntegrations": {
+            "description": "The amount integrations.",
+            "format": "int64",
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "The amount integrations.",
-            "format": "int64"
+            "x-coralogix-presence": true
           },
           "errors": {
             "maxItems": 10000,
@@ -1961,16 +2025,19 @@
             "$ref": "#/components/schemas/Integration"
           },
           "isDeprecated": {
+            "description": "The is deprecated.",
             "type": "boolean",
-            "description": "The is deprecated."
+            "x-coralogix-presence": true
           },
           "isNew": {
+            "description": "The is new.",
             "type": "boolean",
-            "description": "The is new."
+            "x-coralogix-presence": true
           },
           "upgradeAvailable": {
+            "description": "The upgrade available.",
             "type": "boolean",
-            "description": "The upgrade available."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -2006,11 +2073,12 @@
         "type": "object",
         "properties": {
           "templateUrl": {
+            "description": "The template url.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The template url."
+            "x-coralogix-presence": true
           }
         },
         "description": "Response containing an integration template."
@@ -2032,11 +2100,12 @@
             "$ref": "#/components/schemas/IntegrationGuide"
           },
           "template": {
+            "description": "The template.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The template."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a Helm chart."
@@ -2065,49 +2134,55 @@
         "type": "object",
         "properties": {
           "darkIcon": {
+            "description": "The dark icon.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The dark icon."
+            "x-coralogix-presence": true
           },
           "description": {
+            "description": "Human-readable description.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Human-readable description."
+            "x-coralogix-presence": true
           },
           "featureFlag": {
+            "description": "The feature flag.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The feature flag."
+            "x-coralogix-presence": true
           },
           "icon": {
+            "description": "Icon identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Icon identifier."
+            "x-coralogix-presence": true
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "revisions": {
             "maxItems": 10000,
@@ -2148,21 +2223,23 @@
         "type": "object",
         "properties": {
           "featureFlag": {
+            "description": "The feature flag.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The feature flag."
+            "x-coralogix-presence": true
           },
           "integrationType": {
             "$ref": "#/components/schemas/v1.IntegrationType"
           },
           "key": {
+            "description": "The key.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The key."
+            "x-coralogix-presence": true
           },
           "revisions": {
             "maxItems": 10000,
@@ -2181,18 +2258,20 @@
         "type": "object",
         "properties": {
           "link": {
+            "description": "Link.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Link."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -2271,18 +2350,20 @@
         "type": "object",
         "properties": {
           "link": {
+            "description": "Link.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Link."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents integration documentation."
@@ -2292,18 +2373,20 @@
         "type": "object",
         "properties": {
           "installationRequirements": {
+            "description": "The installation requirements.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The installation requirements."
+            "x-coralogix-presence": true
           },
           "introduction": {
+            "description": "The introduction.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The introduction."
+            "x-coralogix-presence": true
           }
         },
         "description": "Integration guide."
@@ -2313,21 +2396,23 @@
         "type": "object",
         "properties": {
           "integrationKey": {
+            "description": "The integration key.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The integration key."
+            "x-coralogix-presence": true
           },
           "integrationParameters": {
             "$ref": "#/components/schemas/GenericIntegrationParameters"
           },
           "version": {
+            "description": "Version number.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Version number."
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents the metadata of an integration."
@@ -2424,11 +2509,12 @@
             "$ref": "#/components/schemas/CloudFormationTemplate"
           },
           "featureFlag": {
+            "description": "The feature flag.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The feature flag."
+            "x-coralogix-presence": true
           },
           "fields": {
             "maxItems": 10000,
@@ -2452,11 +2538,12 @@
             "$ref": "#/components/schemas/HelmChart"
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "managedService": {
             "$ref": "#/components/schemas/ManagedService"
@@ -2487,18 +2574,20 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -2507,9 +2596,10 @@
         "type": "object",
         "properties": {
           "defaultValue": {
-            "type": "number",
             "description": "The default value.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           }
         },
         "description": "Single numeric value."
@@ -2647,16 +2737,18 @@
         "type": "object",
         "properties": {
           "firstOccurrence": {
+            "description": "The first occurrence.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "The first occurrence.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "lastOccurrence": {
+            "description": "The last occurrence.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "The last occurrence.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Log metadata."
@@ -2806,8 +2898,9 @@
             "$ref": "#/components/schemas/ApiKeyData"
           },
           "booleanValue": {
+            "description": "Boolean value for this integration parameter.",
             "type": "boolean",
-            "description": "Boolean value for this integration parameter."
+            "x-coralogix-presence": true
           },
           "key": {
             "maxLength": 65535,
@@ -2817,9 +2910,10 @@
             "description": "The key."
           },
           "numericValue": {
-            "type": "number",
             "description": "Numeric value for this integration parameter.",
-            "format": "double"
+            "format": "double",
+            "type": "number",
+            "x-coralogix-presence": true
           },
           "sensitiveData": {
             "$ref": "#/components/schemas/SensitiveDataPlaceholder"
@@ -2828,11 +2922,12 @@
             "$ref": "#/components/schemas/StringList"
           },
           "stringValue": {
+            "description": "String value for this integration parameter.",
             "maxLength": 1048576,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "String value for this integration parameter."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -2919,34 +3014,38 @@
             "$ref": "#/components/schemas/CloudFormationStack"
           },
           "definitionVersion": {
+            "description": "The definition version.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The definition version."
+            "x-coralogix-presence": true
           },
           "empty": {
             "$ref": "#/components/schemas/NoDeployment"
           },
           "id": {
+            "description": "Unique identifier.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier."
+            "x-coralogix-presence": true
           },
           "integrationStatus": {
             "$ref": "#/components/schemas/IntegrationStatus"
           },
           "isTesting": {
+            "description": "Whether this is a testing instance used for validation purposes only.",
             "type": "boolean",
-            "description": "Whether this is a testing instance used for validation purposes only."
+            "x-coralogix-presence": true
           },
           "lastUpdated": {
+            "description": "Timestamp of the last update to this integration instance.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Timestamp of the last update to this integration instance.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "parameters": {
             "maxItems": 10000,
@@ -3024,10 +3123,11 @@
         "type": "object",
         "properties": {
           "syncedAt": {
+            "description": "The synced at.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "The synced at.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "versions": {
             "maxItems": 10000,
@@ -3052,11 +3152,12 @@
             "$ref": "#/components/schemas/SourceMapMetadata"
           },
           "version": {
+            "description": "Version number.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Version number."
+            "x-coralogix-presence": true
           }
         }
       },
@@ -3065,11 +3166,12 @@
         "type": "object",
         "properties": {
           "integrationId": {
+            "description": "The integration id.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The integration id."
+            "x-coralogix-presence": true
           }
         },
         "description": "Response returned after successfully saving an integration deployment."
@@ -3079,11 +3181,12 @@
         "type": "object",
         "properties": {
           "defaultValue": {
+            "description": "The default value.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The default value."
+            "x-coralogix-presence": true
           },
           "options": {
             "maxItems": 10000,
@@ -3110,8 +3213,9 @@
         "type": "object",
         "properties": {
           "defaultValue": {
+            "description": "The default value.",
             "type": "boolean",
-            "description": "The default value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Single boolean value."
@@ -3121,11 +3225,12 @@
         "type": "object",
         "properties": {
           "defaultValue": {
+            "description": "The default value.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The default value."
+            "x-coralogix-presence": true
           }
         },
         "description": "Single value."
@@ -3135,14 +3240,16 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "isUploadedSuccessful": {
+            "description": "The is uploaded successful.",
             "type": "boolean",
-            "description": "The is uploaded successful."
+            "x-coralogix-presence": true
           }
         },
         "description": "Source map metadata."
@@ -3170,14 +3277,16 @@
         "type": "object",
         "properties": {
           "syncExecuted": {
+            "description": "The sync executed.",
             "type": "boolean",
-            "description": "The sync executed."
+            "x-coralogix-presence": true
           },
           "syncedAt": {
+            "description": "The synced at.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "The synced at.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           }
         },
         "description": "Response returned after syncing RUM data."
@@ -3320,28 +3429,31 @@
             "default": []
           },
           "darkModeImage": {
+            "description": "The dark mode image.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The dark mode image."
+            "x-coralogix-presence": true
           },
           "deprecation": {
             "$ref": "#/components/schemas/Deprecation"
           },
           "id": {
+            "description": "Unique identifier of the extension.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Unique identifier of the extension."
+            "x-coralogix-presence": true
           },
           "image": {
+            "description": "Image reference.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Image reference."
+            "x-coralogix-presence": true
           },
           "integrations": {
             "maxItems": 10000,
@@ -3356,9 +3468,10 @@
             "default": []
           },
           "isHidden": {
-            "type": "boolean",
+            "default": false,
             "description": "The is hidden.",
-            "default": false
+            "type": "boolean",
+            "x-coralogix-presence": true
           },
           "keywords": {
             "maxItems": 10000,
@@ -3373,11 +3486,12 @@
             "default": []
           },
           "name": {
+            "description": "Display name of the extension.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name of the extension."
+            "x-coralogix-presence": true
           },
           "permissionDeniedRevisions": {
             "maxItems": 10000,
@@ -3407,11 +3521,12 @@
         "type": "object",
         "properties": {
           "errorMessage": {
+            "description": "The error message.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The error message."
+            "x-coralogix-presence": true
           }
         },
         "description": "Failure."

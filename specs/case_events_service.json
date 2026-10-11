@@ -675,13 +675,14 @@
             "description": "Actor that produced the event (system or user)"
           },
           "createTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "Server-side insertion time",
-            "format": "date-time",
             "examples": [
               "2025-09-22T10:30:00.000Z"
-            ]
+            ],
+            "format": "date-time",
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "eventData": {
             "allOf": [
@@ -702,19 +703,21 @@
             ]
           },
           "eventTime": {
-            "minLength": 0,
-            "type": "string",
             "description": "Logical occurrence time of the event",
-            "format": "date-time",
             "examples": [
               "2025-09-22T10:29:45.000Z"
-            ]
-          },
-          "updateTime": {
+            ],
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
+            "x-coralogix-presence": true
+          },
+          "updateTime": {
             "description": "If edited, last modification time of the event",
-            "format": "date-time"
+            "format": "date-time",
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Represents an immutable entry in a case's event timeline."
@@ -1499,11 +1502,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1562,12 +1566,13 @@
             ]
           },
           "threshold": {
-            "minLength": 0,
-            "type": "string",
             "description": "Duration after which the KPI threshold was set to breach",
             "examples": [
               "300s"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "Kpi breached case event."
@@ -1612,13 +1617,14 @@
             ]
           },
           "logTimestamp": {
-            "minLength": 0,
-            "type": "string",
             "description": "Timestamp when the log entry was created",
-            "format": "date-time",
             "examples": [
               "2025-09-22T10:30:00.000Z"
-            ]
+            ],
+            "format": "date-time",
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           },
           "queryLinkSuffix": {
             "maxLength": 4096,

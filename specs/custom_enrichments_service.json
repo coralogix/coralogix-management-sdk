@@ -43,7 +43,8 @@
                     "format": "int64",
                     "maximum": 2147483647,
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "description": {
                     "description": "New human-readable description of the custom enrichment.",
@@ -53,7 +54,8 @@
                     "maxLength": 255,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "file": {
                     "$ref": "#/components/schemas/File"
@@ -66,7 +68,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^\\w+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -116,7 +119,8 @@
                     "maxLength": 255,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "file": {
                     "$ref": "#/components/schemas/File"
@@ -129,7 +133,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^\\w+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "required": [
@@ -222,7 +227,8 @@
                     "format": "int64",
                     "maximum": 2147483647,
                     "minimum": 0,
-                    "type": "integer"
+                    "type": "integer",
+                    "x-coralogix-presence": true
                   },
                   "name": {
                     "description": "Search by the name of the custom enrichment.",
@@ -232,7 +238,8 @@
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^\\w+$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Search Clause",
@@ -280,7 +287,8 @@
               "format": "int64",
               "maximum": 2147483647,
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -318,7 +326,8 @@
               "format": "int64",
               "maximum": 2147483647,
               "minimum": 0,
-              "type": "integer"
+              "type": "integer",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -456,12 +465,13 @@
         ],
         "properties": {
           "binary": {
+            "description": "Binary content of the enrichment data file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.",
+            "format": "byte",
             "maxLength": 27962028,
             "minLength": 0,
             "pattern": "^[A-Za-z0-9+/]*={0,2}$",
             "type": "string",
-            "description": "Binary content of the enrichment data file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.",
-            "format": "byte"
+            "x-coralogix-presence": true
           },
           "definition": {
             "allOf": [
@@ -472,11 +482,12 @@
             "description": "The enrichment definition."
           },
           "textual": {
+            "description": "Textual content of the enrichment data file as a UTF-8 string. The account's enrichment file size limit applies to the UTF-8 byte size of the content (20971520 bytes / 20 MiB by default); maxLength is an upper bound in characters.",
             "maxLength": 20971520,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Textual content of the enrichment data file as a UTF-8 string. The account's enrichment file size limit applies to the UTF-8 byte size of the content (20971520 bytes / 20 MiB by default); maxLength is an upper bound in characters."
+            "x-coralogix-presence": true
           }
         },
         "description": "Custom enrichment data including definition and raw content."
@@ -545,55 +556,60 @@
         ],
         "properties": {
           "binary": {
+            "description": "Binary content of the file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.",
+            "examples": [
+              "0xFABB32"
+            ],
+            "format": "byte",
             "maxLength": 27962028,
             "minLength": 0,
             "pattern": "^[A-Za-z0-9+/]*={0,2}$",
             "type": "string",
-            "description": "Binary content of the file encoded as base64. The account's enrichment file size limit applies to the decoded byte size (20971520 bytes / 20 MiB by default); maxLength bounds the base64-encoded string.",
-            "format": "byte",
-            "examples": [
-              "0xFABB32"
-            ]
+            "x-coralogix-presence": true
           },
           "extension": {
+            "description": "File extension indicating the file format. Only \"csv\" is currently supported.",
+            "examples": [
+              "csv"
+            ],
             "maxLength": 3,
             "minLength": 3,
             "pattern": "^csv$",
             "type": "string",
-            "description": "File extension indicating the file format. Only \"csv\" is currently supported.",
-            "examples": [
-              "csv"
-            ]
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Name of the file.",
+            "examples": [
+              "file_name"
+            ],
             "maxLength": 255,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Name of the file.",
-            "examples": [
-              "file_name"
-            ]
+            "x-coralogix-presence": true
           },
           "size": {
+            "description": "Size of the file in bytes.",
+            "examples": [
+              100
+            ],
+            "format": "int64",
             "maximum": 2147483647,
             "minimum": 0,
             "type": "integer",
-            "description": "Size of the file in bytes.",
-            "format": "int64",
-            "examples": [
-              100
-            ]
+            "x-coralogix-presence": true
           },
           "textual": {
+            "description": "Textual content of the file as a UTF-8 string. The account's enrichment file size limit applies to the UTF-8 byte size of the content (20971520 bytes / 20 MiB by default); maxLength is an upper bound in characters.",
+            "examples": [
+              "row1,row2 value1,value2"
+            ],
             "maxLength": 20971520,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Textual content of the file as a UTF-8 string. The account's enrichment file size limit applies to the UTF-8 byte size of the content (20971520 bytes / 20 MiB by default); maxLength is an upper bound in characters.",
-            "examples": [
-              "row1,row2 value1,value2"
-            ]
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a file",
@@ -635,11 +651,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"

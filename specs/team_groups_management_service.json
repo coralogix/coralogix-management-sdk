@@ -854,11 +854,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
@@ -1260,10 +1261,11 @@
         "type": "object",
         "properties": {
           "createdAt": {
+            "description": "Creation timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Creation timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "description": {
             "description": "Group description",
@@ -1327,10 +1329,11 @@
             "format": "int64"
           },
           "updatedAt": {
+            "description": "Last-updated timestamp.",
+            "format": "date-time",
             "minLength": 0,
             "type": "string",
-            "description": "Last-updated timestamp.",
-            "format": "date-time"
+            "x-coralogix-presence": true
           },
           "userIds": {
             "minItems": 0,
@@ -1350,13 +1353,14 @@
         "type": "object",
         "properties": {
           "expireAt": {
-            "minLength": 0,
-            "type": "string",
             "description": "Timestamp when the user's temporary access will expire. After this time, the user will no longer be able to access the system.",
-            "format": "date-time",
             "examples": [
               "2021-01-01T00:00:00.000Z"
-            ]
+            ],
+            "format": "date-time",
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "User with temporary access. The user's access will automatically expire at the specified timestamp."

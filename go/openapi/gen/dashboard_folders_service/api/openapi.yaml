@@ -81,7 +81,8 @@
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Replace dashboard folder request data structure",
@@ -162,7 +163,8 @@
                     "maxLength": 128,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
-                    "type": "string"
+                    "type": "string",
+                    "x-coralogix-presence": true
                   }
                 },
                 "title": "Create dashboard folder request data structure",
@@ -237,7 +239,8 @@
               "maxLength": 128,
               "minLength": 1,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -305,7 +308,8 @@
               "maxLength": 128,
               "minLength": 1,
               "pattern": "^[\\s\\S]*$",
-              "type": "string"
+              "type": "string",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -366,11 +370,12 @@
           "description": "The folder id.",
           "required": true,
           "schema": {
+            "description": "The folder id.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The folder id."
+            "x-coralogix-presence": true
           }
         }
       ]
@@ -383,11 +388,12 @@
         "type": "object",
         "properties": {
           "folderId": {
+            "description": "The folder id.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The folder id."
+            "x-coralogix-presence": true
           }
         },
         "description": "Response returned after successfully creating a dashboard folder.",
@@ -400,25 +406,28 @@
         "type": "object",
         "properties": {
           "id": {
+            "description": "Unique identifier. A UUID.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Unique identifier. A UUID."
+            "x-coralogix-presence": true
           },
           "name": {
+            "description": "Display name.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "x-coralogix-presence": true
           },
           "parentId": {
+            "description": "The parent id. A UUID that must differ from this folder's own id.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "The parent id. A UUID that must differ from this folder's own id."
+            "x-coralogix-presence": true
           }
         },
         "description": "Dashboard folder."
@@ -486,11 +495,12 @@
             "$ref": "#/components/schemas/MultipleValues"
           },
           "path": {
-            "minLength": 0,
-            "type": "string",
             "examples": [
               "test"
-            ]
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
           }
         },
         "description": "This data structure represents a filter path and values"
