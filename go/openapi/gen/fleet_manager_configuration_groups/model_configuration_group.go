@@ -23,6 +23,8 @@ var _ MappedNullable = &ConfigurationGroup{}
 
 // ConfigurationGroup Fleet-manager configuration group.
 type ConfigurationGroup struct {
+	// Whether this configuration group is archived.
+	Archived bool `json:"archived"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Latest configuration family of the group.
@@ -45,8 +47,9 @@ type _ConfigurationGroup ConfigurationGroup
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroup(id string, priorityOrder int32) *ConfigurationGroup {
+func NewConfigurationGroup(archived bool, id string, priorityOrder int32) *ConfigurationGroup {
 	this := ConfigurationGroup{}
+	this.Archived = archived
 	this.Id = id
 	this.PriorityOrder = priorityOrder
 	return &this
@@ -58,6 +61,30 @@ func NewConfigurationGroup(id string, priorityOrder int32) *ConfigurationGroup {
 func NewConfigurationGroupWithDefaults() *ConfigurationGroup {
 	this := ConfigurationGroup{}
 	return &this
+}
+
+// GetArchived returns the Archived field value
+func (o *ConfigurationGroup) GetArchived() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Archived
+}
+
+// GetArchivedOk returns a tuple with the Archived field value
+// and a boolean to check if the value has been set.
+func (o *ConfigurationGroup) GetArchivedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Archived, true
+}
+
+// SetArchived sets field value
+func (o *ConfigurationGroup) SetArchived(v bool) {
+	o.Archived = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -246,6 +273,7 @@ func (o ConfigurationGroup) MarshalJSON() ([]byte, error) {
 
 func (o ConfigurationGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["archived"] = o.Archived
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -273,6 +301,7 @@ func (o *ConfigurationGroup) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"archived",
 		"id",
 		"priorityOrder",
 	}
@@ -305,6 +334,7 @@ func (o *ConfigurationGroup) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archived")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "family")
 		delete(additionalProperties, "id")

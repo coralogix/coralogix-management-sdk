@@ -28,8 +28,6 @@ type ConfigurationFamily struct {
 	Active bool `json:"active"`
 	// Configuration family UUID v7 this family is based on.
 	BasedOnConfigurationFamilyId *string `json:"basedOnConfigurationFamilyId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Collector semantic version this configuration family targets, without a leading v prefix.
-	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Configuration family UUID v7.
@@ -124,38 +122,6 @@ func (o *ConfigurationFamily) HasBasedOnConfigurationFamilyId() bool {
 // SetBasedOnConfigurationFamilyId gets a reference to the given string and assigns it to the BasedOnConfigurationFamilyId field.
 func (o *ConfigurationFamily) SetBasedOnConfigurationFamilyId(v string) {
 	o.BasedOnConfigurationFamilyId = &v
-}
-
-// GetCollectorVersion returns the CollectorVersion field value if set, zero value otherwise.
-func (o *ConfigurationFamily) GetCollectorVersion() string {
-	if o == nil || IsNil(o.CollectorVersion) {
-		var ret string
-		return ret
-	}
-	return *o.CollectorVersion
-}
-
-// GetCollectorVersionOk returns a tuple with the CollectorVersion field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigurationFamily) GetCollectorVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.CollectorVersion) {
-		return nil, false
-	}
-	return o.CollectorVersion, true
-}
-
-// HasCollectorVersion returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasCollectorVersion() bool {
-	if o != nil && !IsNil(o.CollectorVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetCollectorVersion gets a reference to the given string and assigns it to the CollectorVersion field.
-func (o *ConfigurationFamily) SetCollectorVersion(v string) {
-	o.CollectorVersion = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -380,9 +346,6 @@ func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BasedOnConfigurationFamilyId) {
 		toSerialize["basedOnConfigurationFamilyId"] = o.BasedOnConfigurationFamilyId
 	}
-	if !IsNil(o.CollectorVersion) {
-		toSerialize["collectorVersion"] = o.CollectorVersion
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -487,7 +450,6 @@ func (o *ConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
 
 		delete(additionalProperties, "active")
 		delete(additionalProperties, "basedOnConfigurationFamilyId")
-		delete(additionalProperties, "collectorVersion")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "lastActivatedAt")

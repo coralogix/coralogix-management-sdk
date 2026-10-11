@@ -22,7 +22,7 @@ var _ MappedNullable = &AgentSelectorRequest{}
 
 // AgentSelectorRequest Agent selector used in requests.
 type AgentSelectorRequest struct {
-	// Flat agent attributes to match. If collectorVersion is set, service.version must match it or is added automatically.
+	// Flat agent attributes to match. If family.raw.collectorVersion is set, service.version must be set to it.
 	Attributes map[string]string `json:"attributes,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -76,6 +76,7 @@
             "content": {
               "application/json": {
                 "example": {
+                  "archived": false,
                   "description": "Collector configuration group for production.",
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
@@ -166,6 +167,7 @@
             "content": {
               "application/json": {
                 "example": {
+                  "archived": false,
                   "description": "Collector configuration group for production.",
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
@@ -238,12 +240,12 @@
         "operationId": "ConfigurationGroupService_UpdateConfigurationGroup",
         "parameters": [
           {
-            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); name cannot be cleared; family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.",
+            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); name cannot be cleared; family.raw and family.preset replace the family content as a whole and cannot be cleared, and only the arm matching the current family's content type is accepted (raw and preset families cannot be switched). Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.",
             "in": "query",
             "name": "update_mask",
             "required": true,
             "schema": {
-              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); name cannot be cleared; family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.",
+              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); name cannot be cleared; family.raw and family.preset replace the family content as a whole and cannot be cleared, and only the arm matching the current family's content type is accepted (raw and preset families cannot be switched). Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.",
               "maxLength": 512,
               "minLength": 1,
               "pattern": "^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$",
@@ -315,6 +317,7 @@
             "content": {
               "application/json": {
                 "example": {
+                  "archived": false,
                   "description": "Updated collector configuration group.",
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
@@ -481,7 +484,7 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Flat agent attributes to match. If collectorVersion is set, service.version must match it or is added automatically."
+            "description": "Flat agent attributes to match. If family.raw.collectorVersion is set, service.version must be set to it."
           }
         },
         "description": "Agent selector used in requests."
@@ -573,14 +576,6 @@
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "collectorVersion": {
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix.",
-            "maxLength": 256,
-            "minLength": 5,
-            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -781,10 +776,16 @@
       "ConfigurationGroup": {
         "required": [
           "id",
-          "priorityOrder"
+          "priorityOrder",
+          "archived"
         ],
         "type": "object",
         "properties": {
+          "archived": {
+            "description": "Whether this configuration group is archived.",
+            "type": "boolean",
+            "x-coralogix-presence": true
+          },
           "description": {
             "description": "Human-readable description.",
             "maxLength": 4096,
@@ -983,7 +984,8 @@
         "required": [
           "chartVersion",
           "integrationVersion",
-          "observabilityFeatures"
+          "observabilityFeatures",
+          "collectorVersion"
         ],
         "type": "object",
         "properties": {
@@ -1001,6 +1003,13 @@
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
             "type": "string",
             "description": "Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected."
+          },
+          "collectorVersion": {
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "OTel Collector semantic version Coralogix derived from chartVersion, without a leading v prefix."
           },
           "integrationVersion": {
             "maxLength": 256,

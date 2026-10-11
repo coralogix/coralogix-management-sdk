@@ -500,7 +500,7 @@ type ApiConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
 	configurationGroupServiceUpdateConfigurationGroupRequest *ConfigurationGroupServiceUpdateConfigurationGroupRequest
 }
 
-// Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); name cannot be cleared; family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.
+// Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); name cannot be cleared; family.raw and family.preset replace the family content as a whole and cannot be cleared, and only the arm matching the current family&#39;s content type is accepted (raw and preset families cannot be switched). Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.
 func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) UpdateMask(updateMask string) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
 	r.updateMask = &updateMask
 	return r
