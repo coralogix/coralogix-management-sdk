@@ -566,10 +566,9 @@
         ],
         "properties": {
           "active": {
-            "default": false,
-            "description": "Whether this family is active.",
             "type": "boolean",
-            "x-coralogix-presence": true
+            "description": "Whether this family is active.",
+            "default": false
           },
           "basedOnConfigurationFamilyId": {
             "description": "Configuration family UUID v7 this family is based on.",
@@ -782,9 +781,8 @@
         "type": "object",
         "properties": {
           "archived": {
-            "description": "Whether this configuration group is archived.",
             "type": "boolean",
-            "x-coralogix-presence": true
+            "description": "Whether this configuration group is archived."
           },
           "description": {
             "description": "Human-readable description.",
@@ -818,13 +816,12 @@
             "x-coralogix-presence": true
           },
           "priorityOrder": {
-            "default": 0,
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-            "format": "int32",
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
-            "x-coralogix-presence": true
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "format": "int32",
+            "default": 0
           },
           "tags": {
             "maxItems": 64,

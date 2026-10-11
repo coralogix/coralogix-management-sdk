@@ -24689,10 +24689,9 @@ components:
                 type: object
       properties:
         active:
-          default: false
-          description: Whether this family is active.
           type: boolean
-          x-coralogix-presence: true
+          description: Whether this family is active.
+          default: false
         basedOnConfigurationFamilyId:
           description: Configuration family UUID v7 this family is based on.
           maxLength: 36
@@ -24849,9 +24848,8 @@ components:
       type: object
       properties:
         archived:
-          description: Whether this configuration group is archived.
           type: boolean
-          x-coralogix-presence: true
+          description: Whether this configuration group is archived.
         description:
           description: Human-readable description.
           maxLength: 4096
@@ -24878,15 +24876,14 @@ components:
           type: string
           x-coralogix-presence: true
         priorityOrder:
-          default: 0
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
           description: >-
             Selection precedence. Higher values win on ties and 0 is the
             default.
           format: int32
-          maximum: 2147483647
-          minimum: -2147483648
-          type: integer
-          x-coralogix-presence: true
+          default: 0
         tags:
           maxItems: 64
           minItems: 0
