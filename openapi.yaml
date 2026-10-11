@@ -11836,12 +11836,11 @@ paths:
                     - $ref: '#/components/schemas/ConfigurationFamilyCreate'
                   description: Initial configuration family to create with this group.
                 name:
-                  description: Display name.
+                  description: Display name, unique among the team's configuration groups.
                   maxLength: 256
-                  minLength: 0
+                  minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
-                  x-coralogix-presence: true
                 priorityOrder:
                   default: 0
                   description: >-
@@ -11864,6 +11863,7 @@ paths:
                   minItems: 0
                   type: array
               required:
+                - name
                 - family
               type: object
         required: true
@@ -11985,11 +11985,11 @@ paths:
             Comma-separated fields to update: name, description, tags,
             priorityOrder, family.description, family.active, family.raw,
             family.preset. A listed field that is omitted from the body is
-            cleared (name, description, tags, family.description) or reset to
-            its default (priorityOrder 0, family.active false); family.raw and
-            family.preset replace the family content as a whole and cannot be
-            cleared. Paths inside family.raw or family.preset, a bare family,
-            unknown paths, and * return 400.
+            cleared (description, tags, family.description) or reset to its
+            default (priorityOrder 0, family.active false); name cannot be
+            cleared; family.raw and family.preset replace the family content as
+            a whole and cannot be cleared. Paths inside family.raw or
+            family.preset, a bare family, unknown paths, and * return 400.
           in: query
           name: update_mask
           required: true
@@ -11998,11 +11998,11 @@ paths:
               Comma-separated fields to update: name, description, tags,
               priorityOrder, family.description, family.active, family.raw,
               family.preset. A listed field that is omitted from the body is
-              cleared (name, description, tags, family.description) or reset to
-              its default (priorityOrder 0, family.active false); family.raw and
-              family.preset replace the family content as a whole and cannot be
-              cleared. Paths inside family.raw or family.preset, a bare family,
-              unknown paths, and * return 400.
+              cleared (description, tags, family.description) or reset to its
+              default (priorityOrder 0, family.active false); name cannot be
+              cleared; family.raw and family.preset replace the family content
+              as a whole and cannot be cleared. Paths inside family.raw or
+              family.preset, a bare family, unknown paths, and * return 400.
             maxLength: 512
             minLength: 1
             pattern: ^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$
@@ -12028,9 +12028,9 @@ paths:
                     - $ref: '#/components/schemas/ConfigurationFamilyUpdate'
                   description: Latest configuration family field values.
                 name:
-                  description: Display name.
+                  description: Display name, unique among the team's configuration groups.
                   maxLength: 256
-                  minLength: 0
+                  minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
                   x-coralogix-presence: true
@@ -24865,9 +24865,9 @@ components:
           type: string
           description: Configuration group UUID v7.
         name:
-          description: Display name.
+          description: Display name, unique among the team's configuration groups.
           maxLength: 256
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
@@ -44101,8 +44101,9 @@ components:
         collectorVersion:
           description: >-
             Collector semantic version this family targets, without a leading v
-            prefix. The service.version selector must match this value or is
-            added automatically.
+            prefix. When set, every agent selector must set service.version to
+            this value. When omitted, the family is not tied to a collector
+            version.
           maxLength: 256
           minLength: 5
           pattern: >-
@@ -44136,8 +44137,9 @@ components:
         collectorVersion:
           description: >-
             Collector semantic version this family targets, without a leading v
-            prefix. The service.version selector must match this value or is
-            added automatically.
+            prefix. When set, every agent selector must set service.version to
+            this value. When omitted, the family is not tied to a collector
+            version.
           maxLength: 256
           minLength: 5
           pattern: >-

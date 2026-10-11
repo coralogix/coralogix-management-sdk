@@ -29,7 +29,7 @@ type ConfigurationGroup struct {
 	Family *ConfigurationFamily `json:"family,omitempty"`
 	// Configuration group UUID v7.
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Display name.
+	// Display name, unique among the team's configuration groups.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
 	PriorityOrder int32 `json:"priorityOrder"`

@@ -27,8 +27,8 @@ type ConfigurationGroupServiceCreateConfigurationGroupRequest struct {
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Initial configuration family to create with this group.
 	Family ConfigurationFamilyCreate `json:"family"`
-	// Display name.
-	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// Display name, unique among the team's configuration groups.
+	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
 	// Tags attached to the configuration group.
@@ -43,9 +43,10 @@ type _ConfigurationGroupServiceCreateConfigurationGroupRequest ConfigurationGrou
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroupServiceCreateConfigurationGroupRequest(family ConfigurationFamilyCreate) *ConfigurationGroupServiceCreateConfigurationGroupRequest {
+func NewConfigurationGroupServiceCreateConfigurationGroupRequest(family ConfigurationFamilyCreate, name string) *ConfigurationGroupServiceCreateConfigurationGroupRequest {
 	this := ConfigurationGroupServiceCreateConfigurationGroupRequest{}
 	this.Family = family
+	this.Name = name
 	return &this
 }
 
@@ -113,36 +114,28 @@ func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetFamily(v C
 	o.Family = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetPriorityOrder returns the PriorityOrder field value if set, zero value otherwise.
@@ -223,9 +216,7 @@ func (o ConfigurationGroupServiceCreateConfigurationGroupRequest) ToMap() (map[s
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["family"] = o.Family
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.PriorityOrder) {
 		toSerialize["priorityOrder"] = o.PriorityOrder
 	}
@@ -246,6 +237,7 @@ func (o *ConfigurationGroupServiceCreateConfigurationGroupRequest) UnmarshalJSON
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"family",
+		"name",
 	}
 
 	allProperties := make(map[string]interface{})
