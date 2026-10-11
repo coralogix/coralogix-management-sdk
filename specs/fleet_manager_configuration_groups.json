@@ -78,6 +78,29 @@
                 "example": {
                   "archived": false,
                   "description": "Collector configuration group for production.",
+                  "family": {
+                    "active": true,
+                    "id": "01975ed4-9c1b-7c2a-9e5f-526614174001",
+                    "lastActivatedAt": "2026-10-08T09:41:01.000Z",
+                    "raw": {
+                      "remoteConfigurations": [
+                        {
+                          "agentSelector": {
+                            "attributes": {
+                              "service.name": "checkout"
+                            }
+                          },
+                          "createdAt": "2026-10-08T09:41:01.000Z",
+                          "hash": "3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c",
+                          "id": "01975ed4-9c1c-7d3b-af60-626614174002",
+                          "name": "traces",
+                          "rawConfiguration": "exporters:\n  debug: {}\nreceivers:\n  otlp:\n    protocols:\n      grpc: {}\nservice:\n  pipelines:\n    traces:\n      exporters:\n      - debug\n      receivers:\n      - otlp",
+                          "updatedAt": "2026-10-08T09:41:01.000Z"
+                        }
+                      ]
+                    },
+                    "version": "1"
+                  },
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
                   "priorityOrder": 100,
@@ -169,6 +192,29 @@
                 "example": {
                   "archived": false,
                   "description": "Collector configuration group for production.",
+                  "family": {
+                    "active": true,
+                    "id": "01975ed4-9c1b-7c2a-9e5f-526614174001",
+                    "lastActivatedAt": "2026-10-08T09:41:01.000Z",
+                    "raw": {
+                      "remoteConfigurations": [
+                        {
+                          "agentSelector": {
+                            "attributes": {
+                              "service.name": "checkout"
+                            }
+                          },
+                          "createdAt": "2026-10-08T09:41:01.000Z",
+                          "hash": "3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c",
+                          "id": "01975ed4-9c1c-7d3b-af60-626614174002",
+                          "name": "traces",
+                          "rawConfiguration": "exporters:\n  debug: {}\nreceivers:\n  otlp:\n    protocols:\n      grpc: {}\nservice:\n  pipelines:\n    traces:\n      exporters:\n      - debug\n      receivers:\n      - otlp",
+                          "updatedAt": "2026-10-08T09:41:01.000Z"
+                        }
+                      ]
+                    },
+                    "version": "1"
+                  },
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
                   "priorityOrder": 100,
@@ -319,6 +365,29 @@
                 "example": {
                   "archived": false,
                   "description": "Updated collector configuration group.",
+                  "family": {
+                    "active": true,
+                    "id": "01975ed4-9c1b-7c2a-9e5f-526614174001",
+                    "lastActivatedAt": "2026-10-08T09:41:01.000Z",
+                    "raw": {
+                      "remoteConfigurations": [
+                        {
+                          "agentSelector": {
+                            "attributes": {
+                              "service.name": "checkout"
+                            }
+                          },
+                          "createdAt": "2026-10-08T09:41:01.000Z",
+                          "hash": "3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c",
+                          "id": "01975ed4-9c1c-7d3b-af60-626614174002",
+                          "name": "traces",
+                          "rawConfiguration": "exporters:\n  debug: {}\nreceivers:\n  otlp:\n    protocols:\n      grpc: {}\nservice:\n  pipelines:\n    traces:\n      exporters:\n      - debug\n      receivers:\n      - otlp",
+                          "updatedAt": "2026-10-08T09:41:01.000Z"
+                        }
+                      ]
+                    },
+                    "version": "1"
+                  },
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
                   "priorityOrder": 100,
@@ -1150,6 +1219,9 @@
         "description": "Configuration template settings that replace those of the latest configuration family; omitted metadata is cleared, and a new configuration family version is created only when the settings change."
       },
       "RawConfigurationFamily": {
+        "required": [
+          "remoteConfigurations"
+        ],
         "type": "object",
         "properties": {
           "collectorVersion": {
