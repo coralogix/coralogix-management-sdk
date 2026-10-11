@@ -12046,14 +12046,21 @@ paths:
         - description: >-
             Comma-separated fields to update: name, description, tags,
             priorityOrder, family.description, family.active, family.raw,
-            family.preset. A listed field that is omitted from the body is
-            cleared (description, tags, family.description) or reset to its
-            default (priorityOrder 0, family.active false); name cannot be
-            cleared; family.raw and family.preset replace the family content as
-            a whole and cannot be cleared, and only the arm matching the current
-            family's content type is accepted (raw and preset families cannot be
-            switched). Paths inside family.raw or family.preset, a bare family,
-            unknown paths, and * return 400.
+            family.preset, or one field inside family.raw or family.preset, such
+            as family.raw.metadata or family.preset.chartVersion. family.raw and
+            family.preset replace the whole family content; a field inside them
+            changes only that field and keeps the others. A listed field that is
+            omitted from the body is cleared (description, tags,
+            family.description, and optional fields inside family.raw or
+            family.preset) or reset to its default (priorityOrder 0,
+            family.active false). name cannot be cleared, and
+            family.raw.remoteConfigurations cannot be empty. Changing
+            family.preset.chartVersion without family.preset.integrationVersion
+            uses the default integration version of the new chart version. The
+            body must include the arm being changed, and only the arm matching
+            the current family's content type is accepted (raw and preset
+            families cannot be switched). A bare family, unknown paths, and *
+            return 400.
           in: query
           name: update_mask
           required: true
@@ -12061,14 +12068,21 @@ paths:
             description: >-
               Comma-separated fields to update: name, description, tags,
               priorityOrder, family.description, family.active, family.raw,
-              family.preset. A listed field that is omitted from the body is
-              cleared (description, tags, family.description) or reset to its
-              default (priorityOrder 0, family.active false); name cannot be
-              cleared; family.raw and family.preset replace the family content
-              as a whole and cannot be cleared, and only the arm matching the
-              current family's content type is accepted (raw and preset families
-              cannot be switched). Paths inside family.raw or family.preset, a
-              bare family, unknown paths, and * return 400.
+              family.preset, or one field inside family.raw or family.preset,
+              such as family.raw.metadata or family.preset.chartVersion.
+              family.raw and family.preset replace the whole family content; a
+              field inside them changes only that field and keeps the others. A
+              listed field that is omitted from the body is cleared
+              (description, tags, family.description, and optional fields inside
+              family.raw or family.preset) or reset to its default
+              (priorityOrder 0, family.active false). name cannot be cleared,
+              and family.raw.remoteConfigurations cannot be empty. Changing
+              family.preset.chartVersion without
+              family.preset.integrationVersion uses the default integration
+              version of the new chart version. The body must include the arm
+              being changed, and only the arm matching the current family's
+              content type is accepted (raw and preset families cannot be
+              switched). A bare family, unknown paths, and * return 400.
             maxLength: 512
             minLength: 1
             pattern: ^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$
@@ -42336,6 +42350,7 @@ components:
           https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
     PresetConfigurationFamily:
       required:
+        - chartName
         - chartVersion
         - integrationVersion
         - observabilityFeatures
@@ -42473,10 +42488,6 @@ components:
         Configuration template settings for a new configuration family;
         Coralogix generates the remote configurations from them.
     PresetConfigurationFamilyUpdate:
-      required:
-        - chartName
-        - chartVersion
-        - observabilityFeatures
       type: object
       properties:
         chartName:
@@ -42532,9 +42543,12 @@ components:
             JSON object string; the available features depend on chartName and
             integrationVersion.
       description: >-
-        Configuration template settings that replace those of the latest
-        configuration family; omitted metadata is cleared, and a new
-        configuration family version is created only when the settings change.
+        Configuration template settings of the latest configuration family. With
+        family.preset in update_mask, chartName, chartVersion, and
+        observabilityFeatures are required and the settings replace the stored
+        ones; omitted metadata is cleared. With a field path, only that field is
+        needed and changes. A new configuration family version is created only
+        when the settings change.
     PresetInfo:
       title: Preset Info
       type: object
@@ -44235,8 +44249,6 @@ components:
         Configuration family content defined directly by its remote
         configurations.
     RawConfigurationFamilyUpdate:
-      required:
-        - remoteConfigurations
       type: object
       properties:
         collectorVersion:
@@ -44268,9 +44280,11 @@ components:
             $ref: '#/components/schemas/RemoteConfigurationReplace'
           description: Remote configurations for the new family version.
       description: >-
-        Content that replaces the remote configurations, collector version, and
-        metadata of the latest configuration family; an omitted collectorVersion
-        or metadata is cleared.
+        Content of the latest configuration family. With family.raw in
+        update_mask, remoteConfigurations is required and the content replaces
+        the remote configurations, collector version, and metadata; an omitted
+        collectorVersion or metadata is cleared. With a field path, only that
+        field is needed and changes.
     Recipients:
       title: Recipients
       type: object

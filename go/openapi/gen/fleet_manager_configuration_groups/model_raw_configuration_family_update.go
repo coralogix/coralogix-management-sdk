@@ -13,7 +13,6 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -21,14 +20,14 @@ var _ = bytes.MinRead
 // checks if the RawConfigurationFamilyUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RawConfigurationFamilyUpdate{}
 
-// RawConfigurationFamilyUpdate Content that replaces the remote configurations, collector version, and metadata of the latest configuration family; an omitted collectorVersion or metadata is cleared.
+// RawConfigurationFamilyUpdate Content of the latest configuration family. With family.raw in update_mask, remoteConfigurations is required and the content replaces the remote configurations, collector version, and metadata; an omitted collectorVersion or metadata is cleared. With a field path, only that field is needed and changes.
 type RawConfigurationFamilyUpdate struct {
 	// Collector semantic version this family targets, without a leading v prefix. When set, every agent selector must set service.version to this value. When omitted, the family is not tied to a collector version.
 	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Metadata stored with this configuration family.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Remote configurations for the new family version.
-	RemoteConfigurations []RemoteConfigurationReplace `json:"remoteConfigurations"`
+	RemoteConfigurations []RemoteConfigurationReplace `json:"remoteConfigurations,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -39,9 +38,8 @@ type _RawConfigurationFamilyUpdate RawConfigurationFamilyUpdate
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRawConfigurationFamilyUpdate(remoteConfigurations []RemoteConfigurationReplace) *RawConfigurationFamilyUpdate {
+func NewRawConfigurationFamilyUpdate() *RawConfigurationFamilyUpdate {
 	this := RawConfigurationFamilyUpdate{}
-	this.RemoteConfigurations = remoteConfigurations
 	return &this
 }
 
@@ -117,26 +115,34 @@ func (o *RawConfigurationFamilyUpdate) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
-// GetRemoteConfigurations returns the RemoteConfigurations field value
+// GetRemoteConfigurations returns the RemoteConfigurations field value if set, zero value otherwise.
 func (o *RawConfigurationFamilyUpdate) GetRemoteConfigurations() []RemoteConfigurationReplace {
-	if o == nil {
+	if o == nil || IsNil(o.RemoteConfigurations) {
 		var ret []RemoteConfigurationReplace
 		return ret
 	}
-
 	return o.RemoteConfigurations
 }
 
-// GetRemoteConfigurationsOk returns a tuple with the RemoteConfigurations field value
+// GetRemoteConfigurationsOk returns a tuple with the RemoteConfigurations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RawConfigurationFamilyUpdate) GetRemoteConfigurationsOk() ([]RemoteConfigurationReplace, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.RemoteConfigurations) {
 		return nil, false
 	}
 	return o.RemoteConfigurations, true
 }
 
-// SetRemoteConfigurations sets field value
+// HasRemoteConfigurations returns a boolean if a field has been set.
+func (o *RawConfigurationFamilyUpdate) HasRemoteConfigurations() bool {
+	if o != nil && !IsNil(o.RemoteConfigurations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRemoteConfigurations gets a reference to the given []RemoteConfigurationReplace and assigns it to the RemoteConfigurations field.
 func (o *RawConfigurationFamilyUpdate) SetRemoteConfigurations(v []RemoteConfigurationReplace) {
 	o.RemoteConfigurations = v
 }
@@ -157,7 +163,9 @@ func (o RawConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	toSerialize["remoteConfigurations"] = o.RemoteConfigurations
+	if !IsNil(o.RemoteConfigurations) {
+		toSerialize["remoteConfigurations"] = o.RemoteConfigurations
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -167,27 +175,6 @@ func (o RawConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RawConfigurationFamilyUpdate) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"remoteConfigurations",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varRawConfigurationFamilyUpdate := _RawConfigurationFamilyUpdate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
