@@ -524,7 +524,8 @@
       "ConfigurationFamily": {
         "required": [
           "id",
-          "version"
+          "version",
+          "active"
         ],
         "type": "object",
         "oneOf": [
@@ -562,6 +563,7 @@
         ],
         "properties": {
           "active": {
+            "default": false,
             "description": "Whether this family is active.",
             "type": "boolean",
             "x-coralogix-presence": true
@@ -658,6 +660,7 @@
         ],
         "properties": {
           "active": {
+            "default": false,
             "description": "Whether this family is active.",
             "type": "boolean",
             "x-coralogix-presence": true
@@ -743,6 +746,7 @@
         ],
         "properties": {
           "active": {
+            "default": false,
             "description": "Whether this family is active.",
             "type": "boolean",
             "x-coralogix-presence": true

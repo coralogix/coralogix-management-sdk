@@ -24662,6 +24662,7 @@ components:
       required:
         - id
         - version
+        - active
       type: object
       oneOf:
         - required:
@@ -24681,6 +24682,7 @@ components:
                 type: object
       properties:
         active:
+          default: false
           description: Whether this family is active.
           type: boolean
           x-coralogix-presence: true
@@ -24762,6 +24764,7 @@ components:
           type: object
       properties:
         active:
+          default: false
           description: Whether this family is active.
           type: boolean
           x-coralogix-presence: true
@@ -24815,6 +24818,7 @@ components:
                 type: object
       properties:
         active:
+          default: false
           description: Whether this family is active.
           type: boolean
           x-coralogix-presence: true

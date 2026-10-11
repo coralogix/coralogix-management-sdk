@@ -25,7 +25,7 @@ var _ MappedNullable = &ConfigurationFamily{}
 // ConfigurationFamily Configuration family returned by Fleet Manager.
 type ConfigurationFamily struct {
 	// Whether this family is active.
-	Active *bool `json:"active,omitempty"`
+	Active bool `json:"active"`
 	// Configuration family UUID v7 this family is based on.
 	BasedOnConfigurationFamilyId *string `json:"basedOnConfigurationFamilyId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Collector semantic version this configuration family targets, without a leading v prefix.
@@ -54,8 +54,9 @@ type _ConfigurationFamily ConfigurationFamily
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationFamily(id string, version string) *ConfigurationFamily {
+func NewConfigurationFamily(active bool, id string, version string) *ConfigurationFamily {
 	this := ConfigurationFamily{}
+	this.Active = active
 	this.Id = id
 	this.Version = version
 	return &this
@@ -69,36 +70,28 @@ func NewConfigurationFamilyWithDefaults() *ConfigurationFamily {
 	return &this
 }
 
-// GetActive returns the Active field value if set, zero value otherwise.
+// GetActive returns the Active field value
 func (o *ConfigurationFamily) GetActive() bool {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Active
+
+	return o.Active
 }
 
-// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// GetActiveOk returns a tuple with the Active field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationFamily) GetActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Active, true
+	return &o.Active, true
 }
 
-// HasActive returns a boolean if a field has been set.
-func (o *ConfigurationFamily) HasActive() bool {
-	if o != nil && !IsNil(o.Active) {
-		return true
-	}
-
-	return false
-}
-
-// SetActive gets a reference to the given bool and assigns it to the Active field.
+// SetActive sets field value
 func (o *ConfigurationFamily) SetActive(v bool) {
-	o.Active = &v
+	o.Active = v
 }
 
 // GetBasedOnConfigurationFamilyId returns the BasedOnConfigurationFamilyId field value if set, zero value otherwise.
@@ -383,9 +376,7 @@ func (o ConfigurationFamily) MarshalJSON() ([]byte, error) {
 
 func (o ConfigurationFamily) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Active) {
-		toSerialize["active"] = o.Active
-	}
+	toSerialize["active"] = o.Active
 	if !IsNil(o.BasedOnConfigurationFamilyId) {
 		toSerialize["basedOnConfigurationFamilyId"] = o.BasedOnConfigurationFamilyId
 	}
@@ -439,6 +430,7 @@ func (o *ConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"active",
 		"id",
 		"version",
 	}
