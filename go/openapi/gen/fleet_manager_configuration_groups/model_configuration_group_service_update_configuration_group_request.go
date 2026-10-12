@@ -26,7 +26,7 @@ type ConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Latest configuration family field values.
 	Family *ConfigurationFamilyUpdate `json:"family,omitempty"`
-	// Display name.
+	// Display name, unique among the team's configuration groups.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`

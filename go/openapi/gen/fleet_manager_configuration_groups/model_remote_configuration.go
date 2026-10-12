@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -28,13 +29,13 @@ type RemoteConfiguration struct {
 	// Time when this remote configuration was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// SHA-256 hash of the normalized raw configuration content.
-	Hash *string `json:"hash,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Hash string `json:"hash" validate:"regexp=^[\\s\\S]*$"`
 	// Remote configuration UUID v7.
-	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Remote configuration name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Normalized OpenTelemetry Collector configuration YAML.
-	RawConfiguration *string `json:"rawConfiguration,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	RawConfiguration string `json:"rawConfiguration" validate:"regexp=^[\\s\\S]*$"`
 	// Time when this remote configuration was last updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -47,8 +48,11 @@ type _RemoteConfiguration RemoteConfiguration
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRemoteConfiguration() *RemoteConfiguration {
+func NewRemoteConfiguration(hash string, id string, rawConfiguration string) *RemoteConfiguration {
 	this := RemoteConfiguration{}
+	this.Hash = hash
+	this.Id = id
+	this.RawConfiguration = rawConfiguration
 	return &this
 }
 
@@ -124,68 +128,52 @@ func (o *RemoteConfiguration) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
-// GetHash returns the Hash field value if set, zero value otherwise.
+// GetHash returns the Hash field value
 func (o *RemoteConfiguration) GetHash() string {
-	if o == nil || IsNil(o.Hash) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Hash
+
+	return o.Hash
 }
 
-// GetHashOk returns a tuple with the Hash field value if set, nil otherwise
+// GetHashOk returns a tuple with the Hash field value
 // and a boolean to check if the value has been set.
 func (o *RemoteConfiguration) GetHashOk() (*string, bool) {
-	if o == nil || IsNil(o.Hash) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Hash, true
+	return &o.Hash, true
 }
 
-// HasHash returns a boolean if a field has been set.
-func (o *RemoteConfiguration) HasHash() bool {
-	if o != nil && !IsNil(o.Hash) {
-		return true
-	}
-
-	return false
-}
-
-// SetHash gets a reference to the given string and assigns it to the Hash field.
+// SetHash sets field value
 func (o *RemoteConfiguration) SetHash(v string) {
-	o.Hash = &v
+	o.Hash = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *RemoteConfiguration) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *RemoteConfiguration) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *RemoteConfiguration) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *RemoteConfiguration) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -220,36 +208,28 @@ func (o *RemoteConfiguration) SetName(v string) {
 	o.Name = &v
 }
 
-// GetRawConfiguration returns the RawConfiguration field value if set, zero value otherwise.
+// GetRawConfiguration returns the RawConfiguration field value
 func (o *RemoteConfiguration) GetRawConfiguration() string {
-	if o == nil || IsNil(o.RawConfiguration) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.RawConfiguration
+
+	return o.RawConfiguration
 }
 
-// GetRawConfigurationOk returns a tuple with the RawConfiguration field value if set, nil otherwise
+// GetRawConfigurationOk returns a tuple with the RawConfiguration field value
 // and a boolean to check if the value has been set.
 func (o *RemoteConfiguration) GetRawConfigurationOk() (*string, bool) {
-	if o == nil || IsNil(o.RawConfiguration) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RawConfiguration, true
+	return &o.RawConfiguration, true
 }
 
-// HasRawConfiguration returns a boolean if a field has been set.
-func (o *RemoteConfiguration) HasRawConfiguration() bool {
-	if o != nil && !IsNil(o.RawConfiguration) {
-		return true
-	}
-
-	return false
-}
-
-// SetRawConfiguration gets a reference to the given string and assigns it to the RawConfiguration field.
+// SetRawConfiguration sets field value
 func (o *RemoteConfiguration) SetRawConfiguration(v string) {
-	o.RawConfiguration = &v
+	o.RawConfiguration = v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
@@ -300,18 +280,12 @@ func (o RemoteConfiguration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !IsNil(o.Hash) {
-		toSerialize["hash"] = o.Hash
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["hash"] = o.Hash
+	toSerialize["id"] = o.Id
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.RawConfiguration) {
-		toSerialize["rawConfiguration"] = o.RawConfiguration
-	}
+	toSerialize["rawConfiguration"] = o.RawConfiguration
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
@@ -324,6 +298,29 @@ func (o RemoteConfiguration) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RemoteConfiguration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"hash",
+		"id",
+		"rawConfiguration",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRemoteConfiguration := _RemoteConfiguration{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -36,7 +36,7 @@ func (r ApiConfigurationGroupServiceArchiveConfigurationGroupRequest) Execute() 
 /*
 ConfigurationGroupServiceArchiveConfigurationGroup Archive configuration group
 
-Archives a fleet-manager configuration group.
+Archives a fleet-manager configuration group. An already archived group returns 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.
@@ -186,7 +186,7 @@ func (r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) Configurati
 	return r
 }
 
-func (r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) Execute() (*CreateConfigurationGroupResponse, *http.Response, error) {
+func (r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
 	return r.ApiService.ConfigurationGroupServiceCreateConfigurationGroupExecute(r)
 }
 
@@ -206,13 +206,13 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCre
 }
 
 // Execute executes the request
-//  @return CreateConfigurationGroupResponse
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCreateConfigurationGroupExecute(r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) (*CreateConfigurationGroupResponse, *http.Response, error) {
+//  @return ConfigurationGroup
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCreateConfigurationGroupExecute(r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) (*ConfigurationGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *CreateConfigurationGroupResponse
+		localVarReturnValue  *ConfigurationGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceCreateConfigurationGroup")
@@ -225,6 +225,9 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceCre
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.configurationGroupServiceCreateConfigurationGroupRequest == nil {
+		return localVarReturnValue, nil, reportError("configurationGroupServiceCreateConfigurationGroupRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -329,23 +332,23 @@ type ApiConfigurationGroupServiceGetConfigurationGroupRequest struct {
 	ctx context.Context
 	ApiService *FleetManagerConfigurationGroupsAPIService
 	id string
-	latestFamilyOnly *bool
+	includeArchived *bool
 }
 
-// Return only the latest configuration family when true.
-func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) LatestFamilyOnly(latestFamilyOnly bool) ApiConfigurationGroupServiceGetConfigurationGroupRequest {
-	r.latestFamilyOnly = &latestFamilyOnly
+// When true, return an archived group, without a family. Otherwise an archived group returns 404.
+func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) IncludeArchived(includeArchived bool) ApiConfigurationGroupServiceGetConfigurationGroupRequest {
+	r.includeArchived = &includeArchived
 	return r
 }
 
-func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*GetConfigurationGroupResponse, *http.Response, error) {
+func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*ConfigurationGroup, *http.Response, error) {
 	return r.ApiService.ConfigurationGroupServiceGetConfigurationGroupExecute(r)
 }
 
 /*
 ConfigurationGroupServiceGetConfigurationGroup Get configuration group
 
-Gets a fleet-manager configuration group by ID.
+Gets a fleet-manager configuration group by ID. An archived group returns 404 unless include_archived is true.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.
@@ -360,13 +363,13 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 }
 
 // Execute executes the request
-//  @return GetConfigurationGroupResponse
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGetConfigurationGroupExecute(r ApiConfigurationGroupServiceGetConfigurationGroupRequest) (*GetConfigurationGroupResponse, *http.Response, error) {
+//  @return ConfigurationGroup
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGetConfigurationGroupExecute(r ApiConfigurationGroupServiceGetConfigurationGroupRequest) (*ConfigurationGroup, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetConfigurationGroupResponse
+		localVarReturnValue  *ConfigurationGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceGetConfigurationGroup")
@@ -387,8 +390,8 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
 	}
 
-	if r.latestFamilyOnly != nil {
-		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "latest_family_only", r.latestFamilyOnly, "form", ""); err != nil {
+	if r.includeArchived != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_archived", r.includeArchived, "form", ""); err != nil {
 			return localVarReturnValue, nil, err
 		}
 	}
@@ -489,166 +492,6 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfigurationGroupServiceReplaceConfigurationGroupRequest struct {
-	ctx context.Context
-	ApiService *FleetManagerConfigurationGroupsAPIService
-	id string
-	configurationGroupServiceReplaceConfigurationGroupRequest *ConfigurationGroupServiceReplaceConfigurationGroupRequest
-}
-
-func (r ApiConfigurationGroupServiceReplaceConfigurationGroupRequest) ConfigurationGroupServiceReplaceConfigurationGroupRequest(configurationGroupServiceReplaceConfigurationGroupRequest ConfigurationGroupServiceReplaceConfigurationGroupRequest) ApiConfigurationGroupServiceReplaceConfigurationGroupRequest {
-	r.configurationGroupServiceReplaceConfigurationGroupRequest = &configurationGroupServiceReplaceConfigurationGroupRequest
-	return r
-}
-
-func (r ApiConfigurationGroupServiceReplaceConfigurationGroupRequest) Execute() (*ReplaceConfigurationGroupResponse, *http.Response, error) {
-	return r.ApiService.ConfigurationGroupServiceReplaceConfigurationGroupExecute(r)
-}
-
-/*
-ConfigurationGroupServiceReplaceConfigurationGroup Update configuration group
-
-Updates provided fleet-manager configuration group fields and optionally updates the latest family.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Configuration group UUID v7.
- @return ApiConfigurationGroupServiceReplaceConfigurationGroupRequest
-*/
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceReplaceConfigurationGroup(ctx context.Context, id string) ApiConfigurationGroupServiceReplaceConfigurationGroupRequest {
-	return ApiConfigurationGroupServiceReplaceConfigurationGroupRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return ReplaceConfigurationGroupResponse
-func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceReplaceConfigurationGroupExecute(r ApiConfigurationGroupServiceReplaceConfigurationGroupRequest) (*ReplaceConfigurationGroupResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceConfigurationGroupResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceReplaceConfigurationGroup")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/fleet-management/configuration-groups/v1/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if strlen(r.id) < 36 {
-		return localVarReturnValue, nil, reportError("id must have at least 36 elements")
-	}
-	if strlen(r.id) > 36 {
-		return localVarReturnValue, nil, reportError("id must have less than 36 elements")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.configurationGroupServiceReplaceConfigurationGroupRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v Error
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
 	ctx context.Context
 	ApiService *FleetManagerConfigurationGroupsAPIService
@@ -657,7 +500,7 @@ type ApiConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
 	configurationGroupServiceUpdateConfigurationGroupRequest *ConfigurationGroupServiceUpdateConfigurationGroupRequest
 }
 
-// Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (name, description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.
+// Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset, or one field inside family.raw or family.preset, such as family.raw.metadata or family.preset.chartVersion. family.raw and family.preset replace the whole family content; a field inside them changes only that field and keeps the others. A listed field that is omitted from the body is cleared (description, tags, family.description, and optional fields inside family.raw or family.preset) or reset to its default (priorityOrder 0, family.active false). name cannot be cleared, and family.raw.remoteConfigurations cannot be empty. Changing family.preset.chartVersion without family.preset.integrationVersion uses the default integration version of the new chart version. The body must include the arm being changed, and only the arm matching the current family&#39;s content type is accepted (raw and preset families cannot be switched). A bare family, unknown paths, and * return 400.
 func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) UpdateMask(updateMask string) ApiConfigurationGroupServiceUpdateConfigurationGroupRequest {
 	r.updateMask = &updateMask
 	return r
@@ -675,7 +518,7 @@ func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) Execute() (
 /*
 ConfigurationGroupServiceUpdateConfigurationGroup Update configuration group
 
-Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes.
+Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes. An archived group returns 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.

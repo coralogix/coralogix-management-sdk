@@ -24,9 +24,11 @@ var _ MappedNullable = &PresetConfigurationFamily{}
 // PresetConfigurationFamily Configuration template settings of a configuration family.
 type PresetConfigurationFamily struct {
 	// Configuration template type: CHART_NAME_OTEL_INTEGRATION for Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or CHART_NAME_OTEL_LINUX_STANDALONE, CHART_NAME_OTEL_WINDOWS_STANDALONE, or CHART_NAME_OTEL_MACOS_STANDALONE for hosts.
-	ChartName *ChartName `json:"chartName,omitempty"`
+	ChartName ChartName `json:"chartName"`
 	// Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected.
 	ChartVersion string `json:"chartVersion" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
+	// OTel Collector semantic version Coralogix derived from chartVersion, without a leading v prefix.
+	CollectorVersion string `json:"collectorVersion" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Version of the observability features format used for this configuration family.
 	IntegrationVersion string `json:"integrationVersion" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
@@ -45,9 +47,11 @@ type _PresetConfigurationFamily PresetConfigurationFamily
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewPresetConfigurationFamily(chartVersion string, integrationVersion string, observabilityFeatures string) *PresetConfigurationFamily {
+func NewPresetConfigurationFamily(chartName ChartName, chartVersion string, collectorVersion string, integrationVersion string, observabilityFeatures string) *PresetConfigurationFamily {
 	this := PresetConfigurationFamily{}
+	this.ChartName = chartName
 	this.ChartVersion = chartVersion
+	this.CollectorVersion = collectorVersion
 	this.IntegrationVersion = integrationVersion
 	this.ObservabilityFeatures = observabilityFeatures
 	return &this
@@ -61,36 +65,28 @@ func NewPresetConfigurationFamilyWithDefaults() *PresetConfigurationFamily {
 	return &this
 }
 
-// GetChartName returns the ChartName field value if set, zero value otherwise.
+// GetChartName returns the ChartName field value
 func (o *PresetConfigurationFamily) GetChartName() ChartName {
-	if o == nil || IsNil(o.ChartName) {
+	if o == nil {
 		var ret ChartName
 		return ret
 	}
-	return *o.ChartName
+
+	return o.ChartName
 }
 
-// GetChartNameOk returns a tuple with the ChartName field value if set, nil otherwise
+// GetChartNameOk returns a tuple with the ChartName field value
 // and a boolean to check if the value has been set.
 func (o *PresetConfigurationFamily) GetChartNameOk() (*ChartName, bool) {
-	if o == nil || IsNil(o.ChartName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ChartName, true
+	return &o.ChartName, true
 }
 
-// HasChartName returns a boolean if a field has been set.
-func (o *PresetConfigurationFamily) HasChartName() bool {
-	if o != nil && !IsNil(o.ChartName) {
-		return true
-	}
-
-	return false
-}
-
-// SetChartName gets a reference to the given ChartName and assigns it to the ChartName field.
+// SetChartName sets field value
 func (o *PresetConfigurationFamily) SetChartName(v ChartName) {
-	o.ChartName = &v
+	o.ChartName = v
 }
 
 // GetChartVersion returns the ChartVersion field value
@@ -115,6 +111,30 @@ func (o *PresetConfigurationFamily) GetChartVersionOk() (*string, bool) {
 // SetChartVersion sets field value
 func (o *PresetConfigurationFamily) SetChartVersion(v string) {
 	o.ChartVersion = v
+}
+
+// GetCollectorVersion returns the CollectorVersion field value
+func (o *PresetConfigurationFamily) GetCollectorVersion() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CollectorVersion
+}
+
+// GetCollectorVersionOk returns a tuple with the CollectorVersion field value
+// and a boolean to check if the value has been set.
+func (o *PresetConfigurationFamily) GetCollectorVersionOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CollectorVersion, true
+}
+
+// SetCollectorVersion sets field value
+func (o *PresetConfigurationFamily) SetCollectorVersion(v string) {
+	o.CollectorVersion = v
 }
 
 // GetIntegrationVersion returns the IntegrationVersion field value
@@ -239,10 +259,9 @@ func (o PresetConfigurationFamily) MarshalJSON() ([]byte, error) {
 
 func (o PresetConfigurationFamily) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ChartName) {
-		toSerialize["chartName"] = o.ChartName
-	}
+	toSerialize["chartName"] = o.ChartName
 	toSerialize["chartVersion"] = o.ChartVersion
+	toSerialize["collectorVersion"] = o.CollectorVersion
 	toSerialize["integrationVersion"] = o.IntegrationVersion
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -264,7 +283,9 @@ func (o *PresetConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"chartName",
 		"chartVersion",
+		"collectorVersion",
 		"integrationVersion",
 		"observabilityFeatures",
 	}
@@ -299,6 +320,7 @@ func (o *PresetConfigurationFamily) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "chartName")
 		delete(additionalProperties, "chartVersion")
+		delete(additionalProperties, "collectorVersion")
 		delete(additionalProperties, "integrationVersion")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "observabilityFeatures")
