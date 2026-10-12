@@ -24,14 +24,15 @@ var _ MappedNullable = &Slo{}
 // Slo Definition of an SLO
 type Slo struct {
 	ApmSli *ApmSli `json:"apmSli,omitempty"`
-	// APM SLI metadata parallel to materialized metric queries (product_type APM).
+	// Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.
 	ApmSliMetadata *ApmSli `json:"apmSliMetadata,omitempty"`
-	// RFC3339 timestamp of when the SLO was created.
+	// RFC3339 timestamp of when the SLO was created. Set by the server; a value sent by the client is ignored.
 	CreateTime *time.Time `json:"createTime,omitempty"`
-	// Email or identifier of the user who created the SLO.
+	// Email or identifier of the user who created the SLO. Set by the server; a value sent by the client is ignored.
 	Creator *string `json:"creator,omitempty"`
 	// Human-readable description of the SLO.
 	Description *string `json:"description,omitempty"`
+	// Grouping labels derived by the server from the SLI. A value sent by the client is rejected.
 	Grouping *V1Grouping `json:"grouping,omitempty"`
 	// Unique identifier of the SLO.
 	Id *string `json:"id,omitempty"`
@@ -44,15 +45,17 @@ type Slo struct {
 	// Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs
 	ProductType *SloProductType `json:"productType,omitempty"`
 	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
+	// Revision of the SLO. Set by the server; a value sent by the client is ignored.
 	Revision *V1Revision `json:"revision,omitempty"`
 	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
+	// SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.
 	SloType *SloType `json:"sloType,omitempty"`
 	// Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).
 	TargetThresholdPercentage *float32 `json:"targetThresholdPercentage,omitempty"`
-	// Deprecated: SLO type string. Use slo_type instead.
+	// Deprecated: SLO type string. Set by the server from the SLI; a value sent by the client is ignored.
 	// Deprecated
 	Type *string `json:"type,omitempty"`
-	// Timestamp of the last update.
+	// Timestamp of the last update. Set by the server; a value sent by the client is ignored.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 	WindowBasedMetricSli *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
 	AdditionalProperties map[string]interface{}

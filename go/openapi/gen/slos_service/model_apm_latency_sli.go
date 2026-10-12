@@ -13,6 +13,7 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -27,8 +28,8 @@ type ApmLatencySli struct {
 	Quantile *ApmLatencyQuantile `json:"quantile,omitempty"`
 	// Threshold in milliseconds. Good when latency <= threshold, bad when latency > threshold.
 	Threshold *float32 `json:"threshold,omitempty"`
-	// Time window for latency calculations
-	TimeWindow *WindowSloWindow `json:"timeWindow,omitempty"`
+	// Time window for latency calculations. Required. Omitting it is rejected.
+	TimeWindow WindowSloWindow `json:"timeWindow"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -39,8 +40,9 @@ type _ApmLatencySli ApmLatencySli
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewApmLatencySli() *ApmLatencySli {
+func NewApmLatencySli(timeWindow WindowSloWindow) *ApmLatencySli {
 	this := ApmLatencySli{}
+	this.TimeWindow = timeWindow
 	return &this
 }
 
@@ -148,36 +150,28 @@ func (o *ApmLatencySli) SetThreshold(v float32) {
 	o.Threshold = &v
 }
 
-// GetTimeWindow returns the TimeWindow field value if set, zero value otherwise.
+// GetTimeWindow returns the TimeWindow field value
 func (o *ApmLatencySli) GetTimeWindow() WindowSloWindow {
-	if o == nil || IsNil(o.TimeWindow) {
+	if o == nil {
 		var ret WindowSloWindow
 		return ret
 	}
-	return *o.TimeWindow
+
+	return o.TimeWindow
 }
 
-// GetTimeWindowOk returns a tuple with the TimeWindow field value if set, nil otherwise
+// GetTimeWindowOk returns a tuple with the TimeWindow field value
 // and a boolean to check if the value has been set.
 func (o *ApmLatencySli) GetTimeWindowOk() (*WindowSloWindow, bool) {
-	if o == nil || IsNil(o.TimeWindow) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TimeWindow, true
+	return &o.TimeWindow, true
 }
 
-// HasTimeWindow returns a boolean if a field has been set.
-func (o *ApmLatencySli) HasTimeWindow() bool {
-	if o != nil && !IsNil(o.TimeWindow) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeWindow gets a reference to the given WindowSloWindow and assigns it to the TimeWindow field.
+// SetTimeWindow sets field value
 func (o *ApmLatencySli) SetTimeWindow(v WindowSloWindow) {
-	o.TimeWindow = &v
+	o.TimeWindow = v
 }
 
 func (o ApmLatencySli) MarshalJSON() ([]byte, error) {
@@ -199,9 +193,7 @@ func (o ApmLatencySli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Threshold) {
 		toSerialize["threshold"] = o.Threshold
 	}
-	if !IsNil(o.TimeWindow) {
-		toSerialize["timeWindow"] = o.TimeWindow
-	}
+	toSerialize["timeWindow"] = o.TimeWindow
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["quantile"]; exists {
 		optionalOneOfGroup0Matches++
@@ -228,6 +220,38 @@ func (o ApmLatencySli) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ApmLatencySli) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"timeWindow",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["quantile"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["average"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [quantile, average] may be set"}
+	}
+
 	varApmLatencySli := _ApmLatencySli{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
