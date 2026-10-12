@@ -23,7 +23,7 @@ var _ MappedNullable = &RawConfigurationFamilyCreate{}
 
 // RawConfigurationFamilyCreate Configuration family content defined directly by its remote configurations.
 type RawConfigurationFamilyCreate struct {
-	// Collector semantic version this family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.
+	// Collector semantic version this family targets, without a leading v prefix. When set, every agent selector must set service.version to this value. When omitted, the family is not tied to a collector version.
 	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Metadata stored with this configuration family.
 	Metadata map[string]string `json:"metadata,omitempty"`

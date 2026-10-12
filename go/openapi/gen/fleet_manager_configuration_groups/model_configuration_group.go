@@ -13,6 +13,7 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,16 +23,18 @@ var _ MappedNullable = &ConfigurationGroup{}
 
 // ConfigurationGroup Fleet-manager configuration group.
 type ConfigurationGroup struct {
+	// Whether this configuration group is archived.
+	Archived bool `json:"archived"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Configuration families in this group.
-	Families []ConfigurationFamily `json:"families,omitempty"`
+	// Latest configuration family of the group.
+	Family *ConfigurationFamily `json:"family,omitempty"`
 	// Configuration group UUID v7.
-	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Display name.
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
+	// Display name, unique among the team's configuration groups.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Selection precedence. Higher values win on ties and 0 is the default.
-	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
+	PriorityOrder int32 `json:"priorityOrder"`
 	// Tags attached to the configuration group.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -44,8 +47,11 @@ type _ConfigurationGroup ConfigurationGroup
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationGroup() *ConfigurationGroup {
+func NewConfigurationGroup(archived bool, id string, priorityOrder int32) *ConfigurationGroup {
 	this := ConfigurationGroup{}
+	this.Archived = archived
+	this.Id = id
+	this.PriorityOrder = priorityOrder
 	return &this
 }
 
@@ -55,6 +61,30 @@ func NewConfigurationGroup() *ConfigurationGroup {
 func NewConfigurationGroupWithDefaults() *ConfigurationGroup {
 	this := ConfigurationGroup{}
 	return &this
+}
+
+// GetArchived returns the Archived field value
+func (o *ConfigurationGroup) GetArchived() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Archived
+}
+
+// GetArchivedOk returns a tuple with the Archived field value
+// and a boolean to check if the value has been set.
+func (o *ConfigurationGroup) GetArchivedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Archived, true
+}
+
+// SetArchived sets field value
+func (o *ConfigurationGroup) SetArchived(v bool) {
+	o.Archived = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -89,68 +119,60 @@ func (o *ConfigurationGroup) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetFamilies returns the Families field value if set, zero value otherwise.
-func (o *ConfigurationGroup) GetFamilies() []ConfigurationFamily {
-	if o == nil || IsNil(o.Families) {
-		var ret []ConfigurationFamily
+// GetFamily returns the Family field value if set, zero value otherwise.
+func (o *ConfigurationGroup) GetFamily() ConfigurationFamily {
+	if o == nil || IsNil(o.Family) {
+		var ret ConfigurationFamily
 		return ret
 	}
-	return o.Families
+	return *o.Family
 }
 
-// GetFamiliesOk returns a tuple with the Families field value if set, nil otherwise
+// GetFamilyOk returns a tuple with the Family field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationGroup) GetFamiliesOk() ([]ConfigurationFamily, bool) {
-	if o == nil || IsNil(o.Families) {
+func (o *ConfigurationGroup) GetFamilyOk() (*ConfigurationFamily, bool) {
+	if o == nil || IsNil(o.Family) {
 		return nil, false
 	}
-	return o.Families, true
+	return o.Family, true
 }
 
-// HasFamilies returns a boolean if a field has been set.
-func (o *ConfigurationGroup) HasFamilies() bool {
-	if o != nil && !IsNil(o.Families) {
+// HasFamily returns a boolean if a field has been set.
+func (o *ConfigurationGroup) HasFamily() bool {
+	if o != nil && !IsNil(o.Family) {
 		return true
 	}
 
 	return false
 }
 
-// SetFamilies gets a reference to the given []ConfigurationFamily and assigns it to the Families field.
-func (o *ConfigurationGroup) SetFamilies(v []ConfigurationFamily) {
-	o.Families = v
+// SetFamily gets a reference to the given ConfigurationFamily and assigns it to the Family field.
+func (o *ConfigurationGroup) SetFamily(v ConfigurationFamily) {
+	o.Family = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ConfigurationGroup) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationGroup) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ConfigurationGroup) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ConfigurationGroup) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -185,36 +207,28 @@ func (o *ConfigurationGroup) SetName(v string) {
 	o.Name = &v
 }
 
-// GetPriorityOrder returns the PriorityOrder field value if set, zero value otherwise.
+// GetPriorityOrder returns the PriorityOrder field value
 func (o *ConfigurationGroup) GetPriorityOrder() int32 {
-	if o == nil || IsNil(o.PriorityOrder) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.PriorityOrder
+
+	return o.PriorityOrder
 }
 
-// GetPriorityOrderOk returns a tuple with the PriorityOrder field value if set, nil otherwise
+// GetPriorityOrderOk returns a tuple with the PriorityOrder field value
 // and a boolean to check if the value has been set.
 func (o *ConfigurationGroup) GetPriorityOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.PriorityOrder) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PriorityOrder, true
+	return &o.PriorityOrder, true
 }
 
-// HasPriorityOrder returns a boolean if a field has been set.
-func (o *ConfigurationGroup) HasPriorityOrder() bool {
-	if o != nil && !IsNil(o.PriorityOrder) {
-		return true
-	}
-
-	return false
-}
-
-// SetPriorityOrder gets a reference to the given int32 and assigns it to the PriorityOrder field.
+// SetPriorityOrder sets field value
 func (o *ConfigurationGroup) SetPriorityOrder(v int32) {
-	o.PriorityOrder = &v
+	o.PriorityOrder = v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
@@ -259,21 +273,18 @@ func (o ConfigurationGroup) MarshalJSON() ([]byte, error) {
 
 func (o ConfigurationGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["archived"] = o.Archived
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Families) {
-		toSerialize["families"] = o.Families
+	if !IsNil(o.Family) {
+		toSerialize["family"] = o.Family
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.PriorityOrder) {
-		toSerialize["priorityOrder"] = o.PriorityOrder
-	}
+	toSerialize["priorityOrder"] = o.PriorityOrder
 	if !IsNil(o.Tags) {
 		toSerialize["tags"] = o.Tags
 	}
@@ -286,6 +297,29 @@ func (o ConfigurationGroup) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ConfigurationGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"archived",
+		"id",
+		"priorityOrder",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varConfigurationGroup := _ConfigurationGroup{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -300,8 +334,9 @@ func (o *ConfigurationGroup) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "archived")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "families")
+		delete(additionalProperties, "family")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "priorityOrder")

@@ -13,7 +13,6 @@ package fleet_manager_configuration_groups
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -21,18 +20,18 @@ var _ = bytes.MinRead
 // checks if the PresetConfigurationFamilyUpdate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PresetConfigurationFamilyUpdate{}
 
-// PresetConfigurationFamilyUpdate Configuration template settings that replace those of the latest configuration family; omitted metadata is cleared, and a new configuration family version is created only when the settings change.
+// PresetConfigurationFamilyUpdate Configuration template settings of the latest configuration family. With family.preset in update_mask, chartName, chartVersion, and observabilityFeatures are required and the settings replace the stored ones; omitted metadata is cleared. With a field path, only that field is needed and changes. A new configuration family version is created only when the settings change.
 type PresetConfigurationFamilyUpdate struct {
 	// Configuration template type: CHART_NAME_OTEL_INTEGRATION for Kubernetes, CHART_NAME_OTEL_ECS_EC2 for ECS on EC2, or CHART_NAME_OTEL_LINUX_STANDALONE, CHART_NAME_OTEL_WINDOWS_STANDALONE, or CHART_NAME_OTEL_MACOS_STANDALONE for hosts.
-	ChartName ChartName `json:"chartName"`
+	ChartName *ChartName `json:"chartName,omitempty"`
 	// Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected.
-	ChartVersion string `json:"chartVersion" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
+	ChartVersion *string `json:"chartVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Version of the observability features format. Omit it to use the default for the template type and version.
 	IntegrationVersion *string `json:"integrationVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion.
-	ObservabilityFeatures string `json:"observabilityFeatures" validate:"regexp=^[\\s\\S]*$"`
+	ObservabilityFeatures *string `json:"observabilityFeatures,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -43,11 +42,8 @@ type _PresetConfigurationFamilyUpdate PresetConfigurationFamilyUpdate
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewPresetConfigurationFamilyUpdate(chartName ChartName, chartVersion string, observabilityFeatures string) *PresetConfigurationFamilyUpdate {
+func NewPresetConfigurationFamilyUpdate() *PresetConfigurationFamilyUpdate {
 	this := PresetConfigurationFamilyUpdate{}
-	this.ChartName = chartName
-	this.ChartVersion = chartVersion
-	this.ObservabilityFeatures = observabilityFeatures
 	return &this
 }
 
@@ -59,52 +55,68 @@ func NewPresetConfigurationFamilyUpdateWithDefaults() *PresetConfigurationFamily
 	return &this
 }
 
-// GetChartName returns the ChartName field value
+// GetChartName returns the ChartName field value if set, zero value otherwise.
 func (o *PresetConfigurationFamilyUpdate) GetChartName() ChartName {
-	if o == nil {
+	if o == nil || IsNil(o.ChartName) {
 		var ret ChartName
 		return ret
 	}
-
-	return o.ChartName
+	return *o.ChartName
 }
 
-// GetChartNameOk returns a tuple with the ChartName field value
+// GetChartNameOk returns a tuple with the ChartName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PresetConfigurationFamilyUpdate) GetChartNameOk() (*ChartName, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ChartName) {
 		return nil, false
 	}
-	return &o.ChartName, true
+	return o.ChartName, true
 }
 
-// SetChartName sets field value
+// HasChartName returns a boolean if a field has been set.
+func (o *PresetConfigurationFamilyUpdate) HasChartName() bool {
+	if o != nil && !IsNil(o.ChartName) {
+		return true
+	}
+
+	return false
+}
+
+// SetChartName gets a reference to the given ChartName and assigns it to the ChartName field.
 func (o *PresetConfigurationFamilyUpdate) SetChartName(v ChartName) {
-	o.ChartName = v
+	o.ChartName = &v
 }
 
-// GetChartVersion returns the ChartVersion field value
+// GetChartVersion returns the ChartVersion field value if set, zero value otherwise.
 func (o *PresetConfigurationFamilyUpdate) GetChartVersion() string {
-	if o == nil {
+	if o == nil || IsNil(o.ChartVersion) {
 		var ret string
 		return ret
 	}
-
-	return o.ChartVersion
+	return *o.ChartVersion
 }
 
-// GetChartVersionOk returns a tuple with the ChartVersion field value
+// GetChartVersionOk returns a tuple with the ChartVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PresetConfigurationFamilyUpdate) GetChartVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ChartVersion) {
 		return nil, false
 	}
-	return &o.ChartVersion, true
+	return o.ChartVersion, true
 }
 
-// SetChartVersion sets field value
+// HasChartVersion returns a boolean if a field has been set.
+func (o *PresetConfigurationFamilyUpdate) HasChartVersion() bool {
+	if o != nil && !IsNil(o.ChartVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetChartVersion gets a reference to the given string and assigns it to the ChartVersion field.
 func (o *PresetConfigurationFamilyUpdate) SetChartVersion(v string) {
-	o.ChartVersion = v
+	o.ChartVersion = &v
 }
 
 // GetIntegrationVersion returns the IntegrationVersion field value if set, zero value otherwise.
@@ -171,28 +183,36 @@ func (o *PresetConfigurationFamilyUpdate) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
-// GetObservabilityFeatures returns the ObservabilityFeatures field value
+// GetObservabilityFeatures returns the ObservabilityFeatures field value if set, zero value otherwise.
 func (o *PresetConfigurationFamilyUpdate) GetObservabilityFeatures() string {
-	if o == nil {
+	if o == nil || IsNil(o.ObservabilityFeatures) {
 		var ret string
 		return ret
 	}
-
-	return o.ObservabilityFeatures
+	return *o.ObservabilityFeatures
 }
 
-// GetObservabilityFeaturesOk returns a tuple with the ObservabilityFeatures field value
+// GetObservabilityFeaturesOk returns a tuple with the ObservabilityFeatures field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PresetConfigurationFamilyUpdate) GetObservabilityFeaturesOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ObservabilityFeatures) {
 		return nil, false
 	}
-	return &o.ObservabilityFeatures, true
+	return o.ObservabilityFeatures, true
 }
 
-// SetObservabilityFeatures sets field value
+// HasObservabilityFeatures returns a boolean if a field has been set.
+func (o *PresetConfigurationFamilyUpdate) HasObservabilityFeatures() bool {
+	if o != nil && !IsNil(o.ObservabilityFeatures) {
+		return true
+	}
+
+	return false
+}
+
+// SetObservabilityFeatures gets a reference to the given string and assigns it to the ObservabilityFeatures field.
 func (o *PresetConfigurationFamilyUpdate) SetObservabilityFeatures(v string) {
-	o.ObservabilityFeatures = v
+	o.ObservabilityFeatures = &v
 }
 
 func (o PresetConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
@@ -205,15 +225,21 @@ func (o PresetConfigurationFamilyUpdate) MarshalJSON() ([]byte, error) {
 
 func (o PresetConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["chartName"] = o.ChartName
-	toSerialize["chartVersion"] = o.ChartVersion
+	if !IsNil(o.ChartName) {
+		toSerialize["chartName"] = o.ChartName
+	}
+	if !IsNil(o.ChartVersion) {
+		toSerialize["chartVersion"] = o.ChartVersion
+	}
 	if !IsNil(o.IntegrationVersion) {
 		toSerialize["integrationVersion"] = o.IntegrationVersion
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	toSerialize["observabilityFeatures"] = o.ObservabilityFeatures
+	if !IsNil(o.ObservabilityFeatures) {
+		toSerialize["observabilityFeatures"] = o.ObservabilityFeatures
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -223,29 +249,6 @@ func (o PresetConfigurationFamilyUpdate) ToMap() (map[string]interface{}, error)
 }
 
 func (o *PresetConfigurationFamilyUpdate) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"chartName",
-		"chartVersion",
-		"observabilityFeatures",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varPresetConfigurationFamilyUpdate := _PresetConfigurationFamilyUpdate{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

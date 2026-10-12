@@ -13,40 +13,108 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "Request to create a fleet-manager configuration group.",
+                "description": "Payload used to create a fleet-manager configuration group.",
                 "properties": {
-                  "group": {
+                  "description": {
+                    "description": "Human-readable description.",
+                    "maxLength": 4096,
+                    "minLength": 0,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
+                  },
+                  "family": {
                     "allOf": [
                       {
-                        "$ref": "#/components/schemas/ConfigurationGroupCreate"
+                        "$ref": "#/components/schemas/ConfigurationFamilyCreate"
                       }
                     ],
-                    "description": "Configuration group to create."
+                    "description": "Initial configuration family to create with this group."
+                  },
+                  "name": {
+                    "description": "Display name, unique among the team's configuration groups.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "priorityOrder": {
+                    "default": 0,
+                    "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648,
+                    "type": "integer",
+                    "x-coralogix-presence": true
+                  },
+                  "tags": {
+                    "description": "Tags attached to the configuration group.",
+                    "items": {
+                      "description": "Tags attached to the configuration group.",
+                      "maxLength": 256,
+                      "minLength": 0,
+                      "pattern": "^[\\s\\S]*$",
+                      "type": "string"
+                    },
+                    "maxItems": 64,
+                    "minItems": 0,
+                    "type": "array"
                   }
                 },
+                "required": [
+                  "name",
+                  "family"
+                ],
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "example": {
-                  "group": {
-                    "description": "Collector configuration group for production.",
-                    "families": [],
-                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
-                    "name": "Production collectors",
-                    "priorityOrder": 100,
-                    "tags": [
-                      "production"
-                    ]
-                  }
+                  "archived": false,
+                  "description": "Collector configuration group for production.",
+                  "family": {
+                    "active": true,
+                    "id": "01975ed4-9c1b-7c2a-9e5f-526614174001",
+                    "lastActivatedAt": "2026-10-08T09:41:01.000Z",
+                    "raw": {
+                      "remoteConfigurations": [
+                        {
+                          "agentSelector": {
+                            "attributes": {
+                              "service.name": "checkout"
+                            }
+                          },
+                          "createdAt": "2026-10-08T09:41:01.000Z",
+                          "hash": "3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c",
+                          "id": "01975ed4-9c1c-7d3b-af60-626614174002",
+                          "name": "traces",
+                          "rawConfiguration": "exporters:\n  debug: {}\nreceivers:\n  otlp:\n    protocols:\n      grpc: {}\nservice:\n  pipelines:\n    traces:\n      exporters:\n      - debug\n      receivers:\n      - otlp",
+                          "updatedAt": "2026-10-08T09:41:01.000Z"
+                        }
+                      ]
+                    },
+                    "version": "1"
+                  },
+                  "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                  "name": "Production collectors",
+                  "priorityOrder": 100,
+                  "tags": [
+                    "production"
+                  ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/CreateConfigurationGroupResponse"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ConfigurationGroup"
+                    }
+                  ],
+                  "description": "Created configuration group."
                 }
               }
             },
@@ -102,17 +170,18 @@
     },
     "/fleet-management/configuration-groups/v1/{id}": {
       "get": {
-        "description": "Gets a fleet-manager configuration group by ID.",
+        "description": "Gets a fleet-manager configuration group by ID. An archived group returns 404 unless include_archived is true.",
         "operationId": "ConfigurationGroupService_GetConfigurationGroup",
         "parameters": [
           {
-            "description": "Return only the latest configuration family when true.",
+            "description": "When true, return an archived group, without a family. Otherwise an archived group returns 404.",
             "in": "query",
-            "name": "latest_family_only",
+            "name": "include_archived",
             "required": false,
             "schema": {
-              "description": "Return only the latest configuration family when true.",
-              "type": "boolean"
+              "description": "When true, return an archived group, without a family. Otherwise an archived group returns 404.",
+              "type": "boolean",
+              "x-coralogix-presence": true
             }
           }
         ],
@@ -121,19 +190,45 @@
             "content": {
               "application/json": {
                 "example": {
-                  "group": {
-                    "description": "Collector configuration group for production.",
-                    "families": [],
-                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
-                    "name": "Production collectors",
-                    "priorityOrder": 100,
-                    "tags": [
-                      "production"
-                    ]
-                  }
+                  "archived": false,
+                  "description": "Collector configuration group for production.",
+                  "family": {
+                    "active": true,
+                    "id": "01975ed4-9c1b-7c2a-9e5f-526614174001",
+                    "lastActivatedAt": "2026-10-08T09:41:01.000Z",
+                    "raw": {
+                      "remoteConfigurations": [
+                        {
+                          "agentSelector": {
+                            "attributes": {
+                              "service.name": "checkout"
+                            }
+                          },
+                          "createdAt": "2026-10-08T09:41:01.000Z",
+                          "hash": "3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c",
+                          "id": "01975ed4-9c1c-7d3b-af60-626614174002",
+                          "name": "traces",
+                          "rawConfiguration": "exporters:\n  debug: {}\nreceivers:\n  otlp:\n    protocols:\n      grpc: {}\nservice:\n  pipelines:\n    traces:\n      exporters:\n      - debug\n      receivers:\n      - otlp",
+                          "updatedAt": "2026-10-08T09:41:01.000Z"
+                        }
+                      ]
+                    },
+                    "version": "1"
+                  },
+                  "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
+                  "name": "Production collectors",
+                  "priorityOrder": 100,
+                  "tags": [
+                    "production"
+                  ]
                 },
                 "schema": {
-                  "$ref": "#/components/schemas/GetConfigurationGroupResponse"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ConfigurationGroup"
+                    }
+                  ],
+                  "description": "Requested configuration group."
                 }
               }
             },
@@ -167,7 +262,7 @@
                 }
               }
             },
-            "description": "Configuration group not found"
+            "description": "Configuration group not found or archived"
           },
           "500": {
             "content": {
@@ -186,191 +281,17 @@
         ],
         "x-stability": "preview"
       },
-      "put": {
-        "description": "Updates provided fleet-manager configuration group fields and optionally updates the latest family.",
-        "operationId": "ConfigurationGroupService_ReplaceConfigurationGroup",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "description": "Request to update a fleet-manager configuration group.",
-                "properties": {
-                  "group": {
-                    "description": "Fields used to update a fleet-manager configuration group. Omitted optional fields keep their existing values.",
-                    "properties": {
-                      "description": {
-                        "description": "Human-readable description.",
-                        "maxLength": 4096,
-                        "minLength": 0,
-                        "pattern": "^[\\s\\S]*$",
-                        "type": "string",
-                        "x-coralogix-presence": true
-                      },
-                      "family": {
-                        "description": "Fields used to update the latest configuration family. Omitted optional fields keep their existing values.",
-                        "properties": {
-                          "active": {
-                            "description": "Whether this family is active.",
-                            "type": "boolean",
-                            "x-coralogix-presence": true
-                          },
-                          "collectorVersion": {
-                            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
-                            "maxLength": 256,
-                            "minLength": 5,
-                            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
-                            "type": "string",
-                            "x-coralogix-presence": true
-                          },
-                          "description": {
-                            "description": "Human-readable description.",
-                            "maxLength": 4096,
-                            "minLength": 0,
-                            "pattern": "^[\\s\\S]*$",
-                            "type": "string",
-                            "x-coralogix-presence": true
-                          },
-                          "metadata": {
-                            "additionalProperties": {
-                              "maxLength": 4096,
-                              "minLength": 0,
-                              "pattern": "^[\\s\\S]*$",
-                              "type": "string"
-                            },
-                            "description": "Metadata stored with this configuration family.",
-                            "type": "object"
-                          },
-                          "remoteConfigurations": {
-                            "description": "Remote configurations to use when creating or replacing family content.",
-                            "items": {
-                              "$ref": "#/components/schemas/RemoteConfigurationReplace"
-                            },
-                            "maxItems": 128,
-                            "minItems": 0,
-                            "type": "array"
-                          }
-                        },
-                        "type": "object"
-                      },
-                      "name": {
-                        "description": "Display name.",
-                        "maxLength": 256,
-                        "minLength": 0,
-                        "pattern": "^[\\s\\S]*$",
-                        "type": "string",
-                        "x-coralogix-presence": true
-                      },
-                      "priorityOrder": {
-                        "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-                        "format": "int32",
-                        "maximum": 2147483647,
-                        "minimum": -2147483648,
-                        "type": "integer",
-                        "x-coralogix-presence": true
-                      },
-                      "tags": {
-                        "description": "Tags attached to the configuration group.",
-                        "items": {
-                          "description": "Tags attached to the configuration group.",
-                          "maxLength": 256,
-                          "minLength": 0,
-                          "pattern": "^[\\s\\S]*$",
-                          "type": "string"
-                        },
-                        "maxItems": 64,
-                        "minItems": 0,
-                        "type": "array"
-                      }
-                    },
-                    "type": "object"
-                  }
-                },
-                "type": "object"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "group": {
-                    "description": "Updated collector configuration group.",
-                    "families": [],
-                    "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
-                    "name": "Production collectors",
-                    "priorityOrder": 100,
-                    "tags": [
-                      "production"
-                    ]
-                  }
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ReplaceConfigurationGroupResponse"
-                }
-              }
-            },
-            "description": ""
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Bad Request"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Unauthorized request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Configuration group not found"
-          },
-          "500": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            },
-            "description": "Internal server error"
-          }
-        },
-        "summary": "Update configuration group",
-        "tags": [
-          "Fleet Manager Configuration Groups"
-        ],
-        "x-stability": "preview"
-      },
       "patch": {
-        "description": "Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes.",
+        "description": "Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes. An archived group returns 404.",
         "operationId": "ConfigurationGroupService_UpdateConfigurationGroup",
         "parameters": [
           {
-            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (name, description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.",
+            "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset, or one field inside family.raw or family.preset, such as family.raw.metadata or family.preset.chartVersion. family.raw and family.preset replace the whole family content; a field inside them changes only that field and keeps the others. A listed field that is omitted from the body is cleared (description, tags, family.description, and optional fields inside family.raw or family.preset) or reset to its default (priorityOrder 0, family.active false). name cannot be cleared, and family.raw.remoteConfigurations cannot be empty. Changing family.preset.chartVersion without family.preset.integrationVersion uses the default integration version of the new chart version. The body must include the arm being changed, and only the arm matching the current family's content type is accepted (raw and preset families cannot be switched). A bare family, unknown paths, and * return 400.",
             "in": "query",
             "name": "update_mask",
             "required": true,
             "schema": {
-              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset. A listed field that is omitted from the body is cleared (name, description, tags, family.description) or reset to its default (priorityOrder 0, family.active false); family.raw and family.preset replace the family content as a whole and cannot be cleared. Paths inside family.raw or family.preset, a bare family, unknown paths, and * return 400.",
+              "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset, or one field inside family.raw or family.preset, such as family.raw.metadata or family.preset.chartVersion. family.raw and family.preset replace the whole family content; a field inside them changes only that field and keeps the others. A listed field that is omitted from the body is cleared (description, tags, family.description, and optional fields inside family.raw or family.preset) or reset to its default (priorityOrder 0, family.active false). name cannot be cleared, and family.raw.remoteConfigurations cannot be empty. Changing family.preset.chartVersion without family.preset.integrationVersion uses the default integration version of the new chart version. The body must include the arm being changed, and only the arm matching the current family's content type is accepted (raw and preset families cannot be switched). A bare family, unknown paths, and * return 400.",
               "maxLength": 512,
               "minLength": 1,
               "pattern": "^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$",
@@ -402,14 +323,15 @@
                     "description": "Latest configuration family field values."
                   },
                   "name": {
-                    "description": "Display name.",
+                    "description": "Display name, unique among the team's configuration groups.",
                     "maxLength": 256,
-                    "minLength": 0,
+                    "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "priorityOrder": {
+                    "default": 0,
                     "description": "Selection precedence. Higher values win on ties and 0 is the default.",
                     "format": "int32",
                     "maximum": 2147483647,
@@ -441,8 +363,31 @@
             "content": {
               "application/json": {
                 "example": {
+                  "archived": false,
                   "description": "Updated collector configuration group.",
-                  "families": [],
+                  "family": {
+                    "active": true,
+                    "id": "01975ed4-9c1b-7c2a-9e5f-526614174001",
+                    "lastActivatedAt": "2026-10-08T09:41:01.000Z",
+                    "raw": {
+                      "remoteConfigurations": [
+                        {
+                          "agentSelector": {
+                            "attributes": {
+                              "service.name": "checkout"
+                            }
+                          },
+                          "createdAt": "2026-10-08T09:41:01.000Z",
+                          "hash": "3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c",
+                          "id": "01975ed4-9c1c-7d3b-af60-626614174002",
+                          "name": "traces",
+                          "rawConfiguration": "exporters:\n  debug: {}\nreceivers:\n  otlp:\n    protocols:\n      grpc: {}\nservice:\n  pipelines:\n    traces:\n      exporters:\n      - debug\n      receivers:\n      - otlp",
+                          "updatedAt": "2026-10-08T09:41:01.000Z"
+                        }
+                      ]
+                    },
+                    "version": "1"
+                  },
                   "id": "01975ed4-9c1a-7b3f-8d4e-426614174000",
                   "name": "Production collectors",
                   "priorityOrder": 100,
@@ -490,7 +435,7 @@
                 }
               }
             },
-            "description": "Configuration group not found"
+            "description": "Configuration group not found or archived"
           },
           "409": {
             "content": {
@@ -527,7 +472,7 @@
     },
     "/fleet-management/configuration-groups/v1/{id}/archive": {
       "post": {
-        "description": "Archives a fleet-manager configuration group.",
+        "description": "Archives a fleet-manager configuration group. An already archived group returns 404.",
         "operationId": "ConfigurationGroupService_ArchiveConfigurationGroup",
         "parameters": [
           {
@@ -574,7 +519,7 @@
                 }
               }
             },
-            "description": "Configuration group not found"
+            "description": "Configuration group not found or archived"
           },
           "500": {
             "content": {
@@ -608,7 +553,7 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Flat agent attributes to match. If collectorVersion is set, service.version must match it or is added automatically."
+            "description": "Flat agent attributes to match. If family.raw.collectorVersion is set, service.version must be set to it."
           }
         },
         "description": "Agent selector used in requests."
@@ -649,6 +594,11 @@
         "description": "Helm chart name for fleet-manager configuration families."
       },
       "ConfigurationFamily": {
+        "required": [
+          "id",
+          "version",
+          "active"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -685,40 +635,15 @@
         ],
         "properties": {
           "active": {
-            "description": "Whether this family is active.",
             "type": "boolean",
-            "x-coralogix-presence": true
+            "description": "Whether this family is active.",
+            "default": false
           },
           "basedOnConfigurationFamilyId": {
             "description": "Configuration family UUID v7 this family is based on.",
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "chartName": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ChartName"
-              }
-            ],
-            "description": "Helm chart name for Helm-backed families.",
-            "x-coralogix-presence": true
-          },
-          "chartVersion": {
-            "description": "Helm chart or template version used by this family.",
-            "maxLength": 256,
-            "minLength": 0,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "collectorVersion": {
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix.",
-            "maxLength": 256,
-            "minLength": 5,
-            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -737,14 +662,6 @@
             "type": "string",
             "description": "Configuration family UUID v7."
           },
-          "integrationVersion": {
-            "description": "Integration version from the onboarding flow.",
-            "maxLength": 256,
-            "minLength": 0,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
           "lastActivatedAt": {
             "description": "Time when this family was last activated.",
             "format": "date-time",
@@ -752,16 +669,6 @@
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
-          },
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "maxLength": 4096,
-              "minLength": 0,
-              "pattern": "^[\\s\\S]*$",
-              "type": "string"
-            },
-            "description": "Metadata stored with this configuration family."
           },
           "preset": {
             "allOf": [
@@ -778,15 +685,6 @@
               }
             ],
             "description": "Inputs of a configuration family defined directly by its remote configurations; present when the family has no chartName."
-          },
-          "remoteConfigurations": {
-            "maxItems": 128,
-            "minItems": 0,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RemoteConfiguration"
-            },
-            "description": "Remote configurations in this family."
           },
           "sources": {
             "maxItems": 128,
@@ -821,47 +719,13 @@
               "preset"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "raw"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "preset"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
           "active": {
+            "default": false,
             "description": "Whether this family is active.",
             "type": "boolean",
-            "x-coralogix-presence": true
-          },
-          "basedOnConfigurationFamilyId": {
-            "description": "Configuration family UUID v7 this family is based on.",
-            "maxLength": 36,
-            "minLength": 36,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "collectorVersion": {
-            "description": "Collector semantic version this configuration family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
-            "maxLength": 256,
-            "minLength": 5,
-            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
-            "type": "string",
             "x-coralogix-presence": true
           },
           "description": {
@@ -871,16 +735,6 @@
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
-          },
-          "metadata": {
-            "type": "object",
-            "additionalProperties": {
-              "maxLength": 4096,
-              "minLength": 0,
-              "pattern": "^[\\s\\S]*$",
-              "type": "string"
-            },
-            "description": "Metadata stored with this configuration family."
           },
           "preset": {
             "allOf": [
@@ -897,15 +751,6 @@
               }
             ],
             "description": "Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector."
-          },
-          "remoteConfigurations": {
-            "maxItems": 128,
-            "minItems": 1,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RemoteConfigurationCreate"
-            },
-            "description": "Remote configurations to create in this family."
           }
         },
         "description": "Initial configuration family to create."
@@ -964,6 +809,7 @@
         ],
         "properties": {
           "active": {
+            "default": false,
             "description": "Whether this family is active.",
             "type": "boolean",
             "x-coralogix-presence": true
@@ -996,8 +842,17 @@
         "description": "Latest configuration family field values for an update. Only fields listed in update_mask are applied."
       },
       "ConfigurationGroup": {
+        "required": [
+          "id",
+          "priorityOrder",
+          "archived"
+        ],
         "type": "object",
         "properties": {
+          "archived": {
+            "type": "boolean",
+            "description": "Whether this configuration group is archived."
+          },
           "description": {
             "description": "Human-readable description.",
             "maxLength": 4096,
@@ -1006,14 +861,13 @@
             "type": "string",
             "x-coralogix-presence": true
           },
-          "families": {
-            "maxItems": 128,
-            "minItems": 0,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ConfigurationFamily"
-            },
-            "description": "Configuration families in this group."
+          "family": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ConfigurationFamily"
+              }
+            ],
+            "description": "Latest configuration family of the group."
           },
           "id": {
             "maxLength": 36,
@@ -1023,20 +877,20 @@
             "description": "Configuration group UUID v7."
           },
           "name": {
-            "description": "Display name.",
+            "description": "Display name, unique among the team's configuration groups.",
             "maxLength": 256,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
           },
           "priorityOrder": {
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-            "format": "int32",
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
-            "x-coralogix-presence": true
+            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "format": "int32",
+            "default": 0
           },
           "tags": {
             "maxItems": 64,
@@ -1053,57 +907,6 @@
           }
         },
         "description": "Fleet-manager configuration group."
-      },
-      "ConfigurationGroupCreate": {
-        "type": "object",
-        "properties": {
-          "description": {
-            "description": "Human-readable description.",
-            "maxLength": 4096,
-            "minLength": 0,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "family": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConfigurationFamilyCreate"
-              }
-            ],
-            "description": "Initial configuration family to create with this group."
-          },
-          "name": {
-            "description": "Display name.",
-            "maxLength": 256,
-            "minLength": 0,
-            "pattern": "^[\\s\\S]*$",
-            "type": "string",
-            "x-coralogix-presence": true
-          },
-          "priorityOrder": {
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
-            "format": "int32",
-            "maximum": 2147483647,
-            "minimum": -2147483648,
-            "type": "integer",
-            "x-coralogix-presence": true
-          },
-          "tags": {
-            "maxItems": 64,
-            "minItems": 0,
-            "type": "array",
-            "items": {
-              "maxLength": 256,
-              "minLength": 0,
-              "pattern": "^[\\s\\S]*$",
-              "type": "string",
-              "description": "Tags attached to the configuration group."
-            },
-            "description": "Tags attached to the configuration group."
-          }
-        },
-        "description": "Payload used to create a fleet-manager configuration group."
       },
       "ConfigurationOverlaySource": {
         "required": [
@@ -1136,20 +939,6 @@
           }
         },
         "description": "Configuration overlay provenance."
-      },
-      "CreateConfigurationGroupResponse": {
-        "type": "object",
-        "properties": {
-          "group": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConfigurationGroup"
-              }
-            ],
-            "description": "Created configuration group."
-          }
-        },
-        "description": "Response containing the created fleet-manager configuration group."
       },
       "Error": {
         "type": "object",
@@ -1241,20 +1030,6 @@
         },
         "description": "This data structure represents a filter"
       },
-      "GetConfigurationGroupResponse": {
-        "type": "object",
-        "properties": {
-          "group": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConfigurationGroup"
-              }
-            ],
-            "description": "Requested configuration group."
-          }
-        },
-        "description": "Response containing the requested fleet-manager configuration group."
-      },
       "MultipleValues": {
         "type": "object",
         "properties": {
@@ -1273,9 +1048,11 @@
       },
       "PresetConfigurationFamily": {
         "required": [
+          "chartName",
           "chartVersion",
           "integrationVersion",
-          "observabilityFeatures"
+          "observabilityFeatures",
+          "collectorVersion"
         ],
         "type": "object",
         "properties": {
@@ -1293,6 +1070,13 @@
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
             "type": "string",
             "description": "Configuration template version. It determines the OTel Collector version, the generated collector configuration, and which integrationVersion values are supported. Unsupported versions are rejected."
+          },
+          "collectorVersion": {
+            "maxLength": 256,
+            "minLength": 5,
+            "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+            "type": "string",
+            "description": "OTel Collector semantic version Coralogix derived from chartVersion, without a leading v prefix."
           },
           "integrationVersion": {
             "maxLength": 256,
@@ -1384,11 +1168,6 @@
         "description": "Configuration template settings for a new configuration family; Coralogix generates the remote configurations from them."
       },
       "PresetConfigurationFamilyUpdate": {
-        "required": [
-          "chartName",
-          "chartVersion",
-          "observabilityFeatures"
-        ],
         "type": "object",
         "properties": {
           "chartName": {
@@ -1433,9 +1212,12 @@
             "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion."
           }
         },
-        "description": "Configuration template settings that replace those of the latest configuration family; omitted metadata is cleared, and a new configuration family version is created only when the settings change."
+        "description": "Configuration template settings of the latest configuration family. With family.preset in update_mask, chartName, chartVersion, and observabilityFeatures are required and the settings replace the stored ones; omitted metadata is cleared. With a field path, only that field is needed and changes. A new configuration family version is created only when the settings change."
       },
       "RawConfigurationFamily": {
+        "required": [
+          "remoteConfigurations"
+        ],
         "type": "object",
         "properties": {
           "collectorVersion": {
@@ -1459,7 +1241,7 @@
           },
           "remoteConfigurations": {
             "maxItems": 128,
-            "minItems": 0,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RemoteConfiguration"
@@ -1476,7 +1258,7 @@
         "type": "object",
         "properties": {
           "collectorVersion": {
-            "description": "Collector semantic version this family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
+            "description": "Collector semantic version this family targets, without a leading v prefix. When set, every agent selector must set service.version to this value. When omitted, the family is not tied to a collector version.",
             "maxLength": 256,
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
@@ -1507,13 +1289,10 @@
         "description": "Configuration family content defined directly by its remote configurations."
       },
       "RawConfigurationFamilyUpdate": {
-        "required": [
-          "remoteConfigurations"
-        ],
         "type": "object",
         "properties": {
           "collectorVersion": {
-            "description": "Collector semantic version this family targets, without a leading v prefix. The service.version selector must match this value or is added automatically.",
+            "description": "Collector semantic version this family targets, without a leading v prefix. When set, every agent selector must set service.version to this value. When omitted, the family is not tied to a collector version.",
             "maxLength": 256,
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
@@ -1541,9 +1320,14 @@
             "description": "Remote configurations for the new family version."
           }
         },
-        "description": "Content that replaces the remote configurations, collector version, and metadata of the latest configuration family; an omitted collectorVersion or metadata is cleared."
+        "description": "Content of the latest configuration family. With family.raw in update_mask, remoteConfigurations is required and the content replaces the remote configurations, collector version, and metadata; an omitted collectorVersion or metadata is cleared. With a field path, only that field is needed and changes."
       },
       "RemoteConfiguration": {
+        "required": [
+          "id",
+          "hash",
+          "rawConfiguration"
+        ],
         "type": "object",
         "properties": {
           "agentSelector": {
@@ -1602,6 +1386,9 @@
         "description": "Remote configuration returned by Fleet Manager."
       },
       "RemoteConfigurationCreate": {
+        "required": [
+          "rawConfiguration"
+        ],
         "type": "object",
         "properties": {
           "agentSelector": {
@@ -1631,6 +1418,9 @@
         "description": "Remote configuration to create."
       },
       "RemoteConfigurationReplace": {
+        "required": [
+          "rawConfiguration"
+        ],
         "type": "object",
         "properties": {
           "agentSelector": {
@@ -1658,20 +1448,6 @@
           }
         },
         "description": "Remote configuration content used in a family update."
-      },
-      "ReplaceConfigurationGroupResponse": {
-        "type": "object",
-        "properties": {
-          "group": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConfigurationGroup"
-              }
-            ],
-            "description": "Updated configuration group."
-          }
-        },
-        "description": "Response containing the updated fleet-manager configuration group."
       },
       "events.v3.FilterMatcher": {
         "enum": [
