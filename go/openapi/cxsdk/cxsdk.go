@@ -29,6 +29,7 @@ import (
 	events2metrics "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/events2metrics_service"
 	extensiondeployments "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_deployment_service"
 	extensions "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/extension_service"
+	configgroups "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/fleet_manager_configuration_groups"
 	viewsfolders "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/folders_for_views_service"
 	globalrouters "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/global_routers_service"
 	identity "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/identity_service"
@@ -66,6 +67,7 @@ type ClientSet struct {
 	archiveMetrics       *archivemetrics.MetricsDataArchiveServiceAPIService
 	archiveRetentions    *archiveretention.RetentionsServiceAPIService
 	connectors           *connectors.ConnectorsServiceAPIService
+	configGroups         *configgroups.FleetManagerConfigurationGroupsAPIService
 	ipAccess             *ipaccess.IPAccessServiceAPIService
 	customRoles          *customroles.RoleManagementServiceAPIService
 	dashboards           *dashboards.DashboardServiceAPIService
@@ -188,6 +190,11 @@ func (c *ClientSet) Extensions() *extensions.ExtensionServiceAPIService {
 	return c.extensions
 }
 
+// ConfigGroups returns the FleetManagerConfigurationGroupsAPIService client.
+func (c *ClientSet) ConfigGroups() *configgroups.FleetManagerConfigurationGroupsAPIService {
+	return c.configGroups
+}
+
 // ExtensionDeployments returns the ExtensionDeploymentServiceAPIService client.
 func (c *ClientSet) ExtensionDeployments() *extensiondeployments.ExtensionDeploymentServiceAPIService {
 	return c.extensionDeployments
@@ -282,6 +289,7 @@ func NewClientSet(c *Config) *ClientSet {
 		archiveRetentions:    NewArchiveRetentionsClient(c),
 		ipAccess:             NewIPAccessClient(c),
 		connectors:           NewConnectorsClient(c),
+		configGroups:         NewConfigGroupsClient(c),
 		customRoles:          NewCustomRolesClient(c),
 		dashboards:           NewDashboardClient(c),
 		dashboardFolders:     NewDashboardFoldersClient(c),
@@ -529,6 +537,19 @@ func NewExtensionsClient(c *Config) *extensions.ExtensionServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return extensions.NewAPIClient(cfg).ExtensionServiceAPI
+}
+
+// NewConfigGroupsClient builds a new FleetManagerConfigurationGroupsAPIService from CallPropertiesCreator.
+func NewConfigGroupsClient(c *Config) *configgroups.FleetManagerConfigurationGroupsAPIService {
+	cfg := configgroups.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = configgroups.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return configgroups.NewAPIClient(cfg).FleetManagerConfigurationGroupsAPI
 }
 
 // NewExtensionDeploymentsClient builds a new ExtensionDeploymentServiceAPIService from CallPropertiesCreator.
