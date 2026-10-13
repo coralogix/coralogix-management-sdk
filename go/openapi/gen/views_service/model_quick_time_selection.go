@@ -23,10 +23,10 @@ var _ MappedNullable = &QuickTimeSelection{}
 
 // QuickTimeSelection Quick time selection.
 type QuickTimeSelection struct {
-	// Folder name
+	// Display label for the quick time range.
 	// Deprecated
 	Caption *string `json:"caption,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Folder name
+	// Length of the quick time range, in seconds. The service stores the nearest of 60, 120, 300, 900, 1800, 3600, 7200, 21600, 43200, 86400, 172800, 259200, 432000, and 604800.
 	Seconds int64 `json:"seconds"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

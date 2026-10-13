@@ -9104,6 +9104,7 @@ paths:
                   type: string
                   x-coralogix-presence: true
               required:
+                - id
                 - name
               title: ViewFolder
               type: object
@@ -9139,8 +9140,11 @@ paths:
                   pattern: ^[\s\S]*$
                   type: string
                   x-coralogix-presence: true
+              required:
+                - name
               title: CreateViewFolderRequest
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -9277,6 +9281,7 @@ paths:
                   $ref: '#/components/schemas/TimeSelection'
                 viewType:
                   $ref: '#/components/schemas/ViewType'
+                  default: VIEW_TYPE_LOGS
               required:
                 - name
                 - timeSelection
@@ -9381,7 +9386,10 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 isCompactMode:
-                  description: The is compact mode.
+                  default: false
+                  description: >-
+                    Whether the view opens in compact mode. Create stores false,
+                    and a replace that omits the value stores false.
                   type: boolean
                   x-coralogix-presence: true
                 name:
@@ -44285,19 +44293,23 @@ components:
       properties:
         caption:
           deprecated: true
-          description: Folder name
+          description: Display label for the quick time range.
           examples:
             - Last Hour
           maxLength: 100
           minLength: 1
           pattern: ^[\s\S]*$
+          readOnly: true
           type: string
           x-coralogix-presence: true
         seconds:
           maximum: 4294967295
           minimum: 0
           type: integer
-          description: Folder name
+          description: >-
+            Length of the quick time range, in seconds. The service stores the
+            nearest of 60, 120, 300, 900, 1800, 3600, 7200, 21600, 43200, 86400,
+            172800, 259200, 432000, and 604800.
           format: int64
           examples:
             - 3600
@@ -46187,6 +46199,7 @@ components:
           x-coralogix-presence: true
         syntaxType:
           $ref: '#/components/schemas/SyntaxType'
+          default: SYNTAX_TYPE_LUCENE
       description: Search query.
     SearchUsersResponse:
       title: SearchUsersResponse
@@ -47009,6 +47022,7 @@ components:
         - SLO_TIME_FRAME_14_DAYS
         - SLO_TIME_FRAME_21_DAYS
         - SLO_TIME_FRAME_28_DAYS
+        - SLO_TIME_FRAME_30_DAYS
       type: string
       description: Slo time frame.
     SloType:
@@ -48831,15 +48845,6 @@ components:
         - required:
             - customSelection
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - quickSelection
-                type: object
-              - required:
-                  - customSelection
-                type: object
       properties:
         customSelection:
           $ref: '#/components/schemas/CustomTimeSelection'
@@ -51333,7 +51338,10 @@ components:
           type: integer
           x-coralogix-presence: true
         isCompactMode:
-          description: The is compact mode.
+          default: false
+          description: >-
+            Whether the view opens in compact mode. Create stores false, and a
+            replace that omits the value stores false.
           type: boolean
           x-coralogix-presence: true
         name:
@@ -51355,6 +51363,7 @@ components:
     ViewFolder:
       title: ViewFolder
       required:
+        - id
         - name
       type: object
       properties:
@@ -54059,7 +54068,6 @@ components:
       title: ViewFolder
       required:
         - name
-        - selectedValues
       type: object
       properties:
         name:
@@ -54075,7 +54083,9 @@ components:
           type: object
           additionalProperties:
             type: boolean
-          description: Filter selected values
+          description: >-
+            Filter values to select, each set to true. The service keeps only
+            the values set to true and drops a value set to false.
       description: View folder.
     widgets.BarValueDisplay:
       enum:

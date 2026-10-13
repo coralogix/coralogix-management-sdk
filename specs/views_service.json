@@ -123,7 +123,8 @@
                     "$ref": "#/components/schemas/TimeSelection"
                   },
                   "viewType": {
-                    "$ref": "#/components/schemas/ViewType"
+                    "$ref": "#/components/schemas/ViewType",
+                    "default": "VIEW_TYPE_LOGS"
                   }
                 },
                 "required": [
@@ -294,7 +295,8 @@
                     "x-coralogix-presence": true
                   },
                   "isCompactMode": {
-                    "description": "The is compact mode.",
+                    "default": false,
+                    "description": "Whether the view opens in compact mode. Create stores false, and a replace that omits the value stores false.",
                     "type": "boolean",
                     "x-coralogix-presence": true
                   },
@@ -583,13 +585,14 @@
         "properties": {
           "caption": {
             "deprecated": true,
-            "description": "Folder name",
+            "description": "Display label for the quick time range.",
             "examples": [
               "Last Hour"
             ],
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -597,7 +600,7 @@
             "maximum": 4294967295,
             "minimum": 0,
             "type": "integer",
-            "description": "Folder name",
+            "description": "Length of the quick time range, in seconds. The service stores the nearest of 60, 120, 300, 900, 1800, 3600, 7200, 21600, 43200, 86400, 172800, 259200, 432000, and 604800.",
             "format": "int64",
             "examples": [
               3600
@@ -622,7 +625,8 @@
             "x-coralogix-presence": true
           },
           "syntaxType": {
-            "$ref": "#/components/schemas/SyntaxType"
+            "$ref": "#/components/schemas/SyntaxType",
+            "default": "SYNTAX_TYPE_LUCENE"
           }
         },
         "description": "Search query."
@@ -665,25 +669,6 @@
               "customSelection"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "quickSelection"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "customSelection"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
@@ -731,7 +716,8 @@
             "x-coralogix-presence": true
           },
           "isCompactMode": {
-            "description": "The is compact mode.",
+            "default": false,
+            "description": "Whether the view opens in compact mode. Create stores false, and a replace that omits the value stores false.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
@@ -787,8 +773,7 @@
       "views.v1.Filter": {
         "title": "ViewFolder",
         "required": [
-          "name",
-          "selectedValues"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -808,7 +793,7 @@
             "additionalProperties": {
               "type": "boolean"
             },
-            "description": "Filter selected values"
+            "description": "Filter values to select, each set to true. The service keeps only the values set to true and drops a value set to false."
           }
         },
         "description": "View folder."

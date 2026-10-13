@@ -48,7 +48,7 @@ func TestViews(t *testing.T) {
 		ViewFolder(createReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.NotNil(t, created.Id)
+	require.NotEmpty(t, created.Id)
 
 	updatedName := fmt.Sprintf("TestViewUpdated-%v", uuid.NewString())
 	updated := views.View1{
@@ -81,7 +81,7 @@ func TestViewsFolders(t *testing.T) {
 	client := cxsdk.NewViewsFoldersClient(cfg)
 
 	createReq := viewsfolders.CreateViewFolderRequest{
-		Name: viewsfolders.PtrString(fmt.Sprintf("GoTestViewFolder-%s", uuid.NewString())),
+		Name: fmt.Sprintf("GoTestViewFolder-%s", uuid.NewString()),
 	}
 	created, httpResp, err := client.
 		ViewsFoldersServiceCreateViewFolder(context.Background()).
@@ -89,7 +89,7 @@ func TestViewsFolders(t *testing.T) {
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, created)
-	require.NotNil(t, created.Id)
+	require.NotEmpty(t, created.Id)
 
 	updatedName := fmt.Sprintf("GoTestViewFolderUpdated-%s", uuid.NewString())
 	updateReq := viewsfolders.ViewFolder1{
@@ -103,7 +103,7 @@ func TestViewsFolders(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	got, httpResp, err := client.
-		ViewsFoldersServiceGetViewFolder(context.Background(), *created.Id).
+		ViewsFoldersServiceGetViewFolder(context.Background(), created.Id).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, updatedName, got.Name)
@@ -112,10 +112,10 @@ func TestViewsFolders(t *testing.T) {
 		ViewsFoldersServiceListViewFolders(context.Background()).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.True(t, viewFolderListed(after.Folders, *created.Id))
+	require.True(t, viewFolderListed(after.Folders, created.Id))
 
 	_, httpResp, err = client.
-		ViewsFoldersServiceDeleteViewFolder(context.Background(), *created.Id).
+		ViewsFoldersServiceDeleteViewFolder(context.Background(), created.Id).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
@@ -123,12 +123,12 @@ func TestViewsFolders(t *testing.T) {
 		ViewsFoldersServiceListViewFolders(context.Background()).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.False(t, viewFolderListed(final.Folders, *created.Id))
+	require.False(t, viewFolderListed(final.Folders, created.Id))
 }
 
 func viewFolderListed(folders []viewsfolders.ViewFolder, id string) bool {
 	for _, folder := range folders {
-		if folder.Id != nil && *folder.Id == id {
+		if folder.Id == id {
 			return true
 		}
 	}

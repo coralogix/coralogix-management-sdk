@@ -2719,7 +2719,8 @@
           "SLO_TIME_FRAME_7_DAYS",
           "SLO_TIME_FRAME_14_DAYS",
           "SLO_TIME_FRAME_21_DAYS",
-          "SLO_TIME_FRAME_28_DAYS"
+          "SLO_TIME_FRAME_28_DAYS",
+          "SLO_TIME_FRAME_30_DAYS"
         ],
         "type": "string",
         "description": "Slo time frame."
