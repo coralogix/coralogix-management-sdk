@@ -29,6 +29,7 @@ const (
 	SLOTIMEFRAME_SLO_TIME_FRAME_14_DAYS SloTimeFrame = "SLO_TIME_FRAME_14_DAYS"
 	SLOTIMEFRAME_SLO_TIME_FRAME_21_DAYS SloTimeFrame = "SLO_TIME_FRAME_21_DAYS"
 	SLOTIMEFRAME_SLO_TIME_FRAME_28_DAYS SloTimeFrame = "SLO_TIME_FRAME_28_DAYS"
+	SLOTIMEFRAME_SLO_TIME_FRAME_30_DAYS SloTimeFrame = "SLO_TIME_FRAME_30_DAYS"
 )
 
 // All allowed values of SloTimeFrame enum
@@ -39,6 +40,7 @@ var AllowedSloTimeFrameEnumValues = []SloTimeFrame{
 	"SLO_TIME_FRAME_14_DAYS",
 	"SLO_TIME_FRAME_21_DAYS",
 	"SLO_TIME_FRAME_28_DAYS",
+	"SLO_TIME_FRAME_30_DAYS",
 }
 
 func (v *SloTimeFrame) UnmarshalJSON(src []byte) error {

@@ -25,8 +25,8 @@ var _ MappedNullable = &ViewsV1Filter{}
 type ViewsV1Filter struct {
 	// Filter name
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
-	// Filter selected values
-	SelectedValues map[string]bool `json:"selectedValues"`
+	// Filter values to select, each set to true. The service keeps only the values set to true and drops a value set to false.
+	SelectedValues map[string]bool `json:"selectedValues,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -37,10 +37,9 @@ type _ViewsV1Filter ViewsV1Filter
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewViewsV1Filter(name string, selectedValues map[string]bool) *ViewsV1Filter {
+func NewViewsV1Filter(name string) *ViewsV1Filter {
 	this := ViewsV1Filter{}
 	this.Name = name
-	this.SelectedValues = selectedValues
 	return &this
 }
 
@@ -76,26 +75,34 @@ func (o *ViewsV1Filter) SetName(v string) {
 	o.Name = v
 }
 
-// GetSelectedValues returns the SelectedValues field value
+// GetSelectedValues returns the SelectedValues field value if set, zero value otherwise.
 func (o *ViewsV1Filter) GetSelectedValues() map[string]bool {
-	if o == nil {
+	if o == nil || IsNil(o.SelectedValues) {
 		var ret map[string]bool
 		return ret
 	}
-
 	return o.SelectedValues
 }
 
-// GetSelectedValuesOk returns a tuple with the SelectedValues field value
+// GetSelectedValuesOk returns a tuple with the SelectedValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ViewsV1Filter) GetSelectedValuesOk() (map[string]bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.SelectedValues) {
 		return map[string]bool{}, false
 	}
 	return o.SelectedValues, true
 }
 
-// SetSelectedValues sets field value
+// HasSelectedValues returns a boolean if a field has been set.
+func (o *ViewsV1Filter) HasSelectedValues() bool {
+	if o != nil && !IsNil(o.SelectedValues) {
+		return true
+	}
+
+	return false
+}
+
+// SetSelectedValues gets a reference to the given map[string]bool and assigns it to the SelectedValues field.
 func (o *ViewsV1Filter) SetSelectedValues(v map[string]bool) {
 	o.SelectedValues = v
 }
@@ -111,7 +118,9 @@ func (o ViewsV1Filter) MarshalJSON() ([]byte, error) {
 func (o ViewsV1Filter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
-	toSerialize["selectedValues"] = o.SelectedValues
+	if !IsNil(o.SelectedValues) {
+		toSerialize["selectedValues"] = o.SelectedValues
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -126,7 +135,6 @@ func (o *ViewsV1Filter) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"selectedValues",
 	}
 
 	allProperties := make(map[string]interface{})

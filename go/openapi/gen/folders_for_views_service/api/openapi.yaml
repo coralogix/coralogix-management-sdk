@@ -67,6 +67,7 @@
                   }
                 },
                 "required": [
+                  "id",
                   "name"
                 ],
                 "title": "ViewFolder",
@@ -118,11 +119,15 @@
                     "x-coralogix-presence": true
                   }
                 },
+                "required": [
+                  "name"
+                ],
                 "title": "CreateViewFolderRequest",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -323,6 +328,7 @@
       "ViewFolder": {
         "title": "ViewFolder",
         "required": [
+          "id",
           "name"
         ],
         "type": "object",
