@@ -384,21 +384,24 @@
                         "$ref": "#/components/schemas/ApmSli"
                       }
                     ],
-                    "description": "APM SLI metadata parallel to materialized metric queries (product_type APM)."
+                    "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
+                    "readOnly": true
                   },
                   "createTime": {
-                    "description": "RFC3339 timestamp of when the SLO was created.",
+                    "description": "RFC3339 timestamp of when the SLO was created. Set by the server; a value sent by the client is ignored.",
                     "format": "date-time",
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "creator": {
-                    "description": "Email or identifier of the user who created the SLO.",
+                    "description": "Email or identifier of the user who created the SLO. Set by the server; a value sent by the client is ignored.",
                     "examples": [
                       "test@domain.com"
                     ],
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
@@ -412,7 +415,13 @@
                     "x-coralogix-presence": true
                   },
                   "grouping": {
-                    "$ref": "#/components/schemas/v1.Grouping"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.Grouping"
+                      }
+                    ],
+                    "description": "Grouping labels derived by the server from the SLI. A value sent by the client is rejected.",
+                    "readOnly": true
                   },
                   "id": {
                     "description": "Unique identifier of the SLO.",
@@ -463,7 +472,13 @@
                     "$ref": "#/components/schemas/RequestBasedMetricSli"
                   },
                   "revision": {
-                    "$ref": "#/components/schemas/v1.Revision"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.Revision"
+                      }
+                    ],
+                    "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
+                    "readOnly": true
                   },
                   "sloTimeFrame": {
                     "$ref": "#/components/schemas/SloTimeFrame"
@@ -474,9 +489,11 @@
                         "$ref": "#/components/schemas/SloType"
                       }
                     ],
+                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
                     "examples": [
                       "SLO_TYPE_REQUEST"
                     ],
+                    "readOnly": true,
                     "x-coralogix-presence": true
                   },
                   "targetThresholdPercentage": {
@@ -489,18 +506,20 @@
                   },
                   "type": {
                     "deprecated": true,
-                    "description": "Deprecated: SLO type string. Use slo_type instead.",
+                    "description": "Deprecated: SLO type string. Set by the server from the SLI; a value sent by the client is ignored.",
                     "examples": [
                       "request"
                     ],
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "updateTime": {
-                    "description": "Timestamp of the last update.",
+                    "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
                     "format": "date-time",
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
@@ -639,21 +658,24 @@
                         "$ref": "#/components/schemas/ApmSli"
                       }
                     ],
-                    "description": "APM SLI metadata parallel to materialized metric queries (product_type APM)."
+                    "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
+                    "readOnly": true
                   },
                   "createTime": {
-                    "description": "RFC3339 timestamp of when the SLO was created.",
+                    "description": "RFC3339 timestamp of when the SLO was created. Set by the server; a value sent by the client is ignored.",
                     "format": "date-time",
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "creator": {
-                    "description": "Email or identifier of the user who created the SLO.",
+                    "description": "Email or identifier of the user who created the SLO. Set by the server; a value sent by the client is ignored.",
                     "examples": [
                       "test@domain.com"
                     ],
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
@@ -667,7 +689,13 @@
                     "x-coralogix-presence": true
                   },
                   "grouping": {
-                    "$ref": "#/components/schemas/v1.Grouping"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.Grouping"
+                      }
+                    ],
+                    "description": "Grouping labels derived by the server from the SLI. A value sent by the client is rejected.",
+                    "readOnly": true
                   },
                   "id": {
                     "description": "Unique identifier of the SLO.",
@@ -718,7 +746,13 @@
                     "$ref": "#/components/schemas/RequestBasedMetricSli"
                   },
                   "revision": {
-                    "$ref": "#/components/schemas/v1.Revision"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.Revision"
+                      }
+                    ],
+                    "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
+                    "readOnly": true
                   },
                   "sloTimeFrame": {
                     "$ref": "#/components/schemas/SloTimeFrame"
@@ -729,9 +763,11 @@
                         "$ref": "#/components/schemas/SloType"
                       }
                     ],
+                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
                     "examples": [
                       "SLO_TYPE_REQUEST"
                     ],
+                    "readOnly": true,
                     "x-coralogix-presence": true
                   },
                   "targetThresholdPercentage": {
@@ -744,18 +780,20 @@
                   },
                   "type": {
                     "deprecated": true,
-                    "description": "Deprecated: SLO type string. Use slo_type instead.",
+                    "description": "Deprecated: SLO type string. Set by the server from the SLI; a value sent by the client is ignored.",
                     "examples": [
                       "request"
                     ],
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "updateTime": {
-                    "description": "Timestamp of the last update.",
+                    "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
                     "format": "date-time",
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
@@ -1292,21 +1330,24 @@
                         "$ref": "#/components/schemas/ApmSli"
                       }
                     ],
-                    "description": "APM SLI metadata parallel to materialized metric queries (product_type APM)."
+                    "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
+                    "readOnly": true
                   },
                   "createTime": {
-                    "description": "RFC3339 timestamp of when the SLO was created.",
+                    "description": "RFC3339 timestamp of when the SLO was created. Set by the server; a value sent by the client is ignored.",
                     "format": "date-time",
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "creator": {
-                    "description": "Email or identifier of the user who created the SLO.",
+                    "description": "Email or identifier of the user who created the SLO. Set by the server; a value sent by the client is ignored.",
                     "examples": [
                       "test@domain.com"
                     ],
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
@@ -1320,7 +1361,13 @@
                     "x-coralogix-presence": true
                   },
                   "grouping": {
-                    "$ref": "#/components/schemas/v1.Grouping"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.Grouping"
+                      }
+                    ],
+                    "description": "Grouping labels derived by the server from the SLI. A value sent by the client is rejected.",
+                    "readOnly": true
                   },
                   "id": {
                     "description": "Unique identifier of the SLO.",
@@ -1371,7 +1418,13 @@
                     "$ref": "#/components/schemas/RequestBasedMetricSli"
                   },
                   "revision": {
-                    "$ref": "#/components/schemas/v1.Revision"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.Revision"
+                      }
+                    ],
+                    "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
+                    "readOnly": true
                   },
                   "sloTimeFrame": {
                     "$ref": "#/components/schemas/SloTimeFrame"
@@ -1382,9 +1435,11 @@
                         "$ref": "#/components/schemas/SloType"
                       }
                     ],
+                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
                     "examples": [
                       "SLO_TYPE_REQUEST"
                     ],
+                    "readOnly": true,
                     "x-coralogix-presence": true
                   },
                   "targetThresholdPercentage": {
@@ -1397,18 +1452,20 @@
                   },
                   "type": {
                     "deprecated": true,
-                    "description": "Deprecated: SLO type string. Use slo_type instead.",
+                    "description": "Deprecated: SLO type string. Set by the server from the SLI; a value sent by the client is ignored.",
                     "examples": [
                       "request"
                     ],
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "updateTime": {
-                    "description": "Timestamp of the last update.",
+                    "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
                     "format": "date-time",
                     "minLength": 0,
+                    "readOnly": true,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
@@ -1592,6 +1649,9 @@
       },
       "ApmLatencySli": {
         "title": "ApmLatencySli",
+        "required": [
+          "timeWindow"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -1647,7 +1707,7 @@
                 "$ref": "#/components/schemas/WindowSloWindow"
               }
             ],
-            "description": "Time window for latency calculations",
+            "description": "Time window for latency calculations. Required. Omitting it is rejected.",
             "examples": [
               "WINDOW_SLO_WINDOW_5_MINUTES"
             ]
@@ -2294,21 +2354,24 @@
                 "$ref": "#/components/schemas/ApmSli"
               }
             ],
-            "description": "APM SLI metadata parallel to materialized metric queries (product_type APM)."
+            "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
+            "readOnly": true
           },
           "createTime": {
-            "description": "RFC3339 timestamp of when the SLO was created.",
+            "description": "RFC3339 timestamp of when the SLO was created. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
             "minLength": 0,
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
           "creator": {
-            "description": "Email or identifier of the user who created the SLO.",
+            "description": "Email or identifier of the user who created the SLO. Set by the server; a value sent by the client is ignored.",
             "examples": [
               "test@domain.com"
             ],
             "minLength": 0,
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -2322,7 +2385,13 @@
             "x-coralogix-presence": true
           },
           "grouping": {
-            "$ref": "#/components/schemas/v1.Grouping"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.Grouping"
+              }
+            ],
+            "description": "Grouping labels derived by the server from the SLI. A value sent by the client is rejected.",
+            "readOnly": true
           },
           "id": {
             "description": "Unique identifier of the SLO.",
@@ -2373,7 +2442,13 @@
             "$ref": "#/components/schemas/RequestBasedMetricSli"
           },
           "revision": {
-            "$ref": "#/components/schemas/v1.Revision"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.Revision"
+              }
+            ],
+            "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
+            "readOnly": true
           },
           "sloTimeFrame": {
             "$ref": "#/components/schemas/SloTimeFrame"
@@ -2384,9 +2459,11 @@
                 "$ref": "#/components/schemas/SloType"
               }
             ],
+            "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
             "examples": [
               "SLO_TYPE_REQUEST"
             ],
+            "readOnly": true,
             "x-coralogix-presence": true
           },
           "targetThresholdPercentage": {
@@ -2399,18 +2476,20 @@
           },
           "type": {
             "deprecated": true,
-            "description": "Deprecated: SLO type string. Use slo_type instead.",
+            "description": "Deprecated: SLO type string. Set by the server from the SLI; a value sent by the client is ignored.",
             "examples": [
               "request"
             ],
             "minLength": 0,
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
           "updateTime": {
-            "description": "Timestamp of the last update.",
+            "description": "Timestamp of the last update. Set by the server; a value sent by the client is ignored.",
             "format": "date-time",
             "minLength": 0,
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -2578,9 +2657,10 @@
             "items": {
               "minLength": 0,
               "type": "string",
-              "description": "Flat, deduplicated union of static_values and the values resolved from label_keys across observed permutations (empties excluded). Empty when neither source yields any value. Provides a single searchable list of values for this ownership tag, regardless of source."
+              "description": "Flat, deduplicated union of staticValues and the values resolved from labelKeys across observed permutations (empties excluded). Empty when neither source yields any value. Set by the server; a value sent by the client is ignored."
             },
-            "description": "Flat, deduplicated union of static_values and the values resolved from label_keys across observed permutations (empties excluded). Empty when neither source yields any value. Provides a single searchable list of values for this ownership tag, regardless of source.",
+            "description": "Flat, deduplicated union of staticValues and the values resolved from labelKeys across observed permutations (empties excluded). Empty when neither source yields any value. Set by the server; a value sent by the client is ignored.",
+            "readOnly": true,
             "examples": [
               [
                 "checkout-api",
@@ -2635,6 +2715,7 @@
       "SloTimeFrame": {
         "enum": [
           "SLO_TIME_FRAME_UNSPECIFIED",
+          "SLO_TIME_FRAME_1_DAY",
           "SLO_TIME_FRAME_7_DAYS",
           "SLO_TIME_FRAME_14_DAYS",
           "SLO_TIME_FRAME_21_DAYS",

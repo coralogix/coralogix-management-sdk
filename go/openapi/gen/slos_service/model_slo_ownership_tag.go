@@ -24,7 +24,7 @@ var _ MappedNullable = &SloOwnershipTag{}
 type SloOwnershipTag struct {
 	// Metric label names to use as sources (label-driven). Actual values come from series at query time. Empty if not using label-driven for this dimension.
 	LabelKeys []string `json:"labelKeys,omitempty"`
-	// Flat, deduplicated union of static_values and the values resolved from label_keys across observed permutations (empties excluded). Empty when neither source yields any value. Provides a single searchable list of values for this ownership tag, regardless of source.
+	// Flat, deduplicated union of staticValues and the values resolved from labelKeys across observed permutations (empties excluded). Empty when neither source yields any value. Set by the server; a value sent by the client is ignored.
 	ResolvedValues []string `json:"resolvedValues,omitempty"`
 	// Group-wide static values (broad). Empty if not using broad for this dimension.
 	StaticValues []string `json:"staticValues,omitempty"`
