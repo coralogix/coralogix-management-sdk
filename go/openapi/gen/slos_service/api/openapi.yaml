@@ -441,11 +441,11 @@
                     "type": "object"
                   },
                   "name": {
-                    "description": "Human-readable display name for the SLO.",
+                    "description": "Human-readable display name for the SLO. Required. A missing or empty name is rejected.",
                     "examples": [
                       "Example Slo Name"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "ownershipTags": {
@@ -489,7 +489,7 @@
                         "$ref": "#/components/schemas/SloType"
                       }
                     ],
-                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
+                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client must match the SLI type; a different value is rejected.",
                     "examples": [
                       "SLO_TYPE_REQUEST"
                     ],
@@ -527,6 +527,10 @@
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
                   }
                 },
+                "required": [
+                  "name",
+                  "sloTimeFrame"
+                ],
                 "title": "Slo",
                 "type": "object"
               }
@@ -715,11 +719,11 @@
                     "type": "object"
                   },
                   "name": {
-                    "description": "Human-readable display name for the SLO.",
+                    "description": "Human-readable display name for the SLO. Required. A missing or empty name is rejected.",
                     "examples": [
                       "Example Slo Name"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "ownershipTags": {
@@ -763,7 +767,7 @@
                         "$ref": "#/components/schemas/SloType"
                       }
                     ],
-                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
+                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client must match the SLI type; a different value is rejected.",
                     "examples": [
                       "SLO_TYPE_REQUEST"
                     ],
@@ -801,6 +805,10 @@
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
                   }
                 },
+                "required": [
+                  "name",
+                  "sloTimeFrame"
+                ],
                 "title": "Slo",
                 "type": "object"
               }
@@ -1387,11 +1395,11 @@
                     "type": "object"
                   },
                   "name": {
-                    "description": "Human-readable display name for the SLO.",
+                    "description": "Human-readable display name for the SLO. Required. A missing or empty name is rejected.",
                     "examples": [
                       "Example Slo Name"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "ownershipTags": {
@@ -1435,7 +1443,7 @@
                         "$ref": "#/components/schemas/SloType"
                       }
                     ],
-                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
+                    "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client must match the SLI type; a different value is rejected.",
                     "examples": [
                       "SLO_TYPE_REQUEST"
                     ],
@@ -1473,6 +1481,10 @@
                     "$ref": "#/components/schemas/WindowBasedMetricSli"
                   }
                 },
+                "required": [
+                  "name",
+                  "sloTimeFrame"
+                ],
                 "title": "Slo",
                 "type": "object"
               }
@@ -1591,12 +1603,15 @@
       },
       "ApmFilter": {
         "title": "ApmFilter",
+        "required": [
+          "key"
+        ],
         "type": "object",
         "properties": {
           "key": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
-            "description": "Label/tag name to filter on",
+            "description": "Label/tag name to filter on. Required. A missing or empty key is rejected.",
             "examples": [
               "environment"
             ]
@@ -1717,6 +1732,9 @@
       },
       "ApmSli": {
         "title": "ApmSli",
+        "required": [
+          "services"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -1783,14 +1801,14 @@
             "$ref": "#/components/schemas/ApmLatencySli"
           },
           "services": {
-            "minItems": 0,
+            "minItems": 1,
             "type": "array",
             "items": {
               "minLength": 0,
               "type": "string",
-              "description": "List of service names to monitor"
+              "description": "List of service names to monitor. Required. At least one service; an empty list is rejected."
             },
-            "description": "List of service names to monitor",
+            "description": "List of service names to monitor. Required. At least one service; an empty list is rejected.",
             "examples": [
               [
                 "my-service",
@@ -2144,14 +2162,17 @@
       },
       "Metric": {
         "title": "Metric",
+        "required": [
+          "query"
+        ],
         "type": "object",
         "properties": {
           "query": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
-            "description": "Query string.",
+            "description": "Query string. Required. A missing or empty query is rejected.",
             "examples": [
-              "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+              "sum(rate(http_requests_total{status=\"200\"}[1m]))"
             ]
           }
         },
@@ -2258,6 +2279,10 @@
       },
       "RequestBasedMetricSli": {
         "title": "RequestBasedMetricSli",
+        "required": [
+          "goodEvents",
+          "totalEvents"
+        ],
         "type": "object",
         "properties": {
           "goodEvents": {
@@ -2298,6 +2323,10 @@
       },
       "Slo": {
         "title": "Slo",
+        "required": [
+          "name",
+          "sloTimeFrame"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -2411,9 +2440,9 @@
             "description": "List of labels."
           },
           "name": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
-            "description": "Human-readable display name for the SLO.",
+            "description": "Human-readable display name for the SLO. Required. A missing or empty name is rejected.",
             "examples": [
               "Example Slo Name"
             ]
@@ -2459,7 +2488,7 @@
                 "$ref": "#/components/schemas/SloType"
               }
             ],
-            "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.",
+            "description": "SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client must match the SLI type; a different value is rejected.",
             "examples": [
               "SLO_TYPE_REQUEST"
             ],
@@ -2765,6 +2794,11 @@
       },
       "WindowBasedMetricSli": {
         "title": "WindowBasedMetricSli",
+        "required": [
+          "query",
+          "window",
+          "comparisonOperator"
+        ],
         "type": "object",
         "properties": {
           "comparisonOperator": {

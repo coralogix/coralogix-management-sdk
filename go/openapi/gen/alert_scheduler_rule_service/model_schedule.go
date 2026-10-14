@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -24,9 +25,10 @@ var _ MappedNullable = &Schedule{}
 type Schedule struct {
 	OneTime *OneTime `json:"oneTime,omitempty"`
 	Recurring *Recurring `json:"recurring,omitempty"`
-	ScheduleOperation *ScheduleOperation `json:"scheduleOperation,omitempty"`
+	ScheduleOperation ScheduleOperation `json:"scheduleOperation"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _Schedule Schedule
@@ -35,8 +37,9 @@ type _Schedule Schedule
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewSchedule() *Schedule {
+func NewSchedule(scheduleOperation ScheduleOperation) *Schedule {
 	this := Schedule{}
+	this.ScheduleOperation = scheduleOperation
 	return &this
 }
 
@@ -112,36 +115,28 @@ func (o *Schedule) SetRecurring(v Recurring) {
 	o.Recurring = &v
 }
 
-// GetScheduleOperation returns the ScheduleOperation field value if set, zero value otherwise.
+// GetScheduleOperation returns the ScheduleOperation field value
 func (o *Schedule) GetScheduleOperation() ScheduleOperation {
-	if o == nil || IsNil(o.ScheduleOperation) {
+	if o == nil {
 		var ret ScheduleOperation
 		return ret
 	}
-	return *o.ScheduleOperation
+
+	return o.ScheduleOperation
 }
 
-// GetScheduleOperationOk returns a tuple with the ScheduleOperation field value if set, nil otherwise
+// GetScheduleOperationOk returns a tuple with the ScheduleOperation field value
 // and a boolean to check if the value has been set.
 func (o *Schedule) GetScheduleOperationOk() (*ScheduleOperation, bool) {
-	if o == nil || IsNil(o.ScheduleOperation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ScheduleOperation, true
+	return &o.ScheduleOperation, true
 }
 
-// HasScheduleOperation returns a boolean if a field has been set.
-func (o *Schedule) HasScheduleOperation() bool {
-	if o != nil && !IsNil(o.ScheduleOperation) {
-		return true
-	}
-
-	return false
-}
-
-// SetScheduleOperation gets a reference to the given ScheduleOperation and assigns it to the ScheduleOperation field.
+// SetScheduleOperation sets field value
 func (o *Schedule) SetScheduleOperation(v ScheduleOperation) {
-	o.ScheduleOperation = &v
+	o.ScheduleOperation = v
 }
 
 func (o Schedule) MarshalJSON() ([]byte, error) {
@@ -160,18 +155,21 @@ func (o Schedule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Recurring) {
 		toSerialize["recurring"] = o.Recurring
 	}
-	if !IsNil(o.ScheduleOperation) {
-		toSerialize["scheduleOperation"] = o.ScheduleOperation
-	}
-	optionalOneOfGroup0Matches := 0
+	toSerialize["scheduleOperation"] = o.ScheduleOperation
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["oneTime"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["recurring"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [oneTime, recurring] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [oneTime, recurring] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [oneTime, recurring] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["oneTime"]; exists {
@@ -189,6 +187,38 @@ func (o Schedule) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Schedule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"scheduleOperation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["oneTime"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["recurring"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [oneTime, recurring] may be set"}
+	}
+
 	varSchedule := _Schedule{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -203,14 +233,14 @@ func (o *Schedule) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["oneTime"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["recurring"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [oneTime, recurring] may be set"}
 		}
 
@@ -219,6 +249,7 @@ func (o *Schedule) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "scheduleOperation")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

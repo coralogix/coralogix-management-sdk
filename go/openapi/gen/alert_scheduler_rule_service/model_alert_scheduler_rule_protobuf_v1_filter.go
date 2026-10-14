@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -25,9 +26,10 @@ type AlertSchedulerRuleProtobufV1Filter struct {
 	AlertMetaLabels *MetaLabels `json:"alertMetaLabels,omitempty"`
 	AlertUniqueIds *AlertUniqueIds `json:"alertUniqueIds,omitempty"`
 	// Dataprime expression that filters the alerts by group-by values.
-	WhatExpression *string `json:"whatExpression,omitempty"`
+	WhatExpression string `json:"whatExpression"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _AlertSchedulerRuleProtobufV1Filter AlertSchedulerRuleProtobufV1Filter
@@ -36,8 +38,9 @@ type _AlertSchedulerRuleProtobufV1Filter AlertSchedulerRuleProtobufV1Filter
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewAlertSchedulerRuleProtobufV1Filter() *AlertSchedulerRuleProtobufV1Filter {
+func NewAlertSchedulerRuleProtobufV1Filter(whatExpression string) *AlertSchedulerRuleProtobufV1Filter {
 	this := AlertSchedulerRuleProtobufV1Filter{}
+	this.WhatExpression = whatExpression
 	return &this
 }
 
@@ -113,36 +116,28 @@ func (o *AlertSchedulerRuleProtobufV1Filter) SetAlertUniqueIds(v AlertUniqueIds)
 	o.AlertUniqueIds = &v
 }
 
-// GetWhatExpression returns the WhatExpression field value if set, zero value otherwise.
+// GetWhatExpression returns the WhatExpression field value
 func (o *AlertSchedulerRuleProtobufV1Filter) GetWhatExpression() string {
-	if o == nil || IsNil(o.WhatExpression) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.WhatExpression
+
+	return o.WhatExpression
 }
 
-// GetWhatExpressionOk returns a tuple with the WhatExpression field value if set, nil otherwise
+// GetWhatExpressionOk returns a tuple with the WhatExpression field value
 // and a boolean to check if the value has been set.
 func (o *AlertSchedulerRuleProtobufV1Filter) GetWhatExpressionOk() (*string, bool) {
-	if o == nil || IsNil(o.WhatExpression) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WhatExpression, true
+	return &o.WhatExpression, true
 }
 
-// HasWhatExpression returns a boolean if a field has been set.
-func (o *AlertSchedulerRuleProtobufV1Filter) HasWhatExpression() bool {
-	if o != nil && !IsNil(o.WhatExpression) {
-		return true
-	}
-
-	return false
-}
-
-// SetWhatExpression gets a reference to the given string and assigns it to the WhatExpression field.
+// SetWhatExpression sets field value
 func (o *AlertSchedulerRuleProtobufV1Filter) SetWhatExpression(v string) {
-	o.WhatExpression = &v
+	o.WhatExpression = v
 }
 
 func (o AlertSchedulerRuleProtobufV1Filter) MarshalJSON() ([]byte, error) {
@@ -161,18 +156,21 @@ func (o AlertSchedulerRuleProtobufV1Filter) ToMap() (map[string]interface{}, err
 	if !IsNil(o.AlertUniqueIds) {
 		toSerialize["alertUniqueIds"] = o.AlertUniqueIds
 	}
-	if !IsNil(o.WhatExpression) {
-		toSerialize["whatExpression"] = o.WhatExpression
-	}
-	optionalOneOfGroup0Matches := 0
+	toSerialize["whatExpression"] = o.WhatExpression
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["alertMetaLabels"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["alertUniqueIds"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alertMetaLabels, alertUniqueIds] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [alertMetaLabels, alertUniqueIds] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [alertMetaLabels, alertUniqueIds] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["alertMetaLabels"]; exists {
@@ -190,6 +188,38 @@ func (o AlertSchedulerRuleProtobufV1Filter) ToMap() (map[string]interface{}, err
 }
 
 func (o *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"whatExpression",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["alertMetaLabels"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["alertUniqueIds"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [alertMetaLabels, alertUniqueIds] may be set"}
+	}
+
 	varAlertSchedulerRuleProtobufV1Filter := _AlertSchedulerRuleProtobufV1Filter{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -204,14 +234,14 @@ func (o *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) (err err
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["alertMetaLabels"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["alertUniqueIds"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [alertMetaLabels, alertUniqueIds] may be set"}
 		}
 
@@ -220,6 +250,7 @@ func (o *AlertSchedulerRuleProtobufV1Filter) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "whatExpression")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

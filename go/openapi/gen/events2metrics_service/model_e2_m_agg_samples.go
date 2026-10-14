@@ -13,6 +13,7 @@ package events2metrics_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &E2MAggSamples{}
 
 // E2MAggSamples This data structure represents the e2m aggregate samples
 type E2MAggSamples struct {
-	SampleType *SampleType `json:"sampleType,omitempty"`
+	SampleType SampleType `json:"sampleType"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _E2MAggSamples E2MAggSamples
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewE2MAggSamples() *E2MAggSamples {
+func NewE2MAggSamples(sampleType SampleType) *E2MAggSamples {
 	this := E2MAggSamples{}
+	this.SampleType = sampleType
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewE2MAggSamplesWithDefaults() *E2MAggSamples {
 	return &this
 }
 
-// GetSampleType returns the SampleType field value if set, zero value otherwise.
+// GetSampleType returns the SampleType field value
 func (o *E2MAggSamples) GetSampleType() SampleType {
-	if o == nil || IsNil(o.SampleType) {
+	if o == nil {
 		var ret SampleType
 		return ret
 	}
-	return *o.SampleType
+
+	return o.SampleType
 }
 
-// GetSampleTypeOk returns a tuple with the SampleType field value if set, nil otherwise
+// GetSampleTypeOk returns a tuple with the SampleType field value
 // and a boolean to check if the value has been set.
 func (o *E2MAggSamples) GetSampleTypeOk() (*SampleType, bool) {
-	if o == nil || IsNil(o.SampleType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SampleType, true
+	return &o.SampleType, true
 }
 
-// HasSampleType returns a boolean if a field has been set.
-func (o *E2MAggSamples) HasSampleType() bool {
-	if o != nil && !IsNil(o.SampleType) {
-		return true
-	}
-
-	return false
-}
-
-// SetSampleType gets a reference to the given SampleType and assigns it to the SampleType field.
+// SetSampleType sets field value
 func (o *E2MAggSamples) SetSampleType(v SampleType) {
-	o.SampleType = &v
+	o.SampleType = v
 }
 
 func (o E2MAggSamples) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o E2MAggSamples) MarshalJSON() ([]byte, error) {
 
 func (o E2MAggSamples) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SampleType) {
-		toSerialize["sampleType"] = o.SampleType
-	}
+	toSerialize["sampleType"] = o.SampleType
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o E2MAggSamples) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *E2MAggSamples) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"sampleType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varE2MAggSamples := _E2MAggSamples{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -27,6 +27,7 @@ type Recurring struct {
 	Schedule *RecurringDynamic `json:"schedule,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _Recurring Recurring
@@ -128,15 +129,20 @@ func (o Recurring) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Schedule) {
 		toSerialize["schedule"] = o.Schedule
 	}
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["alwaysActive"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["schedule"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [alwaysActive, schedule] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [alwaysActive, schedule] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [alwaysActive, schedule] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["alwaysActive"]; exists {
@@ -168,14 +174,14 @@ func (o *Recurring) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["alwaysActive"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["schedule"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [alwaysActive, schedule] may be set"}
 		}
 
@@ -183,6 +189,7 @@ func (o *Recurring) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "schedule")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

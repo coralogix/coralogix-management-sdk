@@ -48,7 +48,7 @@ func TestSLOs(t *testing.T) {
 	updatedName := "updated_example_slo_" + uuid.NewString()
 	updatePayload := sloPayload
 	updatePayload.Id = &sloID
-	updatePayload.Name = &updatedName
+	updatePayload.Name = updatedName
 
 	updateReq := *updatePayload
 
@@ -86,18 +86,18 @@ func getRequestBasedSlo(name string) *slos.Slo1 {
 	totalEventsQuery := "avg(rate(cpu_usage_seconds_total[1m])) by (instance)"
 
 	return &slos.Slo1{
-		Name:                      &name,
+		Name:                      name,
 		Description:               slos.PtrString(desc),
 		TargetThresholdPercentage: &target,
 		RequestBasedMetricSli: &slos.RequestBasedMetricSli{
-			GoodEvents: &slos.Metric{
-				Query: &goodEventsQuery,
+			GoodEvents: slos.Metric{
+				Query: goodEventsQuery,
 			},
-			TotalEvents: &slos.Metric{
-				Query: &totalEventsQuery,
+			TotalEvents: slos.Metric{
+				Query: totalEventsQuery,
 			},
 		},
-		SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS.Ptr(),
+		SloTimeFrame: slos.SLOTIMEFRAME_SLO_TIME_FRAME_7_DAYS,
 		Labels:       map[string]string{"label1": "value1"},
 	}
 }

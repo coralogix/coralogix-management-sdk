@@ -38,12 +38,12 @@ func TestE2MsLogsQuery(t *testing.T) {
 				TargetBaseMetricName: "method",
 				Aggregations: []events2metrics_service.V2Aggregation{
 					{
-						AggType: events2metrics_service.AGGTYPE_AGG_TYPE_COUNT.Ptr(),
+						AggType: events2metrics_service.AGGTYPE_AGG_TYPE_COUNT,
 						Enabled: &enable,
 						Samples: &events2metrics_service.E2MAggSamples{
-							SampleType: events2metrics_service.SAMPLETYPE_SAMPLE_TYPE_MAX.Ptr().Ptr(),
+							SampleType: events2metrics_service.SAMPLETYPE_SAMPLE_TYPE_MAX,
 						},
-						TargetMetricName: &geoLocationMetricName1,
+						TargetMetricName: geoLocationMetricName1,
 					},
 				},
 			},
@@ -62,7 +62,7 @@ func TestE2MsLogsQuery(t *testing.T) {
 				TargetLabel: "http_referer",
 			},
 		},
-		Type: events2metrics_service.E2MTYPE_E2_M_TYPE_LOGS2_METRICS.Ptr(),
+		Type: events2metrics_service.E2MTYPE_E2_M_TYPE_LOGS2_METRICS,
 	}
 
 	created, httpResp, err := client.
@@ -70,6 +70,6 @@ func TestE2MsLogsQuery(t *testing.T) {
 		E2MCreateParams(createReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.NotNil(t, created.E2m.Id)
+	require.NotEmpty(t, created.E2m.Id)
 
 }

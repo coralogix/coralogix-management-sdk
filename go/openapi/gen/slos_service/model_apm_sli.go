@@ -13,6 +13,7 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -29,8 +30,8 @@ type ApmSli struct {
 	// Labels to group SLO results by
 	GroupingKeys []string `json:"groupingKeys,omitempty"`
 	LatencyConfig *ApmLatencySli `json:"latencyConfig,omitempty"`
-	// List of service names to monitor
-	Services []string `json:"services,omitempty"`
+	// List of service names to monitor. Required. At least one service; an empty list is rejected.
+	Services []string `json:"services"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -41,8 +42,9 @@ type _ApmSli ApmSli
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewApmSli() *ApmSli {
+func NewApmSli(services []string) *ApmSli {
 	this := ApmSli{}
+	this.Services = services
 	return &this
 }
 
@@ -182,34 +184,26 @@ func (o *ApmSli) SetLatencyConfig(v ApmLatencySli) {
 	o.LatencyConfig = &v
 }
 
-// GetServices returns the Services field value if set, zero value otherwise.
+// GetServices returns the Services field value
 func (o *ApmSli) GetServices() []string {
-	if o == nil || IsNil(o.Services) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Services
 }
 
-// GetServicesOk returns a tuple with the Services field value if set, nil otherwise
+// GetServicesOk returns a tuple with the Services field value
 // and a boolean to check if the value has been set.
 func (o *ApmSli) GetServicesOk() ([]string, bool) {
-	if o == nil || IsNil(o.Services) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Services, true
 }
 
-// HasServices returns a boolean if a field has been set.
-func (o *ApmSli) HasServices() bool {
-	if o != nil && !IsNil(o.Services) {
-		return true
-	}
-
-	return false
-}
-
-// SetServices gets a reference to the given []string and assigns it to the Services field.
+// SetServices sets field value
 func (o *ApmSli) SetServices(v []string) {
 	o.Services = v
 }
@@ -236,9 +230,7 @@ func (o ApmSli) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LatencyConfig) {
 		toSerialize["latencyConfig"] = o.LatencyConfig
 	}
-	if !IsNil(o.Services) {
-		toSerialize["services"] = o.Services
-	}
+	toSerialize["services"] = o.Services
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["errorConfig"]; exists {
 		optionalOneOfGroup0Matches++
@@ -265,6 +257,38 @@ func (o ApmSli) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ApmSli) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"services",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["errorConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["latencyConfig"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [errorConfig, latencyConfig] may be set"}
+	}
+
 	varApmSli := _ApmSli{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -38,8 +39,8 @@ type Slo1 struct {
 	Id *string `json:"id,omitempty"`
 	// List of labels.
 	Labels map[string]string `json:"labels,omitempty"`
-	// Human-readable display name for the SLO.
-	Name *string `json:"name,omitempty"`
+	// Human-readable display name for the SLO. Required. A missing or empty name is rejected.
+	Name string `json:"name"`
 	// Service, environment, and team ownership configuration for the SLO group and its permutations.
 	OwnershipTags *SloOwnershipTags `json:"ownershipTags,omitempty"`
 	// Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs
@@ -47,8 +48,8 @@ type Slo1 struct {
 	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
 	// Revision of the SLO. Set by the server; a value sent by the client is ignored.
 	Revision *V1Revision `json:"revision,omitempty"`
-	SloTimeFrame *SloTimeFrame `json:"sloTimeFrame,omitempty"`
-	// SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client is ignored.
+	SloTimeFrame SloTimeFrame `json:"sloTimeFrame"`
+	// SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client must match the SLI type; a different value is rejected.
 	SloType *SloType `json:"sloType,omitempty"`
 	// Target compliance percentage threshold for the SLO (e.g., 99.9 for three nines).
 	TargetThresholdPercentage *float32 `json:"targetThresholdPercentage,omitempty"`
@@ -68,8 +69,10 @@ type _Slo1 Slo1
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewSlo1() *Slo1 {
+func NewSlo1(name string, sloTimeFrame SloTimeFrame) *Slo1 {
 	this := Slo1{}
+	this.Name = name
+	this.SloTimeFrame = sloTimeFrame
 	return &this
 }
 
@@ -337,36 +340,28 @@ func (o *Slo1) SetLabels(v map[string]string) {
 	o.Labels = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *Slo1) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *Slo1) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Slo1) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *Slo1) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetOwnershipTags returns the OwnershipTags field value if set, zero value otherwise.
@@ -497,36 +492,28 @@ func (o *Slo1) SetRevision(v V1Revision) {
 	o.Revision = &v
 }
 
-// GetSloTimeFrame returns the SloTimeFrame field value if set, zero value otherwise.
+// GetSloTimeFrame returns the SloTimeFrame field value
 func (o *Slo1) GetSloTimeFrame() SloTimeFrame {
-	if o == nil || IsNil(o.SloTimeFrame) {
+	if o == nil {
 		var ret SloTimeFrame
 		return ret
 	}
-	return *o.SloTimeFrame
+
+	return o.SloTimeFrame
 }
 
-// GetSloTimeFrameOk returns a tuple with the SloTimeFrame field value if set, nil otherwise
+// GetSloTimeFrameOk returns a tuple with the SloTimeFrame field value
 // and a boolean to check if the value has been set.
 func (o *Slo1) GetSloTimeFrameOk() (*SloTimeFrame, bool) {
-	if o == nil || IsNil(o.SloTimeFrame) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SloTimeFrame, true
+	return &o.SloTimeFrame, true
 }
 
-// HasSloTimeFrame returns a boolean if a field has been set.
-func (o *Slo1) HasSloTimeFrame() bool {
-	if o != nil && !IsNil(o.SloTimeFrame) {
-		return true
-	}
-
-	return false
-}
-
-// SetSloTimeFrame gets a reference to the given SloTimeFrame and assigns it to the SloTimeFrame field.
+// SetSloTimeFrame sets field value
 func (o *Slo1) SetSloTimeFrame(v SloTimeFrame) {
-	o.SloTimeFrame = &v
+	o.SloTimeFrame = v
 }
 
 // GetSloType returns the SloType field value if set, zero value otherwise.
@@ -726,9 +713,7 @@ func (o Slo1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Labels) {
 		toSerialize["labels"] = o.Labels
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.OwnershipTags) {
 		toSerialize["ownershipTags"] = o.OwnershipTags
 	}
@@ -741,9 +726,7 @@ func (o Slo1) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Revision) {
 		toSerialize["revision"] = o.Revision
 	}
-	if !IsNil(o.SloTimeFrame) {
-		toSerialize["sloTimeFrame"] = o.SloTimeFrame
-	}
+	toSerialize["sloTimeFrame"] = o.SloTimeFrame
 	if !IsNil(o.SloType) {
 		toSerialize["sloType"] = o.SloType
 	}
@@ -791,6 +774,42 @@ func (o Slo1) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Slo1) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"sloTimeFrame",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["requestBasedMetricSli"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["windowBasedMetricSli"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["apmSli"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [requestBasedMetricSli, windowBasedMetricSli, apmSli] may be set"}
+	}
+
 	varSlo1 := _Slo1{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

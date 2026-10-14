@@ -30,7 +30,7 @@ type E2M struct {
 	// Human-readable description of this E2M.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier for this E2M. Required on update requests.
-	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
+	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	// Indicates whether this E2M is for internal use only.
 	IsInternal *bool `json:"isInternal,omitempty"`
 	LogsQuery *V2LogsQuery `json:"logsQuery,omitempty"`
@@ -55,8 +55,9 @@ type _E2M E2M
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewE2M(name string, type_ E2MType) *E2M {
+func NewE2M(id string, name string, type_ E2MType) *E2M {
 	this := E2M{}
+	this.Id = id
 	this.Name = name
 	this.Type = type_
 	return &this
@@ -166,36 +167,28 @@ func (o *E2M) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *E2M) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *E2M) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *E2M) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *E2M) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetIsInternal returns the IsInternal field value if set, zero value otherwise.
@@ -489,9 +482,7 @@ func (o E2M) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.IsInternal) {
 		toSerialize["isInternal"] = o.IsInternal
 	}
@@ -545,6 +536,7 @@ func (o *E2M) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"id",
 		"name",
 		"type",
 	}

@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -29,10 +30,11 @@ type RecurringDynamic struct {
 	RepeatEvery *int32 `json:"repeatEvery,omitempty"`
 	// ISO 8601 date after which the recurring rule stops being applied.
 	TerminationDate *string `json:"terminationDate,omitempty"`
-	Timeframe *Timeframe `json:"timeframe,omitempty"`
+	Timeframe Timeframe `json:"timeframe"`
 	Weekly *Weekly `json:"weekly,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _RecurringDynamic RecurringDynamic
@@ -41,8 +43,9 @@ type _RecurringDynamic RecurringDynamic
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRecurringDynamic() *RecurringDynamic {
+func NewRecurringDynamic(timeframe Timeframe) *RecurringDynamic {
 	this := RecurringDynamic{}
+	this.Timeframe = timeframe
 	return &this
 }
 
@@ -182,36 +185,28 @@ func (o *RecurringDynamic) SetTerminationDate(v string) {
 	o.TerminationDate = &v
 }
 
-// GetTimeframe returns the Timeframe field value if set, zero value otherwise.
+// GetTimeframe returns the Timeframe field value
 func (o *RecurringDynamic) GetTimeframe() Timeframe {
-	if o == nil || IsNil(o.Timeframe) {
+	if o == nil {
 		var ret Timeframe
 		return ret
 	}
-	return *o.Timeframe
+
+	return o.Timeframe
 }
 
-// GetTimeframeOk returns a tuple with the Timeframe field value if set, nil otherwise
+// GetTimeframeOk returns a tuple with the Timeframe field value
 // and a boolean to check if the value has been set.
 func (o *RecurringDynamic) GetTimeframeOk() (*Timeframe, bool) {
-	if o == nil || IsNil(o.Timeframe) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timeframe, true
+	return &o.Timeframe, true
 }
 
-// HasTimeframe returns a boolean if a field has been set.
-func (o *RecurringDynamic) HasTimeframe() bool {
-	if o != nil && !IsNil(o.Timeframe) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeframe gets a reference to the given Timeframe and assigns it to the Timeframe field.
+// SetTimeframe sets field value
 func (o *RecurringDynamic) SetTimeframe(v Timeframe) {
-	o.Timeframe = &v
+	o.Timeframe = v
 }
 
 // GetWeekly returns the Weekly field value if set, zero value otherwise.
@@ -268,24 +263,27 @@ func (o RecurringDynamic) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TerminationDate) {
 		toSerialize["terminationDate"] = o.TerminationDate
 	}
-	if !IsNil(o.Timeframe) {
-		toSerialize["timeframe"] = o.Timeframe
-	}
+	toSerialize["timeframe"] = o.Timeframe
 	if !IsNil(o.Weekly) {
 		toSerialize["weekly"] = o.Weekly
 	}
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["daily"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["weekly"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["monthly"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [daily, weekly, monthly] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [daily, weekly, monthly] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [daily, weekly, monthly] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["daily"]; exists {
@@ -306,6 +304,41 @@ func (o RecurringDynamic) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RecurringDynamic) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"timeframe",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["daily"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["weekly"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["monthly"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [daily, weekly, monthly] may be set"}
+	}
+
 	varRecurringDynamic := _RecurringDynamic{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -320,17 +353,17 @@ func (o *RecurringDynamic) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["daily"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["weekly"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["monthly"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [daily, weekly, monthly] may be set"}
 		}
 
@@ -342,6 +375,7 @@ func (o *RecurringDynamic) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "weekly")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

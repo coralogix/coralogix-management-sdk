@@ -13,6 +13,7 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,8 +23,8 @@ var _ MappedNullable = &Metric{}
 
 // Metric Definition of a metric used in SLOs
 type Metric struct {
-	// Query string.
-	Query *string `json:"query,omitempty"`
+	// Query string. Required. A missing or empty query is rejected.
+	Query string `json:"query"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _Metric Metric
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewMetric() *Metric {
+func NewMetric(query string) *Metric {
 	this := Metric{}
+	this.Query = query
 	return &this
 }
 
@@ -47,36 +49,28 @@ func NewMetricWithDefaults() *Metric {
 	return &this
 }
 
-// GetQuery returns the Query field value if set, zero value otherwise.
+// GetQuery returns the Query field value
 func (o *Metric) GetQuery() string {
-	if o == nil || IsNil(o.Query) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Query
+
+	return o.Query
 }
 
-// GetQueryOk returns a tuple with the Query field value if set, nil otherwise
+// GetQueryOk returns a tuple with the Query field value
 // and a boolean to check if the value has been set.
 func (o *Metric) GetQueryOk() (*string, bool) {
-	if o == nil || IsNil(o.Query) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Query, true
+	return &o.Query, true
 }
 
-// HasQuery returns a boolean if a field has been set.
-func (o *Metric) HasQuery() bool {
-	if o != nil && !IsNil(o.Query) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuery gets a reference to the given string and assigns it to the Query field.
+// SetQuery sets field value
 func (o *Metric) SetQuery(v string) {
-	o.Query = &v
+	o.Query = v
 }
 
 func (o Metric) MarshalJSON() ([]byte, error) {
@@ -89,9 +83,7 @@ func (o Metric) MarshalJSON() ([]byte, error) {
 
 func (o Metric) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Query) {
-		toSerialize["query"] = o.Query
-	}
+	toSerialize["query"] = o.Query
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o Metric) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Metric) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"query",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varMetric := _Metric{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -598,18 +598,18 @@ func TestAlertScheduler(t *testing.T) {
 	enabled := true
 
 	schedule := scheduler.Schedule{
-		ScheduleOperation: scheduler.SCHEDULEOPERATION_SCHEDULE_OPERATION_MUTE.Ptr(),
+		ScheduleOperation: scheduler.SCHEDULEOPERATION_SCHEDULE_OPERATION_MUTE,
 		OneTime: &scheduler.OneTime{
-			Timeframe: &scheduler.Timeframe{
+			Timeframe: scheduler.Timeframe{
 				StartTime: scheduler.PtrString("2025-01-01T00:00:00.000Z"),
 				EndTime:   scheduler.PtrString("2025-12-31T23:59:59.000Z"),
-				Timezone:  scheduler.PtrString("UTC"),
+				Timezone:  "UTC",
 			},
 		},
 	}
 
 	filter := scheduler.AlertSchedulerRuleProtobufV1Filter{
-		WhatExpression: scheduler.PtrString("source logs | filter $d.cpodId:string == '122'"),
+		WhatExpression: "source logs | filter $d.cpodId:string == '122'",
 		AlertUniqueIds: &scheduler.AlertUniqueIds{
 			Value: []string{*createdAlert.AlertDef.Id},
 		},
@@ -617,11 +617,11 @@ func TestAlertScheduler(t *testing.T) {
 
 	createReq := scheduler.NewCreateAlertSchedulerRuleRequestDataStructure(
 		scheduler.AlertSchedulerRule{
-			Name:        &name,
+			Name:        name,
 			Description: scheduler.PtrString("Created via OpenAPI SDK"),
 			Enabled:     &enabled,
-			Filter:      &filter,
-			Schedule:    &schedule,
+			Filter:      filter,
+			Schedule:    schedule,
 		},
 	)
 
@@ -638,11 +638,11 @@ func TestAlertScheduler(t *testing.T) {
 	updateReq := scheduler.UpdateAlertSchedulerRuleRequestDataStructure{
 		AlertSchedulerRule: scheduler.AlertSchedulerRule{
 			UniqueIdentifier: &ruleID,
-			Name:             &updatedName,
+			Name:             updatedName,
 			Description:      scheduler.PtrString("Updated description via OpenAPI SDK"),
 			Enabled:          &enabled,
-			Filter:           &filter,
-			Schedule:         &schedule,
+			Filter:           filter,
+			Schedule:         schedule,
 		},
 	}
 
@@ -651,13 +651,13 @@ func TestAlertScheduler(t *testing.T) {
 		UpdateAlertSchedulerRuleRequestDataStructure(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, updatedName, *updateResp.AlertSchedulerRule.Name)
+	require.Equal(t, updatedName, updateResp.AlertSchedulerRule.Name)
 
 	getResp, httpResp, err := schedulerClient.
 		AlertSchedulerRuleServiceGetAlertSchedulerRule(ctx, ruleID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
-	require.Equal(t, updatedName, *getResp.AlertSchedulerRule.Name)
+	require.Equal(t, updatedName, getResp.AlertSchedulerRule.Name)
 
 	_, httpResp, err = schedulerClient.
 		AlertSchedulerRuleServiceDeleteAlertSchedulerRule(ctx, ruleID).
