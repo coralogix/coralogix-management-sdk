@@ -48,7 +48,7 @@ func TestDashboardFolders(t *testing.T) {
 	folderName := "sdk-openapi-folder-" + uuid.NewString()
 	folder := dashboardfolders.DashboardFolder{
 		Id:   dashboardfolders.PtrString(id),
-		Name: dashboardfolders.PtrString(folderName),
+		Name: folderName,
 	}
 	createDashboardFolderRequest := dashboardfolders.CreateDashboardFolderRequestDataStructure{
 		Folder: &folder,
@@ -65,7 +65,7 @@ func TestDashboardFolders(t *testing.T) {
 	replaceReq := dashboardfolders.ReplaceDashboardFolderRequestDataStructure{
 		Folder: &dashboardfolders.DashboardFolder{
 			Id:   dashboardfolders.PtrString(id),
-			Name: dashboardfolders.PtrString(updatedFolderName),
+			Name: updatedFolderName,
 		},
 	}
 	_, httpResp, err = client.
