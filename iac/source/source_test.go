@@ -41,6 +41,27 @@ func TestResolveUsesPinnedSDK(t *testing.T) {
 	}
 }
 
+// A tool module that requires only the iac module of the SDK does not pin the SDK, also
+// though its go.mod contains the SDK module path. Resolve goes on to the module that pins it.
+func TestResolveSkipsModuleThatRequiresOnlyIAC(t *testing.T) {
+	root := t.TempDir()
+	version := "v1.2.3"
+	writeTestFile(t, filepath.Join(root, "go.mod"), "module example.com/tool\n\ngo 1.26.0\n\nrequire "+SDKModule+" "+version+"\n")
+	start := filepath.Join(root, "tools", "codegen")
+	writeTestFile(t, filepath.Join(start, "go.mod"), "module example.com/tool/tools/codegen\n\ngo 1.26.0\n\nrequire "+SDKModule+"/iac v0.0.0-20261020101500-1a2b3c4d5e6f\n")
+	cache := filepath.Join(root, "module-cache")
+	writeTestFile(t, filepath.Join(cache, SDKModule+"@"+version, "openapi.yaml"), "openapi: 3.0.3\n")
+	t.Setenv("GOMODCACHE", cache)
+
+	input, err := Resolve(start)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if input.ModuleRoot != root || input.SDKVersion != version {
+		t.Fatalf("resolved %+v", input)
+	}
+}
+
 func TestResolveDoesNotFetchMissingSDK(t *testing.T) {
 	root := t.TempDir()
 	writeTestFile(t, filepath.Join(root, "go.mod"), "module example.com/tool\n\ngo 1.26.0\n\nrequire "+SDKModule+" v1.2.3\n")

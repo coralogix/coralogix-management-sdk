@@ -44,13 +44,9 @@ type Input struct {
 
 // Resolve walks from start to the go.mod that pins the SDK and resolves its exact SDK version.
 func Resolve(start string) (Input, error) {
-	root, data, err := findModule(start)
+	root, parsed, err := findModule(start)
 	if err != nil {
 		return Input{}, err
-	}
-	parsed, err := modfile.Parse(filepath.Join(root, "go.mod"), data, nil)
-	if err != nil {
-		return Input{}, fmt.Errorf("parse %s: %w", filepath.Join(root, "go.mod"), err)
 	}
 	if parsed.Module == nil || parsed.Module.Mod.Path == "" {
 		return Input{}, fmt.Errorf("%s must declare a module path", filepath.Join(root, "go.mod"))
@@ -85,7 +81,9 @@ func Resolve(start string) (Input, error) {
 	return Input{ModuleRoot: root, Module: parsed.Module.Mod.Path, SDKDir: sdkDir, SDKModule: SDKModule, SDKVersion: versions[0], OpenAPI: openAPI}, nil
 }
 
-func findModule(start string) (string, []byte, error) {
+// findModule walks from start to the first go.mod that requires SDKModule itself. A go.mod
+// that requires only a module inside the SDK, such as its iac module, does not pin the SDK.
+func findModule(start string) (string, *modfile.File, error) {
 	dir, err := filepath.Abs(start)
 	if err != nil {
 		return "", nil, fmt.Errorf("resolve start directory: %w", err)
@@ -93,11 +91,17 @@ func findModule(start string) (string, []byte, error) {
 	for {
 		path := filepath.Join(dir, "go.mod")
 		data, readErr := os.ReadFile(path)
-		if readErr == nil && strings.Contains(string(data), SDKModule) {
-			return dir, data, nil
-		}
 		if readErr != nil && !errors.Is(readErr, os.ErrNotExist) {
 			return "", nil, fmt.Errorf("read %s: %w", path, readErr)
+		}
+		if readErr == nil {
+			parsed, err := modfile.Parse(path, data, nil)
+			if err != nil {
+				return "", nil, fmt.Errorf("parse %s: %w", path, err)
+			}
+			if requires(parsed, SDKModule) {
+				return dir, parsed, nil
+			}
 		}
 		parent := filepath.Dir(dir)
 		if parent == dir {
@@ -105,6 +109,15 @@ func findModule(start string) (string, []byte, error) {
 		}
 		dir = parent
 	}
+}
+
+func requires(file *modfile.File, module string) bool {
+	for _, req := range file.Require {
+		if req.Mod.Path == module {
+			return true
+		}
+	}
+	return false
 }
 
 func moduleCache() (string, error) {
