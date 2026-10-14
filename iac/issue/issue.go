@@ -60,12 +60,18 @@ func (r Report) Normalize() Report {
 
 // Error formats all issues as one stable eligibility report.
 func (r Report) Error() string {
+	return r.Text("Resource is not eligible for generation")
+}
+
+// Text formats all issues as one stable eligibility report under heading. A tool
+// names itself in the heading, for example "Resource is not eligible for X generation".
+func (r Report) Text(heading string) string {
 	r = r.Normalize()
 	if len(r) == 0 {
 		return ""
 	}
 	var b strings.Builder
-	fmt.Fprintf(&b, "Resource is not eligible for Terraform generation: %d problems\n", len(r))
+	fmt.Fprintf(&b, "%s: %d problems\n", heading, len(r))
 	for _, item := range r {
 		fmt.Fprintf(&b, "\n%s %s\n  %s\n  %s\n", item.Code, item.Location, item.Message, item.Remediation)
 	}

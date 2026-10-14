@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package source resolves the OpenAPI and Go SDK from the provider's pinned module.
+// Package source resolves the OpenAPI and Go SDK that a tool's Go module pins.
 package source
 
 import (
@@ -27,33 +27,33 @@ import (
 	"golang.org/x/mod/module"
 )
 
-const (
-	ProviderModule = "github.com/coralogix/terraform-provider-coralogix"
-	SDKModule      = "github.com/coralogix/coralogix-management-sdk"
-)
+// SDKModule is the Go module of the management SDK. Its module root has the openapi.yaml
+// that the SDK was generated from.
+const SDKModule = "github.com/coralogix/coralogix-management-sdk"
 
 // Input is one matched OpenAPI and SDK source.
 type Input struct {
-	ProviderRoot   string
-	ProviderModule string
-	SDKDir         string
-	SDKModule      string
-	SDKVersion     string
-	OpenAPI        []byte
+	// ModuleRoot is the directory of the go.mod that pins the SDK, and Module is its module path.
+	ModuleRoot string
+	Module     string
+	SDKDir     string
+	SDKModule  string
+	SDKVersion string
+	OpenAPI    []byte
 }
 
-// Resolve walks from start to the provider go.mod and resolves its exact SDK version.
+// Resolve walks from start to the go.mod that pins the SDK and resolves its exact SDK version.
 func Resolve(start string) (Input, error) {
-	root, data, err := findProviderModule(start)
+	root, data, err := findModule(start)
 	if err != nil {
 		return Input{}, err
 	}
 	parsed, err := modfile.Parse(filepath.Join(root, "go.mod"), data, nil)
 	if err != nil {
-		return Input{}, fmt.Errorf("parse provider go.mod: %w", err)
+		return Input{}, fmt.Errorf("parse %s: %w", filepath.Join(root, "go.mod"), err)
 	}
 	if parsed.Module == nil || parsed.Module.Mod.Path == "" {
-		return Input{}, errors.New("provider go.mod must declare a module path")
+		return Input{}, fmt.Errorf("%s must declare a module path", filepath.Join(root, "go.mod"))
 	}
 	var versions []string
 	for _, req := range parsed.Require {
@@ -62,7 +62,7 @@ func Resolve(start string) (Input, error) {
 		}
 	}
 	if len(versions) != 1 || versions[0] == "" {
-		return Input{}, fmt.Errorf("provider go.mod must pin exactly one %s version; found %v", SDKModule, versions)
+		return Input{}, fmt.Errorf("%s must pin exactly one %s version; found %v", filepath.Join(root, "go.mod"), SDKModule, versions)
 	}
 	cache, err := moduleCache()
 	if err != nil {
@@ -82,10 +82,10 @@ func Resolve(start string) (Input, error) {
 	if err != nil {
 		return Input{}, fmt.Errorf("read OpenAPI for pinned SDK %s from %s: %w; download the pinned module before generation", versions[0], openAPIPath, err)
 	}
-	return Input{ProviderRoot: root, ProviderModule: parsed.Module.Mod.Path, SDKDir: sdkDir, SDKModule: SDKModule, SDKVersion: versions[0], OpenAPI: openAPI}, nil
+	return Input{ModuleRoot: root, Module: parsed.Module.Mod.Path, SDKDir: sdkDir, SDKModule: SDKModule, SDKVersion: versions[0], OpenAPI: openAPI}, nil
 }
 
-func findProviderModule(start string) (string, []byte, error) {
+func findModule(start string) (string, []byte, error) {
 	dir, err := filepath.Abs(start)
 	if err != nil {
 		return "", nil, fmt.Errorf("resolve start directory: %w", err)
@@ -101,7 +101,7 @@ func findProviderModule(start string) (string, []byte, error) {
 		}
 		parent := filepath.Dir(dir)
 		if parent == dir {
-			return "", nil, fmt.Errorf("find provider root from %s: no ancestor go.mod requires %s", start, SDKModule)
+			return "", nil, fmt.Errorf("find the module root from %s: no ancestor go.mod requires %s", start, SDKModule)
 		}
 		dir = parent
 	}

@@ -26,10 +26,9 @@ import (
 // wrapPolicy is the rule set of testdata/wrapthing.yaml, as its behavior-overrides file states it.
 func wrapPolicy() Policy {
 	return Policy{
-		Existing:             true,
-		NoInferredValidators: true,
-		Unwrap:               []string{"LuceneQuery", "PriorityValue", "Threshold", "UUID", "FilterHolder", "Selection", "ListSelection"},
-		UnwrapFields:         map[string]bool{"WrapThing.rawQuery": false, "WrapThing.mainLabel": true},
+		Existing:     true,
+		Unwrap:       []string{"LuceneQuery", "PriorityValue", "Threshold", "UUID", "FilterHolder", "Selection", "ListSelection"},
+		UnwrapFields: map[string]bool{"WrapThing.rawQuery": false, "WrapThing.mainLabel": true},
 	}
 }
 
@@ -134,13 +133,13 @@ func TestUnwrapRequestTypeKeepsTheWrappers(t *testing.T) {
 	}
 }
 
-// A wrapper that collapses states the presence of its property, because Terraform null sends no
+// A wrapper that collapses states the presence of its property, because a null value sends no
 // wrapper. The same property in a kept object still needs presence.
 func TestUnwrapStatesThePresenceOfTheWrappedProperty(t *testing.T) {
 	if codes := wrapCodes(t, wrapSpec(t), wrapPolicy()); len(codes) != 0 {
 		t.Fatalf("codes %v, want none", codes)
 	}
-	without := Policy{Existing: true, NoInferredValidators: true}
+	without := Policy{Existing: true}
 	if codes := wrapCodes(t, wrapSpec(t), without); !slices.Contains(codes, "FIELD_PRESENCE_UNKNOWN") {
 		t.Fatalf("codes %v, want FIELD_PRESENCE_UNKNOWN without the unwrap lines", codes)
 	}

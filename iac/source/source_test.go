@@ -20,13 +20,13 @@ import (
 	"testing"
 )
 
-func TestResolveUsesProviderPinnedSDK(t *testing.T) {
+func TestResolveUsesPinnedSDK(t *testing.T) {
 	root := t.TempDir()
 	version := "v1.2.3"
-	providerMod := "module example.com/provider\n\ngo 1.26.0\n\nrequire " + SDKModule + " " + version + "\n"
-	writeTestFile(t, filepath.Join(root, "go.mod"), providerMod)
-	start := filepath.Join(root, "tools", "iac-codegen")
-	writeTestFile(t, filepath.Join(start, "go.mod"), "module example.com/provider/tools/iac-codegen\n\ngo 1.26.0\n")
+	toolMod := "module example.com/tool\n\ngo 1.26.0\n\nrequire " + SDKModule + " " + version + "\n"
+	writeTestFile(t, filepath.Join(root, "go.mod"), toolMod)
+	start := filepath.Join(root, "tools", "codegen")
+	writeTestFile(t, filepath.Join(start, "go.mod"), "module example.com/tool/tools/codegen\n\ngo 1.26.0\n")
 	cache := filepath.Join(root, "module-cache")
 	openAPI := []byte("openapi: 3.0.3\n")
 	writeTestFile(t, filepath.Join(cache, SDKModule+"@"+version, "openapi.yaml"), string(openAPI))
@@ -36,14 +36,14 @@ func TestResolveUsesProviderPinnedSDK(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if input.ProviderRoot != root || input.ProviderModule != "example.com/provider" || input.SDKVersion != version || string(input.OpenAPI) != string(openAPI) {
+	if input.ModuleRoot != root || input.Module != "example.com/tool" || input.SDKVersion != version || string(input.OpenAPI) != string(openAPI) {
 		t.Fatalf("resolved %+v", input)
 	}
 }
 
 func TestResolveDoesNotFetchMissingSDK(t *testing.T) {
 	root := t.TempDir()
-	writeTestFile(t, filepath.Join(root, "go.mod"), "module example.com/provider\n\ngo 1.26.0\n\nrequire "+SDKModule+" v1.2.3\n")
+	writeTestFile(t, filepath.Join(root, "go.mod"), "module example.com/tool\n\ngo 1.26.0\n\nrequire "+SDKModule+" v1.2.3\n")
 	t.Setenv("GOMODCACHE", filepath.Join(root, "empty-cache"))
 	_, err := Resolve(root)
 	if err == nil {

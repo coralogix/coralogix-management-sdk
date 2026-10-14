@@ -31,3 +31,17 @@ func TestReportIsDeduplicatedAndSorted(t *testing.T) {
 		t.Fatalf("unexpected report:\n%s", text)
 	}
 }
+
+func TestReportTextNamesTheTool(t *testing.T) {
+	report := Report{{Code: "A", Location: "a", Message: "first", Remediation: "fix"}}
+	want := "Resource is not eligible for X generation: 1 problems\n\nA a\n  first\n  fix"
+	if got := report.Text("Resource is not eligible for X generation"); got != want {
+		t.Fatalf("Text() =\n%s\nwant:\n%s", got, want)
+	}
+	if got := report.Error(); !strings.HasPrefix(got, "Resource is not eligible for generation: 1 problems\n") {
+		t.Fatalf("Error() =\n%s", got)
+	}
+	if got := (Report{}).Text("heading"); got != "" {
+		t.Fatalf("empty report Text() = %q, want empty", got)
+	}
+}

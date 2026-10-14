@@ -30,32 +30,6 @@ import (
 	v3 "github.com/pb33f/libopenapi/datamodel/high/v3"
 )
 
-// ResolveResource maps an explicit Terraform resource name or exact component
-// name to one unique OpenAPI component. It never selects among multiple matches.
-func ResolveResource(doc *v3.Document, selection string) (string, issue.Report) {
-	if doc.Components == nil || doc.Components.Schemas == nil {
-		return "", issue.Report{{Code: "RESOURCE_SCHEMA_NOT_FOUND", Location: "components.schemas", Message: "The OpenAPI document has no component schemas.", Remediation: "Add the selected resource schema to the source API contract."}}
-	}
-	if doc.Components.Schemas.GetOrZero(selection) != nil {
-		return selection, nil
-	}
-	var matches []string
-	for name := range doc.Components.Schemas.FromOldest() {
-		if TerraformName(name) == selection {
-			matches = append(matches, name)
-		}
-	}
-	slices.Sort(matches)
-	switch len(matches) {
-	case 1:
-		return matches[0], nil
-	case 0:
-		return "", issue.Report{{Code: "RESOURCE_SCHEMA_NOT_FOUND", Location: "components.schemas", Message: fmt.Sprintf("No component has the exact name or Terraform name %q.", selection), Remediation: "Select an existing complete resource component."}}
-	default:
-		return "", issue.Report{{Code: "RESOURCE_SCHEMA_AMBIGUOUS", Location: "components.schemas", Message: fmt.Sprintf("More than one component normalizes to %q: %s.", selection, strings.Join(matches, ", ")), Remediation: "Use the exact OpenAPI component name or rename the colliding components."}}
-	}
-}
-
 // Validate collects every detectable eligibility issue before generation.
 func Validate(doc *v3.Document, name string, ids OperationIDs) issue.Report {
 	return ValidateWithPolicy(doc, name, ids, Policy{})
@@ -338,7 +312,7 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 			continue // Build reports the unsupported Update identity contract.
 		}
 		if p.UpdateMaskInBody && isUpdateMaskName(field) {
-			continue // The mask stays in the JSON body and is not a Terraform field.
+			continue // The mask stays in the JSON body and is not a resource field.
 		}
 		report = append(report, validateFieldContract(p, name, idParam, field, create, update, get)...)
 	}
@@ -381,7 +355,7 @@ func bodyIDIssues(p Policy, ops map[verb]foundOp, create, update *base.Schema) i
 
 // serverSetIDIssues checks that serverSetID describes an id that only the server sets: the
 // Create and Update bodies do not have it, or it is read-only there or by a readOnly line.
-// Otherwise the user could set the id in Terraform, and a body-only Update would send the
+// Otherwise the user could set the id, and a body-only Update would send the
 // planned id instead of the state id, so a change could name another resource.
 func serverSetIDIssues(p Policy, name string, ops map[verb]foundOp, create, update *base.Schema) issue.Report {
 	params := pathParams(ops[opGet])
@@ -631,7 +605,7 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 			Code:        "FIELD_REQUIREDNESS_UNSUPPORTED",
 			Location:    location,
 			Message:     "The field is optional in Create but required in Update.",
-			Remediation: "Make the field optional in Update, or require it in Create so Terraform always has a value to send.",
+			Remediation: "Make the field optional in Update, or require it in Create so the client always has a value to send.",
 		})
 	}
 	report = append(report, fieldTypeIssues(p, location, gp, cp, up)...)
@@ -855,7 +829,7 @@ func omissionIsDefault(proxy *base.SchemaProxy, d *string) bool {
 		schema = target
 	}
 	if !scalarZeroValueValid(valueSchema(schema)) {
-		return true // the zero value is not a value that Terraform sends
+		return true // the zero value is not a value that the client sends
 	}
 	switch *d {
 	case "false", "0", "0.0", "":
@@ -1271,7 +1245,7 @@ func stringZeroValueValid(schema *base.Schema) bool {
 	return err == nil && re.MatchString(value)
 }
 
-// createRequires reports whether Create requires the field. Terraform then requires it, and a
+// createRequires reports whether Create requires the field. The client then requires it, and a
 // required value is never empty, so Update always sends a value: omission and an empty value
 // never differ there, and Update needs no presence mark.
 func createRequires(create *base.Schema, cp *base.SchemaProxy, field string) bool {
@@ -1285,7 +1259,7 @@ func asksPresence(p Policy, component *base.SchemaProxy, name string, createRequ
 	return !p.released(referencedComponent(component), name) && !slices.Contains(createRequired, name)
 }
 
-// unsentField reports whether Terraform never sends a nested request field: the field is
+// unsentField reports whether the client never sends a nested request field: the field is
 // readOnly, or a line skips it.
 func unsentField(p Policy, component *base.SchemaProxy, name string, child *base.SchemaProxy) bool {
 	if p.skips(referencedComponent(component), name) {
@@ -1306,7 +1280,7 @@ type presenceVisit struct {
 // nestedPresenceIssues reports the nested request fields that do not state presence. get is the
 // response schema in the same place. wrapped is true when proxy, or the items of the list that
 // proxy is, is a wrapper that collapses: the wrapper states the presence of its property,
-// because Terraform null sends no wrapper. The response components decide which wrappers
+// because a null value sends no wrapper. The response components decide which wrappers
 // collapse, as they do in the generated resource. create is the Create schema in the same
 // place when proxy is an Update schema, and nil otherwise.
 func nestedPresenceIssues(p Policy, location string, proxy, get, create *base.SchemaProxy, wrapped bool, seen map[presenceVisit]bool) issue.Report {
@@ -1531,15 +1505,8 @@ func nameCollisions(location string, t *Type) issue.Report {
 	if t.Kind != Object && t.Kind != OneOf {
 		return nil
 	}
-	terraformNames := map[string]string{}
 	goNames := map[string]string{}
 	for _, field := range t.Fields {
-		terraformName := TerraformName(field.Name)
-		if previous, ok := terraformNames[terraformName]; ok && previous != field.Name {
-			report = append(report, issue.Issue{Code: "TERRAFORM_NAME_COLLISION", Location: location, Message: fmt.Sprintf("Fields %q and %q both normalize to %q.", previous, field.Name, terraformName), Remediation: "Rename a source API field so every Terraform name is unique."})
-		} else {
-			terraformNames[terraformName] = field.Name
-		}
 		goName := GoName(field.Name)
 		if previous, ok := goNames[goName]; ok && previous != field.Name {
 			report = append(report, issue.Issue{Code: "GO_NAME_COLLISION", Location: location, Message: fmt.Sprintf("Fields %q and %q both generate the Go name %q.", previous, field.Name, goName), Remediation: "Rename a source API field so every generated Go field name is unique."})
@@ -1594,38 +1561,6 @@ func componentNameCollisions(root *Type) issue.Report {
 	return report
 }
 
-// TerraformName converts an OpenAPI name to the exact Terraform name used by
-// validation and rendering. Acronym runs stay together: HTTPServer becomes
-// http_server. Terraform allows only a-z, 0-9, and _, and no leading digit, so
-// any other character becomes _: foo-bar and foo.bar become foo_bar. The name
-// collision check then finds foo-bar beside foo_bar.
-func TerraformName(name string) string {
-	var out strings.Builder
-	runes := []rune(name)
-	for i, r := range runes {
-		if unicode.IsUpper(r) && i > 0 {
-			previousLower := !unicode.IsUpper(runes[i-1])
-			nextLower := i+1 < len(runes) && unicode.IsLower(runes[i+1])
-			if previousLower || nextLower {
-				out.WriteByte('_')
-			}
-		}
-		out.WriteRune(terraformNameRune(unicode.ToLower(r)))
-	}
-	result := out.String()
-	if result == "" || result[0] >= '0' && result[0] <= '9' {
-		return "_" + result
-	}
-	return result
-}
-
-func terraformNameRune(r rune) rune {
-	if r >= 'a' && r <= 'z' || r >= '0' && r <= '9' || r == '_' {
-		return r
-	}
-	return '_'
-}
-
 // GoName converts an OpenAPI name to the exact Go name used by SDK and model
 // field rendering: foo-bar and foo_bar both become FooBar.
 func GoName(name string) string {
@@ -1677,8 +1612,6 @@ func constraintSchemaIssueCode(message string) string {
 		return "OBJECT_PROPERTY_COUNT_UNSUPPORTED"
 	case strings.Contains(message, "exclusiveMinimum") || strings.Contains(message, "exclusiveMaximum"):
 		return "NUMERIC_EXCLUSIVE_BOUND_UNSUPPORTED"
-	case strings.Contains(message, "uint64") && strings.Contains(message, "Terraform Int64"):
-		return "UINT64_RANGE_UNSUPPORTED"
 	case strings.Contains(message, "enum") && (strings.Contains(message, "UNSPECIFIED") || strings.Contains(message, "zero value") || strings.Contains(message, "zero-value prefix")):
 		return "ENUM_ZERO_INVALID"
 	default:

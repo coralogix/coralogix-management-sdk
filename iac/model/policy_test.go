@@ -36,7 +36,6 @@ func legacyPolicy() Policy {
 			"LegacyRule.name", "LegacyRule.kind", "LegacyRule.targets",
 			"LegacyLabels.env", "LegacyTarget.connectorId", "LegacyTarget.id",
 		},
-		NoInferredValidators: true,
 	}
 }
 

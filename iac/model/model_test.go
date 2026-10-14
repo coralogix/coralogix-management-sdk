@@ -76,70 +76,6 @@ func TestBodyOnlyUpdateIDIsComputed(t *testing.T) {
 	}
 }
 
-func TestResolveResourceName(t *testing.T) {
-	doc, err := Load(validSpec(t))
-	if err != nil {
-		t.Fatal(err)
-	}
-	for _, selection := range []string{"Thing", "thing"} {
-		name, report := ResolveResource(doc, selection)
-		if len(report) != 0 || name != "Thing" {
-			t.Errorf("ResolveResource(%q) = %q, %v", selection, name, report)
-		}
-	}
-}
-
-func TestTerraformNameKeepsAcronymsTogether(t *testing.T) {
-	for input, want := range map[string]string{
-		"HTTPServer":  "http_server",
-		"httpServer":  "http_server",
-		"sqlReadOnly": "sql_read_only",
-		"foo-bar":     "foo_bar",
-		"foo.bar":     "foo_bar",
-		"1st":         "_1st",
-		"_private":    "_private",
-		"café":        "caf_",
-	} {
-		if got := TerraformName(input); got != want {
-			t.Errorf("TerraformName(%q) = %q, want %q", input, got, want)
-		}
-	}
-}
-
-func TestSeparatorTerraformNameCollisionIsIneligible(t *testing.T) {
-	doc := loadComponent(t, `
-    Collision:
-      type: object
-      properties:
-        foo-bar: {type: string}
-        foo_bar: {type: string}
-`)
-	typeValue, problems := Survey(doc, "Collision")
-	if len(problems) != 0 {
-		t.Fatal(problems)
-	}
-	if codes := reportCodes(nameCollisions("components.schemas.Collision", typeValue)); !slices.Contains(codes, "TERRAFORM_NAME_COLLISION") {
-		t.Fatalf("codes %v do not contain TERRAFORM_NAME_COLLISION", codes)
-	}
-}
-
-func TestAcronymTerraformNameCollisionIsIneligible(t *testing.T) {
-	doc := loadComponent(t, `
-    Collision:
-      type: object
-      properties:
-        HTTPServer: {type: string}
-        httpServer: {type: string}
-`)
-	typeValue, problems := Survey(doc, "Collision")
-	if len(problems) != 0 {
-		t.Fatal(problems)
-	}
-	if codes := reportCodes(nameCollisions("components.schemas.Collision", typeValue)); !slices.Contains(codes, "TERRAFORM_NAME_COLLISION") {
-		t.Fatalf("codes %v do not contain TERRAFORM_NAME_COLLISION", codes)
-	}
-}
-
 func TestGoNameCollisionIsIneligible(t *testing.T) {
 	doc := loadComponent(t, `
     Collision:
@@ -185,27 +121,21 @@ func TestComponentGoNameCollisionIsIneligible(t *testing.T) {
 	}
 }
 
-func TestUint64RequiresTerraformInt64Bound(t *testing.T) {
-	tests := map[string]struct {
-		maxLength string
-		eligible  bool
-	}{
-		"missing bound": {eligible: false},
-		"18 digits":     {maxLength: "      maxLength: 18\n", eligible: true},
-		"19 digits":     {maxLength: "      maxLength: 19\n", eligible: false},
-	}
-	for name, test := range tests {
-		t.Run(name, func(t *testing.T) {
-			doc := loadComponent(t, fmt.Sprintf(`
+// The model keeps the format and the length limit of a 64-bit integer string. The model
+// does not decide whether a tool can store the number: the tool checks these facts.
+func TestUint64KeepsFormatAndLength(t *testing.T) {
+	doc := loadComponent(t, `
     Counter:
       type: string
       format: uint64
-%s`, test.maxLength))
-			_, problems := Survey(doc, "Counter")
-			if (len(problems) == 0) != test.eligible {
-				t.Fatalf("problems = %v, eligible = %t", problems, test.eligible)
-			}
-		})
+      maxLength: 19
+`)
+	typeValue, problems := Survey(doc, "Counter")
+	if len(problems) != 0 {
+		t.Fatal(problems)
+	}
+	if typeValue.Kind != Integer || typeValue.Format != "uint64" || !typeValue.WireString || typeValue.MaxLength == nil || *typeValue.MaxLength != 19 {
+		t.Fatalf("type = %+v, want an integer string with format uint64 and maxLength 19", typeValue)
 	}
 }
 
@@ -465,7 +395,7 @@ func TestNestedPresenceContract(t *testing.T) {
 	}
 }
 
-// A field that Create requires is Required in Terraform and never empty, so Update always sends a
+// A field that Create requires is required in the client and never empty, so Update always sends a
 // value. Update needs no presence mark for it, at the top level and nested. A field that Create
 // does not require still needs the mark in Update.
 func TestCreateRequiredFieldNeedsNoUpdatePresence(t *testing.T) {
@@ -1100,7 +1030,7 @@ func TestBodyUpdateMaskRejectsNestedOneOf(t *testing.T) {
 	if top == dotted {
 		t.Fatal("cannot locate the body mask pattern")
 	}
-	body := Policy{Existing: true, UpdateMaskInBody: true, NoInferredValidators: true}
+	body := Policy{Existing: true, UpdateMaskInBody: true}
 	if codes := maskCodes(t, top, body); !slices.Contains(codes, "UPDATE_MASK_NESTED_ONEOF_UNSUPPORTED") {
 		t.Fatalf("codes %v do not contain UPDATE_MASK_NESTED_ONEOF_UNSUPPORTED", codes)
 	}
@@ -1478,7 +1408,7 @@ func TestSchemaIssuesAreAggregatedAndSorted(t *testing.T) {
 `)
 	report := Validate(doc, "Broken", OperationIDs{})
 	codes := reportCodes(report)
-	for _, want := range []string{"MAP_VALUE_TYPE_UNSUPPORTED", "SCHEMA_RECURSIVE", "TERRAFORM_NAME_COLLISION", "UNION_SHAPE_UNSUPPORTED"} {
+	for _, want := range []string{"GO_NAME_COLLISION", "MAP_VALUE_TYPE_UNSUPPORTED", "SCHEMA_RECURSIVE", "UNION_SHAPE_UNSUPPORTED"} {
 		if !slices.Contains(codes, want) {
 			t.Errorf("codes %v do not contain %s", codes, want)
 		}

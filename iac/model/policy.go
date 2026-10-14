@@ -91,15 +91,10 @@ type Policy struct {
 	// of the contract: a static default or computed: false. A field that is not
 	// listed uses the server default of the contract, also when it has another line.
 	Defaults []string
-	// NoInferredValidators means that no limit of the contract becomes a validator.
-	NoInferredValidators bool
-	// RejectUnknown: an existing resource stops before the API call when a request value is
-	// unknown, as a new resource does.
-	RejectUnknown bool
 	// ReadOnly lists "Component.field" of top-level fields that the server sets, although
 	// the contract does not mark them readOnly yet. They are in Get only.
 	ReadOnly []string
-	// Unwrap lists the components with one property that Terraform shows as the value of that
+	// Unwrap lists the components with one property that the generated code shows as the value of that
 	// property, in every place that has no field line.
 	Unwrap []string
 	// UnwrapFields maps "Component.field" to the choice of a field line: true shows the value
@@ -107,7 +102,7 @@ type Policy struct {
 	UnwrapFields map[string]bool
 }
 
-// unwraps reports whether Terraform shows the value inside component, the wrapper that holds
+// unwraps reports whether the generated code shows the value inside component, the wrapper that holds
 // the value of field of the owner component, or its items.
 func (p Policy) unwraps(owner, field, component string) bool {
 	if !p.Existing {
@@ -217,7 +212,7 @@ func (p Policy) OverridesDefault(component, field string) bool {
 	return p.Existing && component != "" && slices.Contains(p.Defaults, component+"."+field)
 }
 
-// EnumOverride reports whether the file states the Terraform values of the enum.
+// EnumOverride reports whether the behavior-overrides file states the values of the enum.
 func (p Policy) EnumOverride(component string) bool { return p.enumAnyPrefix(component) }
 
 // readOnly reports whether the policy states that the server sets the field.

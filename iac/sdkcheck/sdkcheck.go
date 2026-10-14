@@ -19,13 +19,60 @@ import (
 	"fmt"
 	"go/types"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"golang.org/x/tools/go/packages"
+
+	"github.com/coralogix/coralogix-management-sdk/iac/issue"
 )
 
-// loadSDK loads the packages that the refs use from the selected module graph.
-func loadSDK(refs []sdkRef, dir string) (map[string]*packages.Package, error) {
+// Source is the module that the package of a Ref must come from. An empty Version or Dir is
+// not checked.
+type Source struct {
+	Module, Version, Dir string
+	// Remediation is the fix that the SDK_SOURCE_MISMATCH issue states.
+	Remediation string
+}
+
+// Issues checks that each loaded package comes from the module that source returns for the
+// first ref of that package, and that every ref exists in its package. It changes refs in
+// place, so the caller writes the names that the SDK has: Want of a field becomes the value
+// type when the SDK uses a value, and Name of a ByType method becomes the method it found.
+func Issues(refs []Ref, loaded map[string]*packages.Package, source func(Ref) Source) issue.Report {
+	var report issue.Report
+	seenPackages := map[string]bool{}
+	for _, ref := range refs {
+		if seenPackages[ref.Pkg] {
+			continue
+		}
+		seenPackages[ref.Pkg] = true
+		pkg := loaded[ref.Pkg]
+		if pkg == nil || pkg.Module == nil {
+			continue
+		}
+		want := source(ref)
+		if pkg.Module.Path != want.Module || want.Version != "" && pkg.Module.Version != want.Version || want.Dir != "" && !samePath(pkg.Module.Dir, want.Dir) {
+			report = append(report, issue.Issue{Code: "SDK_SOURCE_MISMATCH", Location: ref.Pkg, Message: fmt.Sprintf("The loaded package comes from module %s %s at %s; expected %s %s at %s.", pkg.Module.Path, pkg.Module.Version, pkg.Module.Dir, want.Module, want.Version, want.Dir), Remediation: want.Remediation})
+		}
+	}
+	for index := range refs {
+		ref := &refs[index]
+		if err := checkRef(ref, loaded[ref.Pkg]); err != nil {
+			report = append(report, issue.Issue{Code: "SDK_SYMBOL_MISSING", Location: ref.Path, Message: fmt.Sprintf("SDK %s %s: %s", ref.Kind, ref.SDKName(), err), Remediation: "Regenerate and publish the SDK from the same OpenAPI contract, then pin that SDK version."})
+		}
+	}
+	return report
+}
+
+func samePath(a, b string) bool {
+	a, aErr := filepath.EvalSymlinks(a)
+	b, bErr := filepath.EvalSymlinks(b)
+	return aErr == nil && bErr == nil && filepath.Clean(a) == filepath.Clean(b)
+}
+
+// Load loads the packages that the refs use from the selected module graph.
+func Load(refs []Ref, dir string) (map[string]*packages.Package, error) {
 	var paths []string
 	seen := map[string]bool{}
 	for _, ref := range refs {
@@ -64,7 +111,7 @@ func offlineGoEnv() []string {
 	return append(env, "GOPROXY=off", "GOSUMDB=off")
 }
 
-func checkRef(ref *sdkRef, pkg *packages.Package) error {
+func checkRef(ref *Ref, pkg *packages.Package) error {
 	if pkg == nil {
 		return fmt.Errorf("package %s not loaded", ref.Pkg)
 	}
@@ -74,32 +121,32 @@ func checkRef(ref *sdkRef, pkg *packages.Package) error {
 		}
 		return p.Name()
 	}
-	if ref.Kind == kindField || ref.Kind == kindMethod {
+	if ref.Kind == KindField || ref.Kind == KindMethod {
 		return checkMember(ref, pkg, qualifier)
 	}
 	return checkTopLevel(ref, pkg, qualifier)
 }
 
 // checkTopLevel checks a package, or a type, const, or func of the package.
-func checkTopLevel(ref *sdkRef, pkg *packages.Package, qualifier types.Qualifier) error {
+func checkTopLevel(ref *Ref, pkg *packages.Package, qualifier types.Qualifier) error {
 	scope := pkg.Types.Scope()
 	switch ref.Kind {
-	case kindPackage:
+	case KindPackage:
 		if pkg.Name != ref.Name {
 			return fmt.Errorf("package name is %s", pkg.Name)
 		}
 		return nil
-	case kindType:
+	case KindType:
 		if _, ok := scope.Lookup(ref.Name).(*types.TypeName); !ok {
 			return errors.New("not found")
 		}
 		return nil
-	case kindConst:
+	case KindConst:
 		if _, ok := scope.Lookup(ref.Name).(*types.Const); !ok {
 			return errors.New("not found")
 		}
 		return nil
-	case kindFunc:
+	case KindFunc:
 		fn, ok := scope.Lookup(ref.Name).(*types.Func)
 		if !ok {
 			return errors.New("not found")
@@ -113,13 +160,13 @@ func checkTopLevel(ref *sdkRef, pkg *packages.Package, qualifier types.Qualifier
 }
 
 // checkMember checks a field or a method of the type ref.Owner.
-func checkMember(ref *sdkRef, pkg *packages.Package, qualifier types.Qualifier) error {
+func checkMember(ref *Ref, pkg *packages.Package, qualifier types.Qualifier) error {
 	owner, ok := pkg.Types.Scope().Lookup(ref.Owner).(*types.TypeName)
 	if !ok {
 		return fmt.Errorf("type %s not found", ref.Owner)
 	}
 	var got types.Type
-	if ref.Kind == kindField {
+	if ref.Kind == KindField {
 		st, ok := owner.Type().Underlying().(*types.Struct)
 		if !ok {
 			return fmt.Errorf("%s is not a struct", ref.Owner)
@@ -150,7 +197,7 @@ func checkMember(ref *sdkRef, pkg *packages.Package, qualifier types.Qualifier) 
 
 // findMethodByType sets ref.Name to the one exported method of owner whose
 // type is ref.Want.
-func findMethodByType(ref *sdkRef, owner *types.TypeName, qualifier types.Qualifier) error {
+func findMethodByType(ref *Ref, owner *types.TypeName, qualifier types.Qualifier) error {
 	var found []string
 	for sel := range types.NewMethodSet(types.NewPointer(owner.Type())).Methods() {
 		if sel.Obj().Exported() && types.TypeString(sel.Type(), qualifier) == ref.Want {

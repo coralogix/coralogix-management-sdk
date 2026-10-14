@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Package model is the target-neutral model of one API resource. It has no
-// Terraform and no SDK types. Build reads it from an OpenAPI document.
+// Package model is the tool-neutral model of one API resource. It has no
+// types of a generated tool and no SDK types. Build reads it from an OpenAPI document.
 package model
 
 import "strings"
@@ -68,8 +68,8 @@ type Resource struct {
 	// UnwrapUsed are the unwrap lines of the policy that decided a place: "unwrap.<Component>"
 	// for a component of the list, and "<Component>.<field>" for a field line.
 	UnwrapUsed map[string]bool
-	// HiddenWrappers are the wrapper components that collapse in every place, so Terraform has
-	// no attribute for their property.
+	// HiddenWrappers are the wrapper components that collapse in every place, so the generated
+	// code has no attribute for their property.
 	HiddenWrappers map[string]bool
 }
 
@@ -166,7 +166,7 @@ const (
 type OneOfGroup struct {
 	Arms []string // field names
 	// AllowNone: the value can have no arm set. When Create sends the value,
-	// it is the Create rule, which the Terraform configuration follows.
+	// it is the Create rule, which the client configuration follows.
 	AllowNone bool
 }
 
@@ -180,7 +180,7 @@ type Type struct {
 	// send the value.
 	CreateSchema, UpdateSchema string
 	// Model is the component of the resource response that holds the
-	// Terraform model of a request type. It is set only on the types that
+	// generated model of a request type. It is set only on the types that
 	// CreateType and UpdateType return.
 	Model  string
 	Format string // for example "double", "uint64", "date-time"
@@ -206,13 +206,13 @@ type Type struct {
 	Minimum, Maximum   *float64
 	MinItems, MaxItems *int64 // List, Set: items. Map: entries (minProperties, maxProperties).
 	// Wrappers are the one-property objects that hold the value in the API, outer first. The
-	// rest of the type is the value inside them, which Terraform shows. They are set only by
+	// rest of the type is the value inside them, which the generated code shows. They are set only by
 	// the unwrap lines of a behavior-overrides file.
 	Wrappers []Wrapper
 }
 
 // Wrapper is one object with one property that holds a value in the API, for example
-// LuceneQuery in {"luceneQuery": {"value": "error"}}. Terraform shows only the value.
+// LuceneQuery in {"luceneQuery": {"value": "error"}}. The generated code shows only the value.
 type Wrapper struct {
 	// Schema is the component in the resource response. CreateSchema and UpdateSchema are the
 	// components in the requests, "" when that request does not send the value.

@@ -192,7 +192,7 @@ func noArmDifference(op verb) string {
 }
 
 // adoptCreateRule gives get the Create rule for a oneOf with no arm. The
-// Terraform configuration follows Create, so it requires an arm when Create
+// client configuration follows Create, so it requires an arm when Create
 // does, also when Update and the response allow none.
 func adoptCreateRule(get, create *Type) {
 	get.AllowNone = create.AllowNone
@@ -260,7 +260,7 @@ func classifyField(at string, f *Field, create, update bool) error {
 			code:        "FIELD_REQUIREDNESS_UNSUPPORTED",
 			location:    at,
 			message:     "The field is optional in Create but required in Update.",
-			remediation: "Make the field optional in Update, or require it in Create so Terraform always has a value to send.",
+			remediation: "Make the field optional in Update, or require it in Create so the client always has a value to send.",
 		}
 	}
 	return nil

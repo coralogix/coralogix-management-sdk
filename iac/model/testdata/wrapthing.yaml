@@ -1,5 +1,5 @@
 # A resource that users already have, whose API holds several values in wrapper objects: an
-# object with one property, such as {"query": {"value": "error"}}. The released Terraform
+# object with one property, such as {"query": {"value": "error"}}. The released
 # resource shows only the value. Most wrapper properties do not state presence: a wrapper that
 # collapses states it. Label collapses in one place and stays an object in another, and
 # LuceneQuery stays an object in rawQuery, so their properties state presence.

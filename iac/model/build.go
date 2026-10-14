@@ -38,8 +38,6 @@ const (
 	updateMaskProtoField = "update_mask"
 	extPresence          = "x-coralogix-presence"
 	extCollection        = "x-coralogix-collection"
-	// A decimal uint64 with at most 18 digits always fits in Terraform Int64.
-	terraformInt64SafeDecimalDigits int64 = 18
 )
 
 // Load parses an OpenAPI 3 document.
@@ -975,7 +973,7 @@ func (r *Resource) requestProperty(body *base.Schema, name string) (*base.Schema
 		return nil, nil // the server sets the field, so it is not in a request
 	}
 	if r.Policy.UpdateMaskInBody && isUpdateMaskName(name) {
-		return nil, nil // the mask stays out of the Terraform schema and is not sent
+		return nil, nil // the mask is not a resource field and is not sent
 	}
 	return requestProperty(body, name)
 }
@@ -1262,8 +1260,6 @@ func checkUnsupportedSchemaKeywords(s *base.Schema) error {
 		return errors.New("minProperties and maxProperties are supported only on a map")
 	case s.ExclusiveMinimum != nil || s.ExclusiveMaximum != nil:
 		return errors.New("exclusiveMinimum and exclusiveMaximum are not supported")
-	case s.Format == "uint64" && (!slices.Equal(s.Type, []string{"string"}) || s.MaxLength == nil || *s.MaxLength > terraformInt64SafeDecimalDigits):
-		return fmt.Errorf("uint64 needs string type and maxLength at most %d to fit Terraform Int64", terraformInt64SafeDecimalDigits)
 	case len(s.PrefixItems) != 0:
 		return errors.New("prefixItems is not supported")
 	}

@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package sdkcheck lists the Go names of the management SDK that generated code uses, and
+// checks that the pinned SDK has each of them.
 package sdkcheck
 
 import (
@@ -30,40 +32,39 @@ func sdkGenRoot(module string) string { return module + "/go/openapi/gen" }
 // sdkClientSet is the handwritten cxsdk package of module.
 func sdkClientSet(module string) string { return module + "/go/openapi/cxsdk" }
 
-// refKind is the kind of Go object an sdkRef names.
-type refKind string
+// Kind is the kind of Go object a Ref names.
+type Kind string
 
 const (
-	kindPackage refKind = "package"
-	kindType    refKind = "type"
-	kindField   refKind = "field"
-	kindMethod  refKind = "method"
-	kindFunc    refKind = "func"
-	kindConst   refKind = "const"
+	KindPackage Kind = "package"
+	KindType    Kind = "type"
+	KindField   Kind = "field"
+	KindMethod  Kind = "method"
+	KindFunc    Kind = "func"
+	KindConst   Kind = "const"
 )
 
-// rule is how an SDK name is derived from the spec. The "special" rules copy
+// Rule is how an SDK name is derived from the spec. The "special" rules copy
 // a choice that the SDK makes and the spec does not show
-// (README.md, findings F15–F18).
-type rule string
+// (findings F15–F18).
+type Rule string
 
 const (
-	ruleTag               rule = "tag"                   // the operation tag
-	ruleOperationID       rule = "operationId"           // the operationId
-	ruleParameter         rule = "parameter"             // an operation parameter
-	ruleComponent         rule = "component"             // the component schema name
-	ruleProperty          rule = "property"              // the property name
-	ruleEnumValue         rule = "enum value"            // the component name and the enum value
-	ruleInlineBody        rule = "special: inline body"  // F15
-	ruleEmptyObject       rule = "special: empty object" // F16
-	ruleClientSet         rule = "special: cxsdk"        // F17
-	ruleProviderClientSet rule = "special: provider clientset"
+	RuleTag         Rule = "tag"                   // the operation tag
+	RuleOperationID Rule = "operationId"           // the operationId
+	RuleParameter   Rule = "parameter"             // an operation parameter
+	RuleComponent   Rule = "component"             // the component schema name
+	RuleProperty    Rule = "property"              // the property name
+	RuleEnumValue   Rule = "enum value"            // the component name and the enum value
+	RuleInlineBody  Rule = "special: inline body"  // F15
+	RuleEmptyObject Rule = "special: empty object" // F16
+	RuleClientSet   Rule = "special: cxsdk"        // F17
 )
 
-// sdkRef is one SDK name that the generated code uses.
-type sdkRef struct {
+// Ref is one SDK name that the generated code uses.
+type Ref struct {
 	Path  string // model path, for example "fields.config.sqlLoad.joinLimit"
-	Kind  refKind
+	Kind  Kind
 	Pkg   string // import path of the package that has the name
 	Owner string // field, method: the type that has it
 	Name  string // package: the package name
@@ -71,28 +72,28 @@ type sdkRef struct {
 	// relative to Pkg. It is "" for the other kinds.
 	Want string
 	// WantValue is the value type that a field may have instead of the
-	// pointer type Want. checkSDKNames sets Want to it when the SDK has it.
+	// pointer type Want. Issues sets Want to it when the SDK has it.
 	WantValue string
 	// ByType: a method that the SDK may name another way. When Name is not
 	// found, the check uses the one method of Owner with type Want (F17).
 	ByType bool
-	Rule   rule
+	Rule   Rule
 	// Schema is the component name of a type ref that comes from the spec.
 	// The generator uses it to find the SDK type of a model type.
 	Schema string
 }
 
 // sdkName is the name as the Go code writes it, for example "SqlLoadConfig.JoinLimit".
-func (s sdkRef) sdkName() string {
+func (s Ref) SDKName() string {
 	if s.Owner == "" {
 		return s.Name
 	}
 	return s.Owner + "." + s.Name
 }
 
-// resourceTag returns the one tag that all four operations share. The SDK
+// ResourceTag returns the one tag that all four operations share. The SDK
 // makes one package per tag.
-func resourceTag(doc *v3.Document, r *model.Resource) (string, error) {
+func ResourceTag(doc *v3.Document, r *model.Resource) (string, error) {
 	tag := ""
 	for _, op := range []model.Operation{r.Create, r.Get, r.Update, r.Delete} {
 		item, ok := doc.Paths.PathItems.Get(op.Path)
@@ -114,22 +115,34 @@ func resourceTag(doc *v3.Document, r *model.Resource) (string, error) {
 	return tag, nil
 }
 
-// resolveSDKNames lists the SDK names that the generated code uses for the
-// resource. It only applies the naming rules. checkSDKNames confirms that
-// the names exist.
-func resolveSDKNames(r *model.Resource, tag, module, providerModule string) ([]sdkRef, error) {
-	pkgName := strings.ToLower(strings.ReplaceAll(tag, " ", "_"))
-	s := &resolver{pkg: sdkGenRoot(module) + "/" + pkgName, seen: map[string]bool{}, bodies: map[string]string{}, policy: r.Policy}
-	client := camelize(tag) + "APIService"
-	s.add(sdkRef{Path: "resource", Kind: kindPackage, Name: pkgName, Rule: ruleTag})
-	s.add(sdkRef{Path: "resource", Kind: kindType, Name: client, Rule: ruleTag})
+// PackageName is the name of the generated SDK package of an operation tag, for example
+// "global_routers_service" for "Global Routers Service".
+func PackageName(tag string) string { return strings.ToLower(strings.ReplaceAll(tag, " ", "_")) }
+
+// ClientType is the API client type of the SDK package of tag, for example
+// "GlobalRoutersServiceAPIService".
+func ClientType(tag string) string { return camelize(tag) + "APIService" }
+
+// Names lists the SDK names that the generated code uses for the resource. It only applies
+// the naming rules. Issues confirms that the names exist. zeroConstants reports the enum
+// components whose zero value the generated code uses, so the SDK must have its constant. It
+// can be nil.
+//
+// A tool appends the names of its own code that the generated code uses, for example its
+// client set, before it loads and checks the list.
+func Names(r *model.Resource, tag, module string, zeroConstants func(component string) bool) ([]Ref, error) {
+	pkgName := PackageName(tag)
+	s := &resolver{pkg: sdkGenRoot(module) + "/" + pkgName, seen: map[string]bool{}, bodies: map[string]string{}, policy: r.Policy, zeroConstants: zeroConstants}
+	client := ClientType(tag)
+	s.add(Ref{Path: "resource", Kind: KindPackage, Name: pkgName, Rule: RuleTag})
+	s.add(Ref{Path: "resource", Kind: KindType, Name: client, Rule: RuleTag})
 
 	if err := s.operations(r, client); err != nil {
 		return nil, err
 	}
 
 	resource := goTypeName(r.Name)
-	s.add(sdkRef{Path: "fields", Kind: kindType, Name: resource, Rule: ruleComponent, Schema: r.Name})
+	s.add(Ref{Path: "fields", Kind: KindType, Name: resource, Rule: RuleComponent, Schema: r.Name})
 	for _, f := range r.Fields {
 		path := "fields." + f.Name
 		if f.InGet {
@@ -144,25 +157,13 @@ func resolveSDKNames(r *model.Resource, tag, module, providerModule string) ([]s
 	if err := s.bodyFields(r, resource); err != nil {
 		return nil, err
 	}
-	// The provider clientset is handwritten. Its accessor name usually drops
-	// " Service" from the tag (F17); when it does not, the check finds the
-	// accessor by its type. The SDK cxsdk package owns the API error helpers.
-	providerClientSet := providerModule + "/internal/clientset"
-	for _, ref := range []sdkRef{
-		{Path: "provider.clientset", Kind: kindPackage, Name: "clientset"},
-		{Path: "provider.clientset", Kind: kindType, Name: "ClientSet"},
-		{Path: "resource", Kind: kindMethod, Owner: "ClientSet", Name: camelize(strings.TrimSuffix(tag, " Service")),
-			Want: "func() *" + pkgName + "." + client, ByType: true},
+	// The SDK cxsdk package owns the API error helpers.
+	for _, ref := range []Ref{
+		{Path: "cxsdk", Kind: KindPackage, Name: "cxsdk"},
+		{Path: "cxsdk.errors", Kind: KindFunc, Name: "NewAPIError", Want: "func(resp *http.Response, err error) error"},
+		{Path: "cxsdk.errors", Kind: KindFunc, Name: "IsNotFound", Want: "func(err error) bool"},
 	} {
-		ref.Pkg, ref.Rule = providerClientSet, ruleProviderClientSet
-		s.refs = append(s.refs, ref)
-	}
-	for _, ref := range []sdkRef{
-		{Path: "cxsdk", Kind: kindPackage, Name: "cxsdk"},
-		{Path: "cxsdk.errors", Kind: kindFunc, Name: "NewAPIError", Want: "func(resp *http.Response, err error) error"},
-		{Path: "cxsdk.errors", Kind: kindFunc, Name: "IsNotFound", Want: "func(err error) bool"},
-	} {
-		ref.Pkg, ref.Rule = sdkClientSet(module), ruleClientSet
+		ref.Pkg, ref.Rule = sdkClientSet(module), RuleClientSet
 		s.refs = append(s.refs, ref)
 	}
 	return s.refs, nil
@@ -175,10 +176,10 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 	if r.MaskInBody {
 		// The body property carries the same mask a query parameter would. It is
 		// *string, or a string when the SDK uses a value.
-		s.add(sdkRef{Path: "update.body." + r.UpdateMask, Kind: kindField, Owner: s.bodies["update"], Name: goFieldName(r.UpdateMask),
-			Want: "*string", WantValue: "string", Rule: ruleProperty})
+		s.add(Ref{Path: "update.body." + r.UpdateMask, Kind: KindField, Owner: s.bodies["update"], Name: goFieldName(r.UpdateMask),
+			Want: "*string", WantValue: "string", Rule: RuleProperty})
 	}
-	if id := serverSetBodyID(r); id != nil && r.Policy.RequestWrapper == "" {
+	if id := ServerSetBodyID(r); id != nil && r.Policy.RequestWrapper == "" {
 		// No Update field sends a server-set id, so Update sets this field of the body itself.
 		if err := s.field("update.body."+id.Name, s.bodies["update"], id.Name, id.Type, true); err != nil {
 			return err
@@ -186,8 +187,8 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 	}
 	if wrapper := r.Policy.RequestWrapper; wrapper != "" {
 		for _, name := range []string{"create", "update"} {
-			s.add(sdkRef{Path: name + ".body." + wrapper, Kind: kindField, Owner: s.bodies[name], Name: goFieldName(wrapper),
-				Want: "*" + resource, WantValue: resource, Rule: ruleProperty})
+			s.add(Ref{Path: name + ".body." + wrapper, Kind: KindField, Owner: s.bodies[name], Name: goFieldName(wrapper),
+				Want: "*" + resource, WantValue: resource, Rule: RuleProperty})
 		}
 		return nil
 	}
@@ -243,13 +244,15 @@ func (s *resolver) operations(r *model.Resource, client string) error {
 
 type resolver struct {
 	pkg    string
-	refs   []sdkRef
+	refs   []Ref
 	seen   map[string]bool   // component schemas already walked
 	bodies map[string]string // operation name → request body type
 	policy model.Policy
+	// zeroConstants reports the enum components whose zero constant the generated code uses.
+	zeroConstants func(component string) bool
 }
 
-func (s *resolver) add(ref sdkRef) {
+func (s *resolver) add(ref Ref) {
 	ref.Pkg = s.pkg
 	s.refs = append(s.refs, ref)
 }
@@ -264,18 +267,18 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	builder := "Api" + method + "Request"
 	params := "ctx context.Context"
 	if withID {
-		idType, err := valueType(r.IDType)
+		idType, err := ValueType(r.IDType)
 		if err != nil {
 			return fmt.Errorf("%s.id: %w", path, err)
 		}
 		params += ", " + r.IDParam + " " + idType
 	}
-	s.add(sdkRef{Path: path, Kind: kindMethod, Owner: client, Name: method,
-		Want: "func(" + params + ") " + builder, Rule: ruleOperationID})
-	s.add(sdkRef{Path: path, Kind: kindType, Name: builder, Rule: ruleOperationID})
+	s.add(Ref{Path: path, Kind: KindMethod, Owner: client, Name: method,
+		Want: "func(" + params + ") " + builder, Rule: RuleOperationID})
+	s.add(Ref{Path: path, Kind: KindType, Name: builder, Rule: RuleOperationID})
 	if name == "update" && !r.Replace && !r.MaskInBody {
-		s.add(sdkRef{Path: path + ".mask", Kind: kindMethod, Owner: builder, Name: goFieldName(r.UpdateMask),
-			Want: "func(" + lowerFirst(goFieldName(r.UpdateMask)) + " string) " + builder, Rule: ruleParameter})
+		s.add(Ref{Path: path + ".mask", Kind: KindMethod, Owner: builder, Name: goFieldName(r.UpdateMask),
+			Want: "func(" + lowerFirst(goFieldName(r.UpdateMask)) + " string) " + builder, Rule: RuleParameter})
 	}
 
 	switch op.Body {
@@ -283,9 +286,9 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	case "inline":
 		body := inlineBodyName(method, op)
 		s.bodies[name] = body
-		s.add(sdkRef{Path: path + ".body", Kind: kindType, Name: body, Rule: ruleInlineBody})
-		s.add(sdkRef{Path: path + ".body", Kind: kindMethod, Owner: builder, Name: body,
-			Want: "func(" + lowerFirst(body) + " " + body + ") " + builder, Rule: ruleInlineBody})
+		s.add(Ref{Path: path + ".body", Kind: KindType, Name: body, Rule: RuleInlineBody})
+		s.add(Ref{Path: path + ".body", Kind: KindMethod, Owner: builder, Name: body,
+			Want: "func(" + lowerFirst(body) + " " + body + ") " + builder, Rule: RuleInlineBody})
 	default:
 		return fmt.Errorf("%s.body: component body %s is not supported", path, op.Body)
 	}
@@ -293,16 +296,16 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	resp := goTypeName(op.Response.Schema)
 	if op.Response.Empty {
 		// An object with no fields has no SDK type (F16).
-		s.add(sdkRef{Path: path, Kind: kindMethod, Owner: builder, Name: "Execute",
-			Want: "func() (map[string]interface{}, *http.Response, error)", Rule: ruleEmptyObject})
+		s.add(Ref{Path: path, Kind: KindMethod, Owner: builder, Name: "Execute",
+			Want: "func() (map[string]interface{}, *http.Response, error)", Rule: RuleEmptyObject})
 		return nil
 	}
-	s.add(sdkRef{Path: path + ".response", Kind: kindType, Name: resp, Rule: ruleComponent})
-	s.add(sdkRef{Path: path, Kind: kindMethod, Owner: builder, Name: "Execute",
-		Want: "func() (*" + resp + ", *http.Response, error)", Rule: ruleOperationID})
+	s.add(Ref{Path: path + ".response", Kind: KindType, Name: resp, Rule: RuleComponent})
+	s.add(Ref{Path: path, Kind: KindMethod, Owner: builder, Name: "Execute",
+		Want: "func() (*" + resp + ", *http.Response, error)", Rule: RuleOperationID})
 	if op.Response.Field != "" {
-		s.add(sdkRef{Path: path + ".response." + op.Response.Field, Kind: kindField, Owner: resp,
-			Name: goFieldName(op.Response.Field), Want: "*" + goTypeName(r.Name), WantValue: goTypeName(r.Name), Rule: ruleProperty})
+		s.add(Ref{Path: path + ".response." + op.Response.Field, Kind: KindField, Owner: resp,
+			Name: goFieldName(op.Response.Field), Want: "*" + goTypeName(r.Name), WantValue: goTypeName(r.Name), Rule: RuleProperty})
 	}
 	return nil
 }
@@ -326,7 +329,7 @@ func (s *resolver) field(path, owner, name string, t *model.Type, allowValue boo
 	if err != nil {
 		return fmt.Errorf("%s: %w", path, err)
 	}
-	ref := sdkRef{Path: path, Kind: kindField, Owner: owner, Name: goFieldName(name), Want: goType, Rule: r}
+	ref := Ref{Path: path, Kind: KindField, Owner: owner, Name: goFieldName(name), Want: goType, Rule: r}
 	// openapi-generator uses a value, not a pointer, for a required field.
 	// Only the SDK knows which spec it was generated from (F18), so the
 	// check accepts both and keeps the one that the SDK has.
@@ -352,13 +355,13 @@ func (s *resolver) nested(path string, t *model.Type) error {
 		}
 		s.seen[t.Schema] = true
 		name := goTypeName(t.Schema)
-		s.add(sdkRef{Path: path, Kind: kindType, Name: name, Rule: ruleComponent, Schema: t.Schema})
+		s.add(Ref{Path: path, Kind: KindType, Name: name, Rule: RuleComponent, Schema: t.Schema})
 		for _, v := range t.Values {
-			s.add(sdkRef{Path: path + "." + v, Kind: kindConst, Name: strings.ToUpper(name) + "_" + v, Rule: ruleEnumValue})
+			s.add(Ref{Path: path + "." + v, Kind: KindConst, Name: strings.ToUpper(name) + "_" + v, Rule: RuleEnumValue})
 		}
-		if s.policy.EnumOverride(t.Schema) && t.EnumZero != "" {
-			// The overrides map the zero value to a Terraform value, so the SDK must have it.
-			s.add(sdkRef{Path: path + "." + t.EnumZero, Kind: kindConst, Name: strings.ToUpper(name) + "_" + t.EnumZero, Rule: ruleEnumValue})
+		if s.zeroConstants != nil && s.zeroConstants(t.Schema) && t.EnumZero != "" {
+			// The generated code uses the zero value, so the SDK must have it.
+			s.add(Ref{Path: path + "." + t.EnumZero, Kind: KindConst, Name: strings.ToUpper(name) + "_" + t.EnumZero, Rule: RuleEnumValue})
 		}
 	case model.Object, model.OneOf:
 		// An object with no fields has no SDK type (F16).
@@ -367,7 +370,7 @@ func (s *resolver) nested(path string, t *model.Type) error {
 		}
 		s.seen[t.Schema] = true
 		name := goTypeName(t.Schema)
-		s.add(sdkRef{Path: path, Kind: kindType, Name: name, Rule: ruleComponent, Schema: t.Schema})
+		s.add(Ref{Path: path, Kind: KindType, Name: name, Rule: RuleComponent, Schema: t.Schema})
 		for _, f := range t.Fields {
 			child := path + "." + f.Name
 			if err := s.field(child, name, f.Name, f.Type, f.Attrs.Required); err != nil {
@@ -388,7 +391,7 @@ func (s *resolver) wrappers(path string, t *model.Type) error {
 		if !s.seen[w.Schema] {
 			s.seen[w.Schema] = true
 			name := goTypeName(w.Schema)
-			s.add(sdkRef{Path: path, Kind: kindType, Name: name, Rule: ruleComponent, Schema: w.Schema})
+			s.add(Ref{Path: path, Kind: KindType, Name: name, Rule: RuleComponent, Schema: w.Schema})
 			rest := *t
 			rest.Wrappers = t.Wrappers[i+1:]
 			if err := s.field(path+"."+w.Field, name, w.Field, &rest, w.Attrs.Required); err != nil {
@@ -402,12 +405,12 @@ func (s *resolver) wrappers(path string, t *model.Type) error {
 
 // fieldType is the Go type of an optional SDK struct field. A required field
 // can also be the value type (see field).
-func fieldType(t *model.Type) (string, rule, error) {
+func fieldType(t *model.Type) (string, Rule, error) {
 	if len(t.Wrappers) != 0 {
-		return "*" + goTypeName(t.Wrappers[0].Schema), ruleProperty, nil
+		return "*" + goTypeName(t.Wrappers[0].Schema), RuleProperty, nil
 	}
 	if (t.Kind == model.Object || t.Kind == model.OneOf) && len(t.Fields) == 0 {
-		return "map[string]interface{}", ruleEmptyObject, nil
+		return "map[string]interface{}", RuleEmptyObject, nil
 	}
 	if t.Kind == model.List || t.Kind == model.Set || t.Kind == model.Map {
 		elem, _, err := fieldType(t.Elem)
@@ -418,18 +421,18 @@ func fieldType(t *model.Type) (string, rule, error) {
 			return "", "", fmt.Errorf("%s of %s is not supported", t.Kind, elem)
 		}
 		if t.Kind == model.Map {
-			return "map[string]" + elem[1:], ruleProperty, nil
+			return "map[string]" + elem[1:], RuleProperty, nil
 		}
-		return "[]" + elem[1:], ruleProperty, nil
+		return "[]" + elem[1:], RuleProperty, nil
 	}
-	v, err := valueType(t)
+	v, err := ValueType(t)
 	if err != nil {
 		return "", "", err
 	}
-	return "*" + v, ruleProperty, nil
+	return "*" + v, RuleProperty, nil
 }
 
-func valueType(t *model.Type) (string, error) {
+func ValueType(t *model.Type) (string, error) {
 	switch t.Kind {
 	case model.String:
 		if t.Format == "date-time" {
@@ -479,9 +482,9 @@ func camelize(s string) string {
 
 func lowerFirst(s string) string { return strings.ToLower(s[:1]) + s[1:] }
 
-// serverSetBodyID returns the id field when Update carries the id in its body and no Update field
+// ServerSetBodyID returns the id field when Update carries the id in its body and no Update field
 // sends it, because only the server sets it. It returns nil otherwise.
-func serverSetBodyID(r *model.Resource) *model.ResourceField {
+func ServerSetBodyID(r *model.Resource) *model.ResourceField {
 	if r.Singleton || !r.Policy.UpdateIDInBody {
 		return nil
 	}
