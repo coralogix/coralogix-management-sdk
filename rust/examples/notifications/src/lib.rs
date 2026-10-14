@@ -757,7 +757,7 @@ mod tests {
                     }],
                     router: Some(NotificationRouter {
                         id: Some("router_default".into()),
-                        notify_on: Some(NotifyOn::TriggeredAndResolved.into()),
+                        notify_on: None,
                     }),
                 }),
                 entity_labels: [
