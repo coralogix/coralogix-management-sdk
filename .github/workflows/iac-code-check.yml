@@ -1,0 +1,41 @@
+name: "[IaC] Code Check"
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ master ]
+    paths:
+      - 'iac/**'
+      - '.github/workflows/iac-code-check.yml'
+
+jobs:
+  check:
+    name: "[IaC] Format, Lint, Test"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: iac
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: iac/go.mod
+      - name: Check formatting
+        run: test -z "$(gofmt -l .)"
+      - name: Vet and test
+        run: |
+          go vet ./...
+          go test ./...
+      - name: Keep tool code out of the iac module
+        run: |
+          if grep -rniI terraform .; then
+            echo "The iac module holds the API facts and checks that every tool needs. Move Terraform code to the Terraform generator." >&2
+            exit 1
+          fi
+      - uses: golangci/golangci-lint-action@v7
+        with:
+          version: v2.12.2
+          working-directory: iac
+          args: --config ../go/.golangci.yml
