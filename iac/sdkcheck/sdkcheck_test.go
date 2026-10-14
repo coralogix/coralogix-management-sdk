@@ -115,6 +115,28 @@ func TestIssuesChecksNamesAndSources(t *testing.T) {
 	}
 }
 
+func TestSDKLoadingIsOffline(t *testing.T) {
+	t.Setenv("GOPROXY", "https://proxy.invalid")
+	t.Setenv("GOSUMDB", "sum.invalid")
+	env := offlineGoEnv()
+	if got := environmentValue(env, "GOPROXY"); got != "off" {
+		t.Fatalf("GOPROXY = %q, want off", got)
+	}
+	if got := environmentValue(env, "GOSUMDB"); got != "off" {
+		t.Fatalf("GOSUMDB = %q, want off", got)
+	}
+}
+
+func environmentValue(env []string, name string) string {
+	prefix := name + "="
+	for _, item := range env {
+		if strings.HasPrefix(item, prefix) {
+			return strings.TrimPrefix(item, prefix)
+		}
+	}
+	return ""
+}
+
 func codesOf(report issue.Report) []string {
 	var codes []string
 	for _, item := range report {
