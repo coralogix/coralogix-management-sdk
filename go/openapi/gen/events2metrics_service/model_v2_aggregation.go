@@ -13,6 +13,7 @@ package events2metrics_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &V2Aggregation{}
 
 // V2Aggregation This data structure represents an aggregation
 type V2Aggregation struct {
-	AggType *AggType `json:"aggType,omitempty"`
+	AggType AggType `json:"aggType"`
 	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// e2m aggregate histogram type metadata
@@ -31,7 +32,7 @@ type V2Aggregation struct {
 	None map[string]interface{} `json:"none,omitempty"`
 	Samples *E2MAggSamples `json:"samples,omitempty"`
 	// Name of the target metric produced by this aggregation.
-	TargetMetricName *string `json:"targetMetricName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	TargetMetricName string `json:"targetMetricName" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -42,8 +43,10 @@ type _V2Aggregation V2Aggregation
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewV2Aggregation() *V2Aggregation {
+func NewV2Aggregation(aggType AggType, targetMetricName string) *V2Aggregation {
 	this := V2Aggregation{}
+	this.AggType = aggType
+	this.TargetMetricName = targetMetricName
 	return &this
 }
 
@@ -55,36 +58,28 @@ func NewV2AggregationWithDefaults() *V2Aggregation {
 	return &this
 }
 
-// GetAggType returns the AggType field value if set, zero value otherwise.
+// GetAggType returns the AggType field value
 func (o *V2Aggregation) GetAggType() AggType {
-	if o == nil || IsNil(o.AggType) {
+	if o == nil {
 		var ret AggType
 		return ret
 	}
-	return *o.AggType
+
+	return o.AggType
 }
 
-// GetAggTypeOk returns a tuple with the AggType field value if set, nil otherwise
+// GetAggTypeOk returns a tuple with the AggType field value
 // and a boolean to check if the value has been set.
 func (o *V2Aggregation) GetAggTypeOk() (*AggType, bool) {
-	if o == nil || IsNil(o.AggType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AggType, true
+	return &o.AggType, true
 }
 
-// HasAggType returns a boolean if a field has been set.
-func (o *V2Aggregation) HasAggType() bool {
-	if o != nil && !IsNil(o.AggType) {
-		return true
-	}
-
-	return false
-}
-
-// SetAggType gets a reference to the given AggType and assigns it to the AggType field.
+// SetAggType sets field value
 func (o *V2Aggregation) SetAggType(v AggType) {
-	o.AggType = &v
+	o.AggType = v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -215,36 +210,28 @@ func (o *V2Aggregation) SetSamples(v E2MAggSamples) {
 	o.Samples = &v
 }
 
-// GetTargetMetricName returns the TargetMetricName field value if set, zero value otherwise.
+// GetTargetMetricName returns the TargetMetricName field value
 func (o *V2Aggregation) GetTargetMetricName() string {
-	if o == nil || IsNil(o.TargetMetricName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TargetMetricName
+
+	return o.TargetMetricName
 }
 
-// GetTargetMetricNameOk returns a tuple with the TargetMetricName field value if set, nil otherwise
+// GetTargetMetricNameOk returns a tuple with the TargetMetricName field value
 // and a boolean to check if the value has been set.
 func (o *V2Aggregation) GetTargetMetricNameOk() (*string, bool) {
-	if o == nil || IsNil(o.TargetMetricName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetMetricName, true
+	return &o.TargetMetricName, true
 }
 
-// HasTargetMetricName returns a boolean if a field has been set.
-func (o *V2Aggregation) HasTargetMetricName() bool {
-	if o != nil && !IsNil(o.TargetMetricName) {
-		return true
-	}
-
-	return false
-}
-
-// SetTargetMetricName gets a reference to the given string and assigns it to the TargetMetricName field.
+// SetTargetMetricName sets field value
 func (o *V2Aggregation) SetTargetMetricName(v string) {
-	o.TargetMetricName = &v
+	o.TargetMetricName = v
 }
 
 func (o V2Aggregation) MarshalJSON() ([]byte, error) {
@@ -257,9 +244,7 @@ func (o V2Aggregation) MarshalJSON() ([]byte, error) {
 
 func (o V2Aggregation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AggType) {
-		toSerialize["aggType"] = o.AggType
-	}
+	toSerialize["aggType"] = o.AggType
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
@@ -272,9 +257,7 @@ func (o V2Aggregation) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Samples) {
 		toSerialize["samples"] = o.Samples
 	}
-	if !IsNil(o.TargetMetricName) {
-		toSerialize["targetMetricName"] = o.TargetMetricName
-	}
+	toSerialize["targetMetricName"] = o.TargetMetricName
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["none"]; exists {
 		optionalOneOfGroup0Matches++
@@ -307,6 +290,42 @@ func (o V2Aggregation) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *V2Aggregation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"aggType",
+		"targetMetricName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	optionalOneOfGroup0Matches := 0
+	if _, exists := allProperties["none"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["samples"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["histogram"]; exists {
+		optionalOneOfGroup0Matches++
+	}
+	if optionalOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [none, samples, histogram] may be set"}
+	}
+
 	varV2Aggregation := _V2Aggregation{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

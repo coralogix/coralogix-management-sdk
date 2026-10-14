@@ -167,6 +167,7 @@
                   }
                 },
                 "required": [
+                  "id",
                   "name",
                   "type"
                 ],
@@ -309,7 +310,8 @@
                   }
                 },
                 "required": [
-                  "name"
+                  "name",
+                  "type"
                 ],
                 "title": "E2M Create Params",
                 "type": "object"
@@ -825,6 +827,7 @@
       "E2M": {
         "title": "E2M",
         "required": [
+          "id",
           "name",
           "type"
         ],
@@ -994,6 +997,9 @@
       },
       "E2MAggSamples": {
         "title": "E2M Aggregate Samples",
+        "required": [
+          "sampleType"
+        ],
         "type": "object",
         "properties": {
           "sampleType": {
@@ -1009,7 +1015,8 @@
       "E2MCreateParams": {
         "title": "E2M Create Params",
         "required": [
-          "name"
+          "name",
+          "type"
         ],
         "type": "object",
         "oneOf": [
@@ -1252,7 +1259,8 @@
         "properties": {
           "hasExceededLimit": {
             "type": "boolean",
-            "description": "The has exceeded limit."
+            "description": "Whether the permutations exceeded the limit. Set by the server; a value sent by the client is ignored.",
+            "readOnly": true
           },
           "limit": {
             "maximum": 10000000,
@@ -1609,6 +1617,10 @@
       },
       "v2.Aggregation": {
         "title": "Aggregation",
+        "required": [
+          "aggType",
+          "targetMetricName"
+        ],
         "type": "object",
         "oneOf": [
           {

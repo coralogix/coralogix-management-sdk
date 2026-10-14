@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &OneTime{}
 
 // OneTime One time.
 type OneTime struct {
-	Timeframe *Timeframe `json:"timeframe,omitempty"`
+	Timeframe Timeframe `json:"timeframe"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _OneTime OneTime
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewOneTime() *OneTime {
+func NewOneTime(timeframe Timeframe) *OneTime {
 	this := OneTime{}
+	this.Timeframe = timeframe
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewOneTimeWithDefaults() *OneTime {
 	return &this
 }
 
-// GetTimeframe returns the Timeframe field value if set, zero value otherwise.
+// GetTimeframe returns the Timeframe field value
 func (o *OneTime) GetTimeframe() Timeframe {
-	if o == nil || IsNil(o.Timeframe) {
+	if o == nil {
 		var ret Timeframe
 		return ret
 	}
-	return *o.Timeframe
+
+	return o.Timeframe
 }
 
-// GetTimeframeOk returns a tuple with the Timeframe field value if set, nil otherwise
+// GetTimeframeOk returns a tuple with the Timeframe field value
 // and a boolean to check if the value has been set.
 func (o *OneTime) GetTimeframeOk() (*Timeframe, bool) {
-	if o == nil || IsNil(o.Timeframe) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timeframe, true
+	return &o.Timeframe, true
 }
 
-// HasTimeframe returns a boolean if a field has been set.
-func (o *OneTime) HasTimeframe() bool {
-	if o != nil && !IsNil(o.Timeframe) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeframe gets a reference to the given Timeframe and assigns it to the Timeframe field.
+// SetTimeframe sets field value
 func (o *OneTime) SetTimeframe(v Timeframe) {
-	o.Timeframe = &v
+	o.Timeframe = v
 }
 
 func (o OneTime) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o OneTime) MarshalJSON() ([]byte, error) {
 
 func (o OneTime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Timeframe) {
-		toSerialize["timeframe"] = o.Timeframe
-	}
+	toSerialize["timeframe"] = o.Timeframe
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o OneTime) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *OneTime) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"timeframe",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varOneTime := _OneTime{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

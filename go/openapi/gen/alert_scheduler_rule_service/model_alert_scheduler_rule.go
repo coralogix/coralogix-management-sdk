@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -28,14 +29,14 @@ type AlertSchedulerRule struct {
 	Description *string `json:"description,omitempty"`
 	// Whether this resource is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	Filter *AlertSchedulerRuleProtobufV1Filter `json:"filter,omitempty"`
+	Filter AlertSchedulerRuleProtobufV1Filter `json:"filter"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty"`
 	// Metadata labels.
 	MetaLabels []MetaLabelsProtobufV1MetaLabel `json:"metaLabels,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
-	Schedule *Schedule `json:"schedule,omitempty"`
+	Name string `json:"name"`
+	Schedule Schedule `json:"schedule"`
 	// Unique identifier.
 	UniqueIdentifier *string `json:"uniqueIdentifier,omitempty"`
 	// Last-updated timestamp.
@@ -50,8 +51,11 @@ type _AlertSchedulerRule AlertSchedulerRule
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewAlertSchedulerRule() *AlertSchedulerRule {
+func NewAlertSchedulerRule(filter AlertSchedulerRuleProtobufV1Filter, name string, schedule Schedule) *AlertSchedulerRule {
 	this := AlertSchedulerRule{}
+	this.Filter = filter
+	this.Name = name
+	this.Schedule = schedule
 	return &this
 }
 
@@ -159,36 +163,28 @@ func (o *AlertSchedulerRule) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetFilter returns the Filter field value if set, zero value otherwise.
+// GetFilter returns the Filter field value
 func (o *AlertSchedulerRule) GetFilter() AlertSchedulerRuleProtobufV1Filter {
-	if o == nil || IsNil(o.Filter) {
+	if o == nil {
 		var ret AlertSchedulerRuleProtobufV1Filter
 		return ret
 	}
-	return *o.Filter
+
+	return o.Filter
 }
 
-// GetFilterOk returns a tuple with the Filter field value if set, nil otherwise
+// GetFilterOk returns a tuple with the Filter field value
 // and a boolean to check if the value has been set.
 func (o *AlertSchedulerRule) GetFilterOk() (*AlertSchedulerRuleProtobufV1Filter, bool) {
-	if o == nil || IsNil(o.Filter) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Filter, true
+	return &o.Filter, true
 }
 
-// HasFilter returns a boolean if a field has been set.
-func (o *AlertSchedulerRule) HasFilter() bool {
-	if o != nil && !IsNil(o.Filter) {
-		return true
-	}
-
-	return false
-}
-
-// SetFilter gets a reference to the given AlertSchedulerRuleProtobufV1Filter and assigns it to the Filter field.
+// SetFilter sets field value
 func (o *AlertSchedulerRule) SetFilter(v AlertSchedulerRuleProtobufV1Filter) {
-	o.Filter = &v
+	o.Filter = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -255,68 +251,52 @@ func (o *AlertSchedulerRule) SetMetaLabels(v []MetaLabelsProtobufV1MetaLabel) {
 	o.MetaLabels = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *AlertSchedulerRule) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *AlertSchedulerRule) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *AlertSchedulerRule) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *AlertSchedulerRule) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetSchedule returns the Schedule field value if set, zero value otherwise.
+// GetSchedule returns the Schedule field value
 func (o *AlertSchedulerRule) GetSchedule() Schedule {
-	if o == nil || IsNil(o.Schedule) {
+	if o == nil {
 		var ret Schedule
 		return ret
 	}
-	return *o.Schedule
+
+	return o.Schedule
 }
 
-// GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
+// GetScheduleOk returns a tuple with the Schedule field value
 // and a boolean to check if the value has been set.
 func (o *AlertSchedulerRule) GetScheduleOk() (*Schedule, bool) {
-	if o == nil || IsNil(o.Schedule) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Schedule, true
+	return &o.Schedule, true
 }
 
-// HasSchedule returns a boolean if a field has been set.
-func (o *AlertSchedulerRule) HasSchedule() bool {
-	if o != nil && !IsNil(o.Schedule) {
-		return true
-	}
-
-	return false
-}
-
-// SetSchedule gets a reference to the given Schedule and assigns it to the Schedule field.
+// SetSchedule sets field value
 func (o *AlertSchedulerRule) SetSchedule(v Schedule) {
-	o.Schedule = &v
+	o.Schedule = v
 }
 
 // GetUniqueIdentifier returns the UniqueIdentifier field value if set, zero value otherwise.
@@ -402,21 +382,15 @@ func (o AlertSchedulerRule) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Filter) {
-		toSerialize["filter"] = o.Filter
-	}
+	toSerialize["filter"] = o.Filter
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
 	if !IsNil(o.MetaLabels) {
 		toSerialize["metaLabels"] = o.MetaLabels
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Schedule) {
-		toSerialize["schedule"] = o.Schedule
-	}
+	toSerialize["name"] = o.Name
+	toSerialize["schedule"] = o.Schedule
 	if !IsNil(o.UniqueIdentifier) {
 		toSerialize["uniqueIdentifier"] = o.UniqueIdentifier
 	}
@@ -432,6 +406,29 @@ func (o AlertSchedulerRule) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AlertSchedulerRule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"filter",
+		"name",
+		"schedule",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAlertSchedulerRule := _AlertSchedulerRule{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

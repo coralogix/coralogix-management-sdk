@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &Weekly{}
 // Weekly Weekly.
 type Weekly struct {
 	// The days of week.
-	DaysOfWeek []int32 `json:"daysOfWeek,omitempty"`
+	DaysOfWeek []int32 `json:"daysOfWeek"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _Weekly Weekly
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewWeekly() *Weekly {
+func NewWeekly(daysOfWeek []int32) *Weekly {
 	this := Weekly{}
+	this.DaysOfWeek = daysOfWeek
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewWeeklyWithDefaults() *Weekly {
 	return &this
 }
 
-// GetDaysOfWeek returns the DaysOfWeek field value if set, zero value otherwise.
+// GetDaysOfWeek returns the DaysOfWeek field value
 func (o *Weekly) GetDaysOfWeek() []int32 {
-	if o == nil || IsNil(o.DaysOfWeek) {
+	if o == nil {
 		var ret []int32
 		return ret
 	}
+
 	return o.DaysOfWeek
 }
 
-// GetDaysOfWeekOk returns a tuple with the DaysOfWeek field value if set, nil otherwise
+// GetDaysOfWeekOk returns a tuple with the DaysOfWeek field value
 // and a boolean to check if the value has been set.
 func (o *Weekly) GetDaysOfWeekOk() ([]int32, bool) {
-	if o == nil || IsNil(o.DaysOfWeek) {
+	if o == nil {
 		return nil, false
 	}
 	return o.DaysOfWeek, true
 }
 
-// HasDaysOfWeek returns a boolean if a field has been set.
-func (o *Weekly) HasDaysOfWeek() bool {
-	if o != nil && !IsNil(o.DaysOfWeek) {
-		return true
-	}
-
-	return false
-}
-
-// SetDaysOfWeek gets a reference to the given []int32 and assigns it to the DaysOfWeek field.
+// SetDaysOfWeek sets field value
 func (o *Weekly) SetDaysOfWeek(v []int32) {
 	o.DaysOfWeek = v
 }
@@ -89,9 +83,7 @@ func (o Weekly) MarshalJSON() ([]byte, error) {
 
 func (o Weekly) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DaysOfWeek) {
-		toSerialize["daysOfWeek"] = o.DaysOfWeek
-	}
+	toSerialize["daysOfWeek"] = o.DaysOfWeek
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o Weekly) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Weekly) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"daysOfWeek",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varWeekly := _Weekly{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

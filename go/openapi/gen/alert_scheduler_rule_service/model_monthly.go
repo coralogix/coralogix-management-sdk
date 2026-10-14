@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &Monthly{}
 // Monthly Monthly.
 type Monthly struct {
 	// The days of month.
-	DaysOfMonth []int32 `json:"daysOfMonth,omitempty"`
+	DaysOfMonth []int32 `json:"daysOfMonth"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _Monthly Monthly
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewMonthly() *Monthly {
+func NewMonthly(daysOfMonth []int32) *Monthly {
 	this := Monthly{}
+	this.DaysOfMonth = daysOfMonth
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewMonthlyWithDefaults() *Monthly {
 	return &this
 }
 
-// GetDaysOfMonth returns the DaysOfMonth field value if set, zero value otherwise.
+// GetDaysOfMonth returns the DaysOfMonth field value
 func (o *Monthly) GetDaysOfMonth() []int32 {
-	if o == nil || IsNil(o.DaysOfMonth) {
+	if o == nil {
 		var ret []int32
 		return ret
 	}
+
 	return o.DaysOfMonth
 }
 
-// GetDaysOfMonthOk returns a tuple with the DaysOfMonth field value if set, nil otherwise
+// GetDaysOfMonthOk returns a tuple with the DaysOfMonth field value
 // and a boolean to check if the value has been set.
 func (o *Monthly) GetDaysOfMonthOk() ([]int32, bool) {
-	if o == nil || IsNil(o.DaysOfMonth) {
+	if o == nil {
 		return nil, false
 	}
 	return o.DaysOfMonth, true
 }
 
-// HasDaysOfMonth returns a boolean if a field has been set.
-func (o *Monthly) HasDaysOfMonth() bool {
-	if o != nil && !IsNil(o.DaysOfMonth) {
-		return true
-	}
-
-	return false
-}
-
-// SetDaysOfMonth gets a reference to the given []int32 and assigns it to the DaysOfMonth field.
+// SetDaysOfMonth sets field value
 func (o *Monthly) SetDaysOfMonth(v []int32) {
 	o.DaysOfMonth = v
 }
@@ -89,9 +83,7 @@ func (o Monthly) MarshalJSON() ([]byte, error) {
 
 func (o Monthly) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DaysOfMonth) {
-		toSerialize["daysOfMonth"] = o.DaysOfMonth
-	}
+	toSerialize["daysOfMonth"] = o.DaysOfMonth
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o Monthly) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Monthly) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"daysOfMonth",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varMonthly := _Monthly{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -24,7 +25,7 @@ var _ MappedNullable = &V1Duration{}
 type V1Duration struct {
 	// The for over.
 	ForOver *int32 `json:"forOver,omitempty"`
-	Frequency *DurationFrequency `json:"frequency,omitempty"`
+	Frequency DurationFrequency `json:"frequency"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -35,8 +36,9 @@ type _V1Duration V1Duration
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewV1Duration() *V1Duration {
+func NewV1Duration(frequency DurationFrequency) *V1Duration {
 	this := V1Duration{}
+	this.Frequency = frequency
 	return &this
 }
 
@@ -80,36 +82,28 @@ func (o *V1Duration) SetForOver(v int32) {
 	o.ForOver = &v
 }
 
-// GetFrequency returns the Frequency field value if set, zero value otherwise.
+// GetFrequency returns the Frequency field value
 func (o *V1Duration) GetFrequency() DurationFrequency {
-	if o == nil || IsNil(o.Frequency) {
+	if o == nil {
 		var ret DurationFrequency
 		return ret
 	}
-	return *o.Frequency
+
+	return o.Frequency
 }
 
-// GetFrequencyOk returns a tuple with the Frequency field value if set, nil otherwise
+// GetFrequencyOk returns a tuple with the Frequency field value
 // and a boolean to check if the value has been set.
 func (o *V1Duration) GetFrequencyOk() (*DurationFrequency, bool) {
-	if o == nil || IsNil(o.Frequency) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Frequency, true
+	return &o.Frequency, true
 }
 
-// HasFrequency returns a boolean if a field has been set.
-func (o *V1Duration) HasFrequency() bool {
-	if o != nil && !IsNil(o.Frequency) {
-		return true
-	}
-
-	return false
-}
-
-// SetFrequency gets a reference to the given DurationFrequency and assigns it to the Frequency field.
+// SetFrequency sets field value
 func (o *V1Duration) SetFrequency(v DurationFrequency) {
-	o.Frequency = &v
+	o.Frequency = v
 }
 
 func (o V1Duration) MarshalJSON() ([]byte, error) {
@@ -125,9 +119,7 @@ func (o V1Duration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ForOver) {
 		toSerialize["forOver"] = o.ForOver
 	}
-	if !IsNil(o.Frequency) {
-		toSerialize["frequency"] = o.Frequency
-	}
+	toSerialize["frequency"] = o.Frequency
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -137,6 +129,27 @@ func (o V1Duration) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *V1Duration) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"frequency",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varV1Duration := _V1Duration{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

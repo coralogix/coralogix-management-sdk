@@ -13,6 +13,7 @@ package slos_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,8 +23,8 @@ var _ MappedNullable = &RequestBasedMetricSli{}
 
 // RequestBasedMetricSli Definition of a request-based SLI based on metrics
 type RequestBasedMetricSli struct {
-	GoodEvents *Metric `json:"goodEvents,omitempty"`
-	TotalEvents *Metric `json:"totalEvents,omitempty"`
+	GoodEvents Metric `json:"goodEvents"`
+	TotalEvents Metric `json:"totalEvents"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,10 @@ type _RequestBasedMetricSli RequestBasedMetricSli
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRequestBasedMetricSli() *RequestBasedMetricSli {
+func NewRequestBasedMetricSli(goodEvents Metric, totalEvents Metric) *RequestBasedMetricSli {
 	this := RequestBasedMetricSli{}
+	this.GoodEvents = goodEvents
+	this.TotalEvents = totalEvents
 	return &this
 }
 
@@ -47,68 +50,52 @@ func NewRequestBasedMetricSliWithDefaults() *RequestBasedMetricSli {
 	return &this
 }
 
-// GetGoodEvents returns the GoodEvents field value if set, zero value otherwise.
+// GetGoodEvents returns the GoodEvents field value
 func (o *RequestBasedMetricSli) GetGoodEvents() Metric {
-	if o == nil || IsNil(o.GoodEvents) {
+	if o == nil {
 		var ret Metric
 		return ret
 	}
-	return *o.GoodEvents
+
+	return o.GoodEvents
 }
 
-// GetGoodEventsOk returns a tuple with the GoodEvents field value if set, nil otherwise
+// GetGoodEventsOk returns a tuple with the GoodEvents field value
 // and a boolean to check if the value has been set.
 func (o *RequestBasedMetricSli) GetGoodEventsOk() (*Metric, bool) {
-	if o == nil || IsNil(o.GoodEvents) {
+	if o == nil {
 		return nil, false
 	}
-	return o.GoodEvents, true
+	return &o.GoodEvents, true
 }
 
-// HasGoodEvents returns a boolean if a field has been set.
-func (o *RequestBasedMetricSli) HasGoodEvents() bool {
-	if o != nil && !IsNil(o.GoodEvents) {
-		return true
-	}
-
-	return false
-}
-
-// SetGoodEvents gets a reference to the given Metric and assigns it to the GoodEvents field.
+// SetGoodEvents sets field value
 func (o *RequestBasedMetricSli) SetGoodEvents(v Metric) {
-	o.GoodEvents = &v
+	o.GoodEvents = v
 }
 
-// GetTotalEvents returns the TotalEvents field value if set, zero value otherwise.
+// GetTotalEvents returns the TotalEvents field value
 func (o *RequestBasedMetricSli) GetTotalEvents() Metric {
-	if o == nil || IsNil(o.TotalEvents) {
+	if o == nil {
 		var ret Metric
 		return ret
 	}
-	return *o.TotalEvents
+
+	return o.TotalEvents
 }
 
-// GetTotalEventsOk returns a tuple with the TotalEvents field value if set, nil otherwise
+// GetTotalEventsOk returns a tuple with the TotalEvents field value
 // and a boolean to check if the value has been set.
 func (o *RequestBasedMetricSli) GetTotalEventsOk() (*Metric, bool) {
-	if o == nil || IsNil(o.TotalEvents) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TotalEvents, true
+	return &o.TotalEvents, true
 }
 
-// HasTotalEvents returns a boolean if a field has been set.
-func (o *RequestBasedMetricSli) HasTotalEvents() bool {
-	if o != nil && !IsNil(o.TotalEvents) {
-		return true
-	}
-
-	return false
-}
-
-// SetTotalEvents gets a reference to the given Metric and assigns it to the TotalEvents field.
+// SetTotalEvents sets field value
 func (o *RequestBasedMetricSli) SetTotalEvents(v Metric) {
-	o.TotalEvents = &v
+	o.TotalEvents = v
 }
 
 func (o RequestBasedMetricSli) MarshalJSON() ([]byte, error) {
@@ -121,12 +108,8 @@ func (o RequestBasedMetricSli) MarshalJSON() ([]byte, error) {
 
 func (o RequestBasedMetricSli) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.GoodEvents) {
-		toSerialize["goodEvents"] = o.GoodEvents
-	}
-	if !IsNil(o.TotalEvents) {
-		toSerialize["totalEvents"] = o.TotalEvents
-	}
+	toSerialize["goodEvents"] = o.GoodEvents
+	toSerialize["totalEvents"] = o.TotalEvents
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -136,6 +119,28 @@ func (o RequestBasedMetricSli) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RequestBasedMetricSli) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"goodEvents",
+		"totalEvents",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRequestBasedMetricSli := _RequestBasedMetricSli{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

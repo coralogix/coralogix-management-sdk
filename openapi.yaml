@@ -11427,6 +11427,7 @@ paths:
                   type: string
                   x-coralogix-presence: true
               required:
+                - id
                 - name
                 - type
               title: E2M
@@ -11531,6 +11532,7 @@ paths:
                   $ref: '#/components/schemas/E2MType'
               required:
                 - name
+                - type
               title: E2M Create Params
               type: object
         required: true
@@ -18357,10 +18359,12 @@ paths:
                   description: List of labels.
                   type: object
                 name:
-                  description: Human-readable display name for the SLO.
+                  description: >-
+                    Human-readable display name for the SLO. Required. A missing
+                    or empty name is rejected.
                   examples:
                     - Example Slo Name
-                  minLength: 0
+                  minLength: 1
                   type: string
                 ownershipTags:
                   allOf:
@@ -18394,7 +18398,8 @@ paths:
                   description: >-
                     SLO type derived by the server from the SLI. A window-based
                     metric SLI still reads SLO_TYPE_REQUEST. A value sent by the
-                    client is ignored.
+                    client must match the SLI type; a different value is
+                    rejected.
                   examples:
                     - SLO_TYPE_REQUEST
                   readOnly: true
@@ -18429,6 +18434,9 @@ paths:
                   x-coralogix-presence: true
                 windowBasedMetricSli:
                   $ref: '#/components/schemas/WindowBasedMetricSli'
+              required:
+                - name
+                - sloTimeFrame
               title: Slo
               type: object
         required: true
@@ -18557,10 +18565,12 @@ paths:
                   description: List of labels.
                   type: object
                 name:
-                  description: Human-readable display name for the SLO.
+                  description: >-
+                    Human-readable display name for the SLO. Required. A missing
+                    or empty name is rejected.
                   examples:
                     - Example Slo Name
-                  minLength: 0
+                  minLength: 1
                   type: string
                 ownershipTags:
                   allOf:
@@ -18594,7 +18604,8 @@ paths:
                   description: >-
                     SLO type derived by the server from the SLI. A window-based
                     metric SLI still reads SLO_TYPE_REQUEST. A value sent by the
-                    client is ignored.
+                    client must match the SLI type; a different value is
+                    rejected.
                   examples:
                     - SLO_TYPE_REQUEST
                   readOnly: true
@@ -18629,6 +18640,9 @@ paths:
                   x-coralogix-presence: true
                 windowBasedMetricSli:
                   $ref: '#/components/schemas/WindowBasedMetricSli'
+              required:
+                - name
+                - sloTimeFrame
               title: Slo
               type: object
         required: true
@@ -19100,10 +19114,12 @@ paths:
                   description: List of labels.
                   type: object
                 name:
-                  description: Human-readable display name for the SLO.
+                  description: >-
+                    Human-readable display name for the SLO. Required. A missing
+                    or empty name is rejected.
                   examples:
                     - Example Slo Name
-                  minLength: 0
+                  minLength: 1
                   type: string
                 ownershipTags:
                   allOf:
@@ -19137,7 +19153,8 @@ paths:
                   description: >-
                     SLO type derived by the server from the SLI. A window-based
                     metric SLI still reads SLO_TYPE_REQUEST. A value sent by the
-                    client is ignored.
+                    client must match the SLI type; a different value is
+                    rejected.
                   examples:
                     - SLO_TYPE_REQUEST
                   readOnly: true
@@ -19172,6 +19189,9 @@ paths:
                   x-coralogix-presence: true
                 windowBasedMetricSli:
                   $ref: '#/components/schemas/WindowBasedMetricSli'
+              required:
+                - name
+                - sloTimeFrame
               title: Slo
               type: object
         required: true
@@ -21204,6 +21224,10 @@ components:
           $ref: '#/components/schemas/TracingLink'
       description: Deep links derived from a single alert indicator on a case.
     AlertSchedulerRule:
+      required:
+        - name
+        - filter
+        - schedule
       type: object
       properties:
         createdAt:
@@ -21227,13 +21251,14 @@ components:
           type: string
           x-coralogix-presence: true
         metaLabels:
-          minItems: 0
-          type: array
+          description: Metadata labels.
           items:
             $ref: '#/components/schemas/meta_labels_protobuf.v1.MetaLabel'
-          description: Metadata labels.
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
         name:
-          minLength: 0
+          minLength: 1
           type: string
           description: Display name.
         schedule:
@@ -21314,13 +21339,14 @@ components:
       type: object
       properties:
         value:
-          minItems: 0
-          type: array
+          description: The value.
           items:
             minLength: 0
             type: string
             description: The value.
-          description: The value.
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
       description: Alert unique ids.
     AlertsOp:
       enum:
@@ -21877,12 +21903,16 @@ components:
       description: Configuration for error-based APM SLI
     ApmFilter:
       title: ApmFilter
+      required:
+        - key
       type: object
       properties:
         key:
-          minLength: 0
+          minLength: 1
           type: string
-          description: Label/tag name to filter on
+          description: >-
+            Label/tag name to filter on. Required. A missing or empty key is
+            rejected.
           examples:
             - environment
         value:
@@ -22013,6 +22043,8 @@ components:
         case-insensitively).
     ApmSli:
       title: ApmSli
+      required:
+        - services
       type: object
       oneOf:
         - required:
@@ -22053,13 +22085,17 @@ components:
         latencyConfig:
           $ref: '#/components/schemas/ApmLatencySli'
         services:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             minLength: 0
             type: string
-            description: List of service names to monitor
-          description: List of service names to monitor
+            description: >-
+              List of service names to monitor. Required. At least one service;
+              an empty list is rejected.
+          description: >-
+            List of service names to monitor. Required. At least one service; an
+            empty list is rejected.
           examples:
             - - my-service
               - payment-service
@@ -28594,6 +28630,7 @@ components:
     E2M:
       title: E2M
       required:
+        - id
         - name
         - type
       type: object
@@ -28720,6 +28757,8 @@ components:
           https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
     E2MAggSamples:
       title: E2M Aggregate Samples
+      required:
+        - sampleType
       type: object
       properties:
         sampleType:
@@ -28733,6 +28772,7 @@ components:
       title: E2M Create Params
       required:
         - name
+        - type
       type: object
       oneOf:
         - required:
@@ -28885,7 +28925,10 @@ components:
       properties:
         hasExceededLimit:
           type: boolean
-          description: The has exceeded limit.
+          description: >-
+            Whether the permutations exceeded the limit. Set by the server; a
+            value sent by the client is ignored.
+          readOnly: true
         limit:
           maximum: 10000000
           minimum: 1
@@ -39691,11 +39734,12 @@ components:
       type: object
       properties:
         value:
-          minItems: 0
-          type: array
+          description: The value.
           items:
             $ref: '#/components/schemas/meta_labels_protobuf.v1.MetaLabel'
-          description: The value.
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
       description: Meta labels.
     MetadataField:
       enum:
@@ -39716,14 +39760,16 @@ components:
       description: Method type.
     Metric:
       title: Metric
+      required:
+        - query
       type: object
       properties:
         query:
-          minLength: 0
+          minLength: 1
           type: string
-          description: Query string.
+          description: Query string. Required. A missing or empty query is rejected.
           examples:
-            - sum(rate(http_requests_total{status="200"}[5m]))
+            - sum(rate(http_requests_total{status="200"}[1m]))
       description: Definition of a metric used in SLOs
     MetricAggregation:
       type: object
@@ -40418,16 +40464,19 @@ components:
           format: double
       description: Custom price for a single model, per one million tokens (USD).
     Monthly:
+      required:
+        - daysOfMonth
       type: object
       properties:
         daysOfMonth:
-          minItems: 0
-          type: array
+          description: The days of month.
           items:
             type: integer
             description: The days of month.
             format: int32
-          description: The days of month.
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
       description: Monthly.
     MultiSelect:
       type: object
@@ -41118,6 +41167,8 @@ components:
       type: string
       description: Onboarding mode.
     OneTime:
+      required:
+        - timeframe
       type: object
       properties:
         timeframe:
@@ -44573,15 +44624,6 @@ components:
         - required:
             - schedule
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - alwaysActive
-                type: object
-              - required:
-                  - schedule
-                type: object
       properties:
         alwaysActive:
           $ref: '#/components/schemas/Always'
@@ -44591,6 +44633,8 @@ components:
         Recurring schedule that activates the alert scheduler rule on a
         repeating cadence.
     Recurring.Dynamic:
+      required:
+        - timeframe
       type: object
       oneOf:
         - required:
@@ -44602,18 +44646,6 @@ components:
         - required:
             - monthly
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - daily
-                type: object
-              - required:
-                  - weekly
-                type: object
-              - required:
-                  - monthly
-                type: object
       properties:
         daily:
           $ref: '#/components/schemas/Daily'
@@ -45097,6 +45129,9 @@ components:
       description: Response after replacing an existing SLO.
     RequestBasedMetricSli:
       title: RequestBasedMetricSli
+      required:
+        - goodEvents
+        - totalEvents
       type: object
       properties:
         goodEvents:
@@ -46092,6 +46127,8 @@ components:
       type: string
       description: Scale type.
     Schedule:
+      required:
+        - scheduleOperation
       type: object
       oneOf:
         - required:
@@ -46100,15 +46137,6 @@ components:
         - required:
             - recurring
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - oneTime
-                type: object
-              - required:
-                  - recurring
-                type: object
       properties:
         oneTime:
           $ref: '#/components/schemas/OneTime'
@@ -46631,6 +46659,9 @@ components:
       description: Slack config.
     Slo:
       title: Slo
+      required:
+        - name
+        - sloTimeFrame
       type: object
       oneOf:
         - required:
@@ -46711,9 +46742,11 @@ components:
             type: string
           description: List of labels.
         name:
-          minLength: 0
+          minLength: 1
           type: string
-          description: Human-readable display name for the SLO.
+          description: >-
+            Human-readable display name for the SLO. Required. A missing or
+            empty name is rejected.
           examples:
             - Example Slo Name
         ownershipTags:
@@ -46747,8 +46780,8 @@ components:
             - $ref: '#/components/schemas/SloType'
           description: >-
             SLO type derived by the server from the SLI. A window-based metric
-            SLI still reads SLO_TYPE_REQUEST. A value sent by the client is
-            ignored.
+            SLI still reads SLO_TYPE_REQUEST. A value sent by the client must
+            match the SLI type; a different value is rejected.
           examples:
             - SLO_TYPE_REQUEST
           readOnly: true
@@ -49164,6 +49197,8 @@ components:
           x-coralogix-presence: true
       description: Time series tooltip.
     Timeframe:
+      required:
+        - timezone
       type: object
       oneOf:
         - required:
@@ -49172,15 +49207,6 @@ components:
         - required:
             - duration
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - endTime
-                type: object
-              - required:
-                  - duration
-                type: object
       properties:
         duration:
           $ref: '#/components/schemas/v1.Duration'
@@ -49205,7 +49231,7 @@ components:
           type: string
           x-coralogix-presence: true
         timezone:
-          minLength: 0
+          minLength: 1
           type: string
           description: Timezone.
       description: Timeframe.
@@ -51873,16 +51899,19 @@ components:
         - WEEKDAY_SUNDAY
       type: string
     Weekly:
+      required:
+        - daysOfWeek
       type: object
       properties:
         daysOfWeek:
-          minItems: 0
-          type: array
+          description: The days of week.
           items:
             type: integer
             description: The days of week.
             format: int32
-          description: The days of week.
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
       description: Weekly.
     WeeklyRecurrence:
       type: object
@@ -52136,6 +52165,10 @@ components:
       description: Reference to a widget from another dashboard
     WindowBasedMetricSli:
       title: WindowBasedMetricSli
+      required:
+        - query
+        - window
+        - comparisonOperator
       type: object
       properties:
         comparisonOperator:
@@ -52250,6 +52283,8 @@ components:
       additionalProperties: false
       description: Y axis view by value.
     alert_scheduler_rule_protobuf.v1.Filter:
+      required:
+        - whatExpression
       type: object
       oneOf:
         - required:
@@ -52258,22 +52293,13 @@ components:
         - required:
             - alertUniqueIds
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - alertMetaLabels
-                type: object
-              - required:
-                  - alertUniqueIds
-                type: object
       properties:
         alertMetaLabels:
           $ref: '#/components/schemas/MetaLabels'
         alertUniqueIds:
           $ref: '#/components/schemas/AlertUniqueIds'
         whatExpression:
-          minLength: 0
+          minLength: 1
           type: string
           description: Dataprime expression that filters the alerts by group-by values.
       description: Alert scheduler rule protobuf.v1.filter.
@@ -52994,6 +53020,8 @@ components:
       type: string
       description: Connector type.
     v1.Duration:
+      required:
+        - frequency
       type: object
       properties:
         forOver:
@@ -53528,6 +53556,9 @@ components:
       description: This data structure represents an Action.
     v2.Aggregation:
       title: Aggregation
+      required:
+        - aggType
+        - targetMetricName
       type: object
       oneOf:
         - required:

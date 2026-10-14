@@ -13,6 +13,7 @@ package alert_scheduler_rule_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -30,9 +31,10 @@ type Timeframe struct {
 	// The start time as submitted in the request, before the service normalized it to the next valid occurrence. Populated only in create and update responses; ignored in requests and omitted from read responses.
 	SubmittedStartTime *string `json:"submittedStartTime,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Timezone.
-	Timezone *string `json:"timezone,omitempty"`
+	Timezone string `json:"timezone"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _Timeframe Timeframe
@@ -41,8 +43,9 @@ type _Timeframe Timeframe
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewTimeframe() *Timeframe {
+func NewTimeframe(timezone string) *Timeframe {
 	this := Timeframe{}
+	this.Timezone = timezone
 	return &this
 }
 
@@ -182,36 +185,28 @@ func (o *Timeframe) SetSubmittedStartTime(v string) {
 	o.SubmittedStartTime = &v
 }
 
-// GetTimezone returns the Timezone field value if set, zero value otherwise.
+// GetTimezone returns the Timezone field value
 func (o *Timeframe) GetTimezone() string {
-	if o == nil || IsNil(o.Timezone) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Timezone
+
+	return o.Timezone
 }
 
-// GetTimezoneOk returns a tuple with the Timezone field value if set, nil otherwise
+// GetTimezoneOk returns a tuple with the Timezone field value
 // and a boolean to check if the value has been set.
 func (o *Timeframe) GetTimezoneOk() (*string, bool) {
-	if o == nil || IsNil(o.Timezone) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Timezone, true
+	return &o.Timezone, true
 }
 
-// HasTimezone returns a boolean if a field has been set.
-func (o *Timeframe) HasTimezone() bool {
-	if o != nil && !IsNil(o.Timezone) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimezone gets a reference to the given string and assigns it to the Timezone field.
+// SetTimezone sets field value
 func (o *Timeframe) SetTimezone(v string) {
-	o.Timezone = &v
+	o.Timezone = v
 }
 
 func (o Timeframe) MarshalJSON() ([]byte, error) {
@@ -236,18 +231,21 @@ func (o Timeframe) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubmittedStartTime) {
 		toSerialize["submittedStartTime"] = o.SubmittedStartTime
 	}
-	if !IsNil(o.Timezone) {
-		toSerialize["timezone"] = o.Timezone
-	}
-	optionalOneOfGroup0Matches := 0
+	toSerialize["timezone"] = o.Timezone
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["endTime"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["duration"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [endTime, duration] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [endTime, duration] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [endTime, duration] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["endTime"]; exists {
@@ -265,6 +263,38 @@ func (o Timeframe) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Timeframe) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"timezone",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["endTime"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["duration"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [endTime, duration] may be set"}
+	}
+
 	varTimeframe := _Timeframe{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -279,14 +309,14 @@ func (o *Timeframe) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["endTime"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["duration"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [endTime, duration] may be set"}
 		}
 
@@ -297,6 +327,7 @@ func (o *Timeframe) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "timezone")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

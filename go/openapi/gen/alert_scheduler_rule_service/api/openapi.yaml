@@ -628,6 +628,11 @@
         }
       },
       "AlertSchedulerRule": {
+        "required": [
+          "name",
+          "filter",
+          "schedule"
+        ],
         "type": "object",
         "properties": {
           "createdAt": {
@@ -656,15 +661,16 @@
             "x-coralogix-presence": true
           },
           "metaLabels": {
-            "minItems": 0,
-            "type": "array",
+            "description": "Metadata labels.",
             "items": {
               "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
             },
-            "description": "Metadata labels."
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           },
           "name": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
             "description": "Display name."
           },
@@ -706,14 +712,15 @@
         "type": "object",
         "properties": {
           "value": {
-            "minItems": 0,
-            "type": "array",
+            "description": "The value.",
             "items": {
               "minLength": 0,
               "type": "string",
               "description": "The value."
             },
-            "description": "The value."
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Alert unique ids."
@@ -937,28 +944,33 @@
         "type": "object",
         "properties": {
           "value": {
-            "minItems": 0,
-            "type": "array",
+            "description": "The value.",
             "items": {
               "$ref": "#/components/schemas/meta_labels_protobuf.v1.MetaLabel"
             },
-            "description": "The value."
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Meta labels."
       },
       "Monthly": {
+        "required": [
+          "daysOfMonth"
+        ],
         "type": "object",
         "properties": {
           "daysOfMonth": {
-            "minItems": 0,
-            "type": "array",
+            "description": "The days of month.",
             "items": {
               "type": "integer",
               "description": "The days of month.",
               "format": "int32"
             },
-            "description": "The days of month."
+            "minItems": 1,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Monthly."
@@ -980,6 +992,9 @@
         }
       },
       "OneTime": {
+        "required": [
+          "timeframe"
+        ],
         "type": "object",
         "properties": {
           "timeframe": {
@@ -1002,25 +1017,6 @@
               "schedule"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "alwaysActive"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "schedule"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
@@ -1034,6 +1030,9 @@
         "description": "Recurring schedule that activates the alert scheduler rule on a repeating cadence."
       },
       "Recurring.Dynamic": {
+        "required": [
+          "timeframe"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -1053,31 +1052,6 @@
               "monthly"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "daily"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "weekly"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "monthly"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
@@ -1108,6 +1082,9 @@
         "description": "Dynamic."
       },
       "Schedule": {
+        "required": [
+          "scheduleOperation"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -1121,25 +1098,6 @@
               "recurring"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "oneTime"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "recurring"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
@@ -1165,6 +1123,9 @@
         "description": "Schedule operation."
       },
       "Timeframe": {
+        "required": [
+          "timezone"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -1178,25 +1139,6 @@
               "duration"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "endTime"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "duration"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
@@ -1223,7 +1165,7 @@
             "x-coralogix-presence": true
           },
           "timezone": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
             "description": "Timezone."
           }
@@ -1287,22 +1229,29 @@
         }
       },
       "Weekly": {
+        "required": [
+          "daysOfWeek"
+        ],
         "type": "object",
         "properties": {
           "daysOfWeek": {
-            "minItems": 0,
-            "type": "array",
+            "description": "The days of week.",
             "items": {
               "type": "integer",
               "description": "The days of week.",
               "format": "int32"
             },
-            "description": "The days of week."
+            "minItems": 1,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Weekly."
       },
       "alert_scheduler_rule_protobuf.v1.Filter": {
+        "required": [
+          "whatExpression"
+        ],
         "type": "object",
         "oneOf": [
           {
@@ -1316,25 +1265,6 @@
               "alertUniqueIds"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "alertMetaLabels"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "alertUniqueIds"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
@@ -1345,7 +1275,7 @@
             "$ref": "#/components/schemas/AlertUniqueIds"
           },
           "whatExpression": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
             "description": "Dataprime expression that filters the alerts by group-by values."
           }
@@ -1383,6 +1313,9 @@
         "description": "Meta label."
       },
       "v1.Duration": {
+        "required": [
+          "frequency"
+        ],
         "type": "object",
         "properties": {
           "forOver": {
