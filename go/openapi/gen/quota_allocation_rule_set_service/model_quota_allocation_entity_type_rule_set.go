@@ -13,7 +13,6 @@ package quota_allocation_rule_set_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -25,8 +24,8 @@ var _ MappedNullable = &QuotaAllocationEntityTypeRuleSet{}
 type QuotaAllocationEntityTypeRuleSet struct {
 	// Unique identifier.
 	Id *string `json:"id,omitempty"`
-	// List of rules.
-	Rules []QuotaAllocationEntityTypeRule `json:"rules"`
+	// List of rules. The server does not keep the order of the rules. Each entity type can have one rule: the service rejects a request with two rules for the same entity type, so a list never has two equal rules. In a `POST` or `PUT` request, an empty or omitted list clears the rules of the customer. In a response, an omitted list is an empty rule set.
+	Rules []QuotaAllocationEntityTypeRule `json:"rules,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -37,9 +36,8 @@ type _QuotaAllocationEntityTypeRuleSet QuotaAllocationEntityTypeRuleSet
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewQuotaAllocationEntityTypeRuleSet(rules []QuotaAllocationEntityTypeRule) *QuotaAllocationEntityTypeRuleSet {
+func NewQuotaAllocationEntityTypeRuleSet() *QuotaAllocationEntityTypeRuleSet {
 	this := QuotaAllocationEntityTypeRuleSet{}
-	this.Rules = rules
 	return &this
 }
 
@@ -83,26 +81,34 @@ func (o *QuotaAllocationEntityTypeRuleSet) SetId(v string) {
 	o.Id = &v
 }
 
-// GetRules returns the Rules field value
+// GetRules returns the Rules field value if set, zero value otherwise.
 func (o *QuotaAllocationEntityTypeRuleSet) GetRules() []QuotaAllocationEntityTypeRule {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		var ret []QuotaAllocationEntityTypeRule
 		return ret
 	}
-
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *QuotaAllocationEntityTypeRuleSet) GetRulesOk() ([]QuotaAllocationEntityTypeRule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Rules) {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// SetRules sets field value
+// HasRules returns a boolean if a field has been set.
+func (o *QuotaAllocationEntityTypeRuleSet) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []QuotaAllocationEntityTypeRule and assigns it to the Rules field.
 func (o *QuotaAllocationEntityTypeRuleSet) SetRules(v []QuotaAllocationEntityTypeRule) {
 	o.Rules = v
 }
@@ -120,7 +126,9 @@ func (o QuotaAllocationEntityTypeRuleSet) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	toSerialize["rules"] = o.Rules
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -130,27 +138,6 @@ func (o QuotaAllocationEntityTypeRuleSet) ToMap() (map[string]interface{}, error
 }
 
 func (o *QuotaAllocationEntityTypeRuleSet) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"rules",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varQuotaAllocationEntityTypeRuleSet := _QuotaAllocationEntityTypeRuleSet{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

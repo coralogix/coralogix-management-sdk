@@ -403,6 +403,9 @@
         }
       },
       "DashboardFolder": {
+        "required": [
+          "name"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -414,7 +417,7 @@
             "x-coralogix-presence": true
           },
           "name": {
-            "description": "Display name.",
+            "description": "Display name. The service rejects a folder without a name, with an empty name, or with a name longer than 100 characters. Folder names are unique in the company.",
             "maxLength": 100,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",

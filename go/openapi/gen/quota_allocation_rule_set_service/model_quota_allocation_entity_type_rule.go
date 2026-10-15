@@ -23,7 +23,7 @@ var _ MappedNullable = &QuotaAllocationEntityTypeRule{}
 
 // QuotaAllocationEntityTypeRule Defines quota allocation rule for a specific entity type
 type QuotaAllocationEntityTypeRule struct {
-	// The allocation.
+	// The allocation. A percentage allocation (the default type) is between 0 and 100, and the percentages of the enabled rules must sum to at most 100. A locked units allocation is a non-negative number of units.
 	Allocation float32 `json:"allocation"`
 	// Determines whether allocation is interpreted as a percentage or locked units. Unspecified defaults to percentage for backwards compatibility.
 	AllocationType *QuotaAllocationType `json:"allocationType,omitempty"`

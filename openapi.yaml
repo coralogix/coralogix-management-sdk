@@ -27329,6 +27329,8 @@ components:
           type: string
           x-coralogix-presence: true
     DashboardFolder:
+      required:
+        - name
       type: object
       properties:
         id:
@@ -27340,7 +27342,10 @@ components:
           type: string
           x-coralogix-presence: true
         name:
-          description: Display name.
+          description: >-
+            Display name. The service rejects a folder without a name, with an
+            empty name, or with a name longer than 100 characters. Folder names
+            are unique in the company.
           maxLength: 100
           minLength: 1
           pattern: ^[\s\S]*$
@@ -44375,8 +44380,13 @@ components:
       type: object
       properties:
         allocation:
+          minimum: 0
           type: number
-          description: The allocation.
+          description: >-
+            The allocation. A percentage allocation (the default type) is
+            between 0 and 100, and the percentages of the enabled rules must sum
+            to at most 100. A locked units allocation is a non-negative number
+            of units.
           format: float
         allocationType:
           allOf:
@@ -44399,14 +44409,12 @@ components:
           type: boolean
           description: Whether this resource is enabled.
         entityType:
-          minLength: 0
+          minLength: 1
           type: string
           description: The entity type.
       description: Defines quota allocation rule for a specific entity type
     QuotaAllocationEntityTypeRuleSet:
       title: Quota allocation entity type rule set
-      required:
-        - rules
       type: object
       properties:
         id:
@@ -44414,11 +44422,18 @@ components:
           type: string
           description: Unique identifier.
         rules:
-          minItems: 0
-          type: array
+          description: >-
+            List of rules. The server does not keep the order of the rules. Each
+            entity type can have one rule: the service rejects a request with
+            two rules for the same entity type, so a list never has two equal
+            rules. In a `POST` or `PUT` request, an empty or omitted list clears
+            the rules of the customer. In a response, an omitted list is an
+            empty rule set.
           items:
             $ref: '#/components/schemas/QuotaAllocationEntityTypeRule'
-          description: List of rules.
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
       description: Contains a collection of quota allocation rules for entity types
     QuotaAllocationType:
       title: Quota allocation type
