@@ -46,7 +46,7 @@ func ValidateWithPolicy(doc *v3.Document, name string, ids OperationIDs, p Polic
 		report = append(report, schemaIssue(err))
 	}
 	if t != nil {
-		report = append(report, nameCollisions("components.schemas."+name, t)...)
+		report = append(report, nameCollisions(p, "components.schemas."+name, t)...)
 		report = append(report, componentNameCollisions(t)...)
 		report = append(report, skippedArmIssues(p, t)...)
 	}
@@ -282,6 +282,13 @@ func requiredParameterIssues(location string, role verb, op foundOp) issue.Repor
 
 func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.Report {
 	create, createErr := schemaOf(p.requestBody(ops[opCreate].op))
+	if createErr == nil {
+		folded, err := p.foldCreateBody(name, create)
+		if err != nil {
+			return issue.Report{{Code: "CREATE_AS_UNSUPPORTED", Location: fieldLocation(name, "createAs"), Message: err.Error(), Remediation: "Name an object field of the resource and the top-level Create fields that hold its properties."}}
+		}
+		create = folded
+	}
 	update, updateErr := schemaOf(p.requestBody(ops[opUpdate].op))
 	getProxy := ops[opGet].op
 	_ = getProxy
@@ -302,7 +309,8 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 	var report issue.Report
 	idParam, bodyOnlyID := "", ""
 	if params := pathParams(ops[opGet]); len(params) == 1 {
-		idParam = params[0].Name
+		// The id property, which api.idProperty can name apart from the path parameter.
+		idParam = p.idProperty(ops)
 		if len(pathParams(ops[opUpdate])) == 0 && !p.UpdateIDInBody {
 			bodyOnlyID = idParam
 		}
@@ -328,11 +336,10 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 // Without the id property, the generated call sends nothing that names the resource, and the
 // override has no effect. The generator fails closed, so a stale or wrong override is an error.
 func bodyIDIssues(p Policy, ops map[verb]foundOp, create, update *base.Schema) issue.Report {
-	params := pathParams(ops[opGet])
-	if len(params) != 1 {
+	id := p.idProperty(ops)
+	if id == "" {
 		return nil // A singleton has no id, and Build reports an unsupported identity shape.
 	}
-	id := params[0].Name
 	var report issue.Report
 	if p.ClientSetID && bodyProperty(create, id) == nil {
 		report = append(report, issue.Issue{
@@ -358,11 +365,10 @@ func bodyIDIssues(p Policy, ops map[verb]foundOp, create, update *base.Schema) i
 // Otherwise the user could set the id, and a body-only Update would send the
 // planned id instead of the state id, so a change could name another resource.
 func serverSetIDIssues(p Policy, name string, ops map[verb]foundOp, create, update *base.Schema) issue.Report {
-	params := pathParams(ops[opGet])
-	if !p.ServerSetID || len(params) != 1 || p.readOnly(name, params[0].Name) {
+	id := p.idProperty(ops)
+	if !p.ServerSetID || id == "" || p.readOnly(name, id) {
 		return nil
 	}
-	id := params[0].Name
 	var report issue.Report
 	for _, body := range []struct {
 		op     verb
@@ -412,20 +418,22 @@ func isReadOnly(s *base.Schema) bool {
 // skippedIDIssues reports a skip override on the resource id. Every call after Create names the
 // resource by its id, so a resource without the id attribute cannot read, update, delete, or import.
 func skippedIDIssues(p Policy, name string, ops map[verb]foundOp) issue.Report {
-	params := pathParams(ops[opGet])
-	if len(params) != 1 || !p.skips(name, params[0].Name) {
+	id := p.idProperty(ops)
+	if id == "" || !p.skips(name, id) {
 		return nil
 	}
 	return issue.Report{{
 		Code:        "RESOURCE_ID_SKIPPED",
-		Location:    "components.schemas." + name + "." + params[0].Name,
-		Message:     fmt.Sprintf("The override skips the resource id field %q. Read, Update, Delete, and import need it.", params[0].Name),
+		Location:    "components.schemas." + name + "." + id,
+		Message:     fmt.Sprintf("The override skips the resource id field %q. Read, Update, Delete, and import need it.", id),
 		Remediation: "Delete the skip line of the resource id from the overrides.",
 	}}
 }
 
 // skippedArmIssues reports a skip override on an arm of a oneOf group. Skipping an arm changes
 // what the group means: the remaining arm would become required, or the schema could not be built.
+// The one exception is an empty object arm of a group that allows no arm, such as an Empty
+// "none" marker: it holds no value, and a client that selects no arm leaves the group as it allows.
 func skippedArmIssues(p Policy, root *Type) issue.Report {
 	var report issue.Report
 	seen := map[*Type]bool{}
@@ -440,7 +448,7 @@ func skippedArmIssues(p Policy, root *Type) issue.Report {
 			return
 		}
 		for _, arm := range oneOfArmNames(t) {
-			if p.skips(t.Schema, arm) {
+			if p.skips(t.Schema, arm) && !skippableArm(t, arm) {
 				report = append(report, issue.Issue{
 					Code:        "ONEOF_ARM_SKIPPED",
 					Location:    "components.schemas." + t.Schema + "." + arm,
@@ -472,12 +480,33 @@ func oneOfArmNames(t *Type) []string {
 	return slices.Compact(arms)
 }
 
-func resourceIDIssues(p Policy, name string, ops map[verb]foundOp, get *base.Schema) issue.Report {
+// idProperty returns the property of the resource that holds the id: the property that the policy
+// names, or the one named like the single path parameter of Get. It is "" when Get does not have
+// exactly one path parameter.
+func (p Policy) idProperty(ops map[verb]foundOp) string {
 	params := pathParams(ops[opGet])
 	if len(params) != 1 {
+		return ""
+	}
+	if p.IDProperty != "" {
+		return p.IDProperty
+	}
+	return params[0].Name
+}
+
+func resourceIDIssues(p Policy, name string, ops map[verb]foundOp, get *base.Schema) issue.Report {
+	id := p.idProperty(ops)
+	if id == "" {
 		return nil // Build reports an unsupported resource identity shape.
 	}
-	id := params[0].Name
+	if params := pathParams(ops[opGet]); p.IDProperty != "" && params[0].Name == p.IDProperty {
+		return issue.Report{{
+			Code:        "ID_PROPERTY_UNNEEDED",
+			Location:    "components.schemas." + name + "." + id,
+			Message:     fmt.Sprintf("The override idProperty names %q, which is already the name of the Get path parameter.", id),
+			Remediation: "Delete api.idProperty from the overrides.",
+		}}
+	}
 	property := propertyOf(get, id)
 	if property == nil {
 		return nil
@@ -590,6 +619,21 @@ func responseWrapperIssues(p Policy, name string, ops map[verb]foundOp) issue.Re
 }
 
 func validateFieldContract(p Policy, name, idParam, field string, create, update, get *base.Schema) issue.Report {
+	if p.skips(name, field) {
+		return skippedFieldIssues(name, field, create, update)
+	}
+	var report issue.Report
+	if slices.Contains(p.Optional, name+"."+field) && !requires(create, field) && !requires(update, field) {
+		// The requests of the resource have their own components, so only they say whether the
+		// line relaxes anything; the response component that the file names does not.
+		report = append(report, issue.Issue{
+			Code:        "OVERRIDE_UNUSED",
+			Location:    "behavior-overrides.yaml:types." + name + ".fields." + field,
+			Message:     fmt.Sprintf("the Create and Update requests already leave %q optional", field),
+			Remediation: "Delete only the key optional.",
+		})
+	}
+	create, update = p.withOptional(name, create), p.withOptional(name, update)
 	cp, up := requestContractProperty(create, field), requestContractProperty(update, field)
 	if p.readOnly(name, field) {
 		cp, up = nil, nil
@@ -599,8 +643,11 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	if _, err := classifyTopLevel(p, idParam, field, cp != nil, up != nil, gp != nil, schemaDefault(up) != nil); err != nil {
 		return issue.Report{{Code: "FIELD_LIFECYCLE_UNSUPPORTED", Location: location, Message: fmt.Sprintf("The field locations are Create=%t, Update=%t, Get=%t.", cp != nil, up != nil, gp != nil), Remediation: "Use a managed, immutable, or computed field lifecycle."}}
 	}
-	var report issue.Report
-	if cp != nil && up != nil && !slices.Contains(create.Required, field) && slices.Contains(update.Required, field) {
+	// A computed line on a field that Get requires has a value in state. With a plan modifier that
+	// keeps it, the plan has it too, so Update can always send it. Without one, a change of another
+	// attribute plans the field unknown, and Update would leave out a field that it requires.
+	kept := p.computed(name, field) && p.keepsState(name, field) && slices.Contains(get.Required, field)
+	if cp != nil && up != nil && !slices.Contains(create.Required, field) && slices.Contains(update.Required, field) && !kept {
 		report = append(report, issue.Issue{
 			Code:        "FIELD_REQUIREDNESS_UNSUPPORTED",
 			Location:    location,
@@ -608,19 +655,19 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 			Remediation: "Make the field optional in Update, or require it in Create so the client always has a value to send.",
 		})
 	}
-	report = append(report, fieldTypeIssues(p, location, gp, cp, up)...)
+	report = append(report, fieldTypeIssues(p, name, field, location, gp, cp, up)...)
 	report = append(report, fieldDefaultContractIssues(p, name, location, field, create, update, get, cp, up, gp)...)
 	// A field with a line in the behavior-overrides file keeps its released behavior, so
 	// the contract need not say whether omission differs from an empty value.
 	if !p.released(name, field) {
-		report = append(report, fieldPresenceIssue(location+".create", field, create, cp)...)
-		// A field with a server default resets to it when Update omits it: the generated
-		// Update leaves a removed value out. Omission has that meaning, so it needs no marker
-		// when a configured value cannot look like omission: an enum never sends its zero
-		// value, and a default that is the zero value is what an omitted zero stores anyway.
-		// Any other zero, such as false next to a default of true, still needs presence.
-		if !createRequires(create, cp, field) && (cp == nil || !omissionIsDefault(up, schemaDefault(cp))) {
-			report = append(report, fieldPresenceIssue(location+".update", field, update, up)...)
+		report = append(report, fieldPresenceIssue(location+".create", field, create, cp, schemaDefault(cp))...)
+		// Generation reads the Create default. A field that only Update has declares it there.
+		updateDefault := schemaDefault(up)
+		if cp != nil {
+			updateDefault = schemaDefault(cp)
+		}
+		if !createRequires(create, cp, field) {
+			report = append(report, fieldPresenceIssue(location+".update", field, update, up, updateDefault)...)
 		}
 	}
 	// The response decides which wrappers collapse, as in the generated resource: a request can
@@ -637,6 +684,23 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	report = append(report, unsupportedSchemaIssues(p, location+".update", up, true, map[*base.Schema]bool{})...)
 	report = append(report, unsupportedSchemaIssues(p, location+".get", gp, false, map[*base.Schema]bool{})...)
 	return report
+}
+
+// skippedFieldIssues checks a top-level field that the resource does not manage. The
+// generated requests never send it, so no request may require it.
+func skippedFieldIssues(name, field string, create, update *base.Schema) issue.Report {
+	for _, body := range []*base.Schema{create, update} {
+		// A read-only property is required in responses only: the request does not send it.
+		if body != nil && slices.Contains(body.Required, field) && requestContractProperty(body, field) != nil {
+			return issue.Report{{
+				Code:        "SKIP_REQUIRED_FIELD",
+				Location:    fieldLocation(name, field),
+				Message:     "The field is skipped, but a request requires it.",
+				Remediation: "Delete the skip line: the generated request must send the field.",
+			}}
+		}
+	}
+	return nil
 }
 
 func fieldDefaultContractIssues(p Policy, name, location, field string, create, update, get *base.Schema, cp, up, gp *base.SchemaProxy) issue.Report {
@@ -828,14 +892,16 @@ func omissionIsDefault(proxy *base.SchemaProxy, d *string) bool {
 	if target := refSiblingTarget(proxy, schema); target != nil {
 		schema = target
 	}
-	if !scalarZeroValueValid(valueSchema(schema)) {
+	zero, ok := scalarZero(valueSchema(schema))
+	if !ok {
 		return true // the zero value is not a value that the client sends
 	}
-	switch *d {
-	case "false", "0", "0.0", "":
+	if *d == zero {
 		return true
 	}
-	return false
+	// A number default can spell zero another way, such as 0.0.
+	n, err := strconv.ParseFloat(*d, 64)
+	return zero == "0" && err == nil && n == 0 && !plainStringSchema(valueSchema(schema))
 }
 
 func schemaDefault(proxy *base.SchemaProxy) *string {
@@ -1062,11 +1128,12 @@ func nestedReadOnlyIssues(p Policy, location string, proxy *base.SchemaProxy, se
 // fieldTypeIssues merges the Create and Update types of a field into its type
 // in the resource response, as Build does. A schema that is not supported is
 // left out: unsupportedSchemaIssues reports it.
-func fieldTypeIssues(p Policy, location string, gp, cp, up *base.SchemaProxy) issue.Report {
+func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.SchemaProxy) issue.Report {
 	if gp == nil {
 		return nil
 	}
 	get, err := typeOf(gp, location, walk{policy: &p})
+	p.asSet(name, field, get)
 	if err != nil {
 		return nil
 	}
@@ -1078,6 +1145,7 @@ func fieldTypeIssues(p Policy, location string, gp, cp, up *base.SchemaProxy) is
 		if requests[i], err = typeOf(proxy, location, walk{policy: &p}); err != nil {
 			return nil
 		}
+		p.asSet(name, field, requests[i])
 	}
 	var contract *contractError
 	if err := mergeRequests(location, get, requests[0], requests[1]); errors.As(err, &contract) {
@@ -1086,7 +1154,9 @@ func fieldTypeIssues(p Policy, location string, gp, cp, up *base.SchemaProxy) is
 	return nil
 }
 
-func fieldPresenceIssue(location, field string, parent *base.Schema, proxy *base.SchemaProxy) issue.Report {
+// fieldPresenceIssue reports a request scalar that must preserve field presence. serverDefault is
+// the declared default that the server stores for an omitted value, or nil.
+func fieldPresenceIssue(location, field string, parent *base.Schema, proxy *base.SchemaProxy, serverDefault *string) issue.Report {
 	if proxy == nil {
 		return nil
 	}
@@ -1118,7 +1188,15 @@ func fieldPresenceIssue(location, field string, parent *base.Schema, proxy *base
 			Remediation: "Use a presence-tracking protobuf scalar and expose x-coralogix-presence: true in OpenAPI.",
 		}}
 	}
-	return issue.Report{{Code: "FIELD_PRESENCE_UNKNOWN", Location: location, Message: "The optional request field does not state whether omission differs from an explicit zero or empty value.", Remediation: "Add x-coralogix-presence: true to the source API contract."}}
+	// Proto3 does not send a zero scalar, so the server reads it as omitted. Without a declared
+	// default, omission and zero both store zero, and the generated resource keeps the prior form
+	// on read. A default that is the zero value, or a zero that is not valid (an enum zero), also
+	// stores the same value. Only a valid zero next to another default, such as false next to a
+	// default of true, cannot be sent without presence.
+	if serverDefault == nil || omissionIsDefault(proxy, serverDefault) {
+		return nil
+	}
+	return issue.Report{{Code: "FIELD_PRESENCE_UNKNOWN", Location: location, Message: fmt.Sprintf("The optional request field has the default %s, so the server stores an explicit zero value as that default.", *serverDefault), Remediation: "Add x-coralogix-presence: true to the source API contract (a proto3 optional field)."}}
 }
 
 // requiredEmptyIssue reports a required string, list, or map that accepts an
@@ -1201,48 +1279,101 @@ func plainStringSchema(schema *base.Schema) bool {
 	return slices.Equal(schema.Type, []string{"string"}) && len(schema.Enum) == 0 && schema.Format == ""
 }
 
+// scalarZeroValueValid reports whether a client can set the protobuf zero value of a scalar.
 func scalarZeroValueValid(schema *base.Schema) bool {
+	_, ok := scalarZero(schema)
+	return ok
+}
+
+// scalarZero returns the protobuf zero value of a scalar, as the text that a default holds, and
+// whether a client can set it. An enum zero is never set, and neither is a zero outside the
+// limits of the field. Matches settable_zero in scripts/lint_iac_contract.py of
+// cx-management-apis.
+func scalarZero(schema *base.Schema) (string, bool) {
 	if inner, err := singleAllOf(schema, "schema"); err == nil {
 		resolved, resolveErr := schemaOf(inner)
-		return resolveErr == nil && scalarZeroValueValid(resolved)
+		if resolveErr != nil {
+			return "", false
+		}
+		return scalarZero(resolved)
 	}
 	if len(schema.Enum) != 0 || len(schema.Type) != 1 {
-		return false
+		return "", false
 	}
 	switch schema.Type[0] {
 	case "boolean":
-		return true
+		return "false", true
 	case "integer", "number":
-		return numericZeroValueValid(schema)
+		return "0", numberAcceptsZero(schema)
 	case "string":
-		return stringZeroValueValid(schema)
+		return stringZero(schema)
 	default:
-		return false
+		return "", false
 	}
 }
 
-func numericZeroValueValid(schema *base.Schema) bool {
-	return (schema.Minimum == nil || *schema.Minimum <= 0) && (schema.Maximum == nil || *schema.Maximum >= 0)
+// numberAcceptsZero reports whether the bounds of a number accept 0: inclusive bounds, and
+// exclusive bounds in both the OpenAPI 3.1 form (a number) and the 3.0 form (true next to
+// minimum or maximum). Matches number_accepts_zero in the API lint.
+func numberAcceptsZero(schema *base.Schema) bool {
+	if schema.Minimum != nil && *schema.Minimum > 0 || schema.Maximum != nil && *schema.Maximum < 0 {
+		return false
+	}
+	for _, bound := range []struct {
+		exclusive *base.DynamicValue[bool, float64]
+		inclusive *float64
+		excludes  func(float64) bool
+	}{
+		{schema.ExclusiveMinimum, schema.Minimum, func(v float64) bool { return v >= 0 }},
+		{schema.ExclusiveMaximum, schema.Maximum, func(v float64) bool { return v <= 0 }},
+	} {
+		switch {
+		case bound.exclusive == nil:
+		case bound.exclusive.IsA() && bound.exclusive.A && bound.inclusive != nil && *bound.inclusive == 0:
+			return false
+		case bound.exclusive.IsB() && bound.excludes(bound.exclusive.B):
+			return false
+		}
+	}
+	return true
 }
 
-func stringZeroValueValid(schema *base.Schema) bool {
+// stringZero returns the protobuf zero value of a string and whether a client can set it. A
+// 64-bit number is a string whose zero is "0": with an int64 or uint64 format, or as a digit
+// string with no format. Matches the string part of settable_zero in the API lint.
+func stringZero(schema *base.Schema) (string, bool) {
 	value := ""
-	switch schema.Format {
-	case "":
-	case "int64", "uint64":
+	switch {
+	case schema.Format == "int64" || schema.Format == "uint64":
 		value = "0"
+	case schema.Format == "" && digitString(schema.Pattern):
+		value = "0"
+	case schema.Format == "":
 	default:
-		return false
+		return "", false
 	}
 	length := int64(len([]rune(value)))
 	if schema.MinLength != nil && length < *schema.MinLength || schema.MaxLength != nil && length > *schema.MaxLength {
-		return false
+		return "", false
 	}
 	if schema.Pattern == "" {
-		return true
+		return value, true
 	}
 	re, err := regexp.Compile(schema.Pattern)
-	return err == nil && re.MatchString(value)
+	return value, err == nil && re.MatchString(value)
+}
+
+// int64Patterns are the patterns that the OpenAPI generator (protoc-gen-openapiv3,
+// stringInt64Pattern) writes for a 64-bit number sent as a string without a format. Matches
+// INT64_PATTERNS in the API lint.
+var int64Patterns = []string{`^[0-9]+$`, `^-?[0-9]+$`}
+
+// digitString reports whether a string is a 64-bit number that the OpenAPI generator writes as a
+// digit string without a format. Its protobuf zero is "0". Only the exact generated patterns
+// count: a pattern such as ^[A-Z0-9]+$ also accepts "0", but its field is a protobuf string.
+// Matches digit_string in the API lint.
+func digitString(pattern string) bool {
+	return slices.Contains(int64Patterns, pattern)
 }
 
 // createRequires reports whether Create requires the field. The client then requires it, and a
@@ -1304,7 +1435,7 @@ func nestedPresenceIssues(p Policy, location string, proxy, get, create *base.Sc
 		component = ref
 	}
 	parent := *object
-	parent.Required = required
+	parent.Required = p.requiredOf(referencedComponent(component), required)
 	getObject, _, _ := validationObject(getSchema)
 	createObject, _, createRequired := validationObject(createSchema)
 	var report issue.Report
@@ -1315,11 +1446,12 @@ func nestedPresenceIssues(p Policy, location string, proxy, get, create *base.Sc
 		if unsentField(p, component, name, child) {
 			continue
 		}
+		createChild := propertyOf(createObject, name)
 		if !wrapped && !grouped[name] && asksPresence(p, component, name, createRequired) {
-			report = append(report, fieldPresenceIssue(location+"."+name, name, &parent, child)...)
+			report = append(report, fieldPresenceIssue(location+"."+name, name, &parent, child, requestDefault(child, createChild))...)
 		}
 		getChild := propertyOf(getObject, name)
-		report = append(report, nestedPresenceIssues(p, location+"."+name, child, getChild, propertyOf(createObject, name), p.unwraps(owner, name, wrapperComponent(getChild)), seen)...)
+		report = append(report, nestedPresenceIssues(p, location+"."+name, child, getChild, createChild, p.unwraps(owner, name, wrapperComponent(getChild)), seen)...)
 	}
 	if object.Items != nil && object.Items.IsA() {
 		report = append(report, nestedPresenceIssues(p, location+"[]", object.Items.A, itemsOf(getObject), itemsOf(createObject), wrapped, seen)...)
@@ -1328,6 +1460,15 @@ func nestedPresenceIssues(p Policy, location string, proxy, get, create *base.Sc
 		report = append(report, nestedPresenceIssues(p, location+"{}", object.AdditionalProperties.A, nil, nil, false, seen)...)
 	}
 	return report
+}
+
+// requestDefault returns the declared default of a nested request field. In Update, create is the
+// same field in Create, and generation reads its default.
+func requestDefault(field, create *base.SchemaProxy) *string {
+	if create != nil {
+		return schemaDefault(create)
+	}
+	return schemaDefault(field)
 }
 
 // itemsOf returns the items of the list schema s, or nil.
@@ -1423,6 +1564,10 @@ func responseResourceProxy(op *v3.Operation, name string) *base.SchemaProxy {
 	for _, field := range propertyNames(s) {
 		proxy := propertyOf(s, field)
 		if unwrapRef(proxy) == componentPrefix+name {
+			// The property can be "allOf: [$ref: X]". Return the $ref, whose schema has the fields.
+			if !proxy.IsReference() {
+				return proxy.Schema().AllOf[0]
+			}
 			return proxy
 		}
 	}
@@ -1494,26 +1639,29 @@ func oneOfMaskPaths(prefix string, t *Type) []string {
 	return paths
 }
 
-func nameCollisions(location string, t *Type) issue.Report {
+func nameCollisions(p Policy, location string, t *Type) issue.Report {
 	var report issue.Report
 	if t == nil {
 		return nil
 	}
 	if t.Kind == List || t.Kind == Set || t.Kind == Map {
-		return nameCollisions(location+"[]", t.Elem)
+		return nameCollisions(p, location+"[]", t.Elem)
 	}
 	if t.Kind != Object && t.Kind != OneOf {
 		return nil
 	}
 	goNames := map[string]string{}
 	for _, field := range t.Fields {
+		if p.skips(t.Schema, field.Name) || p.fixedRequest(t.Schema, field.Name) {
+			continue // a skipped field or a fixed request value has no generated field
+		}
 		goName := GoName(field.Name)
 		if previous, ok := goNames[goName]; ok && previous != field.Name {
 			report = append(report, issue.Issue{Code: "GO_NAME_COLLISION", Location: location, Message: fmt.Sprintf("Fields %q and %q both generate the Go name %q.", previous, field.Name, goName), Remediation: "Rename a source API field so every generated Go field name is unique."})
 		} else {
 			goNames[goName] = field.Name
 		}
-		report = append(report, nameCollisions(location+"."+field.Name, field.Type)...)
+		report = append(report, nameCollisions(p, location+"."+field.Name, field.Type)...)
 	}
 	return report
 }
@@ -1650,4 +1798,25 @@ func firstLocation(message string) string {
 		return strings.TrimSpace(before)
 	}
 	return "openapi"
+}
+
+// skippableArm reports whether arm is an empty object arm of a group of t that allows no arm.
+func skippableArm(t *Type, arm string) bool {
+	field := slices.IndexFunc(t.Fields, func(f *Field) bool { return f.Name == arm })
+	if field < 0 || t.Fields[field].Type.Kind != Object || len(t.Fields[field].Type.Fields) != 0 {
+		return false
+	}
+	switch t.Kind {
+	case Object:
+		return slices.ContainsFunc(t.Groups, func(g OneOfGroup) bool { return slices.Contains(g.Arms, arm) && g.AllowNone })
+	case OneOf:
+		// A type that only has the arms of one group keeps the group in its own AllowNone.
+		return t.AllowNone
+	}
+	return false
+}
+
+// requires reports whether the request body s requires field.
+func requires(s *base.Schema, field string) bool {
+	return s != nil && slices.Contains(s.Required, field)
 }

@@ -37,6 +37,9 @@ type Resource struct {
 	// IDParam is the path parameter of Get, Update, and Delete. The Get
 	// response has a field with the same name. It is "" for a singleton.
 	IDParam string
+	// IDField is the resource field that holds the id: the field named like IDParam, or the
+	// IDProperty of the policy. It is "" for a singleton.
+	IDField string
 	// IDType is the type shared by the path parameter and response ID field.
 	// It is nil for a singleton.
 	IDType *Type
@@ -71,6 +74,15 @@ type Resource struct {
 	// HiddenWrappers are the wrapper components that collapse in every place, so the generated
 	// code has no attribute for their property.
 	HiddenWrappers map[string]bool
+}
+
+// ID returns the resource field that holds the id: IDField, or IDParam for a resource that Build
+// did not make. It is "" for a singleton.
+func (r *Resource) ID() string {
+	if r.IDField != "" {
+		return r.IDField
+	}
+	return r.IDParam
 }
 
 // Operation is one HTTP operation of the resource.
@@ -139,9 +151,15 @@ type Field struct {
 
 // Attrs are the facts about a field in one place (a request body or an object).
 type Attrs struct {
-	Required bool    // in the parent "required" list
-	Presence bool    // x-coralogix-presence: true
-	Default  *string // YAML text of "default", nil when there is none
+	// Computed: a computed: true line keeps the value of the field in state. With a Get that
+	// requires the field, state always has a value that Update can send.
+	Computed bool
+	// KeepState: a line keeps the state value for an unknown plan value (useStateForUnknown or
+	// useNonNullStateForUnknown).
+	KeepState bool
+	Required  bool    // in the parent "required" list
+	Presence  bool    // x-coralogix-presence: true
+	Default   *string // YAML text of "default", nil when there is none
 	// ReadOnly: readOnly: true. In a request, the server sets the field, so the request does not send it.
 	ReadOnly bool
 }
@@ -199,6 +217,20 @@ type Type struct {
 	// discriminator with no mapping). It is also a normal field (F36).
 	Discriminator string
 
+	// Zero is the protobuf zero value of a scalar, as the text that a default holds: "false",
+	// "0", or "". A 64-bit number that the API writes as a string has the zero "0".
+	Zero string
+	// ZeroValid: Zero meets the limits and the pattern of the contract. It is false for an
+	// enum, a time, and a value that is not a scalar.
+	ZeroValid bool
+	// ReadZeroAsNull: a request sends the scalar without presence or a default, and its zero value
+	// is not valid, so a configuration never holds it. A read of the zero value is an omitted one.
+	ReadZeroAsNull bool
+	// ImplicitDefault: the contract declares no default. The default is the zero value that a
+	// request scalar without presence reads back as. The service does not fill an omitted object
+	// that holds it.
+	ImplicitDefault bool
+
 	MinLength, MaxLength *int64
 	// Pattern is the regular expression that a String must match, "" for
 	// none. The free-text pattern is none. Existing resources have none.
@@ -209,6 +241,33 @@ type Type struct {
 	// rest of the type is the value inside them, which the generated code shows. They are set only by
 	// the unwrap lines of a behavior-overrides file.
 	Wrappers []Wrapper
+	// Keyed is set on a Map that the API sends as a list of objects, keyed by a property of the
+	// object (a keyedBy line). Elem is the object without the key, or the value property. On an
+	// Object (keyedBy object: true), each field is the item of one value of the enum key.
+	Keyed *Keyed
+	// Variant tells apart the items that one component makes for a keyedBy object: the Go name
+	// of the attribute that holds the item of each value.
+	Variant string
+}
+
+// Keyed is the list of objects that the API holds for a map of the generated resource.
+type Keyed struct {
+	// Key is the string property of Item that is the map key.
+	Key string
+	// Value is the property of Item that is the map value, "" when the value is the rest of Item.
+	Value string
+	// Item is the object of the API list, with every property.
+	Item *Type
+	// Object: the generated value is an object with an attribute per value of the enum key.
+	// Values are those values. KeyAs is the string property that expand sets to the attribute.
+	Object bool
+	Values []KeyedValue
+	KeyAs  string
+}
+
+// KeyedValue is an API value of the key of a keyedBy object and the field that holds its item.
+type KeyedValue struct {
+	API, Field string
 }
 
 // Wrapper is one object with one property that holds a value in the API, for example

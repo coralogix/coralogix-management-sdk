@@ -50,12 +50,29 @@ func legacyDoc(t *testing.T) []byte {
 
 func legacyCodes(t *testing.T, p Policy) []string {
 	t.Helper()
-	doc, err := Load(legacyDoc(t))
+	return legacyDocCodes(t, legacyDoc(t), p)
+}
+
+func legacyDocCodes(t *testing.T, data []byte, p Policy) []string {
+	t.Helper()
+	doc, err := Load(data)
 	if err != nil {
 		t.Fatal(err)
 	}
 	codes := reportCodes(ValidateWithPolicy(doc, "LegacyThing", OperationIDs{}, p))
 	return slices.Compact(codes)
+}
+
+// legacyDocWithDefault is testdata/legacy.yaml with a default that is not "" on the released
+// LegacyLabels.env. Without its line, the field must state presence.
+func legacyDocWithDefault(t *testing.T) []byte {
+	t.Helper()
+	old := "        env: {type: string}\n"
+	data := string(legacyDoc(t))
+	if !strings.Contains(data, old) {
+		t.Fatal("testdata/legacy.yaml has no plain LegacyLabels.env")
+	}
+	return []byte(strings.Replace(data, old, "        env: {type: string, default: prod}\n", 1))
 }
 
 // A released resource is refused by the rules for a new resource, for these reasons.
@@ -91,14 +108,17 @@ func TestEachPolicyFieldRelaxesOneRule(t *testing.T) {
 		"update id in body": {func(p *Policy) { p.UpdateIDInBody = false }, "UPDATE_ID_IN_BODY_UNSUPPORTED"},
 		"client set id":     {func(p *Policy) { p.ClientSetID = false }, "RESOURCE_ID_OPTIONAL"},
 		"enum prefix":       {func(p *Policy) { p.EnumAnyPrefix = nil }, "ENUM_ZERO_INVALID"},
-		"released":          {func(p *Policy) { p.Released = nil }, "FIELD_PRESENCE_UNKNOWN"},
+		"released":          {func(p *Policy) { p.Released = nil }, "FIELD_PRESENCE_UNKNOWN"}, // see legacyDocWithDefault
 		"existing":          {func(p *Policy) { p.Existing = false }, "RESPONSE_WRAPPER_UNSUPPORTED"},
 	}
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {
 			p := legacyPolicy()
+			if got := legacyDocCodes(t, legacyDocWithDefault(t), p); len(got) != 0 {
+				t.Fatalf("codes with the full policy = %v, want none", got)
+			}
 			test.without(&p)
-			if got := legacyCodes(t, p); !slices.Contains(got, test.code) {
+			if got := legacyDocCodes(t, legacyDocWithDefault(t), p); !slices.Contains(got, test.code) {
 				t.Fatalf("codes = %v, want %s", got, test.code)
 			}
 		})
@@ -286,5 +306,49 @@ func TestBuildSendsTheFieldsOfARequestBodyWrittenAsAllOf(t *testing.T) {
 		if i < 0 || r.Fields[i].Create == nil || r.Fields[i].Update == nil {
 			t.Errorf("field %s is not sent by Create and Update", name)
 		}
+	}
+}
+
+// An empty marker arm of a group that allows no arm holds no value, so skip can leave it out,
+// whether the type has other fields (Object) or only the arms (OneOf).
+func TestSkippableEmptyArm(t *testing.T) {
+	empty := &Type{Kind: Object, Schema: "Empty"}
+	detail := &Type{Kind: Object, Schema: "Detail", Fields: []*Field{{Name: "text", Type: &Type{Kind: String}}}}
+	arms := []*Field{{Name: "none", Type: empty}, {Name: "detail", Type: detail}}
+	pure := &Type{Kind: OneOf, Schema: "Item", Fields: arms, AllowNone: true}
+	if !skippableArm(pure, "none") || skippableArm(pure, "detail") {
+		t.Fatal("a pure oneOf that allows no arm: want only the empty arm skippable")
+	}
+	pure.AllowNone = false
+	if skippableArm(pure, "none") {
+		t.Fatal("a pure oneOf that needs an arm: want no arm skippable")
+	}
+	mixed := &Type{Kind: Object, Schema: "Item", Fields: append([]*Field{{Name: "key", Type: &Type{Kind: String}}}, arms...),
+		Groups: []OneOfGroup{{Arms: []string{"none", "detail"}, AllowNone: true}}}
+	if !skippableArm(mixed, "none") || skippableArm(mixed, "detail") || skippableArm(mixed, "key") {
+		t.Fatal("an object with a group that allows no arm: want only the empty arm skippable")
+	}
+}
+
+// A skipped empty arm of a top-level oneOf leaves the resource group too: the resource
+// validator must not name an attribute that the schema does not have.
+func TestSkippedTopLevelArmLeavesItsGroup(t *testing.T) {
+	r := &Resource{
+		Name:   "Thing",
+		Policy: Policy{Skip: []string{"Thing.none", "Thing.gone"}},
+		Groups: []OneOfGroup{
+			{Arms: []string{"none", "logs", "spans"}, AllowNone: true},
+			{Arms: []string{"gone"}, AllowNone: true},
+		},
+		Fields: []*ResourceField{
+			{Name: "none"}, {Name: "logs"}, {Name: "spans"}, {Name: "gone"},
+		},
+	}
+	r.pruneSkipped()
+	if len(r.Groups) != 1 || !slices.Equal(r.Groups[0].Arms, []string{"logs", "spans"}) || !r.Groups[0].AllowNone {
+		t.Fatalf("groups = %+v, want one group of logs and spans that allows none", r.Groups)
+	}
+	if len(r.Fields) != 2 {
+		t.Fatalf("fields = %d, want 2", len(r.Fields))
 	}
 }

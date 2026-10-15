@@ -88,7 +88,7 @@ func TestGoNameCollisionIsIneligible(t *testing.T) {
 	if len(problems) != 0 {
 		t.Fatal(problems)
 	}
-	if codes := reportCodes(nameCollisions("components.schemas.Collision", typeValue)); !slices.Contains(codes, "GO_NAME_COLLISION") {
+	if codes := reportCodes(nameCollisions(Policy{}, "components.schemas.Collision", typeValue)); !slices.Contains(codes, "GO_NAME_COLLISION") {
 		t.Fatalf("codes %v do not contain GO_NAME_COLLISION", codes)
 	}
 	if GoName("foo-bar") != "FooBar" || GoName("foo_bar") != "FooBar" {
@@ -148,15 +148,73 @@ func TestPresenceContract(t *testing.T) {
 	if report := Validate(doc, "Thing", OperationIDs{}); len(report) != 0 {
 		t.Fatal(report)
 	}
-	data = []byte(strings.Replace(string(data),
+	// Without a default, omission and zero both store zero, so presence adds nothing.
+	noDefault := []byte(strings.Replace(string(data),
 		"                description:\n                  type: string\n                  x-coralogix-presence: true\n",
 		"                description:\n                  type: string\n", 1))
-	doc, err = Load(data)
+	doc, err = Load(noDefault)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if report := Validate(doc, "Thing", OperationIDs{}); len(report) != 0 {
+		t.Fatal(report)
+	}
+	// With the default true, an explicit false is stored as true unless the field has presence.
+	nonZeroDefault := []byte(strings.Replace(string(data),
+		"                  default: true\n                  x-coralogix-presence: true\n",
+		"                  default: true\n", 1))
+	doc, err = Load(nonZeroDefault)
 	if err != nil {
 		t.Fatal(err)
 	}
 	if codes := reportCodes(Validate(doc, "Thing", OperationIDs{})); !slices.Contains(codes, "FIELD_PRESENCE_UNKNOWN") {
 		t.Fatalf("codes %v do not contain FIELD_PRESENCE_UNKNOWN", codes)
+	}
+}
+
+// An optional scalar needs presence only when its declared default is not its zero value and
+// the zero value is valid. The matrix is each scalar shape with no default, a zero default, and a
+// default that is not zero.
+func TestOptionalScalarPresenceNeedsNonZeroDefault(t *testing.T) {
+	shapes := map[string]struct {
+		schema, zero, other string
+		zeroValid           bool
+	}{
+		"bool":                {"type: boolean", "false", "true", true},
+		"int":                 {"type: integer, format: int32", "0", "3", true},
+		"int min 1":           {"type: integer, format: int32, minimum: 1", "0", "3", false},
+		"int exclusive min 0": {"type: integer, format: int32, minimum: 0, exclusiveMinimum: true", "0", "3", false},
+		"string":              {"type: string", `""`, "plain", true},
+		"digit string":        {"type: string, maxLength: 20, pattern: '^[0-9]+$'", "'0'", "'5'", true},
+		"enum":                {"allOf: [{$ref: '#/components/schemas/Level'}]", "LEVEL_UNSPECIFIED", "LEVEL_HIGH", false},
+	}
+	for shape, s := range shapes {
+		for name, test := range map[string]struct {
+			field string
+			want  bool
+		}{
+			"no default":                    {"{" + s.schema + "}", false},
+			"zero default":                  {"{" + s.schema + ", default: " + s.zero + "}", false},
+			"non-zero default":              {"{" + s.schema + ", default: " + s.other + "}", s.zeroValid},
+			"non-zero default and presence": {"{" + s.schema + ", default: " + s.other + ", x-coralogix-presence: true}", false},
+		} {
+			t.Run(shape+"/"+name, func(t *testing.T) {
+				doc := loadComponent(t, `
+    Level:
+      type: string
+      enum: [LEVEL_UNSPECIFIED, LEVEL_HIGH]
+    Nested:
+      type: object
+      properties:
+        value: `+test.field+`
+`)
+				proxy := doc.Components.Schemas.GetOrZero("Nested")
+				report := nestedPresenceIssues(Policy{}, "request.config", proxy, nil, nil, false, map[presenceVisit]bool{})
+				if got := slices.Contains(reportCodes(report), "FIELD_PRESENCE_UNKNOWN"); got != test.want {
+					t.Fatalf("FIELD_PRESENCE_UNKNOWN = %t, want %t: %v", got, test.want, report)
+				}
+			})
+		}
 	}
 }
 
@@ -360,6 +418,7 @@ func TestNestedPresenceContract(t *testing.T) {
       properties:
         enabled:
           type: boolean
+          default: true
 `)
 	proxy := doc.Components.Schemas.GetOrZero("Nested")
 	if codes := reportCodes(nestedPresenceIssues(Policy{}, "request.config", proxy, nil, nil, false, map[presenceVisit]bool{})); !slices.Contains(codes, "FIELD_PRESENCE_UNKNOWN") {
@@ -372,6 +431,7 @@ func TestNestedPresenceContract(t *testing.T) {
       properties:
         enabled:
           type: boolean
+          default: true
           x-coralogix-presence: true
 `)
 	proxy = doc.Components.Schemas.GetOrZero("Nested")
@@ -414,14 +474,19 @@ func TestCreateRequiredFieldNeedsNoUpdatePresence(t *testing.T) {
 func TestSkippedFieldNeedsNoPresence(t *testing.T) {
 	create, update, get := presenceContract(t)
 	for _, skip := range []string{"Thing.spec", "SpecUpdate.note"} {
-		if report := validateFieldContract(Policy{Skip: []string{skip}}, "Thing", "id", "spec", create, update, get); len(report) != 0 {
+		report := validateFieldContract(Policy{Skip: []string{skip}}, "Thing", "id", "spec", create, update, get)
+		// Create requires spec, so skipping all of it is also SKIP_REQUIRED_FIELD. This test is
+		// about presence only.
+		report = slices.DeleteFunc(report, func(i issue.Issue) bool { return i.Code == "SKIP_REQUIRED_FIELD" })
+		if len(report) != 0 {
 			t.Fatalf("skip %s: %v", skip, report)
 		}
 	}
 }
 
 // presenceContract returns the Create, Update, and Get schemas of Thing. Create requires version
-// and spec.version. spec.note is optional and has no presence mark in Update.
+// and spec.version. spec.note is optional, has a default that is not "", and has no presence mark
+// in Update.
 func presenceContract(t *testing.T) (create, update, get *base.Schema) {
 	t.Helper()
 	doc := loadComponent(t, `
@@ -430,38 +495,38 @@ func presenceContract(t *testing.T) (create, update, get *base.Schema) {
       required: [version]
       properties:
         version: {type: string, minLength: 1}
-        note: {type: string, x-coralogix-presence: true}
+        note: {type: string, default: plain, x-coralogix-presence: true}
     SpecUpdate:
       type: object
       properties:
         version: {type: string, minLength: 1}
-        note: {type: string}
+        note: {type: string, default: plain}
     Spec:
       type: object
       required: [version]
       properties:
         version: {type: string, minLength: 1}
-        note: {type: string}
+        note: {type: string, default: plain}
     ThingCreate:
       type: object
       required: [version, spec]
       properties:
         version: {type: string, minLength: 1}
         spec:
-          allOf: [{$ref: '#/components/schemas/SpecCreate'}]
+          $ref: '#/components/schemas/SpecCreate'
     ThingUpdate:
       type: object
       properties:
         version: {type: string, minLength: 1}
         spec:
-          allOf: [{$ref: '#/components/schemas/SpecUpdate'}]
+          $ref: '#/components/schemas/SpecUpdate'
     Thing:
       type: object
       required: [version, spec]
       properties:
         version: {type: string, minLength: 1}
         spec:
-          allOf: [{$ref: '#/components/schemas/Spec'}]
+          $ref: '#/components/schemas/Spec'
 `)
 	schema := func(name string) *base.Schema {
 		t.Helper()
@@ -487,6 +552,7 @@ func TestValidationWalksAllOfRef(t *testing.T) {
           minLength: 1
         enabled:
           type: boolean
+          default: true
     Wrapped:
       description: a described message
       allOf:
@@ -1576,10 +1642,10 @@ func TestNestedFieldLifecycle(t *testing.T) {
 func TestNestedRequestTypes(t *testing.T) {
 	spec := specType(t)
 	create, update := spec.CreateType(), spec.UpdateType()
-	if create.Schema != "ThingSpecCreate" || create.Model != "ThingSpec" || !slices.Equal(fieldNames(create), []string{"mode", "region", "items", "targets"}) {
+	if create.Schema != "ThingSpecCreate" || create.Model != "ThingSpec" || !slices.Equal(fieldNames(create), []string{"mode", "region", "weight", "items", "targets"}) {
 		t.Errorf("Create type = %s for %s with %v", create.Schema, create.Model, fieldNames(create))
 	}
-	if update.Schema != "ThingSpecUpdate" || !slices.Equal(fieldNames(update), []string{"mode", "items"}) {
+	if update.Schema != "ThingSpecUpdate" || !slices.Equal(fieldNames(update), []string{"mode", "weight", "items"}) {
 		t.Errorf("Update type = %s with %v", update.Schema, fieldNames(update))
 	}
 	updateItem := fieldNamed(update.Fields, "items").Type.Elem
