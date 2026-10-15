@@ -28,7 +28,7 @@ type ArchiveSpec struct {
 	// The enable tags.
 	EnableTags *bool `json:"enableTags,omitempty"`
 	Format *TargetFormat `json:"format,omitempty"`
-	// The archiving format id.
+	// Whether archiving to this target is active.
 	IsActive *bool `json:"isActive,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

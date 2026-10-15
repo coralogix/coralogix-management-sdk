@@ -166,7 +166,7 @@
           },
           "isActive": {
             "type": "boolean",
-            "description": "The archiving format id.",
+            "description": "Whether archiving to this target is active.",
             "examples": [
               true
             ]
@@ -386,7 +386,7 @@
         "type": "object",
         "properties": {
           "bucket": {
-            "minLength": 0,
+            "minLength": 3,
             "type": "string",
             "description": "Bucket name.",
             "examples": [
