@@ -22,6 +22,7 @@ package overrides
 import (
 	"errors"
 	"fmt"
+	"maps"
 	"slices"
 	"sort"
 
@@ -41,6 +42,10 @@ type API struct {
 	// ServerSetID: the server sets the id and returns it in every response, but the Get
 	// response cannot require it, because the request shares the resource schema.
 	ServerSetID bool `yaml:"serverSetID"`
+	// IDProperty is the property of the resource that holds the id when it does not have the name
+	// of the path parameter, for example uniqueIdentifier for /rules/{rule_id}. "" means the
+	// property named like the path parameter.
+	IDProperty string `yaml:"idProperty"`
 	// CustomMethods: Get, Update, and Delete are not the Create path with an id.
 	// Get and Delete each have the same {id} path parameter on their own paths.
 	// Update has no path parameter, and the id stays in the body. New resources
@@ -83,9 +88,38 @@ type Field struct {
 	// it readOnly yet. The field is read and stored, and never sent. Delete this key when the
 	// contract marks the field readOnly.
 	ReadOnly bool `yaml:"readOnly"`
+	// Optional: true makes the field optional, although a request of the contract requires it.
+	// The released resource lets the user leave it out, and the API accepts that, but the
+	// contract cannot say so: the request shares the component with a response that always has
+	// the field.
+	Optional bool `yaml:"optional"`
+	// CreateAs folds top-level Create fields into this object field: Create sends each
+	// property of the object as the top-level Create field it names, for example
+	// {limit: permutationsLimit}. Update and Get have the object itself.
+	CreateAs map[string]string `yaml:"createAs"`
+	// Collection: set says that the order of a list of the contract has no meaning. The API
+	// keeps the order.
+	Collection string `yaml:"collection"`
+	// KeyedBy says that a list of objects is a map keyed by a string property of the object.
+	// With Value, the map value is that one property, and the object must have only the two.
+	KeyedBy *KeyedBy `yaml:"keyedBy"`
 	// Unwrap: true shows the value inside the wrapper of the field, or of its items, in this
 	// place. false keeps the object of a component that the unwrap list names.
 	Unwrap *bool `yaml:"unwrap"`
+}
+
+// KeyedBy names the key property, and the value property, of a list of objects that is a map.
+type KeyedBy struct {
+	Key   string `yaml:"key"`
+	Value string `yaml:"value"`
+	// Object shows the list as an object with one attribute per accepted value of the key, an
+	// enum with an enums line. The attribute has the name that the tool gives the enum value.
+	Object bool `yaml:"object"`
+	// Arms gives an enum value of the key the oneOf arm of the item that it holds. The other
+	// arms are not in its attribute, and the arm is required in it.
+	Arms map[string]string `yaml:"arms"`
+	// KeyAs is a string property of the item that expand sets to the attribute name.
+	KeyAs string `yaml:"keyAs"`
 }
 
 // Exceptions are the API keys of one behavior-overrides file.
@@ -119,6 +153,45 @@ func (a API) Check() error {
 	return nil
 }
 
+// Check checks the createAs, collection, and keyedBy keys of a field line.
+func (l Field) Check() error {
+	if l.KeyedBy != nil && (l.KeyedBy.Key == "" || l.KeyedBy.Key == l.KeyedBy.Value) {
+		return errors.New("keyedBy needs a key, and a value other than the key")
+	}
+	if k := l.KeyedBy; k != nil && k.Object && k.Value != "" {
+		return errors.New("keyedBy: object holds the whole item, so value cannot be set")
+	}
+	if k := l.KeyedBy; k != nil && !k.Object && (len(k.Arms) != 0 || k.KeyAs != "") {
+		return errors.New("keyedBy: arms and keyAs need object: true")
+	}
+	if l.KeyedBy != nil && l.Collection != "" {
+		return errors.New("keyedBy makes a map, so collection cannot be set")
+	}
+	if err := checkCreateAs(l.CreateAs); err != nil {
+		return err
+	}
+	if l.Collection != "" && l.Collection != "set" {
+		return fmt.Errorf("collection is %q, want set", l.Collection)
+	}
+	return nil
+}
+
+// checkCreateAs checks a createAs map: each property names one Create field, and no two
+// properties name the same one.
+func checkCreateAs(into map[string]string) error {
+	seen := map[string]bool{}
+	for nested, flat := range into {
+		if nested == "" || flat == "" {
+			return errors.New("createAs maps a property to a Create field; neither can be empty")
+		}
+		if seen[flat] {
+			return fmt.Errorf("createAs names the Create field %q twice", flat)
+		}
+		seen[flat] = true
+	}
+	return nil
+}
+
 // CheckUnwrap checks that the unwrap list names each component once.
 func CheckUnwrap(unwrap []string) error {
 	for i, name := range unwrap {
@@ -142,6 +215,7 @@ func (e Exceptions) Policy() model.Policy {
 		UpdateIDInBody:   e.API.UpdateIDInBody,
 		ClientSetID:      e.API.ClientSetID,
 		ServerSetID:      e.API.ServerSetID,
+		IDProperty:       e.API.IDProperty,
 		CustomMethods:    e.API.CustomMethods,
 		UpdateMaskInBody: e.API.UpdateMaskInBody,
 	}
@@ -172,6 +246,24 @@ func (e Exceptions) Policy() model.Policy {
 			}
 			if line.ReadOnly {
 				p.ReadOnly = append(p.ReadOnly, name+"."+field)
+			}
+			if line.Optional {
+				p.Optional = append(p.Optional, name+"."+field)
+			}
+			if line.Collection == "set" {
+				p.Sets = append(p.Sets, name+"."+field)
+			}
+			if k := line.KeyedBy; k != nil {
+				if p.KeyedBy == nil {
+					p.KeyedBy = map[string]model.KeyedLine{}
+				}
+				p.KeyedBy[name+"."+field] = model.KeyedLine{Key: k.Key, Value: k.Value, Object: k.Object, Arms: maps.Clone(k.Arms), KeyAs: k.KeyAs}
+			}
+			if into := line.CreateAs; len(into) != 0 {
+				if p.CreateAs == nil {
+					p.CreateAs = map[string]map[string]string{}
+				}
+				p.CreateAs[name+"."+field] = maps.Clone(into)
 			}
 			if line.Skip || line.ReadOnly {
 				p.Released = append(p.Released, name+"."+field)
