@@ -55,6 +55,51 @@ func TestPolicyStatesTheAPIKeys(t *testing.T) {
 	}
 }
 
+func TestPolicyStatesTheFieldShapeKeys(t *testing.T) {
+	e := Exceptions{
+		API: API{IDProperty: "uniqueIdentifier"},
+		Fields: map[string]map[string]Field{
+			"Thing": {
+				"name":   {Optional: true},
+				"tags":   {Collection: "set"},
+				"labels": {KeyedBy: &KeyedBy{Key: "key", Value: "value"}},
+				"limits": {CreateAs: map[string]string{"limit": "permutationsLimit"}},
+			},
+		},
+	}
+	want := model.Policy{
+		Existing: true, IDProperty: "uniqueIdentifier",
+		Optional: []string{"Thing.name"},
+		Sets:     []string{"Thing.tags"},
+		KeyedBy:  map[string]model.KeyedLine{"Thing.labels": {Key: "key", Value: "value"}},
+		CreateAs: map[string]map[string]string{"Thing.limits": {"limit": "permutationsLimit"}},
+	}
+	if got := e.Policy(); !reflect.DeepEqual(got, want) {
+		t.Fatalf("Policy() =\n%+v\nwant\n%+v", got, want)
+	}
+}
+
+func TestFieldCheckRejectsBadShapeKeys(t *testing.T) {
+	for name, l := range map[string]Field{
+		"keyedBy without a key":        {KeyedBy: &KeyedBy{Value: "value"}},
+		"keyedBy value is the key":     {KeyedBy: &KeyedBy{Key: "key", Value: "key"}},
+		"keyedBy object with value":    {KeyedBy: &KeyedBy{Key: "key", Value: "value", Object: true}},
+		"keyedBy arms without object":  {KeyedBy: &KeyedBy{Key: "key", Arms: map[string]string{"A": "a"}}},
+		"keyedBy and collection":       {KeyedBy: &KeyedBy{Key: "key"}, Collection: "set"},
+		"createAs with an empty name":  {CreateAs: map[string]string{"limit": ""}},
+		"createAs names a field twice": {CreateAs: map[string]string{"a": "x", "b": "x"}},
+		"collection other than set":    {Collection: "list"},
+	} {
+		if l.Check() == nil {
+			t.Errorf("%s: Check() = nil", name)
+		}
+	}
+	ok := Field{Collection: "set", CreateAs: map[string]string{"limit": "permutationsLimit"}}
+	if err := ok.Check(); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRejectsConflictingAPIKeys(t *testing.T) {
 	for name, a := range map[string]API{
 		"both id owners":        {ClientSetID: true, ServerSetID: true},
