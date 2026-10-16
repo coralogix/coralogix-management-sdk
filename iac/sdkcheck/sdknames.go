@@ -97,6 +97,9 @@ func (s Ref) SDKName() string {
 func ResourceTag(doc *v3.Document, r *model.Resource) (string, error) {
 	tag := ""
 	for _, op := range []model.Operation{r.Create, r.Get, r.Update, r.Delete} {
+		if op.OperationID == "" {
+			continue // an upsert has no Delete
+		}
 		item, ok := doc.Paths.PathItems.Get(op.Path)
 		if !ok {
 			return "", fmt.Errorf("%s: path %s not in the spec", op.OperationID, op.Path)
@@ -147,7 +150,8 @@ func Names(r *model.Resource, tag, module string, zeroConstants func(component s
 	for _, f := range r.Fields {
 		path := "fields." + f.Name
 		if f.InGet {
-			if err := s.field(path, resource, f.Name, f.Type, f.Get != nil && f.Get.Required); err != nil {
+			owner := s.parent("fields", resource, f.GetParent)
+			if err := s.field(path, owner, f.Name, f.Type, f.Get != nil && f.Get.Required); err != nil {
 				return nil, err
 			}
 		}
@@ -204,19 +208,39 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 			continue
 		}
 		if f.Create != nil {
-			if err := s.requestField("create.body."+f.Name, s.bodies["create"], f.Name, f.Type.CreateType(), f.Create.Required); err != nil {
+			owner := s.parent("create.body", s.bodies["create"], f.CreateParent)
+			if err := s.requestField("create.body."+f.Name, owner, f.Name, f.Type.CreateType(), f.Create.Required); err != nil {
 				return err
 			}
 		}
 	}
 	for _, f := range r.Fields {
 		if f.Update != nil {
-			if err := s.requestField("update.body."+f.Name, s.bodies["update"], f.Name, f.Type.UpdateType(), f.Update.Required); err != nil {
+			owner := s.parent("update.body", s.bodies["update"], f.UpdateParent)
+			if err := s.requestField("update.body."+f.Name, owner, f.Name, f.Type.UpdateType(), f.Update.Required); err != nil {
 				return err
 			}
 		}
 	}
 	return nil
+}
+
+// parent returns the SDK type that holds a top-level field: the root type at root, or the object
+// that the policy hoists. The first field of a hoisted object adds the field of the root that
+// holds it, at <root>.<object>, and the type of the object.
+func (s *resolver) parent(root, rootType string, parent *model.Parent) string {
+	if parent == nil {
+		return rootType
+	}
+	name := goTypeName(parent.Schema)
+	path := root + "." + parent.Field
+	if !s.seen["parent:"+path] {
+		s.seen["parent:"+path] = true
+		// A required object can be a value in the SDK (F18). An arm of a oneOf is a pointer.
+		s.add(Ref{Path: path, Kind: KindField, Owner: rootType, Name: goFieldName(parent.Field), Want: "*" + name, WantValue: name, Rule: RuleProperty})
+		s.add(Ref{Path: path, Kind: KindType, Name: name, Rule: RuleComponent, Schema: parent.Schema})
+	}
+	return name
 }
 
 // requestField adds the Go field of a request body, and the request
@@ -242,6 +266,9 @@ func (s *resolver) operations(r *model.Resource, client string) error {
 		{"delete", r.Delete, true},
 	}
 	for _, o := range ops {
+		if o.op.OperationID == "" {
+			continue // an upsert has no Delete
+		}
 		// A singleton has no id in the path (D18).
 		withID := o.id && !r.Singleton && (o.name != "update" || !r.Policy.UpdateIDInBody)
 		if err := s.operation(r, o.name, o.op, client, withID); err != nil {

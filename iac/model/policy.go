@@ -15,6 +15,7 @@
 package model
 
 import (
+	"errors"
 	"fmt"
 	"slices"
 
@@ -132,6 +133,18 @@ type Policy struct {
 	// UnwrapFields maps "Component.field" to the choice of a field line: true shows the value
 	// inside the wrapper of the field, or of its items, and false keeps the object.
 	UnwrapFields map[string]bool
+	// Upsert is a singleton that one call sets and another reads. The API has no Create, Update,
+	// or Delete: Create and Update are the Set call, a full replace, and Delete makes no call.
+	Upsert *Upsert
+	// Hoist lists the object fields of the resource whose fields are top-level fields. The
+	// API sends and returns them inside the object.
+	Hoist []string
+}
+
+// Upsert names the two calls of a singleton that always exists.
+type Upsert struct {
+	Get string // operationId of the GET without path parameters
+	Set string // operationId of the POST on the same path
 }
 
 // unwraps reports whether the generated code shows the value inside component, the wrapper that holds
@@ -186,7 +199,14 @@ func referencedSchema(proxy *base.SchemaProxy) *base.SchemaProxy {
 // operationIDs returns the lifecycle operation IDs. A flag fills a slot the file
 // leaves empty. The file and a flag cannot name different ids for one step.
 // api.delete.operation still names a POST delete when the file has no operations.delete.
+// An upsert names Get, and Set as Create and Update, so no flag can name them.
 func (p Policy) operationIDs(ids OperationIDs) (OperationIDs, error) {
+	if p.Upsert != nil {
+		if ids != (OperationIDs{}) {
+			return ids, errors.New("the overrides name the operations of the upsert, so no operation flag can name one")
+		}
+		return OperationIDs{Create: p.Upsert.Set, Get: p.Upsert.Get, Update: p.Upsert.Set}, nil
+	}
 	var err error
 	ids.Create, err = oneOperationID(opCreate, p.Operations.Create, ids.Create)
 	if err != nil {
@@ -223,6 +243,9 @@ func (p Policy) methods(v verb) []string {
 	if v == opDelete && p.DeleteOperation != "" {
 		return []string{"POST"}
 	}
+	if v == opUpdate && p.Upsert != nil {
+		return []string{"POST"} // the Set call that also creates
+	}
 	return verbMethods[v]
 }
 
@@ -252,6 +275,19 @@ func (p Policy) WithDefaultArms(component string, groups []OneOfGroup) []OneOfGr
 		}
 	}
 	return out
+}
+
+// lifecycle returns the lifecycle steps that need an operation. An upsert has no Delete.
+func (p Policy) lifecycle() []verb {
+	if p.Upsert != nil {
+		return []verb{opCreate, opGet, opUpdate}
+	}
+	return verbs
+}
+
+// hoists reports whether the fields of the object field of the resource are top-level fields.
+func (p Policy) hoists(field string) bool {
+	return p.Existing && slices.Contains(p.Hoist, field)
 }
 
 func (p Policy) skips(component, field string) bool {

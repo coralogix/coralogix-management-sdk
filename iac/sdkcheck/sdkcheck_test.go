@@ -158,3 +158,46 @@ func TestEnumConstName(t *testing.T) {
 		}
 	}
 }
+
+// An upsert has no Delete, so Names lists no Delete call. A field of a hoisted object is a field
+// of the SDK type of the object, and the object is a field of the resource and of the request.
+func TestNamesOfAnUpsert(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "upsert.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	p := model.Policy{
+		Existing: true,
+		Upsert:   &model.Upsert{Get: "UpsertService_GetTarget", Set: "UpsertService_SetTarget"},
+		Hoist:    []string{"spec", "meta"},
+		Skip:     []string{"Target.other"},
+		ReadOnly: []string{"Target.token"},
+		Released: []string{"Target.other", "Target.token", "Target.enabled"},
+	}
+	r, err := model.BuildWithPolicy(doc, "Target", model.OperationIDs{}, p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, ref := range refs {
+		if strings.HasPrefix(ref.Path, "delete") {
+			t.Errorf("an upsert has no Delete, but refs name %s", ref.SDKName())
+		}
+	}
+	for _, path := range []string{"fields.spec", "fields.meta", "create.body.spec"} {
+		if !slices.ContainsFunc(refs, func(ref Ref) bool { return ref.Path == path && ref.Kind == KindField }) {
+			t.Errorf("refs have no field at %s", path)
+		}
+	}
+}

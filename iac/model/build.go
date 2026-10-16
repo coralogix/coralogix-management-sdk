@@ -77,7 +77,8 @@ func BuildWithPolicy(doc *v3.Document, name string, ids OperationIDs, policy Pol
 	if err != nil {
 		return nil, err
 	}
-	r := &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy}
+	// The Set call of an upsert sends the whole resource, as a PUT does.
+	r := &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Upsert != nil, Upsert: policy.Upsert != nil, Policy: policy}
 	if err := r.readOperations(ops); err != nil {
 		return nil, err
 	}
@@ -88,6 +89,10 @@ func BuildWithPolicy(doc *v3.Document, name string, ids OperationIDs, policy Pol
 		}
 	}
 	r.readBodyTitles(doc, ops)
+	if len(policy.Hoist) != 0 && !r.Replace {
+		// An update mask names API fields, and a hoisted field is inside its object in the API.
+		return nil, fmt.Errorf("%s: hoist needs an Update that sends the whole resource (a PUT or an upsert), not an update mask", name)
+	}
 	if err := r.readFields(doc, ops); err != nil {
 		return nil, err
 	}
@@ -166,7 +171,7 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 		return nil, err
 	}
 	explicit := map[verb]string{opCreate: ids.Create, opGet: ids.Get, opUpdate: ids.Update, opDelete: ids.Delete}
-	for _, v := range verbs {
+	for _, v := range p.lifecycle() {
 		matches := matchingOperations(doc, name, v, explicit[v])
 		if len(matches) > 1 {
 			var names []string
@@ -182,7 +187,7 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 	}
 	get, singleton := found[opGet]
 	singleton = singleton && len(pathParams(get)) == 0
-	for _, v := range verbs {
+	for _, v := range p.lifecycle() {
 		f, ok := found[v]
 		suffix := "_" + string(v) + name
 		if v == opUpdate {
@@ -238,11 +243,14 @@ func matchingOperations(doc *v3.Document, name string, role verb, explicit strin
 
 func (r *Resource) readOperations(ops map[verb]foundOp) error {
 	if len(pathParams(ops[opGet])) == 0 {
-		if err := checkSingleton(ops); err != nil {
+		if err := checkSingleton(ops, r.Policy); err != nil {
 			return err
 		}
 		r.Singleton = true
 		return r.readTargets(ops)
+	}
+	if r.Upsert {
+		return fmt.Errorf("%s: an upsert is a singleton, but %s has path parameters", opGet, ops[opGet].op.OperationId)
 	}
 	id, err := idParam(ops[opGet])
 	if err != nil {
@@ -317,10 +325,10 @@ func (r *Resource) itemOperations(ops map[verb]foundOp) ([]verb, error) {
 }
 
 // checkSingleton checks a singleton (D18): Create, Get, Update, and Delete on
-// one path, with no path parameters.
-func checkSingleton(ops map[verb]foundOp) error {
+// one path, with no path parameters. An upsert has no Delete.
+func checkSingleton(ops map[verb]foundOp, p Policy) error {
 	path := ops[opGet].path
-	for _, v := range verbs {
+	for _, v := range p.lifecycle() {
 		if ops[v].path != path {
 			return fmt.Errorf("%s: a singleton has one path; %s is not %s (as in get)", v, ops[v].path, path)
 		}
@@ -335,7 +343,7 @@ func checkSingleton(ops map[verb]foundOp) error {
 func (r *Resource) readTargets(ops map[verb]foundOp) error {
 	var err error
 	targets := map[verb]*Operation{opCreate: &r.Create, opGet: &r.Get, opUpdate: &r.Update, opDelete: &r.Delete}
-	for _, v := range verbs {
+	for _, v := range r.Policy.lifecycle() {
 		f := ops[v]
 		o := targets[v]
 		o.Method, o.Path, o.OperationID = f.method, f.path, f.op.OperationId
@@ -746,6 +754,11 @@ func (r *Resource) readFields(doc *v3.Document, ops map[verb]foundOp) error {
 	if createBody, err = r.Policy.foldCreateBody(r.Name, createBody); err != nil {
 		return err
 	}
+	create, update, get, err := r.Policy.hoistAll(r.Name, createBody, updateBody, getSchema)
+	if err != nil {
+		return err
+	}
+	createBody, updateBody, getSchema = create.schema, update.schema, get.schema
 	if err := r.checkBodies(createBody, updateBody, getSchema, ops[opUpdate]); err != nil {
 		return err
 	}
@@ -770,6 +783,7 @@ func (r *Resource) readFields(doc *v3.Document, ops map[verb]foundOp) error {
 		if err != nil {
 			return fmt.Errorf("%s: %w", r.Name, err)
 		}
+		f.CreateParent, f.UpdateParent, f.GetParent = parentOf(create, f.Create, n), parentOf(update, f.Update, n), parentOf(get, f.Get, n)
 		r.Fields = append(r.Fields, f)
 	}
 	groups, err := r.rootGroups(createBody)
@@ -778,6 +792,16 @@ func (r *Resource) readFields(doc *v3.Document, ops map[verb]foundOp) error {
 	}
 	r.Groups = groups
 	return nil
+}
+
+// parentOf returns the hoisted object that holds field n in a schema where the field is
+// (attrs is not nil), or nil when the schema itself has the field.
+func parentOf(s hoisted, attrs *Attrs, n string) *Parent {
+	parent, ok := s.parents[n]
+	if attrs == nil || !ok {
+		return nil
+	}
+	return &parent
 }
 
 // rootGroups returns the oneOf groups among the configurable top-level fields:

@@ -16,7 +16,10 @@
 // types of a generated tool and no SDK types. Build reads it from an OpenAPI document.
 package model
 
-import "strings"
+import (
+	"slices"
+	"strings"
+)
 
 // OperationIDs selects lifecycle operations when suffix discovery is ambiguous.
 // Empty fields use deterministic suffix discovery.
@@ -61,6 +64,10 @@ type Resource struct {
 	// MaskInBody: PATCH updateMask is an optional JSON body property. Update
 	// sets it to the same changed-field mask a query parameter would send.
 	MaskInBody bool
+	// Upsert: a singleton that always exists. Create and Update are one Set
+	// call, a full replace, and Delete is the zero Operation: the API cannot
+	// remove the resource.
+	Upsert bool
 	// Policy is the rule set that Build used. It is the zero value for a new resource.
 	Policy Policy
 	// Groups are the oneOf groups among the top-level fields.
@@ -132,6 +139,22 @@ type ResourceField struct {
 	Update      *Attrs // nil: not in the Update body
 	Get         *Attrs // attributes in the resource response
 	InGet       bool
+	// CreateParent, UpdateParent, and GetParent are the hoisted objects that hold the field in
+	// the Create body, the Update body, and the resource response. nil: the field is a property
+	// of that schema itself.
+	CreateParent, UpdateParent, GetParent *Parent
+}
+
+// Parents returns the hoisted objects that hold top-level fields in the resource response, in
+// field order, each once.
+func (r *Resource) Parents() []Parent {
+	var out []Parent
+	for _, f := range r.Fields {
+		if f.GetParent != nil && !slices.Contains(out, *f.GetParent) {
+			out = append(out, *f.GetParent)
+		}
+	}
+	return out
 }
 
 // Field is a field of a nested object, or an arm of a oneOf.

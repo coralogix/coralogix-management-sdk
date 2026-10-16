@@ -50,12 +50,13 @@ func ValidateWithPolicy(doc *v3.Document, name string, ids OperationIDs, p Polic
 		report = append(report, componentNameCollisions(t)...)
 		report = append(report, skippedArmIssues(p, t)...)
 	}
-	if len(ops) == len(verbs) {
+	complete := len(ops) == len(p.lifecycle())
+	if complete {
 		report = append(report, requestSchemaSeparationIssues(p, name, ops)...)
 		report = append(report, validateFieldContracts(p, name, ops)...)
 		report = append(report, responseWrapperIssues(p, name, ops)...)
 	}
-	if len(ops) == len(verbs) {
+	if complete {
 		r, err := BuildWithPolicy(doc, name, ids, p)
 		if err != nil {
 			report = append(report, buildIssue(err))
@@ -150,13 +151,17 @@ func validateOperations(doc *v3.Document, name string, ids OperationIDs, p Polic
 	if len(report) != 0 {
 		return found, report
 	}
-	ids, _ = p.operationIDs(ids) // deleteOverrideConflictIssues reports the conflict.
+	ids, err := p.operationIDs(ids)
+	if err != nil && p.Upsert != nil {
+		return found, issue.Report{{Code: "UPSERT_OPERATION_CONFLICT", Location: upsertLocation, Message: err.Error(), Remediation: "Name the operations of the upsert only in api.upsert."}}
+	} // deleteOverrideConflictIssues reports the conflict of a Delete override.
 	explicit := map[verb]string{opCreate: ids.Create, opGet: ids.Get, opUpdate: ids.Update, opDelete: ids.Delete}
-	for _, role := range verbs {
+	for _, role := range p.lifecycle() {
 		candidates := matchingOperations(doc, name, role, explicit[role])
 		report = append(report, validateRole(role, candidates, explicit[role], p, found)...)
 	}
-	if len(found) != len(verbs) {
+	report = append(report, upsertIssues(p, found)...)
+	if len(found) != len(p.lifecycle()) {
 		report = append(report, issue.Issue{Code: "RESOURCE_LIFECYCLE_INCOMPLETE", Location: "paths", Message: "The resource does not have one eligible operation for every lifecycle step.", Remediation: "Provide one Create, Get, Update or Replace, and Delete operation."})
 	}
 	return found, report
@@ -210,6 +215,27 @@ func operationCandidateIssues(location string, role verb, candidate foundOp, p P
 		}}
 	}
 	return requiredParameterIssues(location, role, candidate)
+}
+
+// upsertLocation is the line of the behavior-overrides file that names the upsert operations.
+const upsertLocation = "behavior-overrides.yaml:api.upsert"
+
+// upsertIssues checks the two calls of an upsert: a GET and a POST on one path without path
+// parameters. The singleton checks of Build repeat the path rule for every resource.
+func upsertIssues(p Policy, found map[verb]foundOp) issue.Report {
+	get, getOK := found[opGet]
+	set, setOK := found[opCreate]
+	if p.Upsert == nil || !getOK || !setOK {
+		return nil
+	}
+	var report issue.Report
+	if n := len(pathParams(get)); n != 0 {
+		report = append(report, issue.Issue{Code: "UPSERT_SHAPE_UNSUPPORTED", Location: upsertLocation + ".get", Message: fmt.Sprintf("%s has %d path parameters. An upsert is a singleton: its Get has none.", get.op.OperationId, n), Remediation: "Name the GET of a singleton, or use the Create, Update, and Delete of the API."})
+	}
+	if set.path != get.path || len(pathParams(set)) != 0 {
+		report = append(report, issue.Issue{Code: "UPSERT_SHAPE_UNSUPPORTED", Location: upsertLocation + ".set", Message: fmt.Sprintf("%s is %s %s. The Set of an upsert is a POST on the Get path %s, with no path parameters.", set.op.OperationId, set.method, set.path, get.path), Remediation: "Name the POST on the path of the Get."})
+	}
+	return report
 }
 
 // deleteOverrideLocation is the line of the behavior-overrides file that names the Delete operation.
@@ -290,8 +316,6 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 		create = folded
 	}
 	update, updateErr := schemaOf(p.requestBody(ops[opUpdate].op))
-	getProxy := ops[opGet].op
-	_ = getProxy
 	if createErr != nil || updateErr != nil {
 		return nil
 	}
@@ -302,6 +326,12 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 	if getErr != nil {
 		return nil
 	}
+	// The fields of a hoisted object are top-level fields, so their contracts are checked as such.
+	c, u, g, err := p.hoistAll(name, create, update, get)
+	if err != nil {
+		return issue.Report{{Code: "HOIST_UNSUPPORTED", Location: "components.schemas." + name, Message: err.Error(), Remediation: "Hoist a required object, or an arm of a oneOf group whose other arms the file skips, that has no field name of its parent."}}
+	}
+	create, update, get = c.schema, u.schema, g.schema
 	names := append(propertyNames(get), propertyNames(create)...)
 	names = append(names, propertyNames(update)...)
 	slices.Sort(names)
@@ -447,8 +477,10 @@ func skippedArmIssues(p Policy, root *Type) issue.Report {
 		if t.Kind != Object && t.Kind != OneOf {
 			return
 		}
-		for _, arm := range oneOfArmNames(t) {
-			if p.skips(t.Schema, arm) && !skippableArm(t, arm) {
+		arms := oneOfArmNames(t)
+		for _, arm := range arms {
+			// The other arms of a hoisted arm are skipped: the hoisted arm is the resource.
+			if p.skips(t.Schema, arm) && !skippableArm(t, arm) && !(t == root && slices.ContainsFunc(arms, p.hoists)) {
 				report = append(report, issue.Issue{
 					Code:        "ONEOF_ARM_SKIPPED",
 					Location:    "components.schemas." + t.Schema + "." + arm,
@@ -543,7 +575,10 @@ func resourceIDIssues(p Policy, name string, ops map[verb]foundOp, get *base.Sch
 		return report
 	}
 	for _, role := range []verb{opGet, opUpdate, opDelete} {
-		op := ops[role]
+		op, ok := ops[role]
+		if !ok {
+			continue // an upsert has no Delete
+		}
 		params := pathParams(op)
 		if len(params) != 1 {
 			continue // Build reports the unsupported parameter count.
