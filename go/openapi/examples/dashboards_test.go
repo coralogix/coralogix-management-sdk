@@ -128,8 +128,9 @@ func exerciseDashboardLifecycle(t *testing.T, client *dashboards.DashboardServic
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, getResp.Dashboard)
 
+	replaced := withDashboardID(t, updated, dashboardID)
 	replaceReq := dashboards.ReplaceDashboardRequestDataStructure{
-		Dashboard: withDashboardID(t, updated, dashboardID),
+		Dashboard: &replaced,
 		RequestId: uuid.NewString(),
 	}
 	_, httpResp, err = client.

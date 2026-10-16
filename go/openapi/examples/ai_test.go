@@ -79,14 +79,14 @@ func TestAIEvaluations(t *testing.T) {
 	}
 
 	createReq := aievaluations.AiEvaluationsServiceCreateAiEvaluationRequest{
-		Application: aievaluations.PtrString(app.application),
-		Target:      aievaluations.EVALUATIONTARGET_RESPONSE.Ptr(),
+		Application: app.application,
+		Target:      aievaluations.EVALUATIONTARGET_RESPONSE,
 		Threshold:   aievaluations.PtrFloat64(createdThreshold),
 		IsEnabled:   aievaluations.PtrBool(true),
-		Config:      &config,
+		Config:      config,
 	}
 	if app.subsystem != "" {
-		createReq.Subsystem = aievaluations.PtrString(app.subsystem)
+		createReq.Subsystem = app.subsystem
 	}
 
 	createResp, httpResp, err := client.
