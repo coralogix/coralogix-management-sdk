@@ -23,7 +23,7 @@ var _ MappedNullable = &GetDashboardResponse{}
 
 // GetDashboardResponse This is a response containing the requested dashboard
 type GetDashboardResponse struct {
-	// JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.
+	// JSON string with the access policy of this dashboard. Present only when the caller holds `team-dashboards:ReadAccessPolicy` for this dashboard or `access-policies:ReadAll`.
 	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The author id.
 	AuthorId *string `json:"authorId,omitempty" validate:"regexp=^[\\s\\S]*$"`
@@ -32,6 +32,7 @@ type GetDashboardResponse struct {
 	// Creation timestamp.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	CreatedOriginType *TokenOriginType `json:"createdOriginType,omitempty"`
+	// The dashboard definition. Omitted when the caller lacks `team-dashboards:Read`.
 	Dashboard *Dashboard `json:"dashboard,omitempty"`
 	// The is locked.
 	IsLocked *bool `json:"isLocked,omitempty"`

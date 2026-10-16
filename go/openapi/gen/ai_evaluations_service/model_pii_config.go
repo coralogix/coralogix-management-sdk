@@ -13,6 +13,7 @@ package ai_evaluations_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &PiiConfig{}
 // PiiConfig Configuration for the PII evaluation.
 type PiiConfig struct {
 	// PII categories to detect.
-	Categories []PiiCategory `json:"categories,omitempty"`
+	Categories []PiiCategory `json:"categories"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _PiiConfig PiiConfig
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewPiiConfig() *PiiConfig {
+func NewPiiConfig(categories []PiiCategory) *PiiConfig {
 	this := PiiConfig{}
+	this.Categories = categories
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewPiiConfigWithDefaults() *PiiConfig {
 	return &this
 }
 
-// GetCategories returns the Categories field value if set, zero value otherwise.
+// GetCategories returns the Categories field value
 func (o *PiiConfig) GetCategories() []PiiCategory {
-	if o == nil || IsNil(o.Categories) {
+	if o == nil {
 		var ret []PiiCategory
 		return ret
 	}
+
 	return o.Categories
 }
 
-// GetCategoriesOk returns a tuple with the Categories field value if set, nil otherwise
+// GetCategoriesOk returns a tuple with the Categories field value
 // and a boolean to check if the value has been set.
 func (o *PiiConfig) GetCategoriesOk() ([]PiiCategory, bool) {
-	if o == nil || IsNil(o.Categories) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Categories, true
 }
 
-// HasCategories returns a boolean if a field has been set.
-func (o *PiiConfig) HasCategories() bool {
-	if o != nil && !IsNil(o.Categories) {
-		return true
-	}
-
-	return false
-}
-
-// SetCategories gets a reference to the given []PiiCategory and assigns it to the Categories field.
+// SetCategories sets field value
 func (o *PiiConfig) SetCategories(v []PiiCategory) {
 	o.Categories = v
 }
@@ -89,9 +83,7 @@ func (o PiiConfig) MarshalJSON() ([]byte, error) {
 
 func (o PiiConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Categories) {
-		toSerialize["categories"] = o.Categories
-	}
+	toSerialize["categories"] = o.Categories
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o PiiConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *PiiConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"categories",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varPiiConfig := _PiiConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -21,12 +21,13 @@ var _ = bytes.MinRead
 // checks if the ReplaceDashboardRequestDataStructure type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReplaceDashboardRequestDataStructure{}
 
-// ReplaceDashboardRequestDataStructure This is a request sent to update an existing dashboard with new information
+// ReplaceDashboardRequestDataStructure Replaces the dashboard definition, the access policy, or both. A part that is present replaces the stored value as a whole; a part that is omitted is left unchanged. At least one of `dashboard` and `accessPolicy` is required.
 type ReplaceDashboardRequestDataStructure struct {
-	// JSON string representing the access policy for this dashboard. Defines granular permissions for users and groups.
+	// JSON string with the access policy of this dashboard, which defines granular permissions for users and groups. Changing it requires `team-dashboards:UpdateAccessPolicy` or `access-policies:UpdateAll`. Without either, a value that differs from the stored policy is rejected with `403`, and the stored policy sent back unchanged is accepted.
 	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	Dashboard Dashboard `json:"dashboard"`
-	// The is locked.
+	// The complete dashboard definition to store. Requires `team-dashboards:Update`.
+	Dashboard *Dashboard `json:"dashboard,omitempty"`
+	// Whether the dashboard is locked against edits. Ignored when `dashboard` is omitted.
 	IsLocked *bool `json:"isLocked,omitempty"`
 	// Idempotency key for the replace request, used to prevent duplicate updates.
 	RequestId string `json:"requestId" validate:"regexp=^[\\s\\S]*$"`
@@ -40,9 +41,8 @@ type _ReplaceDashboardRequestDataStructure ReplaceDashboardRequestDataStructure
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewReplaceDashboardRequestDataStructure(dashboard Dashboard, requestId string) *ReplaceDashboardRequestDataStructure {
+func NewReplaceDashboardRequestDataStructure(requestId string) *ReplaceDashboardRequestDataStructure {
 	this := ReplaceDashboardRequestDataStructure{}
-	this.Dashboard = dashboard
 	this.RequestId = requestId
 	return &this
 }
@@ -87,28 +87,36 @@ func (o *ReplaceDashboardRequestDataStructure) SetAccessPolicy(v string) {
 	o.AccessPolicy = &v
 }
 
-// GetDashboard returns the Dashboard field value
+// GetDashboard returns the Dashboard field value if set, zero value otherwise.
 func (o *ReplaceDashboardRequestDataStructure) GetDashboard() Dashboard {
-	if o == nil {
+	if o == nil || IsNil(o.Dashboard) {
 		var ret Dashboard
 		return ret
 	}
-
-	return o.Dashboard
+	return *o.Dashboard
 }
 
-// GetDashboardOk returns a tuple with the Dashboard field value
+// GetDashboardOk returns a tuple with the Dashboard field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReplaceDashboardRequestDataStructure) GetDashboardOk() (*Dashboard, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Dashboard) {
 		return nil, false
 	}
-	return &o.Dashboard, true
+	return o.Dashboard, true
 }
 
-// SetDashboard sets field value
+// HasDashboard returns a boolean if a field has been set.
+func (o *ReplaceDashboardRequestDataStructure) HasDashboard() bool {
+	if o != nil && !IsNil(o.Dashboard) {
+		return true
+	}
+
+	return false
+}
+
+// SetDashboard gets a reference to the given Dashboard and assigns it to the Dashboard field.
 func (o *ReplaceDashboardRequestDataStructure) SetDashboard(v Dashboard) {
-	o.Dashboard = v
+	o.Dashboard = &v
 }
 
 // GetIsLocked returns the IsLocked field value if set, zero value otherwise.
@@ -180,7 +188,9 @@ func (o ReplaceDashboardRequestDataStructure) ToMap() (map[string]interface{}, e
 	if !IsNil(o.AccessPolicy) {
 		toSerialize["accessPolicy"] = o.AccessPolicy
 	}
-	toSerialize["dashboard"] = o.Dashboard
+	if !IsNil(o.Dashboard) {
+		toSerialize["dashboard"] = o.Dashboard
+	}
 	if !IsNil(o.IsLocked) {
 		toSerialize["isLocked"] = o.IsLocked
 	}
@@ -198,7 +208,6 @@ func (o *ReplaceDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err e
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"dashboard",
 		"requestId",
 	}
 

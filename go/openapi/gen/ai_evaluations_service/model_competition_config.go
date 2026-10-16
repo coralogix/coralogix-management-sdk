@@ -13,6 +13,7 @@ package ai_evaluations_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &CompetitionConfig{}
 // CompetitionConfig Configuration for the Competition evaluation.
 type CompetitionConfig struct {
 	// Competitor names to watch for.
-	Competitors []string `json:"competitors,omitempty"`
+	Competitors []string `json:"competitors"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _CompetitionConfig CompetitionConfig
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCompetitionConfig() *CompetitionConfig {
+func NewCompetitionConfig(competitors []string) *CompetitionConfig {
 	this := CompetitionConfig{}
+	this.Competitors = competitors
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewCompetitionConfigWithDefaults() *CompetitionConfig {
 	return &this
 }
 
-// GetCompetitors returns the Competitors field value if set, zero value otherwise.
+// GetCompetitors returns the Competitors field value
 func (o *CompetitionConfig) GetCompetitors() []string {
-	if o == nil || IsNil(o.Competitors) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Competitors
 }
 
-// GetCompetitorsOk returns a tuple with the Competitors field value if set, nil otherwise
+// GetCompetitorsOk returns a tuple with the Competitors field value
 // and a boolean to check if the value has been set.
 func (o *CompetitionConfig) GetCompetitorsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Competitors) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Competitors, true
 }
 
-// HasCompetitors returns a boolean if a field has been set.
-func (o *CompetitionConfig) HasCompetitors() bool {
-	if o != nil && !IsNil(o.Competitors) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompetitors gets a reference to the given []string and assigns it to the Competitors field.
+// SetCompetitors sets field value
 func (o *CompetitionConfig) SetCompetitors(v []string) {
 	o.Competitors = v
 }
@@ -89,9 +83,7 @@ func (o CompetitionConfig) MarshalJSON() ([]byte, error) {
 
 func (o CompetitionConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Competitors) {
-		toSerialize["competitors"] = o.Competitors
-	}
+	toSerialize["competitors"] = o.Competitors
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o CompetitionConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CompetitionConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"competitors",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCompetitionConfig := _CompetitionConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

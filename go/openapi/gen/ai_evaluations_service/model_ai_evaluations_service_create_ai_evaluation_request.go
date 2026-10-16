@@ -13,6 +13,7 @@ package ai_evaluations_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,15 +24,15 @@ var _ MappedNullable = &AiEvaluationsServiceCreateAiEvaluationRequest{}
 // AiEvaluationsServiceCreateAiEvaluationRequest Request to create a new AI evaluation.
 type AiEvaluationsServiceCreateAiEvaluationRequest struct {
 	// Name of the AI application this evaluation belongs to.
-	Application *string `json:"application,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	Application string `json:"application" validate:"regexp=^[\\s\\S]+$"`
 	// Type-specific configuration (oneof).
-	Config *EvaluationConfig `json:"config,omitempty"`
+	Config EvaluationConfig `json:"config"`
 	// Whether the evaluation should start active.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Subsystem within the application.
-	Subsystem *string `json:"subsystem,omitempty" validate:"regexp=^[\\s\\S]+$"`
+	Subsystem string `json:"subsystem" validate:"regexp=^[\\s\\S]+$"`
 	// What the evaluation runs against: PROMPT, RESPONSE, or CONVERSATION.
-	Target *EvaluationTarget `json:"target,omitempty"`
+	Target EvaluationTarget `json:"target"`
 	// Score threshold. Must be between 0.0 and 1.0 inclusive.
 	Threshold *float64 `json:"threshold,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -44,8 +45,12 @@ type _AiEvaluationsServiceCreateAiEvaluationRequest AiEvaluationsServiceCreateAi
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewAiEvaluationsServiceCreateAiEvaluationRequest() *AiEvaluationsServiceCreateAiEvaluationRequest {
+func NewAiEvaluationsServiceCreateAiEvaluationRequest(application string, config EvaluationConfig, subsystem string, target EvaluationTarget) *AiEvaluationsServiceCreateAiEvaluationRequest {
 	this := AiEvaluationsServiceCreateAiEvaluationRequest{}
+	this.Application = application
+	this.Config = config
+	this.Subsystem = subsystem
+	this.Target = target
 	return &this
 }
 
@@ -57,68 +62,52 @@ func NewAiEvaluationsServiceCreateAiEvaluationRequestWithDefaults() *AiEvaluatio
 	return &this
 }
 
-// GetApplication returns the Application field value if set, zero value otherwise.
+// GetApplication returns the Application field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetApplication() string {
-	if o == nil || IsNil(o.Application) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Application
+
+	return o.Application
 }
 
-// GetApplicationOk returns a tuple with the Application field value if set, nil otherwise
+// GetApplicationOk returns a tuple with the Application field value
 // and a boolean to check if the value has been set.
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetApplicationOk() (*string, bool) {
-	if o == nil || IsNil(o.Application) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Application, true
+	return &o.Application, true
 }
 
-// HasApplication returns a boolean if a field has been set.
-func (o *AiEvaluationsServiceCreateAiEvaluationRequest) HasApplication() bool {
-	if o != nil && !IsNil(o.Application) {
-		return true
-	}
-
-	return false
-}
-
-// SetApplication gets a reference to the given string and assigns it to the Application field.
+// SetApplication sets field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) SetApplication(v string) {
-	o.Application = &v
+	o.Application = v
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise.
+// GetConfig returns the Config field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetConfig() EvaluationConfig {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		var ret EvaluationConfig
 		return ret
 	}
-	return *o.Config
+
+	return o.Config
 }
 
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value
 // and a boolean to check if the value has been set.
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetConfigOk() (*EvaluationConfig, bool) {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Config, true
+	return &o.Config, true
 }
 
-// HasConfig returns a boolean if a field has been set.
-func (o *AiEvaluationsServiceCreateAiEvaluationRequest) HasConfig() bool {
-	if o != nil && !IsNil(o.Config) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given EvaluationConfig and assigns it to the Config field.
+// SetConfig sets field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) SetConfig(v EvaluationConfig) {
-	o.Config = &v
+	o.Config = v
 }
 
 // GetIsEnabled returns the IsEnabled field value if set, zero value otherwise.
@@ -153,68 +142,52 @@ func (o *AiEvaluationsServiceCreateAiEvaluationRequest) SetIsEnabled(v bool) {
 	o.IsEnabled = &v
 }
 
-// GetSubsystem returns the Subsystem field value if set, zero value otherwise.
+// GetSubsystem returns the Subsystem field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetSubsystem() string {
-	if o == nil || IsNil(o.Subsystem) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Subsystem
+
+	return o.Subsystem
 }
 
-// GetSubsystemOk returns a tuple with the Subsystem field value if set, nil otherwise
+// GetSubsystemOk returns a tuple with the Subsystem field value
 // and a boolean to check if the value has been set.
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetSubsystemOk() (*string, bool) {
-	if o == nil || IsNil(o.Subsystem) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Subsystem, true
+	return &o.Subsystem, true
 }
 
-// HasSubsystem returns a boolean if a field has been set.
-func (o *AiEvaluationsServiceCreateAiEvaluationRequest) HasSubsystem() bool {
-	if o != nil && !IsNil(o.Subsystem) {
-		return true
-	}
-
-	return false
-}
-
-// SetSubsystem gets a reference to the given string and assigns it to the Subsystem field.
+// SetSubsystem sets field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) SetSubsystem(v string) {
-	o.Subsystem = &v
+	o.Subsystem = v
 }
 
-// GetTarget returns the Target field value if set, zero value otherwise.
+// GetTarget returns the Target field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetTarget() EvaluationTarget {
-	if o == nil || IsNil(o.Target) {
+	if o == nil {
 		var ret EvaluationTarget
 		return ret
 	}
-	return *o.Target
+
+	return o.Target
 }
 
-// GetTargetOk returns a tuple with the Target field value if set, nil otherwise
+// GetTargetOk returns a tuple with the Target field value
 // and a boolean to check if the value has been set.
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) GetTargetOk() (*EvaluationTarget, bool) {
-	if o == nil || IsNil(o.Target) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Target, true
+	return &o.Target, true
 }
 
-// HasTarget returns a boolean if a field has been set.
-func (o *AiEvaluationsServiceCreateAiEvaluationRequest) HasTarget() bool {
-	if o != nil && !IsNil(o.Target) {
-		return true
-	}
-
-	return false
-}
-
-// SetTarget gets a reference to the given EvaluationTarget and assigns it to the Target field.
+// SetTarget sets field value
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) SetTarget(v EvaluationTarget) {
-	o.Target = &v
+	o.Target = v
 }
 
 // GetThreshold returns the Threshold field value if set, zero value otherwise.
@@ -259,21 +232,13 @@ func (o AiEvaluationsServiceCreateAiEvaluationRequest) MarshalJSON() ([]byte, er
 
 func (o AiEvaluationsServiceCreateAiEvaluationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Application) {
-		toSerialize["application"] = o.Application
-	}
-	if !IsNil(o.Config) {
-		toSerialize["config"] = o.Config
-	}
+	toSerialize["application"] = o.Application
+	toSerialize["config"] = o.Config
 	if !IsNil(o.IsEnabled) {
 		toSerialize["isEnabled"] = o.IsEnabled
 	}
-	if !IsNil(o.Subsystem) {
-		toSerialize["subsystem"] = o.Subsystem
-	}
-	if !IsNil(o.Target) {
-		toSerialize["target"] = o.Target
-	}
+	toSerialize["subsystem"] = o.Subsystem
+	toSerialize["target"] = o.Target
 	if !IsNil(o.Threshold) {
 		toSerialize["threshold"] = o.Threshold
 	}
@@ -286,6 +251,30 @@ func (o AiEvaluationsServiceCreateAiEvaluationRequest) ToMap() (map[string]inter
 }
 
 func (o *AiEvaluationsServiceCreateAiEvaluationRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"application",
+		"config",
+		"subsystem",
+		"target",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAiEvaluationsServiceCreateAiEvaluationRequest := _AiEvaluationsServiceCreateAiEvaluationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

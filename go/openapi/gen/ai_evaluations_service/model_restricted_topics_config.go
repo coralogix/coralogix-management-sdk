@@ -13,6 +13,7 @@ package ai_evaluations_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &RestrictedTopicsConfig{}
 // RestrictedTopicsConfig Configuration for the RestrictedTopics evaluation.
 type RestrictedTopicsConfig struct {
 	// Topics that should not appear.
-	Topics []string `json:"topics,omitempty"`
+	Topics []string `json:"topics"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _RestrictedTopicsConfig RestrictedTopicsConfig
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRestrictedTopicsConfig() *RestrictedTopicsConfig {
+func NewRestrictedTopicsConfig(topics []string) *RestrictedTopicsConfig {
 	this := RestrictedTopicsConfig{}
+	this.Topics = topics
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewRestrictedTopicsConfigWithDefaults() *RestrictedTopicsConfig {
 	return &this
 }
 
-// GetTopics returns the Topics field value if set, zero value otherwise.
+// GetTopics returns the Topics field value
 func (o *RestrictedTopicsConfig) GetTopics() []string {
-	if o == nil || IsNil(o.Topics) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Topics
 }
 
-// GetTopicsOk returns a tuple with the Topics field value if set, nil otherwise
+// GetTopicsOk returns a tuple with the Topics field value
 // and a boolean to check if the value has been set.
 func (o *RestrictedTopicsConfig) GetTopicsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Topics) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Topics, true
 }
 
-// HasTopics returns a boolean if a field has been set.
-func (o *RestrictedTopicsConfig) HasTopics() bool {
-	if o != nil && !IsNil(o.Topics) {
-		return true
-	}
-
-	return false
-}
-
-// SetTopics gets a reference to the given []string and assigns it to the Topics field.
+// SetTopics sets field value
 func (o *RestrictedTopicsConfig) SetTopics(v []string) {
 	o.Topics = v
 }
@@ -89,9 +83,7 @@ func (o RestrictedTopicsConfig) MarshalJSON() ([]byte, error) {
 
 func (o RestrictedTopicsConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Topics) {
-		toSerialize["topics"] = o.Topics
-	}
+	toSerialize["topics"] = o.Topics
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o RestrictedTopicsConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RestrictedTopicsConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"topics",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRestrictedTopicsConfig := _RestrictedTopicsConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
