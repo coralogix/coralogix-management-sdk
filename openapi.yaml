@@ -3708,7 +3708,9 @@ paths:
                   - application: checkout
                     companyId: '12345'
                     config:
-                      competition: {}
+                      competition:
+                        competitors:
+                          - Acme
                     createdAt: '2026-06-02T15:30:00.000Z'
                     createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
                     id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
@@ -3765,7 +3767,13 @@ paths:
                   minimum: 0
                   type: number
                   x-coralogix-presence: true
+              required:
+                - application
+                - subsystem
+                - target
+                - config
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -3775,7 +3783,9 @@ paths:
                   application: checkout
                   companyId: '12345'
                   config:
-                    competition: {}
+                    competition:
+                      competitors:
+                        - Acme
                   createdAt: '2026-06-02T15:30:00.000Z'
                   createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
                   id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
@@ -3795,7 +3805,9 @@ paths:
                   application: checkout
                   companyId: '12345'
                   config:
-                    competition: {}
+                    competition:
+                      competitors:
+                        - Acme
                   createdAt: '2026-06-02T15:30:00.000Z'
                   createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
                   id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
@@ -3835,7 +3847,9 @@ paths:
                   application: checkout
                   companyId: '12345'
                   config:
-                    competition: {}
+                    competition:
+                      competitors:
+                        - Acme
                   createdAt: '2026-06-02T15:30:00.000Z'
                   createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
                   id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
@@ -3936,9 +3950,11 @@ paths:
                   x-coralogix-presence: true
                 updateMask:
                   description: >-
-                    Comma-separated list of field paths to update. When
-                    provided, only the listed fields are touched; a listed field
-                    that is absent from the request body is cleared. When
+                    Comma-separated list of top-level field paths to update.
+                    Dotted paths are rejected. When provided, only the listed
+                    fields are touched; a listed field that is absent from the
+                    request body is cleared, except application, subsystem,
+                    target, config, and isEnabled, which cannot be cleared. When
                     omitted, only fields present in the body are updated.
                   maxLength: 1024
                   minLength: 1
@@ -3955,7 +3971,9 @@ paths:
                   application: checkout
                   companyId: '12345'
                   config:
-                    competition: {}
+                    competition:
+                      competitors:
+                        - Acme
                   createdAt: '2026-06-02T15:30:00.000Z'
                   createdBy: 7b1c0e2a-3d4f-5a6b-8c9d-0e1f2a3b4c5d
                   id: 9d4f7c1a-2b3e-4f5a-8c1d-6e2f9a0b1c2d
@@ -8212,25 +8230,44 @@ paths:
         - team-dashboards:Read
   /dashboards/dashboards/v1:
     put:
-      description: |-
-        Replaces an existing dashboard.
+      description: >-
+        Replaces the dashboard definition, the access policy, or both. Sending
+        `dashboard` requires `team-dashboards:Update`. Changing the access
+        policy requires `team-dashboards:UpdateAccessPolicy` or
+        `access-policies:UpdateAll`. Without either, an `accessPolicy` that
+        differs from the stored policy is rejected with `403` and nothing in the
+        request is stored; one equal to the stored policy is accepted and leaves
+        it unchanged. Policies are compared as JSON, so formatting alone is not
+        a change. A request that sends only `accessPolicy` creates no new
+        dashboard version.
+
 
         Requires the following permissions:
+
         - `team-dashboards:Update`
+
+        - `team-dashboards:UpdateAccessPolicy`
+
+        - `access-policies:UpdateAll`
       operationId: DashboardsService_ReplaceDashboard
       requestBody:
         content:
           application/json:
             schema:
               description: >-
-                This is a request sent to update an existing dashboard with new
-                information
+                Replaces the dashboard definition, the access policy, or both. A
+                part that is present replaces the stored value as a whole; a
+                part that is omitted is left unchanged. At least one of
+                `dashboard` and `accessPolicy` is required.
               properties:
                 accessPolicy:
                   description: >-
-                    JSON string representing the access policy for this
-                    dashboard. Defines granular permissions for users and
-                    groups.
+                    JSON string with the access policy of this dashboard, which
+                    defines granular permissions for users and groups. Changing
+                    it requires `team-dashboards:UpdateAccessPolicy` or
+                    `access-policies:UpdateAll`. Without either, a value that
+                    differs from the stored policy is rejected with `403`, and
+                    the stored policy sent back unchanged is accepted.
                   examples:
                     - >-
                       {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
@@ -8240,9 +8277,15 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 dashboard:
-                  $ref: '#/components/schemas/Dashboard'
+                  allOf:
+                    - $ref: '#/components/schemas/Dashboard'
+                  description: >-
+                    The complete dashboard definition to store. Requires
+                    `team-dashboards:Update`.
                 isLocked:
-                  description: The is locked.
+                  description: >-
+                    Whether the dashboard is locked against edits. Ignored when
+                    `dashboard` is omitted.
                   type: boolean
                   x-coralogix-presence: true
                 requestId:
@@ -8256,7 +8299,6 @@ paths:
                   x-coralogix-presence: true
               required:
                 - requestId
-                - dashboard
               title: Replace dashboard request data structure
               type: object
         required: true
@@ -8279,6 +8321,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Dashboard not found
         '500':
           content:
             application/json:
@@ -8290,6 +8344,8 @@ paths:
         - Dashboard service
       x-coralogixPermissions:
         - team-dashboards:Update
+        - team-dashboards:UpdateAccessPolicy
+        - access-policies:UpdateAll
     post:
       description: |-
         Creates a new dashboard.
@@ -8367,11 +8423,22 @@ paths:
         - team-dashboards:Update
   /dashboards/dashboards/v1/catalog/list:
     get:
-      description: |-
-        Get a list of all dashboards accessible.
+      description: >-
+        Returns the dashboards the caller may access. A caller with
+        `team-dashboards:Read` receives every dashboard it may view. A caller
+        without it who holds `team-dashboards:ReadAccessPolicy` or
+        `access-policies:ReadAll` receives the dashboards whose access policy it
+        may read, each reduced to `id`, `name`, `slugName`, `folder` and
+        `isLocked`.
+
 
         Requires the following permissions:
+
         - `team-dashboards:Read`
+
+        - `team-dashboards:ReadAccessPolicy`
+
+        - `access-policies:ReadAll`
       operationId: DashboardCatalogService_GetDashboardCatalog
       responses:
         '200':
@@ -8392,6 +8459,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
         '500':
           content:
             application/json:
@@ -8403,13 +8476,25 @@ paths:
         - Dashboard service
       x-coralogixPermissions:
         - team-dashboards:Read
+        - team-dashboards:ReadAccessPolicy
+        - access-policies:ReadAll
   /dashboards/dashboards/v1/slugs/lookup/{slug}:
     get:
-      description: |-
-        Returns the dashboard associated with the specified slug.
+      description: >-
+        Returns the dashboard associated with the specified slug. A caller with
+        `team-dashboards:Read` receives the dashboard definition and its
+        metadata. A caller without it who holds
+        `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives
+        only the access policy and the lock state.
+
 
         Requires the following permissions:
+
         - `team-dashboards:Read`
+
+        - `team-dashboards:ReadAccessPolicy`
+
+        - `access-policies:ReadAll`
       operationId: DashboardsService_GetDashboardBySlug
       parameters:
         - description: The URL slug identifying the dashboard to retrieve.
@@ -8442,6 +8527,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Dashboard not found
         '500':
           content:
             application/json:
@@ -8453,13 +8550,25 @@ paths:
         - Dashboard service
       x-coralogixPermissions:
         - team-dashboards:Read
+        - team-dashboards:ReadAccessPolicy
+        - access-policies:ReadAll
   /dashboards/dashboards/v1/{dashboard_id}:
     get:
-      description: |-
-        Returns the details of the specified dashboard.
+      description: >-
+        Returns the details of the specified dashboard. A caller with
+        `team-dashboards:Read` receives the dashboard definition and its
+        metadata. A caller without it who holds
+        `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives
+        only the access policy and the lock state.
+
 
         Requires the following permissions:
+
         - `team-dashboards:Read`
+
+        - `team-dashboards:ReadAccessPolicy`
+
+        - `access-policies:ReadAll`
       operationId: DashboardsService_GetDashboard
       responses:
         '200':
@@ -8480,6 +8589,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Dashboard not found
         '500':
           content:
             application/json:
@@ -8491,6 +8612,8 @@ paths:
         - Dashboard service
       x-coralogixPermissions:
         - team-dashboards:Read
+        - team-dashboards:ReadAccessPolicy
+        - access-policies:ReadAll
     delete:
       description: |-
         Deletes the dashboard with the specified ID.
@@ -19890,6 +20013,8 @@ components:
           x-coralogix-presence: true
       description: AI Application
     AiEvaluation:
+      required:
+        - id
       type: object
       properties:
         application:
@@ -21404,19 +21529,22 @@ components:
         - ALLOWED_LOGIN_MODE_LOCAL
       type: string
     AllowedTopicsConfig:
+      required:
+        - topics
       type: object
       properties:
         topics:
-          maxItems: 1024
-          minItems: 1
-          type: array
+          description: Topics considered allowed.
           items:
             maxLength: 256
             minLength: 1
             pattern: ^[\s\S]+$
             type: string
             description: Topics considered allowed.
-          description: Topics considered allowed.
+          maxItems: 1024
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
       description: Configuration for the AllowedTopics evaluation.
     Always:
       type: object
@@ -25003,19 +25131,22 @@ components:
       type: string
       description: Comparison operator.
     CompetitionConfig:
+      required:
+        - competitors
       type: object
       properties:
         competitors:
-          maxItems: 1024
-          minItems: 1
-          type: array
+          description: Competitor names to watch for.
           items:
             maxLength: 256
             minLength: 1
             pattern: ^[\s\S]+$
             type: string
             description: Competitor names to watch for.
-          description: Competitor names to watch for.
+          maxItems: 1024
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
       description: Configuration for the Competition evaluation.
     ConfigOverrides:
       type: object
@@ -25906,6 +26037,8 @@ components:
           $ref: '#/components/schemas/v2.Action'
       description: This data structure represents the response to create an Action.
     CreateAiEvaluationResponse:
+      required:
+        - aiEvaluation
       type: object
       properties:
         aiEvaluation:
@@ -29452,66 +29585,6 @@ components:
         - required:
             - customEvaluation
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - allowedTopics
-                type: object
-              - required:
-                  - competition
-                type: object
-              - required:
-                  - hallucinationCompleteness
-                type: object
-              - required:
-                  - hallucinationContextAdherence
-                type: object
-              - required:
-                  - hallucinationContextRelevance
-                type: object
-              - required:
-                  - hallucinationCorrectness
-                type: object
-              - required:
-                  - pii
-                type: object
-              - required:
-                  - promptInjection
-                type: object
-              - required:
-                  - restrictedTopics
-                type: object
-              - required:
-                  - sexism
-                type: object
-              - required:
-                  - sqlAllowedTables
-                type: object
-              - required:
-                  - sqlHallucination
-                type: object
-              - required:
-                  - sqlReadOnly
-                type: object
-              - required:
-                  - sqlRestrictedTables
-                type: object
-              - required:
-                  - toxicity
-                type: object
-              - required:
-                  - hallucinationTaskAdherence
-                type: object
-              - required:
-                  - sqlLoad
-                type: object
-              - required:
-                  - languageMismatch
-                type: object
-              - required:
-                  - customEvaluation
-                type: object
       properties:
         allowedTopics:
           $ref: '#/components/schemas/AllowedTopicsConfig'
@@ -31804,6 +31877,8 @@ components:
           description: The AI application.
       description: Response containing the requested AI application.
     GetAiEvaluationResponse:
+      required:
+        - aiEvaluation
       type: object
       properties:
         aiEvaluation:
@@ -32373,8 +32448,9 @@ components:
       properties:
         accessPolicy:
           description: >-
-            JSON string representing the access policy for this dashboard.
-            Defines granular permissions for users and groups.
+            JSON string with the access policy of this dashboard. Present only
+            when the caller holds `team-dashboards:ReadAccessPolicy` for this
+            dashboard or `access-policies:ReadAll`.
           examples:
             - >-
               {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
@@ -32407,7 +32483,11 @@ components:
         createdOriginType:
           $ref: '#/components/schemas/TokenOriginType'
         dashboard:
-          $ref: '#/components/schemas/Dashboard'
+          allOf:
+            - $ref: '#/components/schemas/Dashboard'
+          description: >-
+            The dashboard definition. Omitted when the caller lacks
+            `team-dashboards:Read`.
         isLocked:
           description: The is locked.
           type: boolean
@@ -32485,8 +32565,9 @@ components:
       properties:
         accessPolicy:
           description: >-
-            JSON string representing the access policy for this dashboard.
-            Defines granular permissions for users and groups.
+            JSON string with the access policy of this dashboard. Present only
+            when the caller holds `team-dashboards:ReadAccessPolicy` for this
+            dashboard or `access-policies:ReadAll`.
           examples:
             - >-
               {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
@@ -32519,7 +32600,11 @@ components:
         createdOriginType:
           $ref: '#/components/schemas/TokenOriginType'
         dashboard:
-          $ref: '#/components/schemas/Dashboard'
+          allOf:
+            - $ref: '#/components/schemas/Dashboard'
+          description: >-
+            The dashboard definition. Omitted when the caller lacks
+            `team-dashboards:Read`.
         isLocked:
           description: The is locked.
           type: boolean
@@ -42335,15 +42420,18 @@ components:
         - US_SSN
       type: string
     PiiConfig:
+      required:
+        - categories
       type: object
       properties:
         categories:
+          description: PII categories to detect.
+          items:
+            $ref: '#/components/schemas/PiiCategory'
           maxItems: 1024
           minItems: 1
           type: array
-          items:
-            $ref: '#/components/schemas/PiiCategory'
-          description: PII categories to detect.
+          x-coralogix-collection: set
       description: Configuration for the PII evaluation.
     PinDashboardResponse:
       title: Pin dashboard response data structure
@@ -45286,19 +45374,22 @@ components:
           $ref: '#/components/schemas/Code'
       description: Status of the response, including error code and message.
     RestrictedTopicsConfig:
+      required:
+        - topics
       type: object
       properties:
         topics:
-          maxItems: 1024
-          minItems: 1
-          type: array
+          description: Topics that should not appear.
           items:
             maxLength: 256
             minLength: 1
             pattern: ^[\s\S]+$
             type: string
             description: Topics that should not appear.
-          description: Topics that should not appear.
+          maxItems: 1024
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
       description: Configuration for the RestrictedTopics evaluation.
     RetentionPolicyRequest:
       title: Retenion Policy Request
@@ -47484,19 +47575,22 @@ components:
         Range strategy: uses start and end timestamp fields to define the
         annotation span.
     SqlAllowedTablesConfig:
+      required:
+        - tables
       type: object
       properties:
         tables:
-          maxItems: 1024
-          minItems: 1
-          type: array
+          description: SQL table names that are allowed.
           items:
             maxLength: 256
             minLength: 1
             pattern: ^[\s\S]+$
             type: string
             description: SQL table names that are allowed.
-          description: SQL table names that are allowed.
+          maxItems: 1024
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
       description: Configuration for the SqlAllowedTables evaluation.
     SqlHallucinationConfig:
       type: object
@@ -47526,19 +47620,22 @@ components:
       additionalProperties: false
       description: Configuration for the SqlReadOnly evaluation (no fields).
     SqlRestrictedTablesConfig:
+      required:
+        - tables
       type: object
       properties:
         tables:
-          maxItems: 1024
-          minItems: 1
-          type: array
+          description: SQL table names that are not allowed.
           items:
             maxLength: 256
             minLength: 1
             pattern: ^[\s\S]+$
             type: string
             description: SQL table names that are not allowed.
-          description: SQL table names that are not allowed.
+          maxItems: 1024
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
       description: Configuration for the SqlRestrictedTables evaluation.
     StartTimeMetric:
       type: object
@@ -49743,6 +49840,8 @@ components:
       additionalProperties: false
       description: This data structure represents an untracked integration.
     UpdateAiEvaluationResponse:
+      required:
+        - aiEvaluation
       type: object
       properties:
         aiEvaluation:

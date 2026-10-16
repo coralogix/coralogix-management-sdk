@@ -34,7 +34,7 @@ type AiEvaluationsServiceUpdateAiEvaluationRequest struct {
 	Target *EvaluationTarget `json:"target,omitempty"`
 	// Score threshold. Must be between 0.0 and 1.0 inclusive.
 	Threshold *float64 `json:"threshold,omitempty"`
-	// Comma-separated list of field paths to update. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared. When omitted, only fields present in the body are updated.
+	// Comma-separated list of top-level field paths to update. Dotted paths are rejected. When provided, only the listed fields are touched; a listed field that is absent from the request body is cleared, except application, subsystem, target, config, and isEnabled, which cannot be cleared. When omitted, only fields present in the body are updated.
 	UpdateMask *string `json:"updateMask,omitempty" validate:"regexp=^[a-zA-Z_][a-zA-Z0-9_]*(,[a-zA-Z_][a-zA-Z0-9_]*)*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

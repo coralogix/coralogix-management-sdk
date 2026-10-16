@@ -35,10 +35,12 @@ func (r ApiDashboardCatalogServiceGetDashboardCatalogRequest) Execute() (*GetDas
 /*
 DashboardCatalogServiceGetDashboardCatalog Get dashboard catalog
 
-Get a list of all dashboards accessible.
+Returns the dashboards the caller may access. A caller with `team-dashboards:Read` receives every dashboard it may view. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives the dashboards whose access policy it may read, each reduced to `id`, `name`, `slugName`, `folder` and `isLocked`.
 
 Requires the following permissions:
 - `team-dashboards:Read`
+- `team-dashboards:ReadAccessPolicy`
+- `access-policies:ReadAll`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardCatalogServiceGetDashboardCatalogRequest
@@ -122,6 +124,17 @@ func (a *DashboardServiceAPIService) DashboardCatalogServiceGetDashboardCatalogE
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -771,10 +784,12 @@ func (r ApiDashboardsServiceGetDashboardRequest) Execute() (*GetDashboardRespons
 /*
 DashboardsServiceGetDashboard Get a dashboard
 
-Returns the details of the specified dashboard.
+Returns the details of the specified dashboard. A caller with `team-dashboards:Read` receives the dashboard definition and its metadata. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives only the access policy and the lock state.
 
 Requires the following permissions:
 - `team-dashboards:Read`
+- `team-dashboards:ReadAccessPolicy`
+- `access-policies:ReadAll`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param dashboardId The dashboard id.
@@ -877,6 +892,28 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardExecute(r ApiD
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -915,10 +952,12 @@ func (r ApiDashboardsServiceGetDashboardBySlugRequest) Execute() (*GetDashboardB
 /*
 DashboardsServiceGetDashboardBySlug Get a dashboard by URL slug
 
-Returns the dashboard associated with the specified slug.
+Returns the dashboard associated with the specified slug. A caller with `team-dashboards:Read` receives the dashboard definition and its metadata. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives only the access policy and the lock state.
 
 Requires the following permissions:
 - `team-dashboards:Read`
+- `team-dashboards:ReadAccessPolicy`
+- `access-policies:ReadAll`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param slug The URL slug identifying the dashboard to retrieve.
@@ -1011,6 +1050,28 @@ func (a *DashboardServiceAPIService) DashboardsServiceGetDashboardBySlugExecute(
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1220,10 +1281,12 @@ func (r ApiDashboardsServiceReplaceDashboardRequest) Execute() (map[string]inter
 /*
 DashboardsServiceReplaceDashboard Replace a dashboard
 
-Replaces an existing dashboard.
+Replaces the dashboard definition, the access policy, or both. Sending `dashboard` requires `team-dashboards:Update`. Changing the access policy requires `team-dashboards:UpdateAccessPolicy` or `access-policies:UpdateAll`. Without either, an `accessPolicy` that differs from the stored policy is rejected with `403` and nothing in the request is stored; one equal to the stored policy is accepted and leaves it unchanged. Policies are compared as JSON, so formatting alone is not a change. A request that sends only `accessPolicy` creates no new dashboard version.
 
 Requires the following permissions:
 - `team-dashboards:Update`
+- `team-dashboards:UpdateAccessPolicy`
+- `access-policies:UpdateAll`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiDashboardsServiceReplaceDashboardRequest
@@ -1312,6 +1375,28 @@ func (a *DashboardServiceAPIService) DashboardsServiceReplaceDashboardExecute(r 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

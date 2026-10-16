@@ -13,6 +13,7 @@ package ai_evaluations_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &GetAiEvaluationResponse{}
 // GetAiEvaluationResponse Response containing the requested AI evaluation.
 type GetAiEvaluationResponse struct {
 	// The requested AI evaluation.
-	AiEvaluation *AiEvaluation `json:"aiEvaluation,omitempty"`
+	AiEvaluation AiEvaluation `json:"aiEvaluation"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _GetAiEvaluationResponse GetAiEvaluationResponse
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewGetAiEvaluationResponse() *GetAiEvaluationResponse {
+func NewGetAiEvaluationResponse(aiEvaluation AiEvaluation) *GetAiEvaluationResponse {
 	this := GetAiEvaluationResponse{}
+	this.AiEvaluation = aiEvaluation
 	return &this
 }
 
@@ -47,36 +49,28 @@ func NewGetAiEvaluationResponseWithDefaults() *GetAiEvaluationResponse {
 	return &this
 }
 
-// GetAiEvaluation returns the AiEvaluation field value if set, zero value otherwise.
+// GetAiEvaluation returns the AiEvaluation field value
 func (o *GetAiEvaluationResponse) GetAiEvaluation() AiEvaluation {
-	if o == nil || IsNil(o.AiEvaluation) {
+	if o == nil {
 		var ret AiEvaluation
 		return ret
 	}
-	return *o.AiEvaluation
+
+	return o.AiEvaluation
 }
 
-// GetAiEvaluationOk returns a tuple with the AiEvaluation field value if set, nil otherwise
+// GetAiEvaluationOk returns a tuple with the AiEvaluation field value
 // and a boolean to check if the value has been set.
 func (o *GetAiEvaluationResponse) GetAiEvaluationOk() (*AiEvaluation, bool) {
-	if o == nil || IsNil(o.AiEvaluation) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AiEvaluation, true
+	return &o.AiEvaluation, true
 }
 
-// HasAiEvaluation returns a boolean if a field has been set.
-func (o *GetAiEvaluationResponse) HasAiEvaluation() bool {
-	if o != nil && !IsNil(o.AiEvaluation) {
-		return true
-	}
-
-	return false
-}
-
-// SetAiEvaluation gets a reference to the given AiEvaluation and assigns it to the AiEvaluation field.
+// SetAiEvaluation sets field value
 func (o *GetAiEvaluationResponse) SetAiEvaluation(v AiEvaluation) {
-	o.AiEvaluation = &v
+	o.AiEvaluation = v
 }
 
 func (o GetAiEvaluationResponse) MarshalJSON() ([]byte, error) {
@@ -89,9 +83,7 @@ func (o GetAiEvaluationResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetAiEvaluationResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AiEvaluation) {
-		toSerialize["aiEvaluation"] = o.AiEvaluation
-	}
+	toSerialize["aiEvaluation"] = o.AiEvaluation
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o GetAiEvaluationResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetAiEvaluationResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"aiEvaluation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetAiEvaluationResponse := _GetAiEvaluationResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -13,6 +13,7 @@ package ai_evaluations_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &SqlAllowedTablesConfig{}
 // SqlAllowedTablesConfig Configuration for the SqlAllowedTables evaluation.
 type SqlAllowedTablesConfig struct {
 	// SQL table names that are allowed.
-	Tables []string `json:"tables,omitempty"`
+	Tables []string `json:"tables"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _SqlAllowedTablesConfig SqlAllowedTablesConfig
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewSqlAllowedTablesConfig() *SqlAllowedTablesConfig {
+func NewSqlAllowedTablesConfig(tables []string) *SqlAllowedTablesConfig {
 	this := SqlAllowedTablesConfig{}
+	this.Tables = tables
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewSqlAllowedTablesConfigWithDefaults() *SqlAllowedTablesConfig {
 	return &this
 }
 
-// GetTables returns the Tables field value if set, zero value otherwise.
+// GetTables returns the Tables field value
 func (o *SqlAllowedTablesConfig) GetTables() []string {
-	if o == nil || IsNil(o.Tables) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Tables
 }
 
-// GetTablesOk returns a tuple with the Tables field value if set, nil otherwise
+// GetTablesOk returns a tuple with the Tables field value
 // and a boolean to check if the value has been set.
 func (o *SqlAllowedTablesConfig) GetTablesOk() ([]string, bool) {
-	if o == nil || IsNil(o.Tables) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Tables, true
 }
 
-// HasTables returns a boolean if a field has been set.
-func (o *SqlAllowedTablesConfig) HasTables() bool {
-	if o != nil && !IsNil(o.Tables) {
-		return true
-	}
-
-	return false
-}
-
-// SetTables gets a reference to the given []string and assigns it to the Tables field.
+// SetTables sets field value
 func (o *SqlAllowedTablesConfig) SetTables(v []string) {
 	o.Tables = v
 }
@@ -89,9 +83,7 @@ func (o SqlAllowedTablesConfig) MarshalJSON() ([]byte, error) {
 
 func (o SqlAllowedTablesConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Tables) {
-		toSerialize["tables"] = o.Tables
-	}
+	toSerialize["tables"] = o.Tables
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o SqlAllowedTablesConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *SqlAllowedTablesConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"tables",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varSqlAllowedTablesConfig := _SqlAllowedTablesConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
