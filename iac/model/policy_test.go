@@ -352,3 +352,69 @@ func TestSkippedTopLevelArmLeavesItsGroup(t *testing.T) {
 		t.Fatalf("fields = %d, want 2", len(r.Fields))
 	}
 }
+
+func singletonDoc(t *testing.T) []byte {
+	t.Helper()
+	data, err := os.ReadFile("testdata/singleton.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	return data
+}
+
+func singletonCodes(t *testing.T, data []byte, p Policy) []string {
+	t.Helper()
+	doc, err := Load(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return slices.Compact(reportCodes(ValidateWithPolicy(doc, "Settings", OperationIDs{}, p)))
+}
+
+// A singleton with an id that only the server sets passes. The id is read-only in the contract.
+func TestSingletonIDAcceptsAServerSetID(t *testing.T) {
+	p := Policy{Existing: true, SingletonID: true}
+	if got := singletonCodes(t, singletonDoc(t), p); len(got) != 0 {
+		t.Fatalf("codes = %v, want none", got)
+	}
+}
+
+// singletonID is refused when a caller could set the id, unless a readOnly line states that it
+// is read-only.
+func TestSingletonIDRefusesAWritableID(t *testing.T) {
+	old := "              properties:\n                retentionDays:"
+	data := string(singletonDoc(t))
+	if !strings.Contains(data, old) {
+		t.Fatal("testdata/singleton.yaml has no Create body that this test changes")
+	}
+	writable := []byte(strings.Replace(data, old, "              properties:\n                id: {type: string}\n                retentionDays:", 1))
+	p := Policy{Existing: true, SingletonID: true}
+	if got := singletonCodes(t, writable, p); !slices.Equal(got, []string{"SINGLETON_ID_IN_REQUEST"}) {
+		t.Fatalf("codes = %v, want SINGLETON_ID_IN_REQUEST", got)
+	}
+	p.ReadOnly = []string{"Settings.id"}
+	if got := singletonCodes(t, writable, p); len(got) != 0 {
+		t.Fatalf("codes with a readOnly line = %v, want none", got)
+	}
+}
+
+func TestSingletonIDNeedsAnIDProperty(t *testing.T) {
+	old := "        id:\n          type: string\n          description: Identifier that the server sets.\n          readOnly: true\n"
+	data := string(singletonDoc(t))
+	if !strings.Contains(data, old) {
+		t.Fatal("testdata/singleton.yaml has no id that this test removes")
+	}
+	p := Policy{Existing: true, SingletonID: true}
+	if got := singletonCodes(t, []byte(strings.Replace(data, old, "", 1)), p); !slices.Equal(got, []string{"SINGLETON_ID_MISSING"}) {
+		t.Fatalf("codes = %v, want SINGLETON_ID_MISSING", got)
+	}
+}
+
+// singletonID is for a resource whose Get has no path parameter.
+func TestSingletonIDRefusesAResourceWithAnIDPath(t *testing.T) {
+	p := legacyPolicy()
+	p.SingletonID = true
+	if got := legacyCodes(t, p); !slices.Contains(got, "SINGLETON_ID_NOT_A_SINGLETON") {
+		t.Fatalf("codes = %v, want SINGLETON_ID_NOT_A_SINGLETON", got)
+	}
+}

@@ -327,6 +327,7 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 	report = append(report, resourceIDIssues(p, name, ops, get)...)
 	report = append(report, bodyIDIssues(p, ops, create, update)...)
 	report = append(report, serverSetIDIssues(p, name, ops, create, update)...)
+	report = append(report, singletonIDIssues(p, name, ops, create, update, get)...)
 	report = append(report, skippedIDIssues(p, name, ops)...)
 	report = append(report, rootGroupContractIssues(name, create, update, get)...)
 	return report
@@ -382,6 +383,52 @@ func serverSetIDIssues(p Policy, name string, ops map[verb]foundOp, create, upda
 			Location:    "paths." + strings.ToLower(string(body.op)) + "." + ops[body.op].op.OperationId + ".requestBody",
 			Message:     fmt.Sprintf("The override serverSetID says that only the server sets the id, but the %s body has a %q property that is not read-only.", body.op, id),
 			Remediation: fmt.Sprintf("Add readOnly: true to the %q line of %s, mark the property read-only in the contract, or delete serverSetID.", id, name),
+		})
+	}
+	return report
+}
+
+// singletonIDIssues checks that singletonID describes a singleton whose id only the server sets:
+// Get has no path parameter, the resource has an id property, and the Create and Update bodies do
+// not have it, or it is read-only there or by a readOnly line. Otherwise a caller could send a value
+// that the response replaces.
+func singletonIDIssues(p Policy, name string, ops map[verb]foundOp, create, update, get *base.Schema) issue.Report {
+	if !p.SingletonID {
+		return nil
+	}
+	location := "components.schemas." + name + ".id"
+	if len(pathParams(ops[opGet])) != 0 {
+		return issue.Report{{
+			Code:        "SINGLETON_ID_NOT_A_SINGLETON",
+			Location:    location,
+			Message:     "The override singletonID is for a singleton, but Get of this resource has a path parameter.",
+			Remediation: "Delete singletonID from the overrides.",
+		}}
+	}
+	if propertyOf(get, "id") == nil {
+		return issue.Report{{
+			Code:        "SINGLETON_ID_MISSING",
+			Location:    location,
+			Message:     "The override singletonID says that the resource has an id property, and it has none.",
+			Remediation: "Delete singletonID from the overrides, or add the id property to the resource.",
+		}}
+	}
+	if p.readOnly(name, "id") {
+		return nil
+	}
+	var report issue.Report
+	for _, body := range []struct {
+		op     verb
+		schema *base.Schema
+	}{{opCreate, create}, {opUpdate, update}} {
+		if !userSetsProperty(body.schema, "id") {
+			continue
+		}
+		report = append(report, issue.Issue{
+			Code:        "SINGLETON_ID_IN_REQUEST",
+			Location:    "paths." + strings.ToLower(string(body.op)) + "." + ops[body.op].op.OperationId + ".requestBody",
+			Message:     fmt.Sprintf("The override singletonID says that only the server sets the id, but the %s body has an \"id\" property that is not read-only.", body.op),
+			Remediation: fmt.Sprintf("Add readOnly: true to the \"id\" line of %s, mark the property read-only in the contract, or delete singletonID.", name),
 		})
 	}
 	return report

@@ -55,6 +55,10 @@ type Policy struct {
 	// ServerSetID means that the server sets the id and returns it in every response, and
 	// the Get response does not require it: the request shares the resource schema.
 	ServerSetID bool
+	// SingletonID means that a singleton (Get has no path parameter) has a resource field named
+	// "id" that only the server sets. The id identifies the resource in its responses, and no
+	// call takes it.
+	SingletonID bool
 	// IDProperty is the property of the resource that holds the id when its name is not the name
 	// of the path parameter. "" means the property named like the path parameter.
 	IDProperty string

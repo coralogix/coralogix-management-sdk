@@ -42,6 +42,9 @@ type API struct {
 	// ServerSetID: the server sets the id and returns it in every response, but the Get
 	// response cannot require it, because the request shares the resource schema.
 	ServerSetID bool `yaml:"serverSetID"`
+	// SingletonID: the resource is a singleton (Get has no path parameter) whose component has an
+	// id field that only the server sets. No call takes the id.
+	SingletonID bool `yaml:"singletonID"`
 	// IDProperty is the property of the resource that holds the id when it does not have the name
 	// of the path parameter, for example uniqueIdentifier for /rules/{rule_id}. "" means the
 	// property named like the path parameter.
@@ -138,6 +141,9 @@ func (a API) Check() error {
 	if a.ClientSetID && a.ServerSetID {
 		return errors.New("api.clientSetID and api.serverSetID both describe the id: keep the one that states who sets it")
 	}
+	if a.SingletonID && (a.ClientSetID || a.ServerSetID || a.UpdateIDInBody) {
+		return errors.New("api.singletonID is for a singleton, which has no id in a path: it cannot be combined with clientSetID, serverSetID, or updateIDInBody")
+	}
 	if a.Delete != nil && a.Delete.Operation == "" {
 		return errors.New("api.delete.operation is required")
 	}
@@ -215,6 +221,7 @@ func (e Exceptions) Policy() model.Policy {
 		UpdateIDInBody:   e.API.UpdateIDInBody,
 		ClientSetID:      e.API.ClientSetID,
 		ServerSetID:      e.API.ServerSetID,
+		SingletonID:      e.API.SingletonID,
 		IDProperty:       e.API.IDProperty,
 		CustomMethods:    e.API.CustomMethods,
 		UpdateMaskInBody: e.API.UpdateMaskInBody,

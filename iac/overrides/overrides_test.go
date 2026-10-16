@@ -102,10 +102,11 @@ func TestFieldCheckRejectsBadShapeKeys(t *testing.T) {
 
 func TestCheckRejectsConflictingAPIKeys(t *testing.T) {
 	for name, a := range map[string]API{
-		"both id owners":        {ClientSetID: true, ServerSetID: true},
-		"delete with no name":   {Delete: &Delete{}},
-		"incomplete operations": {Operations: &Operations{Create: "C"}},
-		"two delete operations": {Operations: &Operations{Create: "C", Get: "G", Update: "U", Delete: "D"}, Delete: &Delete{Operation: "Archive"}},
+		"both id owners":           {ClientSetID: true, ServerSetID: true},
+		"singleton id and id path": {SingletonID: true, ServerSetID: true},
+		"delete with no name":      {Delete: &Delete{}},
+		"incomplete operations":    {Operations: &Operations{Create: "C"}},
+		"two delete operations":    {Operations: &Operations{Create: "C", Get: "G", Update: "U", Delete: "D"}, Delete: &Delete{Operation: "Archive"}},
 	} {
 		if a.Check() == nil {
 			t.Errorf("%s: Check() = nil", name)
