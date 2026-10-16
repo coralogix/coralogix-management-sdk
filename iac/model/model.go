@@ -108,6 +108,10 @@ type Response struct {
 	// Direct is true when the response is the resource itself, with no
 	// wrapper (proto google.api.http response_body).
 	Direct bool
+	// ID is the property that holds only the id of the resource, for a Create response that does
+	// not return the resource (an existing resource). It is a string, and Create reads the
+	// resource with Get.
+	ID string
 	// Empty is true when the response schema has no fields, for example many
 	// Delete responses. The SDK then returns map[string]interface{}.
 	Empty bool

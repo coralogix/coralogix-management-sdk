@@ -37,6 +37,9 @@ type API struct {
 	RequestWrapper string `yaml:"requestWrapper"`
 	// UpdateIDInBody: Update has no id in its path. The id is a field of the resource.
 	UpdateIDInBody bool `yaml:"updateIDInBody"`
+	// CreateResponseID is the property of the Create response that holds the id of the new
+	// resource, when the response does not return the resource. Create then reads the resource.
+	CreateResponseID string `yaml:"createResponseID"`
 	// ClientSetID: the client can send the id on Create.
 	ClientSetID bool `yaml:"clientSetID"`
 	// ServerSetID: the server sets the id and returns it in every response, but the Get
@@ -214,6 +217,7 @@ func (e Exceptions) Policy() model.Policy {
 		RequestWrapper:   e.API.RequestWrapper,
 		UpdateIDInBody:   e.API.UpdateIDInBody,
 		ClientSetID:      e.API.ClientSetID,
+		CreateResponseID: e.API.CreateResponseID,
 		ServerSetID:      e.API.ServerSetID,
 		IDProperty:       e.API.IDProperty,
 		CustomMethods:    e.API.CustomMethods,
