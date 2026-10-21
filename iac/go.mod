@@ -1,6 +1,6 @@
 module github.com/coralogix/coralogix-management-sdk/iac
 
-go 1.26.0
+go 1.26.10
 
 require (
 	github.com/pb33f/libopenapi v0.40.0
