@@ -13,7 +13,7 @@ authors = []
 anyhow = "*"
 cx-sdk = { path = "../../cx-sdk" }
 serde_json = "*"
-time = "0.3.36"
+time = "0.3.47"
 
 tokio = { version = "*", features = ["full"] }
 tonic = "*"

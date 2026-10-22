@@ -13,7 +13,7 @@ prost = "0.12"
 prost-wkt = "0.5"
 prost-wkt-types = "0.5"
 serde_json = "*"
-time = "0.3.36"
+time = "0.3.47"
 tokio = { version = "*", features = ["full"] }
 tonic = "*"
 uuid = { version = "*", features = ["serde", "v4"] }
