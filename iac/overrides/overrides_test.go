@@ -30,7 +30,7 @@ func TestPolicyStatesTheAPIKeys(t *testing.T) {
 	e := Exceptions{
 		API: API{
 			RequestWrapper: "router", UpdateIDInBody: true, ClientSetID: true, CustomMethods: true, UpdateMaskInBody: true,
-			Operations: &Operations{Create: "C", Get: "G", Update: "U", Delete: "D"},
+			Operations: &Operations{Create: "C", Get: "G", Update: "U", Delete: "D", List: "L"},
 		},
 		Unwrap: []string{"LuceneQuery"},
 		Fields: map[string]map[string]Field{
@@ -40,7 +40,7 @@ func TestPolicyStatesTheAPIKeys(t *testing.T) {
 	}
 	want := model.Policy{
 		Existing: true, RequestWrapper: "router", UpdateIDInBody: true, ClientSetID: true, CustomMethods: true, UpdateMaskInBody: true,
-		Operations:   model.OperationIDs{Create: "C", Get: "G", Update: "U", Delete: "D"},
+		Operations:   model.OperationIDs{Create: "C", Get: "G", Update: "U", Delete: "D", List: "L"},
 		Unwrap:       []string{"LuceneQuery"},
 		UnwrapFields: map[string]bool{"Target.label": true, "Thing.query": false},
 		Skip:         []string{"Target.id"},
@@ -105,6 +105,8 @@ func TestCheckRejectsConflictingAPIKeys(t *testing.T) {
 		"both id owners":        {ClientSetID: true, ServerSetID: true},
 		"delete with no name":   {Delete: &Delete{}},
 		"incomplete operations": {Operations: &Operations{Create: "C"}},
+		"no operations":         {Operations: &Operations{}},
+		"list and one more":     {Operations: &Operations{Get: "G", List: "L"}},
 		"two delete operations": {Operations: &Operations{Create: "C", Get: "G", Update: "U", Delete: "D"}, Delete: &Delete{Operation: "Archive"}},
 	} {
 		if a.Check() == nil {
@@ -112,6 +114,10 @@ func TestCheckRejectsConflictingAPIKeys(t *testing.T) {
 		}
 	}
 	if err := (API{Delete: &Delete{Operation: "Archive"}}).Check(); err != nil {
+		t.Fatal(err)
+	}
+	// The List can be the only operation that the file names: the lifecycle uses discovery.
+	if err := (API{Operations: &Operations{List: "L"}, Delete: &Delete{Operation: "Archive"}}).Check(); err != nil {
 		t.Fatal(err)
 	}
 	if CheckUnwrap([]string{"A", "A"}) == nil || CheckUnwrap([]string{""}) == nil || CheckUnwrap([]string{"A", "B"}) != nil {

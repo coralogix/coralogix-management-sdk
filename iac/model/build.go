@@ -73,13 +73,29 @@ func BuildWithOperationIDs(doc *v3.Document, name string, ids OperationIDs) (*Re
 
 // BuildWithPolicy builds a resource under the given rule set.
 func BuildWithPolicy(doc *v3.Document, name string, ids OperationIDs, policy Policy) (*Resource, error) {
-	ops, err := findOperations(doc, name, ids, policy)
+	r, listErr, err := build(doc, name, ids, policy)
 	if err != nil {
 		return nil, err
 	}
-	r := &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy}
+	if listErr != nil {
+		return nil, listErr
+	}
+	return r, nil
+}
+
+// build builds a resource. listErr is the error of a List that ids names. It is apart from err,
+// so that Validate also reports the issues of the resource that build made.
+func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *Resource, listErr, err error) {
+	if ids, err = policy.operationIDs(ids); err != nil {
+		return nil, nil, err
+	}
+	ops, err := findOperations(doc, name, ids, policy)
+	if err != nil {
+		return nil, nil, err
+	}
+	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy}
 	if err := r.readOperations(ops); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if !r.Singleton {
 		r.IDField = r.IDParam
@@ -89,21 +105,21 @@ func BuildWithPolicy(doc *v3.Document, name string, ids OperationIDs, policy Pol
 	}
 	r.readBodyTitles(doc, ops)
 	if err := r.readFields(doc, ops); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if !r.Singleton {
 		index := slices.IndexFunc(r.Fields, func(field *ResourceField) bool { return field.Name == r.IDField })
 		if index < 0 {
-			return nil, fmt.Errorf("%s: no field %q for the id path parameter", r.Name, r.IDField)
+			return nil, nil, fmt.Errorf("%s: no field %q for the id path parameter", r.Name, r.IDField)
 		}
 		r.IDType = r.Fields[index].Type
 	}
 	r.pruneSkipped()
 	if err := r.unwrap(); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	r.zeroDefaults()
-	return r, nil
+	return r, r.readList(doc, ops[opGet], ids.List), nil
 }
 
 type verb string
@@ -114,6 +130,7 @@ const (
 	opUpdate  verb = "Update"
 	opReplace verb = "Replace" // a full-replace Update; findOperations stores it as opUpdate
 	opDelete  verb = "Delete"
+	opList    verb = "List" // not a lifecycle step; Build reads it after the resource
 )
 
 var verbs = []verb{opCreate, opGet, opUpdate, opDelete}

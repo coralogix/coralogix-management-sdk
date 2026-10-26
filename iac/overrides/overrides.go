@@ -53,7 +53,7 @@ type API struct {
 	CustomMethods bool `yaml:"customMethods"`
 	// Operations names the lifecycle operationIds when they do not end in
 	// _Create, _Get, _Update, or _Delete plus the resource name. A generator then
-	// needs no operation flags.
+	// needs no operation flags. It can also name the List.
 	Operations *Operations `yaml:"operations"`
 	// Delete names the operation that removes the resource when the API has no DELETE.
 	Delete *Delete `yaml:"delete"`
@@ -63,12 +63,16 @@ type API struct {
 	UpdateMaskInBody bool `yaml:"updateMaskInBody"`
 }
 
-// Operations names the four lifecycle operationIds. All four are required.
+// Operations names the four lifecycle operationIds, and the List. The four lifecycle ids are
+// set together, or not at all.
 type Operations struct {
 	Create string `yaml:"create"`
 	Get    string `yaml:"get"`
 	Update string `yaml:"update"`
 	Delete string `yaml:"delete"`
+	// List is the operationId of the GET that lists the resources, when it is not the GET on
+	// the Create path. A List that it names must be one that the model can describe.
+	List string `yaml:"list"`
 }
 
 // Delete is how a released resource is removed when the API has no DELETE, for example a
@@ -144,7 +148,11 @@ func (a API) Check() error {
 	if a.Operations == nil {
 		return nil
 	}
-	if a.Operations.Create == "" || a.Operations.Get == "" || a.Operations.Update == "" || a.Operations.Delete == "" {
+	o := a.Operations
+	if o.List != "" && o.Create == "" && o.Get == "" && o.Update == "" && o.Delete == "" {
+		return nil // only the List
+	}
+	if o.Create == "" || o.Get == "" || o.Update == "" || o.Delete == "" {
 		return errors.New("api.operations needs create, get, update, and delete")
 	}
 	if a.Delete != nil {
@@ -225,6 +233,7 @@ func (e Exceptions) Policy() model.Policy {
 			Get:    e.API.Operations.Get,
 			Update: e.API.Operations.Update,
 			Delete: e.API.Operations.Delete,
+			List:   e.API.Operations.List,
 		}
 	}
 	if e.API.Delete != nil {

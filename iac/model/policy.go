@@ -67,8 +67,8 @@ type Policy struct {
 	// DefaultArms are the "Component.field" oneOf arms that Create and Update send empty when the
 	// configuration sets no arm of the group.
 	DefaultArms []string
-	// Operations names the lifecycle operationIds from behavior-overrides. Flags
-	// still override an empty slot. A flag and the file cannot name different ids.
+	// Operations names the lifecycle operationIds, and the List, from behavior-overrides.
+	// Flags still override an empty slot. A flag and the file cannot name different ids.
 	Operations OperationIDs
 	// DeleteOperation is the operationId of the operation that removes the resource
 	// when the API has no DELETE. It is a POST on the Get path plus one segment, for
@@ -205,6 +205,10 @@ func (p Policy) operationIDs(ids OperationIDs) (OperationIDs, error) {
 		fromFile = p.DeleteOperation
 	}
 	ids.Delete, err = oneOperationID(opDelete, fromFile, ids.Delete)
+	if err != nil {
+		return ids, err
+	}
+	ids.List, err = oneOperationID(opList, p.Operations.List, ids.List)
 	return ids, err
 }
 

@@ -19,12 +19,14 @@ package model
 import "strings"
 
 // OperationIDs selects lifecycle operations when suffix discovery is ambiguous.
-// Empty fields use deterministic suffix discovery.
+// Empty fields use deterministic suffix discovery. An empty List uses the GET on the Create
+// path, and a List that the model cannot describe is then no error.
 type OperationIDs struct {
 	Create string
 	Get    string
 	Update string
 	Delete string
+	List   string
 }
 
 // Resource is one API resource with Create, Get, Update, and Delete operations.
@@ -74,6 +76,13 @@ type Resource struct {
 	// HiddenWrappers are the wrapper components that collapse in every place, so the generated
 	// code has no attribute for their property.
 	HiddenWrappers map[string]bool
+	// List is the operation that lists the resources. It is nil when the API has none, or has
+	// one that the model cannot describe.
+	List *ListOperation
+	// ListProblem says in one sentence why List is nil although the Create path has a GET. It
+	// is "" when List is set, or the Create path has no GET. A List that OperationIDs names
+	// has no problem: Build fails instead.
+	ListProblem string
 }
 
 // ID returns the resource field that holds the id: IDField, or IDParam for a resource that Build
@@ -96,6 +105,27 @@ type Operation struct {
 	BodyTitle            string
 	BodyTitleIsComponent bool
 	Response             Response
+}
+
+// ListOperation is a GET that returns the resources in one array. The model records the facts
+// about it. A tool decides what to generate from them.
+type ListOperation struct {
+	Operation
+	// ItemsField is the response property that holds the items, for example "connectors".
+	ItemsField string
+	// ItemComponent is the component of an item, for example "Connector" or "PresetSummary".
+	ItemComponent string
+	// Full is true when the item component is the resource component, so an item has every
+	// field of a Get. False: an item is a summary, and a tool calls Get for the other fields.
+	Full bool
+	// IDField is the item property that holds the resource id. It is the IDField of the
+	// resource, and it has the type of the resource id.
+	IDField string
+	// NameField is "name" when the item has a string property name, and "" otherwise.
+	NameField string
+	// Paged is true when the List has a query parameter that pages the result (a page token,
+	// size, or offset, a limit, or a pagination object), or the response has a next page token.
+	Paged bool
 }
 
 // Response is the 200 response body.

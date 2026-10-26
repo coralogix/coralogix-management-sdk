@@ -50,4 +50,54 @@ report = sdkcheck.Issues(refs, loaded, func(sdkcheck.Ref) sdkcheck.Source {
 })
 ```
 
+## List
+
+`Resource.List` describes the operation that lists the resources. The model records facts. The tool decides what to generate from them.
+
+| Field | Fact | Example |
+|---|---|---|
+| `ItemsField` | The response property that holds the items. | `connectors` |
+| `ItemComponent` | The component of an item. | `Connector`, `PresetSummary` |
+| `Full` | The item component is the resource component. | `true` for `Connector` |
+| `IDField` | The item property that holds the resource id. It is the `IDField` of the resource. | `id` |
+| `NameField` | `name` when the item has a string `name`, `""` otherwise. | `name` |
+| `Paged` | A query parameter pages the List, or the response has a next page token. | `pageSize`, `pagination.page_token` |
+
+Build finds the List in one of two ways:
+
+- With no name, the List is the GET on the Create path. When the model cannot describe it, `List` is nil and `ListProblem` says why. This is not an issue, so the resource stays eligible.
+- `OperationIDs.List`, or `api.operations.list` in the overrides file, names the List. Use it when the List is not on the Create path:
+
+  ```yaml
+  api:
+    operations:
+      list: PresetsService_ListPresetSummaries   # GET /v1/presets:summariesList
+  ```
+
+  A named List that the model cannot describe is an issue, because the user asked for it. `list` can be the only key of `api.operations`. The four lifecycle keys are set together, or not at all.
+
+A List needs:
+
+- GET, no path parameters, and no required parameter that does not page.
+- The one tag of Get, so the SDK has it in the same package.
+- A 200 response component with exactly one array of component objects. Other properties, such as `nextPageToken` or `totalCount`, are allowed.
+- An item with the id property of the resource, of the same type.
+
+| Code | Problem |
+|---|---|
+| `LIST_OPERATION_NOT_FOUND` | No operation has the named operationId. |
+| `LIST_OPERATION_AMBIGUOUS` | More than one operation matches. |
+| `LIST_OPERATION_METHOD_INCOMPATIBLE` | The operation is not a GET. |
+| `LIST_PATH_PARAMETER_UNSUPPORTED` | The operation has a path parameter. |
+| `LIST_REQUIRED_PARAMETER_UNSUPPORTED` | The operation requires a parameter that does not page. |
+| `LIST_TAG_INCOMPATIBLE` | The operation does not have the one tag of Get. |
+| `LIST_SINGLETON_UNSUPPORTED` | The resource is a singleton. |
+| `LIST_RESPONSE_UNSUPPORTED` | The 200 response is missing or is not a component. |
+| `LIST_ITEMS_NOT_FOUND` | The response has no array of component objects. |
+| `LIST_ITEMS_AMBIGUOUS` | The response has more than one array of component objects. |
+| `LIST_ITEM_ID_MISSING` | The item has no id property. |
+| `LIST_ITEM_ID_TYPE_INCOMPATIBLE` | The item id does not have the type of the resource id. |
+
+`sdkcheck.Names` adds the List call, the items field, and the id and name fields of a summary item only when `List` is set. A resource without a List needs no new SDK name.
+
 A tool pins `iac` by the pseudo-version of a commit on `master`.
