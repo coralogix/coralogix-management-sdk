@@ -14,7 +14,7 @@
 
 
 ARG TARGETARCH
-FROM rust:1.85.0-slim-bullseye AS interim
+FROM rust:1.89.0-slim-bullseye AS interim
 FROM interim AS interim-amd64
 ENV ARCH=x86_64
 FROM interim AS interim-arm64
