@@ -23,10 +23,12 @@ var _ MappedNullable = &ReplaceDashboardRequestDataStructure{}
 
 // ReplaceDashboardRequestDataStructure Replaces the dashboard definition, the access policy, or both. A part that is present replaces the stored value as a whole; a part that is omitted is left unchanged. At least one of `dashboard` and `accessPolicy` is required.
 type ReplaceDashboardRequestDataStructure struct {
-	// JSON string with the access policy of this dashboard, which defines granular permissions for users and groups. Changing it requires `team-dashboards:UpdateAccessPolicy` or `access-policies:UpdateAll`. Without either, a value that differs from the stored policy is rejected with `403`, and the stored policy sent back unchanged is accepted.
+	// JSON string with the access policy of this dashboard, which defines granular permissions for users and groups. Changing it requires `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on this dashboard, or the break-glass `access-policies:UpdateAll`. Without that, a value that differs from the stored policy is rejected with `403`, and the stored policy sent back unchanged is accepted.
 	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The complete dashboard definition to store. Requires `team-dashboards:Update`.
 	Dashboard *Dashboard `json:"dashboard,omitempty"`
+	// The id of the dashboard to change. Required when `dashboard` is omitted; when sent together with `dashboard` it must equal `dashboard.id`.
+	DashboardId *string `json:"dashboardId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Whether the dashboard is locked against edits. Ignored when `dashboard` is omitted.
 	IsLocked *bool `json:"isLocked,omitempty"`
 	// Idempotency key for the replace request, used to prevent duplicate updates.
@@ -119,6 +121,38 @@ func (o *ReplaceDashboardRequestDataStructure) SetDashboard(v Dashboard) {
 	o.Dashboard = &v
 }
 
+// GetDashboardId returns the DashboardId field value if set, zero value otherwise.
+func (o *ReplaceDashboardRequestDataStructure) GetDashboardId() string {
+	if o == nil || IsNil(o.DashboardId) {
+		var ret string
+		return ret
+	}
+	return *o.DashboardId
+}
+
+// GetDashboardIdOk returns a tuple with the DashboardId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReplaceDashboardRequestDataStructure) GetDashboardIdOk() (*string, bool) {
+	if o == nil || IsNil(o.DashboardId) {
+		return nil, false
+	}
+	return o.DashboardId, true
+}
+
+// HasDashboardId returns a boolean if a field has been set.
+func (o *ReplaceDashboardRequestDataStructure) HasDashboardId() bool {
+	if o != nil && !IsNil(o.DashboardId) {
+		return true
+	}
+
+	return false
+}
+
+// SetDashboardId gets a reference to the given string and assigns it to the DashboardId field.
+func (o *ReplaceDashboardRequestDataStructure) SetDashboardId(v string) {
+	o.DashboardId = &v
+}
+
 // GetIsLocked returns the IsLocked field value if set, zero value otherwise.
 func (o *ReplaceDashboardRequestDataStructure) GetIsLocked() bool {
 	if o == nil || IsNil(o.IsLocked) {
@@ -191,6 +225,9 @@ func (o ReplaceDashboardRequestDataStructure) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Dashboard) {
 		toSerialize["dashboard"] = o.Dashboard
 	}
+	if !IsNil(o.DashboardId) {
+		toSerialize["dashboardId"] = o.DashboardId
+	}
 	if !IsNil(o.IsLocked) {
 		toSerialize["isLocked"] = o.IsLocked
 	}
@@ -241,6 +278,7 @@ func (o *ReplaceDashboardRequestDataStructure) UnmarshalJSON(data []byte) (err e
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "accessPolicy")
 		delete(additionalProperties, "dashboard")
+		delete(additionalProperties, "dashboardId")
 		delete(additionalProperties, "isLocked")
 		delete(additionalProperties, "requestId")
 		o.AdditionalProperties = additionalProperties

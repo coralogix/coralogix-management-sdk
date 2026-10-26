@@ -48,6 +48,7 @@ type Slo1 struct {
 	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
 	// Revision of the SLO. Set by the server; a value sent by the client is ignored.
 	Revision *V1Revision `json:"revision,omitempty"`
+	// Rolling evaluation window (fixed-duration lookback).
 	SloTimeFrame SloTimeFrame `json:"sloTimeFrame"`
 	// SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client must match the SLI type; a different value is rejected.
 	SloType *SloType `json:"sloType,omitempty"`

@@ -81,6 +81,7 @@ Class | Method | HTTP request | Description
 *FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceArchiveConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupservicearchiveconfigurationgroup) | **Post** /fleet-management/configuration-groups/v1/{id}/archive | Archive configuration group
 *FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceCreateConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupservicecreateconfigurationgroup) | **Post** /fleet-management/configuration-groups/v1 | Create configuration group
 *FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceGetConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupservicegetconfigurationgroup) | **Get** /fleet-management/configuration-groups/v1/{id} | Get configuration group
+*FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceListConfigurationGroups**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupservicelistconfigurationgroups) | **Get** /fleet-management/configuration-groups/v1 | List configuration groups
 *FleetManagerConfigurationGroupsAPI* | [**ConfigurationGroupServiceUpdateConfigurationGroup**](docs/FleetManagerConfigurationGroupsAPI.md#configurationgroupserviceupdateconfigurationgroup) | **Patch** /fleet-management/configuration-groups/v1/{id} | Update configuration group
 
 
@@ -101,6 +102,7 @@ Class | Method | HTTP request | Description
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [Filters](docs/Filters.md)
+ - [ListConfigurationGroupsResponse](docs/ListConfigurationGroupsResponse.md)
  - [MultipleValues](docs/MultipleValues.md)
  - [PresetConfigurationFamily](docs/PresetConfigurationFamily.md)
  - [PresetConfigurationFamilyCreate](docs/PresetConfigurationFamilyCreate.md)

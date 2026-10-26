@@ -335,7 +335,7 @@ type ApiConfigurationGroupServiceGetConfigurationGroupRequest struct {
 	includeArchived *bool
 }
 
-// When true, return an archived group, without a family. Otherwise an archived group returns 404.
+// When true, return an archived group with its latest configuration family, including an archived family. Otherwise an archived group returns 404.
 func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) IncludeArchived(includeArchived bool) ApiConfigurationGroupServiceGetConfigurationGroupRequest {
 	r.includeArchived = &includeArchived
 	return r
@@ -457,6 +457,173 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceGet
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiConfigurationGroupServiceListConfigurationGroupsRequest struct {
+	ctx context.Context
+	ApiService *FleetManagerConfigurationGroupsAPIService
+	includeArchived *bool
+	pageSize *int32
+	pageToken *string
+}
+
+// When true, include archived groups, each with its latest configuration family, including an archived family.
+func (r ApiConfigurationGroupServiceListConfigurationGroupsRequest) IncludeArchived(includeArchived bool) ApiConfigurationGroupServiceListConfigurationGroupsRequest {
+	r.includeArchived = &includeArchived
+	return r
+}
+
+// Maximum number of groups to return. Defaults to 100 and cannot exceed 256.
+func (r ApiConfigurationGroupServiceListConfigurationGroupsRequest) PageSize(pageSize int32) ApiConfigurationGroupServiceListConfigurationGroupsRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
+// Opaque token returned by a previous list response. Send it with the same include_archived value as that request.
+func (r ApiConfigurationGroupServiceListConfigurationGroupsRequest) PageToken(pageToken string) ApiConfigurationGroupServiceListConfigurationGroupsRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+func (r ApiConfigurationGroupServiceListConfigurationGroupsRequest) Execute() (*ListConfigurationGroupsResponse, *http.Response, error) {
+	return r.ApiService.ConfigurationGroupServiceListConfigurationGroupsExecute(r)
+}
+
+/*
+ConfigurationGroupServiceListConfigurationGroups List configuration groups
+
+Lists fleet-manager configuration groups, newest first. Archived groups are excluded unless include_archived is true.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiConfigurationGroupServiceListConfigurationGroupsRequest
+*/
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceListConfigurationGroups(ctx context.Context) ApiConfigurationGroupServiceListConfigurationGroupsRequest {
+	return ApiConfigurationGroupServiceListConfigurationGroupsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return ListConfigurationGroupsResponse
+func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceListConfigurationGroupsExecute(r ApiConfigurationGroupServiceListConfigurationGroupsRequest) (*ListConfigurationGroupsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ListConfigurationGroupsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FleetManagerConfigurationGroupsAPIService.ConfigurationGroupServiceListConfigurationGroups")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/fleet-management/configuration-groups/v1"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.includeArchived != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "include_archived", r.includeArchived, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	if r.pageSize != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_size", r.pageSize, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	if r.pageToken != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

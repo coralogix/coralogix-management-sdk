@@ -481,7 +481,12 @@
                     "readOnly": true
                   },
                   "sloTimeFrame": {
-                    "$ref": "#/components/schemas/SloTimeFrame"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SloTimeFrame"
+                      }
+                    ],
+                    "description": "Rolling evaluation window (fixed-duration lookback)."
                   },
                   "sloType": {
                     "allOf": [
@@ -759,7 +764,12 @@
                     "readOnly": true
                   },
                   "sloTimeFrame": {
-                    "$ref": "#/components/schemas/SloTimeFrame"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SloTimeFrame"
+                      }
+                    ],
+                    "description": "Rolling evaluation window (fixed-duration lookback)."
                   },
                   "sloType": {
                     "allOf": [
@@ -1435,7 +1445,12 @@
                     "readOnly": true
                   },
                   "sloTimeFrame": {
-                    "$ref": "#/components/schemas/SloTimeFrame"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/SloTimeFrame"
+                      }
+                    ],
+                    "description": "Rolling evaluation window (fixed-duration lookback)."
                   },
                   "sloType": {
                     "allOf": [
@@ -2480,7 +2495,12 @@
             "readOnly": true
           },
           "sloTimeFrame": {
-            "$ref": "#/components/schemas/SloTimeFrame"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SloTimeFrame"
+              }
+            ],
+            "description": "Rolling evaluation window (fixed-duration lookback)."
           },
           "sloType": {
             "allOf": [

@@ -35,7 +35,7 @@ func (r ApiDashboardCatalogServiceGetDashboardCatalogRequest) Execute() (*GetDas
 /*
 DashboardCatalogServiceGetDashboardCatalog Get dashboard catalog
 
-Returns the dashboards the caller may access. A caller with `team-dashboards:Read` receives every dashboard it may view. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives the dashboards whose access policy it may read, each reduced to `id`, `name`, `slugName`, `folder` and `isLocked`.
+Returns the dashboards the caller may access. A caller with `team-dashboards:Read` receives every dashboard it may view. `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on the same dashboard and grants nothing on its own, so a dashboard for which the caller holds only `team-dashboards:ReadAccessPolicy` is not listed. Only `access-policies:ReadAll` is break-glass: a caller without `team-dashboards:Read` who holds it receives every dashboard, each reduced to `id`, `name`, `slugName`, `folder`, `isLocked` and `permissions`.
 
 Requires the following permissions:
 - `team-dashboards:Read`
@@ -784,7 +784,7 @@ func (r ApiDashboardsServiceGetDashboardRequest) Execute() (*GetDashboardRespons
 /*
 DashboardsServiceGetDashboard Get a dashboard
 
-Returns the details of the specified dashboard. A caller with `team-dashboards:Read` receives the dashboard definition and its metadata. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives only the access policy and the lock state.
+Returns the details of the specified dashboard. A caller with `team-dashboards:Read` on this dashboard receives the dashboard definition and its metadata, and the access policy too if it also holds `team-dashboards:ReadAccessPolicy` on this dashboard. `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on the same dashboard and grants nothing on its own: a caller that holds it without `team-dashboards:Read` and without `access-policies:ReadAll` gets `403`. Only `access-policies:ReadAll` is break-glass: a caller without `team-dashboards:Read` who holds it receives only the access policy, the lock state and the `permissions` object.
 
 Requires the following permissions:
 - `team-dashboards:Read`
@@ -952,7 +952,7 @@ func (r ApiDashboardsServiceGetDashboardBySlugRequest) Execute() (*GetDashboardB
 /*
 DashboardsServiceGetDashboardBySlug Get a dashboard by URL slug
 
-Returns the dashboard associated with the specified slug. A caller with `team-dashboards:Read` receives the dashboard definition and its metadata. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives only the access policy and the lock state.
+Returns the dashboard associated with the specified slug. A caller with `team-dashboards:Read` on this dashboard receives the dashboard definition and its metadata, and the access policy too if it also holds `team-dashboards:ReadAccessPolicy` on this dashboard. `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on the same dashboard and grants nothing on its own: a caller that holds it without `team-dashboards:Read` and without `access-policies:ReadAll` gets `403`. Only `access-policies:ReadAll` is break-glass: a caller without `team-dashboards:Read` who holds it receives only the access policy, the lock state and the `permissions` object.
 
 Requires the following permissions:
 - `team-dashboards:Read`
@@ -1281,7 +1281,7 @@ func (r ApiDashboardsServiceReplaceDashboardRequest) Execute() (map[string]inter
 /*
 DashboardsServiceReplaceDashboard Replace a dashboard
 
-Replaces the dashboard definition, the access policy, or both. Sending `dashboard` requires `team-dashboards:Update`. Changing the access policy requires `team-dashboards:UpdateAccessPolicy` or `access-policies:UpdateAll`. Without either, an `accessPolicy` that differs from the stored policy is rejected with `403` and nothing in the request is stored; one equal to the stored policy is accepted and leaves it unchanged. Policies are compared as JSON, so formatting alone is not a change. A request that sends only `accessPolicy` creates no new dashboard version.
+Replaces the dashboard definition, the access policy, or both. Sending `dashboard` requires `team-dashboards:Update`. Changing the access policy requires `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on the same dashboard, or the break-glass `access-policies:UpdateAll`. Without that, an `accessPolicy` that differs from the stored policy is rejected with `403` and nothing in the request is stored; one equal to the stored policy is accepted and leaves it unchanged. Policies are compared as JSON, so formatting alone is not a change. A request that sends only `accessPolicy` creates no new dashboard version.
 
 Requires the following permissions:
 - `team-dashboards:Update`
