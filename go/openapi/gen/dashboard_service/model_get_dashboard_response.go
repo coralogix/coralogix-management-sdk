@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,7 +24,7 @@ var _ MappedNullable = &GetDashboardResponse{}
 
 // GetDashboardResponse This is a response containing the requested dashboard
 type GetDashboardResponse struct {
-	// JSON string with the access policy of this dashboard. Present only when the caller holds `team-dashboards:ReadAccessPolicy` for this dashboard or `access-policies:ReadAll`.
+	// JSON string with the access policy of this dashboard. Present only when the caller holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on this dashboard, or the break-glass `access-policies:ReadAll`.
 	AccessPolicy *string `json:"accessPolicy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The author id.
 	AuthorId *string `json:"authorId,omitempty" validate:"regexp=^[\\s\\S]*$"`
@@ -40,6 +41,8 @@ type GetDashboardResponse struct {
 	LockerAuthorId *string `json:"lockerAuthorId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The locker name.
 	LockerName *string `json:"lockerName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// What the caller may do with this dashboard.
+	Permissions DashboardPermissions `json:"permissions"`
 	// Map of resolved widget references for widgets with references in the dashboard
 	ResolvedWidgets map[string]Widget `json:"resolvedWidgets,omitempty"`
 	// Last-updated timestamp.
@@ -59,8 +62,9 @@ type _GetDashboardResponse GetDashboardResponse
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewGetDashboardResponse() *GetDashboardResponse {
+func NewGetDashboardResponse(permissions DashboardPermissions) *GetDashboardResponse {
 	this := GetDashboardResponse{}
+	this.Permissions = permissions
 	return &this
 }
 
@@ -360,6 +364,30 @@ func (o *GetDashboardResponse) SetLockerName(v string) {
 	o.LockerName = &v
 }
 
+// GetPermissions returns the Permissions field value
+func (o *GetDashboardResponse) GetPermissions() DashboardPermissions {
+	if o == nil {
+		var ret DashboardPermissions
+		return ret
+	}
+
+	return o.Permissions
+}
+
+// GetPermissionsOk returns a tuple with the Permissions field value
+// and a boolean to check if the value has been set.
+func (o *GetDashboardResponse) GetPermissionsOk() (*DashboardPermissions, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Permissions, true
+}
+
+// SetPermissions sets field value
+func (o *GetDashboardResponse) SetPermissions(v DashboardPermissions) {
+	o.Permissions = v
+}
+
 // GetResolvedWidgets returns the ResolvedWidgets field value if set, zero value otherwise.
 func (o *GetDashboardResponse) GetResolvedWidgets() map[string]Widget {
 	if o == nil || IsNil(o.ResolvedWidgets) {
@@ -557,6 +585,7 @@ func (o GetDashboardResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LockerName) {
 		toSerialize["lockerName"] = o.LockerName
 	}
+	toSerialize["permissions"] = o.Permissions
 	if !IsNil(o.ResolvedWidgets) {
 		toSerialize["resolvedWidgets"] = o.ResolvedWidgets
 	}
@@ -581,6 +610,27 @@ func (o GetDashboardResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetDashboardResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"permissions",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetDashboardResponse := _GetDashboardResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -604,6 +654,7 @@ func (o *GetDashboardResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "isLocked")
 		delete(additionalProperties, "lockerAuthorId")
 		delete(additionalProperties, "lockerName")
+		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "resolvedWidgets")
 		delete(additionalProperties, "updatedAt")
 		delete(additionalProperties, "updatedOriginType")

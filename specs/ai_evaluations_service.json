@@ -716,7 +716,7 @@
                     "description": "Type-specific configuration (oneof)."
                   },
                   "isEnabled": {
-                    "description": "Whether the evaluation should start active.",
+                    "description": "Whether the evaluation should start active. Defaults to false when omitted.",
                     "type": "boolean"
                   },
                   "subsystem": {
@@ -1154,6 +1154,7 @@
             "maxItems": 1024,
             "minItems": 1,
             "type": "array",
+            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },
@@ -1177,6 +1178,7 @@
             "maxItems": 1024,
             "minItems": 1,
             "type": "array",
+            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },
@@ -1803,6 +1805,7 @@
             "maxItems": 1024,
             "minItems": 1,
             "type": "array",
+            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },
@@ -1839,6 +1842,7 @@
             "maxItems": 1024,
             "minItems": 1,
             "type": "array",
+            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },
@@ -1867,6 +1871,7 @@
             "maxItems": 1024,
             "minItems": 1,
             "type": "array",
+            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },
@@ -1924,6 +1929,7 @@
             "maxItems": 1024,
             "minItems": 1,
             "type": "array",
+            "uniqueItems": true,
             "x-coralogix-collection": "set"
           }
         },

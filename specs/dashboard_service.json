@@ -147,7 +147,7 @@
     },
     "/dashboards/dashboards/v1": {
       "put": {
-        "description": "Replaces the dashboard definition, the access policy, or both. Sending `dashboard` requires `team-dashboards:Update`. Changing the access policy requires `team-dashboards:UpdateAccessPolicy` or `access-policies:UpdateAll`. Without either, an `accessPolicy` that differs from the stored policy is rejected with `403` and nothing in the request is stored; one equal to the stored policy is accepted and leaves it unchanged. Policies are compared as JSON, so formatting alone is not a change. A request that sends only `accessPolicy` creates no new dashboard version.\n\nRequires the following permissions:\n- `team-dashboards:Update`\n- `team-dashboards:UpdateAccessPolicy`\n- `access-policies:UpdateAll`",
+        "description": "Replaces the dashboard definition, the access policy, or both. Sending `dashboard` requires `team-dashboards:Update`. Changing the access policy requires `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on the same dashboard, or the break-glass `access-policies:UpdateAll`. Without that, an `accessPolicy` that differs from the stored policy is rejected with `403` and nothing in the request is stored; one equal to the stored policy is accepted and leaves it unchanged. Policies are compared as JSON, so formatting alone is not a change. A request that sends only `accessPolicy` creates no new dashboard version.\n\nRequires the following permissions:\n- `team-dashboards:Update`\n- `team-dashboards:UpdateAccessPolicy`\n- `access-policies:UpdateAll`",
         "operationId": "DashboardsService_ReplaceDashboard",
         "requestBody": {
           "content": {
@@ -156,7 +156,7 @@
                 "description": "Replaces the dashboard definition, the access policy, or both. A part that is present replaces the stored value as a whole; a part that is omitted is left unchanged. At least one of `dashboard` and `accessPolicy` is required.",
                 "properties": {
                   "accessPolicy": {
-                    "description": "JSON string with the access policy of this dashboard, which defines granular permissions for users and groups. Changing it requires `team-dashboards:UpdateAccessPolicy` or `access-policies:UpdateAll`. Without either, a value that differs from the stored policy is rejected with `403`, and the stored policy sent back unchanged is accepted.",
+                    "description": "JSON string with the access policy of this dashboard, which defines granular permissions for users and groups. Changing it requires `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on this dashboard, or the break-glass `access-policies:UpdateAll`. Without that, a value that differs from the stored policy is rejected with `403`, and the stored policy sent back unchanged is accepted.",
                     "examples": [
                       "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}"
                     ],
@@ -173,6 +173,17 @@
                       }
                     ],
                     "description": "The complete dashboard definition to store. Requires `team-dashboards:Update`."
+                  },
+                  "dashboardId": {
+                    "description": "The id of the dashboard to change. Required when `dashboard` is omitted; when sent together with `dashboard` it must equal `dashboard.id`.",
+                    "examples": [
+                      "GZLHSeqelCbD3I7HbIDtL"
+                    ],
+                    "maxLength": 21,
+                    "minLength": 21,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
                   },
                   "isLocked": {
                     "description": "Whether the dashboard is locked against edits. Ignored when `dashboard` is omitted.",
@@ -371,7 +382,7 @@
     },
     "/dashboards/dashboards/v1/catalog/list": {
       "get": {
-        "description": "Returns the dashboards the caller may access. A caller with `team-dashboards:Read` receives every dashboard it may view. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives the dashboards whose access policy it may read, each reduced to `id`, `name`, `slugName`, `folder` and `isLocked`.\n\nRequires the following permissions:\n- `team-dashboards:Read`\n- `team-dashboards:ReadAccessPolicy`\n- `access-policies:ReadAll`",
+        "description": "Returns the dashboards the caller may access. A caller with `team-dashboards:Read` receives every dashboard it may view. `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on the same dashboard and grants nothing on its own, so a dashboard for which the caller holds only `team-dashboards:ReadAccessPolicy` is not listed. Only `access-policies:ReadAll` is break-glass: a caller without `team-dashboards:Read` who holds it receives every dashboard, each reduced to `id`, `name`, `slugName`, `folder`, `isLocked` and `permissions`.\n\nRequires the following permissions:\n- `team-dashboards:Read`\n- `team-dashboards:ReadAccessPolicy`\n- `access-policies:ReadAll`",
         "operationId": "DashboardCatalogService_GetDashboardCatalog",
         "responses": {
           "200": {
@@ -438,7 +449,7 @@
     },
     "/dashboards/dashboards/v1/slugs/lookup/{slug}": {
       "get": {
-        "description": "Returns the dashboard associated with the specified slug. A caller with `team-dashboards:Read` receives the dashboard definition and its metadata. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives only the access policy and the lock state.\n\nRequires the following permissions:\n- `team-dashboards:Read`\n- `team-dashboards:ReadAccessPolicy`\n- `access-policies:ReadAll`",
+        "description": "Returns the dashboard associated with the specified slug. A caller with `team-dashboards:Read` on this dashboard receives the dashboard definition and its metadata, and the access policy too if it also holds `team-dashboards:ReadAccessPolicy` on this dashboard. `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on the same dashboard and grants nothing on its own: a caller that holds it without `team-dashboards:Read` and without `access-policies:ReadAll` gets `403`. Only `access-policies:ReadAll` is break-glass: a caller without `team-dashboards:Read` who holds it receives only the access policy, the lock state and the `permissions` object.\n\nRequires the following permissions:\n- `team-dashboards:Read`\n- `team-dashboards:ReadAccessPolicy`\n- `access-policies:ReadAll`",
         "operationId": "DashboardsService_GetDashboardBySlug",
         "parameters": [
           {
@@ -531,7 +542,7 @@
     },
     "/dashboards/dashboards/v1/{dashboard_id}": {
       "get": {
-        "description": "Returns the details of the specified dashboard. A caller with `team-dashboards:Read` receives the dashboard definition and its metadata. A caller without it who holds `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives only the access policy and the lock state.\n\nRequires the following permissions:\n- `team-dashboards:Read`\n- `team-dashboards:ReadAccessPolicy`\n- `access-policies:ReadAll`",
+        "description": "Returns the details of the specified dashboard. A caller with `team-dashboards:Read` on this dashboard receives the dashboard definition and its metadata, and the access policy too if it also holds `team-dashboards:ReadAccessPolicy` on this dashboard. `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on the same dashboard and grants nothing on its own: a caller that holds it without `team-dashboards:Read` and without `access-policies:ReadAll` gets `403`. Only `access-policies:ReadAll` is break-glass: a caller without `team-dashboards:Read` who holds it receives only the access policy, the lock state and the `permissions` object.\n\nRequires the following permissions:\n- `team-dashboards:Read`\n- `team-dashboards:ReadAccessPolicy`\n- `access-policies:ReadAll`",
         "operationId": "DashboardsService_GetDashboard",
         "responses": {
           "200": {
@@ -2774,6 +2785,9 @@
       },
       "DashboardCatalogItem": {
         "title": "Dashboard catalog item data structure",
+        "required": [
+          "permissions"
+        ],
         "type": "object",
         "properties": {
           "authorId": {
@@ -2845,6 +2859,14 @@
             "type": "string",
             "x-coralogix-presence": true
           },
+          "permissions": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DashboardPermissions"
+              }
+            ],
+            "description": "What the caller may do with this dashboard."
+          },
           "slugName": {
             "description": "The slug name.",
             "maxLength": 255,
@@ -2895,6 +2917,35 @@
           }
         },
         "description": "Dashboard folder."
+      },
+      "DashboardPermissions": {
+        "title": "Dashboard permissions",
+        "required": [
+          "canRead",
+          "canUpdate",
+          "canReadAccessPolicy",
+          "canUpdateAccessPolicy"
+        ],
+        "type": "object",
+        "properties": {
+          "canRead": {
+            "type": "boolean",
+            "description": "Whether the caller may view the dashboard definition."
+          },
+          "canReadAccessPolicy": {
+            "type": "boolean",
+            "description": "Whether the caller may read the access policy of this dashboard: it holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on this dashboard, or the break-glass `access-policies:ReadAll`."
+          },
+          "canUpdate": {
+            "type": "boolean",
+            "description": "Whether the caller may replace or delete the dashboard definition."
+          },
+          "canUpdateAccessPolicy": {
+            "type": "boolean",
+            "description": "Whether the caller may replace the access policy of this dashboard: it holds `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on this dashboard, or the break-glass `access-policies:UpdateAll`."
+          }
+        },
+        "description": "What the caller may do with this dashboard. All four flags are always returned."
       },
       "DataTable": {
         "type": "object",
@@ -4953,10 +5004,13 @@
       },
       "GetDashboardBySlugResponse": {
         "title": "Get dashboard by URL slug response data structure",
+        "required": [
+          "permissions"
+        ],
         "type": "object",
         "properties": {
           "accessPolicy": {
-            "description": "JSON string with the access policy of this dashboard. Present only when the caller holds `team-dashboards:ReadAccessPolicy` for this dashboard or `access-policies:ReadAll`.",
+            "description": "JSON string with the access policy of this dashboard. Present only when the caller holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on this dashboard, or the break-glass `access-policies:ReadAll`.",
             "examples": [
               "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}"
             ],
@@ -5021,6 +5075,14 @@
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
+          },
+          "permissions": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DashboardPermissions"
+              }
+            ],
+            "description": "What the caller may do with this dashboard."
           },
           "updatedAt": {
             "description": "Last-updated timestamp.",
@@ -5074,10 +5136,13 @@
       },
       "GetDashboardResponse": {
         "title": "Get dashboard response data structure",
+        "required": [
+          "permissions"
+        ],
         "type": "object",
         "properties": {
           "accessPolicy": {
-            "description": "JSON string with the access policy of this dashboard. Present only when the caller holds `team-dashboards:ReadAccessPolicy` for this dashboard or `access-policies:ReadAll`.",
+            "description": "JSON string with the access policy of this dashboard. Present only when the caller holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on this dashboard, or the break-glass `access-policies:ReadAll`.",
             "examples": [
               "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-dashboards:Read\":\"grant\",\"team-dashboards:Update\":\"deny\",\"team-dashboards:ReadAccessPolicy\":\"grant\",\"team-dashboards:UpdateAccessPolicy\":\"deny\"}},\"rules\":[]}"
             ],
@@ -5142,6 +5207,14 @@
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
+          },
+          "permissions": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DashboardPermissions"
+              }
+            ],
+            "description": "What the caller may do with this dashboard."
           },
           "resolvedWidgets": {
             "type": "object",

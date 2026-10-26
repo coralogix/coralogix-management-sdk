@@ -27,7 +27,7 @@ type AiEvaluationsServiceCreateAiEvaluationRequest struct {
 	Application string `json:"application" validate:"regexp=^[\\s\\S]+$"`
 	// Type-specific configuration (oneof).
 	Config EvaluationConfig `json:"config"`
-	// Whether the evaluation should start active.
+	// Whether the evaluation should start active. Defaults to false when omitted.
 	IsEnabled *bool `json:"isEnabled,omitempty"`
 	// Subsystem within the application.
 	Subsystem string `json:"subsystem" validate:"regexp=^[\\s\\S]+$"`

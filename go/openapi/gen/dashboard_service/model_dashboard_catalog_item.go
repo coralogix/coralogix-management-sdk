@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -42,6 +43,8 @@ type DashboardCatalogItem struct {
 	LockerAuthorId *string `json:"lockerAuthorId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// What the caller may do with this dashboard.
+	Permissions DashboardPermissions `json:"permissions"`
 	// The slug name.
 	SlugName *string `json:"slugName,omitempty" validate:"regexp=^[a-z0-9]+(?:[-_]+[a-z0-9]+)*$"`
 	// Timestamp of the last update.
@@ -56,8 +59,9 @@ type _DashboardCatalogItem DashboardCatalogItem
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewDashboardCatalogItem() *DashboardCatalogItem {
+func NewDashboardCatalogItem(permissions DashboardPermissions) *DashboardCatalogItem {
 	this := DashboardCatalogItem{}
+	this.Permissions = permissions
 	return &this
 }
 
@@ -389,6 +393,30 @@ func (o *DashboardCatalogItem) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPermissions returns the Permissions field value
+func (o *DashboardCatalogItem) GetPermissions() DashboardPermissions {
+	if o == nil {
+		var ret DashboardPermissions
+		return ret
+	}
+
+	return o.Permissions
+}
+
+// GetPermissionsOk returns a tuple with the Permissions field value
+// and a boolean to check if the value has been set.
+func (o *DashboardCatalogItem) GetPermissionsOk() (*DashboardPermissions, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Permissions, true
+}
+
+// SetPermissions sets field value
+func (o *DashboardCatalogItem) SetPermissions(v DashboardPermissions) {
+	o.Permissions = v
+}
+
 // GetSlugName returns the SlugName field value if set, zero value otherwise.
 func (o *DashboardCatalogItem) GetSlugName() string {
 	if o == nil || IsNil(o.SlugName) {
@@ -493,6 +521,7 @@ func (o DashboardCatalogItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+	toSerialize["permissions"] = o.Permissions
 	if !IsNil(o.SlugName) {
 		toSerialize["slugName"] = o.SlugName
 	}
@@ -508,6 +537,27 @@ func (o DashboardCatalogItem) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *DashboardCatalogItem) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"permissions",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varDashboardCatalogItem := _DashboardCatalogItem{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -532,6 +582,7 @@ func (o *DashboardCatalogItem) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "isPinned")
 		delete(additionalProperties, "lockerAuthorId")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "permissions")
 		delete(additionalProperties, "slugName")
 		delete(additionalProperties, "updateTime")
 		o.AdditionalProperties = additionalProperties
