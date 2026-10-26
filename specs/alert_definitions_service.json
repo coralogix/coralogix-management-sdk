@@ -4352,7 +4352,7 @@
                 "$ref": "#/components/schemas/NoDataPolicy"
               }
             ],
-            "description": "User configuration to decide how to treat and what state to give to an alert with no data."
+            "description": "User configuration to decide how to treat and what state to give to an alert with no data. Applies only when the alert's alertDefProperties.groupByKeys contains at least one key: an alert without group-by keys evaluates a time window with no matching logs as a count of 0 against its threshold, whatever this policy says."
           },
           "notificationPayloadFilter": {
             "minItems": 0,

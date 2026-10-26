@@ -138,6 +138,7 @@ Class | Method | HTTP request | Description
  - [DashboardAction](docs/DashboardAction.md)
  - [DashboardCatalogItem](docs/DashboardCatalogItem.md)
  - [DashboardFolder](docs/DashboardFolder.md)
+ - [DashboardPermissions](docs/DashboardPermissions.md)
  - [DataTable](docs/DataTable.md)
  - [DataTableColumn](docs/DataTableColumn.md)
  - [DataTableDataprimeQuery](docs/DataTableDataprimeQuery.md)

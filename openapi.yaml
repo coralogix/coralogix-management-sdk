@@ -3745,7 +3745,9 @@ paths:
                     - $ref: '#/components/schemas/EvaluationConfig'
                   description: Type-specific configuration (oneof).
                 isEnabled:
-                  description: Whether the evaluation should start active.
+                  description: >-
+                    Whether the evaluation should start active. Defaults to
+                    false when omitted.
                   type: boolean
                 subsystem:
                   description: Subsystem within the application.
@@ -8233,8 +8235,9 @@ paths:
       description: >-
         Replaces the dashboard definition, the access policy, or both. Sending
         `dashboard` requires `team-dashboards:Update`. Changing the access
-        policy requires `team-dashboards:UpdateAccessPolicy` or
-        `access-policies:UpdateAll`. Without either, an `accessPolicy` that
+        policy requires `team-dashboards:UpdateAccessPolicy` together with
+        `team-dashboards:Update` on the same dashboard, or the break-glass
+        `access-policies:UpdateAll`. Without that, an `accessPolicy` that
         differs from the stored policy is rejected with `403` and nothing in the
         request is stored; one equal to the stored policy is accepted and leaves
         it unchanged. Policies are compared as JSON, so formatting alone is not
@@ -8264,10 +8267,12 @@ paths:
                   description: >-
                     JSON string with the access policy of this dashboard, which
                     defines granular permissions for users and groups. Changing
-                    it requires `team-dashboards:UpdateAccessPolicy` or
-                    `access-policies:UpdateAll`. Without either, a value that
-                    differs from the stored policy is rejected with `403`, and
-                    the stored policy sent back unchanged is accepted.
+                    it requires `team-dashboards:UpdateAccessPolicy` together
+                    with `team-dashboards:Update` on this dashboard, or the
+                    break-glass `access-policies:UpdateAll`. Without that, a
+                    value that differs from the stored policy is rejected with
+                    `403`, and the stored policy sent back unchanged is
+                    accepted.
                   examples:
                     - >-
                       {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
@@ -8282,6 +8287,18 @@ paths:
                   description: >-
                     The complete dashboard definition to store. Requires
                     `team-dashboards:Update`.
+                dashboardId:
+                  description: >-
+                    The id of the dashboard to change. Required when `dashboard`
+                    is omitted; when sent together with `dashboard` it must
+                    equal `dashboard.id`.
+                  examples:
+                    - GZLHSeqelCbD3I7HbIDtL
+                  maxLength: 21
+                  minLength: 21
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
                 isLocked:
                   description: >-
                     Whether the dashboard is locked against edits. Ignored when
@@ -8425,11 +8442,14 @@ paths:
     get:
       description: >-
         Returns the dashboards the caller may access. A caller with
-        `team-dashboards:Read` receives every dashboard it may view. A caller
-        without it who holds `team-dashboards:ReadAccessPolicy` or
-        `access-policies:ReadAll` receives the dashboards whose access policy it
-        may read, each reduced to `id`, `name`, `slugName`, `folder` and
-        `isLocked`.
+        `team-dashboards:Read` receives every dashboard it may view.
+        `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on
+        the same dashboard and grants nothing on its own, so a dashboard for
+        which the caller holds only `team-dashboards:ReadAccessPolicy` is not
+        listed. Only `access-policies:ReadAll` is break-glass: a caller without
+        `team-dashboards:Read` who holds it receives every dashboard, each
+        reduced to `id`, `name`, `slugName`, `folder`, `isLocked` and
+        `permissions`.
 
 
         Requires the following permissions:
@@ -8482,10 +8502,15 @@ paths:
     get:
       description: >-
         Returns the dashboard associated with the specified slug. A caller with
-        `team-dashboards:Read` receives the dashboard definition and its
-        metadata. A caller without it who holds
-        `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives
-        only the access policy and the lock state.
+        `team-dashboards:Read` on this dashboard receives the dashboard
+        definition and its metadata, and the access policy too if it also holds
+        `team-dashboards:ReadAccessPolicy` on this dashboard.
+        `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on
+        the same dashboard and grants nothing on its own: a caller that holds it
+        without `team-dashboards:Read` and without `access-policies:ReadAll`
+        gets `403`. Only `access-policies:ReadAll` is break-glass: a caller
+        without `team-dashboards:Read` who holds it receives only the access
+        policy, the lock state and the `permissions` object.
 
 
         Requires the following permissions:
@@ -8556,10 +8581,15 @@ paths:
     get:
       description: >-
         Returns the details of the specified dashboard. A caller with
-        `team-dashboards:Read` receives the dashboard definition and its
-        metadata. A caller without it who holds
-        `team-dashboards:ReadAccessPolicy` or `access-policies:ReadAll` receives
-        only the access policy and the lock state.
+        `team-dashboards:Read` on this dashboard receives the dashboard
+        definition and its metadata, and the access policy too if it also holds
+        `team-dashboards:ReadAccessPolicy` on this dashboard.
+        `team-dashboards:ReadAccessPolicy` requires `team-dashboards:Read` on
+        the same dashboard and grants nothing on its own: a caller that holds it
+        without `team-dashboards:Read` and without `access-policies:ReadAll`
+        gets `403`. Only `access-policies:ReadAll` is break-glass: a caller
+        without `team-dashboards:Read` who holds it receives only the access
+        policy, the lock state and the `permissions` object.
 
 
         Requires the following permissions:
@@ -11948,6 +11978,123 @@ paths:
       tags:
         - Events2Metrics Service
   /fleet-management/configuration-groups/v1:
+    get:
+      description: >-
+        Lists fleet-manager configuration groups, newest first. Archived groups
+        are excluded unless include_archived is true.
+      operationId: ConfigurationGroupService_ListConfigurationGroups
+      parameters:
+        - description: >-
+            When true, include archived groups, each with its latest
+            configuration family, including an archived family.
+          in: query
+          name: include_archived
+          required: false
+          schema:
+            description: >-
+              When true, include archived groups, each with its latest
+              configuration family, including an archived family.
+            type: boolean
+            x-coralogix-presence: true
+        - description: >-
+            Maximum number of groups to return. Defaults to 100 and cannot
+            exceed 256.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            description: >-
+              Maximum number of groups to return. Defaults to 100 and cannot
+              exceed 256.
+            format: int32
+            maximum: 256
+            minimum: 1
+            type: integer
+            x-coralogix-presence: true
+        - description: >-
+            Opaque token returned by a previous list response. Send it with the
+            same include_archived value as that request.
+          in: query
+          name: page_token
+          required: false
+          schema:
+            description: >-
+              Opaque token returned by a previous list response. Send it with
+              the same include_archived value as that request.
+            maxLength: 64
+            minLength: 1
+            pattern: ^[A-Za-z0-9_-]+$
+            type: string
+            x-coralogix-presence: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                groups:
+                  - archived: false
+                    description: Collector configuration group for production.
+                    family:
+                      active: true
+                      id: 01975ed4-9c1b-7c2a-9e5f-526614174001
+                      lastActivatedAt: '2026-10-08T09:41:01.000Z'
+                      raw:
+                        remoteConfigurations:
+                          - agentSelector:
+                              attributes:
+                                service.name: checkout
+                            createdAt: '2026-10-08T09:41:01.000Z'
+                            hash: >-
+                              3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c
+                            id: 01975ed4-9c1c-7d3b-af60-626614174002
+                            name: traces
+                            rawConfiguration: |-
+                              exporters:
+                                debug: {}
+                              receivers:
+                                otlp:
+                                  protocols:
+                                    grpc: {}
+                              service:
+                                pipelines:
+                                  traces:
+                                    exporters:
+                                    - debug
+                                    receivers:
+                                    - otlp
+                            updatedAt: '2026-10-08T09:41:01.000Z'
+                      version: '1'
+                    id: 01975ed4-9c1a-7b3f-8d4e-426614174000
+                    name: Production collectors
+                    priorityOrder: 100
+                    tags:
+                      - production
+                nextPageToken: AZdtCKSZq3sAAAAAAAAAAQ
+              schema:
+                $ref: '#/components/schemas/ListConfigurationGroupsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: List configuration groups
+      tags:
+        - Fleet Manager Configuration Groups
+      x-stability: preview
     post:
       description: Creates a fleet-manager configuration group.
       operationId: ConfigurationGroupService_CreateConfigurationGroup
@@ -12083,15 +12230,17 @@ paths:
       operationId: ConfigurationGroupService_GetConfigurationGroup
       parameters:
         - description: >-
-            When true, return an archived group, without a family. Otherwise an
-            archived group returns 404.
+            When true, return an archived group with its latest configuration
+            family, including an archived family. Otherwise an archived group
+            returns 404.
           in: query
           name: include_archived
           required: false
           schema:
             description: >-
-              When true, return an archived group, without a family. Otherwise
-              an archived group returns 404.
+              When true, return an archived group with its latest configuration
+              family, including an archived family. Otherwise an archived group
+              returns 404.
             type: boolean
             x-coralogix-presence: true
       responses:
@@ -18514,7 +18663,9 @@ paths:
                     client is ignored.
                   readOnly: true
                 sloTimeFrame:
-                  $ref: '#/components/schemas/SloTimeFrame'
+                  allOf:
+                    - $ref: '#/components/schemas/SloTimeFrame'
+                  description: Rolling evaluation window (fixed-duration lookback).
                 sloType:
                   allOf:
                     - $ref: '#/components/schemas/SloType'
@@ -18720,7 +18871,9 @@ paths:
                     client is ignored.
                   readOnly: true
                 sloTimeFrame:
-                  $ref: '#/components/schemas/SloTimeFrame'
+                  allOf:
+                    - $ref: '#/components/schemas/SloTimeFrame'
+                  description: Rolling evaluation window (fixed-duration lookback).
                 sloType:
                   allOf:
                     - $ref: '#/components/schemas/SloType'
@@ -19269,7 +19422,9 @@ paths:
                     client is ignored.
                   readOnly: true
                 sloTimeFrame:
-                  $ref: '#/components/schemas/SloTimeFrame'
+                  allOf:
+                    - $ref: '#/components/schemas/SloTimeFrame'
+                  description: Rolling evaluation window (fixed-duration lookback).
                 sloType:
                   allOf:
                     - $ref: '#/components/schemas/SloType'
@@ -21544,6 +21699,7 @@ components:
           maxItems: 1024
           minItems: 1
           type: array
+          uniqueItems: true
           x-coralogix-collection: set
       description: Configuration for the AllowedTopics evaluation.
     Always:
@@ -25146,6 +25302,7 @@ components:
           maxItems: 1024
           minItems: 1
           type: array
+          uniqueItems: true
           x-coralogix-collection: set
       description: Configuration for the Competition evaluation.
     ConfigOverrides:
@@ -27387,6 +27544,8 @@ components:
           https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
     DashboardCatalogItem:
       title: Dashboard catalog item data structure
+      required:
+        - permissions
       type: object
       properties:
         authorId:
@@ -27447,6 +27606,10 @@ components:
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
+        permissions:
+          allOf:
+            - $ref: '#/components/schemas/DashboardPermissions'
+          description: What the caller may do with this dashboard.
         slugName:
           description: The slug name.
           maxLength: 255
@@ -27493,6 +27656,38 @@ components:
           type: string
           x-coralogix-presence: true
       description: Dashboard folder.
+    DashboardPermissions:
+      title: Dashboard permissions
+      required:
+        - canRead
+        - canUpdate
+        - canReadAccessPolicy
+        - canUpdateAccessPolicy
+      type: object
+      properties:
+        canRead:
+          type: boolean
+          description: Whether the caller may view the dashboard definition.
+        canReadAccessPolicy:
+          type: boolean
+          description: >-
+            Whether the caller may read the access policy of this dashboard: it
+            holds `team-dashboards:ReadAccessPolicy` together with
+            `team-dashboards:Read` on this dashboard, or the break-glass
+            `access-policies:ReadAll`.
+        canUpdate:
+          type: boolean
+          description: Whether the caller may replace or delete the dashboard definition.
+        canUpdateAccessPolicy:
+          type: boolean
+          description: >-
+            Whether the caller may replace the access policy of this dashboard:
+            it holds `team-dashboards:UpdateAccessPolicy` together with
+            `team-dashboards:Update` on this dashboard, or the break-glass
+            `access-policies:UpdateAll`.
+      description: >-
+        What the caller may do with this dashboard. All four flags are always
+        returned.
     DataTable:
       type: object
       properties:
@@ -32444,13 +32639,16 @@ components:
       description: Response containing the details of a custom role.
     GetDashboardBySlugResponse:
       title: Get dashboard by URL slug response data structure
+      required:
+        - permissions
       type: object
       properties:
         accessPolicy:
           description: >-
             JSON string with the access policy of this dashboard. Present only
-            when the caller holds `team-dashboards:ReadAccessPolicy` for this
-            dashboard or `access-policies:ReadAll`.
+            when the caller holds `team-dashboards:ReadAccessPolicy` together
+            with `team-dashboards:Read` on this dashboard, or the break-glass
+            `access-policies:ReadAll`.
           examples:
             - >-
               {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
@@ -32506,6 +32704,10 @@ components:
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
+        permissions:
+          allOf:
+            - $ref: '#/components/schemas/DashboardPermissions'
+          description: What the caller may do with this dashboard.
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
@@ -32561,13 +32763,16 @@ components:
           https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
     GetDashboardResponse:
       title: Get dashboard response data structure
+      required:
+        - permissions
       type: object
       properties:
         accessPolicy:
           description: >-
             JSON string with the access policy of this dashboard. Present only
-            when the caller holds `team-dashboards:ReadAccessPolicy` for this
-            dashboard or `access-policies:ReadAll`.
+            when the caller holds `team-dashboards:ReadAccessPolicy` together
+            with `team-dashboards:Read` on this dashboard, or the break-glass
+            `access-policies:ReadAll`.
           examples:
             - >-
               {"version":"2025-01-01","default":{"permissions":{"team-dashboards:Read":"grant","team-dashboards:Update":"deny","team-dashboards:ReadAccessPolicy":"grant","team-dashboards:UpdateAccessPolicy":"deny"}},"rules":[]}
@@ -32623,6 +32828,10 @@ components:
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
+        permissions:
+          allOf:
+            - $ref: '#/components/schemas/DashboardPermissions'
+          description: What the caller may do with this dashboard.
         resolvedWidgets:
           type: object
           additionalProperties:
@@ -37924,6 +38133,26 @@ components:
             (Policy-Based Access Control) restrictions. If true, the user may
             not have access to all cases that match the filters.
       description: Response containing a list of cases and pagination information
+    ListConfigurationGroupsResponse:
+      required:
+        - groups
+      type: object
+      properties:
+        groups:
+          maxItems: 256
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigurationGroup'
+          description: Configuration groups, newest first.
+        nextPageToken:
+          description: Token for the next page. Omitted when there are no further results.
+          maxLength: 64
+          minLength: 1
+          pattern: ^[A-Za-z0-9_-]+$
+          type: string
+          x-coralogix-presence: true
+      description: Response containing fleet-manager configuration groups.
     ListConnectorSummariesResponse:
       title: List Connector Summaries Response
       type: object
@@ -39242,7 +39471,10 @@ components:
             - $ref: '#/components/schemas/NoDataPolicy'
           description: >-
             User configuration to decide how to treat and what state to give to
-            an alert with no data.
+            an alert with no data. Applies only when the alert's
+            alertDefProperties.groupByKeys contains at least one key: an alert
+            without group-by keys evaluates a time window with no matching logs
+            as a count of 0 against its threshold, whatever this policy says.
         notificationPayloadFilter:
           minItems: 0
           type: array
@@ -42431,6 +42663,7 @@ components:
           maxItems: 1024
           minItems: 1
           type: array
+          uniqueItems: true
           x-coralogix-collection: set
       description: Configuration for the PII evaluation.
     PinDashboardResponse:
@@ -45389,6 +45622,7 @@ components:
           maxItems: 1024
           minItems: 1
           type: array
+          uniqueItems: true
           x-coralogix-collection: set
       description: Configuration for the RestrictedTopics evaluation.
     RetentionPolicyRequest:
@@ -46880,7 +47114,9 @@ components:
             is ignored.
           readOnly: true
         sloTimeFrame:
-          $ref: '#/components/schemas/SloTimeFrame'
+          allOf:
+            - $ref: '#/components/schemas/SloTimeFrame'
+          description: Rolling evaluation window (fixed-duration lookback).
         sloType:
           allOf:
             - $ref: '#/components/schemas/SloType'
@@ -47590,6 +47826,7 @@ components:
           maxItems: 1024
           minItems: 1
           type: array
+          uniqueItems: true
           x-coralogix-collection: set
       description: Configuration for the SqlAllowedTables evaluation.
     SqlHallucinationConfig:
@@ -47635,6 +47872,7 @@ components:
           maxItems: 1024
           minItems: 1
           type: array
+          uniqueItems: true
           x-coralogix-collection: set
       description: Configuration for the SqlRestrictedTables evaluation.
     StartTimeMetric:

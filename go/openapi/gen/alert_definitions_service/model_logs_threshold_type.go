@@ -26,7 +26,7 @@ type LogsThresholdType struct {
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
 	// The filter to match log entries for threshold alerts
 	LogsFilter *V3LogsFilter `json:"logsFilter,omitempty"`
-	// User configuration to decide how to treat and what state to give to an alert with no data.
+	// User configuration to decide how to treat and what state to give to an alert with no data. Applies only when the alert's alertDefProperties.groupByKeys contains at least one key: an alert without group-by keys evaluates a time window with no matching logs as a count of 0 against its threshold, whatever this policy says.
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The filter to specify which fields to include in the notification payload
 	NotificationPayloadFilter []string `json:"notificationPayloadFilter,omitempty"`
