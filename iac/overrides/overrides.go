@@ -46,6 +46,10 @@ type API struct {
 	// of the path parameter, for example uniqueIdentifier for /rules/{rule_id}. "" means the
 	// property named like the path parameter.
 	IDProperty string `yaml:"idProperty"`
+	// CreateResponseOnlyIDProperty is the property of the Create response that holds only the id of
+	// the new resource, when the response does not return the resource. A tool then reads the
+	// resource with Get.
+	CreateResponseOnlyIDProperty string `yaml:"createResponseOnlyIDProperty"`
 	// CustomMethods: Get, Update, and Delete are not the Create path with an id.
 	// Get and Delete each have the same {id} path parameter on their own paths.
 	// Update has no path parameter, and the id stays in the body. New resources
@@ -218,14 +222,15 @@ func CheckUnwrap(unwrap []string) error {
 // The tool adds the exceptions that its own keys cover.
 func (e Exceptions) Policy() model.Policy {
 	p := model.Policy{
-		Existing:         true,
-		RequestWrapper:   e.API.RequestWrapper,
-		UpdateIDInBody:   e.API.UpdateIDInBody,
-		ClientSetID:      e.API.ClientSetID,
-		ServerSetID:      e.API.ServerSetID,
-		IDProperty:       e.API.IDProperty,
-		CustomMethods:    e.API.CustomMethods,
-		UpdateMaskInBody: e.API.UpdateMaskInBody,
+		Existing:                     true,
+		RequestWrapper:               e.API.RequestWrapper,
+		UpdateIDInBody:               e.API.UpdateIDInBody,
+		ClientSetID:                  e.API.ClientSetID,
+		ServerSetID:                  e.API.ServerSetID,
+		IDProperty:                   e.API.IDProperty,
+		CreateResponseOnlyIDProperty: e.API.CreateResponseOnlyIDProperty,
+		CustomMethods:                e.API.CustomMethods,
+		UpdateMaskInBody:             e.API.UpdateMaskInBody,
 	}
 	if e.API.Operations != nil {
 		p.Operations = model.OperationIDs{
