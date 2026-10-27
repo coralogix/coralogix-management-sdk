@@ -158,3 +158,59 @@ func TestEnumConstName(t *testing.T) {
 		}
 	}
 }
+
+// The List names are in the list only when the resource has a List. A summary item adds its
+// type and the fields that a tool reads.
+func TestNamesListsTheList(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "lists.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	names := func(resource string) []string {
+		r, err := model.Build(doc, resource)
+		if err != nil {
+			t.Fatal(err)
+		}
+		tag, err := ResourceTag(doc, r)
+		if err != nil {
+			t.Fatal(err)
+		}
+		refs, err := Names(r, tag, "example.com/sdk", nil)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var out []string
+		for _, ref := range refs {
+			if strings.HasPrefix(ref.Path, "list") {
+				out = append(out, string(ref.Kind)+" "+ref.SDKName()+" "+ref.Want)
+			}
+		}
+		return out
+	}
+	want := []string{
+		"method LabelsServiceAPIService.LabelsServiceListLabels func(ctx context.Context) ApiLabelsServiceListLabelsRequest",
+		"type ApiLabelsServiceListLabelsRequest ",
+		"type ListLabelsResponse ",
+		"method ApiLabelsServiceListLabelsRequest.Execute func() (*ListLabelsResponse, *http.Response, error)",
+		"field ListLabelsResponse.Labels []LabelSummary",
+		"type LabelSummary ",
+		"field LabelSummary.Id *string",
+	}
+	if got := names("Label"); !slices.Equal(got, want) {
+		t.Fatalf("Label list names =\n%s\nwant\n%s", strings.Join(got, "\n"), strings.Join(want, "\n"))
+	}
+	// A full item is the resource, whose names the fields cover.
+	if got := names("Connector"); len(got) != 5 || got[4] != "field ListConnectorsResponse.Connectors []Connector" {
+		t.Fatalf("Connector list names = %v", got)
+	}
+	if got := names("Pair"); len(got) != 0 {
+		t.Fatalf("Pair list names = %v, want none: the List is not described", got)
+	}
+	if got := thingNames(t, nil); slices.ContainsFunc(got, func(ref Ref) bool { return strings.HasPrefix(ref.Path, "list") }) {
+		t.Fatal("a resource without a List lists List names")
+	}
+}

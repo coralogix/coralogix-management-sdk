@@ -1,0 +1,484 @@
+# Resources with a List, in the shapes of the API. Each resource has the lifecycle of a new
+# resource with a full-replace Update. Only the List differs.
+# - Connector: a GET on the Create path with filter parameters only. The items are the resource.
+# - GlobalRouter: as Connector, with items in the form allOf: [$ref].
+# - Preset: Create is a custom method, so the List is not on the Create path. Its items are a
+#   summary component.
+# - ViewFolder: a GET on the Create path with no parameters.
+# - Evaluation: a List that pages with an offset and a size, next to a count.
+# - Pair: a List response with two arrays of objects.
+# - Label: a List of summaries that have no name.
+openapi: 3.1.0
+info: {title: lists, version: 1.0.0}
+paths:
+  /connectors:
+    post:
+      tags: [Connectors Service]
+      operationId: ConnectorsService_CreateConnector
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: CreateConnectorRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Connector'}}}}
+    get:
+      tags: [Connectors Service]
+      operationId: ConnectorsService_ListConnectors
+      parameters:
+        - in: query
+          name: connector_type
+          required: false
+          schema:
+            allOf: [{$ref: '#/components/schemas/ConnectorType'}]
+            x-coralogix-presence: true
+        - in: query
+          name: supported_by_entity_type
+          required: false
+          schema: {type: string}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ListConnectorsResponse'}}}}
+  /connectors/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      tags: [Connectors Service]
+      operationId: ConnectorsService_GetConnector
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Connector'}}}}
+    put:
+      tags: [Connectors Service]
+      operationId: ConnectorsService_ReplaceConnector
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ReplaceConnectorRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Connector'}}}}
+    delete:
+      tags: [Connectors Service]
+      operationId: ConnectorsService_DeleteConnector
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {type: object}}}}
+  /routers:
+    post:
+      tags: [Global Routers Service]
+      operationId: GlobalRoutersService_CreateGlobalRouter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: CreateGlobalRouterRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/GlobalRouter'}}}}
+    get:
+      tags: [Global Routers Service]
+      operationId: GlobalRoutersService_ListGlobalRouters
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ListGlobalRoutersResponse'}}}}
+  /routers/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      tags: [Global Routers Service]
+      operationId: GlobalRoutersService_GetGlobalRouter
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/GlobalRouter'}}}}
+    put:
+      tags: [Global Routers Service]
+      operationId: GlobalRoutersService_ReplaceGlobalRouter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ReplaceGlobalRouterRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/GlobalRouter'}}}}
+    delete:
+      tags: [Global Routers Service]
+      operationId: GlobalRoutersService_DeleteGlobalRouter
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {type: object}}}}
+  /presets:createCustom:
+    post:
+      tags: [Presets Service]
+      operationId: PresetsService_CreatePreset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: CreatePresetRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Preset'}}}}
+  /presets:summariesList:
+    get:
+      tags: [Presets Service]
+      operationId: PresetsService_ListPresetSummaries
+      parameters:
+        - {in: query, name: entity_type, required: false, schema: {type: string}}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ListPresetSummariesResponse'}}}}
+  /presets/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      tags: [Presets Service]
+      operationId: PresetsService_GetPreset
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Preset'}}}}
+    put:
+      tags: [Presets Service]
+      operationId: PresetsService_ReplacePreset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ReplacePresetRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Preset'}}}}
+    delete:
+      tags: [Presets Service]
+      operationId: PresetsService_DeletePreset
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {type: object}}}}
+  /folders:
+    post:
+      tags: [Folders Service]
+      operationId: FoldersService_CreateViewFolder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: CreateViewFolderRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ViewFolder'}}}}
+    get:
+      tags: [Folders Service]
+      operationId: FoldersService_ListViewFolders
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ListViewFoldersResponse'}}}}
+  /folders/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      tags: [Folders Service]
+      operationId: FoldersService_GetViewFolder
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ViewFolder'}}}}
+    put:
+      tags: [Folders Service]
+      operationId: FoldersService_ReplaceViewFolder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ReplaceViewFolderRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ViewFolder'}}}}
+    delete:
+      tags: [Folders Service]
+      operationId: FoldersService_DeleteViewFolder
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {type: object}}}}
+  /evaluations:
+    post:
+      tags: [Evaluations Service]
+      operationId: EvaluationsService_CreateEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: CreateEvaluationRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Evaluation'}}}}
+    get:
+      tags: [Evaluations Service]
+      operationId: EvaluationsService_ListEvaluations
+      parameters:
+        - {in: query, name: pageOffset, required: false, schema: {type: integer, format: int32}}
+        - {in: query, name: pageSize, required: false, schema: {type: integer, format: int32}}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ListEvaluationsResponse'}}}}
+  /evaluations/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      tags: [Evaluations Service]
+      operationId: EvaluationsService_GetEvaluation
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Evaluation'}}}}
+    put:
+      tags: [Evaluations Service]
+      operationId: EvaluationsService_ReplaceEvaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ReplaceEvaluationRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Evaluation'}}}}
+    delete:
+      tags: [Evaluations Service]
+      operationId: EvaluationsService_DeleteEvaluation
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {type: object}}}}
+  /pairs:
+    post:
+      tags: [Pairs Service]
+      operationId: PairsService_CreatePair
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: CreatePairRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Pair'}}}}
+    get:
+      tags: [Pairs Service]
+      operationId: PairsService_ListPairs
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ListPairsResponse'}}}}
+  /pairs/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      tags: [Pairs Service]
+      operationId: PairsService_GetPair
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Pair'}}}}
+    put:
+      tags: [Pairs Service]
+      operationId: PairsService_ReplacePair
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ReplacePairRequest
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Pair'}}}}
+    delete:
+      tags: [Pairs Service]
+      operationId: PairsService_DeletePair
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {type: object}}}}
+  /labels:
+    post:
+      tags: [Labels Service]
+      operationId: LabelsService_CreateLabel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: CreateLabelRequest
+              type: object
+              required: [key]
+              properties:
+                key: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Label'}}}}
+    get:
+      tags: [Labels Service]
+      operationId: LabelsService_ListLabels
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/ListLabelsResponse'}}}}
+  /labels/{id}:
+    parameters:
+      - {name: id, in: path, required: true, schema: {type: string}}
+    get:
+      tags: [Labels Service]
+      operationId: LabelsService_GetLabel
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Label'}}}}
+    put:
+      tags: [Labels Service]
+      operationId: LabelsService_ReplaceLabel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: ReplaceLabelRequest
+              type: object
+              required: [key]
+              properties:
+                key: {type: string, minLength: 1, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Label'}}}}
+    delete:
+      tags: [Labels Service]
+      operationId: LabelsService_DeleteLabel
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {type: object}}}}
+components:
+  schemas:
+    ConnectorType:
+      type: string
+      enum: [CONNECTOR_TYPE_UNSPECIFIED, CONNECTOR_TYPE_SLACK]
+    Connector:
+      type: object
+      required: [id, name]
+      properties:
+        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        name: {type: string, minLength: 1, x-coralogix-presence: true}
+    ListConnectorsResponse:
+      type: object
+      properties:
+        connectors:
+          type: array
+          maxItems: 800
+          minItems: 0
+          items: {$ref: '#/components/schemas/Connector'}
+    GlobalRouter:
+      type: object
+      required: [id, name]
+      properties:
+        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        name: {type: string, minLength: 1, x-coralogix-presence: true}
+    ListGlobalRoutersResponse:
+      type: object
+      properties:
+        routers:
+          type: array
+          items:
+            allOf: [{$ref: '#/components/schemas/GlobalRouter'}]
+            description: A router.
+    Preset:
+      type: object
+      required: [id, name]
+      properties:
+        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        name: {type: string, minLength: 1, x-coralogix-presence: true}
+    PresetSummary:
+      type: object
+      properties:
+        id: {type: string}
+        name: {type: string}
+        connectorType: {$ref: '#/components/schemas/ConnectorType'}
+    ListPresetSummariesResponse:
+      type: object
+      properties:
+        presetSummaries:
+          type: array
+          items: {$ref: '#/components/schemas/PresetSummary'}
+    ViewFolder:
+      type: object
+      required: [id, name]
+      properties:
+        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        name: {type: string, minLength: 1, x-coralogix-presence: true}
+    ListViewFoldersResponse:
+      type: object
+      properties:
+        folders:
+          type: array
+          items: {$ref: '#/components/schemas/ViewFolder'}
+    Evaluation:
+      type: object
+      required: [id, name]
+      properties:
+        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        name: {type: string, minLength: 1, x-coralogix-presence: true}
+    ListEvaluationsResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items: {$ref: '#/components/schemas/Evaluation'}
+        totalCount: {type: integer, format: int32}
+    Pair:
+      type: object
+      required: [id, name]
+      properties:
+        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        name: {type: string, minLength: 1, x-coralogix-presence: true}
+    ListPairsResponse:
+      type: object
+      properties:
+        pairs:
+          type: array
+          items: {$ref: '#/components/schemas/Pair'}
+        archived:
+          type: array
+          items: {$ref: '#/components/schemas/Pair'}
+        names:
+          type: array
+          items: {type: string}
+    Label:
+      type: object
+      required: [id, key]
+      properties:
+        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        key: {type: string, minLength: 1, x-coralogix-presence: true}
+    LabelSummary:
+      type: object
+      properties:
+        id: {type: string}
+        key: {type: string}
+    ListLabelsResponse:
+      type: object
+      properties:
+        labels:
+          type: array
+          items: {$ref: '#/components/schemas/LabelSummary'}

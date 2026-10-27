@@ -229,7 +229,7 @@ func (s *resolver) requestField(path, owner, name string, t *model.Type, allowVa
 	return s.nested(path, t)
 }
 
-// operations adds the SDK names of the four operations.
+// operations adds the SDK names of the four operations, and of the List when the resource has one.
 func (s *resolver) operations(r *model.Resource, client string) error {
 	ops := []struct {
 		name string
@@ -248,8 +248,33 @@ func (s *resolver) operations(r *model.Resource, client string) error {
 			return err
 		}
 	}
-
+	if r.List != nil {
+		return s.list(r, client)
+	}
 	return nil
+}
+
+// list adds the SDK names of the List: the call, the items field of the response, and the
+// item fields that a tool reads. A resource without a List needs none of them.
+func (s *resolver) list(r *model.Resource, client string) error {
+	l := r.List
+	if err := s.operation(r, "list", l.Operation, client, false); err != nil {
+		return err
+	}
+	item := goTypeName(l.ItemComponent)
+	s.add(Ref{Path: "list.response." + l.ItemsField, Kind: KindField, Owner: goTypeName(l.Response.Schema),
+		Name: goFieldName(l.ItemsField), Want: "[]" + item, Rule: RuleProperty})
+	if l.Full {
+		return nil // the "fields" names cover the resource
+	}
+	s.add(Ref{Path: "list.item", Kind: KindType, Name: item, Rule: RuleComponent, Schema: l.ItemComponent})
+	if err := s.field("list.item."+l.IDField, item, l.IDField, r.IDType, true); err != nil {
+		return err
+	}
+	if l.NameField == "" {
+		return nil
+	}
+	return s.field("list.item."+l.NameField, item, l.NameField, &model.Type{Kind: model.String}, true)
 }
 
 type resolver struct {

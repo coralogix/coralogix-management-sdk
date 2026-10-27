@@ -56,12 +56,15 @@ func ValidateWithPolicy(doc *v3.Document, name string, ids OperationIDs, p Polic
 		report = append(report, responseWrapperIssues(p, name, ops)...)
 	}
 	if len(ops) == len(verbs) {
-		r, err := BuildWithPolicy(doc, name, ids, p)
+		r, listErr, err := build(doc, name, ids, p)
 		if err != nil {
 			report = append(report, buildIssue(err))
 		} else {
 			report = append(report, validateBuiltResource(r)...)
 			report = append(report, componentNameCollisions(resourceType(r))...)
+		}
+		if listErr != nil {
+			report = append(report, buildIssue(listErr))
 		}
 	}
 	return report.Normalize()
