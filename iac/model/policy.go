@@ -49,6 +49,10 @@ type Policy struct {
 	// Get and Delete each carry the same {id} path parameter. Update has no path
 	// parameter. New resources leave this false.
 	CustomMethods bool
+	// CreateResponseOnlyIDProperty is the property of the Create response that holds the id, when the
+	// response does not return the resource (an existing resource only). Create reads the
+	// resource with Get. "" means that the Create response holds the resource.
+	CreateResponseOnlyIDProperty string
 	// ClientSetID means that the client can send the id on Create, and the Get
 	// response does not require it.
 	ClientSetID bool

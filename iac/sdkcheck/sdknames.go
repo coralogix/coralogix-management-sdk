@@ -340,6 +340,10 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	s.add(Ref{Path: path + ".response", Kind: KindType, Name: resp, Rule: RuleComponent})
 	s.add(Ref{Path: path, Kind: KindMethod, Owner: builder, Name: "Execute",
 		Want: "func() (*" + resp + ", *http.Response, error)", Rule: RuleOperationID})
+	if op.Response.ID != "" {
+		s.add(Ref{Path: path + ".response." + op.Response.ID, Kind: KindField, Owner: resp,
+			Name: goFieldName(op.Response.ID), Want: "*string", WantValue: "string", Rule: RuleProperty})
+	}
 	if op.Response.Field != "" {
 		s.add(Ref{Path: path + ".response." + op.Response.Field, Kind: KindField, Owner: resp,
 			Name: goFieldName(op.Response.Field), Want: "*" + goTypeName(r.Name), WantValue: goTypeName(r.Name), Rule: RuleProperty})

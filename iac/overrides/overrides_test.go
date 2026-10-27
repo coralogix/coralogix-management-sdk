@@ -177,3 +177,12 @@ components:
 		t.Fatal("ContractReadOnly does not match the readOnly keyword")
 	}
 }
+
+// api.createResponseOnlyIDProperty is an API key of the shared overrides: it reaches the policy.
+func TestCreateResponseOnlyIDPropertyReachesThePolicy(t *testing.T) {
+	var e Exceptions
+	e.API.CreateResponseOnlyIDProperty = "thingId"
+	if got := e.Policy().CreateResponseOnlyIDProperty; got != "thingId" {
+		t.Fatalf("policy CreateResponseOnlyIDProperty = %q, want thingId", got)
+	}
+}

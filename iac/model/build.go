@@ -113,6 +113,9 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 			return nil, nil, fmt.Errorf("%s: no field %q for the id path parameter", r.Name, r.IDField)
 		}
 		r.IDType = r.Fields[index].Type
+		if r.Create.Response.ID != "" && r.IDType.Kind != String {
+			return nil, nil, fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
+		}
 	}
 	r.pruneSkipped()
 	if err := r.unwrap(); err != nil {
@@ -359,7 +362,7 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 		if o.Body, err = bodyName(f.op); err != nil {
 			return fmt.Errorf("%s: %w", v, err)
 		}
-		if o.Response, err = r.response(f.op, v != opDelete); err != nil {
+		if o.Response, err = r.response(f.op, v); err != nil {
 			return fmt.Errorf("%s: %w", v, err)
 		}
 	}
@@ -569,17 +572,19 @@ func okSchema(op *v3.Operation) (*base.SchemaProxy, error) {
 	return resp.Content.GetOrZero(jsonMedia).Schema, nil
 }
 
-// response reads the 200 response. When wrapped is true, the response must
-// have exactly one property, and that property must be the resource.
-// response reads the 200 response. With wrapped, it must return the resource:
-// the resource itself (Direct), or one field that wraps it.
-func (r *Resource) response(op *v3.Operation, wrapped bool) (Response, error) {
+// response reads the 200 response. Except for Delete, it must return the resource: the
+// resource itself (Direct), or one field that wraps it. An existing resource can also have a
+// Create response that holds only the id (Policy.CreateResponseOnlyIDProperty), and an Update response with
+// no fields. A tool then reads the resource with Get.
+func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
+	wrapped := v != opDelete
 	schema, err := okSchema(op)
 	if err != nil {
 		return Response{}, err
 	}
 	proxy := responseRef(schema)
-	if proxy == nil && !wrapped && emptyInlineObject(schema) {
+	emptyAllowed := !wrapped || v == opUpdate && r.Policy.Existing
+	if proxy == nil && emptyAllowed && emptyInlineObject(schema) {
 		// google.protobuf.Empty is an inline object with no fields. The SDK
 		// returns map[string]interface{}, the same as for an empty component.
 		return Response{Empty: true}, nil
@@ -592,8 +597,16 @@ func (r *Resource) response(op *v3.Operation, wrapped bool) (Response, error) {
 		return Response{}, err
 	}
 	out := Response{Schema: name}
+	if v == opCreate && r.Policy.CreateResponseOnlyIDProperty != "" {
+		return r.idResponse(out, proxy)
+	}
 	if !wrapped {
 		return emptyResponse(out, proxy)
+	}
+	if v == opUpdate && r.Policy.Existing {
+		if out, err = emptyResponse(out, proxy); err != nil || out.Empty {
+			return out, err
+		}
 	}
 	if name == r.Name {
 		out.Direct = true
@@ -615,6 +628,40 @@ func (r *Resource) response(op *v3.Operation, wrapped bool) (Response, error) {
 		return Response{}, fmt.Errorf("response %s.%s is %s, want %s", name, keys[0], inner, r.Name)
 	}
 	out.Field = keys[0]
+	return out, nil
+}
+
+// idResponse reads a Create response that holds only the id of the new resource, in the property
+// that the behavior-overrides file names.
+func (r *Resource) idResponse(out Response, proxy *base.SchemaProxy) (Response, error) {
+	s, err := schemaOf(proxy)
+	if err != nil {
+		return Response{}, err
+	}
+	key := r.Policy.CreateResponseOnlyIDProperty
+	if out.Schema == r.Name {
+		return Response{}, fmt.Errorf("response %s is the resource, so api.createResponseOnlyIDProperty has nothing to read back", out.Schema)
+	}
+	for _, name := range propertyNames(s) {
+		if inner, err := componentName(unwrapRef(propertyOf(s, name))); err == nil && inner == r.Name {
+			return Response{}, fmt.Errorf("response %s.%s holds the resource, so api.createResponseOnlyIDProperty has nothing to read back", out.Schema, name)
+		}
+	}
+	var property *base.SchemaProxy
+	if s != nil && s.Properties != nil {
+		property = propertyOf(s, key)
+	}
+	if property == nil {
+		return Response{}, fmt.Errorf("response %s has no property %q for the id (api.createResponseOnlyIDProperty)", out.Schema, key)
+	}
+	ps, err := schemaOf(property)
+	if err != nil {
+		return Response{}, fmt.Errorf("response %s.%s: %w", out.Schema, key, err)
+	}
+	if !slices.Equal(ps.Type, []string{"string"}) {
+		return Response{}, fmt.Errorf("response %s.%s has type %v, want a string id", out.Schema, key, ps.Type)
+	}
+	out.ID = key
 	return out, nil
 }
 
