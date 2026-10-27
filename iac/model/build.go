@@ -114,7 +114,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 		}
 		r.IDType = r.Fields[index].Type
 		if r.Create.Response.ID != "" && r.IDType.Kind != String {
-			return nil, fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
+			return nil, nil, fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
 		}
 	}
 	r.pruneSkipped()
@@ -574,7 +574,7 @@ func okSchema(op *v3.Operation) (*base.SchemaProxy, error) {
 
 // response reads the 200 response. Except for Delete, it must return the resource: the
 // resource itself (Direct), or one field that wraps it. An existing resource can also have a
-// Create response that holds only the id (Policy.CreateResponseID), and an Update response with
+// Create response that holds only the id (Policy.CreateResponseOnlyIDProperty), and an Update response with
 // no fields. A tool then reads the resource with Get.
 func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	wrapped := v != opDelete
@@ -597,7 +597,7 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 		return Response{}, err
 	}
 	out := Response{Schema: name}
-	if v == opCreate && r.Policy.CreateResponseID != "" {
+	if v == opCreate && r.Policy.CreateResponseOnlyIDProperty != "" {
 		return r.idResponse(out, proxy)
 	}
 	if !wrapped {
@@ -638,10 +638,21 @@ func (r *Resource) idResponse(out Response, proxy *base.SchemaProxy) (Response, 
 	if err != nil {
 		return Response{}, err
 	}
-	key := r.Policy.CreateResponseID
-	property := propertyOf(s, key)
+	key := r.Policy.CreateResponseOnlyIDProperty
+	if out.Schema == r.Name {
+		return Response{}, fmt.Errorf("response %s is the resource, so api.createResponseOnlyIDProperty has nothing to read back", out.Schema)
+	}
+	for _, name := range propertyNames(s) {
+		if inner, err := componentName(unwrapRef(propertyOf(s, name))); err == nil && inner == r.Name {
+			return Response{}, fmt.Errorf("response %s.%s holds the resource, so api.createResponseOnlyIDProperty has nothing to read back", out.Schema, name)
+		}
+	}
+	var property *base.SchemaProxy
+	if s != nil && s.Properties != nil {
+		property = propertyOf(s, key)
+	}
 	if property == nil {
-		return Response{}, fmt.Errorf("response %s has no property %q for the id (api.createResponseID)", out.Schema, key)
+		return Response{}, fmt.Errorf("response %s has no property %q for the id (api.createResponseOnlyIDProperty)", out.Schema, key)
 	}
 	ps, err := schemaOf(property)
 	if err != nil {

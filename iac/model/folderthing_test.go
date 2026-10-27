@@ -25,13 +25,13 @@ import (
 // wraps the resource, the id is in the Update body, and Create returns only the id.
 func folderPolicy() Policy {
 	return Policy{
-		Existing:         true,
-		RequestWrapper:   "thing",
-		UpdateIDInBody:   true,
-		IDProperty:       "id",
-		ServerSetID:      true,
-		CreateResponseID: "thingId",
-		ReadOnly:         []string{"FolderThing.id"},
+		Existing:                     true,
+		RequestWrapper:               "thing",
+		UpdateIDInBody:               true,
+		IDProperty:                   "id",
+		ServerSetID:                  true,
+		CreateResponseOnlyIDProperty: "thingId",
+		ReadOnly:                     []string{"FolderThing.id"},
 	}
 }
 
@@ -50,7 +50,7 @@ func buildFolderThing(t *testing.T, policy Policy) (*Resource, error) {
 
 // A Create response that holds only the id, and an Update response with no fields, are read as
 // such: the tool reads the resource with Get.
-func TestCreateResponseIDAndEmptyUpdate(t *testing.T) {
+func TestCreateResponseOnlyIDPropertyAndEmptyUpdate(t *testing.T) {
 	r, err := buildFolderThing(t, folderPolicy())
 	if err != nil {
 		t.Fatal(err)
@@ -67,7 +67,7 @@ func TestCreateResponseIDAndEmptyUpdate(t *testing.T) {
 }
 
 // The id of a Create response is a string, and the property must exist.
-func TestCreateResponseIDIsChecked(t *testing.T) {
+func TestCreateResponseOnlyIDPropertyIsChecked(t *testing.T) {
 	tests := map[string]struct {
 		key  string
 		want string
@@ -77,7 +77,7 @@ func TestCreateResponseIDIsChecked(t *testing.T) {
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {
 			policy := folderPolicy()
-			policy.CreateResponseID = test.key
+			policy.CreateResponseOnlyIDProperty = test.key
 			if _, err := buildFolderThing(t, policy); err == nil || !strings.Contains(err.Error(), test.want) {
 				t.Fatalf("err = %v, want %q", err, test.want)
 			}
@@ -85,12 +85,40 @@ func TestCreateResponseIDIsChecked(t *testing.T) {
 	}
 	// Without the key, the Create response is not the resource, and the build says so.
 	policy := folderPolicy()
-	policy.CreateResponseID = ""
+	policy.CreateResponseOnlyIDProperty = ""
 	if _, err := buildFolderThing(t, policy); err == nil {
-		t.Fatal("create response with only an id and no createResponseID: want an error")
+		t.Fatal("create response with only an id and no createResponseOnlyIDProperty: want an error")
 	}
 	// A new resource has no Policy.Existing, so an empty Update response is not accepted.
-	if _, err := buildFolderThing(t, Policy{CreateResponseID: "thingId"}); err == nil {
+	if _, err := buildFolderThing(t, Policy{CreateResponseOnlyIDProperty: "thingId"}); err == nil {
 		t.Fatal("empty update response of a new resource: want an error")
+	}
+}
+
+// An override that is stale, or that names a property of a response with no properties, is an
+// error and does not panic.
+func TestCreateResponseOnlyIDPropertyStaleAndEmpty(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("testdata", "folderthing.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	cases := map[string]struct{ old, new, want string }{
+		"holds the resource": {"        thingId: {type: string, x-coralogix-presence: true}\n", "        thingId: {type: string, x-coralogix-presence: true}\n        thing:\n          allOf: [{$ref: '#/components/schemas/FolderThing'}]\n", "holds the resource"},
+		"no properties":      {"    CreateFolderThingResponse:\n      type: object\n      properties:\n        thingId: {type: string, x-coralogix-presence: true}\n", "    CreateFolderThingResponse:\n      type: object\n", `has no property "thingId"`},
+	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			changed := strings.Replace(string(data), c.old, c.new, 1)
+			if changed == string(data) {
+				t.Fatal("the test contract did not change: update the replaced text")
+			}
+			doc, err := Load([]byte(changed))
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := BuildWithPolicy(doc, "FolderThing", OperationIDs{}, folderPolicy()); err == nil || !strings.Contains(err.Error(), c.want) {
+				t.Fatalf("err = %v, want %q", err, c.want)
+			}
+		})
 	}
 }
