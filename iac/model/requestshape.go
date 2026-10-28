@@ -16,6 +16,7 @@ package model
 
 import (
 	"fmt"
+	"maps"
 	"slices"
 	"strings"
 
@@ -31,7 +32,7 @@ func (p Policy) updateIDOutsideWrapper() bool {
 }
 
 // shapeRequests returns the Create and Update bodies as the resource sees them, when the policy
-// says that a request is shaped differently from the resource component: requestNames moves a
+// says that a request is shaped differently from the resource component: requestAs moves a
 // property of a request to the top level under the name that the resource has, and
 // updateIDOutsideWrapper adds the id property that sits beside the wrapper to the Update body.
 // Validation and Build both read the bodies this way, so the field has the normal lifecycle and
@@ -99,25 +100,31 @@ func bodySchemaOrNil(proxy *base.SchemaProxy) *base.Schema {
 	return s
 }
 
-// renameRequestFields moves each property that requestNames names to the top level of the Create and
+// renameRequestFields moves each property that a requestAs line names to the top level of the Create and
 // Update bodies under the name of the resource field.
 func (p Policy) renameRequestFields(name string, create, update, get *base.Schema) (c, u *base.Schema, report issue.Report) {
-	fields := make([]string, 0, len(p.RequestNames))
-	for field := range p.RequestNames {
+	names := p.requestNames(name)
+	fields := make([]string, 0, len(names))
+	for field := range names {
 		fields = append(fields, field)
 	}
 	slices.Sort(fields)
+	for _, key := range slices.Sorted(maps.Keys(p.RequestNames)) {
+		if component, _, _ := strings.Cut(key, "."); component != name {
+			report = append(report, issue.Issue{Code: "REQUEST_NAME_UNKNOWN_FIELD", Location: "behavior-overrides.yaml:types." + key, Message: fmt.Sprintf("The field line %q has requestAs, but the resource component is %s.", key, name), Remediation: "Put requestAs on a field of the resource component, or delete it."})
+		}
+	}
 	var valid []string // the fields whose line can be applied
 	byPath := map[string]string{}
 	for _, field := range fields {
-		path := p.RequestNames[field]
+		path := names[field]
 		location := fieldLocation(name, field)
 		if propertyOf(get, field) == nil {
 			report = append(report, issue.Issue{Code: "REQUEST_NAME_UNKNOWN_FIELD", Location: location, Message: fmt.Sprintf("The overrides map the request path %q to %q, which is not a property of %s.", path, field, name), Remediation: "Name a property of the resource component, or delete the line."})
 			continue
 		}
 		if path == field {
-			report = append(report, issue.Issue{Code: "OVERRIDE_UNUSED", Location: "behavior-overrides.yaml:api.requestNames." + field, Message: fmt.Sprintf("the requests already name the field %q like the resource", field), Remediation: "Delete the line."})
+			report = append(report, issue.Issue{Code: "OVERRIDE_UNUSED", Location: "behavior-overrides.yaml:types." + name + "." + field, Message: fmt.Sprintf("the requests already name the field %q like the resource", field), Remediation: "Delete the line."})
 			continue
 		}
 		if other, clash := overlappingPath(byPath, path); clash {
@@ -140,7 +147,7 @@ func (p Policy) renameRequestFields(name string, create, update, get *base.Schem
 	}
 	for _, field := range valid {
 		if !found[0][field] && !found[1][field] {
-			report = append(report, issue.Issue{Code: "REQUEST_NAME_NOT_FOUND", Location: fieldLocation(name, field), Message: fmt.Sprintf("Neither the Create nor the Update body has the property %q that the overrides map to %q.", p.RequestNames[field], field), Remediation: "Fix the path in api.requestNames, or delete the line."})
+			report = append(report, issue.Issue{Code: "REQUEST_NAME_NOT_FOUND", Location: fieldLocation(name, field), Message: fmt.Sprintf("Neither the Create nor the Update body has the property %q that the overrides map to %q.", names[field], field), Remediation: "Fix the path in requestAs, or delete the line."})
 		}
 	}
 	return c, u, report
@@ -164,6 +171,7 @@ func (p Policy) renameIn(name string, body *base.Schema, fields []string, report
 	if body == nil {
 		return body, found, report
 	}
+	names := p.requestNames(name)
 	type move struct {
 		field    string
 		leaf     *base.SchemaProxy
@@ -171,13 +179,13 @@ func (p Policy) renameIn(name string, body *base.Schema, fields []string, report
 	}
 	var moves []move
 	for _, field := range fields {
-		leaf, required, problem := resolveRequestPath(body, strings.Split(p.RequestNames[field], "."))
+		leaf, required, problem := resolveRequestPath(body, strings.Split(names[field], "."))
 		switch problem {
 		case "":
 			found[field] = true
 			moves = append(moves, move{field, leaf, required})
 		case problemNotObject:
-			report = append(report, issue.Issue{Code: "REQUEST_NAME_NOT_OBJECT", Location: fieldLocation(name, field), Message: fmt.Sprintf("A segment of the request path %q is not an object, so the path cannot go through it.", p.RequestNames[field]), Remediation: "Dot-separate only object properties in api.requestNames."})
+			report = append(report, issue.Issue{Code: "REQUEST_NAME_NOT_OBJECT", Location: fieldLocation(name, field), Message: fmt.Sprintf("A segment of the request path %q is not an object, so the path cannot go through it.", names[field]), Remediation: "Dot-separate only object properties in requestAs."})
 		}
 	}
 	if len(moves) == 0 {
@@ -186,13 +194,13 @@ func (p Policy) renameIn(name string, body *base.Schema, fields []string, report
 	obj, _, required := validationObject(body)
 	shaped := obj
 	for _, m := range moves {
-		shaped = removePath(shaped, required, strings.Split(p.RequestNames[m.field], "."))
+		shaped = removePath(shaped, required, strings.Split(names[m.field], "."))
 		required = shaped.Required
 	}
 	shaped = copySchema(shaped, "", required)
 	for _, m := range moves {
 		if propertyOf(shaped, m.field) != nil {
-			report = append(report, issue.Issue{Code: "REQUEST_NAME_CONFLICT", Location: fieldLocation(name, m.field), Message: fmt.Sprintf("A request body has its own property %q, and the overrides also map %q to it.", m.field, p.RequestNames[m.field]), Remediation: "Map the request property to a field that no request property has, or delete the line."})
+			report = append(report, issue.Issue{Code: "REQUEST_NAME_CONFLICT", Location: fieldLocation(name, m.field), Message: fmt.Sprintf("A request body has its own property %q, and the overrides also map %q to it.", m.field, names[m.field]), Remediation: "Map the request property to a field that no request property has, or delete the line."})
 			delete(found, m.field)
 			continue
 		}
@@ -338,6 +346,19 @@ func (p Policy) requestObjects(op *v3.Operation, path []string) []string {
 		out = append(out, name)
 		if cur, err = schemaOf(proxy); err != nil {
 			return nil
+		}
+	}
+	return out
+}
+
+// requestNames returns the request path of each field of the resource component that a field
+// line gives a requestAs. RequestNames is keyed by component and field, like the other field
+// lines.
+func (p Policy) requestNames(resource string) map[string]string {
+	out := map[string]string{}
+	for key, path := range p.RequestNames {
+		if component, field, ok := strings.Cut(key, "."); ok && component == resource {
+			out[field] = path
 		}
 	}
 	return out

@@ -247,7 +247,7 @@ func TestNamesForARequestShapeThatDiffersFromTheResource(t *testing.T) {
 	policy := model.Policy{
 		Existing: true, RequestWrapper: "spec", UpdateIDInBody: true, UpdateIDOutsideWrapper: true, IDProperty: "id",
 		CustomMethods: true, CreateResponseOnlyIDProperty: "thingId",
-		RequestNames: map[string]string{"kind": "specKind", "version": "specVersion", "parameters": "holder.items"},
+		RequestNames: map[string]string{"RenameThing.kind": "specKind", "RenameThing.version": "specVersion", "RenameThing.parameters": "holder.items"},
 		Operations: model.OperationIDs{
 			Create: "RenameThingsService_SaveRenameThing", Get: "RenameThingsService_GetRenameThing",
 			Update: "RenameThingsService_UpdateRenameThing", Delete: "RenameThingsService_DeleteRenameThing",

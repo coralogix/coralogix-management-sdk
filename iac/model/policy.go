@@ -53,10 +53,11 @@ type Policy struct {
 	// carries the id property (named IDProperty, or like the path parameter of Get) beside the
 	// wrapper property, not inside it.
 	UpdateIDOutsideWrapper bool
-	// RequestNames maps a property of the resource component to the path of the property that
-	// holds it in the Create and Update bodies (after the request wrapper), dot-separated through
-	// object properties, for example {"definitionKey": "integrationKey", "parameters":
-	// "spec.parameters"}. The API names a value in a request differently from the Get response.
+	// RequestNames maps a property of the resource component ("Component.field", like Skip) to
+	// the path of the property that holds it in the Create and Update bodies (after the request
+	// wrapper), dot-separated through object properties, for example
+	// {"Thing.definitionKey": "integrationKey", "Thing.parameters": "spec.parameters"}. The API
+	// names a value in a request differently from the Get response.
 	RequestNames map[string]string
 	// CustomMethods means Get, Update, and Delete are not the Create path with an id.
 	// Get and Delete each carry the same {id} path parameter. Update has no path

@@ -32,7 +32,7 @@ func renamePolicy() Policy {
 		IDProperty:                   "id",
 		CustomMethods:                true,
 		CreateResponseOnlyIDProperty: "thingId",
-		RequestNames:                 map[string]string{"kind": "specKind", "version": "specVersion", "parameters": "holder.items"},
+		RequestNames:                 map[string]string{"RenameThing.kind": "specKind", "RenameThing.version": "specVersion", "RenameThing.parameters": "holder.items"},
 		Operations: OperationIDs{
 			Create: "RenameThingsService_SaveRenameThing", Get: "RenameThingsService_GetRenameThing",
 			Update: "RenameThingsService_UpdateRenameThing", Delete: "RenameThingsService_DeleteRenameThing",
@@ -206,15 +206,16 @@ func TestRequestNamesIssues(t *testing.T) {
 		spec  []string
 		want  string
 	}{
-		"unknown resource field":   {map[string]string{"kind": "specKind", "gone": "specVersion"}, nil, "REQUEST_NAME_UNKNOWN_FIELD"},
-		"path not in a body":       {map[string]string{"kind": "nothing"}, nil, "REQUEST_NAME_NOT_FOUND"},
-		"dotted path not found":    {map[string]string{"parameters": "holder.nothing"}, nil, "REQUEST_NAME_NOT_FOUND"},
-		"segment not an object":    {map[string]string{"parameters": "specKind.items"}, nil, "REQUEST_NAME_NOT_OBJECT"},
-		"two keys one path":        {map[string]string{"kind": "specKind", "version": "specKind"}, nil, "REQUEST_NAME_DUPLICATE"},
-		"path inside another":      {map[string]string{"parameters": "holder", "version": "holder.items"}, nil, "REQUEST_NAME_DUPLICATE"},
-		"name of the field itself": {map[string]string{"kind": "kind"}, nil, "OVERRIDE_UNUSED"},
+		"unknown resource field":    {map[string]string{"RenameThing.kind": "specKind", "RenameThing.gone": "specVersion"}, nil, "REQUEST_NAME_UNKNOWN_FIELD"},
+		"path not in a body":        {map[string]string{"RenameThing.kind": "nothing"}, nil, "REQUEST_NAME_NOT_FOUND"},
+		"dotted path not found":     {map[string]string{"RenameThing.parameters": "holder.nothing"}, nil, "REQUEST_NAME_NOT_FOUND"},
+		"segment not an object":     {map[string]string{"RenameThing.parameters": "specKind.items"}, nil, "REQUEST_NAME_NOT_OBJECT"},
+		"two keys one path":         {map[string]string{"RenameThing.kind": "specKind", "RenameThing.version": "specKind"}, nil, "REQUEST_NAME_DUPLICATE"},
+		"path inside another":       {map[string]string{"RenameThing.parameters": "holder", "RenameThing.version": "holder.items"}, nil, "REQUEST_NAME_DUPLICATE"},
+		"line on another component": {map[string]string{"Other.kind": "specKind"}, nil, "REQUEST_NAME_UNKNOWN_FIELD"},
+		"name of the field itself":  {map[string]string{"RenameThing.kind": "kind"}, nil, "OVERRIDE_UNUSED"},
 		"request property also matched by name": {
-			map[string]string{"kind": "specKind"},
+			map[string]string{"RenameThing.kind": "specKind"},
 			[]string{"        specKind: {type: string, minLength: 1}\n", "        specKind: {type: string, minLength: 1}\n        kind: {type: string, minLength: 1}\n"},
 			"REQUEST_NAME_CONFLICT",
 		},
@@ -320,7 +321,7 @@ func TestDeployedIntegrationRequestShape(t *testing.T) {
 		CustomMethods:                true,
 		CreateResponseOnlyIDProperty: "integrationId",
 		RequestNames: map[string]string{
-			"definitionKey": "integrationKey", "definitionVersion": "version", "parameters": "integrationParameters.parameters",
+			"DeployedIntegrationInformation.definitionKey": "integrationKey", "DeployedIntegrationInformation.definitionVersion": "version", "DeployedIntegrationInformation.parameters": "integrationParameters.parameters",
 		},
 		Operations: OperationIDs{
 			Create: "IntegrationService_SaveIntegration", Get: "IntegrationService_GetDeployedIntegration",

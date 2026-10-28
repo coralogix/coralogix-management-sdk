@@ -837,7 +837,7 @@ func (r *Resource) readFields(doc *v3.Document, ops map[verb]foundOp) error {
 		if err != nil {
 			return fmt.Errorf("%s: %w", r.Name, err)
 		}
-		f.RequestPath = r.Policy.RequestNames[n]
+		f.RequestPath = r.Policy.requestNames(r.Name)[n]
 		r.Fields = append(r.Fields, f)
 	}
 	groups, err := r.rootGroups(createBody)

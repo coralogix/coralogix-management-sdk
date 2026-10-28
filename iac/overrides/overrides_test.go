@@ -188,15 +188,18 @@ func TestCreateResponseOnlyIDPropertyReachesThePolicy(t *testing.T) {
 }
 
 func TestPolicyStatesTheRequestShapeKeys(t *testing.T) {
-	names := map[string]string{"definitionKey": "integrationKey", "parameters": "integrationParameters.parameters"}
-	e := Exceptions{API: API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true, RequestNames: names}}
-	got := e.Policy()
-	if !got.UpdateIDOutsideWrapper || !reflect.DeepEqual(got.RequestNames, names) {
-		t.Fatalf("Policy() = %+v, want updateIDOutsideWrapper and the request names", got)
+	e := Exceptions{
+		API: API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true},
+		Fields: map[string]map[string]Field{"Thing": {
+			"definitionKey": {RequestAs: "integrationKey"},
+			"parameters":    {RequestAs: "integrationParameters.parameters"},
+			"id":            {},
+		}},
 	}
-	names["definitionKey"] = "changed"
-	if got.RequestNames["definitionKey"] != "integrationKey" {
-		t.Fatal("the policy shares the map of the file")
+	got := e.Policy()
+	want := map[string]string{"Thing.definitionKey": "integrationKey", "Thing.parameters": "integrationParameters.parameters"}
+	if !got.UpdateIDOutsideWrapper || !reflect.DeepEqual(got.RequestNames, want) {
+		t.Fatalf("Policy() = %+v, want updateIDOutsideWrapper and the request names %v", got, want)
 	}
 	if p := (Exceptions{}).Policy(); p.UpdateIDOutsideWrapper || p.RequestNames != nil {
 		t.Fatalf("Policy() without the keys = %+v", p)
@@ -210,10 +213,6 @@ func TestCheckRequestShapeKeys(t *testing.T) {
 	}{
 		"outside wrapper needs a wrapper":  {API{UpdateIDInBody: true, UpdateIDOutsideWrapper: true}, "updateIDOutsideWrapper"},
 		"outside wrapper needs id in body": {API{RequestWrapper: "metadata", UpdateIDOutsideWrapper: true}, "updateIDOutsideWrapper"},
-		"empty path":                       {API{RequestNames: map[string]string{"a": ""}}, "requestNames"},
-		"empty segment":                    {API{RequestNames: map[string]string{"a": "b..c"}}, "requestNames"},
-		"two fields one path":              {API{RequestNames: map[string]string{"a": "x.y", "b": "x.y"}}, "both"},
-		"empty field":                      {API{RequestNames: map[string]string{"": "x"}}, "requestNames"},
 	}
 	for name, tc := range tests {
 		t.Run(name, func(t *testing.T) {
@@ -222,8 +221,16 @@ func TestCheckRequestShapeKeys(t *testing.T) {
 			}
 		})
 	}
-	ok := API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true, RequestNames: map[string]string{"a": "b", "c": "d.e"}}
+	ok := API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true}
 	if err := ok.Check(); err != nil {
+		t.Fatalf("Check() = %v", err)
+	}
+	for _, path := range []string{"b..c", ".b", "b."} {
+		if err := (Field{RequestAs: path}).Check(); err == nil || !strings.Contains(err.Error(), "requestAs") {
+			t.Fatalf("Field{RequestAs: %q}.Check() = %v, want a requestAs error", path, err)
+		}
+	}
+	if err := (Field{RequestAs: "d.e"}).Check(); err != nil {
 		t.Fatalf("Check() = %v", err)
 	}
 }

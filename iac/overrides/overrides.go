@@ -41,12 +41,6 @@ type API struct {
 	// UpdateIDOutsideWrapper: with requestWrapper and updateIDInBody, the Update body carries the
 	// id property beside the wrapper property, not inside it.
 	UpdateIDOutsideWrapper bool `yaml:"updateIDOutsideWrapper"`
-	// RequestNames maps a property of the resource component to the path of the property that
-	// holds it in the Create and Update bodies, after the request wrapper. The path is
-	// dot-separated through object properties, for example {definitionKey: integrationKey,
-	// parameters: integrationParameters.parameters}. A request property that the key covers is
-	// not a separate field.
-	RequestNames map[string]string `yaml:"requestNames"`
 	// ClientSetID: the client can send the id on Create.
 	ClientSetID bool `yaml:"clientSetID"`
 	// ServerSetID: the server sets the id and returns it in every response, but the Get
@@ -115,6 +109,12 @@ type Field struct {
 	// property of the object as the top-level Create field it names, for example
 	// {limit: permutationsLimit}. Update and Get have the object itself.
 	CreateAs map[string]string `yaml:"createAs"`
+	// RequestAs is the path of the property that holds the field in the Create and Update bodies,
+	// after the request wrapper, when the request names it differently from the Get response:
+	// dot-separated through object properties, for example integrationKey or
+	// integrationParameters.parameters. A request property that the field covers is not a
+	// separate field. Only a field of the resource component can have it.
+	RequestAs string `yaml:"requestAs"`
 	// Collection: set says that the order of a list of the contract has no meaning. The API
 	// keeps the order.
 	Collection string `yaml:"collection"`
@@ -159,9 +159,6 @@ func (a API) Check() error {
 	if a.UpdateIDOutsideWrapper && (a.RequestWrapper == "" || !a.UpdateIDInBody) {
 		return errors.New("api.updateIDOutsideWrapper needs api.requestWrapper and api.updateIDInBody")
 	}
-	if err := checkRequestNames(a.RequestNames); err != nil {
-		return err
-	}
 	if a.Delete != nil && a.Delete.Operation == "" {
 		return errors.New("api.delete.operation is required")
 	}
@@ -198,6 +195,9 @@ func (l Field) Check() error {
 	if err := checkCreateAs(l.CreateAs); err != nil {
 		return err
 	}
+	if l.RequestAs != "" && slices.Contains(strings.Split(l.RequestAs, "."), "") {
+		return fmt.Errorf("requestAs is a request path of dot-separated names; %q is not one", l.RequestAs)
+	}
 	if l.Collection != "" && l.Collection != "set" {
 		return fmt.Errorf("collection is %q, want set", l.Collection)
 	}
@@ -216,23 +216,6 @@ func checkCreateAs(into map[string]string) error {
 			return fmt.Errorf("createAs names the Create field %q twice", flat)
 		}
 		seen[flat] = true
-	}
-	return nil
-}
-
-// checkRequestNames checks a requestNames map: each resource field and each request path is a
-// non-empty name, and no two fields name the same path.
-func checkRequestNames(names map[string]string) error {
-	seen := map[string]string{}
-	for _, field := range sortedKeys(names) {
-		path := names[field]
-		if field == "" || path == "" || slices.Contains(strings.Split(path, "."), "") {
-			return fmt.Errorf("api.requestNames maps a resource field to a request path of dot-separated names; %q: %q is not one", field, path)
-		}
-		if other, ok := seen[path]; ok {
-			return fmt.Errorf("api.requestNames maps both %q and %q to the request path %q", other, field, path)
-		}
-		seen[path] = field
 	}
 	return nil
 }
@@ -259,7 +242,6 @@ func (e Exceptions) Policy() model.Policy {
 		RequestWrapper:               e.API.RequestWrapper,
 		UpdateIDInBody:               e.API.UpdateIDInBody,
 		UpdateIDOutsideWrapper:       e.API.UpdateIDOutsideWrapper,
-		RequestNames:                 maps.Clone(e.API.RequestNames),
 		ClientSetID:                  e.API.ClientSetID,
 		ServerSetID:                  e.API.ServerSetID,
 		IDProperty:                   e.API.IDProperty,
@@ -289,6 +271,12 @@ func (e Exceptions) Policy() model.Policy {
 					p.UnwrapFields = map[string]bool{}
 				}
 				p.UnwrapFields[name+"."+field] = *line.Unwrap
+			}
+			if line.RequestAs != "" {
+				if p.RequestNames == nil {
+					p.RequestNames = map[string]string{}
+				}
+				p.RequestNames[name+"."+field] = line.RequestAs
 			}
 			if line.Skip {
 				p.Skip = append(p.Skip, name+"."+field)
