@@ -41,6 +41,10 @@ type Policy struct {
 	// RequestWrapper is the property of the Create and Update bodies that holds
 	// the resource, for example "router". "" means that the body is the resource.
 	RequestWrapper string
+	// CreateUnwrapped is set by Build, not by a file: the Create body is the resource itself, and
+	// only the Update body has the RequestWrapper property. A service can take the resource
+	// directly in its Create request and wrapped in its Replace request.
+	CreateUnwrapped bool
 	// UpdateIDInBody means that Update has no id in its path. The id is a field of
 	// the resource in the body. Update uses the Create path, unless CustomMethods
 	// names a different path.
@@ -148,6 +152,27 @@ func (p Policy) unwraps(owner, field, component string) bool {
 		return on
 	}
 	return component != "" && slices.Contains(p.Unwrap, component)
+}
+
+// WrapperOf is the property that holds the resource in the Create body (create) or the Update
+// body: "" when that body is the resource itself.
+func (p Policy) WrapperOf(create bool) string {
+	if create && p.CreateUnwrapped {
+		return ""
+	}
+	return p.RequestWrapper
+}
+
+// unwrappedCreate reports whether only the Update body has the request wrapper property.
+func (p Policy) unwrappedCreate(ops map[verb]foundOp) bool {
+	if p.RequestWrapper == "" {
+		return false
+	}
+	has := func(v verb) bool {
+		s, err := schemaOf(bodyProxy(ops[v].op))
+		return err == nil && propertyOf(s, p.RequestWrapper) != nil
+	}
+	return !has(opCreate) && has(opUpdate)
 }
 
 // requestBody returns the schema that holds the resource in a Create or Update

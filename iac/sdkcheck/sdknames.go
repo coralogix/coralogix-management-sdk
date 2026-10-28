@@ -186,11 +186,13 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 			return err
 		}
 	}
-	if wrapper := r.Policy.RequestWrapper; wrapper != "" {
-		for _, name := range []string{"create", "update"} {
+	for _, name := range []string{"create", "update"} {
+		if wrapper := r.Policy.WrapperOf(name == "create"); wrapper != "" {
 			s.add(Ref{Path: name + ".body." + wrapper, Kind: KindField, Owner: s.bodies[name], Name: goFieldName(wrapper),
 				Want: "*" + resource, WantValue: resource, Rule: RuleProperty})
 		}
+	}
+	if r.Policy.RequestWrapper != "" && !r.Policy.CreateUnwrapped {
 		return nil
 	}
 	for _, f := range r.Fields {
@@ -208,6 +210,9 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 				return err
 			}
 		}
+	}
+	if r.Policy.RequestWrapper != "" {
+		return nil // the Update body wraps the resource, whose fields the "fields" names cover
 	}
 	for _, f := range r.Fields {
 		if f.Update != nil {
