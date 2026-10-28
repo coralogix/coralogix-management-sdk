@@ -93,6 +93,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	if err != nil {
 		return nil, nil, err
 	}
+	policy.CreateUnwrapped = policy.unwrappedCreate(ops)
 	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy}
 	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
 	if err := r.readOperations(ops); err != nil {

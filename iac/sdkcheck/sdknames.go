@@ -187,7 +187,12 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 		}
 	}
 	if wrapper := r.Policy.RequestWrapper; wrapper != "" {
-		return s.wrappedBodyFields(r, wrapper, resource)
+		if err := s.wrappedBodyFields(r, wrapper, resource); err != nil {
+			return err
+		}
+		if !r.Policy.CreateUnwrapped {
+			return nil
+		}
 	}
 	for _, f := range r.Fields {
 		if folds := r.CreateFolds(f); folds != nil {
@@ -204,6 +209,9 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 				return err
 			}
 		}
+	}
+	if r.Policy.RequestWrapper != "" {
+		return nil // the Update body wraps the resource, whose fields the "fields" names cover
 	}
 	for _, f := range r.Fields {
 		if f.Update != nil {
@@ -225,6 +233,9 @@ func (s *resolver) wrappedBodyFields(r *model.Resource, wrapper, resource string
 		op := r.Create
 		if name == "update" {
 			op = r.Update
+		}
+		if wrapper := r.Policy.WrapperOf(name == "create"); wrapper == "" {
+			continue // the Create body is the resource itself
 		}
 		component := resource
 		if op.RequestComponent != "" {
