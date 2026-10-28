@@ -214,3 +214,115 @@ func TestNamesListsTheList(t *testing.T) {
 		t.Fatal("a resource without a List lists List names")
 	}
 }
+
+// inlineRenameSpec is model/testdata/renamething.yaml with inline Create and Update bodies, as the
+// SDK generator gets them from a proto request.
+func inlineRenameSpec(t *testing.T) []byte {
+	t.Helper()
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "renamething.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := string(data)
+	for old, inline := range map[string]string{
+		"{$ref: '#/components/schemas/SaveRenameThingRequest'}":   "{title: Save rename thing request, type: object, required: [spec], properties: {spec: {$ref: '#/components/schemas/RenameSpec'}}}",
+		"{$ref: '#/components/schemas/UpdateRenameThingRequest'}": "{title: Update rename thing request, type: object, required: [id, spec], properties: {id: {type: string, minLength: 1}, spec: {$ref: '#/components/schemas/RenameSpec'}}}",
+	} {
+		if !strings.Contains(spec, old) {
+			t.Fatalf("the spec has no %q", old)
+		}
+		spec = strings.Replace(spec, old, inline, 1)
+	}
+	return []byte(spec)
+}
+
+// A request wrapper holds the request component of the spec, not the resource. A renamed field is a
+// field of that component, or of an object inside it, and the Update id beside the wrapper is a
+// field of the body.
+func TestNamesForARequestShapeThatDiffersFromTheResource(t *testing.T) {
+	doc, err := model.Load(inlineRenameSpec(t))
+	if err != nil {
+		t.Fatal(err)
+	}
+	policy := model.Policy{
+		Existing: true, RequestWrapper: "spec", UpdateIDInBody: true, UpdateIDOutsideWrapper: true, IDProperty: "id",
+		CustomMethods: true, CreateResponseOnlyIDProperty: "thingId",
+		RequestNames: map[string]string{"kind": "specKind", "version": "specVersion", "parameters": "holder.items"},
+		Operations: model.OperationIDs{
+			Create: "RenameThingsService_SaveRenameThing", Get: "RenameThingsService_GetRenameThing",
+			Update: "RenameThingsService_UpdateRenameThing", Delete: "RenameThingsService_DeleteRenameThing",
+		},
+	}
+	r, err := model.BuildWithPolicy(doc, "RenameThing", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	find := func(path string) *Ref {
+		for i := range refs {
+			if refs[i].Path == path && refs[i].Kind == KindField {
+				return &refs[i]
+			}
+		}
+		return nil
+	}
+	for path, want := range map[string]string{
+		"create.body.spec":       "SaveRenameThingRequest.Spec *RenameSpec",
+		"update.body.spec":       "UpdateRenameThingRequest.Spec *RenameSpec",
+		"update.body.id":         "UpdateRenameThingRequest.Id *string",
+		"create.body.kind":       "RenameSpec.SpecKind *string",
+		"update.body.version":    "RenameSpec.SpecVersion *string",
+		"create.body.parameters": "RenameHolder.Items []RenameParam",
+	} {
+		ref := find(path)
+		if ref == nil {
+			t.Errorf("no field ref at %s", path)
+			continue
+		}
+		if got := ref.SDKName() + " " + ref.Want; got != want {
+			t.Errorf("%s = %q, want %q", path, got, want)
+		}
+	}
+	typePath := func(path string) *Ref {
+		for i := range refs {
+			if refs[i].Path == path && refs[i].Kind == KindType {
+				return &refs[i]
+			}
+		}
+		return nil
+	}
+	if ref := typePath("create.body.spec"); ref == nil || ref.Name != "RenameSpec" || ref.Schema != "RenameSpec" {
+		t.Errorf("type ref at create.body.spec = %+v, want the request component RenameSpec", ref)
+	}
+	if ref := typePath("create.body"); ref == nil || ref.Name != "SaveRenameThingRequest" {
+		t.Errorf("type ref at create.body = %+v, want the body type SaveRenameThingRequest", ref)
+	}
+	if ref := find("create.body.id"); ref != nil {
+		t.Errorf("Create has a field ref for the id: %s", ref.SDKName())
+	}
+	if ref := find("update.body.holder"); ref != nil {
+		t.Errorf("a ref with the path %s: the field is named parameters", ref.Path)
+	}
+	for _, want := range []string{"RenameSpec.Holder", "RenameThing.Kind", "SaveRenameThingResponse.ThingId"} {
+		if !slices.ContainsFunc(refs, func(ref Ref) bool { return ref.SDKName() == want }) {
+			t.Errorf("refs do not contain %s", want)
+		}
+	}
+	// The wrapper is not the resource, so no ref expects the resource type in it, and the resource
+	// has no field for the request names.
+	for _, ref := range refs {
+		if ref.Name == "Spec" && ref.Want != "*RenameSpec" {
+			t.Errorf("wrapper ref %s has type %s", ref.SDKName(), ref.Want)
+		}
+		if ref.Owner == "RenameThing" && (ref.Name == "SpecKind" || ref.Name == "SpecVersion") {
+			t.Errorf("ref %s names the request path on the resource", ref.SDKName())
+		}
+	}
+}

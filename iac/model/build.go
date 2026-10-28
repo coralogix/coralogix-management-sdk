@@ -94,6 +94,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 		return nil, nil, err
 	}
 	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy}
+	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
 	if err := r.readOperations(ops); err != nil {
 		return nil, nil, err
 	}
@@ -107,6 +108,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	if err := r.readFields(doc, ops); err != nil {
 		return nil, nil, err
 	}
+	r.readRequestComponents(ops)
 	if !r.Singleton {
 		index := slices.IndexFunc(r.Fields, func(field *ResourceField) bool { return field.Name == r.IDField })
 		if index < 0 {
@@ -834,6 +836,7 @@ func (r *Resource) readFields(doc *v3.Document, ops map[verb]foundOp) error {
 		if err != nil {
 			return fmt.Errorf("%s: %w", r.Name, err)
 		}
+		f.RequestPath = r.Policy.RequestNames[n]
 		r.Fields = append(r.Fields, f)
 	}
 	groups, err := r.rootGroups(createBody)
@@ -904,6 +907,10 @@ func (r *Resource) fieldSchemas(doc *v3.Document, ops map[verb]foundOp) (createB
 	}
 	if getSchema, err = schemaOf(component); err != nil {
 		return nil, nil, nil, fmt.Errorf("%s: %w", r.Name, err)
+	}
+	createBody, updateBody, report := r.Policy.shapeRequests(r.Name, r.ID(), ops, createBody, updateBody, getSchema)
+	if len(report) != 0 {
+		return nil, nil, nil, fmt.Errorf("%s: %s", report[0].Code, report[0].Message)
 	}
 	return createBody, updateBody, getSchema, nil
 }
@@ -1466,12 +1473,22 @@ func oneOfGroups(s *base.Schema, path string, fields []*Field) ([]OneOfGroup, er
 func objectFields(s *base.Schema, path string, w walk, component string) ([]*Field, error) {
 	required := w.policy.requiredOf(component, s.Required)
 	var fields []*Field
+	owner := component
+	if owner == "" && len(w.stack) == 1 {
+		owner = strings.TrimPrefix(w.stack[0], componentPrefix) // Survey: the root component has no name yet
+	}
 	for _, name := range propertyNames(s) {
 		proxy := propertyOf(s, name)
-		ft, err := typeOf(proxy, path+"."+name, w)
+		fw := w
+		if w.policy.skips(owner, name) {
+			// The resource does not manage the field, so a shape that the model cannot read inside
+			// it is not an error. The walk goes on with a placeholder.
+			fw.issues = new([]error)
+		}
+		ft, err := typeOf(proxy, path+"."+name, fw)
 		w.policy.asSet(component, name, ft)
 		if err != nil {
-			if !w.keep(err) {
+			if !fw.keep(err) {
 				return nil, err
 			}
 			ft = &Type{Kind: String} // Survey: a placeholder, to go on

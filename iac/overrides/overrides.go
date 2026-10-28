@@ -25,6 +25,7 @@ import (
 	"maps"
 	"slices"
 	"sort"
+	"strings"
 
 	"github.com/pb33f/libopenapi/datamodel/high/base"
 
@@ -37,6 +38,15 @@ type API struct {
 	RequestWrapper string `yaml:"requestWrapper"`
 	// UpdateIDInBody: Update has no id in its path. The id is a field of the resource.
 	UpdateIDInBody bool `yaml:"updateIDInBody"`
+	// UpdateIDOutsideWrapper: with requestWrapper and updateIDInBody, the Update body carries the
+	// id property beside the wrapper property, not inside it.
+	UpdateIDOutsideWrapper bool `yaml:"updateIDOutsideWrapper"`
+	// RequestNames maps a property of the resource component to the path of the property that
+	// holds it in the Create and Update bodies, after the request wrapper. The path is
+	// dot-separated through object properties, for example {definitionKey: integrationKey,
+	// parameters: integrationParameters.parameters}. A request property that the key covers is
+	// not a separate field.
+	RequestNames map[string]string `yaml:"requestNames"`
 	// ClientSetID: the client can send the id on Create.
 	ClientSetID bool `yaml:"clientSetID"`
 	// ServerSetID: the server sets the id and returns it in every response, but the Get
@@ -146,6 +156,12 @@ func (a API) Check() error {
 	if a.ClientSetID && a.ServerSetID {
 		return errors.New("api.clientSetID and api.serverSetID both describe the id: keep the one that states who sets it")
 	}
+	if a.UpdateIDOutsideWrapper && (a.RequestWrapper == "" || !a.UpdateIDInBody) {
+		return errors.New("api.updateIDOutsideWrapper needs api.requestWrapper and api.updateIDInBody")
+	}
+	if err := checkRequestNames(a.RequestNames); err != nil {
+		return err
+	}
 	if a.Delete != nil && a.Delete.Operation == "" {
 		return errors.New("api.delete.operation is required")
 	}
@@ -204,6 +220,23 @@ func checkCreateAs(into map[string]string) error {
 	return nil
 }
 
+// checkRequestNames checks a requestNames map: each resource field and each request path is a
+// non-empty name, and no two fields name the same path.
+func checkRequestNames(names map[string]string) error {
+	seen := map[string]string{}
+	for _, field := range sortedKeys(names) {
+		path := names[field]
+		if field == "" || path == "" || slices.Contains(strings.Split(path, "."), "") {
+			return fmt.Errorf("api.requestNames maps a resource field to a request path of dot-separated names; %q: %q is not one", field, path)
+		}
+		if other, ok := seen[path]; ok {
+			return fmt.Errorf("api.requestNames maps both %q and %q to the request path %q", other, field, path)
+		}
+		seen[path] = field
+	}
+	return nil
+}
+
 // CheckUnwrap checks that the unwrap list names each component once.
 func CheckUnwrap(unwrap []string) error {
 	for i, name := range unwrap {
@@ -225,6 +258,8 @@ func (e Exceptions) Policy() model.Policy {
 		Existing:                     true,
 		RequestWrapper:               e.API.RequestWrapper,
 		UpdateIDInBody:               e.API.UpdateIDInBody,
+		UpdateIDOutsideWrapper:       e.API.UpdateIDOutsideWrapper,
+		RequestNames:                 maps.Clone(e.API.RequestNames),
 		ClientSetID:                  e.API.ClientSetID,
 		ServerSetID:                  e.API.ServerSetID,
 		IDProperty:                   e.API.IDProperty,

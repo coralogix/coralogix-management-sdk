@@ -186,3 +186,44 @@ func TestCreateResponseOnlyIDPropertyReachesThePolicy(t *testing.T) {
 		t.Fatalf("policy CreateResponseOnlyIDProperty = %q, want thingId", got)
 	}
 }
+
+func TestPolicyStatesTheRequestShapeKeys(t *testing.T) {
+	names := map[string]string{"definitionKey": "integrationKey", "parameters": "integrationParameters.parameters"}
+	e := Exceptions{API: API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true, RequestNames: names}}
+	got := e.Policy()
+	if !got.UpdateIDOutsideWrapper || !reflect.DeepEqual(got.RequestNames, names) {
+		t.Fatalf("Policy() = %+v, want updateIDOutsideWrapper and the request names", got)
+	}
+	names["definitionKey"] = "changed"
+	if got.RequestNames["definitionKey"] != "integrationKey" {
+		t.Fatal("the policy shares the map of the file")
+	}
+	if p := (Exceptions{}).Policy(); p.UpdateIDOutsideWrapper || p.RequestNames != nil {
+		t.Fatalf("Policy() without the keys = %+v", p)
+	}
+}
+
+func TestCheckRequestShapeKeys(t *testing.T) {
+	tests := map[string]struct {
+		api  API
+		want string
+	}{
+		"outside wrapper needs a wrapper":  {API{UpdateIDInBody: true, UpdateIDOutsideWrapper: true}, "updateIDOutsideWrapper"},
+		"outside wrapper needs id in body": {API{RequestWrapper: "metadata", UpdateIDOutsideWrapper: true}, "updateIDOutsideWrapper"},
+		"empty path":                       {API{RequestNames: map[string]string{"a": ""}}, "requestNames"},
+		"empty segment":                    {API{RequestNames: map[string]string{"a": "b..c"}}, "requestNames"},
+		"two fields one path":              {API{RequestNames: map[string]string{"a": "x.y", "b": "x.y"}}, "both"},
+		"empty field":                      {API{RequestNames: map[string]string{"": "x"}}, "requestNames"},
+	}
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			if err := tc.api.Check(); err == nil || !strings.Contains(err.Error(), tc.want) {
+				t.Fatalf("Check() = %v, want an error naming %q", err, tc.want)
+			}
+		})
+	}
+	ok := API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true, RequestNames: map[string]string{"a": "b", "c": "d.e"}}
+	if err := ok.Check(); err != nil {
+		t.Fatalf("Check() = %v", err)
+	}
+}
