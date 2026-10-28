@@ -193,7 +193,7 @@ func (r ApiConfigurationGroupServiceCreateConfigurationGroupRequest) Execute() (
 /*
 ConfigurationGroupServiceCreateConfigurationGroup Create configuration group
 
-Creates a fleet-manager configuration group.
+Creates a configuration group with its initial family. Send group settings and a single `family` object as the request body; the response returns the created group with its latest `family`. Set `family.active` to `true` to make the initial configuration available to matching agents. When `active` is omitted, the family is inactive. A successful response confirms creation; check Fleet Management for agent application status.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConfigurationGroupServiceCreateConfigurationGroupRequest
@@ -348,7 +348,7 @@ func (r ApiConfigurationGroupServiceGetConfigurationGroupRequest) Execute() (*Co
 /*
 ConfigurationGroupServiceGetConfigurationGroup Get configuration group
 
-Gets a fleet-manager configuration group by ID. An archived group returns 404 unless include_archived is true.
+Returns a configuration group with its latest family. Family `active` indicates eligibility for delivery, not whether an agent has successfully applied the configuration. An archived group returns 404 unless `include_archived=true`; when included, an archived group is returned with its latest configuration family, which may itself be archived.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.
@@ -685,7 +685,7 @@ func (r ApiConfigurationGroupServiceUpdateConfigurationGroupRequest) Execute() (
 /*
 ConfigurationGroupServiceUpdateConfigurationGroup Update configuration group
 
-Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes. An archived group returns 404.
+Updates the fields listed in `update_mask`; other fields are unchanged. Changing `family.raw` or `family.preset` creates a new configuration family version only when the content changes. Send group field values directly in the request body. To activate the latest family, send `{"family":{"active":true}}` with `update_mask=family.active`. The response contains the latest family. An archived group returns 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration group UUID v7.

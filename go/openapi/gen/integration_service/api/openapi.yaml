@@ -160,7 +160,7 @@
     },
     "/integrations/integrations/v1/deployed/{integration_id}": {
       "get": {
-        "description": "Returns the deployed instance of the specified integration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Returns the deployed instance of the specified integration. An id that does not exist answers 404.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_GetDeployedIntegration",
         "parameters": [
           {
@@ -234,7 +234,7 @@
     },
     "/integrations/integrations/v1/instances/{integration_id}": {
       "delete": {
-        "description": "Removes the specified deployed integration instance.\n\nRequires the following permissions:\n- `integrations:Deploy`",
+        "description": "Removes the specified deployed integration instance and answers an empty object. An id that does not exist answers 404.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "operationId": "IntegrationService_DeleteIntegration",
         "parameters": [
           {
@@ -656,18 +656,18 @@
     },
     "/integrations/metadata/v1": {
       "put": {
-        "description": "Updates an existing integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
+        "description": "Updates the integration deployment with the given id and answers an empty object. A parameter that the request omits keeps its stored value. An id that does not exist answers 404.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "operationId": "IntegrationService_UpdateIntegration",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "description": "This data structure represents a list of outgoing webhook types.",
+                "description": "Request for updating an integration deployment.",
                 "properties": {
                   "id": {
                     "description": "Integration metadata ID generated at creation time.",
                     "maxLength": 65535,
-                    "minLength": 0,
+                    "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
                     "type": "string",
                     "x-coralogix-presence": true
@@ -676,11 +676,16 @@
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
                 },
+                "required": [
+                  "id",
+                  "metadata"
+                ],
                 "title": "Update integration request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -733,7 +738,7 @@
         ]
       },
       "post": {
-        "description": "Creates or updates an integration deployment.\n\nRequires the following permissions:\n- `integrations:Deploy`",
+        "description": "Creates an integration deployment and returns its id. To change an existing deployment, use the update operation. Parameter names are case sensitive.\n\nRequires the following permissions:\n- `integrations:Deploy`",
         "operationId": "IntegrationService_SaveIntegration",
         "requestBody": {
           "content": {
@@ -745,11 +750,15 @@
                     "$ref": "#/components/schemas/IntegrationMetadata"
                   }
                 },
+                "required": [
+                  "metadata"
+                ],
                 "title": "Save integration request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -804,7 +813,7 @@
     },
     "/integrations/metadata/v1/test": {
       "post": {
-        "description": "Tests the integration configuration.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
+        "description": "Tests the integration configuration. A test that runs answers 200 with result.success or result.failure.errorMessage. An invalid integration key or version answers 400 or 404.\n\nRequires the following permissions:\n- `integrations:ReadConfig`",
         "operationId": "IntegrationService_TestIntegration",
         "requestBody": {
           "content": {
@@ -824,11 +833,15 @@
                     "x-coralogix-presence": true
                   }
                 },
+                "required": [
+                  "integrationData"
+                ],
                 "title": "Test integration request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1287,12 +1300,17 @@
       },
       "DeployedIntegrationInformation": {
         "title": "Deployed integration information",
+        "required": [
+          "id",
+          "definitionKey",
+          "definitionVersion"
+        ],
         "type": "object",
         "properties": {
           "definitionKey": {
             "description": "The definition key.",
             "maxLength": 65535,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
@@ -1300,7 +1318,7 @@
           "definitionVersion": {
             "description": "The definition version.",
             "maxLength": 65535,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
@@ -1308,7 +1326,7 @@
           "id": {
             "description": "Unique identifier.",
             "maxLength": 65535,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
@@ -2393,12 +2411,17 @@
       },
       "IntegrationMetadata": {
         "title": "Integration metadata",
+        "required": [
+          "integrationKey",
+          "version",
+          "integrationParameters"
+        ],
         "type": "object",
         "properties": {
           "integrationKey": {
-            "description": "The integration key.",
+            "description": "The integration key. Must not be empty.",
             "maxLength": 65535,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
@@ -2407,15 +2430,15 @@
             "$ref": "#/components/schemas/GenericIntegrationParameters"
           },
           "version": {
-            "description": "Version number.",
+            "description": "Version number. Must not be empty.",
             "maxLength": 65535,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "This data structure represents the metadata of an integration."
+        "description": "This data structure represents the metadata of an integration. Parameter names are case sensitive."
       },
       "IntegrationRevision": {
         "title": "Integration revision",
@@ -3163,6 +3186,9 @@
       },
       "SaveIntegrationResponse": {
         "title": "Save integration response",
+        "required": [
+          "integrationId"
+        ],
         "type": "object",
         "properties": {
           "integrationId": {

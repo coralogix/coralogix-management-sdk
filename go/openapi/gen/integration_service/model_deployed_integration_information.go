@@ -13,6 +13,7 @@ package integration_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,11 +24,11 @@ var _ MappedNullable = &DeployedIntegrationInformation{}
 // DeployedIntegrationInformation Deployed integration information.
 type DeployedIntegrationInformation struct {
 	// The definition key.
-	DefinitionKey *string `json:"definitionKey,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	DefinitionKey string `json:"definitionKey" validate:"regexp=^[\\s\\S]*$"`
 	// The definition version.
-	DefinitionVersion *string `json:"definitionVersion,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	DefinitionVersion string `json:"definitionVersion" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	Id string `json:"id" validate:"regexp=^[\\s\\S]*$"`
 	IntegrationStatus *IntegrationStatus `json:"integrationStatus,omitempty"`
 	// The parameters.
 	Parameters []Parameter `json:"parameters,omitempty"`
@@ -41,8 +42,11 @@ type _DeployedIntegrationInformation DeployedIntegrationInformation
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewDeployedIntegrationInformation() *DeployedIntegrationInformation {
+func NewDeployedIntegrationInformation(definitionKey string, definitionVersion string, id string) *DeployedIntegrationInformation {
 	this := DeployedIntegrationInformation{}
+	this.DefinitionKey = definitionKey
+	this.DefinitionVersion = definitionVersion
+	this.Id = id
 	return &this
 }
 
@@ -54,100 +58,76 @@ func NewDeployedIntegrationInformationWithDefaults() *DeployedIntegrationInforma
 	return &this
 }
 
-// GetDefinitionKey returns the DefinitionKey field value if set, zero value otherwise.
+// GetDefinitionKey returns the DefinitionKey field value
 func (o *DeployedIntegrationInformation) GetDefinitionKey() string {
-	if o == nil || IsNil(o.DefinitionKey) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DefinitionKey
+
+	return o.DefinitionKey
 }
 
-// GetDefinitionKeyOk returns a tuple with the DefinitionKey field value if set, nil otherwise
+// GetDefinitionKeyOk returns a tuple with the DefinitionKey field value
 // and a boolean to check if the value has been set.
 func (o *DeployedIntegrationInformation) GetDefinitionKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.DefinitionKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefinitionKey, true
+	return &o.DefinitionKey, true
 }
 
-// HasDefinitionKey returns a boolean if a field has been set.
-func (o *DeployedIntegrationInformation) HasDefinitionKey() bool {
-	if o != nil && !IsNil(o.DefinitionKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefinitionKey gets a reference to the given string and assigns it to the DefinitionKey field.
+// SetDefinitionKey sets field value
 func (o *DeployedIntegrationInformation) SetDefinitionKey(v string) {
-	o.DefinitionKey = &v
+	o.DefinitionKey = v
 }
 
-// GetDefinitionVersion returns the DefinitionVersion field value if set, zero value otherwise.
+// GetDefinitionVersion returns the DefinitionVersion field value
 func (o *DeployedIntegrationInformation) GetDefinitionVersion() string {
-	if o == nil || IsNil(o.DefinitionVersion) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DefinitionVersion
+
+	return o.DefinitionVersion
 }
 
-// GetDefinitionVersionOk returns a tuple with the DefinitionVersion field value if set, nil otherwise
+// GetDefinitionVersionOk returns a tuple with the DefinitionVersion field value
 // and a boolean to check if the value has been set.
 func (o *DeployedIntegrationInformation) GetDefinitionVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.DefinitionVersion) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefinitionVersion, true
+	return &o.DefinitionVersion, true
 }
 
-// HasDefinitionVersion returns a boolean if a field has been set.
-func (o *DeployedIntegrationInformation) HasDefinitionVersion() bool {
-	if o != nil && !IsNil(o.DefinitionVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefinitionVersion gets a reference to the given string and assigns it to the DefinitionVersion field.
+// SetDefinitionVersion sets field value
 func (o *DeployedIntegrationInformation) SetDefinitionVersion(v string) {
-	o.DefinitionVersion = &v
+	o.DefinitionVersion = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *DeployedIntegrationInformation) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *DeployedIntegrationInformation) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *DeployedIntegrationInformation) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *DeployedIntegrationInformation) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetIntegrationStatus returns the IntegrationStatus field value if set, zero value otherwise.
@@ -224,15 +204,9 @@ func (o DeployedIntegrationInformation) MarshalJSON() ([]byte, error) {
 
 func (o DeployedIntegrationInformation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefinitionKey) {
-		toSerialize["definitionKey"] = o.DefinitionKey
-	}
-	if !IsNil(o.DefinitionVersion) {
-		toSerialize["definitionVersion"] = o.DefinitionVersion
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["definitionKey"] = o.DefinitionKey
+	toSerialize["definitionVersion"] = o.DefinitionVersion
+	toSerialize["id"] = o.Id
 	if !IsNil(o.IntegrationStatus) {
 		toSerialize["integrationStatus"] = o.IntegrationStatus
 	}
@@ -248,6 +222,29 @@ func (o DeployedIntegrationInformation) ToMap() (map[string]interface{}, error) 
 }
 
 func (o *DeployedIntegrationInformation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"definitionKey",
+		"definitionVersion",
+		"id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varDeployedIntegrationInformation := _DeployedIntegrationInformation{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

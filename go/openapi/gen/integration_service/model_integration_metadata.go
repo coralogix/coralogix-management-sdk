@@ -13,6 +13,7 @@ package integration_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,13 +21,13 @@ var _ = bytes.MinRead
 // checks if the IntegrationMetadata type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &IntegrationMetadata{}
 
-// IntegrationMetadata This data structure represents the metadata of an integration.
+// IntegrationMetadata This data structure represents the metadata of an integration. Parameter names are case sensitive.
 type IntegrationMetadata struct {
-	// The integration key.
-	IntegrationKey *string `json:"integrationKey,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	IntegrationParameters *GenericIntegrationParameters `json:"integrationParameters,omitempty"`
-	// Version number.
-	Version *string `json:"version,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	// The integration key. Must not be empty.
+	IntegrationKey string `json:"integrationKey" validate:"regexp=^[\\s\\S]*$"`
+	IntegrationParameters GenericIntegrationParameters `json:"integrationParameters"`
+	// Version number. Must not be empty.
+	Version string `json:"version" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -37,8 +38,11 @@ type _IntegrationMetadata IntegrationMetadata
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewIntegrationMetadata() *IntegrationMetadata {
+func NewIntegrationMetadata(integrationKey string, integrationParameters GenericIntegrationParameters, version string) *IntegrationMetadata {
 	this := IntegrationMetadata{}
+	this.IntegrationKey = integrationKey
+	this.IntegrationParameters = integrationParameters
+	this.Version = version
 	return &this
 }
 
@@ -50,100 +54,76 @@ func NewIntegrationMetadataWithDefaults() *IntegrationMetadata {
 	return &this
 }
 
-// GetIntegrationKey returns the IntegrationKey field value if set, zero value otherwise.
+// GetIntegrationKey returns the IntegrationKey field value
 func (o *IntegrationMetadata) GetIntegrationKey() string {
-	if o == nil || IsNil(o.IntegrationKey) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.IntegrationKey
+
+	return o.IntegrationKey
 }
 
-// GetIntegrationKeyOk returns a tuple with the IntegrationKey field value if set, nil otherwise
+// GetIntegrationKeyOk returns a tuple with the IntegrationKey field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationMetadata) GetIntegrationKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.IntegrationKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IntegrationKey, true
+	return &o.IntegrationKey, true
 }
 
-// HasIntegrationKey returns a boolean if a field has been set.
-func (o *IntegrationMetadata) HasIntegrationKey() bool {
-	if o != nil && !IsNil(o.IntegrationKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationKey gets a reference to the given string and assigns it to the IntegrationKey field.
+// SetIntegrationKey sets field value
 func (o *IntegrationMetadata) SetIntegrationKey(v string) {
-	o.IntegrationKey = &v
+	o.IntegrationKey = v
 }
 
-// GetIntegrationParameters returns the IntegrationParameters field value if set, zero value otherwise.
+// GetIntegrationParameters returns the IntegrationParameters field value
 func (o *IntegrationMetadata) GetIntegrationParameters() GenericIntegrationParameters {
-	if o == nil || IsNil(o.IntegrationParameters) {
+	if o == nil {
 		var ret GenericIntegrationParameters
 		return ret
 	}
-	return *o.IntegrationParameters
+
+	return o.IntegrationParameters
 }
 
-// GetIntegrationParametersOk returns a tuple with the IntegrationParameters field value if set, nil otherwise
+// GetIntegrationParametersOk returns a tuple with the IntegrationParameters field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationMetadata) GetIntegrationParametersOk() (*GenericIntegrationParameters, bool) {
-	if o == nil || IsNil(o.IntegrationParameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IntegrationParameters, true
+	return &o.IntegrationParameters, true
 }
 
-// HasIntegrationParameters returns a boolean if a field has been set.
-func (o *IntegrationMetadata) HasIntegrationParameters() bool {
-	if o != nil && !IsNil(o.IntegrationParameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationParameters gets a reference to the given GenericIntegrationParameters and assigns it to the IntegrationParameters field.
+// SetIntegrationParameters sets field value
 func (o *IntegrationMetadata) SetIntegrationParameters(v GenericIntegrationParameters) {
-	o.IntegrationParameters = &v
+	o.IntegrationParameters = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value
 func (o *IntegrationMetadata) GetVersion() string {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Version
+
+	return o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationMetadata) GetVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.Version) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return &o.Version, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *IntegrationMetadata) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given string and assigns it to the Version field.
+// SetVersion sets field value
 func (o *IntegrationMetadata) SetVersion(v string) {
-	o.Version = &v
+	o.Version = v
 }
 
 func (o IntegrationMetadata) MarshalJSON() ([]byte, error) {
@@ -156,15 +136,9 @@ func (o IntegrationMetadata) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationMetadata) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IntegrationKey) {
-		toSerialize["integrationKey"] = o.IntegrationKey
-	}
-	if !IsNil(o.IntegrationParameters) {
-		toSerialize["integrationParameters"] = o.IntegrationParameters
-	}
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
-	}
+	toSerialize["integrationKey"] = o.IntegrationKey
+	toSerialize["integrationParameters"] = o.IntegrationParameters
+	toSerialize["version"] = o.Version
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -174,6 +148,29 @@ func (o IntegrationMetadata) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *IntegrationMetadata) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"integrationKey",
+		"integrationParameters",
+		"version",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varIntegrationMetadata := _IntegrationMetadata{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

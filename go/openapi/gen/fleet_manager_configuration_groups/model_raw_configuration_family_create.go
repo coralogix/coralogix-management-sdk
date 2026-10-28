@@ -23,11 +23,11 @@ var _ MappedNullable = &RawConfigurationFamilyCreate{}
 
 // RawConfigurationFamilyCreate Configuration family content defined directly by its remote configurations.
 type RawConfigurationFamilyCreate struct {
-	// Collector semantic version this family targets, without a leading v prefix. When set, every agent selector must set service.version to this value. When omitted, the family is not tied to a collector version.
+	// Collector semantic version targeted by this family, without a leading v prefix. Use the Collector version, not the Supervisor image tag. This field has no impact on agent selector matching.
 	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
-	// Metadata stored with this configuration family.
+	// Additional key-value metadata stored with the family. It does not select agents. Example: `{\"team\":\"platform\"}`.
 	Metadata map[string]string `json:"metadata,omitempty"`
-	// Remote configurations to create in this family.
+	// Collector configurations and selectors to create together. Include at least one entry.
 	RemoteConfigurations []RemoteConfigurationCreate `json:"remoteConfigurations"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

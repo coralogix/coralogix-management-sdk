@@ -23,9 +23,9 @@ var _ MappedNullable = &RawConfigurationFamily{}
 
 // RawConfigurationFamily Inputs of a configuration family defined directly by its remote configurations.
 type RawConfigurationFamily struct {
-	// Collector semantic version this family targets, without a leading v prefix.
+	// Collector semantic version targeted by this family. This is separate from the family version and the Supervisor image tag.
 	CollectorVersion *string `json:"collectorVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
-	// Metadata stored with this configuration family.
+	// Metadata stored with this configuration family. Example: `{\"team\":\"platform\"}`.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Remote configurations of this configuration family.
 	RemoteConfigurations []RemoteConfiguration `json:"remoteConfigurations"`

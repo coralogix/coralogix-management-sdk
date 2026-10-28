@@ -28,6 +28,9 @@
             "required": false,
             "schema": {
               "description": "Maximum number of groups to return. Defaults to 100 and cannot exceed 256.",
+              "examples": [
+                100
+              ],
               "format": "int32",
               "maximum": 256,
               "minimum": 1,
@@ -42,6 +45,9 @@
             "required": false,
             "schema": {
               "description": "Opaque token returned by a previous list response. Send it with the same include_archived value as that request.",
+              "examples": [
+                "AZdtCKSZq3sAAAAAAAAAAQ"
+              ],
               "maxLength": 64,
               "minLength": 1,
               "pattern": "^[A-Za-z0-9_-]+$",
@@ -137,16 +143,19 @@
         "x-stability": "preview"
       },
       "post": {
-        "description": "Creates a fleet-manager configuration group.",
+        "description": "Creates a configuration group with its initial family. Send group settings and a single `family` object as the request body; the response returns the created group with its latest `family`. Set `family.active` to `true` to make the initial configuration available to matching agents. When `active` is omitted, the family is inactive. A successful response confirms creation; check Fleet Management for agent application status.",
         "operationId": "ConfigurationGroupService_CreateConfigurationGroup",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "description": "Payload used to create a fleet-manager configuration group.",
+                "description": "Group settings and the initial family. The service assigns the group ID.",
                 "properties": {
                   "description": {
-                    "description": "Human-readable description.",
+                    "description": "Description of the group's purpose.",
+                    "examples": [
+                      "Collector configuration for production Linux virtual machines."
+                    ],
                     "maxLength": 4096,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
@@ -159,10 +168,13 @@
                         "$ref": "#/components/schemas/ConfigurationFamilyCreate"
                       }
                     ],
-                    "description": "Initial configuration family to create with this group."
+                    "description": "Initial family containing the Collector configurations and agent selectors."
                   },
                   "name": {
-                    "description": "Display name, unique among the team's configuration groups.",
+                    "description": "Display name shown in Fleet Management, unique among the team's configuration groups.",
+                    "examples": [
+                      "Production Linux VMs"
+                    ],
                     "maxLength": 256,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
@@ -170,7 +182,10 @@
                   },
                   "priorityOrder": {
                     "default": 0,
-                    "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+                    "description": "Selection priority when multiple configurations match an agent. Higher values take precedence. Defaults to 0.",
+                    "examples": [
+                      100
+                    ],
                     "format": "int32",
                     "maximum": 2147483647,
                     "minimum": -2147483648,
@@ -178,9 +193,14 @@
                     "x-coralogix-presence": true
                   },
                   "tags": {
-                    "description": "Tags attached to the configuration group.",
+                    "description": "Tags for organizing the group. Tags do not select agents.",
+                    "examples": [
+                      [
+                        "production"
+                      ]
+                    ],
                     "items": {
-                      "description": "Tags attached to the configuration group.",
+                      "description": "Tags for organizing the group. Tags do not select agents.",
                       "maxLength": 256,
                       "minLength": 0,
                       "pattern": "^[\\s\\S]*$",
@@ -300,7 +320,7 @@
     },
     "/fleet-management/configuration-groups/v1/{id}": {
       "get": {
-        "description": "Gets a fleet-manager configuration group by ID. An archived group returns 404 unless include_archived is true.",
+        "description": "Returns a configuration group with its latest family. Family `active` indicates eligibility for delivery, not whether an agent has successfully applied the configuration. An archived group returns 404 unless `include_archived=true`; when included, an archived group is returned with its latest configuration family, which may itself be archived.",
         "operationId": "ConfigurationGroupService_GetConfigurationGroup",
         "parameters": [
           {
@@ -412,7 +432,7 @@
         "x-stability": "preview"
       },
       "patch": {
-        "description": "Updates the fields listed in update_mask; other fields are unchanged. Changing family.raw or family.preset creates a new configuration family version only when the content changes. An archived group returns 404.",
+        "description": "Updates the fields listed in `update_mask`; other fields are unchanged. Changing `family.raw` or `family.preset` creates a new configuration family version only when the content changes. Send group field values directly in the request body. To activate the latest family, send `{\"family\":{\"active\":true}}` with `update_mask=family.active`. The response contains the latest family. An archived group returns 404.",
         "operationId": "ConfigurationGroupService_UpdateConfigurationGroup",
         "parameters": [
           {
@@ -422,6 +442,9 @@
             "required": true,
             "schema": {
               "description": "Comma-separated fields to update: name, description, tags, priorityOrder, family.description, family.active, family.raw, family.preset, or one field inside family.raw or family.preset, such as family.raw.metadata or family.preset.chartVersion. family.raw and family.preset replace the whole family content; a field inside them changes only that field and keeps the others. A listed field that is omitted from the body is cleared (description, tags, family.description, and optional fields inside family.raw or family.preset) or reset to its default (priorityOrder 0, family.active false). name cannot be cleared, and family.raw.remoteConfigurations cannot be empty. Changing family.preset.chartVersion without family.preset.integrationVersion uses the default integration version of the new chart version. The body must include the arm being changed, and only the arm matching the current family's content type is accepted (raw and preset families cannot be switched). A bare family, unknown paths, and * return 400.",
+              "examples": [
+                "family.active"
+              ],
               "maxLength": 512,
               "minLength": 1,
               "pattern": "^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$",
@@ -437,7 +460,10 @@
                 "description": "Configuration group field values for an update. Only fields listed in update_mask are applied.",
                 "properties": {
                   "description": {
-                    "description": "Human-readable description.",
+                    "description": "Description of the group's purpose.",
+                    "examples": [
+                      "Collector configuration for production Linux virtual machines."
+                    ],
                     "maxLength": 4096,
                     "minLength": 0,
                     "pattern": "^[\\s\\S]*$",
@@ -453,7 +479,10 @@
                     "description": "Latest configuration family field values."
                   },
                   "name": {
-                    "description": "Display name, unique among the team's configuration groups.",
+                    "description": "Display name shown in Fleet Management, unique among the team's configuration groups.",
+                    "examples": [
+                      "Production Linux VMs"
+                    ],
                     "maxLength": 256,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
@@ -462,7 +491,10 @@
                   },
                   "priorityOrder": {
                     "default": 0,
-                    "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+                    "description": "Selection priority when multiple configurations match an agent. Higher values take precedence.",
+                    "examples": [
+                      100
+                    ],
                     "format": "int32",
                     "maximum": 2147483647,
                     "minimum": -2147483648,
@@ -470,9 +502,14 @@
                     "x-coralogix-presence": true
                   },
                   "tags": {
-                    "description": "Tags attached to the configuration group.",
+                    "description": "Tags for organizing the group. Tags do not select agents.",
+                    "examples": [
+                      [
+                        "production"
+                      ]
+                    ],
                     "items": {
-                      "description": "Tags attached to the configuration group.",
+                      "description": "Tags for organizing the group. Tags do not select agents.",
                       "maxLength": 256,
                       "minLength": 0,
                       "pattern": "^[\\s\\S]*$",
@@ -683,10 +720,10 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Flat agent attributes to match. If family.raw.collectorVersion is set, service.version must be set to it."
+            "description": "Exact key-value matches, combined with AND. Use advertised agent attributes such as cx.agent.type and host.name. Set custom attributes under agent_description.non_identifying_attributes of the opamp extension in the Collector configuration, or under agent.description.non_identifying_attributes in the Supervisor configuration. An empty selector matches all agents. Example: `{\"cx.agent.type\":\"docker\",\"host.name\":\"collector-host-01\"}`."
           }
         },
-        "description": "Agent selector used in requests."
+        "description": "Exact matches against attributes advertised by the target agent. Every key-value pair must match the agent."
       },
       "AgentSelectorResponse": {
         "type": "object",
@@ -699,10 +736,10 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Flat agent attributes matched by the selector."
+            "description": "Attributes of the stored selector. A remote configuration saved with an omitted or empty selector is returned without agentSelector, so the empty match-all selection is preserved; attributes are not expanded to the currently matched agents. Example: `{\"cx.agent.type\":\"docker\",\"host.name\":\"collector-host-01\",\"service.version\":\"0.160.0\"}`."
           }
         },
-        "description": "Agent selector returned in responses."
+        "description": "Agent attributes used for matching."
       },
       "ArchiveConfigurationGroupResponse": {
         "type": "object",
@@ -766,11 +803,14 @@
         "properties": {
           "active": {
             "type": "boolean",
-            "description": "Whether this family is active.",
+            "description": "Whether this family is eligible for delivery to matching agents. This is not confirmation that an agent has applied it.",
             "default": false
           },
           "basedOnConfigurationFamilyId": {
             "description": "Configuration family UUID v7 this family is based on.",
+            "examples": [
+              "01975ed4-9c18-7a2d-9b4e-426614173999"
+            ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
@@ -779,6 +819,9 @@
           },
           "description": {
             "description": "Human-readable description.",
+            "examples": [
+              "Adds an OTLP logs pipeline for the production Linux VMs."
+            ],
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -790,10 +833,16 @@
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Configuration family UUID v7."
+            "description": "Configuration family UUID v7.",
+            "examples": [
+              "01975ed4-9c1b-7c2a-9e5f-526614174001"
+            ]
           },
           "lastActivatedAt": {
             "description": "Time when this family was last activated.",
+            "examples": [
+              "2026-10-08T09:41:01.000Z"
+            ],
             "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
@@ -830,10 +879,13 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Monotonic version number of this configuration family within its group."
+            "description": "Increasing family version within this group, returned as a string. The initial version is \"1\"; changed configuration content creates a new version.",
+            "examples": [
+              "2"
+            ]
           }
         },
-        "description": "Configuration family returned by Fleet Manager."
+        "description": "A versioned collection of Collector configurations and agent selectors. Family IDs identify versions; the group ID stays the same across updates."
       },
       "ConfigurationFamilyCreate": {
         "type": "object",
@@ -854,12 +906,15 @@
         "properties": {
           "active": {
             "default": false,
-            "description": "Whether this family is active.",
+            "description": "Set true to make the configuration available to matching agents. Defaults to false (inactive).",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "description": {
             "description": "Human-readable description.",
+            "examples": [
+              "Adds an OTLP logs pipeline for the production Linux VMs."
+            ],
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -883,7 +938,7 @@
             "description": "Configuration family defined directly by its remote configurations, each with an OTel Collector configuration and an agent selector."
           }
         },
-        "description": "Initial configuration family to create."
+        "description": "An initial version of the group's configurations. Supply raw Collector configurations or preset template settings. The family starts inactive unless active is true."
       },
       "ConfigurationFamilySource": {
         "required": [
@@ -940,12 +995,15 @@
         "properties": {
           "active": {
             "default": false,
-            "description": "Whether this family is active.",
+            "description": "Set true to activate or false to deactivate the latest family. Include family.active in update_mask to apply this value; omitting its value when listed resets it to false.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "description": {
             "description": "Human-readable description.",
+            "examples": [
+              "Adds an OTLP logs pipeline for the production Linux VMs."
+            ],
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -984,7 +1042,10 @@
             "description": "Whether this configuration group is archived."
           },
           "description": {
-            "description": "Human-readable description.",
+            "description": "Description of the group's purpose.",
+            "examples": [
+              "Collector configuration for production Linux virtual machines."
+            ],
             "maxLength": 4096,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -1004,10 +1065,16 @@
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Configuration group UUID v7."
+            "description": "Configuration group UUID v7.",
+            "examples": [
+              "01975ed4-9c1a-7b3f-8d4e-426614174000"
+            ]
           },
           "name": {
-            "description": "Display name, unique among the team's configuration groups.",
+            "description": "Display name shown in Fleet Management, unique among the team's configuration groups.",
+            "examples": [
+              "Production Linux VMs"
+            ],
             "maxLength": 256,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
@@ -1018,9 +1085,12 @@
             "maximum": 2147483647,
             "minimum": -2147483648,
             "type": "integer",
-            "description": "Selection precedence. Higher values win on ties and 0 is the default.",
+            "description": "Selection priority when multiple configurations match an agent. Higher values take precedence.",
             "format": "int32",
-            "default": 0
+            "default": 0,
+            "examples": [
+              100
+            ]
           },
           "tags": {
             "maxItems": 64,
@@ -1031,12 +1101,17 @@
               "minLength": 0,
               "pattern": "^[\\s\\S]*$",
               "type": "string",
-              "description": "Tags attached to the configuration group."
+              "description": "Tags for organizing the group. Tags do not select agents."
             },
-            "description": "Tags attached to the configuration group."
+            "description": "Tags for organizing the group. Tags do not select agents.",
+            "examples": [
+              [
+                "production"
+              ]
+            ]
           }
         },
-        "description": "Fleet-manager configuration group."
+        "description": "A group of versioned Collector configurations. Use its ID for get, update, and archive operations."
       },
       "ConfigurationOverlaySource": {
         "required": [
@@ -1050,10 +1125,16 @@
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Configuration overlay UUID v7."
+            "description": "Configuration overlay UUID v7.",
+            "examples": [
+              "01975ed4-9c1d-7e4c-b071-426614174003"
+            ]
           },
           "overlayName": {
             "description": "Configuration overlay name at read time.",
+            "examples": [
+              "production-overlay"
+            ],
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -1065,7 +1146,10 @@
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Configuration overlay version UUID v7."
+            "description": "Configuration overlay version UUID v7.",
+            "examples": [
+              "01975ed4-9c1e-7f5d-8182-426614174004"
+            ]
           }
         },
         "description": "Configuration overlay provenance."
@@ -1177,6 +1261,9 @@
           },
           "nextPageToken": {
             "description": "Token for the next page. Omitted when there are no further results.",
+            "examples": [
+              "AZdtCKSZq3sAAAAAAAAAAQ"
+            ],
             "maxLength": 64,
             "minLength": 1,
             "pattern": "^[A-Za-z0-9_-]+$",
@@ -1232,7 +1319,10 @@
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
             "type": "string",
-            "description": "OTel Collector semantic version Coralogix derived from chartVersion, without a leading v prefix."
+            "description": "OTel Collector semantic version Coralogix derived from chartVersion, without a leading v prefix.",
+            "examples": [
+              "0.160.0"
+            ]
           },
           "integrationVersion": {
             "maxLength": 256,
@@ -1250,14 +1340,14 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName."
+            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Example: `{\"ClusterName\":\"production-eu2\"}`."
           },
           "observabilityFeatures": {
             "maxLength": 1048576,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion."
+            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion. Example: `{\"logs\":{\"enabled\":true}}`."
           },
           "remoteConfigurations": {
             "maxItems": 128,
@@ -1311,14 +1401,14 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here."
+            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here. Example: `{\"ClusterName\":\"production-eu2\"}`."
           },
           "observabilityFeatures": {
             "maxLength": 1048576,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion."
+            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion. Example: `{\"logs\":{\"enabled\":true}}`."
           }
         },
         "description": "Configuration template settings for a new configuration family; Coralogix generates the remote configurations from them."
@@ -1358,14 +1448,14 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here."
+            "description": "Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here. Example: `{\"ClusterName\":\"production-eu2\"}`."
           },
           "observabilityFeatures": {
             "maxLength": 1048576,
             "minLength": 2,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion."
+            "description": "Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion. Example: `{\"logs\":{\"enabled\":true}}`."
           }
         },
         "description": "Configuration template settings of the latest configuration family. With family.preset in update_mask, chartName, chartVersion, and observabilityFeatures are required and the settings replace the stored ones; omitted metadata is cleared. With a field path, only that field is needed and changes. A new configuration family version is created only when the settings change."
@@ -1377,7 +1467,10 @@
         "type": "object",
         "properties": {
           "collectorVersion": {
-            "description": "Collector semantic version this family targets, without a leading v prefix.",
+            "description": "Collector semantic version targeted by this family. This is separate from the family version and the Supervisor image tag.",
+            "examples": [
+              "0.160.0"
+            ],
             "maxLength": 256,
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
@@ -1393,7 +1486,7 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Metadata stored with this configuration family."
+            "description": "Metadata stored with this configuration family. Example: `{\"team\":\"platform\"}`."
           },
           "remoteConfigurations": {
             "maxItems": 128,
@@ -1414,7 +1507,10 @@
         "type": "object",
         "properties": {
           "collectorVersion": {
-            "description": "Collector semantic version this family targets, without a leading v prefix. When set, every agent selector must set service.version to this value. When omitted, the family is not tied to a collector version.",
+            "description": "Collector semantic version targeted by this family, without a leading v prefix. Use the Collector version, not the Supervisor image tag. This field has no impact on agent selector matching.",
+            "examples": [
+              "0.160.0"
+            ],
             "maxLength": 256,
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
@@ -1430,7 +1526,7 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Metadata stored with this configuration family."
+            "description": "Additional key-value metadata stored with the family. It does not select agents. Example: `{\"team\":\"platform\"}`."
           },
           "remoteConfigurations": {
             "maxItems": 128,
@@ -1439,7 +1535,7 @@
             "items": {
               "$ref": "#/components/schemas/RemoteConfigurationCreate"
             },
-            "description": "Remote configurations to create in this family."
+            "description": "Collector configurations and selectors to create together. Include at least one entry."
           }
         },
         "description": "Configuration family content defined directly by its remote configurations."
@@ -1448,7 +1544,10 @@
         "type": "object",
         "properties": {
           "collectorVersion": {
-            "description": "Collector semantic version this family targets, without a leading v prefix. When set, every agent selector must set service.version to this value. When omitted, the family is not tied to a collector version.",
+            "description": "Collector semantic version targeted by this family, without a leading v prefix. Use the Collector version, not the Supervisor image tag. This field has no impact on agent selector matching.",
+            "examples": [
+              "0.160.0"
+            ],
             "maxLength": 256,
             "minLength": 5,
             "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
@@ -1464,7 +1563,7 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "Metadata stored with this configuration family."
+            "description": "Additional key-value metadata stored with the family. It does not select agents. Example: `{\"team\":\"platform\"}`."
           },
           "remoteConfigurations": {
             "maxItems": 128,
@@ -1496,6 +1595,9 @@
           },
           "createdAt": {
             "description": "Time when this remote configuration was created.",
+            "examples": [
+              "2026-10-08T09:41:01.000Z"
+            ],
             "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
@@ -1507,31 +1609,46 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "SHA-256 hash of the normalized raw configuration content."
+            "description": "SHA-256 hash of the normalized raw configuration content.",
+            "examples": [
+              "3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c"
+            ]
           },
           "id": {
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
             "type": "string",
-            "description": "Remote configuration UUID v7."
+            "description": "Remote configuration UUID v7.",
+            "examples": [
+              "01975ed4-9c1c-7d3b-af60-626614174002"
+            ]
           },
           "name": {
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Remote configuration name."
+            "description": "Remote configuration name.",
+            "examples": [
+              "host-metrics"
+            ]
           },
           "rawConfiguration": {
             "maxLength": 1048576,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Normalized OpenTelemetry Collector configuration YAML."
+            "description": "Collector YAML sent to matching agents.",
+            "examples": [
+              "receivers:\n  otlp:\n    protocols:\n      grpc:\n      http:\nexporters:\n  otlp:\n    endpoint: otelcol:4317\nservice:\n  pipelines:\n    logs:\n      receivers: [otlp]\n      exporters: [otlp]"
+            ]
           },
           "updatedAt": {
             "description": "Time when this remote configuration was last updated.",
+            "examples": [
+              "2026-10-08T09:41:01.000Z"
+            ],
             "format": "date-time",
             "maxLength": 64,
             "minLength": 0,
@@ -1553,10 +1670,13 @@
                 "$ref": "#/components/schemas/AgentSelectorRequest"
               }
             ],
-            "description": "Flat agent attributes that match agents for this configuration."
+            "description": "Attributes advertised by the target agents. All attributes must match; set custom attributes under agent_description.non_identifying_attributes of the opamp extension in the Collector configuration, or under agent.description.non_identifying_attributes in the Supervisor configuration."
           },
           "name": {
-            "description": "Remote configuration name.",
+            "description": "Name identifying this configuration within the family.",
+            "examples": [
+              "host-metrics"
+            ],
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -1568,10 +1688,13 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured."
+            "description": "Collector configuration YAML encoded as a JSON string. Use newline escapes (\\n) between YAML lines. Environment references such as `${env:CORALOGIX_PRIVATE_KEY}` are resolved on the Collector host. Do not define the Supervisor-managed opamp extension.",
+            "examples": [
+              "receivers:\n  otlp:\n    protocols:\n      grpc:\n      http:\nexporters:\n  otlp:\n    endpoint: otelcol:4317\nservice:\n  pipelines:\n    logs:\n      receivers: [otlp]\n      exporters: [otlp]"
+            ]
           }
         },
-        "description": "Remote configuration to create."
+        "description": "Collector YAML and the agent attributes that select where it is delivered."
       },
       "RemoteConfigurationReplace": {
         "required": [
@@ -1585,10 +1708,13 @@
                 "$ref": "#/components/schemas/AgentSelectorRequest"
               }
             ],
-            "description": "Flat agent attributes that match agents for this configuration."
+            "description": "Attributes advertised by the target agents. All attributes must match; set custom attributes under agent_description.non_identifying_attributes of the opamp extension in the Collector configuration, or under agent.description.non_identifying_attributes in the Supervisor configuration."
           },
           "name": {
-            "description": "Remote configuration name.",
+            "description": "Name identifying this configuration within the family.",
+            "examples": [
+              "host-metrics"
+            ],
             "maxLength": 256,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -1600,10 +1726,13 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured."
+            "description": "Collector configuration YAML encoded as a JSON string. Use newline escapes (\\n) between YAML lines. Environment references such as `${env:CORALOGIX_PRIVATE_KEY}` are resolved on the Collector host. Do not define the Supervisor-managed opamp extension.",
+            "examples": [
+              "receivers:\n  otlp:\n    protocols:\n      grpc:\n      http:\nexporters:\n  otlp:\n    endpoint: otelcol:4317\nservice:\n  pipelines:\n    logs:\n      receivers: [otlp]\n      exporters: [otlp]"
+            ]
           }
         },
-        "description": "Remote configuration content used in a family update."
+        "description": "A complete remote configuration in a replacement collection. Supply the YAML; entries are not patched by name. The agent selector is optional: an omitted or empty selector matches all agents."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -1632,7 +1761,10 @@
           "minLength": 36,
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
           "type": "string",
-          "description": "Configuration group UUID v7."
+          "description": "Configuration group UUID v7.",
+          "examples": [
+            "01975ed4-9c1a-7b3f-8d4e-426614174000"
+          ]
         }
       }
     }

@@ -21,21 +21,21 @@ var _ = bytes.MinRead
 // checks if the ConfigurationGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationGroup{}
 
-// ConfigurationGroup Fleet-manager configuration group.
+// ConfigurationGroup A group of versioned Collector configurations. Use its ID for get, update, and archive operations.
 type ConfigurationGroup struct {
 	// Whether this configuration group is archived.
 	Archived bool `json:"archived"`
-	// Human-readable description.
+	// Description of the group's purpose.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Latest configuration family of the group.
 	Family *ConfigurationFamily `json:"family,omitempty"`
 	// Configuration group UUID v7.
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Display name, unique among the team's configuration groups.
+	// Display name shown in Fleet Management, unique among the team's configuration groups.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Selection precedence. Higher values win on ties and 0 is the default.
+	// Selection priority when multiple configurations match an agent. Higher values take precedence.
 	PriorityOrder int32 `json:"priorityOrder"`
-	// Tags attached to the configuration group.
+	// Tags for organizing the group. Tags do not select agents.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

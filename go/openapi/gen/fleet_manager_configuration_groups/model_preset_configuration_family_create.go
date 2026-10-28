@@ -29,9 +29,9 @@ type PresetConfigurationFamilyCreate struct {
 	ChartVersion string `json:"chartVersion" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Version of the observability features format. Omit it to use the default for the template type and version.
 	IntegrationVersion *string `json:"integrationVersion,omitempty" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
-	// Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here.
+	// Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Set the observability features in observabilityFeatures, not under an ObservabilityFeatures key here. Example: `{\"ClusterName\":\"production-eu2\"}`.
 	Metadata map[string]string `json:"metadata,omitempty"`
-	// Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion.
+	// Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion. Example: `{\"logs\":{\"enabled\":true}}`.
 	ObservabilityFeatures string `json:"observabilityFeatures" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

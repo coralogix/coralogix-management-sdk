@@ -22,15 +22,15 @@ var _ MappedNullable = &ConfigurationGroupServiceUpdateConfigurationGroupRequest
 
 // ConfigurationGroupServiceUpdateConfigurationGroupRequest Configuration group field values for an update. Only fields listed in update_mask are applied.
 type ConfigurationGroupServiceUpdateConfigurationGroupRequest struct {
-	// Human-readable description.
+	// Description of the group's purpose.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Latest configuration family field values.
 	Family *ConfigurationFamilyUpdate `json:"family,omitempty"`
-	// Display name, unique among the team's configuration groups.
+	// Display name shown in Fleet Management, unique among the team's configuration groups.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Selection precedence. Higher values win on ties and 0 is the default.
+	// Selection priority when multiple configurations match an agent. Higher values take precedence.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
-	// Tags attached to the configuration group.
+	// Tags for organizing the group. Tags do not select agents.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

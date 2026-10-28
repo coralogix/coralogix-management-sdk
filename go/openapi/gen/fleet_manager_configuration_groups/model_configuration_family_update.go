@@ -22,7 +22,7 @@ var _ MappedNullable = &ConfigurationFamilyUpdate{}
 
 // ConfigurationFamilyUpdate Latest configuration family field values for an update. Only fields listed in update_mask are applied.
 type ConfigurationFamilyUpdate struct {
-	// Whether this family is active.
+	// Set true to activate or false to deactivate the latest family. Include family.active in update_mask to apply this value; omitting its value when listed resets it to false.
 	Active *bool `json:"active,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`

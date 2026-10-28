@@ -36,7 +36,7 @@ func (r ApiIntegrationServiceDeleteIntegrationRequest) Execute() (map[string]int
 /*
 IntegrationServiceDeleteIntegration Delete integration
 
-Removes the specified deployed integration instance.
+Removes the specified deployed integration instance and answers an empty object. An id that does not exist answers 404.
 
 Requires the following permissions:
 - `integrations:Deploy`
@@ -180,7 +180,7 @@ func (r ApiIntegrationServiceGetDeployedIntegrationRequest) Execute() (*GetDeplo
 /*
 IntegrationServiceGetDeployedIntegration Get deployed integration
 
-Returns the deployed instance of the specified integration.
+Returns the deployed instance of the specified integration. An id that does not exist answers 404.
 
 Requires the following permissions:
 - `integrations:ReadConfig`
@@ -1381,7 +1381,7 @@ func (r ApiIntegrationServiceSaveIntegrationRequest) Execute() (*SaveIntegration
 /*
 IntegrationServiceSaveIntegration Save integration registration metadata
 
-Creates or updates an integration deployment.
+Creates an integration deployment and returns its id. To change an existing deployment, use the update operation. Parameter names are case sensitive.
 
 Requires the following permissions:
 - `integrations:Deploy`
@@ -1416,6 +1416,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceSaveIntegrationExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.saveIntegrationRequest == nil {
+		return localVarReturnValue, nil, reportError("saveIntegrationRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1665,7 +1668,7 @@ func (r ApiIntegrationServiceTestIntegrationRequest) Execute() (*TestIntegration
 /*
 IntegrationServiceTestIntegration Test integration
 
-Tests the integration configuration.
+Tests the integration configuration. A test that runs answers 200 with result.success or result.failure.errorMessage. An invalid integration key or version answers 400 or 404.
 
 Requires the following permissions:
 - `integrations:ReadConfig`
@@ -1700,6 +1703,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceTestIntegrationExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.testIntegrationRequest == nil {
+		return localVarReturnValue, nil, reportError("testIntegrationRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1807,7 +1813,7 @@ func (r ApiIntegrationServiceUpdateIntegrationRequest) Execute() (map[string]int
 /*
 IntegrationServiceUpdateIntegration Update integration
 
-Updates an existing integration deployment.
+Updates the integration deployment with the given id and answers an empty object. A parameter that the request omits keeps its stored value. An id that does not exist answers 404.
 
 Requires the following permissions:
 - `integrations:Deploy`
@@ -1842,6 +1848,9 @@ func (a *IntegrationServiceAPIService) IntegrationServiceUpdateIntegrationExecut
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateIntegrationRequest == nil {
+		return localVarReturnValue, nil, reportError("updateIntegrationRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

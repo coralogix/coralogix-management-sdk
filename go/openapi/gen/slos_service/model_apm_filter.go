@@ -25,6 +25,8 @@ var _ MappedNullable = &ApmFilter{}
 type ApmFilter struct {
 	// Label/tag name to filter on. Required. A missing or empty key is rejected.
 	Key string `json:"key"`
+	// How literals on `key` are compared. Every item in `apmSli.filters` must use the same mode: all implicit (legacy) or all explicit — mixing modes in one list is rejected. Implicit: omitted or `APM_FILTER_MATCH_OPERATOR_UNSPECIFIED` on every item — multiple items with the same `key` OR-merge literals with exact (IS) comparison; sending `UNSPECIFIED` is equivalent to omitting the field (neither is stored as explicit `IS`). Explicit: `APM_FILTER_MATCH_OPERATOR_IS`, `STARTS_WITH`, `ENDS_WITH`, or `INCLUDES` on every item — each item is a separate AND criterion; OR applies only among literals in that item (explicit `IS` differs from implicit when several items share a `key`). Items on different keys are AND-combined. Pattern operators use literal substring matching (not caller-supplied regex). Applies only when the item has at least one literal: non-empty `values`, or deprecated `value` when `values` is omitted or empty (non-empty `values` takes precedence over `value`); otherwise rejected.
+	MatchOperator *ApmFilterMatchOperator `json:"matchOperator,omitempty"`
 	// Deprecated: use values instead. Single value to match (kept for backward compatibility)
 	// Deprecated
 	Value *string `json:"value,omitempty"`
@@ -76,6 +78,38 @@ func (o *ApmFilter) GetKeyOk() (*string, bool) {
 // SetKey sets field value
 func (o *ApmFilter) SetKey(v string) {
 	o.Key = v
+}
+
+// GetMatchOperator returns the MatchOperator field value if set, zero value otherwise.
+func (o *ApmFilter) GetMatchOperator() ApmFilterMatchOperator {
+	if o == nil || IsNil(o.MatchOperator) {
+		var ret ApmFilterMatchOperator
+		return ret
+	}
+	return *o.MatchOperator
+}
+
+// GetMatchOperatorOk returns a tuple with the MatchOperator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ApmFilter) GetMatchOperatorOk() (*ApmFilterMatchOperator, bool) {
+	if o == nil || IsNil(o.MatchOperator) {
+		return nil, false
+	}
+	return o.MatchOperator, true
+}
+
+// HasMatchOperator returns a boolean if a field has been set.
+func (o *ApmFilter) HasMatchOperator() bool {
+	if o != nil && !IsNil(o.MatchOperator) {
+		return true
+	}
+
+	return false
+}
+
+// SetMatchOperator gets a reference to the given ApmFilterMatchOperator and assigns it to the MatchOperator field.
+func (o *ApmFilter) SetMatchOperator(v ApmFilterMatchOperator) {
+	o.MatchOperator = &v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -156,6 +190,9 @@ func (o ApmFilter) MarshalJSON() ([]byte, error) {
 func (o ApmFilter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
+	if !IsNil(o.MatchOperator) {
+		toSerialize["matchOperator"] = o.MatchOperator
+	}
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
@@ -207,6 +244,7 @@ func (o *ApmFilter) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "key")
+		delete(additionalProperties, "matchOperator")
 		delete(additionalProperties, "value")
 		delete(additionalProperties, "values")
 		o.AdditionalProperties = additionalProperties

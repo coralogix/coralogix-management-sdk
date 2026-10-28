@@ -82,10 +82,10 @@ func TestIntegration(t *testing.T) {
 	}
 
 	testReq := integrations.TestIntegrationRequest{
-		IntegrationData: &integrations.IntegrationMetadata{
-			IntegrationKey: strPtr(name),
-			Version:        strPtr(version),
-			IntegrationParameters: &integrations.GenericIntegrationParameters{
+		IntegrationData: integrations.IntegrationMetadata{
+			IntegrationKey: name,
+			Version:        version,
+			IntegrationParameters: integrations.GenericIntegrationParameters{
 				Parameters: params,
 			},
 		},
@@ -96,10 +96,10 @@ func TestIntegration(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	saveReq := integrations.SaveIntegrationRequest{
-		Metadata: &integrations.IntegrationMetadata{
-			IntegrationKey: strPtr(name),
-			Version:        strPtr(version),
-			IntegrationParameters: &integrations.GenericIntegrationParameters{
+		Metadata: integrations.IntegrationMetadata{
+			IntegrationKey: name,
+			Version:        version,
+			IntegrationParameters: integrations.GenericIntegrationParameters{
 				Parameters: params,
 			},
 		},
@@ -110,7 +110,7 @@ func TestIntegration(t *testing.T) {
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, httpResp, err = client.
-		IntegrationServiceDeleteIntegration(context.Background(), *createResp.IntegrationId).
+		IntegrationServiceDeleteIntegration(context.Background(), createResp.IntegrationId).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }

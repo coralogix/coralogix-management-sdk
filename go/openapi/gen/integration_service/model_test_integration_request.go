@@ -13,6 +13,7 @@ package integration_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &TestIntegrationRequest{}
 
 // TestIntegrationRequest Request for testing an integration configuration.
 type TestIntegrationRequest struct {
-	IntegrationData *IntegrationMetadata `json:"integrationData,omitempty"`
+	IntegrationData IntegrationMetadata `json:"integrationData"`
 	// ID of the existing integration instance to test.
 	IntegrationId *string `json:"integrationId,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
@@ -35,8 +36,9 @@ type _TestIntegrationRequest TestIntegrationRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewTestIntegrationRequest() *TestIntegrationRequest {
+func NewTestIntegrationRequest(integrationData IntegrationMetadata) *TestIntegrationRequest {
 	this := TestIntegrationRequest{}
+	this.IntegrationData = integrationData
 	return &this
 }
 
@@ -48,36 +50,28 @@ func NewTestIntegrationRequestWithDefaults() *TestIntegrationRequest {
 	return &this
 }
 
-// GetIntegrationData returns the IntegrationData field value if set, zero value otherwise.
+// GetIntegrationData returns the IntegrationData field value
 func (o *TestIntegrationRequest) GetIntegrationData() IntegrationMetadata {
-	if o == nil || IsNil(o.IntegrationData) {
+	if o == nil {
 		var ret IntegrationMetadata
 		return ret
 	}
-	return *o.IntegrationData
+
+	return o.IntegrationData
 }
 
-// GetIntegrationDataOk returns a tuple with the IntegrationData field value if set, nil otherwise
+// GetIntegrationDataOk returns a tuple with the IntegrationData field value
 // and a boolean to check if the value has been set.
 func (o *TestIntegrationRequest) GetIntegrationDataOk() (*IntegrationMetadata, bool) {
-	if o == nil || IsNil(o.IntegrationData) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IntegrationData, true
+	return &o.IntegrationData, true
 }
 
-// HasIntegrationData returns a boolean if a field has been set.
-func (o *TestIntegrationRequest) HasIntegrationData() bool {
-	if o != nil && !IsNil(o.IntegrationData) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationData gets a reference to the given IntegrationMetadata and assigns it to the IntegrationData field.
+// SetIntegrationData sets field value
 func (o *TestIntegrationRequest) SetIntegrationData(v IntegrationMetadata) {
-	o.IntegrationData = &v
+	o.IntegrationData = v
 }
 
 // GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
@@ -122,9 +116,7 @@ func (o TestIntegrationRequest) MarshalJSON() ([]byte, error) {
 
 func (o TestIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IntegrationData) {
-		toSerialize["integrationData"] = o.IntegrationData
-	}
+	toSerialize["integrationData"] = o.IntegrationData
 	if !IsNil(o.IntegrationId) {
 		toSerialize["integrationId"] = o.IntegrationId
 	}
@@ -137,6 +129,27 @@ func (o TestIntegrationRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *TestIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"integrationData",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varTestIntegrationRequest := _TestIntegrationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

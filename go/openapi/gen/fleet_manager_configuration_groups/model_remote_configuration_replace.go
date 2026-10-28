@@ -21,13 +21,13 @@ var _ = bytes.MinRead
 // checks if the RemoteConfigurationReplace type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RemoteConfigurationReplace{}
 
-// RemoteConfigurationReplace Remote configuration content used in a family update.
+// RemoteConfigurationReplace A complete remote configuration in a replacement collection. Supply the YAML; entries are not patched by name. The agent selector is optional: an omitted or empty selector matches all agents.
 type RemoteConfigurationReplace struct {
-	// Flat agent attributes that match agents for this configuration.
+	// Attributes advertised by the target agents. All attributes must match; set custom attributes under agent_description.non_identifying_attributes of the opamp extension in the Collector configuration, or under agent.description.non_identifying_attributes in the Supervisor configuration.
 	AgentSelector *AgentSelectorRequest `json:"agentSelector,omitempty"`
-	// Remote configuration name.
+	// Name identifying this configuration within the family.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.
+	// Collector configuration YAML encoded as a JSON string. Use newline escapes (\\n) between YAML lines. Environment references such as `${env:CORALOGIX_PRIVATE_KEY}` are resolved on the Collector host. Do not define the Supervisor-managed opamp extension.
 	RawConfiguration string `json:"rawConfiguration" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

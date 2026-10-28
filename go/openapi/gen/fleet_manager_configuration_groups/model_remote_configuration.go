@@ -34,7 +34,7 @@ type RemoteConfiguration struct {
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Remote configuration name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Normalized OpenTelemetry Collector configuration YAML.
+	// Collector YAML sent to matching agents.
 	RawConfiguration string `json:"rawConfiguration" validate:"regexp=^[\\s\\S]*$"`
 	// Time when this remote configuration was last updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`

@@ -93,6 +93,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [ApmFilter](docs/ApmFilter.md)
+ - [ApmFilterMatchOperator](docs/ApmFilterMatchOperator.md)
  - [ApmLatencyQuantile](docs/ApmLatencyQuantile.md)
  - [ApmLatencySli](docs/ApmLatencySli.md)
  - [ApmSli](docs/ApmSli.md)

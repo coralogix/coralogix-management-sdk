@@ -1846,12 +1846,17 @@
       },
       "IntegrationMetadata": {
         "title": "Integration metadata",
+        "required": [
+          "integrationKey",
+          "version",
+          "integrationParameters"
+        ],
         "type": "object",
         "properties": {
           "integrationKey": {
-            "description": "The integration key.",
+            "description": "The integration key. Must not be empty.",
             "maxLength": 65535,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
@@ -1860,15 +1865,15 @@
             "$ref": "#/components/schemas/GenericIntegrationParameters"
           },
           "version": {
-            "description": "Version number.",
+            "description": "Version number. Must not be empty.",
             "maxLength": 65535,
-            "minLength": 0,
+            "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "This data structure represents the metadata of an integration."
+        "description": "This data structure represents the metadata of an integration. Parameter names are case sensitive."
       },
       "IntegrationRevision": {
         "title": "Integration revision",
