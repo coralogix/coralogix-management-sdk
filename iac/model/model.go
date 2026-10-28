@@ -63,6 +63,10 @@ type Resource struct {
 	// MaskInBody: PATCH updateMask is an optional JSON body property. Update
 	// sets it to the same changed-field mask a query parameter would send.
 	MaskInBody bool
+	// UpdateIDOutsideWrapper is true when the Update body carries the id property beside the request
+	// wrapper, not inside it (Policy.UpdateIDOutsideWrapper). The id is then a field of the
+	// resource that Update sends, and a tool places it next to the wrapper property.
+	UpdateIDOutsideWrapper bool
 	// Policy is the rule set that Build used. It is the zero value for a new resource.
 	Policy Policy
 	// Groups are the oneOf groups among the top-level fields.
@@ -104,7 +108,12 @@ type Operation struct {
 	// BodyTitleIsComponent: a component schema has the same name.
 	BodyTitle            string
 	BodyTitleIsComponent bool
-	Response             Response
+	// RequestComponent is the component schema of the request wrapper property (Policy.RequestWrapper)
+	// of a Create or Update body, for example "IntegrationMetadata". It is "" without a wrapper, and
+	// when the wrapper property has an inline schema. It is the type that the SDK body holds: the
+	// resource component only when the request has the shape of the resource.
+	RequestComponent string
+	Response         Response
 }
 
 // ListOperation is a GET that returns the resources in one array. The model records the facts
@@ -166,6 +175,15 @@ type ResourceField struct {
 	Update      *Attrs // nil: not in the Update body
 	Get         *Attrs // attributes in the resource response
 	InGet       bool
+	// RequestPath is the dot-separated path of the property that holds the field in the Create and
+	// Update bodies, after the request wrapper, when Policy.RequestNames gives the field another
+	// name there. "" means that the requests use the name of the field.
+	RequestPath string
+	// RequestObjects are the component schemas of the objects that RequestPath goes through, one
+	// for each segment before the last: "integrationParameters.parameters" has the component of
+	// integrationParameters. It is nil for a path of one segment, and when a segment has an inline
+	// schema.
+	RequestObjects []string
 }
 
 // Field is a field of a nested object, or an arm of a oneOf.

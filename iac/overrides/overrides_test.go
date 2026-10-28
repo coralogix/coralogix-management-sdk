@@ -186,3 +186,51 @@ func TestCreateResponseOnlyIDPropertyReachesThePolicy(t *testing.T) {
 		t.Fatalf("policy CreateResponseOnlyIDProperty = %q, want thingId", got)
 	}
 }
+
+func TestPolicyStatesTheRequestShapeKeys(t *testing.T) {
+	e := Exceptions{
+		API: API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true},
+		Fields: map[string]map[string]Field{"Thing": {
+			"definitionKey": {RequestAs: "integrationKey"},
+			"parameters":    {RequestAs: "integrationParameters.parameters"},
+			"id":            {},
+		}},
+	}
+	got := e.Policy()
+	want := map[string]string{"Thing.definitionKey": "integrationKey", "Thing.parameters": "integrationParameters.parameters"}
+	if !got.UpdateIDOutsideWrapper || !reflect.DeepEqual(got.RequestNames, want) {
+		t.Fatalf("Policy() = %+v, want updateIDOutsideWrapper and the request names %v", got, want)
+	}
+	if p := (Exceptions{}).Policy(); p.UpdateIDOutsideWrapper || p.RequestNames != nil {
+		t.Fatalf("Policy() without the keys = %+v", p)
+	}
+}
+
+func TestCheckRequestShapeKeys(t *testing.T) {
+	tests := map[string]struct {
+		api  API
+		want string
+	}{
+		"outside wrapper needs a wrapper":  {API{UpdateIDInBody: true, UpdateIDOutsideWrapper: true}, "updateIDOutsideWrapper"},
+		"outside wrapper needs id in body": {API{RequestWrapper: "metadata", UpdateIDOutsideWrapper: true}, "updateIDOutsideWrapper"},
+	}
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			if err := tc.api.Check(); err == nil || !strings.Contains(err.Error(), tc.want) {
+				t.Fatalf("Check() = %v, want an error naming %q", err, tc.want)
+			}
+		})
+	}
+	ok := API{RequestWrapper: "metadata", UpdateIDInBody: true, UpdateIDOutsideWrapper: true}
+	if err := ok.Check(); err != nil {
+		t.Fatalf("Check() = %v", err)
+	}
+	for _, path := range []string{"b..c", ".b", "b."} {
+		if err := (Field{RequestAs: path}).Check(); err == nil || !strings.Contains(err.Error(), "requestAs") {
+			t.Fatalf("Field{RequestAs: %q}.Check() = %v, want a requestAs error", path, err)
+		}
+	}
+	if err := (Field{RequestAs: "d.e"}).Check(); err != nil {
+		t.Fatalf("Check() = %v", err)
+	}
+}

@@ -25,6 +25,7 @@ import (
 	"maps"
 	"slices"
 	"sort"
+	"strings"
 
 	"github.com/pb33f/libopenapi/datamodel/high/base"
 
@@ -37,6 +38,9 @@ type API struct {
 	RequestWrapper string `yaml:"requestWrapper"`
 	// UpdateIDInBody: Update has no id in its path. The id is a field of the resource.
 	UpdateIDInBody bool `yaml:"updateIDInBody"`
+	// UpdateIDOutsideWrapper: with requestWrapper and updateIDInBody, the Update body carries the
+	// id property beside the wrapper property, not inside it.
+	UpdateIDOutsideWrapper bool `yaml:"updateIDOutsideWrapper"`
 	// ClientSetID: the client can send the id on Create.
 	ClientSetID bool `yaml:"clientSetID"`
 	// ServerSetID: the server sets the id and returns it in every response, but the Get
@@ -105,6 +109,12 @@ type Field struct {
 	// property of the object as the top-level Create field it names, for example
 	// {limit: permutationsLimit}. Update and Get have the object itself.
 	CreateAs map[string]string `yaml:"createAs"`
+	// RequestAs is the path of the property that holds the field in the Create and Update bodies,
+	// after the request wrapper, when the request names it differently from the Get response:
+	// dot-separated through object properties, for example integrationKey or
+	// integrationParameters.parameters. A request property that the field covers is not a
+	// separate field. Only a field of the resource component can have it.
+	RequestAs string `yaml:"requestAs"`
 	// Collection: set says that the order of a list of the contract has no meaning. The API
 	// keeps the order.
 	Collection string `yaml:"collection"`
@@ -146,6 +156,9 @@ func (a API) Check() error {
 	if a.ClientSetID && a.ServerSetID {
 		return errors.New("api.clientSetID and api.serverSetID both describe the id: keep the one that states who sets it")
 	}
+	if a.UpdateIDOutsideWrapper && (a.RequestWrapper == "" || !a.UpdateIDInBody) {
+		return errors.New("api.updateIDOutsideWrapper needs api.requestWrapper and api.updateIDInBody")
+	}
 	if a.Delete != nil && a.Delete.Operation == "" {
 		return errors.New("api.delete.operation is required")
 	}
@@ -181,6 +194,9 @@ func (l Field) Check() error {
 	}
 	if err := checkCreateAs(l.CreateAs); err != nil {
 		return err
+	}
+	if l.RequestAs != "" && slices.Contains(strings.Split(l.RequestAs, "."), "") {
+		return fmt.Errorf("requestAs is a request path of dot-separated names; %q is not one", l.RequestAs)
 	}
 	if l.Collection != "" && l.Collection != "set" {
 		return fmt.Errorf("collection is %q, want set", l.Collection)
@@ -225,6 +241,7 @@ func (e Exceptions) Policy() model.Policy {
 		Existing:                     true,
 		RequestWrapper:               e.API.RequestWrapper,
 		UpdateIDInBody:               e.API.UpdateIDInBody,
+		UpdateIDOutsideWrapper:       e.API.UpdateIDOutsideWrapper,
 		ClientSetID:                  e.API.ClientSetID,
 		ServerSetID:                  e.API.ServerSetID,
 		IDProperty:                   e.API.IDProperty,
@@ -254,6 +271,12 @@ func (e Exceptions) Policy() model.Policy {
 					p.UnwrapFields = map[string]bool{}
 				}
 				p.UnwrapFields[name+"."+field] = *line.Unwrap
+			}
+			if line.RequestAs != "" {
+				if p.RequestNames == nil {
+					p.RequestNames = map[string]string{}
+				}
+				p.RequestNames[name+"."+field] = line.RequestAs
 			}
 			if line.Skip {
 				p.Skip = append(p.Skip, name+"."+field)

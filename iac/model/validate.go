@@ -285,6 +285,12 @@ func requiredParameterIssues(location string, role verb, op foundOp) issue.Repor
 
 func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.Report {
 	create, createErr := schemaOf(p.requestBody(ops[opCreate].op))
+	update, updateErr := schemaOf(p.requestBody(ops[opUpdate].op))
+	get, getErr := schemaOf(responseResourceProxy(ops[opGet].op, name))
+	var report issue.Report
+	if createErr == nil && updateErr == nil && getErr == nil {
+		create, update, report = p.shapeRequests(name, p.idProperty(ops), ops, create, update, get)
+	}
 	if createErr == nil {
 		folded, err := p.foldCreateBody(name, create)
 		if err != nil {
@@ -292,24 +298,15 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 		}
 		create = folded
 	}
-	update, updateErr := schemaOf(p.requestBody(ops[opUpdate].op))
-	getProxy := ops[opGet].op
-	_ = getProxy
-	if createErr != nil || updateErr != nil {
+	if createErr != nil || updateErr != nil || getErr != nil {
 		return nil
 	}
 	// The component is validated by Survey. Build performs the detailed
 	// request/response match after this pass.
-	resourceProxy := responseResourceProxy(ops[opGet].op, name)
-	get, getErr := schemaOf(resourceProxy)
-	if getErr != nil {
-		return nil
-	}
 	names := append(propertyNames(get), propertyNames(create)...)
 	names = append(names, propertyNames(update)...)
 	slices.Sort(names)
 	names = slices.Compact(names)
-	var report issue.Report
 	idParam, bodyOnlyID := "", ""
 	if params := pathParams(ops[opGet]); len(params) == 1 {
 		// The id property, which api.idProperty can name apart from the path parameter.
@@ -352,7 +349,7 @@ func bodyIDIssues(p Policy, ops map[verb]foundOp, create, update *base.Schema) i
 			Remediation: "Delete clientSetID from the overrides, or add the id property to the Create body.",
 		})
 	}
-	if p.UpdateIDInBody && bodyProperty(update, id) == nil {
+	if p.UpdateIDInBody && !p.UpdateIDOutsideWrapper && bodyProperty(update, id) == nil {
 		report = append(report, issue.Issue{
 			Code:        "UPDATE_ID_NOT_IN_BODY",
 			Location:    "paths.update." + ops[opUpdate].op.OperationId + ".requestBody",
@@ -379,6 +376,9 @@ func serverSetIDIssues(p Policy, name string, ops map[verb]foundOp, create, upda
 	}{{opCreate, create}, {opUpdate, update}} {
 		if !userSetsProperty(body.schema, id) {
 			continue
+		}
+		if body.op == opUpdate && p.updateIDOutsideWrapper() {
+			continue // Create has no id, so the field is computed: Update sends the id of the state
 		}
 		report = append(report, issue.Issue{
 			Code:        "SERVER_SET_ID_IN_REQUEST",

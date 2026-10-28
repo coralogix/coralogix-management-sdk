@@ -100,4 +100,45 @@ A List needs:
 
 `sdkcheck.Names` adds the List call, the items field, and the id and name fields of a summary item only when `List` is set. A resource without a List needs no new SDK name.
 
+## A request shape that differs from the read shape
+
+A released API can take a value in a Create or Update request under another name than the resource component (Get) has, or deeper in an object. A `requestAs` key on the field line and an `api` key of the overrides file describe it. Without them, the model matches top-level fields by identical property names, so such a resource gets `FIELD_LIFECYCLE_UNSUPPORTED`.
+
+| Key | Meaning | Model |
+|---|---|---|
+| `requestAs` (field line) | The path of the property that holds the field in the Create and Update bodies, after the `requestWrapper` is removed, dot-separated through object properties, for example `integrationParameters.parameters`. Only a field of the resource component can have it. | `Policy.RequestNames`, `ResourceField.RequestPath` |
+| `api.updateIDOutsideWrapper` | With `requestWrapper` and `updateIDInBody`, the Update body carries the id property beside the wrapper property, not inside it. | `Policy.UpdateIDOutsideWrapper`, `Resource.UpdateIDOutsideWrapper` |
+
+The model matches the field by its request path, so the request property is not a separate request-only field, and the type checks run on the leaf. A path that only one body has makes the field absent from the other request. A container object that loses all its properties to the keys is not a field either. `api.idProperty` names the id field when the path parameter has another name (`integration_id` and `id`).
+
+| Code | Problem |
+|---|---|
+| `REQUEST_NAME_UNKNOWN_FIELD` | The field line is not on a property of the resource component. |
+| `REQUEST_NAME_NOT_FOUND` | Neither the Create nor the Update body has the path. |
+| `REQUEST_NAME_NOT_OBJECT` | A segment before the last is not an object. |
+| `REQUEST_NAME_DUPLICATE` | Two fields map to one path, or to a path that holds the other. |
+| `REQUEST_NAME_CONFLICT` | A request body has a property with the name of the field, which `requestAs` also maps. |
+| `OVERRIDE_UNUSED` | The path is the name of the field. |
+| `UPDATE_ID_OUTSIDE_WRAPPER_UNSUPPORTED` | `updateIDOutsideWrapper` is set without `requestWrapper` and `updateIDInBody`. |
+| `UPDATE_ID_NOT_IN_BODY` | The Update body has no id property beside the wrapper. |
+| `UPDATE_ID_INSIDE_WRAPPER` | The wrapper also has the id property, so the key is wrong or ambiguous. |
+
+```yaml
+api:
+  requestWrapper: metadata
+  updateIDInBody: true
+  updateIDOutsideWrapper: true   # Update is {id, metadata}
+  idProperty: id                 # the path parameter is integration_id
+types:
+  DeployedIntegrationInformation:
+    fields:
+      definitionKey: {requestAs: integrationKey}
+      definitionVersion: {requestAs: version}
+      parameters: {requestAs: integrationParameters.parameters}
+```
+
+A tool renders the expand code from `ResourceField.RequestPath` and `Resource.UpdateIDOutsideWrapper`. The model also records the component that the request wrapper holds (`Operation.RequestComponent`, for example `IntegrationMetadata`) and the components of the objects that a dotted path goes through (`ResourceField.RequestObjects`). `sdkcheck.Names` reads all of them: the wrapper field has the request component as its type, a renamed field is a field of that component or of an object inside it, and the Update id beside the wrapper is a field of the Update body.
+
+A `skip` line on a top-level field also ends the shape errors that the model finds inside the field, such as an enum without its zero value: the resource does not manage the field.
+
 A tool pins `iac` by the pseudo-version of a commit on `master`.

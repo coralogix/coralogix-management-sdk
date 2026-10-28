@@ -186,14 +186,13 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 			return err
 		}
 	}
-	for _, name := range []string{"create", "update"} {
-		if wrapper := r.Policy.WrapperOf(name == "create"); wrapper != "" {
-			s.add(Ref{Path: name + ".body." + wrapper, Kind: KindField, Owner: s.bodies[name], Name: goFieldName(wrapper),
-				Want: "*" + resource, WantValue: resource, Rule: RuleProperty})
+	if wrapper := r.Policy.RequestWrapper; wrapper != "" {
+		if err := s.wrappedBodyFields(r, wrapper, resource); err != nil {
+			return err
 		}
-	}
-	if r.Policy.RequestWrapper != "" && !r.Policy.CreateUnwrapped {
-		return nil
+		if !r.Policy.CreateUnwrapped {
+			return nil
+		}
 	}
 	for _, f := range r.Fields {
 		if folds := r.CreateFolds(f); folds != nil {
@@ -219,6 +218,85 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 			if err := s.requestField("update.body."+f.Name, s.bodies["update"], f.Name, f.Type.UpdateType(), f.Update.Required); err != nil {
 				return err
 			}
+		}
+	}
+	return nil
+}
+
+// wrappedBodyFields adds the SDK names of Create and Update bodies that hold the request in one
+// wrapper property. The wrapper has the component that the spec gives it (RequestComponent), which
+// is the resource only when the request has the shape of the resource. A field that a request holds
+// under another name or deeper (RequestPath) is a field of that component, or of an object inside
+// it. An Update id beside the wrapper is a field of the body itself.
+func (s *resolver) wrappedBodyFields(r *model.Resource, wrapper, resource string) error {
+	for _, name := range []string{"create", "update"} {
+		op := r.Create
+		if name == "update" {
+			op = r.Update
+		}
+		if wrapper := r.Policy.WrapperOf(name == "create"); wrapper == "" {
+			continue // the Create body is the resource itself
+		}
+		component := resource
+		if op.RequestComponent != "" {
+			component = goTypeName(op.RequestComponent)
+		}
+		s.add(Ref{Path: name + ".body." + wrapper, Kind: KindField, Owner: s.bodies[name], Name: goFieldName(wrapper),
+			Want: "*" + component, WantValue: component, Rule: RuleProperty})
+		if component == resource {
+			continue // the "fields" names cover the resource
+		}
+		if err := s.requestComponent(r, name, wrapper, op.RequestComponent); err != nil {
+			return err
+		}
+	}
+	if r.UpdateIDOutsideWrapper {
+		i := slices.IndexFunc(r.Fields, func(f *model.ResourceField) bool { return f.Name == r.ID() })
+		if i < 0 {
+			return fmt.Errorf("update.body: no field %q for the id beside the wrapper", r.ID())
+		}
+		f := r.Fields[i]
+		// A tool that makes the id a server-set body id drops its Update attributes, so the check
+		// accepts the value type too.
+		return s.field("update.body."+f.Name, s.bodies["update"], f.Name, f.Type, true)
+	}
+	return nil
+}
+
+// requestComponent adds the type of the request component that the wrapper of the Create or Update
+// body holds, and the Go field of each resource field that the request sends in it.
+func (s *resolver) requestComponent(r *model.Resource, name, wrapper, component string) error {
+	owner := goTypeName(component)
+	s.addOnce(Ref{Path: name + ".body." + wrapper, Kind: KindType, Name: owner, Rule: RuleComponent, Schema: component})
+	for _, f := range r.Fields {
+		attrs, t := f.Create, f.Type.CreateType()
+		if name == "update" {
+			attrs, t = f.Update, f.Type.UpdateType()
+			if r.UpdateIDOutsideWrapper && f.Name == r.ID() {
+				continue // a field of the body, not of the wrapper
+			}
+		}
+		if attrs == nil {
+			continue
+		}
+		segments := strings.Split(f.Name, ".")
+		if f.RequestPath != "" {
+			segments = strings.Split(f.RequestPath, ".")
+		}
+		if len(f.RequestObjects) != len(segments)-1 {
+			return fmt.Errorf("%s.body.%s: the request path %q goes through %d objects with a component, want %d", name, f.Name, f.RequestPath, len(f.RequestObjects), len(segments)-1)
+		}
+		path := name + ".body." + f.Name
+		holder := owner
+		for i, segment := range segments[:len(segments)-1] {
+			object := goTypeName(f.RequestObjects[i])
+			via := path + ".via." + segment // the object that the path goes through, not the field itself
+			s.add(Ref{Path: via, Kind: KindField, Owner: holder, Name: goFieldName(segment), Want: "*" + object, WantValue: object, Rule: RuleProperty})
+			s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: f.RequestObjects[i]})
+			holder = object
+		}
+		if err := s.requestField(path, holder, segments[len(segments)-1], t, attrs.Required); err != nil {
+			return err
 		}
 	}
 	return nil
@@ -290,6 +368,13 @@ type resolver struct {
 	policy model.Policy
 	// zeroConstants reports the enum components whose zero constant the generated code uses.
 	zeroConstants func(component string) bool
+}
+
+// addOnce adds a type ref that another walk of the same component may have added.
+func (s *resolver) addOnce(ref Ref) {
+	if !slices.ContainsFunc(s.refs, func(r Ref) bool { return r.Kind == ref.Kind && r.Name == ref.Name && r.Path == ref.Path }) {
+		s.add(ref)
+	}
 }
 
 func (s *resolver) add(ref Ref) {
