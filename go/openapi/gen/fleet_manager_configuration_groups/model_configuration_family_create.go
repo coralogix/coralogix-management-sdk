@@ -20,9 +20,9 @@ var _ = bytes.MinRead
 // checks if the ConfigurationFamilyCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationFamilyCreate{}
 
-// ConfigurationFamilyCreate Initial configuration family to create.
+// ConfigurationFamilyCreate An initial version of the group's configurations. Supply raw Collector configurations or preset template settings. The family starts inactive unless active is true.
 type ConfigurationFamilyCreate struct {
-	// Whether this family is active.
+	// Set true to make the configuration available to matching agents. Defaults to false (inactive).
 	Active *bool `json:"active,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`

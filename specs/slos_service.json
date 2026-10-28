@@ -1631,6 +1631,14 @@
               "environment"
             ]
           },
+          "matchOperator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmFilterMatchOperator"
+              }
+            ],
+            "description": "How literals on `key` are compared. Every item in `apmSli.filters` must use the same mode: all implicit (legacy) or all explicit — mixing modes in one list is rejected. Implicit: omitted or `APM_FILTER_MATCH_OPERATOR_UNSPECIFIED` on every item — multiple items with the same `key` OR-merge literals with exact (IS) comparison; sending `UNSPECIFIED` is equivalent to omitting the field (neither is stored as explicit `IS`). Explicit: `APM_FILTER_MATCH_OPERATOR_IS`, `STARTS_WITH`, `ENDS_WITH`, or `INCLUDES` on every item — each item is a separate AND criterion; OR applies only among literals in that item (explicit `IS` differs from implicit when several items share a `key`). Items on different keys are AND-combined. Pattern operators use literal substring matching (not caller-supplied regex). Applies only when the item has at least one literal: non-empty `values`, or deprecated `value` when `values` is omitted or empty (non-empty `values` takes precedence over `value`); otherwise rejected."
+          },
           "value": {
             "minLength": 0,
             "type": "string",
@@ -1655,6 +1663,17 @@
           }
         },
         "description": "Key-value filter for APM metrics. Supports single value (legacy) or multiple values (OR semantics)"
+      },
+      "ApmFilterMatchOperator": {
+        "enum": [
+          "APM_FILTER_MATCH_OPERATOR_UNSPECIFIED",
+          "APM_FILTER_MATCH_OPERATOR_IS",
+          "APM_FILTER_MATCH_OPERATOR_STARTS_WITH",
+          "APM_FILTER_MATCH_OPERATOR_ENDS_WITH",
+          "APM_FILTER_MATCH_OPERATOR_INCLUDES"
+        ],
+        "type": "string",
+        "description": "How each entry in the filter's `values` list is compared to the metric label named in `key`. Case-sensitive. IS: exact equality. STARTS_WITH: prefix. ENDS_WITH: suffix. INCLUDES: contains the value. Entries in `values` are literal strings (not caller regex); metacharacters are escaped in the PromQL label matcher. Multiple values are OR."
       },
       "ApmLatencyAverage": {
         "title": "ApmLatencyAverage",
@@ -1826,8 +1845,7 @@
             "description": "List of service names to monitor. Required. At least one service; an empty list is rejected.",
             "examples": [
               [
-                "my-service",
-                "payment-service"
+                "ws-service-catalog"
               ]
             ]
           }

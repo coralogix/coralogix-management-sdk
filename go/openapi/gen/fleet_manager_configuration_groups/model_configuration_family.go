@@ -22,9 +22,9 @@ var _ = bytes.MinRead
 // checks if the ConfigurationFamily type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationFamily{}
 
-// ConfigurationFamily Configuration family returned by Fleet Manager.
+// ConfigurationFamily A versioned collection of Collector configurations and agent selectors. Family IDs identify versions; the group ID stays the same across updates.
 type ConfigurationFamily struct {
-	// Whether this family is active.
+	// Whether this family is eligible for delivery to matching agents. This is not confirmation that an agent has applied it.
 	Active bool `json:"active"`
 	// Configuration family UUID v7 this family is based on.
 	BasedOnConfigurationFamilyId *string `json:"basedOnConfigurationFamilyId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
@@ -40,7 +40,7 @@ type ConfigurationFamily struct {
 	Raw *RawConfigurationFamily `json:"raw,omitempty"`
 	// Immutable inputs that produced this configuration family version.
 	Sources []ConfigurationFamilySource `json:"sources,omitempty"`
-	// Monotonic version number of this configuration family within its group.
+	// Increasing family version within this group, returned as a string. The initial version is \"1\"; changed configuration content creates a new version.
 	Version string `json:"version" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -20,9 +20,9 @@ var _ = bytes.MinRead
 // checks if the AgentSelectorRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AgentSelectorRequest{}
 
-// AgentSelectorRequest Agent selector used in requests.
+// AgentSelectorRequest Exact matches against attributes advertised by the target agent. Every key-value pair must match the agent.
 type AgentSelectorRequest struct {
-	// Flat agent attributes to match. If family.raw.collectorVersion is set, service.version must be set to it.
+	// Exact key-value matches, combined with AND. Use advertised agent attributes such as cx.agent.type and host.name. Set custom attributes under agent_description.non_identifying_attributes of the opamp extension in the Collector configuration, or under agent.description.non_identifying_attributes in the Supervisor configuration. An empty selector matches all agents. Example: `{\"cx.agent.type\":\"docker\",\"host.name\":\"collector-host-01\"}`.
 	Attributes map[string]string `json:"attributes,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

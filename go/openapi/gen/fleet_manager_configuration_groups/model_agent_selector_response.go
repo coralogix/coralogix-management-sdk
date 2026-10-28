@@ -20,9 +20,9 @@ var _ = bytes.MinRead
 // checks if the AgentSelectorResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AgentSelectorResponse{}
 
-// AgentSelectorResponse Agent selector returned in responses.
+// AgentSelectorResponse Agent attributes used for matching.
 type AgentSelectorResponse struct {
-	// Flat agent attributes matched by the selector.
+	// Attributes of the stored selector. A remote configuration saved with an omitted or empty selector is returned without agentSelector, so the empty match-all selection is preserved; attributes are not expanded to the currently matched agents. Example: `{\"cx.agent.type\":\"docker\",\"host.name\":\"collector-host-01\",\"service.version\":\"0.160.0\"}`.
 	Attributes map[string]string `json:"attributes,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

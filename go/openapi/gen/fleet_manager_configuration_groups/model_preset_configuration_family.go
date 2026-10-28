@@ -31,9 +31,9 @@ type PresetConfigurationFamily struct {
 	CollectorVersion string `json:"collectorVersion" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
 	// Version of the observability features format used for this configuration family.
 	IntegrationVersion string `json:"integrationVersion" validate:"regexp=^(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)\\\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\\\+([0-9A-Za-z-]+(?:\\\\.[0-9A-Za-z-]+)*))?$"`
-	// Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
+	// Environment setup values for the configuration template, such as ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName. Example: `{\"ClusterName\":\"production-eu2\"}`.
 	Metadata map[string]string `json:"metadata,omitempty"`
-	// Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion.
+	// Observability feature settings for the configuration template, as a JSON object string; the available features depend on chartName and integrationVersion. Example: `{\"logs\":{\"enabled\":true}}`.
 	ObservabilityFeatures string `json:"observabilityFeatures" validate:"regexp=^[\\s\\S]*$"`
 	// Remote configurations Coralogix generated from the configuration template settings.
 	RemoteConfigurations []RemoteConfiguration `json:"remoteConfigurations,omitempty"`

@@ -98,7 +98,11 @@ tags:
       description: Learn more about extensions in our documentation.
       url: https://coralogix.com/docs/integrations/extensions/
   - name: Fleet Manager Configuration Groups
-    description: Create, read, update, and archive fleet-manager configuration groups.
+    description: >-
+      Manage OpenTelemetry Collector configurations delivered to connected
+      agents. A configuration group holds versioned families. Each family
+      contains Collector YAML and selectors that match agent attributes.
+      Activate a family to make its configurations available to matching agents.
   - name: Folders for views service
     description: Create and manage view folders.
   - name: Global routers service
@@ -12006,6 +12010,8 @@ paths:
             description: >-
               Maximum number of groups to return. Defaults to 100 and cannot
               exceed 256.
+            examples:
+              - 100
             format: int32
             maximum: 256
             minimum: 1
@@ -12021,6 +12027,8 @@ paths:
             description: >-
               Opaque token returned by a previous list response. Send it with
               the same include_archived value as that request.
+            examples:
+              - AZdtCKSZq3sAAAAAAAAAAQ
             maxLength: 64
             minLength: 1
             pattern: ^[A-Za-z0-9_-]+$
@@ -12096,16 +12104,29 @@ paths:
         - Fleet Manager Configuration Groups
       x-stability: preview
     post:
-      description: Creates a fleet-manager configuration group.
+      description: >-
+        Creates a configuration group with its initial family. Send group
+        settings and a single `family` object as the request body; the response
+        returns the created group with its latest `family`. Set `family.active`
+        to `true` to make the initial configuration available to matching
+        agents. When `active` is omitted, the family is inactive. A successful
+        response confirms creation; check Fleet Management for agent application
+        status.
       operationId: ConfigurationGroupService_CreateConfigurationGroup
       requestBody:
         content:
           application/json:
             schema:
-              description: Payload used to create a fleet-manager configuration group.
+              description: >-
+                Group settings and the initial family. The service assigns the
+                group ID.
               properties:
                 description:
-                  description: Human-readable description.
+                  description: Description of the group's purpose.
+                  examples:
+                    - >-
+                      Collector configuration for production Linux virtual
+                      machines.
                   maxLength: 4096
                   minLength: 0
                   pattern: ^[\s\S]*$
@@ -12114,9 +12135,15 @@ paths:
                 family:
                   allOf:
                     - $ref: '#/components/schemas/ConfigurationFamilyCreate'
-                  description: Initial configuration family to create with this group.
+                  description: >-
+                    Initial family containing the Collector configurations and
+                    agent selectors.
                 name:
-                  description: Display name, unique among the team's configuration groups.
+                  description: >-
+                    Display name shown in Fleet Management, unique among the
+                    team's configuration groups.
+                  examples:
+                    - Production Linux VMs
                   maxLength: 256
                   minLength: 1
                   pattern: ^[\s\S]*$
@@ -12124,17 +12151,21 @@ paths:
                 priorityOrder:
                   default: 0
                   description: >-
-                    Selection precedence. Higher values win on ties and 0 is the
-                    default.
+                    Selection priority when multiple configurations match an
+                    agent. Higher values take precedence. Defaults to 0.
+                  examples:
+                    - 100
                   format: int32
                   maximum: 2147483647
                   minimum: -2147483648
                   type: integer
                   x-coralogix-presence: true
                 tags:
-                  description: Tags attached to the configuration group.
+                  description: Tags for organizing the group. Tags do not select agents.
+                  examples:
+                    - - production
                   items:
-                    description: Tags attached to the configuration group.
+                    description: Tags for organizing the group. Tags do not select agents.
                     maxLength: 256
                     minLength: 0
                     pattern: ^[\s\S]*$
@@ -12225,8 +12256,12 @@ paths:
   /fleet-management/configuration-groups/v1/{id}:
     get:
       description: >-
-        Gets a fleet-manager configuration group by ID. An archived group
-        returns 404 unless include_archived is true.
+        Returns a configuration group with its latest family. Family `active`
+        indicates eligibility for delivery, not whether an agent has
+        successfully applied the configuration. An archived group returns 404
+        unless `include_archived=true`; when included, an archived group is
+        returned with its latest configuration family, which may itself be
+        archived.
       operationId: ConfigurationGroupService_GetConfigurationGroup
       parameters:
         - description: >-
@@ -12320,9 +12355,12 @@ paths:
       x-stability: preview
     patch:
       description: >-
-        Updates the fields listed in update_mask; other fields are unchanged.
-        Changing family.raw or family.preset creates a new configuration family
-        version only when the content changes. An archived group returns 404.
+        Updates the fields listed in `update_mask`; other fields are unchanged.
+        Changing `family.raw` or `family.preset` creates a new configuration
+        family version only when the content changes. Send group field values
+        directly in the request body. To activate the latest family, send
+        `{"family":{"active":true}}` with `update_mask=family.active`. The
+        response contains the latest family. An archived group returns 404.
       operationId: ConfigurationGroupService_UpdateConfigurationGroup
       parameters:
         - description: >-
@@ -12365,6 +12403,8 @@ paths:
               being changed, and only the arm matching the current family's
               content type is accepted (raw and preset families cannot be
               switched). A bare family, unknown paths, and * return 400.
+            examples:
+              - family.active
             maxLength: 512
             minLength: 1
             pattern: ^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$
@@ -12379,7 +12419,11 @@ paths:
                 listed in update_mask are applied.
               properties:
                 description:
-                  description: Human-readable description.
+                  description: Description of the group's purpose.
+                  examples:
+                    - >-
+                      Collector configuration for production Linux virtual
+                      machines.
                   maxLength: 4096
                   minLength: 0
                   pattern: ^[\s\S]*$
@@ -12390,7 +12434,11 @@ paths:
                     - $ref: '#/components/schemas/ConfigurationFamilyUpdate'
                   description: Latest configuration family field values.
                 name:
-                  description: Display name, unique among the team's configuration groups.
+                  description: >-
+                    Display name shown in Fleet Management, unique among the
+                    team's configuration groups.
+                  examples:
+                    - Production Linux VMs
                   maxLength: 256
                   minLength: 1
                   pattern: ^[\s\S]*$
@@ -12399,17 +12447,21 @@ paths:
                 priorityOrder:
                   default: 0
                   description: >-
-                    Selection precedence. Higher values win on ties and 0 is the
-                    default.
+                    Selection priority when multiple configurations match an
+                    agent. Higher values take precedence.
+                  examples:
+                    - 100
                   format: int32
                   maximum: 2147483647
                   minimum: -2147483648
                   type: integer
                   x-coralogix-presence: true
                 tags:
-                  description: Tags attached to the configuration group.
+                  description: Tags for organizing the group. Tags do not select agents.
+                  examples:
+                    - - production
                   items:
-                    description: Tags attached to the configuration group.
+                    description: Tags for organizing the group. Tags do not select agents.
                     maxLength: 256
                     minLength: 0
                     pattern: ^[\s\S]*$
@@ -15045,10 +15097,13 @@ paths:
         - integrations:ReadConfig
   /integrations/integrations/v1/deployed/{integration_id}:
     get:
-      description: |-
-        Returns the deployed instance of the specified integration.
+      description: >-
+        Returns the deployed instance of the specified integration. An id that
+        does not exist answers 404.
+
 
         Requires the following permissions:
+
         - `integrations:ReadConfig`
       operationId: IntegrationService_GetDeployedIntegration
       parameters:
@@ -15097,10 +15152,13 @@ paths:
         - integrations:ReadConfig
   /integrations/integrations/v1/instances/{integration_id}:
     delete:
-      description: |-
-        Removes the specified deployed integration instance.
+      description: >-
+        Removes the specified deployed integration instance and answers an empty
+        object. An id that does not exist answers 404.
+
 
         Requires the following permissions:
+
         - `integrations:Deploy`
       operationId: IntegrationService_DeleteIntegration
       parameters:
@@ -15392,29 +15450,37 @@ paths:
         - integrations:ReadConfig
   /integrations/metadata/v1:
     put:
-      description: |-
-        Updates an existing integration deployment.
+      description: >-
+        Updates the integration deployment with the given id and answers an
+        empty object. A parameter that the request omits keeps its stored value.
+        An id that does not exist answers 404.
+
 
         Requires the following permissions:
+
         - `integrations:Deploy`
       operationId: IntegrationService_UpdateIntegration
       requestBody:
         content:
           application/json:
             schema:
-              description: This data structure represents a list of outgoing webhook types.
+              description: Request for updating an integration deployment.
               properties:
                 id:
                   description: Integration metadata ID generated at creation time.
                   maxLength: 65535
-                  minLength: 0
+                  minLength: 1
                   pattern: ^[\s\S]*$
                   type: string
                   x-coralogix-presence: true
                 metadata:
                   $ref: '#/components/schemas/IntegrationMetadata'
+              required:
+                - id
+                - metadata
               title: Update integration request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -15446,10 +15512,14 @@ paths:
       x-coralogixPermissions:
         - integrations:Deploy
     post:
-      description: |-
-        Creates or updates an integration deployment.
+      description: >-
+        Creates an integration deployment and returns its id. To change an
+        existing deployment, use the update operation. Parameter names are case
+        sensitive.
+
 
         Requires the following permissions:
+
         - `integrations:Deploy`
       operationId: IntegrationService_SaveIntegration
       requestBody:
@@ -15460,8 +15530,11 @@ paths:
               properties:
                 metadata:
                   $ref: '#/components/schemas/IntegrationMetadata'
+              required:
+                - metadata
               title: Save integration request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -15494,10 +15567,14 @@ paths:
         - integrations:Deploy
   /integrations/metadata/v1/test:
     post:
-      description: |-
-        Tests the integration configuration.
+      description: >-
+        Tests the integration configuration. A test that runs answers 200 with
+        result.success or result.failure.errorMessage. An invalid integration
+        key or version answers 400 or 404.
+
 
         Requires the following permissions:
+
         - `integrations:ReadConfig`
       operationId: IntegrationService_TestIntegration
       requestBody:
@@ -15515,8 +15592,11 @@ paths:
                   pattern: ^[\s\S]*$
                   type: string
                   x-coralogix-presence: true
+              required:
+                - integrationData
               title: Test integration request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -20094,9 +20174,16 @@ components:
             pattern: ^[\s\S]*$
             type: string
           description: >-
-            Flat agent attributes to match. If family.raw.collectorVersion is
-            set, service.version must be set to it.
-      description: Agent selector used in requests.
+            Exact key-value matches, combined with AND. Use advertised agent
+            attributes such as cx.agent.type and host.name. Set custom
+            attributes under agent_description.non_identifying_attributes of the
+            opamp extension in the Collector configuration, or under
+            agent.description.non_identifying_attributes in the Supervisor
+            configuration. An empty selector matches all agents. Example:
+            `{"cx.agent.type":"docker","host.name":"collector-host-01"}`.
+      description: >-
+        Exact matches against attributes advertised by the target agent. Every
+        key-value pair must match the agent.
     AgentSelectorResponse:
       type: object
       properties:
@@ -20107,8 +20194,13 @@ components:
             minLength: 0
             pattern: ^[\s\S]*$
             type: string
-          description: Flat agent attributes matched by the selector.
-      description: Agent selector returned in responses.
+          description: >-
+            Attributes of the stored selector. A remote configuration saved with
+            an omitted or empty selector is returned without agentSelector, so
+            the empty match-all selection is preserved; attributes are not
+            expanded to the currently matched agents. Example:
+            `{"cx.agent.type":"docker","host.name":"collector-host-01","service.version":"0.160.0"}`.
+      description: Agent attributes used for matching.
     AggType:
       enum:
         - AGG_TYPE_UNSPECIFIED
@@ -22199,6 +22291,26 @@ components:
             rejected.
           examples:
             - environment
+        matchOperator:
+          allOf:
+            - $ref: '#/components/schemas/ApmFilterMatchOperator'
+          description: >-
+            How literals on `key` are compared. Every item in `apmSli.filters`
+            must use the same mode: all implicit (legacy) or all explicit —
+            mixing modes in one list is rejected. Implicit: omitted or
+            `APM_FILTER_MATCH_OPERATOR_UNSPECIFIED` on every item — multiple
+            items with the same `key` OR-merge literals with exact (IS)
+            comparison; sending `UNSPECIFIED` is equivalent to omitting the
+            field (neither is stored as explicit `IS`). Explicit:
+            `APM_FILTER_MATCH_OPERATOR_IS`, `STARTS_WITH`, `ENDS_WITH`, or
+            `INCLUDES` on every item — each item is a separate AND criterion; OR
+            applies only among literals in that item (explicit `IS` differs from
+            implicit when several items share a `key`). Items on different keys
+            are AND-combined. Pattern operators use literal substring matching
+            (not caller-supplied regex). Applies only when the item has at least
+            one literal: non-empty `values`, or deprecated `value` when `values`
+            is omitted or empty (non-empty `values` takes precedence over
+            `value`); otherwise rejected.
         value:
           minLength: 0
           type: string
@@ -22225,6 +22337,20 @@ components:
       description: >-
         Key-value filter for APM metrics. Supports single value (legacy) or
         multiple values (OR semantics)
+    ApmFilterMatchOperator:
+      enum:
+        - APM_FILTER_MATCH_OPERATOR_UNSPECIFIED
+        - APM_FILTER_MATCH_OPERATOR_IS
+        - APM_FILTER_MATCH_OPERATOR_STARTS_WITH
+        - APM_FILTER_MATCH_OPERATOR_ENDS_WITH
+        - APM_FILTER_MATCH_OPERATOR_INCLUDES
+      type: string
+      description: >-
+        How each entry in the filter's `values` list is compared to the metric
+        label named in `key`. Case-sensitive. IS: exact equality. STARTS_WITH:
+        prefix. ENDS_WITH: suffix. INCLUDES: contains the value. Entries in
+        `values` are literal strings (not caller regex); metacharacters are
+        escaped in the PromQL label matcher. Multiple values are OR.
     ApmLatencyAverage:
       title: ApmLatencyAverage
       type: object
@@ -22381,8 +22507,7 @@ components:
             List of service names to monitor. Required. At least one service; an
             empty list is rejected.
           examples:
-            - - my-service
-              - payment-service
+            - - ws-service-catalog
       description: Definition of an APM-based SLI with automatic query generation
     ApplicationNameConstraint:
       type: object
@@ -25369,10 +25494,14 @@ components:
       properties:
         active:
           type: boolean
-          description: Whether this family is active.
+          description: >-
+            Whether this family is eligible for delivery to matching agents.
+            This is not confirmation that an agent has applied it.
           default: false
         basedOnConfigurationFamilyId:
           description: Configuration family UUID v7 this family is based on.
+          examples:
+            - 01975ed4-9c18-7a2d-9b4e-426614173999
           maxLength: 36
           minLength: 36
           pattern: >-
@@ -25381,6 +25510,8 @@ components:
           x-coralogix-presence: true
         description:
           description: Human-readable description.
+          examples:
+            - Adds an OTLP logs pipeline for the production Linux VMs.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -25393,8 +25524,12 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Configuration family UUID v7.
+          examples:
+            - 01975ed4-9c1b-7c2a-9e5f-526614174001
         lastActivatedAt:
           description: Time when this family was last activated.
+          examples:
+            - '2026-10-08T09:41:01.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -25425,9 +25560,15 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: >-
-            Monotonic version number of this configuration family within its
-            group.
-      description: Configuration family returned by Fleet Manager.
+            Increasing family version within this group, returned as a string.
+            The initial version is "1"; changed configuration content creates a
+            new version.
+          examples:
+            - '2'
+      description: >-
+        A versioned collection of Collector configurations and agent selectors.
+        Family IDs identify versions; the group ID stays the same across
+        updates.
     ConfigurationFamilyCreate:
       type: object
       oneOf:
@@ -25440,11 +25581,15 @@ components:
       properties:
         active:
           default: false
-          description: Whether this family is active.
+          description: >-
+            Set true to make the configuration available to matching agents.
+            Defaults to false (inactive).
           type: boolean
           x-coralogix-presence: true
         description:
           description: Human-readable description.
+          examples:
+            - Adds an OTLP logs pipeline for the production Linux VMs.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -25462,7 +25607,10 @@ components:
           description: >-
             Configuration family defined directly by its remote configurations,
             each with an OTel Collector configuration and an agent selector.
-      description: Initial configuration family to create.
+      description: >-
+        An initial version of the group's configurations. Supply raw Collector
+        configurations or preset template settings. The family starts inactive
+        unless active is true.
     ConfigurationFamilySource:
       required:
         - configurationOverlay
@@ -25494,11 +25642,16 @@ components:
       properties:
         active:
           default: false
-          description: Whether this family is active.
+          description: >-
+            Set true to activate or false to deactivate the latest family.
+            Include family.active in update_mask to apply this value; omitting
+            its value when listed resets it to false.
           type: boolean
           x-coralogix-presence: true
         description:
           description: Human-readable description.
+          examples:
+            - Adds an OTLP logs pipeline for the production Linux VMs.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -25530,7 +25683,9 @@ components:
           type: boolean
           description: Whether this configuration group is archived.
         description:
-          description: Human-readable description.
+          description: Description of the group's purpose.
+          examples:
+            - Collector configuration for production Linux virtual machines.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -25547,8 +25702,14 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Configuration group UUID v7.
+          examples:
+            - 01975ed4-9c1a-7b3f-8d4e-426614174000
         name:
-          description: Display name, unique among the team's configuration groups.
+          description: >-
+            Display name shown in Fleet Management, unique among the team's
+            configuration groups.
+          examples:
+            - Production Linux VMs
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
@@ -25559,10 +25720,12 @@ components:
           minimum: -2147483648
           type: integer
           description: >-
-            Selection precedence. Higher values win on ties and 0 is the
-            default.
+            Selection priority when multiple configurations match an agent.
+            Higher values take precedence.
           format: int32
           default: 0
+          examples:
+            - 100
         tags:
           maxItems: 64
           minItems: 0
@@ -25572,9 +25735,13 @@ components:
             minLength: 0
             pattern: ^[\s\S]*$
             type: string
-            description: Tags attached to the configuration group.
-          description: Tags attached to the configuration group.
-      description: Fleet-manager configuration group.
+            description: Tags for organizing the group. Tags do not select agents.
+          description: Tags for organizing the group. Tags do not select agents.
+          examples:
+            - - production
+      description: >-
+        A group of versioned Collector configurations. Use its ID for get,
+        update, and archive operations.
     ConfigurationOverlaySource:
       required:
         - overlayId
@@ -25588,8 +25755,12 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Configuration overlay UUID v7.
+          examples:
+            - 01975ed4-9c1d-7e4c-b071-426614174003
         overlayName:
           description: Configuration overlay name at read time.
+          examples:
+            - production-overlay
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
@@ -25602,6 +25773,8 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Configuration overlay version UUID v7.
+          examples:
+            - 01975ed4-9c1e-7f5d-8182-426614174004
       description: Configuration overlay provenance.
     ConnectionStatus:
       enum:
@@ -28635,26 +28808,30 @@ components:
       description: Deployed extension summary.
     DeployedIntegrationInformation:
       title: Deployed integration information
+      required:
+        - id
+        - definitionKey
+        - definitionVersion
       type: object
       properties:
         definitionKey:
           description: The definition key.
           maxLength: 65535
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
         definitionVersion:
           description: The definition version.
           maxLength: 65535
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
         id:
           description: Unique identifier.
           maxLength: 65535
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
@@ -36760,25 +36937,31 @@ components:
       description: Integration guide.
     IntegrationMetadata:
       title: Integration metadata
+      required:
+        - integrationKey
+        - version
+        - integrationParameters
       type: object
       properties:
         integrationKey:
-          description: The integration key.
+          description: The integration key. Must not be empty.
           maxLength: 65535
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
         integrationParameters:
           $ref: '#/components/schemas/GenericIntegrationParameters'
         version:
-          description: Version number.
+          description: Version number. Must not be empty.
           maxLength: 65535
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
-      description: This data structure represents the metadata of an integration.
+      description: >-
+        This data structure represents the metadata of an integration. Parameter
+        names are case sensitive.
     IntegrationRevision:
       title: Integration revision
       type: object
@@ -38147,6 +38330,8 @@ components:
           description: Configuration groups, newest first.
         nextPageToken:
           description: Token for the next page. Omitted when there are no further results.
+          examples:
+            - AZdtCKSZq3sAAAAAAAAAAQ
           maxLength: 64
           minLength: 1
           pattern: ^[A-Za-z0-9_-]+$
@@ -43014,6 +43199,8 @@ components:
           description: >-
             OTel Collector semantic version Coralogix derived from chartVersion,
             without a leading v prefix.
+          examples:
+            - 0.160.0
         integrationVersion:
           maxLength: 256
           minLength: 5
@@ -43034,6 +43221,7 @@ components:
           description: >-
             Environment setup values for the configuration template, such as
             ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
+            Example: `{"ClusterName":"production-eu2"}`.
         observabilityFeatures:
           maxLength: 1048576
           minLength: 2
@@ -43042,7 +43230,7 @@ components:
           description: >-
             Observability feature settings for the configuration template, as a
             JSON object string; the available features depend on chartName and
-            integrationVersion.
+            integrationVersion. Example: `{"logs":{"enabled":true}}`.
         remoteConfigurations:
           maxItems: 128
           minItems: 0
@@ -43102,7 +43290,8 @@ components:
             Environment setup values for the configuration template, such as
             ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
             Set the observability features in observabilityFeatures, not under
-            an ObservabilityFeatures key here.
+            an ObservabilityFeatures key here. Example:
+            `{"ClusterName":"production-eu2"}`.
         observabilityFeatures:
           maxLength: 1048576
           minLength: 2
@@ -43111,7 +43300,7 @@ components:
           description: >-
             Observability feature settings for the configuration template, as a
             JSON object string; the available features depend on chartName and
-            integrationVersion.
+            integrationVersion. Example: `{"logs":{"enabled":true}}`.
       description: >-
         Configuration template settings for a new configuration family;
         Coralogix generates the remote configurations from them.
@@ -43160,7 +43349,8 @@ components:
             Environment setup values for the configuration template, such as
             ClusterName, KubernetesRunningOn, ApplicationName, or SubsystemName.
             Set the observability features in observabilityFeatures, not under
-            an ObservabilityFeatures key here.
+            an ObservabilityFeatures key here. Example:
+            `{"ClusterName":"production-eu2"}`.
         observabilityFeatures:
           maxLength: 1048576
           minLength: 2
@@ -43169,7 +43359,7 @@ components:
           description: >-
             Observability feature settings for the configuration template, as a
             JSON object string; the available features depend on chartName and
-            integrationVersion.
+            integrationVersion. Example: `{"logs":{"enabled":true}}`.
       description: >-
         Configuration template settings of the latest configuration family. With
         family.preset in update_mask, chartName, chartVersion, and
@@ -44827,8 +45017,10 @@ components:
       properties:
         collectorVersion:
           description: >-
-            Collector semantic version this family targets, without a leading v
-            prefix.
+            Collector semantic version targeted by this family. This is separate
+            from the family version and the Supervisor image tag.
+          examples:
+            - 0.160.0
           maxLength: 256
           minLength: 5
           pattern: >-
@@ -44843,7 +45035,9 @@ components:
             minLength: 0
             pattern: ^[\s\S]*$
             type: string
-          description: Metadata stored with this configuration family.
+          description: >-
+            Metadata stored with this configuration family. Example:
+            `{"team":"platform"}`.
         remoteConfigurations:
           maxItems: 128
           minItems: 1
@@ -44861,10 +45055,11 @@ components:
       properties:
         collectorVersion:
           description: >-
-            Collector semantic version this family targets, without a leading v
-            prefix. When set, every agent selector must set service.version to
-            this value. When omitted, the family is not tied to a collector
-            version.
+            Collector semantic version targeted by this family, without a
+            leading v prefix. Use the Collector version, not the Supervisor
+            image tag. This field has no impact on agent selector matching.
+          examples:
+            - 0.160.0
           maxLength: 256
           minLength: 5
           pattern: >-
@@ -44879,14 +45074,18 @@ components:
             minLength: 0
             pattern: ^[\s\S]*$
             type: string
-          description: Metadata stored with this configuration family.
+          description: >-
+            Additional key-value metadata stored with the family. It does not
+            select agents. Example: `{"team":"platform"}`.
         remoteConfigurations:
           maxItems: 128
           minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/RemoteConfigurationCreate'
-          description: Remote configurations to create in this family.
+          description: >-
+            Collector configurations and selectors to create together. Include
+            at least one entry.
       description: >-
         Configuration family content defined directly by its remote
         configurations.
@@ -44895,10 +45094,11 @@ components:
       properties:
         collectorVersion:
           description: >-
-            Collector semantic version this family targets, without a leading v
-            prefix. When set, every agent selector must set service.version to
-            this value. When omitted, the family is not tied to a collector
-            version.
+            Collector semantic version targeted by this family, without a
+            leading v prefix. Use the Collector version, not the Supervisor
+            image tag. This field has no impact on agent selector matching.
+          examples:
+            - 0.160.0
           maxLength: 256
           minLength: 5
           pattern: >-
@@ -44913,7 +45113,9 @@ components:
             minLength: 0
             pattern: ^[\s\S]*$
             type: string
-          description: Metadata stored with this configuration family.
+          description: >-
+            Additional key-value metadata stored with the family. It does not
+            select agents. Example: `{"team":"platform"}`.
         remoteConfigurations:
           maxItems: 128
           minItems: 1
@@ -45105,6 +45307,8 @@ components:
           description: Flat agent attributes that match agents for this configuration.
         createdAt:
           description: Time when this remote configuration was created.
+          examples:
+            - '2026-10-08T09:41:01.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -45116,6 +45320,8 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: SHA-256 hash of the normalized raw configuration content.
+          examples:
+            - 3f2b8c1d9e7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c
         id:
           maxLength: 36
           minLength: 36
@@ -45123,20 +45329,41 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Remote configuration UUID v7.
+          examples:
+            - 01975ed4-9c1c-7d3b-af60-626614174002
         name:
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
           type: string
           description: Remote configuration name.
+          examples:
+            - host-metrics
         rawConfiguration:
           maxLength: 1048576
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Normalized OpenTelemetry Collector configuration YAML.
+          description: Collector YAML sent to matching agents.
+          examples:
+            - |-
+              receivers:
+                otlp:
+                  protocols:
+                    grpc:
+                    http:
+              exporters:
+                otlp:
+                  endpoint: otelcol:4317
+              service:
+                pipelines:
+                  logs:
+                    receivers: [otlp]
+                    exporters: [otlp]
         updatedAt:
           description: Time when this remote configuration was last updated.
+          examples:
+            - '2026-10-08T09:41:01.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -45151,9 +45378,17 @@ components:
         agentSelector:
           allOf:
             - $ref: '#/components/schemas/AgentSelectorRequest'
-          description: Flat agent attributes that match agents for this configuration.
+          description: >-
+            Attributes advertised by the target agents. All attributes must
+            match; set custom attributes under
+            agent_description.non_identifying_attributes of the opamp extension
+            in the Collector configuration, or under
+            agent.description.non_identifying_attributes in the Supervisor
+            configuration.
         name:
-          description: Remote configuration name.
+          description: Name identifying this configuration within the family.
+          examples:
+            - host-metrics
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
@@ -45165,9 +45400,28 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: >-
-            OpenTelemetry Collector configuration YAML. The supervisor-managed
-            OpAMP extension must not be configured.
-      description: Remote configuration to create.
+            Collector configuration YAML encoded as a JSON string. Use newline
+            escapes (\n) between YAML lines. Environment references such as
+            `${env:CORALOGIX_PRIVATE_KEY}` are resolved on the Collector host.
+            Do not define the Supervisor-managed opamp extension.
+          examples:
+            - |-
+              receivers:
+                otlp:
+                  protocols:
+                    grpc:
+                    http:
+              exporters:
+                otlp:
+                  endpoint: otelcol:4317
+              service:
+                pipelines:
+                  logs:
+                    receivers: [otlp]
+                    exporters: [otlp]
+      description: >-
+        Collector YAML and the agent attributes that select where it is
+        delivered.
     RemoteConfigurationReplace:
       required:
         - rawConfiguration
@@ -45176,9 +45430,17 @@ components:
         agentSelector:
           allOf:
             - $ref: '#/components/schemas/AgentSelectorRequest'
-          description: Flat agent attributes that match agents for this configuration.
+          description: >-
+            Attributes advertised by the target agents. All attributes must
+            match; set custom attributes under
+            agent_description.non_identifying_attributes of the opamp extension
+            in the Collector configuration, or under
+            agent.description.non_identifying_attributes in the Supervisor
+            configuration.
         name:
-          description: Remote configuration name.
+          description: Name identifying this configuration within the family.
+          examples:
+            - host-metrics
           maxLength: 256
           minLength: 0
           pattern: ^[\s\S]*$
@@ -45190,9 +45452,29 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: >-
-            OpenTelemetry Collector configuration YAML. The supervisor-managed
-            OpAMP extension must not be configured.
-      description: Remote configuration content used in a family update.
+            Collector configuration YAML encoded as a JSON string. Use newline
+            escapes (\n) between YAML lines. Environment references such as
+            `${env:CORALOGIX_PRIVATE_KEY}` are resolved on the Collector host.
+            Do not define the Supervisor-managed opamp extension.
+          examples:
+            - |-
+              receivers:
+                otlp:
+                  protocols:
+                    grpc:
+                    http:
+              exporters:
+                otlp:
+                  endpoint: otelcol:4317
+              service:
+                pipelines:
+                  logs:
+                    receivers: [otlp]
+                    exporters: [otlp]
+      description: >-
+        A complete remote configuration in a replacement collection. Supply the
+        YAML; entries are not patched by name. The agent selector is optional:
+        an omitted or empty selector matches all agents.
     RemoveEnrichmentsResponse:
       title: Encrichments Delettion Response
       type: object
@@ -46449,6 +46731,8 @@ components:
         integration.
     SaveIntegrationResponse:
       title: Save integration response
+      required:
+        - integrationId
       type: object
       properties:
         integrationId:
@@ -54837,6 +55121,8 @@ components:
           ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
         type: string
         description: Configuration group UUID v7.
+        examples:
+          - 01975ed4-9c1a-7b3f-8d4e-426614174000
     id_2:
       name: id
       in: path

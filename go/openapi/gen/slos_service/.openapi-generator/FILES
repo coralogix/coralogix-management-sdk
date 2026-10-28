@@ -8,6 +8,7 @@ client.go
 configuration.go
 git_push.sh
 model_apm_filter.go
+model_apm_filter_match_operator.go
 model_apm_latency_quantile.go
 model_apm_latency_sli.go
 model_apm_sli.go

@@ -13,6 +13,7 @@ package integration_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &SaveIntegrationRequest{}
 
 // SaveIntegrationRequest Request for creating an integration deployment.
 type SaveIntegrationRequest struct {
-	Metadata *IntegrationMetadata `json:"metadata,omitempty"`
+	Metadata IntegrationMetadata `json:"metadata"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _SaveIntegrationRequest SaveIntegrationRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewSaveIntegrationRequest() *SaveIntegrationRequest {
+func NewSaveIntegrationRequest(metadata IntegrationMetadata) *SaveIntegrationRequest {
 	this := SaveIntegrationRequest{}
+	this.Metadata = metadata
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewSaveIntegrationRequestWithDefaults() *SaveIntegrationRequest {
 	return &this
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
+// GetMetadata returns the Metadata field value
 func (o *SaveIntegrationRequest) GetMetadata() IntegrationMetadata {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		var ret IntegrationMetadata
 		return ret
 	}
-	return *o.Metadata
+
+	return o.Metadata
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
 func (o *SaveIntegrationRequest) GetMetadataOk() (*IntegrationMetadata, bool) {
-	if o == nil || IsNil(o.Metadata) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Metadata, true
+	return &o.Metadata, true
 }
 
-// HasMetadata returns a boolean if a field has been set.
-func (o *SaveIntegrationRequest) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given IntegrationMetadata and assigns it to the Metadata field.
+// SetMetadata sets field value
 func (o *SaveIntegrationRequest) SetMetadata(v IntegrationMetadata) {
-	o.Metadata = &v
+	o.Metadata = v
 }
 
 func (o SaveIntegrationRequest) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o SaveIntegrationRequest) MarshalJSON() ([]byte, error) {
 
 func (o SaveIntegrationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
-	}
+	toSerialize["metadata"] = o.Metadata
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o SaveIntegrationRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *SaveIntegrationRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"metadata",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varSaveIntegrationRequest := _SaveIntegrationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

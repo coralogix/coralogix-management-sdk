@@ -21,17 +21,17 @@ var _ = bytes.MinRead
 // checks if the ConfigurationGroupServiceCreateConfigurationGroupRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationGroupServiceCreateConfigurationGroupRequest{}
 
-// ConfigurationGroupServiceCreateConfigurationGroupRequest Payload used to create a fleet-manager configuration group.
+// ConfigurationGroupServiceCreateConfigurationGroupRequest Group settings and the initial family. The service assigns the group ID.
 type ConfigurationGroupServiceCreateConfigurationGroupRequest struct {
-	// Human-readable description.
+	// Description of the group's purpose.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Initial configuration family to create with this group.
+	// Initial family containing the Collector configurations and agent selectors.
 	Family ConfigurationFamilyCreate `json:"family"`
-	// Display name, unique among the team's configuration groups.
+	// Display name shown in Fleet Management, unique among the team's configuration groups.
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
-	// Selection precedence. Higher values win on ties and 0 is the default.
+	// Selection priority when multiple configurations match an agent. Higher values take precedence. Defaults to 0.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
-	// Tags attached to the configuration group.
+	// Tags for organizing the group. Tags do not select agents.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

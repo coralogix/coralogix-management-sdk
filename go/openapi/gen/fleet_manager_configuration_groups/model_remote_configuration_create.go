@@ -21,13 +21,13 @@ var _ = bytes.MinRead
 // checks if the RemoteConfigurationCreate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RemoteConfigurationCreate{}
 
-// RemoteConfigurationCreate Remote configuration to create.
+// RemoteConfigurationCreate Collector YAML and the agent attributes that select where it is delivered.
 type RemoteConfigurationCreate struct {
-	// Flat agent attributes that match agents for this configuration.
+	// Attributes advertised by the target agents. All attributes must match; set custom attributes under agent_description.non_identifying_attributes of the opamp extension in the Collector configuration, or under agent.description.non_identifying_attributes in the Supervisor configuration.
 	AgentSelector *AgentSelectorRequest `json:"agentSelector,omitempty"`
-	// Remote configuration name.
+	// Name identifying this configuration within the family.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// OpenTelemetry Collector configuration YAML. The supervisor-managed OpAMP extension must not be configured.
+	// Collector configuration YAML encoded as a JSON string. Use newline escapes (\\n) between YAML lines. Environment references such as `${env:CORALOGIX_PRIVATE_KEY}` are resolved on the Collector host. Do not define the Supervisor-managed opamp extension.
 	RawConfiguration string `json:"rawConfiguration" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
