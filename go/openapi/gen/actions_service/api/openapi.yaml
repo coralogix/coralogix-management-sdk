@@ -57,7 +57,7 @@
         ]
       },
       "put": {
-        "description": "Replaces all actions with the provided set.",
+        "description": "Replaces the action with the given id. The request replaces the lists `applicationNames`, `subsystemNames`, and `urlFields`, so an omitted list is cleared. The optional `description` and `dpxlFilter` keep their stored value when omitted: send an empty string to clear them. A request that changes `isPrivate` fails with `412 Precondition Failed`.",
         "operationId": "ActionsService_ReplaceAction",
         "requestBody": {
           "content": {
@@ -160,7 +160,8 @@
                     "x-coralogix-presence": true
                   },
                   "isPrivate": {
-                    "description": "The is private.",
+                    "default": true,
+                    "description": "Whether only the creating user sees the action. Defaults to true. A private action needs a user, so a request with an API key must set false.",
                     "type": "boolean",
                     "x-coralogix-presence": true
                   },
@@ -705,7 +706,8 @@
             "x-coralogix-presence": true
           },
           "isPrivate": {
-            "description": "The is private.",
+            "default": true,
+            "description": "Whether only the creating user sees the action. Defaults to true. A private action needs a user, so a request with an API key must set false.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
@@ -981,10 +983,11 @@
             "description": "The application names."
           },
           "createdBy": {
-            "description": "The creating user's username. Set by the server; ignored on requests.",
+            "description": "The creating user's username. Set by the server; ignored on requests. Absent for an action that an API key created.",
             "maxLength": 255,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -997,7 +1000,7 @@
             "x-coralogix-presence": true
           },
           "dpxlFilter": {
-            "description": "The dpxl filter.",
+            "description": "The dpxl filter. The server stores a non-empty filter with the version prefix, for example `<v1> $d.severity == 'ERROR'`. An empty string stays empty.",
             "maxLength": 65535,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
@@ -1013,12 +1016,14 @@
             "x-coralogix-presence": true
           },
           "isHidden": {
-            "description": "The is hidden.",
+            "default": false,
+            "description": "A per-user UI preference that hides the action. Replace requires it and ignores a changed value, and Create does not take it. Defaults to false.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "isPrivate": {
-            "description": "The is private.",
+            "default": true,
+            "description": "Whether only the creating user sees the action. Replace requires it and cannot change it (412 Precondition Failed). A private action needs a user, so a request with an API key can create only shared actions (false). Defaults to true.",
             "type": "boolean",
             "x-coralogix-presence": true
           },

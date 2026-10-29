@@ -871,7 +871,7 @@ func (r ApiActionsServiceReplaceActionRequest) Execute() (*ReplaceActionResponse
 /*
 ActionsServiceReplaceAction Replace Action
 
-Replaces all actions with the provided set.
+Replaces the action with the given id. The request replaces the lists `applicationNames`, `subsystemNames`, and `urlFields`, so an omitted list is cleared. The optional `description` and `dpxlFilter` keep their stored value when omitted: send an empty string to clear them. A request that changes `isPrivate` fails with `412 Precondition Failed`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiActionsServiceReplaceActionRequest
