@@ -242,8 +242,15 @@ type OneOfGroup struct {
 
 // Type is the type of a field.
 type Type struct {
-	Kind   Kind
-	Schema string // component name, "" for an inline schema
+	Kind Kind
+	// WireKind is the collection kind used by this operation's API schema. Kind is
+	// the Terraform-facing kind and can differ when an explicit collection: set
+	// override normalizes a list or a map of objects.
+	WireKind Kind
+	// CreateWireKind and UpdateWireKind preserve the corresponding request shape
+	// on the resource type so requestType can expose it to generators.
+	CreateWireKind, UpdateWireKind Kind
+	Schema                         string // component name, "" for an inline schema
 	// CreateSchema and UpdateSchema are the components of an Object or a
 	// OneOf in the Create and Update requests. They can differ from Schema,
 	// the component in the resource response. "" when the request does not

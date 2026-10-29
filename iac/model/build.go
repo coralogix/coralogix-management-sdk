@@ -1243,6 +1243,7 @@ func typeOf(proxy *base.SchemaProxy, path string, w walk) (*Type, error) {
 	if err := fillType(t, s, path, w); err != nil {
 		return nil, err
 	}
+	t.WireKind = t.Kind
 	t.Zero, t.ZeroValid = scalarZero(s)
 	return t, nil
 }

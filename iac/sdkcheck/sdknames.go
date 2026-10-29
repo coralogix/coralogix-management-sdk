@@ -550,7 +550,11 @@ func fieldType(t *model.Type) (string, Rule, error) {
 	if t.Keyed != nil {
 		return "[]" + goTypeName(t.Keyed.Item.Schema), RuleProperty, nil
 	}
-	if t.Kind == model.List || t.Kind == model.Set || t.Kind == model.Map {
+	kind := t.WireKind
+	if kind == "" {
+		kind = t.Kind
+	}
+	if kind == model.List || kind == model.Set || kind == model.Map {
 		elem, _, err := fieldType(t.Elem)
 		if err != nil {
 			return "", "", err
@@ -558,7 +562,7 @@ func fieldType(t *model.Type) (string, Rule, error) {
 		if !strings.HasPrefix(elem, "*") {
 			return "", "", fmt.Errorf("%s of %s is not supported", t.Kind, elem)
 		}
-		if t.Kind == model.Map {
+		if kind == model.Map {
 			return "map[string]" + elem[1:], RuleProperty, nil
 		}
 		return "[]" + elem[1:], RuleProperty, nil
