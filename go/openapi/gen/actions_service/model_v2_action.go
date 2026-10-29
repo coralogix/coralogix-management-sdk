@@ -24,17 +24,17 @@ var _ MappedNullable = &V2Action{}
 type V2Action struct {
 	// The application names.
 	ApplicationNames []string `json:"applicationNames,omitempty"`
-	// The creating user's username. Set by the server; ignored on requests.
+	// The creating user's username. Set by the server; ignored on requests. Absent for an action that an API key created.
 	CreatedBy *string `json:"createdBy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// The dpxl filter.
+	// The dpxl filter. The server stores a non-empty filter with the version prefix, for example `<v1> $d.severity == 'ERROR'`. An empty string stays empty.
 	DpxlFilter *string `json:"dpxlFilter,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
-	// The is hidden.
+	// A per-user UI preference that hides the action. Replace requires it and ignores a changed value, and Create does not take it. Defaults to false.
 	IsHidden *bool `json:"isHidden,omitempty"`
-	// The is private.
+	// Whether only the creating user sees the action. Replace requires it and cannot change it (412 Precondition Failed). A private action needs a user, so a request with an API key can create only shared actions (false). Defaults to true.
 	IsPrivate *bool `json:"isPrivate,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`

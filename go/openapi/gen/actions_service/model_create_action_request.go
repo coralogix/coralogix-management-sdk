@@ -28,7 +28,7 @@ type CreateActionRequest struct {
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The dpxl filter.
 	DpxlFilter *string `json:"dpxlFilter,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// The is private.
+	// Whether only the creating user sees the action. Defaults to true. A private action needs a user, so a request with an API key must set false.
 	IsPrivate *bool `json:"isPrivate,omitempty"`
 	// Display name.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
