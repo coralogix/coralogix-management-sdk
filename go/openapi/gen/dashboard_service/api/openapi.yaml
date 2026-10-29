@@ -2930,22 +2930,22 @@
         "properties": {
           "canRead": {
             "type": "boolean",
-            "description": "Whether the caller may view the dashboard definition."
+            "description": "Whether the caller may view the resource itself, apart from its access policy."
           },
           "canReadAccessPolicy": {
             "type": "boolean",
-            "description": "Whether the caller may read the access policy of this dashboard: it holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on this dashboard, or the break-glass `access-policies:ReadAll`."
+            "description": "Whether the caller may read the resource's access policy. For a dashboard, the caller holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on it, or the break-glass `access-policies:ReadAll`."
           },
           "canUpdate": {
             "type": "boolean",
-            "description": "Whether the caller may replace or delete the dashboard definition."
+            "description": "Whether the caller may change or delete the resource itself, apart from its access policy."
           },
           "canUpdateAccessPolicy": {
             "type": "boolean",
-            "description": "Whether the caller may replace the access policy of this dashboard: it holds `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on this dashboard, or the break-glass `access-policies:UpdateAll`."
+            "description": "Whether the caller may replace the resource's access policy. For a dashboard, the caller holds `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on it, or the break-glass `access-policies:UpdateAll`."
           }
         },
-        "description": "What the caller may do with this dashboard. All four flags are always returned."
+        "description": "What the caller may do with this resource. All four flags are always returned."
       },
       "DataTable": {
         "type": "object",
