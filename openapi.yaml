@@ -68,7 +68,7 @@ tags:
   - name: Dashboard folders service
     description: Manage your dashboard folders.
   - name: Dashboard service
-    description: Get information about the Coralogix Dashboard catalog.
+    description: Manage your dashboards.
   - name: Data Usage Query Service
     description: >-
       Query billable data usage through the public Coralogix API using daily or
@@ -103,6 +103,8 @@ tags:
       agents. A configuration group holds versioned families. Each family
       contains Collector YAML and selectors that match agent attributes.
       Activate a family to make its configurations available to matching agents.
+  - name: Fleet Manager Configuration Overlays
+    description: Create, read, update, and archive fleet-manager configuration overlays.
   - name: Folders for views service
     description: Create and manage view folders.
   - name: Global routers service
@@ -7046,7 +7048,7 @@ paths:
         - `case:Read`
       operationId: CasesService_GetCase
       parameters:
-        - $ref: '#/components/parameters/id_2'
+        - $ref: '#/components/parameters/id_3'
       responses:
         '200':
           content:
@@ -7987,7 +7989,7 @@ paths:
       x-coralogixPermissions:
         - case:Update
     parameters:
-      - $ref: '#/components/parameters/id_2'
+      - $ref: '#/components/parameters/id_3'
   /cases/resolved/v1:
     post:
       description: |-
@@ -12597,6 +12599,608 @@ paths:
       tags:
         - Fleet Manager Configuration Groups
       x-stability: preview
+  /fleet-management/configuration-overlays/v1:
+    get:
+      description: >-
+        Lists configuration overlays, newest first. Archived overlays are
+        excluded unless include_archived is true.
+      operationId: ConfigurationOverlayService_ListConfigurationOverlays
+      parameters:
+        - description: When true, include archived overlays.
+          in: query
+          name: include_archived
+          required: false
+          schema:
+            description: When true, include archived overlays.
+            type: boolean
+            x-coralogix-presence: true
+        - description: >-
+            Maximum number of overlays to return. Defaults to 100 and cannot
+            exceed 256.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            description: >-
+              Maximum number of overlays to return. Defaults to 100 and cannot
+              exceed 256.
+            format: int32
+            maximum: 256
+            minimum: 1
+            type: integer
+            x-coralogix-presence: true
+        - description: Opaque token returned by a previous list response.
+          in: query
+          name: page_token
+          required: false
+          schema:
+            description: Opaque token returned by a previous list response.
+            maxLength: 64
+            minLength: 1
+            pattern: ^[A-Za-z0-9_-]+$
+            type: string
+            x-coralogix-presence: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                overlays:
+                  - active: true
+                    archived: false
+                    custom:
+                      configuration: |
+                        service:
+                          telemetry:
+                            logs:
+                              level: debug
+                      targets:
+                        - createdAt: '2026-09-28T10:05:00.000Z'
+                          id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3003
+                          overlayConfigurationFamilyId: 01975ed5-2a11-7a01-8b02-0c0d0e0f1011
+                          overlayRemoteConfigurationId: 01975ed5-2a11-7a01-8b02-0c0d0e0f1012
+                          sourceConfigurationFamilyId: 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60
+                          sourceRemoteConfigurationId: 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61
+                          updatedAt: '2026-09-28T10:05:00.000Z'
+                    description: >-
+                      Raises the Collector log level for selected remote
+                      configurations.
+                    id: 01975ed4-9c1a-7b3f-8d4e-426614174000
+                    name: Debug logging overlay
+                    overlayHash: >-
+                      b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
+                    parentVersionId: 01975ed4-9c1a-7b3f-8d4e-426614174001
+                    priorityOrder: 100
+                    schedules:
+                      - createdAt: '2026-09-28T10:05:00.000Z'
+                        description: Weekend debug logging
+                        duration: 7200s
+                        id: 01975ed5-2a12-7b03-8c04-0d0e0f101213
+                        nextActivation: '2026-10-31T22:00:00.000Z'
+                        recurrence:
+                          every: 1
+                          unit: CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_WEEKS
+                        startAt: '2026-10-31T22:00:00.000Z'
+                        state: CONFIGURATION_OVERLAY_SCHEDULE_STATE_ENABLED
+                        timeZone: Europe/Berlin
+                        updatedAt: '2026-09-28T10:05:00.000Z'
+                    tags:
+                      - production
+                    version: '2'
+                    versionId: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3002
+              schema:
+                $ref: '#/components/schemas/ListConfigurationOverlaysResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: List configuration overlays
+      tags:
+        - Fleet Manager Configuration Overlays
+      x-stability: preview
+    post:
+      description: >-
+        Creates a custom configuration overlay (OpenTelemetry Collector YAML).
+        It is inactive unless active is true, which needs at least one target.
+      operationId: ConfigurationOverlayService_CreateConfigurationOverlay
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Payload used to create a custom configuration overlay.
+              properties:
+                active:
+                  default: false
+                  description: Set true to activate the overlay when it is created.
+                  type: boolean
+                  x-coralogix-presence: true
+                custom:
+                  allOf:
+                    - $ref: '#/components/schemas/CustomConfigurationOverlayCreate'
+                  description: >-
+                    Custom overlay: an OpenTelemetry Collector YAML fragment and
+                    its targets.
+                description:
+                  description: Human-readable description.
+                  maxLength: 4096
+                  minLength: 0
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                name:
+                  description: Display name, unique among unarchived overlays.
+                  maxLength: 256
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                priorityOrder:
+                  default: 0
+                  description: >-
+                    Merge precedence on a shared remote configuration: higher
+                    values win, and the newer overlay wins a tie.
+                  format: int32
+                  maximum: 2147483647
+                  minimum: -2147483648
+                  type: integer
+                  x-coralogix-presence: true
+                schedules:
+                  description: >-
+                    Activation schedules. Windows must not overlap; a window may
+                    start when another ends.
+                  items:
+                    $ref: '#/components/schemas/ConfigurationOverlayScheduleCreate'
+                  maxItems: 10
+                  minItems: 0
+                  type: array
+                  uniqueItems: true
+                  x-coralogix-collection: set
+                tags:
+                  description: Tags attached to the configuration overlay.
+                  items:
+                    description: Tags attached to the configuration overlay.
+                    maxLength: 256
+                    minLength: 0
+                    pattern: ^[\s\S]*$
+                    type: string
+                  maxItems: 64
+                  minItems: 0
+                  type: array
+              required:
+                - name
+                - custom
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                active: false
+                archived: false
+                custom:
+                  configuration: |
+                    service:
+                      telemetry:
+                        logs:
+                          level: debug
+                  targets: []
+                description: >-
+                  Raises the Collector log level for selected remote
+                  configurations.
+                id: 01975ed4-9c1a-7b3f-8d4e-426614174000
+                name: Debug logging overlay
+                overlayHash: >-
+                  b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
+                priorityOrder: 100
+                schedules:
+                  - createdAt: '2026-09-28T10:00:00.000Z'
+                    description: Weekend debug logging
+                    duration: 7200s
+                    id: 01975ed6-3b20-7d55-8c2f-6e3d9b8a4004
+                    recurrence:
+                      every: 1
+                      unit: CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_WEEKS
+                    startAt: '2026-10-31T22:00:00.000Z'
+                    state: CONFIGURATION_OVERLAY_SCHEDULE_STATE_PAUSED
+                    timeZone: Europe/Berlin
+                    updatedAt: '2026-09-28T10:00:00.000Z'
+                tags:
+                  - production
+                version: '1'
+                versionId: 01975ed4-9c1a-7b3f-8d4e-426614174001
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ConfigurationOverlay'
+                description: Created configuration overlay.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Configuration overlay name already exists
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Create configuration overlay
+      tags:
+        - Fleet Manager Configuration Overlays
+      x-stability: preview
+  /fleet-management/configuration-overlays/v1/{id}:
+    get:
+      description: Gets a fleet-manager configuration overlay by ID.
+      operationId: ConfigurationOverlayService_GetConfigurationOverlay
+      parameters:
+        - description: >-
+            When true, return an archived overlay. Otherwise an archived overlay
+            returns 404.
+          in: query
+          name: include_archived
+          required: false
+          schema:
+            description: >-
+              When true, return an archived overlay. Otherwise an archived
+              overlay returns 404.
+            type: boolean
+            x-coralogix-presence: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                active: true
+                archived: false
+                custom:
+                  configuration: |
+                    service:
+                      telemetry:
+                        logs:
+                          level: debug
+                  targets:
+                    - createdAt: '2026-09-28T10:05:00.000Z'
+                      id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3003
+                      overlayConfigurationFamilyId: 01975ed5-2a11-7a01-8b02-0c0d0e0f1011
+                      overlayRemoteConfigurationId: 01975ed5-2a11-7a01-8b02-0c0d0e0f1012
+                      sourceConfigurationFamilyId: 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60
+                      sourceRemoteConfigurationId: 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61
+                      updatedAt: '2026-09-28T10:05:00.000Z'
+                description: >-
+                  Raises the Collector log level for selected remote
+                  configurations.
+                id: 01975ed4-9c1a-7b3f-8d4e-426614174000
+                name: Debug logging overlay
+                overlayHash: >-
+                  b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
+                parentVersionId: 01975ed4-9c1a-7b3f-8d4e-426614174001
+                priorityOrder: 100
+                schedules:
+                  - createdAt: '2026-09-28T10:05:00.000Z'
+                    description: Weekend debug logging
+                    duration: 7200s
+                    id: 01975ed5-2a12-7b03-8c04-0d0e0f101213
+                    nextActivation: '2026-10-31T22:00:00.000Z'
+                    recurrence:
+                      every: 1
+                      unit: CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_WEEKS
+                    startAt: '2026-10-31T22:00:00.000Z'
+                    state: CONFIGURATION_OVERLAY_SCHEDULE_STATE_ENABLED
+                    timeZone: Europe/Berlin
+                    updatedAt: '2026-09-28T10:05:00.000Z'
+                tags:
+                  - production
+                version: '2'
+                versionId: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3002
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ConfigurationOverlay'
+                description: Requested configuration overlay.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Configuration overlay not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get configuration overlay
+      tags:
+        - Fleet Manager Configuration Overlays
+      x-stability: preview
+    patch:
+      description: >-
+        Updates the fields listed in update_mask; a listed field that is omitted
+        from the body is cleared or reset to its default. A change to the
+        content of custom.configuration or custom.targets creates a new version
+        that carries over the schedules. An archived overlay can't be updated.
+        Activation needs a target, and every schedule needs a future window. A
+        version-creating change is rejected while a scheduled window is
+        applying.
+      operationId: ConfigurationOverlayService_UpdateConfigurationOverlay
+      parameters:
+        - description: >-
+            Comma-separated fields to update: name, description, tags,
+            priorityOrder, active, custom, custom.configuration, custom.targets,
+            schedules. A listed field that is omitted from the body is cleared
+            (description, tags, custom.targets, schedules) or reset to its
+            default (priorityOrder 0, active false); name, custom, and
+            custom.configuration cannot be cleared. Unknown fields and * return
+            400.
+          in: query
+          name: update_mask
+          required: true
+          schema:
+            description: >-
+              Comma-separated fields to update: name, description, tags,
+              priorityOrder, active, custom, custom.configuration,
+              custom.targets, schedules. A listed field that is omitted from the
+              body is cleared (description, tags, custom.targets, schedules) or
+              reset to its default (priorityOrder 0, active false); name,
+              custom, and custom.configuration cannot be cleared. Unknown fields
+              and * return 400.
+            maxLength: 512
+            minLength: 1
+            pattern: ^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$
+            type: string
+            x-coralogix-presence: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Configuration overlay field values for an update. Only fields
+                listed in update_mask are applied.
+              properties:
+                active:
+                  default: false
+                  description: >-
+                    Set true to activate or false to deactivate the overlay.
+                    With schedules, activation enables them, and deactivation
+                    pauses them and ends a running window.
+                  type: boolean
+                  x-coralogix-presence: true
+                custom:
+                  allOf:
+                    - $ref: '#/components/schemas/CustomConfigurationOverlayUpdate'
+                  description: >-
+                    Custom overlay fields to update. Rejected for preset
+                    overlays.
+                description:
+                  description: Human-readable description.
+                  maxLength: 4096
+                  minLength: 0
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                name:
+                  description: Display name, unique among unarchived overlays.
+                  maxLength: 256
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                priorityOrder:
+                  default: 0
+                  description: >-
+                    Merge precedence on a shared remote configuration: higher
+                    values win, and the newer overlay wins a tie.
+                  format: int32
+                  maximum: 2147483647
+                  minimum: -2147483648
+                  type: integer
+                  x-coralogix-presence: true
+                schedules:
+                  description: >-
+                    Replaces the schedules of the latest version without
+                    creating a version. When the same request changes custom
+                    content, the list moves to the new version with new ids.
+                    Windows must not overlap; a window may start when another
+                    ends. Schedules are matched by startAt, duration,
+                    recurrence, and timeZone: a match keeps its id, and other
+                    schedules are removed. An empty list on an active overlay
+                    applies it continuously, right away.
+                  items:
+                    $ref: '#/components/schemas/ConfigurationOverlayScheduleReplace'
+                  maxItems: 10
+                  minItems: 0
+                  type: array
+                  uniqueItems: true
+                  x-coralogix-collection: set
+                tags:
+                  description: >-
+                    Tags attached to the configuration overlay. Replaces all
+                    tags.
+                  items:
+                    description: >-
+                      Tags attached to the configuration overlay. Replaces all
+                      tags.
+                    maxLength: 256
+                    minLength: 0
+                    pattern: ^[\s\S]*$
+                    type: string
+                  maxItems: 64
+                  minItems: 0
+                  type: array
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                active: true
+                archived: false
+                custom:
+                  configuration: |
+                    service:
+                      telemetry:
+                        logs:
+                          level: debug
+                  targets:
+                    - createdAt: '2026-09-28T10:05:00.000Z'
+                      id: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3003
+                      overlayConfigurationFamilyId: 01975ed5-2a11-7a01-8b02-0c0d0e0f1011
+                      overlayRemoteConfigurationId: 01975ed5-2a11-7a01-8b02-0c0d0e0f1012
+                      sourceConfigurationFamilyId: 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60
+                      sourceRemoteConfigurationId: 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61
+                      updatedAt: '2026-09-28T10:05:00.000Z'
+                description: Updated overlay description.
+                id: 01975ed4-9c1a-7b3f-8d4e-426614174000
+                name: Debug logging overlay
+                overlayHash: >-
+                  b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
+                parentVersionId: 01975ed4-9c1a-7b3f-8d4e-426614174001
+                priorityOrder: 100
+                schedules:
+                  - createdAt: '2026-09-28T10:05:00.000Z'
+                    description: Weekend debug logging
+                    duration: 7200s
+                    id: 01975ed5-2a12-7b03-8c04-0d0e0f101213
+                    nextActivation: '2026-10-31T22:00:00.000Z'
+                    recurrence:
+                      every: 1
+                      unit: CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_WEEKS
+                    startAt: '2026-10-31T22:00:00.000Z'
+                    state: CONFIGURATION_OVERLAY_SCHEDULE_STATE_ENABLED
+                    timeZone: Europe/Berlin
+                    updatedAt: '2026-09-28T10:05:00.000Z'
+                tags:
+                  - production
+                version: '2'
+                versionId: 01975ed5-2a10-7c44-9b1e-5d2c8a7f3002
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ConfigurationOverlay'
+                description: Updated configuration overlay.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Configuration overlay not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Configuration overlay name already exists
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update configuration overlay
+      tags:
+        - Fleet Manager Configuration Overlays
+      x-stability: preview
+    parameters:
+      - $ref: '#/components/parameters/id_2'
+  /fleet-management/configuration-overlays/v1/{id}/archive:
+    post:
+      description: >-
+        Archives a configuration overlay and all its versions. An active overlay
+        must be deactivated before it is archived. Archiving an archived overlay
+        succeeds.
+      operationId: ConfigurationOverlayService_ArchiveConfigurationOverlay
+      parameters:
+        - $ref: '#/components/parameters/id_2'
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                id: 01975ed4-9c1a-7b3f-8d4e-426614174000
+              schema:
+                $ref: '#/components/schemas/ArchiveConfigurationOverlayResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Configuration overlay not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Archive configuration overlay
+      tags:
+        - Fleet Manager Configuration Overlays
+      x-stability: preview
   /incidents/aggregations/v1:
     get:
       description: >-
@@ -12672,7 +13276,28 @@ paths:
               metaLabels:
                 description: Filters all incidents with the given meta labels
                 items:
-                  $ref: '#/components/schemas/incidents.v1.MetaLabel'
+                  description: Meta label.
+                  properties:
+                    key:
+                      description: The key.
+                      examples:
+                        - key
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^[\s\S]*$
+                      type: string
+                      x-coralogix-presence: true
+                    value:
+                      description: The value.
+                      examples:
+                        - value
+                      maxLength: 255
+                      minLength: 1
+                      pattern: ^[\s\S]*$
+                      type: string
+                      x-coralogix-presence: true
+                  title: Incident meta label
+                  type: object
                 maxItems: 1000
                 minItems: 0
                 type: array
@@ -12681,41 +13306,9 @@ paths:
                   - $ref: '#/components/schemas/v1.FilterOperator'
                 description: The operator for the meta labels filter
               searchQuery:
-                description: Incident search query.
-                oneOf:
-                  - required:
-                      - incidentField
-                    type: object
-                  - required:
-                      - contextualLabel
-                    type: object
-                properties:
-                  contextualLabel:
-                    description: The contextual label to search in.
-                    maxLength: 256
-                    minLength: 1
-                    pattern: ^[\s\S]*$
-                    type: string
-                    x-coralogix-presence: true
-                  incidentField:
-                    allOf:
-                      - $ref: '#/components/schemas/IncidentFields'
-                    description: The field to search in
-                    examples:
-                      - INCIDENTS_FIELDS_STATUS
-                  query:
-                    description: The search query
-                    examples:
-                      - error
-                    maxLength: 4096
-                    minLength: 1
-                    pattern: ^[\s\S]*$
-                    type: string
-                    x-coralogix-presence: true
-                required:
-                  - query
-                title: Incident search query
-                type: object
+                allOf:
+                  - $ref: '#/components/schemas/IncidentSearchQuery'
+                description: Search query for incidents
               severity:
                 description: Filter by incident severity
                 items:
@@ -12880,44 +13473,12 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  description: Represents contextual label values for filtering incidents
-                  properties:
-                    contextualLabelValues:
-                      description: The contextual label values.
-                      items:
-                        description: The contextual label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - contextualLabelValues
-                  title: Contextual label values
-                  type: object
+                  $ref: '#/components/schemas/ContextualLabelValues'
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  description: Represents display label values for filtering incidents
-                  properties:
-                    displayLabelValues:
-                      description: The display label values.
-                      items:
-                        description: The display label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - displayLabelValues
-                  title: Display label values
-                  type: object
+                  $ref: '#/components/schemas/DisplayLabelValues'
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -12950,25 +13511,9 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                description: Represents a time range with start and end timestamps
-                properties:
-                  endTime:
-                    description: End time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                  startTime:
-                    description: Start time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                required:
-                  - startTime
-                  - endTime
-                title: Time range
-                type: object
+                allOf:
+                  - $ref: '#/components/schemas/v1.TimeRange'
+                description: The time range of the incident
             title: Incident event query filter
             type: object
         - description: >-
@@ -13071,44 +13616,12 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  description: Represents contextual label values for filtering incidents
-                  properties:
-                    contextualLabelValues:
-                      description: The contextual label values.
-                      items:
-                        description: The contextual label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - contextualLabelValues
-                  title: Contextual label values
-                  type: object
+                  $ref: '#/components/schemas/ContextualLabelValues'
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  description: Represents display label values for filtering incidents
-                  properties:
-                    displayLabelValues:
-                      description: The display label values.
-                      items:
-                        description: The display label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - displayLabelValues
-                  title: Display label values
-                  type: object
+                  $ref: '#/components/schemas/DisplayLabelValues'
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -13141,25 +13654,9 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                description: Represents a time range with start and end timestamps
-                properties:
-                  endTime:
-                    description: End time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                  startTime:
-                    description: Start time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                required:
-                  - startTime
-                  - endTime
-                title: Time range
-                type: object
+                allOf:
+                  - $ref: '#/components/schemas/v1.TimeRange'
+                description: The time range of the incident
             title: Incident event query filter
             type: object
       responses:
@@ -13395,44 +13892,12 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  description: Represents contextual label values for filtering incidents
-                  properties:
-                    contextualLabelValues:
-                      description: The contextual label values.
-                      items:
-                        description: The contextual label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - contextualLabelValues
-                  title: Contextual label values
-                  type: object
+                  $ref: '#/components/schemas/ContextualLabelValues'
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  description: Represents display label values for filtering incidents
-                  properties:
-                    displayLabelValues:
-                      description: The display label values.
-                      items:
-                        description: The display label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - displayLabelValues
-                  title: Display label values
-                  type: object
+                  $ref: '#/components/schemas/DisplayLabelValues'
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -13465,25 +13930,9 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                description: Represents a time range with start and end timestamps
-                properties:
-                  endTime:
-                    description: End time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                  startTime:
-                    description: Start time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                required:
-                  - startTime
-                  - endTime
-                title: Time range
-                type: object
+                allOf:
+                  - $ref: '#/components/schemas/v1.TimeRange'
+                description: The time range of the incident
             title: Incident event query filter
             type: object
       responses:
@@ -16129,7 +16578,7 @@ paths:
         - `outbound-webhooks:UpdateConfig`
       operationId: OutgoingWebhooksService_DeleteOutgoingWebhook
       parameters:
-        - $ref: '#/components/parameters/id_3'
+        - $ref: '#/components/parameters/id_4'
       responses:
         '200':
           content:
@@ -16169,7 +16618,7 @@ paths:
         - `outbound-webhooks:ReadConfig`
       operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
       parameters:
-        - $ref: '#/components/parameters/id_3'
+        - $ref: '#/components/parameters/id_4'
       responses:
         '200':
           content:
@@ -16872,7 +17321,7 @@ paths:
       description: Deletes the notification connector with the specified ID.
       operationId: ConnectorsService_DeleteConnector
       parameters:
-        - $ref: '#/components/parameters/id_4'
+        - $ref: '#/components/parameters/id_5'
       responses:
         '200':
           content:
@@ -17133,7 +17582,7 @@ paths:
       description: Deletes the custom notification preset with the specified ID.
       operationId: PresetsService_DeleteCustomPreset
       parameters:
-        - $ref: '#/components/parameters/id_4'
+        - $ref: '#/components/parameters/id_5'
       responses:
         '200':
           content:
@@ -17667,7 +18116,7 @@ paths:
       description: Deletes the notification router with the specified ID.
       operationId: GlobalRoutersService_DeleteGlobalRouter
       parameters:
-        - $ref: '#/components/parameters/id_4'
+        - $ref: '#/components/parameters/id_5'
       responses:
         '200':
           content:
@@ -22549,6 +22998,19 @@ components:
       description: >-
         Empty response returned after archiving a fleet-manager configuration
         group.
+    ArchiveConfigurationOverlayResponse:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Archived configuration overlay UUID v7.
+      description: Response containing the archived configuration overlay ID.
     ArchiveRetention:
       type: object
       properties:
@@ -25742,6 +26204,384 @@ components:
       description: >-
         A group of versioned Collector configurations. Use its ID for get,
         update, and archive operations.
+    ConfigurationOverlay:
+      required:
+        - id
+        - tags
+        - archived
+        - priorityOrder
+        - active
+        - versionId
+        - version
+        - overlayHash
+        - schedules
+      type: object
+      oneOf:
+        - required:
+            - custom
+          type: object
+        - required:
+            - preset
+          type: object
+      properties:
+        active:
+          default: false
+          description: >-
+            Whether the latest version is active. With schedules, it applies
+            only during their windows.
+          type: boolean
+          x-coralogix-presence: true
+        archived:
+          description: Whether this configuration overlay is archived.
+          type: boolean
+          x-coralogix-presence: true
+        createdBy:
+          maxLength: 256
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: User that created the configuration overlay.
+        custom:
+          allOf:
+            - $ref: '#/components/schemas/CustomConfigurationOverlay'
+          description: Custom overlay content of the latest version.
+        description:
+          description: Human-readable description.
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Configuration overlay UUID v7.
+        name:
+          description: Display name.
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        overlayHash:
+          maxLength: 64
+          minLength: 64
+          pattern: ^[0-9a-f]{64}$
+          type: string
+          description: >-
+            Lowercase hexadecimal SHA-256 hash of the normalized payload: the
+            custom overlay YAML, or the preset JSON.
+        parentVersionId:
+          description: UUID v7 of the version the latest version was created from.
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          x-coralogix-presence: true
+        preset:
+          allOf:
+            - $ref: '#/components/schemas/PresetConfigurationOverlay'
+          description: >-
+            Preset overlay content of the latest version, for
+            ObservabilityFeatures overlays created outside this API.
+        priorityOrder:
+          default: 0
+          description: >-
+            Merge precedence on a shared remote configuration: higher values
+            win, and the newer overlay wins a tie.
+          format: int32
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          x-coralogix-presence: true
+        schedules:
+          description: >-
+            Activation schedules of the latest version. With schedules, an
+            active overlay applies only during their windows.
+          items:
+            $ref: '#/components/schemas/ConfigurationOverlaySchedule'
+          maxItems: 10
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+        tags:
+          maxItems: 64
+          minItems: 0
+          type: array
+          items:
+            maxLength: 256
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+            description: Tags attached to the configuration overlay.
+          description: Tags attached to the configuration overlay.
+        version:
+          maxLength: 10
+          minLength: 1
+          pattern: ^[1-9][0-9]*$
+          type: string
+          description: Monotonic number of the latest version.
+        versionId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: >-
+            UUID v7 of the latest version. Changes when an update creates a
+            version.
+      description: >-
+        Fleet-manager configuration overlay with the content of its latest
+        version. The latest version is the newest unarchived one, or the newest
+        one for an archived overlay.
+    ConfigurationOverlaySchedule:
+      required:
+        - id
+        - startAt
+        - duration
+        - timeZone
+        - state
+        - createdAt
+        - updatedAt
+      type: object
+      properties:
+        createdAt:
+          description: Time when this schedule was created.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        description:
+          description: Human-readable description.
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        duration:
+          description: Length of each window.
+          maxLength: 23
+          minLength: 2
+          pattern: ^([1-9][0-9]{0,11}(\.[0-9]{1,9})?|0\.[0-9]{1,9})s$
+          type: string
+          x-coralogix-presence: true
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: >-
+            Schedule UUID v7. Changes when startAt, duration, recurrence, or
+            timeZone changes, or when a new version is created.
+        nextActivation:
+          description: >-
+            Start of the next window. Set only while the schedule is enabled and
+            has a window left.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        recurrence:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverlayScheduleRecurrence'
+          description: Repeats the window. Absent for a one-off schedule.
+        startAt:
+          description: Start of the first window.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverlayScheduleState'
+          description: Lifecycle state of the schedule.
+        terminationDate:
+          description: >-
+            End of a recurring schedule: no window starts at or after it, and a
+            running window ends at it.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        timeZone:
+          maxLength: 64
+          minLength: 1
+          pattern: ^[A-Za-z0-9_+\-/]+$
+          type: string
+          description: IANA time zone for daily, weekly, and monthly recurrence.
+          default: UTC
+        updatedAt:
+          description: Time when this schedule was last updated.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+      description: Activation schedule of a configuration overlay.
+    ConfigurationOverlayScheduleCreate:
+      required:
+        - startAt
+        - duration
+      type: object
+      properties:
+        description:
+          description: Human-readable description.
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        duration:
+          description: >-
+            Positive length of each window, such as "7200s". Must be shorter
+            than the recurrence interval; for days, weeks, and months, shorter
+            than the shortest interval in the schedule's time zone, such as a
+            23-hour daylight-saving day or the shortest month.
+          maxLength: 23
+          minLength: 2
+          pattern: ^([1-9][0-9]{0,11}(\.[0-9]{1,9})?|0\.[0-9]{1,9})s$
+          type: string
+          x-coralogix-presence: true
+        recurrence:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverlayScheduleRecurrence'
+          description: Repeats the window. Omit for a one-off schedule.
+        startAt:
+          description: >-
+            Start of the first window. A new schedule needs a window that starts
+            in the future and before terminationDate.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        terminationDate:
+          description: >-
+            End of a recurring schedule: no window starts at or after it, and a
+            running window ends at it. Must be in the future when set or
+            changed. Rejected for a one-off schedule.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        timeZone:
+          default: UTC
+          description: IANA time zone for daily, weekly, and monthly recurrence.
+          maxLength: 64
+          minLength: 1
+          pattern: ^[A-Za-z0-9_+\-/]+$
+          type: string
+          x-coralogix-presence: true
+      description: Activation schedule to create with a configuration overlay.
+    ConfigurationOverlayScheduleRecurrence:
+      required:
+        - every
+        - unit
+      type: object
+      properties:
+        every:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: Number of units between window starts.
+          format: int32
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverlayScheduleRecurrenceUnit'
+          description: Interval unit.
+      description: >-
+        Interval between window starts. Days, weeks, and months follow the
+        schedule's time zone: a monthly start on a missing day moves to the
+        month's last day, a start time skipped by a daylight-saving change moves
+        forward, and a repeated one uses the earlier instant.
+    ConfigurationOverlayScheduleRecurrenceUnit:
+      title: Configuration overlay schedule recurrence unit
+      enum:
+        - CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_UNSPECIFIED
+        - CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_MINUTES
+        - CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_HOURS
+        - CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_DAYS
+        - CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_WEEKS
+        - CONFIGURATION_OVERLAY_SCHEDULE_RECURRENCE_UNIT_MONTHS
+      type: string
+      description: Unit of the interval between window starts.
+    ConfigurationOverlayScheduleReplace:
+      required:
+        - startAt
+        - duration
+      type: object
+      properties:
+        description:
+          description: Human-readable description.
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        duration:
+          description: >-
+            Positive length of each window, such as "7200s". Must be shorter
+            than the recurrence interval; for days, weeks, and months, shorter
+            than the shortest interval in the schedule's time zone, such as a
+            23-hour daylight-saving day or the shortest month.
+          maxLength: 23
+          minLength: 2
+          pattern: ^([1-9][0-9]{0,11}(\.[0-9]{1,9})?|0\.[0-9]{1,9})s$
+          type: string
+          x-coralogix-presence: true
+        recurrence:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationOverlayScheduleRecurrence'
+          description: Repeats the window. Omit for a one-off schedule.
+        startAt:
+          description: >-
+            Start of the first window. A new schedule needs a window that starts
+            in the future and before terminationDate.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        terminationDate:
+          description: >-
+            End of a recurring schedule: no window starts at or after it, and a
+            running window ends at it. Must be in the future when set or
+            changed. Rejected for a one-off schedule.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        timeZone:
+          default: UTC
+          description: IANA time zone for daily, weekly, and monthly recurrence.
+          maxLength: 64
+          minLength: 1
+          pattern: ^[A-Za-z0-9_+\-/]+$
+          type: string
+          x-coralogix-presence: true
+      description: Activation schedule in a replacement schedule list.
+    ConfigurationOverlayScheduleState:
+      title: Configuration overlay schedule state
+      enum:
+        - CONFIGURATION_OVERLAY_SCHEDULE_STATE_UNSPECIFIED
+        - CONFIGURATION_OVERLAY_SCHEDULE_STATE_ENABLED
+        - CONFIGURATION_OVERLAY_SCHEDULE_STATE_PAUSED
+        - CONFIGURATION_OVERLAY_SCHEDULE_STATE_COMPLETED
+      type: string
+      description: >-
+        PAUSED: the overlay is not active. ENABLED: the schedule applies the
+        overlay during its windows. COMPLETED: the schedule has no windows left.
     ConfigurationOverlaySource:
       required:
         - overlayId
@@ -25776,6 +26616,101 @@ components:
           examples:
             - 01975ed4-9c1e-7f5d-8182-426614174004
       description: Configuration overlay provenance.
+    ConfigurationOverlayTarget:
+      required:
+        - id
+        - sourceConfigurationFamilyId
+        - overlayConfigurationFamilyId
+        - sourceRemoteConfigurationId
+        - overlayRemoteConfigurationId
+        - createdAt
+        - updatedAt
+      type: object
+      properties:
+        createdAt:
+          description: Time when this overlay target was created.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+        id:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Overlay target UUID v7.
+        overlayConfigurationFamilyId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Generated overlay configuration family UUID v7.
+        overlayRemoteConfigurationId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Generated overlay remote configuration UUID v7.
+        sourceConfigurationFamilyId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Source configuration family UUID v7.
+        sourceRemoteConfigurationId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: Source remote configuration UUID v7.
+        updatedAt:
+          description: Time when this overlay target was last updated.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          type: string
+          x-coralogix-presence: true
+      description: Target snapshot entry for a configuration overlay version.
+    ConfigurationOverlayTargetCreate:
+      required:
+        - remoteConfigurationId
+      type: object
+      properties:
+        remoteConfigurationId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: >-
+            Remote configuration ID (families[].remoteConfigurations[].id in a
+            configuration group, not the group ID). Its family must be active.
+      description: >-
+        Remote-configuration target input used when creating a configuration
+        overlay.
+    ConfigurationOverlayTargetReplace:
+      required:
+        - remoteConfigurationId
+      type: object
+      properties:
+        remoteConfigurationId:
+          maxLength: 36
+          minLength: 36
+          pattern: >-
+            ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+          type: string
+          description: >-
+            Remote configuration ID (families[].remoteConfigurations[].id in a
+            configuration group, not the group ID). Its family must be active.
+      description: >-
+        Remote-configuration target input used when replacing configuration
+        overlay targets.
     ConnectionStatus:
       enum:
         - PENDING
@@ -27019,6 +27954,87 @@ components:
           type: string
           x-coralogix-presence: true
       description: Custom action.
+    CustomConfigurationOverlay:
+      required:
+        - configuration
+        - targets
+      type: object
+      properties:
+        configuration:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            OpenTelemetry Collector YAML fragment, re-emitted in normalized form
+            (sorted keys, no comments).
+        targets:
+          description: Target snapshot of this version.
+          items:
+            $ref: '#/components/schemas/ConfigurationOverlayTarget'
+          maxItems: 256
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+      description: Custom overlay content of a version.
+    CustomConfigurationOverlayCreate:
+      required:
+        - configuration
+      type: object
+      properties:
+        configuration:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            OpenTelemetry Collector YAML fragment merged into each targeted
+            remote configuration. Stored in normalized form (sorted keys, no
+            comments). Must not configure the OpAMP extension.
+        targets:
+          description: >-
+            Remote configurations the overlay applies to, as a set: duplicates
+            are rejected. An active overlay needs at least one target.
+          items:
+            $ref: '#/components/schemas/ConfigurationOverlayTargetCreate'
+          maxItems: 256
+          minItems: 0
+          type: array
+          uniqueItems: true
+          x-coralogix-collection: set
+      description: >-
+        Custom overlay to create: an OpenTelemetry Collector YAML fragment and
+        its targets.
+    CustomConfigurationOverlayUpdate:
+      type: object
+      properties:
+        configuration:
+          description: >-
+            Replacement OpenTelemetry Collector YAML fragment. Creates a new
+            version when its normalized form changes. Must not configure the
+            OpAMP extension.
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        targets:
+          description: >-
+            Replaces the targets, as a set: duplicates are rejected and
+            reordering alone changes nothing. An empty list removes all targets,
+            which is rejected on an active overlay.
+          items:
+            $ref: '#/components/schemas/ConfigurationOverlayTargetReplace'
+          maxItems: 256
+          minItems: 0
+          type: array
+          uniqueItems: true
+          x-coralogix-collection: set
+      description: >-
+        Custom overlay field values for an update. With custom in update_mask,
+        configuration is required and the content replaces the stored one;
+        omitted targets are cleared. With custom.configuration or
+        custom.targets, only that field changes.
     CustomDashboardWidgetAttachment:
       title: Custom dashboard widget attachment
       required:
@@ -27840,26 +28856,30 @@ components:
       properties:
         canRead:
           type: boolean
-          description: Whether the caller may view the dashboard definition.
+          description: >-
+            Whether the caller may view the resource itself, apart from its
+            access policy.
         canReadAccessPolicy:
           type: boolean
           description: >-
-            Whether the caller may read the access policy of this dashboard: it
-            holds `team-dashboards:ReadAccessPolicy` together with
-            `team-dashboards:Read` on this dashboard, or the break-glass
+            Whether the caller may read the resource's access policy. For a
+            dashboard, the caller holds `team-dashboards:ReadAccessPolicy`
+            together with `team-dashboards:Read` on it, or the break-glass
             `access-policies:ReadAll`.
         canUpdate:
           type: boolean
-          description: Whether the caller may replace or delete the dashboard definition.
+          description: >-
+            Whether the caller may change or delete the resource itself, apart
+            from its access policy.
         canUpdateAccessPolicy:
           type: boolean
           description: >-
-            Whether the caller may replace the access policy of this dashboard:
-            it holds `team-dashboards:UpdateAccessPolicy` together with
-            `team-dashboards:Update` on this dashboard, or the break-glass
+            Whether the caller may replace the resource's access policy. For a
+            dashboard, the caller holds `team-dashboards:UpdateAccessPolicy`
+            together with `team-dashboards:Update` on it, or the break-glass
             `access-policies:UpdateAll`.
       description: >-
-        What the caller may do with this dashboard. All four flags are always
+        What the caller may do with this resource. All four flags are always
         returned.
     DataTable:
       type: object
@@ -38338,6 +39358,26 @@ components:
           type: string
           x-coralogix-presence: true
       description: Response containing fleet-manager configuration groups.
+    ListConfigurationOverlaysResponse:
+      required:
+        - overlays
+      type: object
+      properties:
+        nextPageToken:
+          description: Token for the next page. Omitted when there are no further results.
+          maxLength: 64
+          minLength: 1
+          pattern: ^[A-Za-z0-9_-]+$
+          type: string
+          x-coralogix-presence: true
+        overlays:
+          maxItems: 256
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfigurationOverlay'
+          description: Configuration overlays, newest first.
+      description: Response containing configuration overlays.
     ListConnectorSummariesResponse:
       title: List Connector Summaries Response
       type: object
@@ -43367,6 +44407,31 @@ components:
         ones; omitted metadata is cleared. With a field path, only that field is
         needed and changes. A new configuration family version is created only
         when the settings change.
+    PresetConfigurationOverlay:
+      required:
+        - observabilityFeatures
+        - targets
+      type: object
+      properties:
+        chartName:
+          allOf:
+            - $ref: '#/components/schemas/ChartName'
+          description: Preset chart name.
+        observabilityFeatures:
+          maxLength: 1048576
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Normalized ObservabilityFeatures JSON.
+        targets:
+          description: Target snapshot of this version.
+          items:
+            $ref: '#/components/schemas/ConfigurationOverlayTarget'
+          maxItems: 256
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+      description: ObservabilityFeatures preset overlay content of a version.
     PresetInfo:
       title: Preset Info
       type: object
@@ -55126,6 +56191,18 @@ components:
     id_2:
       name: id
       in: path
+      description: Configuration overlay UUID v7.
+      required: true
+      schema:
+        maxLength: 36
+        minLength: 36
+        pattern: >-
+          ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+        type: string
+        description: Configuration overlay UUID v7.
+    id_3:
+      name: id
+      in: path
       description: >-
         ID of the case. Accepts either the case UUID (the `id` field on a case)
         or the readable identifier (the `readable_id` field, e.g. `CASE-123`).
@@ -55142,7 +56219,7 @@ components:
           `CASE-123`).
         examples:
           - 3f166e9f-3c88-4af2-b52e-138f339dab3e
-    id_3:
+    id_4:
       name: id
       in: path
       description: Unique identifier.
@@ -55154,7 +56231,7 @@ components:
         minLength: 0
         type: string
         x-coralogix-presence: true
-    id_4:
+    id_5:
       name: id
       in: path
       description: Unique identifier.

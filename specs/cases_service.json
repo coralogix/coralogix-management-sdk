@@ -756,7 +756,7 @@
         "operationId": "CasesService_GetCase",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_2"
+            "$ref": "#/components/parameters/id_3"
           }
         ],
         "responses": {
@@ -1625,7 +1625,7 @@
       },
       "parameters": [
         {
-          "$ref": "#/components/parameters/id_2"
+          "$ref": "#/components/parameters/id_3"
         }
       ]
     },
@@ -5394,7 +5394,7 @@
           ]
         }
       },
-      "id_2": {
+      "id_3": {
         "name": "id",
         "in": "path",
         "description": "ID of the case. Accepts either the case UUID (the `id` field on a case) or the readable identifier (the `readable_id` field, e.g. `CASE-123`).",

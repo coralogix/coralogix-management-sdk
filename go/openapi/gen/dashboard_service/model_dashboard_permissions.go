@@ -21,15 +21,15 @@ var _ = bytes.MinRead
 // checks if the DashboardPermissions type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DashboardPermissions{}
 
-// DashboardPermissions What the caller may do with this dashboard. All four flags are always returned.
+// DashboardPermissions What the caller may do with this resource. All four flags are always returned.
 type DashboardPermissions struct {
-	// Whether the caller may view the dashboard definition.
+	// Whether the caller may view the resource itself, apart from its access policy.
 	CanRead bool `json:"canRead"`
-	// Whether the caller may read the access policy of this dashboard: it holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on this dashboard, or the break-glass `access-policies:ReadAll`.
+	// Whether the caller may read the resource's access policy. For a dashboard, the caller holds `team-dashboards:ReadAccessPolicy` together with `team-dashboards:Read` on it, or the break-glass `access-policies:ReadAll`.
 	CanReadAccessPolicy bool `json:"canReadAccessPolicy"`
-	// Whether the caller may replace or delete the dashboard definition.
+	// Whether the caller may change or delete the resource itself, apart from its access policy.
 	CanUpdate bool `json:"canUpdate"`
-	// Whether the caller may replace the access policy of this dashboard: it holds `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on this dashboard, or the break-glass `access-policies:UpdateAll`.
+	// Whether the caller may replace the resource's access policy. For a dashboard, the caller holds `team-dashboards:UpdateAccessPolicy` together with `team-dashboards:Update` on it, or the break-glass `access-policies:UpdateAll`.
 	CanUpdateAccessPolicy bool `json:"canUpdateAccessPolicy"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
