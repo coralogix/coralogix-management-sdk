@@ -53,6 +53,24 @@ func thingNames(t *testing.T, zeroConstants func(string) bool) []Ref {
 	return refs
 }
 
+func TestFieldTypeUsesOperationWireCollection(t *testing.T) {
+	object := &model.Type{Kind: model.Object, WireKind: model.Object, Schema: "Item", Fields: []*model.Field{{Name: "name", Type: &model.Type{Kind: model.String, WireKind: model.String}}}}
+	for _, test := range []struct {
+		name, want string
+		wire       model.Kind
+	}{
+		{name: "request list", wire: model.List, want: "[]Item"},
+		{name: "response map", wire: model.Map, want: "map[string]Item"},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			got, _, err := fieldType(&model.Type{Kind: model.Set, WireKind: test.wire, Elem: object})
+			if err != nil || got != test.want {
+				t.Fatalf("fieldType = %q, %v; want %q", got, err, test.want)
+			}
+		})
+	}
+}
+
 // Names lists only names of the SDK module: the generated package of the tag and the cxsdk
 // package. A tool appends the names of its own code.
 func TestNamesListsOnlySDKNames(t *testing.T) {

@@ -17,9 +17,10 @@ package model
 import "fmt"
 
 // classifyTopLevel returns the behavior of a top-level field. With updateIDInBody,
-// the Update call has no id in its path, so the id path parameter of Get is a
-// field of the Update body. When Create does not send that field, the server
-// assigns the id: the field is computed, and Update sends the value from state.
+// the Update call has no id in its path, so a non-singleton's Get path id is a
+// field of the Update body. A singleton can also have a server-assigned id in
+// its Update body. When Create does not send the id, it is computed and Update
+// sends the value from state.
 //
 // A field that Create does not have, but that Update can set and that declares
 // a server default in Update (updateDefault), is managed: Create stores the
@@ -27,7 +28,10 @@ import "fmt"
 // configuration sets another value.
 // id is the id property: the id path parameter of Get, or the property that api.idProperty names.
 func classifyTopLevel(p Policy, id, field string, inCreate, inUpdate, inGet, updateDefault bool) (Behavior, error) {
-	if p.UpdateIDInBody && id != "" && field == id && !inCreate && inUpdate && inGet {
+	// A singleton can return a server-assigned id and require it in the body of
+	// a later Replace, even though it has no path id parameter.
+	isID := id != "" && field == id || id == "" && field == "id"
+	if p.UpdateIDInBody && isID && !inCreate && inUpdate && inGet {
 		return Computed, nil
 	}
 	if !inCreate && inUpdate && inGet && updateDefault {
