@@ -60,6 +60,13 @@ func mergeRequests(location string, get, create, update *Type) error {
 // type of the same value in the resource response. It records on get the
 // request components and the request attributes of the nested fields.
 func mergeRequest(location string, get, req *Type, op verb) error {
+	if get != nil && req != nil {
+		if op == opCreate {
+			get.CreateWireKind = req.WireKind
+		} else {
+			get.UpdateWireKind = req.WireKind
+		}
+	}
 	if detail := typeDifference(get, req, op); detail != "" {
 		return &contractError{
 			code:        "FIELD_TYPE_INCONSISTENT",
@@ -129,8 +136,15 @@ func mergeFields(location string, get, req *Type, op verb) error {
 // typeDifference returns how req differs from get, or "". It does not compare
 // component names, descriptions, or the nested fields of an object.
 func typeDifference(get, req *Type, op verb) string {
+	// A set override can normalize the one supported legacy mismatch: the API
+	// reads an object keyed by string and writes a list of matching objects.
+	// Same-shape lists remain supported; other map/list directions do not.
+	if get.Kind == Set && req.Kind == Set && (get.WireKind == Map || req.WireKind == Map) &&
+		!(get.WireKind == Map && req.WireKind == List && get.Elem != nil && req.Elem != nil && get.Elem.Kind == Object && req.Elem.Kind == Object) {
+		return fmt.Sprintf("wire collection kinds %s and %s are not supported with collection: set", req.WireKind, get.WireKind)
+	}
 	switch {
-	case get.Kind != req.Kind:
+	case get.Kind != req.Kind && !(get.Kind == Set && req.Kind == Set && get.WireKind == Map && req.WireKind == List && get.Elem != nil && req.Elem != nil && get.Elem.Kind == Object && req.Elem.Kind == Object):
 		return fmt.Sprintf("kind %s, want %s", req.Kind, get.Kind)
 	case get.Format != req.Format || get.WireString != req.WireString:
 		return fmt.Sprintf("format %q, want %q", req.Format, get.Format)
@@ -138,10 +152,29 @@ func typeDifference(get, req *Type, op verb) string {
 		return fmt.Sprintf("enum %s, want %s", req.Schema, get.Schema)
 	case !slices.Equal(get.Values, req.Values) || get.EnumZero != req.EnumZero:
 		return "different enum values"
-	case !sameLimits(get, req):
+	case !sameTypeLimits(get, req):
 		return "different limits"
 	}
 	return oneOfDifference(get, req, op)
+}
+
+func sameTypeLimits(get, req *Type) bool {
+	if get.Kind == Set && req.Kind == Set && get.WireKind == Map && req.WireKind == List {
+		return samePointer(get.MinLength, req.MinLength) && samePointer(get.MaxLength, req.MaxLength) && get.Pattern == req.Pattern &&
+			samePointer(get.Minimum, req.Minimum) && samePointer(get.Maximum, req.Maximum) &&
+			collectionLimit(get.MinItems) == collectionLimit(req.MinItems) && samePointer(get.MaxItems, req.MaxItems)
+	}
+	return sameLimits(get, req)
+}
+
+// Empty and omitted collection limits have the same meaning for these wire
+// shapes: both allow zero values. A positive lower bound or any upper bound
+// must still match.
+func collectionLimit(value *int64) int64 {
+	if value == nil {
+		return 0
+	}
+	return *value
 }
 
 func sameLimits(a, b *Type) bool {
@@ -280,6 +313,13 @@ func (t *Type) requestType(op verb) *Type {
 	}
 	out := *t
 	out.Elem = t.Elem.requestType(op)
+	out.WireKind = t.WireKind
+	if op == opCreate && t.CreateWireKind != "" {
+		out.WireKind = t.CreateWireKind
+	}
+	if op == opUpdate && t.UpdateWireKind != "" {
+		out.WireKind = t.UpdateWireKind
+	}
 	out.Wrappers = requestWrappers(t.Wrappers, op)
 	if t.Kind != Object && t.Kind != OneOf {
 		return &out
