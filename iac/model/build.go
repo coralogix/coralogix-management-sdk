@@ -578,7 +578,8 @@ func okSchema(op *v3.Operation) (*base.SchemaProxy, error) {
 // response reads the 200 response. Except for Delete, it must return the resource: the
 // resource itself (Direct), or one field that wraps it. An existing resource can also have a
 // Create response that holds only the id (Policy.CreateResponseOnlyIDProperty), and an Update response with
-// no fields. A tool then reads the resource with Get.
+// no fields. An existing singleton can also have a Create response that is an inline object with
+// no fields: its Get needs no id. A tool then reads the resource with Get.
 func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	wrapped := v != opDelete
 	schema, err := okSchema(op)
@@ -586,7 +587,7 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 		return Response{}, err
 	}
 	proxy := responseRef(schema)
-	emptyAllowed := !wrapped || v == opUpdate && r.Policy.Existing
+	emptyAllowed := !wrapped || r.Policy.Existing && (v == opUpdate || v == opCreate && r.Singleton)
 	if proxy == nil && emptyAllowed && emptyInlineObject(schema) {
 		// google.protobuf.Empty is an inline object with no fields. The SDK
 		// returns map[string]interface{}, the same as for an empty component.
