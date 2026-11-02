@@ -116,4 +116,9 @@ func TestEmptyInlineCreateResponse(t *testing.T) {
 			}
 		})
 	}
+	// An id property for a Create response that has no fields is a stale override: it is
+	// reported, not ignored.
+	if _, err := build(false, Policy{Existing: true, CreateResponseOnlyIDProperty: "settingId"}); err == nil || !strings.Contains(err.Error(), `has no property "settingId"`) {
+		t.Fatalf("err = %v, want the stale api.createResponseOnlyIDProperty reported", err)
+	}
 }
