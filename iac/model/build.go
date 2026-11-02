@@ -15,6 +15,7 @@
 package model
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"regexp"
@@ -394,6 +395,22 @@ func (r *Resource) readBodyTitles(doc *v3.Document, ops map[verb]foundOp) {
 		o.BodyTitle = proxy.Schema().Title
 		o.BodyTitleIsComponent = o.BodyTitle != "" && referenced[o.BodyTitle]
 	}
+	r.Update.BodyAsCreate = sameInlineBodies(bodyProxy(ops[opCreate].op), bodyProxy(ops[opUpdate].op))
+}
+
+// sameInlineBodies reports whether two inline bodies without a title are the same schema.
+// openapi-generator then generates one type for both. A body with a title is named after it.
+func sameInlineBodies(create, update *base.SchemaProxy) bool {
+	if create == nil || update == nil || create.IsReference() || update.IsReference() {
+		return false
+	}
+	c, u := create.Schema(), update.Schema()
+	if c == nil || u == nil || c.Title != "" || u.Title != "" {
+		return false
+	}
+	cr, cerr := c.Render()
+	ur, uerr := u.Render()
+	return cerr == nil && uerr == nil && bytes.Equal(cr, ur)
 }
 
 func operationTags(ops map[verb]foundOp) map[string]bool {

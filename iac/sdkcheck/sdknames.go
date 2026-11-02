@@ -412,6 +412,10 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	case "":
 	case "inline":
 		body := inlineBodyName(method, op)
+		if name == "update" && op.BodyAsCreate && s.bodies["create"] != "" {
+			// One type serves both bodies, with the name of the Create body.
+			body = s.bodies["create"]
+		}
 		s.bodies[name] = body
 		s.add(Ref{Path: path + ".body", Kind: KindType, Name: body, Rule: RuleInlineBody})
 		s.add(Ref{Path: path + ".body", Kind: KindMethod, Owner: builder, Name: body,

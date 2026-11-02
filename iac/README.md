@@ -155,3 +155,7 @@ types:
 ```
 
 A tool pins `iac` by the pseudo-version of a commit on `master`.
+
+## Create and Update with one inline body
+
+openapi-generator makes one Go type of two inline bodies that are the same schema, and names it after the first: the Create body. When the Update body is an inline schema without a title that renders the same as the inline Create body, the model sets `Update.BodyAsCreate`, and `sdkcheck` expects the Update builder to take the Create body type. The parsing rule groups API has such a pair: `RuleGroupsServiceUpdateRuleGroup(ctx, id).RuleGroupsServiceCreateRuleGroupRequest(body)`. A title names each body, so two titled bodies keep their own types.
