@@ -129,20 +129,20 @@ func TestWebhooks(t *testing.T) {
 		{
 			name: "slack-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("slack-webhook"),
+				Name: "slack-webhook",
 				Type: webhooks.WEBHOOKTYPE_SLACK.Ptr(),
 				Url:  webhooks.PtrString("https://join.slack.com/example"),
 				Slack: &webhooks.SlackConfig{
 					Attachments: []webhooks.Attachment{
 						{
 							IsActive: boolPtr(true),
-							Type:     webhooks.ATTACHMENTTYPE_LOGS.Ptr(),
+							Type:     webhooks.ATTACHMENTTYPE_LOGS,
 						},
 					},
 					Digests: []webhooks.Digest{
 						{
 							IsActive: boolPtr(true),
-							Type:     webhooks.DIGESTTYPE_FLOW_ANOMALIES.Ptr(),
+							Type:     webhooks.DIGESTTYPE_FLOW_ANOMALIES,
 						},
 					},
 				},
@@ -151,11 +151,11 @@ func TestWebhooks(t *testing.T) {
 		{
 			name: "custom-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("custom-webhook"),
+				Name: "custom-webhook",
 				Type: webhooks.WEBHOOKTYPE_GENERIC.Ptr(),
 				Url:  webhooks.PtrString("https://example-url.com"),
 				GenericWebhook: &webhooks.GenericWebhookConfig{
-					Method: webhooks.METHODTYPE_GET.Ptr(),
+					Method: webhooks.METHODTYPE_GET,
 					Payload: webhooks.PtrString(
 						"Hello from $ALERT_NAME, a coralogix alert",
 					),
@@ -166,18 +166,18 @@ func TestWebhooks(t *testing.T) {
 		{
 			name: "pager-duty-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("pager-duty-webhook"),
+				Name: "pager-duty-webhook",
 				Type: webhooks.WEBHOOKTYPE_PAGERDUTY.Ptr(),
 				Url:  webhooks.PtrString("https://example-url.com/"),
 				PagerDuty: &webhooks.PagerDutyConfig{
-					ServiceKey: webhooks.PtrString("example-key"),
+					ServiceKey: "example-key",
 				},
 			},
 		},
 		{
 			name: "email-group-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("email-group-webhook"),
+				Name: "email-group-webhook",
 				Type: webhooks.WEBHOOKTYPE_EMAIL_GROUP.Ptr(),
 				Url:  webhooks.PtrString("https://example-url.com/"),
 				EmailGroup: &webhooks.EmailGroupConfig{
@@ -187,21 +187,21 @@ func TestWebhooks(t *testing.T) {
 		{
 			name: "jira-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("jira-webhook"),
+				Name: "jira-webhook",
 				Type: webhooks.WEBHOOKTYPE_JIRA.Ptr(),
 				Url:  webhooks.PtrString("https://my-jira.atlassian.net/jira/"),
 				Jira: &webhooks.JiraConfig{
 
-					ProjectKey: webhooks.PtrString("example-key"),
-					Email:      webhooks.PtrString("email@coralogix.com"),
-					ApiToken:   webhooks.PtrString("example-token"),
+					ProjectKey: "example-key",
+					Email:      "email@coralogix.com",
+					ApiToken:   "example-token",
 				},
 			},
 		},
 		{
 			name: "opsgenie-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name:     webhooks.PtrString("opsgenie-webhook"),
+				Name:     "opsgenie-webhook",
 				Type:     webhooks.WEBHOOKTYPE_OPSGENIE.Ptr(),
 				Url:      webhooks.PtrString("https://example.opsgenie.com"),
 				Opsgenie: map[string]interface{}{},
@@ -210,38 +210,38 @@ func TestWebhooks(t *testing.T) {
 		{
 			name: "demisto-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("demisto-webhook"),
+				Name: "demisto-webhook",
 				Type: webhooks.WEBHOOKTYPE_DEMISTO.Ptr(),
 				Url:  webhooks.PtrString("https://example.com"),
 				Demisto: &webhooks.DemistoConfig{
 					Uuid:    webhooks.PtrString(uuid.NewString()),
-					Payload: webhooks.PtrString("Hello from $ALERT_NAME, a coralogix alert"),
+					Payload: "Hello from $ALERT_NAME, a coralogix alert",
 				},
 			},
 		},
 		{
 			name: "sendlog-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("sendlog-webhook"),
+				Name: "sendlog-webhook",
 				Type: webhooks.WEBHOOKTYPE_SEND_LOG.Ptr(),
 				SendLog: &webhooks.SendLogConfig{
 					Uuid:    webhooks.PtrString(uuid.NewString()),
-					Payload: webhooks.PtrString("Hello from $ALERT_NAME, a coralogix alert"),
+					Payload: "Hello from $ALERT_NAME, a coralogix alert",
 				},
 			},
 		},
 		{
 			name: "event-bridge-webhook",
 			data: webhooks.OutgoingWebhookInputData{
-				Name: webhooks.PtrString("event-bridge-webhook"),
+				Name: "event-bridge-webhook",
 				Type: webhooks.WEBHOOKTYPE_AWS_EVENT_BRIDGE.Ptr(),
 				Url:  webhooks.PtrString("https://aws.amazon.com"),
 				AwsEventBridge: &webhooks.AwsEventBridgeConfig{
-					EventBusArn: webhooks.PtrString("arn:aws:events:us-east-1:123456789012:event-bus/default"),
-					Detail:      webhooks.PtrString("example-detail"),
-					DetailType:  webhooks.PtrString("example-detail-type"),
-					Source:      webhooks.PtrString("example-source"),
-					RoleName:    webhooks.PtrString("example-role"),
+					EventBusArn: "arn:aws:events:us-east-1:123456789012:event-bus/default",
+					Detail:      "example-detail",
+					DetailType:  "example-detail-type",
+					Source:      "example-source",
+					RoleName:    "example-role",
 				},
 			},
 		},
@@ -253,7 +253,7 @@ func TestWebhooks(t *testing.T) {
 				t.Skip("Skipping opsgenie-webhook test: example.opsgenie.com host cannot be resolved")
 			}
 			req := webhooks.CreateOutgoingWebhookRequest{
-				Data: &tt.data,
+				Data: tt.data,
 			}
 			createResp, httpResp, err := client.
 				OutgoingWebhooksServiceCreateOutgoingWebhook(context.Background()).
@@ -266,10 +266,10 @@ func TestWebhooks(t *testing.T) {
 			newName := fmt.Sprintf("%s-updated", tt.name)
 
 			updateReq := webhooks.UpdateOutgoingWebhookRequest{
-				Id:   &id,
-				Data: &tt.data,
+				Id:   id,
+				Data: tt.data,
 			}
-			updateReq.Data.Name = &newName
+			updateReq.Data.Name = newName
 
 			_, httpResp, err = client.
 				OutgoingWebhooksServiceUpdateOutgoingWebhook(context.Background()).

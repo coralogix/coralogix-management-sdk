@@ -13,6 +13,7 @@ package outgoing_webhooks_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,12 +23,12 @@ var _ MappedNullable = &JiraConfig{}
 
 // JiraConfig Jira config.
 type JiraConfig struct {
-	// The api token.
-	ApiToken *string `json:"apiToken,omitempty"`
+	// API token. Required on Create and Update. Treat any value returned by Get as a secret.
+	ApiToken string `json:"apiToken"`
 	// Email address.
-	Email *string `json:"email,omitempty"`
+	Email string `json:"email"`
 	// The project key.
-	ProjectKey *string `json:"projectKey,omitempty"`
+	ProjectKey string `json:"projectKey"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -38,8 +39,11 @@ type _JiraConfig JiraConfig
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewJiraConfig() *JiraConfig {
+func NewJiraConfig(apiToken string, email string, projectKey string) *JiraConfig {
 	this := JiraConfig{}
+	this.ApiToken = apiToken
+	this.Email = email
+	this.ProjectKey = projectKey
 	return &this
 }
 
@@ -51,100 +55,76 @@ func NewJiraConfigWithDefaults() *JiraConfig {
 	return &this
 }
 
-// GetApiToken returns the ApiToken field value if set, zero value otherwise.
+// GetApiToken returns the ApiToken field value
 func (o *JiraConfig) GetApiToken() string {
-	if o == nil || IsNil(o.ApiToken) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ApiToken
+
+	return o.ApiToken
 }
 
-// GetApiTokenOk returns a tuple with the ApiToken field value if set, nil otherwise
+// GetApiTokenOk returns a tuple with the ApiToken field value
 // and a boolean to check if the value has been set.
 func (o *JiraConfig) GetApiTokenOk() (*string, bool) {
-	if o == nil || IsNil(o.ApiToken) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ApiToken, true
+	return &o.ApiToken, true
 }
 
-// HasApiToken returns a boolean if a field has been set.
-func (o *JiraConfig) HasApiToken() bool {
-	if o != nil && !IsNil(o.ApiToken) {
-		return true
-	}
-
-	return false
-}
-
-// SetApiToken gets a reference to the given string and assigns it to the ApiToken field.
+// SetApiToken sets field value
 func (o *JiraConfig) SetApiToken(v string) {
-	o.ApiToken = &v
+	o.ApiToken = v
 }
 
-// GetEmail returns the Email field value if set, zero value otherwise.
+// GetEmail returns the Email field value
 func (o *JiraConfig) GetEmail() string {
-	if o == nil || IsNil(o.Email) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Email
+
+	return o.Email
 }
 
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 func (o *JiraConfig) GetEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.Email) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Email, true
+	return &o.Email, true
 }
 
-// HasEmail returns a boolean if a field has been set.
-func (o *JiraConfig) HasEmail() bool {
-	if o != nil && !IsNil(o.Email) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given string and assigns it to the Email field.
+// SetEmail sets field value
 func (o *JiraConfig) SetEmail(v string) {
-	o.Email = &v
+	o.Email = v
 }
 
-// GetProjectKey returns the ProjectKey field value if set, zero value otherwise.
+// GetProjectKey returns the ProjectKey field value
 func (o *JiraConfig) GetProjectKey() string {
-	if o == nil || IsNil(o.ProjectKey) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ProjectKey
+
+	return o.ProjectKey
 }
 
-// GetProjectKeyOk returns a tuple with the ProjectKey field value if set, nil otherwise
+// GetProjectKeyOk returns a tuple with the ProjectKey field value
 // and a boolean to check if the value has been set.
 func (o *JiraConfig) GetProjectKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.ProjectKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProjectKey, true
+	return &o.ProjectKey, true
 }
 
-// HasProjectKey returns a boolean if a field has been set.
-func (o *JiraConfig) HasProjectKey() bool {
-	if o != nil && !IsNil(o.ProjectKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetProjectKey gets a reference to the given string and assigns it to the ProjectKey field.
+// SetProjectKey sets field value
 func (o *JiraConfig) SetProjectKey(v string) {
-	o.ProjectKey = &v
+	o.ProjectKey = v
 }
 
 func (o JiraConfig) MarshalJSON() ([]byte, error) {
@@ -157,15 +137,9 @@ func (o JiraConfig) MarshalJSON() ([]byte, error) {
 
 func (o JiraConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ApiToken) {
-		toSerialize["apiToken"] = o.ApiToken
-	}
-	if !IsNil(o.Email) {
-		toSerialize["email"] = o.Email
-	}
-	if !IsNil(o.ProjectKey) {
-		toSerialize["projectKey"] = o.ProjectKey
-	}
+	toSerialize["apiToken"] = o.ApiToken
+	toSerialize["email"] = o.Email
+	toSerialize["projectKey"] = o.ProjectKey
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -175,6 +149,29 @@ func (o JiraConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *JiraConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"apiToken",
+		"email",
+		"projectKey",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varJiraConfig := _JiraConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

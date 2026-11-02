@@ -13,6 +13,7 @@ package outgoing_webhooks_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &CreateOutgoingWebhookRequest{}
 
 // CreateOutgoingWebhookRequest Request for creating an outgoing webhook.
 type CreateOutgoingWebhookRequest struct {
-	Data *OutgoingWebhookInputData `json:"data,omitempty"`
+	Data OutgoingWebhookInputData `json:"data"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _CreateOutgoingWebhookRequest CreateOutgoingWebhookRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCreateOutgoingWebhookRequest() *CreateOutgoingWebhookRequest {
+func NewCreateOutgoingWebhookRequest(data OutgoingWebhookInputData) *CreateOutgoingWebhookRequest {
 	this := CreateOutgoingWebhookRequest{}
+	this.Data = data
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewCreateOutgoingWebhookRequestWithDefaults() *CreateOutgoingWebhookRequest
 	return &this
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
+// GetData returns the Data field value
 func (o *CreateOutgoingWebhookRequest) GetData() OutgoingWebhookInputData {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		var ret OutgoingWebhookInputData
 		return ret
 	}
-	return *o.Data
+
+	return o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *CreateOutgoingWebhookRequest) GetDataOk() (*OutgoingWebhookInputData, bool) {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Data, true
+	return &o.Data, true
 }
 
-// HasData returns a boolean if a field has been set.
-func (o *CreateOutgoingWebhookRequest) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
-		return true
-	}
-
-	return false
-}
-
-// SetData gets a reference to the given OutgoingWebhookInputData and assigns it to the Data field.
+// SetData sets field value
 func (o *CreateOutgoingWebhookRequest) SetData(v OutgoingWebhookInputData) {
-	o.Data = &v
+	o.Data = v
 }
 
 func (o CreateOutgoingWebhookRequest) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o CreateOutgoingWebhookRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateOutgoingWebhookRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Data) {
-		toSerialize["data"] = o.Data
-	}
+	toSerialize["data"] = o.Data
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o CreateOutgoingWebhookRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CreateOutgoingWebhookRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"data",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCreateOutgoingWebhookRequest := _CreateOutgoingWebhookRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
