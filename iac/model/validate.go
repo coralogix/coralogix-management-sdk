@@ -49,6 +49,7 @@ func ValidateWithPolicy(doc *v3.Document, name string, ids OperationIDs, p Polic
 		report = append(report, nameCollisions(p, "components.schemas."+name, t)...)
 		report = append(report, componentNameCollisions(t)...)
 		report = append(report, skippedArmIssues(p, t)...)
+		report = append(report, nestedShapeIssues(p, name, t)...)
 	}
 	if len(ops) == len(verbs) {
 		report = append(report, requestSchemaSeparationIssues(p, name, ops)...)
@@ -212,7 +213,7 @@ func operationCandidateIssues(location string, role verb, candidate foundOp, p P
 			Remediation: remediation,
 		}}
 	}
-	return requiredParameterIssues(location, role, candidate)
+	return requiredParameterIssues(location, role, candidate, p)
 }
 
 // deleteOverrideLocation is the line of the behavior-overrides file that names the Delete operation.
@@ -270,9 +271,9 @@ func deleteActionIssues(location string, candidate foundOp, found map[verb]found
 	return report
 }
 
-func requiredParameterIssues(location string, role verb, op foundOp) issue.Report {
+func requiredParameterIssues(location string, role verb, op foundOp, policy Policy) issue.Report {
 	var report issue.Report
-	for _, p := range unsupportedRequiredParameters(role, op) {
+	for _, p := range unsupportedRequiredParameters(role, op, policy) {
 		report = append(report, issue.Issue{
 			Code:        "REQUIRED_PARAMETER_UNSUPPORTED",
 			Location:    fmt.Sprintf("%s.%s.parameters.%s.%s", location, op.op.OperationId, p.In, p.Name),
@@ -662,7 +663,9 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	report = append(report, fieldDefaultContractIssues(p, name, location, field, create, update, get, cp, up, gp)...)
 	// A field with a line in the behavior-overrides file keeps its released behavior, so
 	// the contract need not say whether omission differs from an empty value.
-	if !p.released(name, field) {
+	// The write of an overwrite resource takes each list empty: that is the Delete. A required list
+	// that accepts [] is the contract, and a list has no presence.
+	if !p.released(name, field) && !p.Overwrite {
 		report = append(report, fieldPresenceIssue(location+".create", field, create, cp, schemaDefault(cp))...)
 		// Generation reads the Create default. A field that only Update has declares it there.
 		updateDefault := schemaDefault(up)
@@ -1149,6 +1152,18 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 			return nil
 		}
 		p.asSet(name, field, requests[i])
+	}
+	for i := range requests {
+		shaped, err := p.shapeNested(name, location, get, requests[i], map[string]bool{})
+		var contract *contractError
+		if errors.As(err, &contract) {
+			return issue.Report{contract.issue()}
+		}
+		requests[i] = shaped
+	}
+	if p.Overwrite && requests[0] != nil {
+		// As in Build: Get lists the items of every resource that its query can select.
+		get.MinItems, get.MaxItems = requests[0].MinItems, requests[0].MaxItems
 	}
 	var contract *contractError
 	if err := mergeRequests(location, get, requests[0], requests[1]); errors.As(err, &contract) {

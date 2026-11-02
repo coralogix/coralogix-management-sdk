@@ -17,8 +17,10 @@ package model
 import (
 	"errors"
 	"fmt"
+	"maps"
 	"regexp"
 	"slices"
+	"strconv"
 	"strings"
 
 	"github.com/pb33f/libopenapi"
@@ -94,7 +96,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 		return nil, nil, err
 	}
 	policy.CreateUnwrapped = policy.unwrappedCreate(ops)
-	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy}
+	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy, shapeUsed: map[string]bool{}}
 	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
 	if err := r.readOperations(ops); err != nil {
 		return nil, nil, err
@@ -109,7 +111,15 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	if err := r.readFields(doc, ops); err != nil {
 		return nil, nil, err
 	}
+	if err := r.Policy.unusedNestedShapes(r.Name, r.shapeUsed); err != nil {
+		return nil, nil, err
+	}
 	r.readRequestComponents(ops)
+	if r.Overwrite {
+		if err := r.readOverwrite(ops[opGet]); err != nil {
+			return nil, nil, err
+		}
+	}
 	if !r.Singleton {
 		index := slices.IndexFunc(r.Fields, func(field *ResourceField) bool { return field.Name == r.IDField })
 		if index < 0 {
@@ -220,17 +230,20 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 		if !slices.Contains(p.methods(v), f.method) {
 			return nil, fmt.Errorf("%s: %s is %s, want %s", v, f.op.OperationId, f.method, strings.Join(p.methods(v), " or "))
 		}
-		if params := unsupportedRequiredParameters(v, f); len(params) != 0 {
+		if params := unsupportedRequiredParameters(v, f, p); len(params) != 0 {
 			return nil, fmt.Errorf("%s: required %s parameter %q is not supported", v, params[0].In, params[0].Name)
 		}
 	}
 	return found, nil
 }
 
-func unsupportedRequiredParameters(role verb, op foundOp) []*v3.Parameter {
+func unsupportedRequiredParameters(role verb, op foundOp, policy Policy) []*v3.Parameter {
 	var params []*v3.Parameter
 	for _, p := range slices.Concat(op.item.Parameters, op.op.Parameters) {
 		if role == opUpdate && p.In == "query" && isUpdateMaskName(p.Name) {
+			continue
+		}
+		if _, sent := policy.GetQuery[p.Name]; role == opGet && p.In == "query" && sent {
 			continue
 		}
 		if p.In != "path" && p.Required != nil && *p.Required {
@@ -260,6 +273,13 @@ func matchingOperations(doc *v3.Document, name string, role verb, explicit strin
 }
 
 func (r *Resource) readOperations(ops map[verb]foundOp) error {
+	if r.Policy.Overwrite {
+		if err := checkOverwrite(ops); err != nil {
+			return err
+		}
+		r.Singleton, r.Overwrite = true, true
+		return r.readTargets(ops)
+	}
 	if len(pathParams(ops[opGet])) == 0 {
 		if err := checkSingleton(ops); err != nil {
 			return err
@@ -354,6 +374,31 @@ func checkSingleton(ops map[verb]foundOp) error {
 	return nil
 }
 
+// checkOverwrite checks an Overwrite resource: Get has no path parameters, and Create, Update, and
+// Delete are one write operation without path parameters.
+func checkOverwrite(ops map[verb]foundOp) error {
+	write := ops[opCreate].op.OperationId
+	for _, v := range verbs {
+		if n := len(pathParams(ops[v])); n != 0 {
+			return &contractError{
+				code:        "OVERWRITE_SHAPE_UNSUPPORTED",
+				location:    "paths." + strings.ToLower(string(v)) + "." + ops[v].op.OperationId,
+				message:     fmt.Sprintf("An overwrite resource has no path parameters; the %s operation has %d.", v, n),
+				remediation: "Name a Get that lists every item, and a write that replaces them, both without path parameters.",
+			}
+		}
+		if v != opGet && ops[v].op.OperationId != write {
+			return &contractError{
+				code:        "OVERWRITE_SHAPE_UNSUPPORTED",
+				location:    "behavior-overrides.yaml:api.operations." + strings.ToLower(string(v)),
+				message:     fmt.Sprintf("An overwrite resource uses one write for Create, Update, and Delete; %s names %s, and Create names %s.", v, ops[v].op.OperationId, write),
+				remediation: "Name the write operation as create, update, and delete.",
+			}
+		}
+	}
+	return nil
+}
+
 // readTargets reads the method, path, body, and response of each operation.
 func (r *Resource) readTargets(ops map[verb]foundOp) error {
 	var err error
@@ -386,7 +431,11 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 // component that only another tag references does not collide.
 func (r *Resource) readBodyTitles(doc *v3.Document, ops map[verb]foundOp) {
 	referenced := schemasReferencedByTags(doc, operationTags(ops))
-	for v, o := range map[verb]*Operation{opCreate: &r.Create, opUpdate: &r.Update} {
+	targets := map[verb]*Operation{opCreate: &r.Create, opUpdate: &r.Update}
+	if r.Overwrite {
+		targets[opDelete] = &r.Delete // the Delete of an overwrite resource is the write
+	}
+	for v, o := range targets {
 		proxy := bodyProxy(ops[v].op)
 		if o.Body != "inline" || proxy == nil || proxy.Schema() == nil {
 			continue
@@ -587,6 +636,18 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 		return Response{}, err
 	}
 	proxy := responseRef(schema)
+	if r.Policy.Overwrite && v != opGet {
+		// The write of an overwrite resource returns what it created, in its own shape. A tool
+		// reads the resource with Get instead.
+		if proxy == nil {
+			return Response{Empty: emptyInlineObject(schema)}, nil
+		}
+		name, err := componentName(proxy.GetReference())
+		if err != nil {
+			return Response{}, err
+		}
+		return Response{Schema: name}, nil
+	}
 	emptyAllowed := !wrapped || r.Policy.Existing && (v == opUpdate || v == opCreate && r.Singleton)
 	if proxy == nil && emptyAllowed && emptyInlineObject(schema) {
 		if v == opCreate && r.Policy.CreateResponseOnlyIDProperty != "" {
@@ -1138,6 +1199,15 @@ func (r *Resource) resourceField(name string, createBody, updateBody, getSchema 
 		}
 		a.Required = slices.Contains(r.Policy.requiredOf(r.Name, loc.body.Required), name)
 		*loc.attrs = &a
+	}
+	for i := range requests {
+		if requests[i], err = r.Policy.shapeNested(r.Name, fieldLocation(r.Name, name), f.Type, requests[i], r.shapeUsed); err != nil {
+			return nil, err
+		}
+	}
+	if r.Overwrite && requests[0] != nil {
+		// Get lists the items of every resource that its query can select; the write limits one.
+		f.Type.MinItems, f.Type.MaxItems = requests[0].MinItems, requests[0].MaxItems
 	}
 	if err := mergeRequests(fieldLocation(r.Name, name), f.Type, requests[0], requests[1]); err != nil {
 		return nil, err
@@ -1733,4 +1803,83 @@ func UpdateMaskRule(pattern string) (valid func(string) bool, leaf bool, err err
 		return nil, false, fmt.Errorf("update mask pattern %q must accept a field name and a comma-separated list of names, and reject *", pattern)
 	}
 	return re.MatchString, re.MatchString("a.b"), nil
+}
+
+// readOverwrite checks the fields and the Get query of an Overwrite resource. Delete sends every
+// field that Update sends empty, so each is a list or a map. Each GetQuery parameter is a query
+// parameter of Get, and its value is one that the parameter accepts.
+func (r *Resource) readOverwrite(get foundOp) error {
+	for _, f := range r.Fields {
+		if f.Update == nil || f.Type == nil {
+			continue
+		}
+		switch f.Type.Kind {
+		case List, Set, Map:
+		default:
+			return &contractError{
+				code:        "OVERWRITE_FIELD_NOT_COLLECTION",
+				location:    fieldLocation(r.Name, f.Name),
+				message:     fmt.Sprintf("The write of an overwrite resource sends %q, a %s. Delete sends every field empty, so each must be a list or a map.", f.Name, f.Type.Kind),
+				remediation: "Model the resource as the lists that the write replaces, or skip the field.",
+			}
+		}
+	}
+	if len(r.Policy.GetQuery) == 0 {
+		return nil
+	}
+	params := map[string]*v3.Parameter{}
+	for _, p := range slices.Concat(get.item.Parameters, get.op.Parameters) {
+		if p.In == "query" {
+			params[p.Name] = p
+		}
+	}
+	for _, name := range slices.Sorted(maps.Keys(r.Policy.GetQuery)) {
+		value := r.Policy.GetQuery[name]
+		location := "behavior-overrides.yaml:api.overwrite.getQuery." + name
+		p := params[name]
+		if p == nil {
+			return &contractError{code: "GET_QUERY_UNKNOWN", location: location, message: fmt.Sprintf("Get %s has no query parameter %q.", get.op.OperationId, name), remediation: "Name a query parameter of Get, or delete the line."}
+		}
+		if problem := queryValueProblem(p.Schema, value); problem != "" {
+			return &contractError{code: "GET_QUERY_VALUE_INVALID", location: location, message: fmt.Sprintf("The value %q of the query parameter %q %s.", value, name, problem), remediation: "Use a value that the parameter accepts."}
+		}
+		t, err := typeOf(p.Schema, location, walk{policy: &r.Policy})
+		if err != nil {
+			return &contractError{code: "GET_QUERY_VALUE_INVALID", location: location, message: fmt.Sprintf("The query parameter %q has a type that the model cannot read: %s.", name, err), remediation: "Use a scalar or an enum query parameter."}
+		}
+		r.GetQuery = append(r.GetQuery, QueryValue{Name: name, Value: value, Type: t})
+	}
+	return nil
+}
+
+// queryValueProblem says why value is not a value of the query parameter schema proxy, or "".
+func queryValueProblem(proxy *base.SchemaProxy, value string) string {
+	s, err := schemaOf(proxy)
+	if err != nil || s == nil {
+		return "has no schema to check it against"
+	}
+	if len(s.AllOf) == 1 {
+		if inner, err := schemaOf(s.AllOf[0]); err == nil && inner != nil {
+			s = inner
+		}
+	}
+	if len(s.Enum) != 0 {
+		for _, e := range s.Enum {
+			if e.Value == value {
+				return ""
+			}
+		}
+		return "is not a value of its enum"
+	}
+	switch {
+	case slices.Contains(s.Type, "boolean"):
+		if value != "true" && value != "false" {
+			return "is not a boolean"
+		}
+	case slices.Contains(s.Type, "integer"):
+		if _, err := strconv.ParseInt(value, 10, 64); err != nil {
+			return "is not an integer"
+		}
+	}
+	return ""
 }
