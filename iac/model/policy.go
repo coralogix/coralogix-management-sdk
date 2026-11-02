@@ -470,11 +470,12 @@ type EnumValue struct {
 	API, Name string
 }
 
-// asMap makes t, a list of objects, a map keyed by a string property of the object when a
-// keyedBy line says so. The map value is the rest of the object, or one property of it. A line
-// that does not fit leaves t a list: the generator reports the line.
+// asMap makes t, a list or a set of objects, a map keyed by a string property of the object when
+// a keyedBy line says so. The map value is the rest of the object, or one property of it. A map has
+// no order, so an unordered list keys the same way. A line that does not fit leaves t as it is:
+// the generator reports the line.
 func (p *Policy) asMap(component, field string, t *Type) {
-	if p == nil || t == nil || component == "" || t.Kind != List || t.Elem == nil || t.Elem.Kind != Object {
+	if p == nil || t == nil || component == "" || t.Kind != List && t.Kind != Set || t.Elem == nil || t.Elem.Kind != Object {
 		return
 	}
 	line, ok := p.KeyedBy[component+"."+field]

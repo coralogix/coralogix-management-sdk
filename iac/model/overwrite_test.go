@@ -202,3 +202,19 @@ func TestOverwriteNeedsThePolicy(t *testing.T) {
 		t.Fatal("Build accepted the write as a Create without api.overwrite")
 	}
 }
+
+// A keyedBy line keys a set of objects as it keys a list: a map has no order either.
+func TestKeyedBySet(t *testing.T) {
+	for _, kind := range []Kind{List, Set} {
+		item := &Type{Kind: Object, Schema: "TagRule", Fields: []*Field{
+			{Name: "tagName", Type: &Type{Kind: String}},
+			{Name: "tagValue", Type: &Type{Kind: String}},
+		}}
+		typ := &Type{Kind: kind, Elem: item}
+		p := &Policy{KeyedBy: map[string]KeyedLine{"SpanRules.tagRules": {Key: "tagName"}}}
+		p.asSet("SpanRules", "tagRules", typ)
+		if typ.Kind != Map || typ.Keyed == nil || typ.Keyed.Key != "tagName" || len(typ.Elem.Fields) != 1 {
+			t.Fatalf("%s: type = %+v, want a map keyed by tagName", kind, typ)
+		}
+	}
+}
