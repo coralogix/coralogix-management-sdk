@@ -141,4 +141,17 @@ A tool renders the expand code from `ResourceField.RequestPath` and `Resource.Up
 
 A `skip` line on a top-level field also ends the shape errors that the model finds inside the field, such as an enum without its zero value: the resource does not manage the field.
 
+## A field that only the requests have
+
+A Create or Update body can have a top-level field that the resource component does not have, such as a `teamId` that the API reads only on write. The model reports it as `FIELD_LIFECYCLE_UNSUPPORTED`. A `skip` line of the resource component can name it: the model then skips it before the lifecycle check, the enum checks, and the other field checks, and Build does not add it, so the generated requests never send it. A request that requires the field still makes the line an error (`SKIP_REQUIRED_FIELD`).
+
+The resource component has no property of that name, so a tool that reports a field line without its field needs another list for a `skip` line. `model.RequestOnlyFields(doc, name, ids, policy)` returns the top-level fields that the Create or Update body has and the resource component does not, read as the field checks read them: without the request wrapper, and with the `requestAs` and `createAs` keys applied. A `skip` line on one of them matches the contract. A line on a field that neither the resource component nor this list has matches nothing, and the tool reports it as unused.
+
+```yaml
+types:
+  RuleGroup:
+    fields:
+      teamId: {skip: true}   # Create and Update have it, Get does not
+```
+
 A tool pins `iac` by the pseudo-version of a commit on `master`.
