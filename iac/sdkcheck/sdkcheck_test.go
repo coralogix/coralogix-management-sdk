@@ -404,3 +404,22 @@ components:
 		t.Fatalf("refs do not set the Update body with the Create body type: setter %t, field %t", setter, field)
 	}
 }
+
+// A ByType method whose name belongs to a method of another type is found by its type.
+func TestIssuesFindsAByTypeMethodWhoseNameHasAnotherType(t *testing.T) {
+	const pkg = "example.com/fakesdk/widgets"
+	refs := []Ref{
+		{Path: "resource", Kind: KindPackage, Pkg: pkg, Name: "widgets"},
+		{Path: "client", Kind: KindMethod, Pkg: pkg, Owner: "WidgetsAPIService", Name: "Gadgets", Want: "func() bool", ByType: true},
+	}
+	loaded, err := Load(refs, filepath.Join("testdata", "fakesdk"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if report := Issues(refs, loaded, func(Ref) Source { return Source{Module: "example.com/fakesdk"} }); len(report) != 0 {
+		t.Fatalf("report = %v", report)
+	}
+	if refs[1].Name != "RestGadgets" {
+		t.Fatalf("ref name = %s, want RestGadgets", refs[1].Name)
+	}
+}

@@ -179,7 +179,9 @@ func checkMember(ref *Ref, pkg *packages.Package, qualifier types.Qualifier) err
 	} else if sel := types.NewMethodSet(types.NewPointer(owner.Type())).Lookup(pkg.Types, ref.Name); sel != nil {
 		got = sel.Type()
 	}
-	if got == nil && ref.ByType {
+	if ref.ByType && (got == nil || types.TypeString(got, qualifier) != ref.Want) {
+		// The name can belong to another method, such as an accessor of another client of the
+		// same tag. The one method of the wanted type is the one.
 		return findMethodByType(ref, owner, qualifier)
 	}
 	if got == nil {
