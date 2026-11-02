@@ -22,7 +22,7 @@ var _ MappedNullable = &EmailGroupConfig{}
 
 // EmailGroupConfig Email group config.
 type EmailGroupConfig struct {
-	// The email addresses.
+	// Email addresses. The service removes duplicates and keeps the first occurrence order. If omitted on update, this list is cleared.
 	EmailAddresses []string `json:"emailAddresses,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

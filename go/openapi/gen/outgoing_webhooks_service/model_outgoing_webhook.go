@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -25,34 +26,35 @@ var _ MappedNullable = &OutgoingWebhook{}
 type OutgoingWebhook struct {
 	AwsEventBridge *AwsEventBridgeConfig `json:"awsEventBridge,omitempty"`
 	// Creation timestamp.
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
 	Demisto *DemistoConfig `json:"demisto,omitempty"`
 	EmailGroup *EmailGroupConfig `json:"emailGroup,omitempty"`
 	// External identifier.
-	ExternalId *int64 `json:"externalId,omitempty"`
+	ExternalId int64 `json:"externalId"`
 	GenericWebhook *GenericWebhookConfig `json:"genericWebhook,omitempty"`
 	IbmEventNotifications *IbmEventNotificationsConfig `json:"ibmEventNotifications,omitempty"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	Jira *JiraConfig `json:"jira,omitempty"`
 	// Microsoft teams config.
 	MicrosoftTeams map[string]interface{} `json:"microsoftTeams,omitempty"`
 	// Ms teams workflow config.
 	MsTeamsWorkflow map[string]interface{} `json:"msTeamsWorkflow,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Opsgenie config.
 	Opsgenie map[string]interface{} `json:"opsgenie,omitempty"`
 	PagerDuty *PagerDutyConfig `json:"pagerDuty,omitempty"`
 	SendLog *SendLogConfig `json:"sendLog,omitempty"`
 	Slack *SlackConfig `json:"slack,omitempty"`
-	Type *WebhookType `json:"type,omitempty"`
+	Type WebhookType `json:"type"`
 	// Last-updated timestamp.
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt"`
 	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _OutgoingWebhook OutgoingWebhook
@@ -61,8 +63,14 @@ type _OutgoingWebhook OutgoingWebhook
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewOutgoingWebhook() *OutgoingWebhook {
+func NewOutgoingWebhook(createdAt time.Time, externalId int64, id string, name string, type_ WebhookType, updatedAt time.Time) *OutgoingWebhook {
 	this := OutgoingWebhook{}
+	this.CreatedAt = createdAt
+	this.ExternalId = externalId
+	this.Id = id
+	this.Name = name
+	this.Type = type_
+	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -106,36 +114,28 @@ func (o *OutgoingWebhook) SetAwsEventBridge(v AwsEventBridgeConfig) {
 	o.AwsEventBridge = &v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *OutgoingWebhook) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhook) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *OutgoingWebhook) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *OutgoingWebhook) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
 // GetDemisto returns the Demisto field value if set, zero value otherwise.
@@ -202,36 +202,28 @@ func (o *OutgoingWebhook) SetEmailGroup(v EmailGroupConfig) {
 	o.EmailGroup = &v
 }
 
-// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+// GetExternalId returns the ExternalId field value
 func (o *OutgoingWebhook) GetExternalId() int64 {
-	if o == nil || IsNil(o.ExternalId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.ExternalId
+
+	return o.ExternalId
 }
 
-// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
+// GetExternalIdOk returns a tuple with the ExternalId field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhook) GetExternalIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.ExternalId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExternalId, true
+	return &o.ExternalId, true
 }
 
-// HasExternalId returns a boolean if a field has been set.
-func (o *OutgoingWebhook) HasExternalId() bool {
-	if o != nil && !IsNil(o.ExternalId) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalId gets a reference to the given int64 and assigns it to the ExternalId field.
+// SetExternalId sets field value
 func (o *OutgoingWebhook) SetExternalId(v int64) {
-	o.ExternalId = &v
+	o.ExternalId = v
 }
 
 // GetGenericWebhook returns the GenericWebhook field value if set, zero value otherwise.
@@ -298,36 +290,28 @@ func (o *OutgoingWebhook) SetIbmEventNotifications(v IbmEventNotificationsConfig
 	o.IbmEventNotifications = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *OutgoingWebhook) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhook) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *OutgoingWebhook) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *OutgoingWebhook) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetJira returns the Jira field value if set, zero value otherwise.
@@ -426,36 +410,28 @@ func (o *OutgoingWebhook) SetMsTeamsWorkflow(v map[string]interface{}) {
 	o.MsTeamsWorkflow = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *OutgoingWebhook) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhook) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OutgoingWebhook) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *OutgoingWebhook) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetOpsgenie returns the Opsgenie field value if set, zero value otherwise.
@@ -586,68 +562,52 @@ func (o *OutgoingWebhook) SetSlack(v SlackConfig) {
 	o.Slack = &v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *OutgoingWebhook) GetType() WebhookType {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		var ret WebhookType
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhook) GetTypeOk() (*WebhookType, bool) {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *OutgoingWebhook) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given WebhookType and assigns it to the Type field.
+// SetType sets field value
 func (o *OutgoingWebhook) SetType(v WebhookType) {
-	o.Type = &v
+	o.Type = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+// GetUpdatedAt returns the UpdatedAt field value
 func (o *OutgoingWebhook) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdatedAt
+
+	return o.UpdatedAt
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhook) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpdatedAt, true
+	return &o.UpdatedAt, true
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *OutgoingWebhook) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *OutgoingWebhook) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+	o.UpdatedAt = v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -695,27 +655,21 @@ func (o OutgoingWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AwsEventBridge) {
 		toSerialize["awsEventBridge"] = o.AwsEventBridge
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
+	toSerialize["createdAt"] = o.CreatedAt
 	if !IsNil(o.Demisto) {
 		toSerialize["demisto"] = o.Demisto
 	}
 	if !IsNil(o.EmailGroup) {
 		toSerialize["emailGroup"] = o.EmailGroup
 	}
-	if !IsNil(o.ExternalId) {
-		toSerialize["externalId"] = o.ExternalId
-	}
+	toSerialize["externalId"] = o.ExternalId
 	if !IsNil(o.GenericWebhook) {
 		toSerialize["genericWebhook"] = o.GenericWebhook
 	}
 	if !IsNil(o.IbmEventNotifications) {
 		toSerialize["ibmEventNotifications"] = o.IbmEventNotifications
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.Jira) {
 		toSerialize["jira"] = o.Jira
 	}
@@ -725,9 +679,7 @@ func (o OutgoingWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MsTeamsWorkflow) {
 		toSerialize["msTeamsWorkflow"] = o.MsTeamsWorkflow
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Opsgenie) {
 		toSerialize["opsgenie"] = o.Opsgenie
 	}
@@ -740,54 +692,55 @@ func (o OutgoingWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Slack) {
 		toSerialize["slack"] = o.Slack
 	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
-	}
+	toSerialize["type"] = o.Type
+	toSerialize["updatedAt"] = o.UpdatedAt
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["genericWebhook"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["slack"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["pagerDuty"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["sendLog"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["emailGroup"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["microsoftTeams"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["jira"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["opsgenie"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["demisto"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["awsEventBridge"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["ibmEventNotifications"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["msTeamsWorkflow"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["genericWebhook"]; exists {
@@ -835,6 +788,73 @@ func (o OutgoingWebhook) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *OutgoingWebhook) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"createdAt",
+		"externalId",
+		"id",
+		"name",
+		"type",
+		"updatedAt",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["genericWebhook"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["slack"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["pagerDuty"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["sendLog"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["emailGroup"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["microsoftTeams"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["jira"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["opsgenie"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["demisto"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["awsEventBridge"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["ibmEventNotifications"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["msTeamsWorkflow"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
+	}
+
 	varOutgoingWebhook := _OutgoingWebhook{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -849,44 +869,44 @@ func (o *OutgoingWebhook) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["genericWebhook"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["slack"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["pagerDuty"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["sendLog"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["emailGroup"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["microsoftTeams"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["jira"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["opsgenie"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["demisto"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["awsEventBridge"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["ibmEventNotifications"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["msTeamsWorkflow"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
 		}
 
@@ -911,6 +931,7 @@ func (o *OutgoingWebhook) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err
