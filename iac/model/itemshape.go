@@ -213,6 +213,18 @@ func (p Policy) shapeObject(location string, get, req *Type, used map[string]boo
 		used["negate."+key] = true
 		f.Negated = true
 	}
+	// The request object now has the fields of the response component, so the collection lines of
+	// that component (collection: set, keyedBy) apply to it too.
+	for i, f := range fields {
+		if f.Type == nil {
+			continue
+		}
+		typ := *f.Type
+		p.asSet(component, f.Name, &typ)
+		copied := *f
+		copied.Type = &typ
+		fields[i] = &copied
+	}
 	out := *req
 	out.Fields = fields
 	// A write that sends one arm of a oneOf of the response as a plain field always selects that

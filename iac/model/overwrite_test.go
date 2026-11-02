@@ -218,3 +218,22 @@ func TestKeyedBySet(t *testing.T) {
 		}
 	}
 }
+
+// The collection lines of the response component apply to the request object that the item shape
+// rewrites: a keyedBy line keys the list of the request item as it keys the response.
+func TestItemShapeAppliesCollectionLines(t *testing.T) {
+	item := &Type{Kind: Object, Schema: "TagRule", Fields: []*Field{{Name: "tagName", Type: &Type{Kind: String}}, {Name: "tagValue", Type: &Type{Kind: String}}}}
+	get := &Type{Kind: Object, Schema: "Thing", Fields: []*Field{{Name: "tags", Type: &Type{Kind: Map}}}}
+	req := &Type{Kind: Object, Schema: "ThingWrite", Fields: []*Field{{Name: "tags", Type: &Type{Kind: Set, Elem: item}}}}
+	p := Policy{RequestWrappers: map[string]string{}, RequestNegated: []string{}, KeyedBy: map[string]KeyedLine{"Thing.tags": {Key: "tagName"}}}
+	shaped, err := p.shapeObject("things", get, req, map[string]bool{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if f := fieldNamed(shaped.Fields, "tags"); f == nil || f.Type.Kind != Map {
+		t.Fatalf("request tags = %+v, want a map keyed by tagName", f)
+	}
+	if req.Fields[0].Type.Kind != Set {
+		t.Fatal("the shape changed the request type that it was given")
+	}
+}
