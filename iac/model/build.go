@@ -1667,6 +1667,15 @@ func stringType(t *Type, s *base.Schema, w walk) error {
 	case s.Format == "int64" || s.Format == "uint64":
 		t.Kind = Integer
 		t.WireString = true
+	case s.Format == "" && digitString(s.Pattern):
+		// protoc-gen-openapiv3 writes a 64-bit number as a digit string and drops its format, which
+		// is an integer format and invalid on a string. The pattern states the sign.
+		t.Kind = Integer
+		t.WireString = true
+		t.Format = "int64"
+		if s.Pattern == int64Patterns[0] {
+			t.Format = "uint64"
+		}
 	default:
 		t.Kind = String
 		if s.Pattern != permissivePattern && (w.policy == nil || !w.policy.Existing) {

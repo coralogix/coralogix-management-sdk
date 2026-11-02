@@ -139,6 +139,40 @@ func TestUint64KeepsFormatAndLength(t *testing.T) {
 	}
 }
 
+// protoc-gen-openapiv3 writes a 64-bit number as a digit string without a format. The model reads
+// it as the integer string that the format would state: the pattern without a sign is uint64, the
+// one with a sign int64. Another digit pattern stays a string.
+func TestDigitStringIsAnIntegerString(t *testing.T) {
+	for _, test := range []struct {
+		pattern, format string
+	}{
+		{pattern: "^[0-9]+$", format: "uint64"},
+		{pattern: "^-?[0-9]+$", format: "int64"},
+		{pattern: "^[A-Z0-9]+$"},
+	} {
+		doc := loadComponent(t, `
+    Counter:
+      type: string
+      pattern: '`+test.pattern+`'
+      minLength: 1
+      maxLength: 20
+`)
+		typeValue, problems := Survey(doc, "Counter")
+		if len(problems) != 0 {
+			t.Fatal(problems)
+		}
+		if test.format == "" {
+			if typeValue.Kind != String || typeValue.WireString {
+				t.Errorf("%s: type = %+v, want a string", test.pattern, typeValue)
+			}
+			continue
+		}
+		if typeValue.Kind != Integer || !typeValue.WireString || typeValue.Format != test.format || typeValue.MaxLength == nil || *typeValue.MaxLength != 20 {
+			t.Errorf("%s: type = %+v, want an integer string with format %s and maxLength 20", test.pattern, typeValue, test.format)
+		}
+	}
+}
+
 func TestPresenceContract(t *testing.T) {
 	data := validSpec(t)
 	doc, err := Load(data)
