@@ -257,11 +257,17 @@ type Type struct {
 	// WireString is true for an integer that JSON sends as a string
 	// (protobuf 64-bit numbers).
 	WireString bool
-	Values     []string // Enum: the business values, without EnumZero
-	EnumZero   string   // Enum: the exact protobuf zero value
-	Elem       *Type    // List, Set, Map
-	Fields     []*Field // Object: the properties; OneOf: the arms
-	AllowNone  bool     // OneOf: the value can have no arm set, as in OneOfGroup
+	// DigitString is "uint64" or "int64" for a string without a format whose pattern is the one
+	// that protoc-gen-openapiv3 writes for a 64-bit number (^[0-9]+$ or ^-?[0-9]+$), and "" for
+	// any other string. The pattern cannot tell such a number from a string that a proto author
+	// validates as digits (a StringValue company id has the same schema), so the type stays a
+	// String. A tool can read it as a number where its own policy names the field.
+	DigitString string
+	Values      []string // Enum: the business values, without EnumZero
+	EnumZero    string   // Enum: the exact protobuf zero value
+	Elem        *Type    // List, Set, Map
+	Fields      []*Field // Object: the properties; OneOf: the arms
+	AllowNone   bool     // OneOf: the value can have no arm set, as in OneOfGroup
 	// Groups are the oneOf groups of an Object that also has normal fields,
 	// or has more than one group. Each arm is one of Fields.
 	Groups []OneOfGroup
