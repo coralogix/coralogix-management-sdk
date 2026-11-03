@@ -1848,10 +1848,12 @@ func TestRequestCanRequireMoreItemsThanTheResponse(t *testing.T) {
 		wantMin                           int64
 		wantIssue                         bool
 	}{
-		"requests require one item":               {createMin: 1, updateMin: 1, wantMin: 1},
-		"response requires one item":              {responseMin: 1, wantIssue: true},
-		"Create and Update disagree":              {createMin: 1, updateMin: 2, wantIssue: true},
-		"requests require more than the response": {createMin: 2, updateMin: 2, responseMin: 1, wantMin: 2},
+		"requests require one item":                 {createMin: 1, updateMin: 1, wantMin: 1},
+		"response requires one item":                {responseMin: 1, wantIssue: true},
+		"Create and Update disagree":                {createMin: 1, updateMin: 2, wantIssue: true},
+		"requests require more than the response":   {createMin: 2, updateMin: 2, responseMin: 1, wantMin: 2},
+		"Update raises a minimum that Create keeps": {createMin: 1, updateMin: 2, responseMin: 1, wantIssue: true},
+		"only Update requires items":                {updateMin: 1, wantIssue: true},
 	}
 	for name, test := range tests {
 		t.Run(name, func(t *testing.T) {

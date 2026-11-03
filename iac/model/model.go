@@ -327,9 +327,9 @@ type Type struct {
 	Pattern            string
 	Minimum, Maximum   *float64
 	MinItems, MaxItems *int64 // List, Set: items. Map: entries (minProperties, maxProperties).
-	// raisedMinItems: MinItems is the minimum of the requests, which require more items than the
-	// response declares.
-	raisedMinItems bool
+	// requestMinItems: a request's item minimum is merged into MinItems. The first request may
+	// require more items than the response declares; every later request must require as many.
+	requestMinItems bool
 	// Wrappers are the one-property objects that hold the value in the API, outer first. The
 	// rest of the type is the value inside them, which the generated code shows. They are set only by
 	// the unwrap lines of a behavior-overrides file.
