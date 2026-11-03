@@ -22,9 +22,9 @@ var _ MappedNullable = &SlackConfig{}
 
 // SlackConfig Slack config.
 type SlackConfig struct {
-	// The attachments.
+	// Attachments. The service keeps one item per type and does not preserve order. If omitted on update, this list is cleared.
 	Attachments []Attachment `json:"attachments,omitempty"`
-	// The digests.
+	// Digests. The service keeps one item per type and does not preserve order. If omitted on update, this list is cleared.
 	Digests []Digest `json:"digests,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

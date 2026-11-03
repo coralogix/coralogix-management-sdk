@@ -13,6 +13,7 @@ package outgoing_webhooks_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,9 +23,9 @@ var _ MappedNullable = &Digest{}
 
 // Digest struct for Digest
 type Digest struct {
-	// Whether this resource is active.
+	// Whether this digest is active. An omitted or false value is absent from Get responses.
 	IsActive *bool `json:"isActive,omitempty"`
-	Type *DigestType `json:"type,omitempty"`
+	Type DigestType `json:"type"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -35,8 +36,9 @@ type _Digest Digest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewDigest() *Digest {
+func NewDigest(type_ DigestType) *Digest {
 	this := Digest{}
+	this.Type = type_
 	return &this
 }
 
@@ -80,36 +82,28 @@ func (o *Digest) SetIsActive(v bool) {
 	o.IsActive = &v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *Digest) GetType() DigestType {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		var ret DigestType
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *Digest) GetTypeOk() (*DigestType, bool) {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *Digest) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given DigestType and assigns it to the Type field.
+// SetType sets field value
 func (o *Digest) SetType(v DigestType) {
-	o.Type = &v
+	o.Type = v
 }
 
 func (o Digest) MarshalJSON() ([]byte, error) {
@@ -125,9 +119,7 @@ func (o Digest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsActive) {
 		toSerialize["isActive"] = o.IsActive
 	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
+	toSerialize["type"] = o.Type
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -137,6 +129,27 @@ func (o Digest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *Digest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"type",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varDigest := _Digest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

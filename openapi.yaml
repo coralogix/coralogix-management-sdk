@@ -16276,8 +16276,11 @@ paths:
               properties:
                 data:
                   $ref: '#/components/schemas/OutgoingWebhookInputData'
+              required:
+                - data
               title: Test outgoing webhook request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -16365,10 +16368,14 @@ paths:
                   description: Unique identifier.
                   examples:
                     - example_id
-                  minLength: 0
+                  minLength: 1
                   type: string
+              required:
+                - id
+                - data
               title: Update outgoing webhook request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -16414,8 +16421,11 @@ paths:
               properties:
                 data:
                   $ref: '#/components/schemas/OutgoingWebhookInputData'
+              required:
+                - data
               title: Create outgoing webhook request
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -23331,11 +23341,14 @@ components:
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
     Attachment:
       title: Slack attachment configuration
+      required:
+        - type
       type: object
       properties:
         isActive:
-          default: false
-          description: Whether this resource is active.
+          description: >-
+            Whether this attachment is active. An omitted or false value is
+            absent from Get responses.
           type: boolean
           x-coralogix-presence: true
         type:
@@ -23464,39 +23477,45 @@ components:
       description: Average.
     AwsEventBridgeConfig:
       title: AWS EventBridge configuration
+      required:
+        - eventBusArn
+        - detail
+        - detailType
+        - source
+        - roleName
       type: object
       properties:
         detail:
           description: Detail.
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         detailType:
           description: The detail type.
           examples:
             - detail_type
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         eventBusArn:
           description: The event bus arn.
           examples:
             - arn:aws:events:us-east-1:123456789012:event-bus/default
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         roleName:
           description: The role name.
           examples:
             - role_name
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         source:
           description: Source.
           examples:
             - source
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
       description: Aws event bridge config.
@@ -27656,13 +27675,15 @@ components:
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
     CreateOutgoingWebhookResponse:
       title: Create outgoing webhook response
+      required:
+        - id
       type: object
       properties:
         id:
           description: Unique identifier.
           examples:
             - example_id
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
       description: Response returned after successfully creating an outgoing webhook.
@@ -29760,15 +29781,17 @@ components:
       description: Successful delivery outcome with an optional evidence URL.
     DemistoConfig:
       title: Demisto configuration
+      required:
+        - payload
       type: object
       properties:
         payload:
           description: Raw payload data.
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         uuid:
-          description: The uuid.
+          description: UUID. Required on Create and Update.
           examples:
             - d838cd7b-087b-40c6-bc33-80997020f5d0
           minLength: 0
@@ -29928,11 +29951,14 @@ components:
         url: https://coralogix.com/docs/user-guides/data-layer/datasets/
     Digest:
       title: Slack digest configuration
+      required:
+        - type
       type: object
       properties:
         isActive:
-          default: false
-          description: Whether this resource is active.
+          description: >-
+            Whether this digest is active. An omitted or false value is absent
+            from Get responses.
           type: boolean
           x-coralogix-presence: true
         type:
@@ -30504,8 +30530,13 @@ components:
           items:
             minLength: 0
             type: string
-            description: The email addresses.
-          description: The email addresses.
+            description: >-
+              Email addresses. The service removes duplicates and keeps the
+              first occurrence order. If omitted on update, this list is
+              cleared.
+          description: >-
+            Email addresses. The service removes duplicates and keeps the first
+            occurrence order. If omitted on update, this list is cleared.
           examples:
             - - example@coralogix.com
       description: Email group config.
@@ -32917,6 +32948,8 @@ components:
       description: This data structure represents a generic webhook integration.
     GenericWebhookConfig:
       title: Generic webhook configuration
+      required:
+        - method
       type: object
       properties:
         headers:
@@ -32931,12 +32964,12 @@ components:
           examples:
             - '1'
         payload:
-          description: Raw payload data.
-          minLength: 0
+          description: Optional raw payload data. If set, it must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
         uuid:
-          description: The uuid.
+          description: UUID. Required on Create and Update.
           examples:
             - d838cd7b-087b-40c6-bc33-80997020f5d0
           minLength: 0
@@ -34424,6 +34457,8 @@ components:
       description: Response containing the status of a managed integration.
     GetOutgoingWebhookResponse:
       title: Get outgoing webhook response
+      required:
+        - webhook
       type: object
       properties:
         webhook:
@@ -38360,27 +38395,33 @@ components:
       description: Item counts.
     JiraConfig:
       title: Jira configuration
+      required:
+        - apiToken
+        - email
+        - projectKey
       type: object
       properties:
         apiToken:
-          description: The api token.
+          description: >-
+            API token. Required on Create and Update. Treat any value returned
+            by Get as a secret.
           examples:
             - jira_api_token
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         email:
           description: Email address.
           examples:
             - jira_email
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         projectKey:
           description: The project key.
           examples:
             - jira_project_key
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
       description: Jira config.
@@ -42963,6 +43004,13 @@ components:
           x-coralogix-presence: true
     OutgoingWebhook:
       title: Outgoing webhook
+      required:
+        - id
+        - type
+        - name
+        - createdAt
+        - updatedAt
+        - externalId
       type: object
       oneOf:
         - required:
@@ -43001,45 +43049,6 @@ components:
         - required:
             - msTeamsWorkflow
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - genericWebhook
-                type: object
-              - required:
-                  - slack
-                type: object
-              - required:
-                  - pagerDuty
-                type: object
-              - required:
-                  - sendLog
-                type: object
-              - required:
-                  - emailGroup
-                type: object
-              - required:
-                  - microsoftTeams
-                type: object
-              - required:
-                  - jira
-                type: object
-              - required:
-                  - opsgenie
-                type: object
-              - required:
-                  - demisto
-                type: object
-              - required:
-                  - awsEventBridge
-                type: object
-              - required:
-                  - ibmEventNotifications
-                type: object
-              - required:
-                  - msTeamsWorkflow
-                type: object
       properties:
         awsEventBridge:
           $ref: '#/components/schemas/AwsEventBridgeConfig'
@@ -43047,6 +43056,7 @@ components:
           description: Creation timestamp.
           format: date-time
           minLength: 0
+          readOnly: true
           type: string
           x-coralogix-presence: true
         demisto:
@@ -43059,6 +43069,7 @@ components:
             - 123456
           format: int64
           minimum: 0
+          readOnly: true
           type: integer
           x-coralogix-presence: true
         genericWebhook:
@@ -43069,7 +43080,8 @@ components:
           description: Unique identifier.
           examples:
             - webhook_id
-          minLength: 0
+          minLength: 1
+          readOnly: true
           type: string
           x-coralogix-presence: true
         jira:
@@ -43082,7 +43094,7 @@ components:
           description: Display name.
           examples:
             - my_webhook
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         opsgenie:
@@ -43096,12 +43108,14 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/WebhookType'
+          readOnly: true
           examples:
             - '1'
         updatedAt:
           description: Last-updated timestamp.
           format: date-time
           minLength: 0
+          readOnly: true
           type: string
           x-coralogix-presence: true
         url:
@@ -43128,6 +43142,13 @@ components:
       description: Outgoing webhook details.
     OutgoingWebhookExtendedSummary:
       title: Outgoing webhook extended summary
+      required:
+        - id
+        - type
+        - name
+        - createdAt
+        - updatedAt
+        - externalId
       type: object
       properties:
         createdAt:
@@ -43148,14 +43169,14 @@ components:
           description: Unique identifier.
           examples:
             - webhook_id
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         name:
           description: Display name.
           examples:
             - my_webhook
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         type:
@@ -43178,6 +43199,8 @@ components:
           x-coralogix-presence: true
     OutgoingWebhookInputData:
       title: Outgoing webhook input data
+      required:
+        - name
       type: object
       oneOf:
         - required:
@@ -43216,45 +43239,6 @@ components:
         - required:
             - msTeamsWorkflow
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - genericWebhook
-                type: object
-              - required:
-                  - slack
-                type: object
-              - required:
-                  - pagerDuty
-                type: object
-              - required:
-                  - sendLog
-                type: object
-              - required:
-                  - emailGroup
-                type: object
-              - required:
-                  - microsoftTeams
-                type: object
-              - required:
-                  - jira
-                type: object
-              - required:
-                  - opsgenie
-                type: object
-              - required:
-                  - demisto
-                type: object
-              - required:
-                  - awsEventBridge
-                type: object
-              - required:
-                  - ibmEventNotifications
-                type: object
-              - required:
-                  - msTeamsWorkflow
-                type: object
       properties:
         awsEventBridge:
           $ref: '#/components/schemas/AwsEventBridgeConfig'
@@ -43276,7 +43260,7 @@ components:
           description: Display name.
           examples:
             - my_webhook
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         opsgenie:
@@ -43290,6 +43274,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/WebhookType'
+          readOnly: true
           examples:
             - '1'
         url:
@@ -43299,9 +43284,21 @@ components:
           minLength: 0
           type: string
           x-coralogix-presence: true
-      description: Outgoing webhook input data.
+      description: >-
+        Outgoing webhook input data. The selected config determines the type. A
+        URL is required for Generic, Slack, Microsoft Teams workflow, Jira,
+        Opsgenie, and Demisto webhooks. Microsoft Teams writes are rejected
+        because this type is deprecated. Send Log needs no URL. A service policy
+        may reject a supplied Send Log URL. An update replaces the config and
+        cannot change the webhook type.
     OutgoingWebhookSummary:
       title: Outgoing webhook summary
+      required:
+        - id
+        - name
+        - createdAt
+        - updatedAt
+        - externalId
       type: object
       properties:
         createdAt:
@@ -43322,14 +43319,14 @@ components:
           description: Unique identifier.
           examples:
             - webhook_id
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         name:
           description: Display name.
           examples:
             - my_webhook
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         updatedAt:
@@ -43455,13 +43452,17 @@ components:
       description: Information about the PagerDuty user who initiated the action.
     PagerDutyConfig:
       title: PagerDuty configuration
+      required:
+        - serviceKey
       type: object
       properties:
         serviceKey:
-          description: The service key.
+          description: >-
+            Service key. Required on Create and Update. Treat any value returned
+            by Get as a secret.
           examples:
             - pager_duty_service_key
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
       description: Pager duty config.
@@ -48071,15 +48072,17 @@ components:
       description: Selection value.
     SendLogConfig:
       title: Send log configuration
+      required:
+        - payload
       type: object
       properties:
         payload:
           description: Raw payload data.
-          minLength: 0
+          minLength: 1
           type: string
           x-coralogix-presence: true
         uuid:
-          description: The uuid.
+          description: UUID. Required on Create and Update.
           examples:
             - d838cd7b-087b-40c6-bc33-80997020f5d0
           minLength: 0
@@ -48351,13 +48354,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Attachment'
-          description: The attachments.
+          description: >-
+            Attachments. The service keeps one item per type and does not
+            preserve order. If omitted on update, this list is cleared.
         digests:
           minItems: 0
           type: array
           items:
             $ref: '#/components/schemas/Digest'
-          description: The digests.
+          description: >-
+            Digests. The service keeps one item per type and does not preserve
+            order. If omitted on update, this list is cleared.
       description: Slack config.
     Slo:
       title: Slo

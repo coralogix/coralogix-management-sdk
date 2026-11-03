@@ -13,6 +13,7 @@ package outgoing_webhooks_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -23,8 +24,8 @@ var _ MappedNullable = &DemistoConfig{}
 // DemistoConfig Demisto config.
 type DemistoConfig struct {
 	// Raw payload data.
-	Payload *string `json:"payload,omitempty"`
-	// The uuid.
+	Payload string `json:"payload"`
+	// UUID. Required on Create and Update.
 	Uuid *string `json:"uuid,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -36,8 +37,9 @@ type _DemistoConfig DemistoConfig
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewDemistoConfig() *DemistoConfig {
+func NewDemistoConfig(payload string) *DemistoConfig {
 	this := DemistoConfig{}
+	this.Payload = payload
 	return &this
 }
 
@@ -49,36 +51,28 @@ func NewDemistoConfigWithDefaults() *DemistoConfig {
 	return &this
 }
 
-// GetPayload returns the Payload field value if set, zero value otherwise.
+// GetPayload returns the Payload field value
 func (o *DemistoConfig) GetPayload() string {
-	if o == nil || IsNil(o.Payload) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Payload
+
+	return o.Payload
 }
 
-// GetPayloadOk returns a tuple with the Payload field value if set, nil otherwise
+// GetPayloadOk returns a tuple with the Payload field value
 // and a boolean to check if the value has been set.
 func (o *DemistoConfig) GetPayloadOk() (*string, bool) {
-	if o == nil || IsNil(o.Payload) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Payload, true
+	return &o.Payload, true
 }
 
-// HasPayload returns a boolean if a field has been set.
-func (o *DemistoConfig) HasPayload() bool {
-	if o != nil && !IsNil(o.Payload) {
-		return true
-	}
-
-	return false
-}
-
-// SetPayload gets a reference to the given string and assigns it to the Payload field.
+// SetPayload sets field value
 func (o *DemistoConfig) SetPayload(v string) {
-	o.Payload = &v
+	o.Payload = v
 }
 
 // GetUuid returns the Uuid field value if set, zero value otherwise.
@@ -123,9 +117,7 @@ func (o DemistoConfig) MarshalJSON() ([]byte, error) {
 
 func (o DemistoConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Payload) {
-		toSerialize["payload"] = o.Payload
-	}
+	toSerialize["payload"] = o.Payload
 	if !IsNil(o.Uuid) {
 		toSerialize["uuid"] = o.Uuid
 	}
@@ -138,6 +130,27 @@ func (o DemistoConfig) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *DemistoConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"payload",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varDemistoConfig := _DemistoConfig{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

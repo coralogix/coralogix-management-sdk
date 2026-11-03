@@ -14,6 +14,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"time"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -24,16 +25,16 @@ var _ MappedNullable = &OutgoingWebhookExtendedSummary{}
 // OutgoingWebhookExtendedSummary struct for OutgoingWebhookExtendedSummary
 type OutgoingWebhookExtendedSummary struct {
 	// Creation timestamp.
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
 	// External identifier.
-	ExternalId *int64 `json:"externalId,omitempty"`
+	ExternalId int64 `json:"externalId"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
-	Type *WebhookType `json:"type,omitempty"`
+	Name string `json:"name"`
+	Type WebhookType `json:"type"`
 	// Last-updated timestamp.
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt"`
 	// URL.
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -46,8 +47,14 @@ type _OutgoingWebhookExtendedSummary OutgoingWebhookExtendedSummary
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewOutgoingWebhookExtendedSummary() *OutgoingWebhookExtendedSummary {
+func NewOutgoingWebhookExtendedSummary(createdAt time.Time, externalId int64, id string, name string, type_ WebhookType, updatedAt time.Time) *OutgoingWebhookExtendedSummary {
 	this := OutgoingWebhookExtendedSummary{}
+	this.CreatedAt = createdAt
+	this.ExternalId = externalId
+	this.Id = id
+	this.Name = name
+	this.Type = type_
+	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -59,196 +66,148 @@ func NewOutgoingWebhookExtendedSummaryWithDefaults() *OutgoingWebhookExtendedSum
 	return &this
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *OutgoingWebhookExtendedSummary) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookExtendedSummary) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *OutgoingWebhookExtendedSummary) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *OutgoingWebhookExtendedSummary) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+// GetExternalId returns the ExternalId field value
 func (o *OutgoingWebhookExtendedSummary) GetExternalId() int64 {
-	if o == nil || IsNil(o.ExternalId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.ExternalId
+
+	return o.ExternalId
 }
 
-// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
+// GetExternalIdOk returns a tuple with the ExternalId field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookExtendedSummary) GetExternalIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.ExternalId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExternalId, true
+	return &o.ExternalId, true
 }
 
-// HasExternalId returns a boolean if a field has been set.
-func (o *OutgoingWebhookExtendedSummary) HasExternalId() bool {
-	if o != nil && !IsNil(o.ExternalId) {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalId gets a reference to the given int64 and assigns it to the ExternalId field.
+// SetExternalId sets field value
 func (o *OutgoingWebhookExtendedSummary) SetExternalId(v int64) {
-	o.ExternalId = &v
+	o.ExternalId = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *OutgoingWebhookExtendedSummary) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookExtendedSummary) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *OutgoingWebhookExtendedSummary) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *OutgoingWebhookExtendedSummary) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *OutgoingWebhookExtendedSummary) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookExtendedSummary) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OutgoingWebhookExtendedSummary) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *OutgoingWebhookExtendedSummary) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *OutgoingWebhookExtendedSummary) GetType() WebhookType {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		var ret WebhookType
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookExtendedSummary) GetTypeOk() (*WebhookType, bool) {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *OutgoingWebhookExtendedSummary) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given WebhookType and assigns it to the Type field.
+// SetType sets field value
 func (o *OutgoingWebhookExtendedSummary) SetType(v WebhookType) {
-	o.Type = &v
+	o.Type = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+// GetUpdatedAt returns the UpdatedAt field value
 func (o *OutgoingWebhookExtendedSummary) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdatedAt
+
+	return o.UpdatedAt
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookExtendedSummary) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpdatedAt, true
+	return &o.UpdatedAt, true
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *OutgoingWebhookExtendedSummary) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *OutgoingWebhookExtendedSummary) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+	o.UpdatedAt = v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -293,24 +252,12 @@ func (o OutgoingWebhookExtendedSummary) MarshalJSON() ([]byte, error) {
 
 func (o OutgoingWebhookExtendedSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if !IsNil(o.ExternalId) {
-		toSerialize["externalId"] = o.ExternalId
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
-	}
+	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["externalId"] = o.ExternalId
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["type"] = o.Type
+	toSerialize["updatedAt"] = o.UpdatedAt
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
@@ -323,6 +270,32 @@ func (o OutgoingWebhookExtendedSummary) ToMap() (map[string]interface{}, error) 
 }
 
 func (o *OutgoingWebhookExtendedSummary) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"createdAt",
+		"externalId",
+		"id",
+		"name",
+		"type",
+		"updatedAt",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varOutgoingWebhookExtendedSummary := _OutgoingWebhookExtendedSummary{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
