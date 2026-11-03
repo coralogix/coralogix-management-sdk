@@ -234,3 +234,62 @@ func TestCheckRequestShapeKeys(t *testing.T) {
 		t.Fatalf("Check() = %v", err)
 	}
 }
+
+func TestPolicyStatesTheOverwriteKeys(t *testing.T) {
+	e := Exceptions{
+		API: API{
+			Overwrite:  &Overwrite{GetQuery: map[string]string{"source_type": "SOURCE_TYPE_LOGS"}},
+			Operations: &Operations{Create: "W", Get: "G", Update: "W", Delete: "W"},
+		},
+		Fields:          map[string]map[string]Field{"Policy": {"enabled": {RequestAs: "disabled", Negate: true}}},
+		RequestWrappers: map[string]string{"Policy": "policy"},
+	}
+	if err := e.API.Check(); err != nil {
+		t.Fatal(err)
+	}
+	p := e.Policy()
+	if !p.Overwrite || !reflect.DeepEqual(p.GetQuery, map[string]string{"source_type": "SOURCE_TYPE_LOGS"}) {
+		t.Errorf("overwrite = %t, get query = %v", p.Overwrite, p.GetQuery)
+	}
+	if !reflect.DeepEqual(p.RequestWrappers, map[string]string{"Policy": "policy"}) || !reflect.DeepEqual(p.RequestNegated, []string{"Policy.enabled"}) || p.RequestNames["Policy.enabled"] != "disabled" {
+		t.Errorf("wrappers = %v, negated = %v, names = %v", p.RequestWrappers, p.RequestNegated, p.RequestNames)
+	}
+}
+
+func TestCheckOverwriteKeys(t *testing.T) {
+	ops := func(create, update, del string) *Operations {
+		return &Operations{Create: create, Get: "G", Update: update, Delete: del}
+	}
+	for name, api := range map[string]API{
+		"no operations":          {Overwrite: &Overwrite{}},
+		"another update":         {Overwrite: &Overwrite{}, Operations: ops("W", "U", "W")},
+		"another delete":         {Overwrite: &Overwrite{}, Operations: ops("W", "W", "D")},
+		"with a request wrapper": {Overwrite: &Overwrite{}, Operations: ops("W", "W", "W"), RequestWrapper: "thing"},
+		"with an id key":         {Overwrite: &Overwrite{}, Operations: ops("W", "W", "W"), ServerSetID: true},
+		"empty query value":      {Overwrite: &Overwrite{GetQuery: map[string]string{"kind": ""}}, Operations: ops("W", "W", "W")},
+	} {
+		t.Run(name, func(t *testing.T) {
+			if err := api.Check(); err == nil {
+				t.Fatal("Check accepted the keys")
+			}
+		})
+	}
+}
+
+func TestOverwriteKeysParse(t *testing.T) {
+	var api API
+	in := "overwrite:\n  getQuery: {source_type: SOURCE_TYPE_SPANS}\noperations: {create: W, get: G, update: W, delete: W}\n"
+	if err := yaml.Unmarshal([]byte(in), &api); err != nil {
+		t.Fatal(err)
+	}
+	if api.Overwrite == nil || api.Overwrite.GetQuery["source_type"] != "SOURCE_TYPE_SPANS" {
+		t.Fatalf("overwrite = %+v", api.Overwrite)
+	}
+	var line Field
+	if err := yaml.Unmarshal([]byte("{requestAs: disabled, negate: true}"), &line); err != nil {
+		t.Fatal(err)
+	}
+	if !line.Negate || line.RequestAs != "disabled" {
+		t.Fatalf("line = %+v", line)
+	}
+}

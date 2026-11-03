@@ -47,8 +47,16 @@ type Resource struct {
 	IDType *Type
 	// Singleton is true when Get has no path parameter: there is one
 	// resource per company (D18). Create, Get, Update, and Delete use one
-	// path.
+	// path, except for an Overwrite resource.
 	Singleton bool
+	// Overwrite is true when the resource is the whole list that one write operation replaces
+	// (Policy.Overwrite). Create, Update, and Delete are that write; Delete sends every field
+	// empty. The write response is not read: a tool reads the resource with Get after the write.
+	// An Overwrite resource is a singleton.
+	Overwrite bool
+	// GetQuery are the query parameters that Get always sends, with their values, sorted by name
+	// (Policy.GetQuery). It is nil when Get sends none.
+	GetQuery []QueryValue
 	// Replace is true when Update is a full replace (PUT, E11): the body has
 	// every Update field, and the server clears a field that the body does
 	// not have. It has no update mask. False: PATCH with an update mask.
@@ -83,6 +91,8 @@ type Resource struct {
 	// List is the operation that lists the resources. It is nil when the API has none, or has
 	// one that the model cannot describe.
 	List *ListOperation
+	// shapeUsed collects the nested request lines that Build applied (Policy.shapeNested).
+	shapeUsed map[string]bool
 	// ListProblem says in one sentence why List is nil although the Create path has a GET. It
 	// is "" when List is set, or the Create path has no GET. A List that OperationIDs names
 	// has no problem: Build fails instead.
@@ -114,6 +124,13 @@ type Operation struct {
 	// resource component only when the request has the shape of the resource.
 	RequestComponent string
 	Response         Response
+}
+
+// QueryValue is a query parameter that an operation always sends, and its value.
+type QueryValue struct {
+	Name  string // the parameter name, for example "source_type"
+	Value string // the value as the query string holds it, for example "SOURCE_TYPE_LOGS"
+	Type  *Type  // the type of the parameter: an Enum names its component
 }
 
 // ListOperation is a GET that returns the resources in one array. The model records the facts
@@ -199,6 +216,17 @@ type Field struct {
 	// Create and Update are the attributes of the field in the request type of
 	// its parent object. nil: that request does not have the field.
 	Create, Update *Attrs
+	// RequestPath is the path of the property that holds the field in the request object of its
+	// parent, when it is not the field name: for example ["policy", "name"] when the request item
+	// holds the field in a wrapper (Policy.RequestWrappers), or ["policy", "disabled"] after a
+	// requestAs line. nil means the field name.
+	RequestPath []string
+	// RequestObjects are the components of the request objects that RequestPath goes through,
+	// outer first, for example ["CreateGenericPolicyRequest"]. A tool needs them to build the request.
+	RequestObjects []string
+	// Negated: the request sends the opposite of the boolean field (Policy.RequestNegated), for
+	// example disabled for enabled.
+	Negated bool
 }
 
 // Attrs are the facts about a field in one place (a request body or an object).

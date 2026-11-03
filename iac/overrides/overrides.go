@@ -65,6 +65,9 @@ type API struct {
 	Operations *Operations `yaml:"operations"`
 	// Delete names the operation that removes the resource when the API has no DELETE.
 	Delete *Delete `yaml:"delete"`
+	// Overwrite says that the resource is the whole list that one write replaces: operations
+	// names that write as create, update, and delete, and Delete sends every list empty.
+	Overwrite *Overwrite `yaml:"overwrite"`
 	// UpdateMaskInBody: PATCH updateMask is an optional JSON body property.
 	// The generated update sets it to the same changed-field mask a query
 	// parameter would send.
@@ -91,6 +94,13 @@ type Delete struct {
 	Operation string `yaml:"operation"`
 }
 
+// Overwrite describes a collection resource: the list that one write operation replaces.
+type Overwrite struct {
+	// GetQuery are the query parameters that Get always sends, with their values, for a Get that
+	// lists the items of more than one resource, for example {source_type: SOURCE_TYPE_LOGS}.
+	GetQuery map[string]string `yaml:"getQuery"`
+}
+
 // Field is the part of a field line that describes the API. A tool embeds it in its own
 // field line with the yaml inline flag, so both parts are one line of the file.
 type Field struct {
@@ -115,6 +125,9 @@ type Field struct {
 	// integrationParameters.parameters. A request property that the field covers is not a
 	// separate field. Only a field of the resource component can have it.
 	RequestAs string `yaml:"requestAs"`
+	// Negate: the request sends the opposite of this boolean field, under the name that requestAs
+	// gives, for example enabled sent as disabled.
+	Negate bool `yaml:"negate"`
 	// Collection: set says that the order of a list of the contract has no meaning. The API
 	// keeps the order.
 	Collection string `yaml:"collection"`
@@ -149,6 +162,9 @@ type Exceptions struct {
 	Unwrap []string
 	// Fields has the API part of each field line: component, then field.
 	Fields map[string]map[string]Field
+	// RequestWrappers maps a nested component to the property of its request component that holds
+	// its fields, for example {Policy: policy}. A tool reads it from the line of the component.
+	RequestWrappers map[string]string
 }
 
 // Check checks that a Delete override names its operation, and that only one line names it.
@@ -161,6 +177,19 @@ func (a API) Check() error {
 	}
 	if a.Delete != nil && a.Delete.Operation == "" {
 		return errors.New("api.delete.operation is required")
+	}
+	if a.Overwrite != nil {
+		if o := a.Operations; o == nil || o.Create == "" || o.Create != o.Update || o.Create != o.Delete {
+			return errors.New("api.overwrite needs api.operations to name the write as create, update, and delete")
+		}
+		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" {
+			return errors.New("api.overwrite describes a resource without an id or a wrapper; it cannot go with the other api keys")
+		}
+		for name, value := range a.Overwrite.GetQuery {
+			if name == "" || value == "" {
+				return errors.New("api.overwrite.getQuery maps a query parameter to a value; neither can be empty")
+			}
+		}
 	}
 	if a.Operations == nil {
 		return nil
@@ -248,6 +277,11 @@ func (e Exceptions) Policy() model.Policy {
 		CreateResponseOnlyIDProperty: e.API.CreateResponseOnlyIDProperty,
 		CustomMethods:                e.API.CustomMethods,
 		UpdateMaskInBody:             e.API.UpdateMaskInBody,
+		RequestWrappers:              maps.Clone(e.RequestWrappers),
+	}
+	if e.API.Overwrite != nil {
+		p.Overwrite = true
+		p.GetQuery = maps.Clone(e.API.Overwrite.GetQuery)
 	}
 	if e.API.Operations != nil {
 		p.Operations = model.OperationIDs{
@@ -277,6 +311,9 @@ func (e Exceptions) Policy() model.Policy {
 					p.RequestNames = map[string]string{}
 				}
 				p.RequestNames[name+"."+field] = line.RequestAs
+			}
+			if line.Negate {
+				p.RequestNegated = append(p.RequestNegated, name+"."+field)
 			}
 			if line.Skip {
 				p.Skip = append(p.Skip, name+"."+field)
