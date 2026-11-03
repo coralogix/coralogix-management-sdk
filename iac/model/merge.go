@@ -17,6 +17,7 @@ package model
 import (
 	"fmt"
 	"slices"
+	"strings"
 
 	"github.com/coralogix/coralogix-management-sdk/iac/issue"
 )
@@ -112,6 +113,18 @@ func mergeFields(location string, get, req *Type, op verb) error {
 				message:     fmt.Sprintf("The %s request and the resource response declare different defaults.", op),
 				remediation: "Declare the same default in every schema of the field.",
 			}
+		}
+		if op == opCreate {
+			gf.RequestPath, gf.RequestObjects, gf.Negated = rf.RequestPath, rf.RequestObjects, rf.Negated
+		} else if !slices.Equal(gf.RequestPath, rf.RequestPath) && gf.Create != nil {
+			return &contractError{
+				code:        "REQUEST_NAME_INCONSISTENT",
+				location:    at,
+				message:     fmt.Sprintf("The Create request holds the field at %q and the Update request at %q.", strings.Join(gf.RequestPath, "."), strings.Join(rf.RequestPath, ".")),
+				remediation: "Use one request shape for Create and Update.",
+			}
+		} else if gf.Create == nil {
+			gf.RequestPath, gf.RequestObjects, gf.Negated = rf.RequestPath, rf.RequestObjects, rf.Negated
 		}
 		attrs := rf.Attrs
 		if op == opCreate {
@@ -297,7 +310,8 @@ func (t *Type) requestType(op verb) *Type {
 		if attrs == nil {
 			continue
 		}
-		out.Fields = append(out.Fields, &Field{Name: f.Name, Description: f.Description, Attrs: *attrs, Type: f.Type.requestType(op), Behavior: f.Behavior})
+		out.Fields = append(out.Fields, &Field{Name: f.Name, Description: f.Description, Attrs: *attrs, Type: f.Type.requestType(op), Behavior: f.Behavior,
+			RequestPath: f.RequestPath, RequestObjects: f.RequestObjects, Negated: f.Negated})
 	}
 	return &out
 }

@@ -16,7 +16,6 @@ package model
 
 import (
 	"fmt"
-	"maps"
 	"slices"
 	"strings"
 
@@ -109,11 +108,6 @@ func (p Policy) renameRequestFields(name string, create, update, get *base.Schem
 		fields = append(fields, field)
 	}
 	slices.Sort(fields)
-	for _, key := range slices.Sorted(maps.Keys(p.RequestNames)) {
-		if component, _, _ := strings.Cut(key, "."); component != name {
-			report = append(report, issue.Issue{Code: "REQUEST_NAME_UNKNOWN_FIELD", Location: "behavior-overrides.yaml:types." + key, Message: fmt.Sprintf("The field line %q has requestAs, but the resource component is %s.", key, name), Remediation: "Put requestAs on a field of the resource component, or delete it."})
-		}
-	}
 	var valid []string // the fields whose line can be applied
 	byPath := map[string]string{}
 	for _, field := range fields {
