@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the RuleParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleParameters{}
 
-// RuleParameters Rule parameters.
+// RuleParameters Rule parameters. Exactly one parameters object must be set; an empty object is rejected.
 type RuleParameters struct {
 	AllowParameters *AllowParameters `json:"allowParameters,omitempty"`
 	BlockParameters *BlockParameters `json:"blockParameters,omitempty"`
@@ -34,6 +34,7 @@ type RuleParameters struct {
 	ReplaceParameters *ReplaceParameters `json:"replaceParameters,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _RuleParameters RuleParameters
@@ -415,39 +416,44 @@ func (o RuleParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReplaceParameters) {
 		toSerialize["replaceParameters"] = o.ReplaceParameters
 	}
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["extractParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["jsonExtractParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["replaceParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["parseParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["allowParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["blockParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["extractTimestampParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["removeFieldsParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["jsonStringifyParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["jsonParseParameters"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["extractParameters"]; exists {
@@ -503,38 +509,38 @@ func (o *RuleParameters) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["extractParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["jsonExtractParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["replaceParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["parseParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["allowParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["blockParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["extractTimestampParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["removeFieldsParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["jsonStringifyParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["jsonParseParameters"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [extractParameters, jsonExtractParameters, replaceParameters, parseParameters, allowParameters, blockParameters, extractTimestampParameters, removeFieldsParameters, jsonStringifyParameters, jsonParseParameters] may be set"}
 		}
 
@@ -550,6 +556,7 @@ func (o *RuleParameters) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "replaceParameters")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// FormatStandard Format standard.
+// FormatStandard Format standard. The zero value `FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED` means strftime.
 type FormatStandard string
 
 // List of FormatStandard

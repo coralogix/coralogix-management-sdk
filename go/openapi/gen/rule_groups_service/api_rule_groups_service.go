@@ -227,6 +227,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceCreateRuleGroupExecute(r 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.ruleGroupsServiceCreateRuleGroupRequest == nil {
+		return localVarReturnValue, nil, reportError("ruleGroupsServiceCreateRuleGroupRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1012,7 +1015,7 @@ func (r ApiRuleGroupsServiceUpdateRuleGroupRequest) Execute() (*UpdateRuleGroupR
 /*
 RuleGroupsServiceUpdateRuleGroup Update Rule Group
 
-Updates the specified parsing rule group.
+Replaces the specified parsing rule group with the request body. A field that the request omits takes its default, and the service sets new ids for every subgroup and rule.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param groupId The unique identifier of the parsing rule group to update.
@@ -1049,6 +1052,9 @@ func (a *RuleGroupsServiceAPIService) RuleGroupsServiceUpdateRuleGroupExecute(r 
 	localVarFormParams := url.Values{}
 	if strlen(r.groupId) < 0 {
 		return localVarReturnValue, nil, reportError("groupId must have at least 0 elements")
+	}
+	if r.ruleGroupsServiceCreateRuleGroupRequest == nil {
+		return localVarReturnValue, nil, reportError("ruleGroupsServiceCreateRuleGroupRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header

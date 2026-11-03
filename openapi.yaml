@@ -10150,7 +10150,12 @@ paths:
                 create the provided list by order.
               properties:
                 policies:
-                  description: Policies.
+                  description: >-
+                    Replaces every log policy of the team with this list, in
+                    this order: the first policy gets order 1. An overwrite that
+                    changes the policies gives each a new id; one that sends the
+                    stored policies again keeps their ids. An empty list deletes
+                    every log policy.
                   items:
                     $ref: '#/components/schemas/CreateLogPolicyRequest'
                   maxItems: 200
@@ -10180,6 +10185,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Two policies of the request have the same name
         '429':
           content:
             application/json:
@@ -10419,7 +10430,8 @@ paths:
                 description:
                   description: >-
                     Optional free-text description of the policy's purpose. Only
-                    Latin-1 characters are accepted.
+                    Latin-1 characters are accepted. An omitted description is
+                    stored as an empty string.
                   examples:
                     - My Policy Description
                   maxLength: 255
@@ -10428,7 +10440,9 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 disabled:
-                  description: When true, the policy is disabled and will not be evaluated.
+                  description: >-
+                    Whether the policy is created disabled. Defaults to `false`.
+                    A policy returns the opposite value as `enabled`.
                   type: boolean
                 logRules:
                   $ref: '#/components/schemas/LogRules'
@@ -10446,7 +10460,14 @@ paths:
                 placement:
                   $ref: '#/components/schemas/Placement'
                 priority:
-                  $ref: '#/components/schemas/quota.v1.Priority'
+                  allOf:
+                    - $ref: '#/components/schemas/quota.v1.Priority'
+                  description: >-
+                    The priority of the policy. Set it here, or on every target,
+                    not both. With `priorityOverride` and no priority, the
+                    policy gets `PRIORITY_TYPE_BLOCK`. The service rejects a
+                    policy without a priority, an override, or targets that each
+                    have a priority.
                 priorityOverride:
                   $ref: '#/components/schemas/PriorityOverride'
                 rumRules:
@@ -10472,7 +10493,6 @@ paths:
                   type: array
               required:
                 - name
-                - priority
               title: Create Policy Request
               type: object
         required: true
@@ -10917,8 +10937,12 @@ paths:
               properties:
                 policies:
                   description: >-
-                    List of RUM policies to create as part of the atomic
-                    overwrite.
+                    Replaces every RUM policy of the team with this list, in
+                    this order: the first policy gets order 1. An overwrite that
+                    changes the policies gives each a new id; one that sends the
+                    stored policies again keeps their ids. An empty list deletes
+                    every RUM policy. RUM policies do not accept the
+                    `PRIORITY_TYPE_HIGH` priority and have no targets.
                   items:
                     $ref: '#/components/schemas/CreateRumPolicyRequest'
                   maxItems: 10000
@@ -10963,6 +10987,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Two policies of the request have the same name
         '429':
           content:
             application/json:
@@ -10994,8 +11024,11 @@ paths:
               properties:
                 policies:
                   description: >-
-                    List of span policies to create as part of the atomic
-                    overwrite.
+                    Replaces every span policy of the team with this list, in
+                    this order: the first policy gets order 1. An overwrite that
+                    changes the policies gives each a new id; one that sends the
+                    stored policies again keeps their ids. An empty list deletes
+                    every span policy.
                   items:
                     $ref: '#/components/schemas/CreateSpanPolicyRequest'
                   maxItems: 200
@@ -11025,6 +11058,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Two policies of the request have the same name
         '429':
           content:
             application/json:
@@ -18382,33 +18421,47 @@ paths:
         content:
           application/json:
             schema:
-              description: Request to create a new parsing rule group.
+              description: >-
+                Request to create a new parsing rule group. Update takes the
+                same body and replaces the whole group: a field that the request
+                omits takes its default.
               properties:
                 creator:
-                  description: Creator.
+                  description: >-
+                    Free-form name of the creator. The service stores it as
+                    sent. Defaults to an empty string.
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 description:
-                  description: Human-readable description.
+                  description: Human-readable description. Defaults to an empty string.
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 enabled:
-                  description: Whether this resource is enabled.
+                  default: true
+                  description: Whether the group is enabled. Defaults to true.
                   type: boolean
                   x-coralogix-presence: true
                 hidden:
-                  description: The hidden.
+                  default: false
+                  description: >-
+                    A free-form flag for clients, for example to hide the group
+                    in a UI. The service stores and returns it and does not act
+                    on it. Defaults to false.
                   type: boolean
                   x-coralogix-presence: true
                 name:
-                  description: Display name.
-                  minLength: 0
+                  description: Display name. Must not be empty.
+                  minLength: 1
                   type: string
                   x-coralogix-presence: true
                 order:
-                  description: Sort order.
+                  default: 1
+                  description: >-
+                    Position of the group among the rule groups of the company.
+                    Defaults to 1. 0 places the group last. Groups can share an
+                    order: the service does not shift the other groups.
                   format: int64
                   minimum: 0
                   type: integer
@@ -18420,15 +18473,23 @@ paths:
                   minItems: 0
                   type: array
                 ruleSubgroups:
-                  description: The rule subgroups.
+                  description: The rule subgroups. At least one.
                   items:
                     $ref: >-
                       #/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup
-                  minItems: 0
+                  minItems: 1
                   type: array
                 teamId:
-                  $ref: '#/components/schemas/v1.TeamId'
+                  allOf:
+                    - $ref: '#/components/schemas/v1.TeamId'
+                  description: >-
+                    Ignored. The service takes the team from the credentials of
+                    the request.
+              required:
+                - name
+                - ruleSubgroups
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -18543,7 +18604,10 @@ paths:
       tags:
         - Rule Groups Service
     put:
-      description: Updates the specified parsing rule group.
+      description: >-
+        Replaces the specified parsing rule group with the request body. A field
+        that the request omits takes its default, and the service sets new ids
+        for every subgroup and rule.
       operationId: RuleGroupsService_UpdateRuleGroup
       parameters:
         - description: The unique identifier of the parsing rule group to update.
@@ -18559,33 +18623,47 @@ paths:
         content:
           application/json:
             schema:
-              description: Request to create a new parsing rule group.
+              description: >-
+                Request to create a new parsing rule group. Update takes the
+                same body and replaces the whole group: a field that the request
+                omits takes its default.
               properties:
                 creator:
-                  description: Creator.
+                  description: >-
+                    Free-form name of the creator. The service stores it as
+                    sent. Defaults to an empty string.
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 description:
-                  description: Human-readable description.
+                  description: Human-readable description. Defaults to an empty string.
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 enabled:
-                  description: Whether this resource is enabled.
+                  default: true
+                  description: Whether the group is enabled. Defaults to true.
                   type: boolean
                   x-coralogix-presence: true
                 hidden:
-                  description: The hidden.
+                  default: false
+                  description: >-
+                    A free-form flag for clients, for example to hide the group
+                    in a UI. The service stores and returns it and does not act
+                    on it. Defaults to false.
                   type: boolean
                   x-coralogix-presence: true
                 name:
-                  description: Display name.
-                  minLength: 0
+                  description: Display name. Must not be empty.
+                  minLength: 1
                   type: string
                   x-coralogix-presence: true
                 order:
-                  description: Sort order.
+                  default: 1
+                  description: >-
+                    Position of the group among the rule groups of the company.
+                    Defaults to 1. 0 places the group last. Groups can share an
+                    order: the service does not shift the other groups.
                   format: int64
                   minimum: 0
                   type: integer
@@ -18597,15 +18675,23 @@ paths:
                   minItems: 0
                   type: array
                 ruleSubgroups:
-                  description: The rule subgroups.
+                  description: The rule subgroups. At least one.
                   items:
                     $ref: >-
                       #/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup
-                  minItems: 0
+                  minItems: 1
                   type: array
                 teamId:
-                  $ref: '#/components/schemas/v1.TeamId'
+                  allOf:
+                    - $ref: '#/components/schemas/v1.TeamId'
+                  description: >-
+                    Ignored. The service takes the team from the credentials of
+                    the request.
+              required:
+                - name
+                - ruleSubgroups
               type: object
+        required: true
       responses:
         '200':
           content:
@@ -22272,18 +22358,27 @@ components:
       additionalProperties: false
       description: All value.
     AllowParameters:
+      required:
+        - rule
+        - keepBlockedLogs
       type: object
       properties:
         keepBlockedLogs:
-          description: The keep blocked logs.
+          description: >-
+            Whether the logs that the rule blocks are kept as low-priority logs
+            instead of being dropped.
           type: boolean
           x-coralogix-presence: true
         rule:
-          description: Rule.
-          minLength: 0
+          description: >-
+            The regular expression. Logs that do not match it are blocked. Must
+            not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
-      description: Allow parameters.
+      description: >-
+        Allow parameters. Blocks every log that does not match the regular
+        expression.
     AllowedLoginMode:
       enum:
         - ALLOWED_LOGIN_MODE_UNSPECIFIED
@@ -24168,18 +24263,25 @@ components:
           description: The slos.
       description: Response containing a batch of SLOs and any IDs not found.
     BlockParameters:
+      required:
+        - rule
+        - keepBlockedLogs
       type: object
       properties:
         keepBlockedLogs:
-          description: The keep blocked logs.
+          description: >-
+            Whether the logs that the rule blocks are kept as low-priority logs
+            instead of being dropped.
           type: boolean
           x-coralogix-presence: true
         rule:
-          description: Rule.
-          minLength: 0
+          description: >-
+            The regular expression. Logs that match it are blocked. Must not be
+            empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
-      description: Block parameters.
+      description: Block parameters. Blocks every log that matches the regular expression.
     BreachStatus:
       title: Breach status
       enum:
@@ -27646,8 +27748,6 @@ components:
       title: Create Generic Policy Request
       required:
         - name
-        - description
-        - priority
       type: object
       properties:
         applicationRule:
@@ -27655,7 +27755,11 @@ components:
         archiveRetention:
           $ref: '#/components/schemas/ArchiveRetention'
         description:
-          description: Human-readable description. Only Latin-1 characters are accepted.
+          description: >-
+            Human-readable description. Only Latin-1 characters are accepted.
+            The atomic overwrite does not default an omitted description, so the
+            policy can read back without one; send an empty string for an empty
+            description.
           examples:
             - My Policy Description
           maxLength: 255
@@ -27665,9 +27769,14 @@ components:
           x-coralogix-presence: true
         disabled:
           type: boolean
-          description: The disabled.
+          description: >-
+            Whether the policy is created disabled. Defaults to `false`. A
+            policy returns the opposite value as `enabled`.
         name:
-          description: Display name. Only Latin-1 characters are accepted.
+          description: >-
+            Display name. Only Latin-1 characters are accepted. The names of the
+            policies of one request must be unique: the service rejects a
+            repeated name with `409`.
           examples:
             - My Policy
           maxLength: 255
@@ -27676,7 +27785,13 @@ components:
           type: string
           x-coralogix-presence: true
         priority:
-          $ref: '#/components/schemas/quota.v1.Priority'
+          allOf:
+            - $ref: '#/components/schemas/quota.v1.Priority'
+          description: >-
+            The priority of the policy. Set it here, or on every target, not
+            both. With `priorityOverride` and no priority, the policy gets
+            `PRIORITY_TYPE_BLOCK`. The service rejects a policy without a
+            priority, an override, or targets that each have a priority.
         priorityOverride:
           $ref: '#/components/schemas/PriorityOverride'
         subsystemRule:
@@ -27687,7 +27802,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1.Target'
-          description: List of targets.
+          description: >-
+            List of targets. A log policy without targets is routed to the
+            `logs` dataset of the `default` dataspace, and reads back with that
+            target. Span policies always read back with one `spans` target, and
+            RUM policies reject targets.
       description: This data structue is used to create a new policy.
       externalDocs:
         description: Find out more about quota management.
@@ -27766,55 +27885,75 @@ components:
           format: int64
       description: Response returned after successfully creating a custom role.
     CreateRuleGroupRequest.CreateRuleSubgroup:
+      required:
+        - rules
+        - order
       type: object
       properties:
         enabled:
-          description: Whether this resource is enabled.
+          default: true
+          description: Whether the subgroup is enabled. Defaults to true.
           type: boolean
           x-coralogix-presence: true
         order:
-          description: Sort order.
+          description: Position of the subgroup in the group, starting at 1.
           format: int64
-          minimum: 0
+          minimum: 1
           type: integer
           x-coralogix-presence: true
         rules:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: >-
               #/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule
-          description: List of rules.
+          description: The rules of the subgroup. At least one.
+      description: >-
+        A rule subgroup. The service sets its id, and sets a new one on every
+        update of the group.
     CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule:
+      required:
+        - name
+        - sourceField
+        - parameters
+        - order
       type: object
       properties:
         description:
-          description: Human-readable description.
+          description: Human-readable description. Defaults to an empty string.
           minLength: 0
           type: string
           x-coralogix-presence: true
         enabled:
-          description: Whether this resource is enabled.
+          default: true
+          description: Whether the rule is enabled. Defaults to true.
           type: boolean
           x-coralogix-presence: true
         name:
-          description: Display name.
-          minLength: 0
+          description: Display name. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
         order:
-          description: Sort order.
+          description: Position of the rule in its subgroup, starting at 1.
           format: int64
-          minimum: 0
+          minimum: 1
           type: integer
           x-coralogix-presence: true
         parameters:
           $ref: '#/components/schemas/RuleParameters'
         sourceField:
-          description: The source field.
-          minLength: 0
+          description: >-
+            The field the rule reads: `text`, a `text.<field>` path, or one of
+            `applicationName`, `subsystemName`, `computerName`, `category`,
+            `className`, `methodName`, `threadId`, and `severity`. A rule that
+            deletes its source field must read a `text.<field>` path.
+          minLength: 1
           type: string
           x-coralogix-presence: true
+      description: >-
+        A parsing rule. The service sets its id, and sets a new one on every
+        update of the group.
     CreateRuleGroupResponse:
       type: object
       properties:
@@ -29979,7 +30118,9 @@ components:
         - DESTINATION_FIELD_SEVERITY
         - DESTINATION_FIELD_TEXT
       type: string
-      description: Destination field.
+      description: >-
+        Destination field. The zero value
+        `DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED` means the category field.
     Diagnostics:
       title: Connector Diagnostics
       type: object
@@ -31595,25 +31736,38 @@ components:
           description: URL.
       description: External url.
     ExtractParameters:
+      required:
+        - rule
       type: object
       properties:
         rule:
-          description: Rule.
-          minLength: 0
+          description: >-
+            The regular expression, with named capture groups, applied to the
+            source field. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
-      description: Extract parameters.
+      description: >-
+        Extract parameters. The named capture groups of the regular expression
+        become fields of the log.
     ExtractTimestampParameters:
+      required:
+        - format
       type: object
       properties:
         format:
-          description: The format.
+          description: >-
+            The time format, in the syntax that `standard` names. The service
+            accepts an empty string, for example with a standard that has no
+            format.
           minLength: 0
           type: string
           x-coralogix-presence: true
         standard:
           $ref: '#/components/schemas/FormatStandard'
-      description: Extract timestamp parameters.
+      description: >-
+        Extract timestamp parameters. Sets the log timestamp from the source
+        field.
     FailedItem:
       title: Failed item
       type: object
@@ -32623,7 +32777,9 @@ components:
         - FORMAT_STANDARD_MICROTS
         - FORMAT_STANDARD_NANOTS
       type: string
-      description: Format standard.
+      description: >-
+        Format standard. The zero value
+        `FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED` means strftime.
     Gauge.Aggregation:
       enum:
         - AGGREGATION_UNSPECIFIED
@@ -38486,55 +38642,77 @@ components:
           x-coralogix-presence: true
       description: Jira config.
     JsonExtractParameters:
+      required:
+        - rule
       type: object
       properties:
         destinationFieldText:
-          description: The destination field text.
+          description: >-
+            The destination path in the log text. Required when
+            `destinationFieldType` is `DESTINATION_FIELD_TEXT`: it must be
+            `text` or start with `text.`.
           minLength: 0
           type: string
           x-coralogix-presence: true
         destinationFieldType:
           $ref: '#/components/schemas/DestinationField'
         rule:
-          description: Rule.
-          minLength: 0
+          description: The JSON key whose value is copied. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
-      description: Json extract parameters.
+      description: >-
+        Json extract parameters. Copies the value of a JSON key into a log
+        field.
     JsonParseParameters:
+      required:
+        - destinationField
+        - deleteSource
+        - overrideDest
       type: object
       properties:
         deleteSource:
-          description: The delete source.
+          description: Whether the source field is removed.
           type: boolean
           x-coralogix-presence: true
         destinationField:
-          description: The destination field.
-          minLength: 0
+          description: The field that receives the result. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
         escapedValue:
-          description: The escaped value.
+          description: >-
+            Ignored. The service always parses the value as escaped JSON and
+            never returns this field.
           type: boolean
           x-coralogix-presence: true
         overrideDest:
-          description: The override dest.
+          description: >-
+            Whether the result replaces a value that the destination field
+            already has.
           type: boolean
           x-coralogix-presence: true
-      description: Json parse parameters.
+      description: >-
+        Json parse parameters. Parses the JSON string in the source field into
+        an object in the destination field.
     JsonStringifyParameters:
+      required:
+        - destinationField
+        - deleteSource
       type: object
       properties:
         deleteSource:
-          description: The delete source.
+          description: Whether the source field is removed.
           type: boolean
           x-coralogix-presence: true
         destinationField:
-          description: The destination field.
-          minLength: 0
+          description: The field that receives the result. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
-      description: Json stringify parameters.
+      description: >-
+        Json stringify parameters. Writes the source field as a JSON string to
+        the destination field.
     KPIBreachedCaseEvent:
       title: KPI breached event
       type: object
@@ -40078,25 +40256,30 @@ components:
       description: Log metadata.
     LogRules:
       title: Log Rules
-      required:
-        - severities
       type: object
       properties:
         dpxlExpression:
-          description: The dpxl expression.
+          description: >-
+            The DataPrime expression that selects the data. It starts with a
+            version tag, for example `<v1> $d.severity == 'INFO'`; the service
+            rejects an expression without one.
           maxLength: 65535
           minLength: 1
           pattern: ^[\s\S]*$
           type: string
           x-coralogix-presence: true
         severities:
+          description: >-
+            The severities. A request without `dpxlExpression` needs at least
+            one, and a request with it must have none. A response with
+            `dpxlExpression` has an empty list.
+          items:
+            $ref: '#/components/schemas/quota.v1.Severity'
           maxItems: 6
           minItems: 0
           type: array
-          items:
-            $ref: '#/components/schemas/quota.v1.Severity'
-          description: The severities.
-      description: Log rules for a policy.
+          x-coralogix-collection: set
+      description: Log rules for a policy. Set `severities` or `dpxlExpression`, not both.
       externalDocs:
         description: Find out more about quota management.
         url: >-
@@ -43618,19 +43801,28 @@ components:
           type: string
           x-coralogix-presence: true
     ParseParameters:
+      required:
+        - rule
+        - destinationField
       type: object
       properties:
         destinationField:
-          description: The destination field.
+          description: >-
+            The field that receives the result. An empty string writes to the
+            source field.
           minLength: 0
           type: string
           x-coralogix-presence: true
         rule:
-          description: Rule.
-          minLength: 0
+          description: >-
+            The regular expression, with named capture groups, applied to the
+            source field. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
-      description: Parse parameters.
+      description: >-
+        Parse parameters. Parses the source field with a regular expression and
+        writes the named capture groups to the destination field.
     Percentile:
       type: object
       properties:
@@ -44062,6 +44254,7 @@ components:
           format: int32
           maximum: 2147483647
           minimum: 0
+          readOnly: true
           type: integer
           x-coralogix-presence: true
         createdAt:
@@ -44071,6 +44264,7 @@ components:
           maxLength: 64
           minLength: 0
           pattern: ^[\s\S]*$
+          readOnly: true
           type: string
           x-coralogix-presence: true
         deleted:
@@ -44079,12 +44273,15 @@ components:
             longer applied.
           examples:
             - false
+          readOnly: true
           type: boolean
           x-coralogix-presence: true
         description:
           description: >-
             Optional free-text description of the policy's purpose. Only Latin-1
-            characters are accepted.
+            characters are accepted. A policy that `POST /dataplans/policies/v1`
+            created without a description returns an empty string. A policy that
+            an atomic overwrite created without a description can return none.
           examples:
             - My Policy Description
           maxLength: 255
@@ -44093,19 +44290,26 @@ components:
           type: string
           x-coralogix-presence: true
         enabled:
-          description: Indicates whether the policy is actively evaluated and applied.
+          description: >-
+            Indicates whether the policy is actively evaluated and applied. A
+            create or atomic-overwrite request sets it as the opposite of its
+            `disabled` value; `PUT /dataplans/policies/v1` sets `enabled`
+            directly.
           examples:
             - true
           type: boolean
           x-coralogix-presence: true
         id:
-          description: Unique identifier for the policy.
+          description: >-
+            Unique identifier for the policy. The service sets it, and an
+            overwrite that changes the policies gives every policy a new id.
           examples:
             - 3dc02998-0b50-4ea8-b68a-4779d716fa1f
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          readOnly: true
           type: string
           x-coralogix-presence: true
         logRules:
@@ -44124,12 +44328,14 @@ components:
         order:
           description: >-
             Ordering priority that determines the sequence in which policies are
-            evaluated. Can be negative for policies placed first.
+            evaluated. Can be negative for policies placed first. An overwrite
+            sets it to the position of the policy in the request, starting at 1.
           examples:
             - 1
           format: int32
           maximum: 2147483647
           minimum: -2147483648
+          readOnly: true
           type: integer
           x-coralogix-presence: true
         priority:
@@ -44137,7 +44343,13 @@ components:
         priorityOverride:
           $ref: '#/components/schemas/PriorityOverride'
         priorityOverrideStatus:
-          $ref: '#/components/schemas/PriorityOverrideStatus'
+          allOf:
+            - $ref: '#/components/schemas/PriorityOverrideStatus'
+          description: >-
+            The priority currently in effect, from the quota usage of the team
+            against the usage tiers. Get Company Policies returns it for an
+            enabled policy with a quota-based override.
+          readOnly: true
         rumRules:
           $ref: '#/components/schemas/LogRules'
         spanRules:
@@ -44150,7 +44362,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1.Target'
-          description: List of data targets/destinations to which this policy routes data.
+          description: >-
+            List of data targets/destinations to which this policy routes data.
+            A log policy created without targets has one target: the `logs`
+            dataset of the `default` dataspace, with the priority and the
+            override of the policy. A span policy has one `spans` target. A RUM
+            policy has none.
           examples:
             - - name: My Target
                 dataset: dataset1
@@ -44164,6 +44381,7 @@ components:
           maxLength: 64
           minLength: 0
           pattern: ^[\s\S]*$
+          readOnly: true
           type: string
           x-coralogix-presence: true
       description: >-
@@ -46650,16 +46868,18 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
     RemoveFieldsParameters:
+      required:
+        - fields
       type: object
       properties:
         fields:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             minLength: 0
             type: string
-            description: List of fields.
-          description: List of fields.
+            description: The fields to remove from the log. At least one.
+          description: The fields to remove from the log. At least one.
       description: Remove fields parameters.
     ReorderPoliciesResponse:
       title: Reorder Policies Response
@@ -46821,24 +47041,36 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
     ReplaceParameters:
+      required:
+        - rule
+        - destinationField
+        - replaceNewVal
       type: object
       properties:
         destinationField:
-          description: The destination field.
+          description: >-
+            The field that receives the result. An empty string writes to the
+            source field.
           minLength: 0
           type: string
           x-coralogix-presence: true
         replaceNewVal:
-          description: The replace new val.
+          description: >-
+            The text that replaces each match. An empty string removes the
+            match.
           minLength: 0
           type: string
           x-coralogix-presence: true
         rule:
-          description: Rule.
-          minLength: 0
+          description: >-
+            The regular expression that selects the text to replace. Must not be
+            empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
-      description: Replace parameters.
+      description: >-
+        Replace parameters. Replaces the text that the regular expression
+        matches.
     ReplacePolicySettingsResponse:
       title: Replace Policy Settings Response
       type: object
@@ -47425,24 +47657,39 @@ components:
       type: string
       description: Row style.
     RuleGroup:
+      required:
+        - id
+        - name
+        - description
+        - enabled
+        - hidden
+        - order
+        - ruleSubgroups
       type: object
       properties:
         creator:
-          description: Creator.
+          description: >-
+            Free-form name of the creator, as the client sent it. A request
+            without it stores an empty string, but a response can omit it.
           minLength: 0
           type: string
           x-coralogix-presence: true
         description:
-          description: Human-readable description.
+          description: Human-readable description. Defaults to an empty string.
           minLength: 0
           type: string
           x-coralogix-presence: true
         enabled:
-          description: Whether this resource is enabled.
+          default: true
+          description: Whether the group is enabled. Defaults to true.
           type: boolean
           x-coralogix-presence: true
         hidden:
-          description: The hidden.
+          default: false
+          description: >-
+            A free-form flag for clients, for example to hide the group in a UI.
+            The service stores and returns it and does not act on it. Defaults
+            to false.
           type: boolean
           x-coralogix-presence: true
         id:
@@ -47451,12 +47698,16 @@ components:
           type: string
           x-coralogix-presence: true
         name:
-          description: Display name.
-          minLength: 0
+          description: Display name. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
         order:
-          description: Sort order.
+          default: 1
+          description: >-
+            Position of the group among the rule groups of the company. Defaults
+            to 1. A request with 0 places the group last. Groups can share an
+            order: the service does not shift the other groups.
           format: int64
           minimum: 0
           type: integer
@@ -47468,12 +47719,12 @@ components:
             $ref: '#/components/schemas/RuleMatcher'
           description: The rule matchers.
         ruleSubgroups:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/RuleSubgroup'
-          description: The rule subgroups.
-      description: Rule group.
+          description: The rule subgroups, sorted by order.
+      description: Rule group. Every scalar field except `creator` is always returned.
     RuleGroupSetListing:
       title: Rule Group Set Listing
       required:
@@ -47556,39 +47807,6 @@ components:
         - required:
             - jsonParseParameters
           type: object
-        - type: object
-          not:
-            anyOf:
-              - required:
-                  - extractParameters
-                type: object
-              - required:
-                  - jsonExtractParameters
-                type: object
-              - required:
-                  - replaceParameters
-                type: object
-              - required:
-                  - parseParameters
-                type: object
-              - required:
-                  - allowParameters
-                type: object
-              - required:
-                  - blockParameters
-                type: object
-              - required:
-                  - extractTimestampParameters
-                type: object
-              - required:
-                  - removeFieldsParameters
-                type: object
-              - required:
-                  - jsonStringifyParameters
-                type: object
-              - required:
-                  - jsonParseParameters
-                type: object
       properties:
         allowParameters:
           $ref: '#/components/schemas/AllowParameters'
@@ -47610,7 +47828,9 @@ components:
           $ref: '#/components/schemas/RemoveFieldsParameters'
         replaceParameters:
           $ref: '#/components/schemas/ReplaceParameters'
-      description: Rule parameters.
+      description: >-
+        Rule parameters. Exactly one parameters object must be set; an empty
+        object is rejected.
     RuleScope:
       type: object
       oneOf:
@@ -47649,29 +47869,40 @@ components:
           x-coralogix-presence: true
       description: Rule scope.
     RuleSubgroup:
+      required:
+        - id
+        - enabled
+        - order
+        - rules
       type: object
       properties:
         enabled:
-          description: Whether this resource is enabled.
+          default: true
+          description: Whether the subgroup is enabled. Defaults to true.
           type: boolean
           x-coralogix-presence: true
         id:
-          description: Unique identifier.
+          description: >-
+            Unique identifier. Set by the server, and regenerated for every
+            subgroup on each update of the group.
           minLength: 0
           type: string
           x-coralogix-presence: true
         order:
-          description: Sort order.
+          description: >-
+            Position of the subgroup in the group, starting at 1. Get returns
+            the subgroups sorted by order.
           format: int64
-          minimum: 0
+          minimum: 1
           type: integer
           x-coralogix-presence: true
         rules:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/rules.v1.Rule'
-          description: List of rules.
+          description: The rules of the subgroup, sorted by order.
+      description: A rule subgroup. Get returns every scalar field.
     RuleTypeId:
       enum:
         - RULE_TYPE_ID_UNSPECIFIED
@@ -49015,7 +49246,11 @@ components:
         actionRule:
           $ref: '#/components/schemas/quota.v1.Rule'
         dpxlExpression:
-          description: The dpxl expression.
+          description: >-
+            The DataPrime expression that selects the spans. It starts with a
+            version tag, for example `<v1> $l.serviceName == 'checkout'`. The
+            service rejects it next to an application, subsystem, service,
+            action, or tag rule.
           maxLength: 65535
           minLength: 1
           pattern: ^[\s\S]*$
@@ -49024,12 +49259,13 @@ components:
         serviceRule:
           $ref: '#/components/schemas/quota.v1.Rule'
         tagRules:
+          description: The tag rules. The service does not keep their order.
+          items:
+            $ref: '#/components/schemas/TagRule'
           maxItems: 100
           minItems: 0
           type: array
-          items:
-            $ref: '#/components/schemas/TagRule'
-          description: The tag rules.
+          x-coralogix-collection: set
       description: Span rules.
     Spans:
       title: SpansQuery
@@ -52484,7 +52720,7 @@ components:
         - VALUE_ERROR
         - VALUE_CRITICAL
       type: string
-      description: Value.
+      description: Log severity. The zero value `VALUE_DEBUG_OR_UNSPECIFIED` means debug.
     ValueCount:
       title: Filter value count
       type: object
@@ -54681,7 +54917,7 @@ components:
         name:
           description: >-
             The value(s) to match. For IS and IS_NOT rules, up to 50
-            comma-separated values.
+            comma-separated values. The service stores the values in lower case.
           maxLength: 65535
           minLength: 1
           pattern: ^[\s\S]*$
@@ -54757,40 +54993,58 @@ components:
         A user is an entity that is always part of a team and has an account
         associated with it
     rules.v1.Rule:
+      required:
+        - id
+        - name
+        - description
+        - sourceField
+        - parameters
+        - enabled
+        - order
       type: object
       properties:
         description:
-          description: Human-readable description.
+          description: Human-readable description. Defaults to an empty string.
           minLength: 0
           type: string
           x-coralogix-presence: true
         enabled:
-          description: Whether this resource is enabled.
+          default: true
+          description: Whether the rule is enabled. Defaults to true.
           type: boolean
           x-coralogix-presence: true
         id:
-          description: Unique identifier.
+          description: >-
+            Unique identifier. Set by the server, and regenerated for every rule
+            on each update of the group.
           minLength: 0
           type: string
           x-coralogix-presence: true
         name:
-          description: Display name.
-          minLength: 0
+          description: Display name. Must not be empty.
+          minLength: 1
           type: string
           x-coralogix-presence: true
         order:
-          description: Sort order.
+          description: >-
+            Position of the rule in its subgroup, starting at 1. Get returns the
+            rules sorted by order.
           format: int64
-          minimum: 0
+          minimum: 1
           type: integer
           x-coralogix-presence: true
         parameters:
           $ref: '#/components/schemas/RuleParameters'
         sourceField:
-          description: The source field.
-          minLength: 0
+          description: >-
+            The field the rule reads: `text`, a `text.<field>` path, or one of
+            `applicationName`, `subsystemName`, `computerName`, `category`,
+            `className`, `methodName`, `threadId`, and `severity`. A rule that
+            deletes its source field must read a `text.<field>` path.
+          minLength: 1
           type: string
           x-coralogix-presence: true
+      description: A parsing rule. Get returns every field.
     scopes.v1.Filter:
       title: Filter
       type: object
@@ -55190,7 +55444,9 @@ components:
         archiveRetention:
           allOf:
             - $ref: '#/components/schemas/ArchiveRetention'
-          description: Optional archive retention configuration for the target.
+          description: >-
+            Optional archive retention configuration for the target. The service
+            accepts it and does not store it: a target never returns it.
         dataset:
           maxLength: 512
           minLength: 1
@@ -55204,9 +55460,11 @@ components:
           minLength: 1
           pattern: ^[A-Za-z](?:[A-Za-z0-9_]|\.[A-Za-z0-9_])*$
           type: string
-          description: The dataspace.
+          description: >-
+            The dataspace. Only `default` is supported. An omitted dataspace is
+            `default`, and the service returns it in lower case.
           examples:
-            - dataspace1
+            - default
         priority:
           allOf:
             - $ref: '#/components/schemas/quota.v1.Priority'
@@ -55234,7 +55492,9 @@ components:
           type: integer
           description: Unique identifier.
           format: int64
-      description: Team id.
+      description: >-
+        Team id. Ignored: the service takes the team from the credentials of the
+        request.
     v1.TimeRange:
       title: Time range
       required:

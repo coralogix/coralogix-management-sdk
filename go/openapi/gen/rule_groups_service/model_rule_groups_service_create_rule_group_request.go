@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,24 +21,25 @@ var _ = bytes.MinRead
 // checks if the RuleGroupsServiceCreateRuleGroupRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroupsServiceCreateRuleGroupRequest{}
 
-// RuleGroupsServiceCreateRuleGroupRequest Request to create a new parsing rule group.
+// RuleGroupsServiceCreateRuleGroupRequest Request to create a new parsing rule group. Update takes the same body and replaces the whole group: a field that the request omits takes its default.
 type RuleGroupsServiceCreateRuleGroupRequest struct {
-	// Creator.
+	// Free-form name of the creator. The service stores it as sent. Defaults to an empty string.
 	Creator *string `json:"creator,omitempty"`
-	// Human-readable description.
+	// Human-readable description. Defaults to an empty string.
 	Description *string `json:"description,omitempty"`
-	// Whether this resource is enabled.
+	// Whether the group is enabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty"`
-	// The hidden.
+	// A free-form flag for clients, for example to hide the group in a UI. The service stores and returns it and does not act on it. Defaults to false.
 	Hidden *bool `json:"hidden,omitempty"`
-	// Display name.
-	Name *string `json:"name,omitempty"`
-	// Sort order.
+	// Display name. Must not be empty.
+	Name string `json:"name"`
+	// Position of the group among the rule groups of the company. Defaults to 1. 0 places the group last. Groups can share an order: the service does not shift the other groups.
 	Order *int64 `json:"order,omitempty"`
 	// The rule matchers.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
-	// The rule subgroups.
-	RuleSubgroups []CreateRuleGroupRequestCreateRuleSubgroup `json:"ruleSubgroups,omitempty"`
+	// The rule subgroups. At least one.
+	RuleSubgroups []CreateRuleGroupRequestCreateRuleSubgroup `json:"ruleSubgroups"`
+	// Ignored. The service takes the team from the credentials of the request.
 	TeamId *V1TeamId `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -49,8 +51,10 @@ type _RuleGroupsServiceCreateRuleGroupRequest RuleGroupsServiceCreateRuleGroupRe
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRuleGroupsServiceCreateRuleGroupRequest() *RuleGroupsServiceCreateRuleGroupRequest {
+func NewRuleGroupsServiceCreateRuleGroupRequest(name string, ruleSubgroups []CreateRuleGroupRequestCreateRuleSubgroup) *RuleGroupsServiceCreateRuleGroupRequest {
 	this := RuleGroupsServiceCreateRuleGroupRequest{}
+	this.Name = name
+	this.RuleSubgroups = ruleSubgroups
 	return &this
 }
 
@@ -190,36 +194,28 @@ func (o *RuleGroupsServiceCreateRuleGroupRequest) SetHidden(v bool) {
 	o.Hidden = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *RuleGroupsServiceCreateRuleGroupRequest) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroupsServiceCreateRuleGroupRequest) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *RuleGroupsServiceCreateRuleGroupRequest) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *RuleGroupsServiceCreateRuleGroupRequest) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
@@ -286,34 +282,26 @@ func (o *RuleGroupsServiceCreateRuleGroupRequest) SetRuleMatchers(v []RuleMatche
 	o.RuleMatchers = v
 }
 
-// GetRuleSubgroups returns the RuleSubgroups field value if set, zero value otherwise.
+// GetRuleSubgroups returns the RuleSubgroups field value
 func (o *RuleGroupsServiceCreateRuleGroupRequest) GetRuleSubgroups() []CreateRuleGroupRequestCreateRuleSubgroup {
-	if o == nil || IsNil(o.RuleSubgroups) {
+	if o == nil {
 		var ret []CreateRuleGroupRequestCreateRuleSubgroup
 		return ret
 	}
+
 	return o.RuleSubgroups
 }
 
-// GetRuleSubgroupsOk returns a tuple with the RuleSubgroups field value if set, nil otherwise
+// GetRuleSubgroupsOk returns a tuple with the RuleSubgroups field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroupsServiceCreateRuleGroupRequest) GetRuleSubgroupsOk() ([]CreateRuleGroupRequestCreateRuleSubgroup, bool) {
-	if o == nil || IsNil(o.RuleSubgroups) {
+	if o == nil {
 		return nil, false
 	}
 	return o.RuleSubgroups, true
 }
 
-// HasRuleSubgroups returns a boolean if a field has been set.
-func (o *RuleGroupsServiceCreateRuleGroupRequest) HasRuleSubgroups() bool {
-	if o != nil && !IsNil(o.RuleSubgroups) {
-		return true
-	}
-
-	return false
-}
-
-// SetRuleSubgroups gets a reference to the given []CreateRuleGroupRequestCreateRuleSubgroup and assigns it to the RuleSubgroups field.
+// SetRuleSubgroups sets field value
 func (o *RuleGroupsServiceCreateRuleGroupRequest) SetRuleSubgroups(v []CreateRuleGroupRequestCreateRuleSubgroup) {
 	o.RuleSubgroups = v
 }
@@ -372,18 +360,14 @@ func (o RuleGroupsServiceCreateRuleGroupRequest) ToMap() (map[string]interface{}
 	if !IsNil(o.Hidden) {
 		toSerialize["hidden"] = o.Hidden
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Order) {
 		toSerialize["order"] = o.Order
 	}
 	if !IsNil(o.RuleMatchers) {
 		toSerialize["ruleMatchers"] = o.RuleMatchers
 	}
-	if !IsNil(o.RuleSubgroups) {
-		toSerialize["ruleSubgroups"] = o.RuleSubgroups
-	}
+	toSerialize["ruleSubgroups"] = o.RuleSubgroups
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
@@ -396,6 +380,28 @@ func (o RuleGroupsServiceCreateRuleGroupRequest) ToMap() (map[string]interface{}
 }
 
 func (o *RuleGroupsServiceCreateRuleGroupRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"ruleSubgroups",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRuleGroupsServiceCreateRuleGroupRequest := _RuleGroupsServiceCreateRuleGroupRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

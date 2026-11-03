@@ -23,7 +23,7 @@ var _ MappedNullable = &AtomicOverwriteLogPoliciesRequest{}
 
 // AtomicOverwriteLogPoliciesRequest In an atomic operation delete all existing log policies and create the provided list by order.
 type AtomicOverwriteLogPoliciesRequest struct {
-	// Policies.
+	// Replaces every log policy of the team with this list, in this order: the first policy gets order 1. An overwrite that changes the policies gives each a new id; one that sends the stored policies again keeps their ids. An empty list deletes every log policy.
 	Policies []CreateLogPolicyRequest `json:"policies"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

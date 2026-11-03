@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,14 +21,14 @@ var _ = bytes.MinRead
 // checks if the CreateRuleGroupRequestCreateRuleSubgroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRuleGroupRequestCreateRuleSubgroup{}
 
-// CreateRuleGroupRequestCreateRuleSubgroup struct for CreateRuleGroupRequestCreateRuleSubgroup
+// CreateRuleGroupRequestCreateRuleSubgroup A rule subgroup. The service sets its id, and sets a new one on every update of the group.
 type CreateRuleGroupRequestCreateRuleSubgroup struct {
-	// Whether this resource is enabled.
+	// Whether the subgroup is enabled. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Sort order.
-	Order *int64 `json:"order,omitempty"`
-	// List of rules.
-	Rules []CreateRuleGroupRequestCreateRuleSubgroupCreateRule `json:"rules,omitempty"`
+	// Position of the subgroup in the group, starting at 1.
+	Order int64 `json:"order"`
+	// The rules of the subgroup. At least one.
+	Rules []CreateRuleGroupRequestCreateRuleSubgroupCreateRule `json:"rules"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -38,8 +39,10 @@ type _CreateRuleGroupRequestCreateRuleSubgroup CreateRuleGroupRequestCreateRuleS
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCreateRuleGroupRequestCreateRuleSubgroup() *CreateRuleGroupRequestCreateRuleSubgroup {
+func NewCreateRuleGroupRequestCreateRuleSubgroup(order int64, rules []CreateRuleGroupRequestCreateRuleSubgroupCreateRule) *CreateRuleGroupRequestCreateRuleSubgroup {
 	this := CreateRuleGroupRequestCreateRuleSubgroup{}
+	this.Order = order
+	this.Rules = rules
 	return &this
 }
 
@@ -83,66 +86,50 @@ func (o *CreateRuleGroupRequestCreateRuleSubgroup) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *CreateRuleGroupRequestCreateRuleSubgroup) GetOrder() int64 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *CreateRuleGroupRequestCreateRuleSubgroup) GetOrderOk() (*int64, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *CreateRuleGroupRequestCreateRuleSubgroup) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int64 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *CreateRuleGroupRequestCreateRuleSubgroup) SetOrder(v int64) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetRules returns the Rules field value if set, zero value otherwise.
+// GetRules returns the Rules field value
 func (o *CreateRuleGroupRequestCreateRuleSubgroup) GetRules() []CreateRuleGroupRequestCreateRuleSubgroupCreateRule {
-	if o == nil || IsNil(o.Rules) {
+	if o == nil {
 		var ret []CreateRuleGroupRequestCreateRuleSubgroupCreateRule
 		return ret
 	}
+
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
+// GetRulesOk returns a tuple with the Rules field value
 // and a boolean to check if the value has been set.
 func (o *CreateRuleGroupRequestCreateRuleSubgroup) GetRulesOk() ([]CreateRuleGroupRequestCreateRuleSubgroupCreateRule, bool) {
-	if o == nil || IsNil(o.Rules) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// HasRules returns a boolean if a field has been set.
-func (o *CreateRuleGroupRequestCreateRuleSubgroup) HasRules() bool {
-	if o != nil && !IsNil(o.Rules) {
-		return true
-	}
-
-	return false
-}
-
-// SetRules gets a reference to the given []CreateRuleGroupRequestCreateRuleSubgroupCreateRule and assigns it to the Rules field.
+// SetRules sets field value
 func (o *CreateRuleGroupRequestCreateRuleSubgroup) SetRules(v []CreateRuleGroupRequestCreateRuleSubgroupCreateRule) {
 	o.Rules = v
 }
@@ -160,12 +147,8 @@ func (o CreateRuleGroupRequestCreateRuleSubgroup) ToMap() (map[string]interface{
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if !IsNil(o.Rules) {
-		toSerialize["rules"] = o.Rules
-	}
+	toSerialize["order"] = o.Order
+	toSerialize["rules"] = o.Rules
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -175,6 +158,28 @@ func (o CreateRuleGroupRequestCreateRuleSubgroup) ToMap() (map[string]interface{
 }
 
 func (o *CreateRuleGroupRequestCreateRuleSubgroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"order",
+		"rules",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCreateRuleGroupRequestCreateRuleSubgroup := _CreateRuleGroupRequestCreateRuleSubgroup{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

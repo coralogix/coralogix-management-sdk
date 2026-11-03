@@ -23,7 +23,7 @@ var _ MappedNullable = &AtomicOverwriteRumPoliciesRequest{}
 
 // AtomicOverwriteRumPoliciesRequest In an atomic operation delete all existing RUM policies and create the provided list by order.
 type AtomicOverwriteRumPoliciesRequest struct {
-	// List of RUM policies to create as part of the atomic overwrite.
+	// Replaces every RUM policy of the team with this list, in this order: the first policy gets order 1. An overwrite that changes the policies gives each a new id; one that sends the stored policies again keeps their ids. An empty list deletes every RUM policy. RUM policies do not accept the `PRIORITY_TYPE_HIGH` priority and have no targets.
 	Policies []CreateRumPolicyRequest `json:"policies"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

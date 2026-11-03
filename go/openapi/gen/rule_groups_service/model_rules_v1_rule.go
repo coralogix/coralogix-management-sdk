@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,21 +21,21 @@ var _ = bytes.MinRead
 // checks if the RulesV1Rule type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RulesV1Rule{}
 
-// RulesV1Rule struct for RulesV1Rule
+// RulesV1Rule A parsing rule. Get returns every field.
 type RulesV1Rule struct {
-	// Human-readable description.
-	Description *string `json:"description,omitempty"`
-	// Whether this resource is enabled.
-	Enabled *bool `json:"enabled,omitempty"`
-	// Unique identifier.
-	Id *string `json:"id,omitempty"`
-	// Display name.
-	Name *string `json:"name,omitempty"`
-	// Sort order.
-	Order *int64 `json:"order,omitempty"`
-	Parameters *RuleParameters `json:"parameters,omitempty"`
-	// The source field.
-	SourceField *string `json:"sourceField,omitempty"`
+	// Human-readable description. Defaults to an empty string.
+	Description string `json:"description"`
+	// Whether the rule is enabled. Defaults to true.
+	Enabled bool `json:"enabled"`
+	// Unique identifier. Set by the server, and regenerated for every rule on each update of the group.
+	Id string `json:"id"`
+	// Display name. Must not be empty.
+	Name string `json:"name"`
+	// Position of the rule in its subgroup, starting at 1. Get returns the rules sorted by order.
+	Order int64 `json:"order"`
+	Parameters RuleParameters `json:"parameters"`
+	// The field the rule reads: `text`, a `text.<field>` path, or one of `applicationName`, `subsystemName`, `computerName`, `category`, `className`, `methodName`, `threadId`, and `severity`. A rule that deletes its source field must read a `text.<field>` path.
+	SourceField string `json:"sourceField"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -45,8 +46,15 @@ type _RulesV1Rule RulesV1Rule
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRulesV1Rule() *RulesV1Rule {
+func NewRulesV1Rule(description string, enabled bool, id string, name string, order int64, parameters RuleParameters, sourceField string) *RulesV1Rule {
 	this := RulesV1Rule{}
+	this.Description = description
+	this.Enabled = enabled
+	this.Id = id
+	this.Name = name
+	this.Order = order
+	this.Parameters = parameters
+	this.SourceField = sourceField
 	return &this
 }
 
@@ -58,228 +66,172 @@ func NewRulesV1RuleWithDefaults() *RulesV1Rule {
 	return &this
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *RulesV1Rule) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *RulesV1Rule) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *RulesV1Rule) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *RulesV1Rule) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
+// GetEnabled returns the Enabled field value
 func (o *RulesV1Rule) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled
+
+	return o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value
 // and a boolean to check if the value has been set.
 func (o *RulesV1Rule) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Enabled, true
+	return &o.Enabled, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *RulesV1Rule) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+// SetEnabled sets field value
 func (o *RulesV1Rule) SetEnabled(v bool) {
-	o.Enabled = &v
+	o.Enabled = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *RulesV1Rule) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *RulesV1Rule) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *RulesV1Rule) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *RulesV1Rule) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *RulesV1Rule) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *RulesV1Rule) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *RulesV1Rule) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *RulesV1Rule) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *RulesV1Rule) GetOrder() int64 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *RulesV1Rule) GetOrderOk() (*int64, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *RulesV1Rule) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int64 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *RulesV1Rule) SetOrder(v int64) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetParameters returns the Parameters field value if set, zero value otherwise.
+// GetParameters returns the Parameters field value
 func (o *RulesV1Rule) GetParameters() RuleParameters {
-	if o == nil || IsNil(o.Parameters) {
+	if o == nil {
 		var ret RuleParameters
 		return ret
 	}
-	return *o.Parameters
+
+	return o.Parameters
 }
 
-// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
+// GetParametersOk returns a tuple with the Parameters field value
 // and a boolean to check if the value has been set.
 func (o *RulesV1Rule) GetParametersOk() (*RuleParameters, bool) {
-	if o == nil || IsNil(o.Parameters) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Parameters, true
+	return &o.Parameters, true
 }
 
-// HasParameters returns a boolean if a field has been set.
-func (o *RulesV1Rule) HasParameters() bool {
-	if o != nil && !IsNil(o.Parameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetParameters gets a reference to the given RuleParameters and assigns it to the Parameters field.
+// SetParameters sets field value
 func (o *RulesV1Rule) SetParameters(v RuleParameters) {
-	o.Parameters = &v
+	o.Parameters = v
 }
 
-// GetSourceField returns the SourceField field value if set, zero value otherwise.
+// GetSourceField returns the SourceField field value
 func (o *RulesV1Rule) GetSourceField() string {
-	if o == nil || IsNil(o.SourceField) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SourceField
+
+	return o.SourceField
 }
 
-// GetSourceFieldOk returns a tuple with the SourceField field value if set, nil otherwise
+// GetSourceFieldOk returns a tuple with the SourceField field value
 // and a boolean to check if the value has been set.
 func (o *RulesV1Rule) GetSourceFieldOk() (*string, bool) {
-	if o == nil || IsNil(o.SourceField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SourceField, true
+	return &o.SourceField, true
 }
 
-// HasSourceField returns a boolean if a field has been set.
-func (o *RulesV1Rule) HasSourceField() bool {
-	if o != nil && !IsNil(o.SourceField) {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceField gets a reference to the given string and assigns it to the SourceField field.
+// SetSourceField sets field value
 func (o *RulesV1Rule) SetSourceField(v string) {
-	o.SourceField = &v
+	o.SourceField = v
 }
 
 func (o RulesV1Rule) MarshalJSON() ([]byte, error) {
@@ -292,27 +244,13 @@ func (o RulesV1Rule) MarshalJSON() ([]byte, error) {
 
 func (o RulesV1Rule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if !IsNil(o.Parameters) {
-		toSerialize["parameters"] = o.Parameters
-	}
-	if !IsNil(o.SourceField) {
-		toSerialize["sourceField"] = o.SourceField
-	}
+	toSerialize["description"] = o.Description
+	toSerialize["enabled"] = o.Enabled
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["order"] = o.Order
+	toSerialize["parameters"] = o.Parameters
+	toSerialize["sourceField"] = o.SourceField
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -322,6 +260,33 @@ func (o RulesV1Rule) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RulesV1Rule) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"description",
+		"enabled",
+		"id",
+		"name",
+		"order",
+		"parameters",
+		"sourceField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRulesV1Rule := _RulesV1Rule{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

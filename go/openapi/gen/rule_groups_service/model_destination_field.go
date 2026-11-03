@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// DestinationField Destination field.
+// DestinationField Destination field. The zero value `DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED` means the category field.
 type DestinationField string
 
 // List of DestinationField
