@@ -25,13 +25,13 @@ var _ MappedNullable = &OutRuleGroup{}
 type OutRuleGroup struct {
 	// Unique identifier.
 	Id string `json:"id" validate:"regexp=^[\\s\\S]*$"`
-	// Interval.
-	Interval *int64 `json:"interval,omitempty"`
+	// How often the rules of the group are evaluated, in seconds. At least 60. An omitted interval is stored as 60, also on an update.
+	Interval int64 `json:"interval"`
 	// The last eval at.
 	LastEvalAt *string `json:"lastEvalAt,omitempty" validate:"regexp=^[0-9]+$"`
-	// Limit.
-	Limit *string `json:"limit,omitempty" validate:"regexp=^[0-9]+$"`
-	// Display name.
+	// Limits the number of series that a rule of the group can produce. 0 means no limit. An omitted limit is stored as 0, also on an update.
+	Limit string `json:"limit" validate:"regexp=^[0-9]+$"`
+	// The name of the group. Unique within the set.
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// List of rules.
 	Rules []OutRule `json:"rules"`
@@ -47,9 +47,11 @@ type _OutRuleGroup OutRuleGroup
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewOutRuleGroup(id string, name string, rules []OutRule, version int64) *OutRuleGroup {
+func NewOutRuleGroup(id string, interval int64, limit string, name string, rules []OutRule, version int64) *OutRuleGroup {
 	this := OutRuleGroup{}
 	this.Id = id
+	this.Interval = interval
+	this.Limit = limit
 	this.Name = name
 	this.Rules = rules
 	this.Version = version
@@ -88,36 +90,28 @@ func (o *OutRuleGroup) SetId(v string) {
 	o.Id = v
 }
 
-// GetInterval returns the Interval field value if set, zero value otherwise.
+// GetInterval returns the Interval field value
 func (o *OutRuleGroup) GetInterval() int64 {
-	if o == nil || IsNil(o.Interval) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.Interval
+
+	return o.Interval
 }
 
-// GetIntervalOk returns a tuple with the Interval field value if set, nil otherwise
+// GetIntervalOk returns a tuple with the Interval field value
 // and a boolean to check if the value has been set.
 func (o *OutRuleGroup) GetIntervalOk() (*int64, bool) {
-	if o == nil || IsNil(o.Interval) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Interval, true
+	return &o.Interval, true
 }
 
-// HasInterval returns a boolean if a field has been set.
-func (o *OutRuleGroup) HasInterval() bool {
-	if o != nil && !IsNil(o.Interval) {
-		return true
-	}
-
-	return false
-}
-
-// SetInterval gets a reference to the given int64 and assigns it to the Interval field.
+// SetInterval sets field value
 func (o *OutRuleGroup) SetInterval(v int64) {
-	o.Interval = &v
+	o.Interval = v
 }
 
 // GetLastEvalAt returns the LastEvalAt field value if set, zero value otherwise.
@@ -152,36 +146,28 @@ func (o *OutRuleGroup) SetLastEvalAt(v string) {
 	o.LastEvalAt = &v
 }
 
-// GetLimit returns the Limit field value if set, zero value otherwise.
+// GetLimit returns the Limit field value
 func (o *OutRuleGroup) GetLimit() string {
-	if o == nil || IsNil(o.Limit) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Limit
+
+	return o.Limit
 }
 
-// GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
+// GetLimitOk returns a tuple with the Limit field value
 // and a boolean to check if the value has been set.
 func (o *OutRuleGroup) GetLimitOk() (*string, bool) {
-	if o == nil || IsNil(o.Limit) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Limit, true
+	return &o.Limit, true
 }
 
-// HasLimit returns a boolean if a field has been set.
-func (o *OutRuleGroup) HasLimit() bool {
-	if o != nil && !IsNil(o.Limit) {
-		return true
-	}
-
-	return false
-}
-
-// SetLimit gets a reference to the given string and assigns it to the Limit field.
+// SetLimit sets field value
 func (o *OutRuleGroup) SetLimit(v string) {
-	o.Limit = &v
+	o.Limit = v
 }
 
 // GetName returns the Name field value
@@ -267,15 +253,11 @@ func (o OutRuleGroup) MarshalJSON() ([]byte, error) {
 func (o OutRuleGroup) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	if !IsNil(o.Interval) {
-		toSerialize["interval"] = o.Interval
-	}
+	toSerialize["interval"] = o.Interval
 	if !IsNil(o.LastEvalAt) {
 		toSerialize["lastEvalAt"] = o.LastEvalAt
 	}
-	if !IsNil(o.Limit) {
-		toSerialize["limit"] = o.Limit
-	}
+	toSerialize["limit"] = o.Limit
 	toSerialize["name"] = o.Name
 	toSerialize["rules"] = o.Rules
 	toSerialize["version"] = o.Version
@@ -293,6 +275,8 @@ func (o *OutRuleGroup) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
+		"interval",
+		"limit",
 		"name",
 		"rules",
 		"version",

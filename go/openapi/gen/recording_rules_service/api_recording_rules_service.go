@@ -41,7 +41,7 @@ func (r ApiRuleGroupSetsCreateRequest) Execute() (*CreateRuleGroupSetResult, *ht
 /*
 RuleGroupSetsCreate Create Recording Rules
 
-Creates a new recording rule group.
+Creates a set of recording rule groups and returns its id. A set name that another set has answers 400.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRuleGroupSetsCreateRequest
@@ -73,6 +73,9 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsCreateExecute(r ApiRuleGr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createRuleGroupSet == nil {
+		return localVarReturnValue, nil, reportError("createRuleGroupSet is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -175,7 +178,7 @@ func (r ApiRuleGroupSetsDeleteRequest) Execute() (map[string]interface{}, *http.
 /*
 RuleGroupSetsDelete Delete Recording Rules
 
-Deletes the recording rule group with the specified ID.
+Deletes the set with the given id. An id that does not exist answers 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Unique identifier.
@@ -278,6 +281,17 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsDeleteExecute(r ApiRuleGr
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 500 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -316,7 +330,7 @@ func (r ApiRuleGroupSetsFetchRequest) Execute() (*OutRuleGroupSet, *http.Respons
 /*
 RuleGroupSetsFetch Get Recording Rules
 
-Returns the details of the specified recording rule group.
+Returns the set with the given id. An id that does not exist answers 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Unique identifier.
@@ -409,6 +423,17 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsFetchExecute(r ApiRuleGro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -594,7 +619,7 @@ func (r ApiRuleGroupSetsUpdateRequest) Execute() (map[string]interface{}, *http.
 /*
 RuleGroupSetsUpdate Update Recording Rules
 
-Updates the specified recording rule group.
+Replaces the groups of the set with the given id. An omitted name keeps the stored name. An id that does not exist answers 404.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Unique identifier.
@@ -634,6 +659,9 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGr
 	}
 	if strlen(r.id) > 128 {
 		return localVarReturnValue, nil, reportError("id must have less than 128 elements")
+	}
+	if r.updateRuleGroupSet == nil {
+		return localVarReturnValue, nil, reportError("updateRuleGroupSet is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -689,6 +717,17 @@ func (a *RecordingRulesServiceAPIService) RuleGroupSetsUpdateExecute(r ApiRuleGr
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

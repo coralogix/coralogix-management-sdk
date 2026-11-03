@@ -25,11 +25,11 @@ var _ MappedNullable = &InRuleGroup{}
 type InRuleGroup struct {
 	// Unique identifier.
 	Id *string `json:"id,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Interval.
+	// How often the rules of the group are evaluated, in seconds. At least 60. An omitted interval is stored as 60, also on an update.
 	Interval *int64 `json:"interval,omitempty"`
-	// Limit.
+	// Limits the number of series that a rule of the group can produce. 0 means no limit. An omitted limit is stored as 0, also on an update.
 	Limit *string `json:"limit,omitempty" validate:"regexp=^[0-9]+$"`
-	// Display name.
+	// The name of the group. Unique within the set.
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	// List of rules.
 	Rules []InRule `json:"rules,omitempty"`
