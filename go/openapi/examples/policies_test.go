@@ -33,7 +33,7 @@ func TestPolicies(t *testing.T) {
 	policyName := "Example tco_policy from SDK" + uuid.NewString()
 	createReq := tcopolicies.CreatePolicyRequest{
 		Name:     policyName,
-		Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_HIGH,
+		Priority: tcopolicies.QUOTAV1PRIORITY_PRIORITY_TYPE_HIGH.Ptr(),
 		LogRules: &tcopolicies.LogRules{
 			Severities: []tcopolicies.QuotaV1Severity{
 				tcopolicies.QUOTAV1SEVERITY_SEVERITY_ERROR,
