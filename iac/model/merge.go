@@ -72,6 +72,11 @@ func mergeRequest(location string, get, req *Type, op verb) error {
 	if op == opCreate {
 		adoptCreateRule(get, req)
 	}
+	if raisesMinItems(get, req) {
+		// The resource that a user writes holds the items of the request.
+		get.MinItems = req.MinItems
+	}
+	get.requestMinItems = true
 	switch get.Kind {
 	case List, Set:
 		return mergeRequest(location+"[]", get.Elem, req.Elem, op)
@@ -151,10 +156,27 @@ func typeDifference(get, req *Type, op verb) string {
 		return fmt.Sprintf("enum %s, want %s", req.Schema, get.Schema)
 	case !slices.Equal(get.Values, req.Values) || get.EnumZero != req.EnumZero:
 		return "different enum values"
-	case !sameLimits(get, req):
+	case !sameLimits(get, writeLimits(get, req)):
 		return "different limits"
 	}
 	return oneOfDifference(get, req, op)
+}
+
+// writeLimits returns req with the item minimum of get where req is the first request and requires
+// more items than the response. A request can refuse fewer items than a response holds, because
+// another write, such as a call that deletes one item, can leave fewer. Every later request must
+// then require the same number of items, also when the first one required what the response does.
+func writeLimits(get, req *Type) *Type {
+	if !raisesMinItems(get, req) {
+		return req
+	}
+	out := *req
+	out.MinItems = get.MinItems
+	return &out
+}
+
+func raisesMinItems(get, req *Type) bool {
+	return !get.requestMinItems && req.MinItems != nil && (get.MinItems == nil || *req.MinItems > *get.MinItems)
 }
 
 func sameLimits(a, b *Type) bool {
