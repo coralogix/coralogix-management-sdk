@@ -173,16 +173,13 @@ func (p Policy) shapeObject(location string, get, req *Type, used map[string]boo
 		if wrapper != "" {
 			path = append([]string{wrapper}, path...)
 		}
-		index := slices.IndexFunc(fields, func(f *Field) bool {
-			return slices.Equal(requestPathOf(f), path)
-		})
+		var index int
+		fields, index = liftRequestPath(fields, path)
 		if index < 0 {
-			return nil, &contractError{
-				code:        "REQUEST_NAME_NOT_FOUND",
-				location:    location + "." + field,
-				message:     fmt.Sprintf("The request object %s has no property at %q for %s.", req.Schema, strings.Join(path, "."), key),
-				remediation: "Name the path of the property after the wrapper, or delete the line.",
-			}
+			// An immutable field is in the Create request and not in Update. unusedNestedShapes
+			// reports a line that neither request has.
+			used["missing."+key] = true
+			continue
 		}
 		if other := fieldNamed(fields, field); other != nil && other != fields[index] {
 			return nil, &contractError{
@@ -202,7 +199,10 @@ func (p Policy) shapeObject(location string, get, req *Type, used map[string]boo
 			continue
 		}
 		f := fieldNamed(fields, field)
-		if f == nil || f.Type == nil || f.Type.Kind != Bool {
+		if f == nil {
+			continue // not in this request; unusedNestedShapes reports a line that no request has
+		}
+		if f.Type == nil || f.Type.Kind != Bool {
 			return nil, &contractError{
 				code:        "REQUEST_NEGATED_UNSUPPORTED",
 				location:    location + "." + field,
@@ -237,6 +237,81 @@ func (p Policy) shapeObject(location string, get, req *Type, used map[string]boo
 	return &out, nil
 }
 
+// liftRequestPath returns fields with the field at the request path, and its index, or -1 when no
+// field is there. A path that goes into an object field of fields (details.disabled) moves the leaf
+// out of that object, beside the other fields, and records the objects on the way. The object
+// keeps its other fields, and goes when it has none left.
+func liftRequestPath(fields []*Field, path []string) ([]*Field, int) {
+	if i := slices.IndexFunc(fields, func(f *Field) bool { return slices.Equal(requestPathOf(f), path) }); i >= 0 {
+		return fields, i
+	}
+	for i, parent := range fields {
+		at := requestPathOf(parent)
+		if len(at) >= len(path) || !slices.Equal(at, path[:len(at)]) || parent.Type == nil || parent.Type.Kind != Object {
+			continue
+		}
+		objects := append(slices.Clone(parent.RequestObjects), parent.Type.Schema)
+		required := parent.Attrs.Required
+		cur := parent.Type
+		var leaf *Field
+		for depth, segment := range path[len(at):] {
+			f := fieldNamed(cur.Fields, segment)
+			if f == nil {
+				return fields, -1
+			}
+			required = required && f.Attrs.Required
+			if depth == len(path)-len(at)-1 {
+				leaf = f
+				break
+			}
+			if f.Type == nil || f.Type.Kind != Object {
+				return fields, -1
+			}
+			objects = append(objects, f.Type.Schema)
+			cur = f.Type
+		}
+		lifted := *leaf
+		lifted.RequestPath = slices.Clone(path)
+		lifted.RequestObjects = objects
+		lifted.Attrs.Required = required
+		out := slices.Clone(fields)
+		if rest := withoutPath(parent.Type, path[len(at):]); rest == nil {
+			out = slices.Delete(out, i, i+1)
+		} else {
+			kept := *parent
+			kept.Type = rest
+			out[i] = &kept
+		}
+		return append(out, &lifted), len(out)
+	}
+	return fields, -1
+}
+
+// withoutPath returns a copy of the object t without the field at path, or nil when the object has
+// no fields left.
+func withoutPath(t *Type, path []string) *Type {
+	out := *t
+	out.Fields = nil
+	for _, f := range t.Fields {
+		if f.Name != path[0] {
+			out.Fields = append(out.Fields, f)
+			continue
+		}
+		if len(path) == 1 {
+			continue
+		}
+		if rest := withoutPath(f.Type, path[1:]); rest != nil {
+			kept := *f
+			kept.Type = rest
+			out.Fields = append(out.Fields, &kept)
+		}
+	}
+	if len(out.Fields) == 0 {
+		return nil
+	}
+	return &out
+}
+
 // requestPathOf is the request path of f: RequestPath, or its name.
 func requestPathOf(f *Field) []string {
 	if f.RequestPath != nil {
@@ -248,9 +323,12 @@ func requestPathOf(f *Field) []string {
 // unusedNestedShapes reports the nested lines that shaped no request object of the resource: a
 // requestAs line on a component other than the resource, a requestWrapper line, or a negation.
 func (p Policy) unusedNestedShapes(resource string, used map[string]bool) error {
+	if err := p.missingNestedNames(resource, used); err != nil {
+		return err
+	}
 	var keys []string
 	for key := range p.nestedRequestNames(resource) {
-		if !used[key] {
+		if !used[key] && !used["missing."+key] {
 			keys = append(keys, "types."+key+".requestAs")
 		}
 	}
@@ -273,6 +351,27 @@ func (p Policy) unusedNestedShapes(resource string, used map[string]bool) error 
 		location:    "behavior-overrides.yaml:" + keys[0],
 		message:     fmt.Sprintf("These lines shape no request object of %s: %s.", resource, strings.Join(keys, ", ")),
 		remediation: "Put the line on a component that a request of the resource holds, or delete it.",
+	}
+}
+
+// missingNestedNames reports a nested requestAs line whose path neither the Create nor the Update
+// request has. A path that only one of them has is an immutable or an Update-only field.
+func (p Policy) missingNestedNames(resource string, used map[string]bool) error {
+	var missing []string
+	for key := range p.nestedRequestNames(resource) {
+		if !used[key] && used["missing."+key] {
+			missing = append(missing, key)
+		}
+	}
+	if len(missing) == 0 {
+		return nil
+	}
+	slices.Sort(missing)
+	return &contractError{
+		code:        "REQUEST_NAME_NOT_FOUND",
+		location:    "behavior-overrides.yaml:types." + missing[0] + ".requestAs",
+		message:     fmt.Sprintf("Neither the Create nor the Update request has a property at %q for %s.", p.RequestNames[missing[0]], missing[0]),
+		remediation: "Name the path of the property after the wrapper, or delete the line.",
 	}
 }
 

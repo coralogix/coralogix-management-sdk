@@ -18,6 +18,7 @@ import (
 	"errors"
 	"fmt"
 	"maps"
+	"math"
 	"regexp"
 	"slices"
 	"strconv"
@@ -96,7 +97,8 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 		return nil, nil, err
 	}
 	policy.CreateUnwrapped = policy.unwrappedCreate(ops)
-	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT", Policy: policy, shapeUsed: map[string]bool{}}
+	// The write of an overwrite resource replaces every item, also when it is a POST.
+	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Overwrite, Policy: policy, shapeUsed: map[string]bool{}}
 	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
 	if err := r.readOperations(ops); err != nil {
 		return nil, nil, err
@@ -109,6 +111,11 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	}
 	r.readBodyTitles(doc, ops)
 	if err := r.readFields(doc, ops); err != nil {
+		// A requestAs path that no request has leaves the field out of both requests; say that,
+		// not what the merge then finds.
+		if missing := r.Policy.missingNestedNames(r.Name, r.shapeUsed); missing != nil {
+			return nil, nil, missing
+		}
 		return nil, nil, err
 	}
 	if err := r.Policy.unusedNestedShapes(r.Name, r.shapeUsed); err != nil {
@@ -640,7 +647,17 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 		// The write of an overwrite resource returns what it created, in its own shape. A tool
 		// reads the resource with Get instead.
 		if proxy == nil {
-			return Response{Empty: emptyInlineObject(schema)}, nil
+			if !emptyInlineObject(schema) {
+				// The SDK names an inline response after the operation; the model has no name
+				// for it, so a tool could not check or call it.
+				return Response{}, &contractError{
+					code:        "OVERWRITE_SHAPE_UNSUPPORTED",
+					location:    "paths." + strings.ToLower(string(v)) + "." + op.OperationId + ".responses.200",
+					message:     fmt.Sprintf("The write %s of an overwrite resource returns an inline object with fields; the model reads a component or an empty object.", op.OperationId),
+					remediation: "Return a component schema, or an empty object, from the write.",
+				}
+			}
+			return Response{Empty: true}, nil
 		}
 		name, err := componentName(proxy.GetReference())
 		if err != nil {
@@ -1877,9 +1894,31 @@ func queryValueProblem(proxy *base.SchemaProxy, value string) string {
 			return "is not a boolean"
 		}
 	case slices.Contains(s.Type, "integer"):
-		if _, err := strconv.ParseInt(value, 10, 64); err != nil {
+		n, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
 			return "is not an integer"
 		}
+		if s.Format == "int32" && (n < math.MinInt32 || n > math.MaxInt32) {
+			return "is not an int32"
+		}
+		return numberRangeProblem(s, float64(n))
+	}
+	return ""
+}
+
+// numberRangeProblem says why value is outside the range of the number schema s, or "".
+func numberRangeProblem(s *base.Schema, value float64) string {
+	switch {
+	case s.Minimum != nil && value < *s.Minimum:
+		return fmt.Sprintf("is below the minimum %v", *s.Minimum)
+	case s.Maximum != nil && value > *s.Maximum:
+		return fmt.Sprintf("is above the maximum %v", *s.Maximum)
+	case s.ExclusiveMinimum != nil && s.ExclusiveMinimum.IsB() && value <= s.ExclusiveMinimum.B,
+		s.ExclusiveMinimum != nil && s.ExclusiveMinimum.IsA() && s.ExclusiveMinimum.A && s.Minimum != nil && value == *s.Minimum:
+		return "is not above the exclusive minimum"
+	case s.ExclusiveMaximum != nil && s.ExclusiveMaximum.IsB() && value >= s.ExclusiveMaximum.B,
+		s.ExclusiveMaximum != nil && s.ExclusiveMaximum.IsA() && s.ExclusiveMaximum.A && s.Maximum != nil && value == *s.Maximum:
+		return "is not below the exclusive maximum"
 	}
 	return ""
 }

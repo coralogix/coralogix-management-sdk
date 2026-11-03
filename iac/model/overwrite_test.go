@@ -15,6 +15,7 @@
 package model
 
 import (
+	"errors"
 	"os"
 	"slices"
 	"strings"
@@ -150,6 +151,27 @@ func TestOverwriteResourceIssues(t *testing.T) {
 			},
 			want: "OVERWRITE_FIELD_NOT_COLLECTION",
 		},
+		"inline write response with fields": {
+			spec: func(s string) string {
+				return strings.Replace(s, "        '200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/OverwriteResponse'}}}}",
+					"        '200': {description: ok, content: {application/json: {schema: {type: object, properties: {count: {type: integer}}}}}}", 1)
+			},
+			want: "OVERWRITE_SHAPE_UNSUPPORTED",
+		},
+		"query value above the maximum": {
+			spec: func(s string) string {
+				return strings.Replace(s, "        - {name: enabled_only,", "        - {name: limit, in: query, required: false, schema: {type: integer, format: int32, maximum: 10}}\n        - {name: enabled_only,", 1)
+			},
+			edit: func(p *Policy) { p.GetQuery = map[string]string{"kind": "THING_KIND_A", "limit": "99"} },
+			want: "GET_QUERY_VALUE_INVALID",
+		},
+		"query value outside int32": {
+			spec: func(s string) string {
+				return strings.Replace(s, "        - {name: enabled_only,", "        - {name: limit, in: query, required: false, schema: {type: integer, format: int32}}\n        - {name: enabled_only,", 1)
+			},
+			edit: func(p *Policy) { p.GetQuery = map[string]string{"kind": "THING_KIND_A", "limit": "3000000000"} },
+			want: "GET_QUERY_VALUE_INVALID",
+		},
 		"wrapper not in the request":  {edit: func(p *Policy) { p.RequestWrappers = map[string]string{"Thing": "core"} }, want: "REQUEST_WRAPPER_NOT_FOUND"},
 		"nested path not found":       {edit: func(p *Policy) { p.RequestNames = map[string]string{"Thing.enabled": "off"} }, want: "REQUEST_NAME_NOT_FOUND"},
 		"negated field is not a bool": {edit: func(p *Policy) { p.RequestNegated = []string{"Thing.enabled", "Thing.name"} }, want: "REQUEST_NEGATED_UNSUPPORTED"},
@@ -190,6 +212,43 @@ func TestOverwriteResourceIssues(t *testing.T) {
 				t.Fatalf("Build accepted the resource, want %s", test.want)
 			}
 		})
+	}
+}
+
+// A write that is a POST replaces every item as a PUT does, so the resource is a replacement and
+// needs no update mask.
+func TestOverwritePostIsAReplace(t *testing.T) {
+	raw, err := os.ReadFile("testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := Load([]byte(strings.Replace(string(raw), "  /v1/kind-a-things:\n    put:\n", "  /v1/kind-a-things:\n    post:\n", 1)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	r, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, overwritePolicy())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if r.Update.Method != "POST" || !r.Replace {
+		t.Fatalf("update method %s, replace %t; want POST and a replacement", r.Update.Method, r.Replace)
+	}
+}
+
+// A fixed query value inside the range of its parameter is accepted.
+func TestOverwriteQueryInRange(t *testing.T) {
+	raw, err := os.ReadFile("testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := Load([]byte(strings.Replace(string(raw), "        - {name: enabled_only,", "        - {name: limit, in: query, required: false, schema: {type: integer, format: int32, minimum: 1, maximum: 10}}\n        - {name: enabled_only,", 1)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	p := overwritePolicy()
+	p.GetQuery = map[string]string{"kind": "THING_KIND_A", "limit": "10"}
+	if _, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, p); err != nil {
+		t.Fatal(err)
 	}
 }
 
@@ -235,5 +294,73 @@ func TestItemShapeAppliesCollectionLines(t *testing.T) {
 	}
 	if req.Fields[0].Type.Kind != Set {
 		t.Fatal("the shape changed the request type that it was given")
+	}
+}
+
+// nestedShapes is a response component Rules and its request object, which holds enabled negated
+// as details.off, next to a note that stays in details.
+func nestedShapes() (get, req *Type, p Policy) {
+	get = &Type{Kind: Object, Schema: "Rules", Fields: []*Field{
+		{Name: "values", Type: &Type{Kind: String}},
+		{Name: "enabled", Type: &Type{Kind: Bool}},
+	}}
+	details := &Type{Kind: Object, Schema: "Details", Fields: []*Field{
+		{Name: "off", Type: &Type{Kind: Bool}, Attrs: Attrs{Required: true}},
+		{Name: "note", Type: &Type{Kind: String}},
+	}}
+	req = &Type{Kind: Object, Schema: "RulesWrite", Fields: []*Field{
+		{Name: "values", Type: &Type{Kind: String}},
+		{Name: "details", Type: details, Attrs: Attrs{Required: true}},
+	}}
+	p = Policy{RequestNames: map[string]string{"Rules.enabled": "details.off"}, RequestNegated: []string{"Rules.enabled"}}
+	return get, req, p
+}
+
+// A nested requestAs path through an object of the request moves the leaf beside the other
+// fields, and records the objects on the way.
+func TestNestedRequestPathThroughObject(t *testing.T) {
+	get, req, p := nestedShapes()
+	used := map[string]bool{}
+	shaped, err := p.shapeObject("things", get, req, used)
+	if err != nil {
+		t.Fatal(err)
+	}
+	f := fieldNamed(shaped.Fields, "enabled")
+	if f == nil || !slices.Equal(f.RequestPath, []string{"details", "off"}) || !slices.Equal(f.RequestObjects, []string{"Details"}) || !f.Negated || !f.Attrs.Required {
+		t.Fatalf("enabled = %+v, want details.off through Details, negated and required", f)
+	}
+	details := fieldNamed(shaped.Fields, "details")
+	if details == nil || len(details.Type.Fields) != 1 || details.Type.Fields[0].Name != "note" {
+		t.Fatalf("details = %+v, want only note left", details)
+	}
+	if len(req.Fields[1].Type.Fields) != 2 {
+		t.Fatal("the shape changed the request type that it was given")
+	}
+	if !used["Rules.enabled"] {
+		t.Fatal("the line is not marked used")
+	}
+}
+
+// A renamed nested field that only one request has (an immutable field) is fine; a path that no
+// request has is REQUEST_NAME_NOT_FOUND.
+func TestNestedRequestPathInOneRequest(t *testing.T) {
+	get, req, p := nestedShapes()
+	without := &Type{Kind: Object, Schema: "RulesUpdate", Fields: []*Field{{Name: "values", Type: &Type{Kind: String}}}}
+	used := map[string]bool{}
+	for _, r := range []*Type{req, without} {
+		if _, err := p.shapeObject("things", get, r, used); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := p.missingNestedNames("ThingList", used); err != nil {
+		t.Fatalf("missing = %v, want none: Create has the path", err)
+	}
+	used = map[string]bool{}
+	if _, err := p.shapeObject("things", get, without, used); err != nil {
+		t.Fatal(err)
+	}
+	var ce *contractError
+	if err := p.missingNestedNames("ThingList", used); !errors.As(err, &ce) || ce.code != "REQUEST_NAME_NOT_FOUND" {
+		t.Fatalf("missing = %v, want REQUEST_NAME_NOT_FOUND", err)
 	}
 }
