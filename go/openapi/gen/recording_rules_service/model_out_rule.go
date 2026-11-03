@@ -23,15 +23,15 @@ var _ MappedNullable = &OutRule{}
 
 // OutRule A recording rule as returned by the API.
 type OutRule struct {
-	// The evaluation delay ms.
+	// The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation. An omitted delay stays omitted, and 0 is stored as 0.
 	EvaluationDelayMs *int64 `json:"evaluationDelayMs,omitempty"`
-	// The expr.
+	// The PromQL expression to evaluate. Every evaluation cycle evaluates it at the current time and records the result as a new set of time series with the metric name of `record`.
 	Expr string `json:"expr" validate:"regexp=^[\\s\\S]*$"`
-	// List of labels.
+	// Labels to add or overwrite before storing the result. An omitted map is stored as an empty map.
 	Labels map[string]string `json:"labels"`
 	// The last eval duration ms.
 	LastEvalDurationMs *string `json:"lastEvalDurationMs,omitempty" validate:"regexp=^[0-9]+$"`
-	// Record.
+	// The name of the time series to output to. Must be a valid metric name.
 	Record string `json:"record" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

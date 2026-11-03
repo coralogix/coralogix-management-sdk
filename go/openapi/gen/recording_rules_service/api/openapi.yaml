@@ -57,7 +57,7 @@
         ]
       },
       "post": {
-        "description": "Creates a new recording rule group.",
+        "description": "Creates a set of recording rule groups and returns its id. A set name that another set has answers 400.",
         "operationId": "RuleGroupSets_Create",
         "requestBody": {
           "content": {
@@ -66,16 +66,17 @@
                 "description": "A set of rule groups to create.",
                 "properties": {
                   "groups": {
-                    "description": "List of groups.",
+                    "description": "The rule groups of the set. The service rejects an empty list. Group names are unique within the set. The server does not keep the order of the groups.",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     },
                     "maxItems": 1000,
-                    "minItems": 0,
-                    "type": "array"
+                    "minItems": 1,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
                   },
                   "name": {
-                    "description": "Display name.",
+                    "description": "The name of the set. Unique among the sets of the company. When omitted, the server uses the id of the set.",
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
@@ -83,11 +84,15 @@
                     "x-coralogix-presence": true
                   }
                 },
+                "required": [
+                  "groups"
+                ],
                 "title": "Create Rule Group Set",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -139,7 +144,7 @@
     },
     "/recording-rules/recording-rules/v1/{id}": {
       "get": {
-        "description": "Returns the details of the specified recording rule group.",
+        "description": "Returns the set with the given id. An id that does not exist answers 404.",
         "operationId": "RuleGroupSets_Fetch",
         "responses": {
           "200": {
@@ -172,6 +177,16 @@
             },
             "description": "Unauthorized request"
           },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "No rule group set with the given id"
+          },
           "500": {
             "content": {
               "application/json": {
@@ -189,7 +204,7 @@
         ]
       },
       "put": {
-        "description": "Updates the specified recording rule group.",
+        "description": "Replaces the groups of the set with the given id. An omitted name keeps the stored name. An id that does not exist answers 404.",
         "operationId": "RuleGroupSets_Update",
         "requestBody": {
           "content": {
@@ -198,16 +213,17 @@
                 "description": "A set of rule groups to update.",
                 "properties": {
                   "groups": {
-                    "description": "List of groups.",
+                    "description": "The rule groups of the set. The service rejects an empty list. Group names are unique within the set. The request replaces the stored groups: a stored group that the request omits is deleted, and a group with the name of a stored group keeps its id. The server does not keep the order of the groups.",
                     "items": {
                       "$ref": "#/components/schemas/InRuleGroup"
                     },
                     "maxItems": 1000,
-                    "minItems": 0,
-                    "type": "array"
+                    "minItems": 1,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
                   },
                   "name": {
-                    "description": "Display name.",
+                    "description": "The name of the set. Unique among the sets of the company. When omitted, the stored name stays.",
                     "maxLength": 255,
                     "minLength": 1,
                     "pattern": "^[\\s\\S]*$",
@@ -215,11 +231,15 @@
                     "x-coralogix-presence": true
                   }
                 },
+                "required": [
+                  "groups"
+                ],
                 "title": "Update Rule Group Set",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -252,6 +272,16 @@
             },
             "description": "Unauthorized request"
           },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "No rule group set with the given id"
+          },
           "500": {
             "content": {
               "application/json": {
@@ -269,7 +299,7 @@
         ]
       },
       "delete": {
-        "description": "Deletes the recording rule group with the specified ID.",
+        "description": "Deletes the set with the given id. An id that does not exist answers 404.",
         "operationId": "RuleGroupSets_Delete",
         "responses": {
           "200": {
@@ -301,6 +331,16 @@
               }
             },
             "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "No rule group set with the given id"
           },
           "500": {
             "content": {
@@ -457,7 +497,7 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
-            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation.",
+            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation. An omitted delay stays omitted, and 0 is stored as 0.",
             "examples": [
               60000
             ],
@@ -472,7 +512,7 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The expr."
+            "description": "The PromQL expression to evaluate. Every evaluation cycle evaluates it at the current time and records the result as a new set of time series with the metric name of `record`."
           },
           "labels": {
             "type": "object",
@@ -482,14 +522,14 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "List of labels."
+            "description": "Labels to add or overwrite before storing the result. An omitted map is stored as an empty map."
           },
           "record": {
             "maxLength": 4096,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Record."
+            "description": "The name of the time series to output to. Must be a valid metric name."
           }
         },
         "description": "A rule within a group that defines a recording rule expression.",
@@ -514,7 +554,8 @@
             "x-coralogix-presence": true
           },
           "interval": {
-            "description": "Interval.",
+            "default": 60,
+            "description": "How often the rules of the group are evaluated, in seconds. At least 60. An omitted interval is stored as 60, also on an update.",
             "format": "int64",
             "maximum": 4294967295,
             "minimum": 60,
@@ -522,7 +563,8 @@
             "x-coralogix-presence": true
           },
           "limit": {
-            "description": "Limit.",
+            "default": "0",
+            "description": "Limits the number of series that a rule of the group can produce. 0 means no limit. An omitted limit is stored as 0, also on an update.",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
@@ -534,7 +576,7 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "description": "The name of the group. Unique within the set."
           },
           "rules": {
             "maxItems": 1000,
@@ -586,7 +628,7 @@
         "type": "object",
         "properties": {
           "evaluationDelayMs": {
-            "description": "The evaluation delay ms.",
+            "description": "The delay in milliseconds before evaluating the recording rule expression. Allows late-arriving data to be ingested before evaluation. An omitted delay stays omitted, and 0 is stored as 0.",
             "format": "int64",
             "maximum": 1800000,
             "minimum": 0,
@@ -598,7 +640,7 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "The expr."
+            "description": "The PromQL expression to evaluate. Every evaluation cycle evaluates it at the current time and records the result as a new set of time series with the metric name of `record`."
           },
           "labels": {
             "type": "object",
@@ -608,7 +650,7 @@
               "pattern": "^[\\s\\S]*$",
               "type": "string"
             },
-            "description": "List of labels."
+            "description": "Labels to add or overwrite before storing the result. An omitted map is stored as an empty map."
           },
           "lastEvalDurationMs": {
             "description": "The last eval duration ms.",
@@ -623,7 +665,7 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Record."
+            "description": "The name of the time series to output to. Must be a valid metric name."
           }
         },
         "description": "A recording rule as returned by the API.",
@@ -636,6 +678,8 @@
         "title": "Out Rule Group",
         "required": [
           "name",
+          "interval",
+          "limit",
           "rules",
           "version",
           "id"
@@ -650,7 +694,8 @@
             "description": "Unique identifier."
           },
           "interval": {
-            "description": "Interval.",
+            "default": 60,
+            "description": "How often the rules of the group are evaluated, in seconds. At least 60. An omitted interval is stored as 60, also on an update.",
             "format": "int64",
             "maximum": 4294967295,
             "minimum": 60,
@@ -666,7 +711,8 @@
             "x-coralogix-presence": true
           },
           "limit": {
-            "description": "Limit.",
+            "default": "0",
+            "description": "Limits the number of series that a rule of the group can produce. 0 means no limit. An omitted limit is stored as 0, also on an update.",
             "maxLength": 20,
             "minLength": 1,
             "pattern": "^[0-9]+$",
@@ -678,7 +724,7 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "description": "The name of the group. Unique within the set."
           },
           "rules": {
             "maxItems": 1000,
@@ -713,13 +759,14 @@
         "type": "object",
         "properties": {
           "groups": {
-            "maxItems": 1000,
-            "minItems": 0,
-            "type": "array",
+            "description": "The rule groups of the set, in no particular order.",
             "items": {
               "$ref": "#/components/schemas/OutRuleGroup"
             },
-            "description": "List of groups."
+            "maxItems": 1000,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           },
           "id": {
             "maxLength": 128,
@@ -733,7 +780,7 @@
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
             "type": "string",
-            "description": "Display name."
+            "description": "The name of the set. Unique among the sets of the company."
           }
         },
         "description": "An output set of rule groups.",

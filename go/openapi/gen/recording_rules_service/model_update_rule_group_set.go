@@ -13,6 +13,7 @@ package recording_rules_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,9 +23,9 @@ var _ MappedNullable = &UpdateRuleGroupSet{}
 
 // UpdateRuleGroupSet A set of rule groups to update.
 type UpdateRuleGroupSet struct {
-	// List of groups.
-	Groups []InRuleGroup `json:"groups,omitempty"`
-	// Display name.
+	// The rule groups of the set. The service rejects an empty list. Group names are unique within the set. The request replaces the stored groups: a stored group that the request omits is deleted, and a group with the name of a stored group keeps its id. The server does not keep the order of the groups.
+	Groups []InRuleGroup `json:"groups"`
+	// The name of the set. Unique among the sets of the company. When omitted, the stored name stays.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -36,8 +37,9 @@ type _UpdateRuleGroupSet UpdateRuleGroupSet
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewUpdateRuleGroupSet() *UpdateRuleGroupSet {
+func NewUpdateRuleGroupSet(groups []InRuleGroup) *UpdateRuleGroupSet {
 	this := UpdateRuleGroupSet{}
+	this.Groups = groups
 	return &this
 }
 
@@ -49,34 +51,26 @@ func NewUpdateRuleGroupSetWithDefaults() *UpdateRuleGroupSet {
 	return &this
 }
 
-// GetGroups returns the Groups field value if set, zero value otherwise.
+// GetGroups returns the Groups field value
 func (o *UpdateRuleGroupSet) GetGroups() []InRuleGroup {
-	if o == nil || IsNil(o.Groups) {
+	if o == nil {
 		var ret []InRuleGroup
 		return ret
 	}
+
 	return o.Groups
 }
 
-// GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
+// GetGroupsOk returns a tuple with the Groups field value
 // and a boolean to check if the value has been set.
 func (o *UpdateRuleGroupSet) GetGroupsOk() ([]InRuleGroup, bool) {
-	if o == nil || IsNil(o.Groups) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Groups, true
 }
 
-// HasGroups returns a boolean if a field has been set.
-func (o *UpdateRuleGroupSet) HasGroups() bool {
-	if o != nil && !IsNil(o.Groups) {
-		return true
-	}
-
-	return false
-}
-
-// SetGroups gets a reference to the given []InRuleGroup and assigns it to the Groups field.
+// SetGroups sets field value
 func (o *UpdateRuleGroupSet) SetGroups(v []InRuleGroup) {
 	o.Groups = v
 }
@@ -123,9 +117,7 @@ func (o UpdateRuleGroupSet) MarshalJSON() ([]byte, error) {
 
 func (o UpdateRuleGroupSet) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Groups) {
-		toSerialize["groups"] = o.Groups
-	}
+	toSerialize["groups"] = o.Groups
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -138,6 +130,27 @@ func (o UpdateRuleGroupSet) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *UpdateRuleGroupSet) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"groups",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varUpdateRuleGroupSet := _UpdateRuleGroupSet{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
