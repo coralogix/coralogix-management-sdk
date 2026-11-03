@@ -330,6 +330,10 @@ func RequestOnlyFields(doc *v3.Document, name string, ids OperationIDs, p Policy
 	}
 	var fields []string
 	for _, field := range append(propertyNames(create), propertyNames(update)...) {
+		if p.UpdateMaskInBody && isUpdateMaskName(field) {
+			// The body mask is no field: Build reads it as the mask, so a skip line cannot apply.
+			continue
+		}
 		if propertyOf(get, field) == nil {
 			fields = append(fields, field)
 		}

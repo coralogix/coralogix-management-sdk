@@ -16,6 +16,7 @@ package model
 
 import (
 	"slices"
+	"strings"
 	"testing"
 )
 
@@ -171,5 +172,34 @@ func TestSkipLineThatMatchesNothing(t *testing.T) {
 	}
 	if _, err := RequestOnlyFields(doc, "Other", OperationIDs{}, p); err == nil {
 		t.Fatal("RequestOnlyFields of a resource without operations returned no error")
+	}
+}
+
+// With the update mask in the body, the mask property of the Update body is no request-only field:
+// Build reads it as the mask, so a skip line on it would change nothing. Without that policy the
+// property is an ordinary field that only the Update body has.
+func TestRequestOnlyFieldsLeaveOutABodyMask(t *testing.T) {
+	spec := strings.Replace(requestOnlyThing, "                access: {$ref: '#/components/schemas/Access'}\n      responses: {'200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Thing'}}}}}\n    delete:",
+		"                access: {$ref: '#/components/schemas/Access'}\n                updateMask: {type: string}\n      responses: {'200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Thing'}}}}}\n    delete:", 1)
+	if spec == requestOnlyThing {
+		t.Fatal("the fixture has no Update body to add the mask to")
+	}
+	doc, err := Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	fields, err := RequestOnlyFields(doc, "Thing", OperationIDs{}, Policy{Existing: true, UpdateMaskInBody: true})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if slices.Contains(fields, "updateMask") {
+		t.Fatalf("RequestOnlyFields = %v, want no updateMask with the mask in the body", fields)
+	}
+	fields, err = RequestOnlyFields(doc, "Thing", OperationIDs{}, Policy{Existing: true})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !slices.Contains(fields, "updateMask") {
+		t.Fatalf("RequestOnlyFields = %v, want updateMask without the body-mask policy", fields)
 	}
 }
