@@ -25,15 +25,16 @@ var _ MappedNullable = &CreatePolicyRequest{}
 type CreatePolicyRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
-	// Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.
+	// Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted. An omitted description is stored as an empty string.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
-	// When true, the policy is disabled and will not be evaluated.
+	// Whether the policy is created disabled. Defaults to `false`. A policy returns the opposite value as `enabled`.
 	Disabled *bool `json:"disabled,omitempty"`
 	LogRules *LogRules `json:"logRules,omitempty"`
 	// Human-readable name for the policy. Only Latin-1 characters are accepted.
 	Name string `json:"name" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
 	Placement *Placement `json:"placement,omitempty"`
-	Priority QuotaV1Priority `json:"priority"`
+	// The priority of the policy. Set it here, or on every target, not both. With `priorityOverride` and no priority, the policy gets `PRIORITY_TYPE_BLOCK`. The service rejects a policy without a priority, an override, or targets that each have a priority.
+	Priority *QuotaV1Priority `json:"priority,omitempty"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	RumRules *LogRules `json:"rumRules,omitempty"`
 	SpanRules *SpanRules `json:"spanRules,omitempty"`
@@ -50,10 +51,9 @@ type _CreatePolicyRequest CreatePolicyRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCreatePolicyRequest(name string, priority QuotaV1Priority) *CreatePolicyRequest {
+func NewCreatePolicyRequest(name string) *CreatePolicyRequest {
 	this := CreatePolicyRequest{}
 	this.Name = name
-	this.Priority = priority
 	return &this
 }
 
@@ -281,28 +281,36 @@ func (o *CreatePolicyRequest) SetPlacement(v Placement) {
 	o.Placement = &v
 }
 
-// GetPriority returns the Priority field value
+// GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *CreatePolicyRequest) GetPriority() QuotaV1Priority {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret QuotaV1Priority
 		return ret
 	}
-
-	return o.Priority
+	return *o.Priority
 }
 
-// GetPriorityOk returns a tuple with the Priority field value
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreatePolicyRequest) GetPriorityOk() (*QuotaV1Priority, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
-	return &o.Priority, true
+	return o.Priority, true
 }
 
-// SetPriority sets field value
+// HasPriority returns a boolean if a field has been set.
+func (o *CreatePolicyRequest) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given QuotaV1Priority and assigns it to the Priority field.
 func (o *CreatePolicyRequest) SetPriority(v QuotaV1Priority) {
-	o.Priority = v
+	o.Priority = &v
 }
 
 // GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
@@ -494,7 +502,9 @@ func (o CreatePolicyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Placement) {
 		toSerialize["placement"] = o.Placement
 	}
-	toSerialize["priority"] = o.Priority
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
 	if !IsNil(o.PriorityOverride) {
 		toSerialize["priorityOverride"] = o.PriorityOverride
 	}
@@ -547,7 +557,6 @@ func (o *CreatePolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"name",
-		"priority",
 	}
 
 	allProperties := make(map[string]interface{})

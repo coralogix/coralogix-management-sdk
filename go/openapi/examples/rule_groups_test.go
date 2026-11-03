@@ -32,7 +32,7 @@ func TestRuleGroups(t *testing.T) {
 
 	groupName := "block-rule"
 	createReq := rulegroups.RuleGroupsServiceCreateRuleGroupRequest{
-		Name:          &groupName,
+		Name:          groupName,
 		Description:   rulegroups.PtrString("rule-group from sdk"),
 		RuleSubgroups: getSubgroups(),
 	}
@@ -54,7 +54,7 @@ func TestRuleGroups(t *testing.T) {
 	require.NotNil(t, listResp)
 	found := false
 	for _, g := range listResp.RuleGroups {
-		if g.Id != nil && *g.Id == *groupID {
+		if g.Id == groupID {
 			found = true
 			break
 		}
@@ -62,35 +62,35 @@ func TestRuleGroups(t *testing.T) {
 	require.True(t, found, "created group not found in list")
 
 	getResp, httpResp, err := client.
-		RuleGroupsServiceGetRuleGroup(ctx, *groupID).
+		RuleGroupsServiceGetRuleGroup(ctx, groupID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, getResp)
-	require.Equal(t, groupName, *getResp.RuleGroup.Name)
+	require.Equal(t, groupName, getResp.RuleGroup.Name)
 
 	updatedDesc := "rule-group updated via OpenAPI test"
 	updateReq := rulegroups.RuleGroupsServiceCreateRuleGroupRequest{
-		Name:          &groupName,
+		Name:          groupName,
 		Description:   &updatedDesc,
 		RuleSubgroups: getSubgroups(),
 	}
 
 	updateResp, httpResp, err := client.
-		RuleGroupsServiceUpdateRuleGroup(ctx, *groupID).
+		RuleGroupsServiceUpdateRuleGroup(ctx, groupID).
 		RuleGroupsServiceCreateRuleGroupRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.NotNil(t, updateResp)
 	require.Equal(t, groupID, updateResp.RuleGroup.Id)
-	require.Equal(t, updatedDesc, *updateResp.RuleGroup.Description)
+	require.Equal(t, updatedDesc, updateResp.RuleGroup.Description)
 
 	_, httpResp, err = client.
-		RuleGroupsServiceDeleteRuleGroup(ctx, *groupID).
+		RuleGroupsServiceDeleteRuleGroup(ctx, groupID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	_, _, err = client.
-		RuleGroupsServiceGetRuleGroup(ctx, *groupID).
+		RuleGroupsServiceGetRuleGroup(ctx, groupID).
 		Execute()
 	require.Error(t, err, "expected error after deleting rule group")
 }
@@ -100,19 +100,19 @@ func getSubgroups() []rulegroups.CreateRuleGroupRequestCreateRuleSubgroup {
 		{
 			Rules: []rulegroups.CreateRuleGroupRequestCreateRuleSubgroupCreateRule{
 				{
-					Name:        rulegroups.PtrString("Block 28000"),
+					Name:        "Block 28000",
 					Description: rulegroups.PtrString("Block 2800 pg error"),
-					SourceField: rulegroups.PtrString("text"),
-					Order:       rulegroups.PtrInt64(int64(1)),
-					Parameters: &rulegroups.RuleParameters{
+					SourceField: "text",
+					Order:       1,
+					Parameters: rulegroups.RuleParameters{
 						BlockParameters: &rulegroups.BlockParameters{
-							KeepBlockedLogs: rulegroups.PtrBool(false),
-							Rule:            rulegroups.PtrString(`sql_error_code\s*=\s*28000`),
+							KeepBlockedLogs: false,
+							Rule:            `sql_error_code\s*=\s*28000`,
 						},
 					},
 				},
 			},
-			Order: rulegroups.PtrInt64(int64(1)),
+			Order: 1,
 		},
 	}
 }

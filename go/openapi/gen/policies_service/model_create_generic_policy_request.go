@@ -25,16 +25,17 @@ var _ MappedNullable = &CreateGenericPolicyRequest{}
 type CreateGenericPolicyRequest struct {
 	ApplicationRule *QuotaV1Rule `json:"applicationRule,omitempty"`
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
-	// Human-readable description. Only Latin-1 characters are accepted.
-	Description string `json:"description" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
-	// The disabled.
+	// Human-readable description. Only Latin-1 characters are accepted. The atomic overwrite does not default an omitted description, so the policy can read back without one; send an empty string for an empty description.
+	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
+	// Whether the policy is created disabled. Defaults to `false`. A policy returns the opposite value as `enabled`.
 	Disabled *bool `json:"disabled,omitempty"`
-	// Display name. Only Latin-1 characters are accepted.
+	// Display name. Only Latin-1 characters are accepted. The names of the policies of one request must be unique: the service rejects a repeated name with `409`.
 	Name string `json:"name" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
-	Priority QuotaV1Priority `json:"priority"`
+	// The priority of the policy. Set it here, or on every target, not both. With `priorityOverride` and no priority, the policy gets `PRIORITY_TYPE_BLOCK`. The service rejects a policy without a priority, an override, or targets that each have a priority.
+	Priority *QuotaV1Priority `json:"priority,omitempty"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
-	// List of targets.
+	// List of targets. A log policy without targets is routed to the `logs` dataset of the `default` dataspace, and reads back with that target. Span policies always read back with one `spans` target, and RUM policies reject targets.
 	Targets []V1Target `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -46,11 +47,9 @@ type _CreateGenericPolicyRequest CreateGenericPolicyRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCreateGenericPolicyRequest(description string, name string, priority QuotaV1Priority) *CreateGenericPolicyRequest {
+func NewCreateGenericPolicyRequest(name string) *CreateGenericPolicyRequest {
 	this := CreateGenericPolicyRequest{}
-	this.Description = description
 	this.Name = name
-	this.Priority = priority
 	return &this
 }
 
@@ -126,28 +125,36 @@ func (o *CreateGenericPolicyRequest) SetArchiveRetention(v ArchiveRetention) {
 	o.ArchiveRetention = &v
 }
 
-// GetDescription returns the Description field value
+// GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CreateGenericPolicyRequest) GetDescription() string {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
-
-	return o.Description
+	return *o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateGenericPolicyRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return &o.Description, true
+	return o.Description, true
 }
 
-// SetDescription sets field value
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateGenericPolicyRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *CreateGenericPolicyRequest) SetDescription(v string) {
-	o.Description = v
+	o.Description = &v
 }
 
 // GetDisabled returns the Disabled field value if set, zero value otherwise.
@@ -206,28 +213,36 @@ func (o *CreateGenericPolicyRequest) SetName(v string) {
 	o.Name = v
 }
 
-// GetPriority returns the Priority field value
+// GetPriority returns the Priority field value if set, zero value otherwise.
 func (o *CreateGenericPolicyRequest) GetPriority() QuotaV1Priority {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		var ret QuotaV1Priority
 		return ret
 	}
-
-	return o.Priority
+	return *o.Priority
 }
 
-// GetPriorityOk returns a tuple with the Priority field value
+// GetPriorityOk returns a tuple with the Priority field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateGenericPolicyRequest) GetPriorityOk() (*QuotaV1Priority, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Priority) {
 		return nil, false
 	}
-	return &o.Priority, true
+	return o.Priority, true
 }
 
-// SetPriority sets field value
+// HasPriority returns a boolean if a field has been set.
+func (o *CreateGenericPolicyRequest) HasPriority() bool {
+	if o != nil && !IsNil(o.Priority) {
+		return true
+	}
+
+	return false
+}
+
+// SetPriority gets a reference to the given QuotaV1Priority and assigns it to the Priority field.
 func (o *CreateGenericPolicyRequest) SetPriority(v QuotaV1Priority) {
-	o.Priority = v
+	o.Priority = &v
 }
 
 // GetPriorityOverride returns the PriorityOverride field value if set, zero value otherwise.
@@ -342,12 +357,16 @@ func (o CreateGenericPolicyRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ArchiveRetention) {
 		toSerialize["archiveRetention"] = o.ArchiveRetention
 	}
-	toSerialize["description"] = o.Description
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	if !IsNil(o.Disabled) {
 		toSerialize["disabled"] = o.Disabled
 	}
 	toSerialize["name"] = o.Name
-	toSerialize["priority"] = o.Priority
+	if !IsNil(o.Priority) {
+		toSerialize["priority"] = o.Priority
+	}
 	if !IsNil(o.PriorityOverride) {
 		toSerialize["priorityOverride"] = o.PriorityOverride
 	}
@@ -370,9 +389,7 @@ func (o *CreateGenericPolicyRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"description",
 		"name",
-		"priority",
 	}
 
 	allProperties := make(map[string]interface{})

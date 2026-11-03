@@ -22,7 +22,7 @@ var _ MappedNullable = &QuotaV1Rule{}
 
 // QuotaV1Rule Rule.
 type QuotaV1Rule struct {
-	// The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.
+	// The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values. The service stores the values in lower case.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	RuleTypeId *RuleTypeId `json:"ruleTypeId,omitempty"`
 	AdditionalProperties map[string]interface{}

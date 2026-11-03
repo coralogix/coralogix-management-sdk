@@ -16,7 +16,7 @@
                 "description": "In an atomic operation delete all existing log policies and create the provided list by order.",
                 "properties": {
                   "policies": {
-                    "description": "Policies.",
+                    "description": "Replaces every log policy of the team with this list, in this order: the first policy gets order 1. An overwrite that changes the policies gives each a new id; one that sends the stored policies again keeps their ids. An empty list deletes every log policy.",
                     "items": {
                       "$ref": "#/components/schemas/CreateLogPolicyRequest"
                     },
@@ -65,6 +65,16 @@
               }
             },
             "description": "Unauthorized request"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Two policies of the request have the same name"
           },
           "429": {
             "content": {
@@ -422,7 +432,7 @@
                     "$ref": "#/components/schemas/ArchiveRetention"
                   },
                   "description": {
-                    "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
+                    "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted. An omitted description is stored as an empty string.",
                     "examples": [
                       "My Policy Description"
                     ],
@@ -433,7 +443,7 @@
                     "x-coralogix-presence": true
                   },
                   "disabled": {
-                    "description": "When true, the policy is disabled and will not be evaluated.",
+                    "description": "Whether the policy is created disabled. Defaults to `false`. A policy returns the opposite value as `enabled`.",
                     "type": "boolean"
                   },
                   "logRules": {
@@ -454,7 +464,12 @@
                     "$ref": "#/components/schemas/Placement"
                   },
                   "priority": {
-                    "$ref": "#/components/schemas/quota.v1.Priority"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/quota.v1.Priority"
+                      }
+                    ],
+                    "description": "The priority of the policy. Set it here, or on every target, not both. With `priorityOverride` and no priority, the policy gets `PRIORITY_TYPE_BLOCK`. The service rejects a policy without a priority, an override, or targets that each have a priority."
                   },
                   "priorityOverride": {
                     "$ref": "#/components/schemas/PriorityOverride"
@@ -491,8 +506,7 @@
                   }
                 },
                 "required": [
-                  "name",
-                  "priority"
+                  "name"
                 ],
                 "title": "Create Policy Request",
                 "type": "object"
@@ -1178,7 +1192,7 @@
                 "description": "In an atomic operation delete all existing RUM policies and create the provided list by order.",
                 "properties": {
                   "policies": {
-                    "description": "List of RUM policies to create as part of the atomic overwrite.",
+                    "description": "Replaces every RUM policy of the team with this list, in this order: the first policy gets order 1. An overwrite that changes the policies gives each a new id; one that sends the stored policies again keeps their ids. An empty list deletes every RUM policy. RUM policies do not accept the `PRIORITY_TYPE_HIGH` priority and have no targets.",
                     "items": {
                       "$ref": "#/components/schemas/CreateRumPolicyRequest"
                     },
@@ -1250,6 +1264,16 @@
             },
             "description": "Unauthorized request"
           },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Two policies of the request have the same name"
+          },
           "429": {
             "content": {
               "application/json": {
@@ -1288,7 +1312,7 @@
                 "description": "In an atomic operation delete all existing span policies and create the provided list by order.",
                 "properties": {
                   "policies": {
-                    "description": "List of span policies to create as part of the atomic overwrite.",
+                    "description": "Replaces every span policy of the team with this list, in this order: the first policy gets order 1. An overwrite that changes the policies gives each a new id; one that sends the stored policies again keeps their ids. An empty list deletes every span policy.",
                     "items": {
                       "$ref": "#/components/schemas/CreateSpanPolicyRequest"
                     },
@@ -1337,6 +1361,16 @@
               }
             },
             "description": "Unauthorized request"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Two policies of the request have the same name"
           },
           "429": {
             "content": {
@@ -1468,9 +1502,7 @@
       "CreateGenericPolicyRequest": {
         "title": "Create Generic Policy Request",
         "required": [
-          "name",
-          "description",
-          "priority"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -1481,7 +1513,7 @@
             "$ref": "#/components/schemas/ArchiveRetention"
           },
           "description": {
-            "description": "Human-readable description. Only Latin-1 characters are accepted.",
+            "description": "Human-readable description. Only Latin-1 characters are accepted. The atomic overwrite does not default an omitted description, so the policy can read back without one; send an empty string for an empty description.",
             "examples": [
               "My Policy Description"
             ],
@@ -1493,10 +1525,10 @@
           },
           "disabled": {
             "type": "boolean",
-            "description": "The disabled."
+            "description": "Whether the policy is created disabled. Defaults to `false`. A policy returns the opposite value as `enabled`."
           },
           "name": {
-            "description": "Display name. Only Latin-1 characters are accepted.",
+            "description": "Display name. Only Latin-1 characters are accepted. The names of the policies of one request must be unique: the service rejects a repeated name with `409`.",
             "examples": [
               "My Policy"
             ],
@@ -1507,7 +1539,12 @@
             "x-coralogix-presence": true
           },
           "priority": {
-            "$ref": "#/components/schemas/quota.v1.Priority"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/quota.v1.Priority"
+              }
+            ],
+            "description": "The priority of the policy. Set it here, or on every target, not both. With `priorityOverride` and no priority, the policy gets `PRIORITY_TYPE_BLOCK`. The service rejects a policy without a priority, an override, or targets that each have a priority."
           },
           "priorityOverride": {
             "$ref": "#/components/schemas/PriorityOverride"
@@ -1522,7 +1559,7 @@
             "items": {
               "$ref": "#/components/schemas/v1.Target"
             },
-            "description": "List of targets."
+            "description": "List of targets. A log policy without targets is routed to the `logs` dataset of the `default` dataspace, and reads back with that target. Span policies always read back with one `spans` target, and RUM policies reject targets."
           }
         },
         "description": "This data structue is used to create a new policy.",
@@ -1876,13 +1913,10 @@
       },
       "LogRules": {
         "title": "Log Rules",
-        "required": [
-          "severities"
-        ],
         "type": "object",
         "properties": {
           "dpxlExpression": {
-            "description": "The dpxl expression.",
+            "description": "The DataPrime expression that selects the data. It starts with a version tag, for example `<v1> $d.severity == 'INFO'`; the service rejects an expression without one.",
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
@@ -1890,16 +1924,17 @@
             "x-coralogix-presence": true
           },
           "severities": {
-            "maxItems": 6,
-            "minItems": 0,
-            "type": "array",
+            "description": "The severities. A request without `dpxlExpression` needs at least one, and a request with it must have none. A response with `dpxlExpression` has an empty list.",
             "items": {
               "$ref": "#/components/schemas/quota.v1.Severity"
             },
-            "description": "The severities."
+            "maxItems": 6,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
-        "description": "Log rules for a policy.",
+        "description": "Log rules for a policy. Set `severities` or `dpxlExpression`, not both.",
         "externalDocs": {
           "description": "Find out more about quota management.",
           "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
@@ -2048,6 +2083,7 @@
             "format": "int32",
             "maximum": 2147483647,
             "minimum": 0,
+            "readOnly": true,
             "type": "integer",
             "x-coralogix-presence": true
           },
@@ -2059,6 +2095,7 @@
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -2067,11 +2104,12 @@
             "examples": [
               false
             ],
+            "readOnly": true,
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "description": {
-            "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.",
+            "description": "Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted. A policy that `POST /dataplans/policies/v1` created without a description returns an empty string. A policy that an atomic overwrite created without a description can return none.",
             "examples": [
               "My Policy Description"
             ],
@@ -2082,7 +2120,7 @@
             "x-coralogix-presence": true
           },
           "enabled": {
-            "description": "Indicates whether the policy is actively evaluated and applied.",
+            "description": "Indicates whether the policy is actively evaluated and applied. A create or atomic-overwrite request sets it as the opposite of its `disabled` value; `PUT /dataplans/policies/v1` sets `enabled` directly.",
             "examples": [
               true
             ],
@@ -2090,13 +2128,14 @@
             "x-coralogix-presence": true
           },
           "id": {
-            "description": "Unique identifier for the policy.",
+            "description": "Unique identifier for the policy. The service sets it, and an overwrite that changes the policies gives every policy a new id.",
             "examples": [
               "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
             ],
             "maxLength": 36,
             "minLength": 36,
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           },
@@ -2115,13 +2154,14 @@
             "x-coralogix-presence": true
           },
           "order": {
-            "description": "Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.",
+            "description": "Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first. An overwrite sets it to the position of the policy in the request, starting at 1.",
             "examples": [
               1
             ],
             "format": "int32",
             "maximum": 2147483647,
             "minimum": -2147483648,
+            "readOnly": true,
             "type": "integer",
             "x-coralogix-presence": true
           },
@@ -2132,7 +2172,13 @@
             "$ref": "#/components/schemas/PriorityOverride"
           },
           "priorityOverrideStatus": {
-            "$ref": "#/components/schemas/PriorityOverrideStatus"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PriorityOverrideStatus"
+              }
+            ],
+            "description": "The priority currently in effect, from the quota usage of the team against the usage tiers. Get Company Policies returns it for an enabled policy with a quota-based override.",
+            "readOnly": true
           },
           "rumRules": {
             "$ref": "#/components/schemas/LogRules"
@@ -2150,7 +2196,7 @@
             "items": {
               "$ref": "#/components/schemas/v1.Target"
             },
-            "description": "List of data targets/destinations to which this policy routes data.",
+            "description": "List of data targets/destinations to which this policy routes data. A log policy created without targets has one target: the `logs` dataset of the `default` dataspace, with the priority and the override of the policy. A span policy has one `spans` target. A RUM policy has none.",
             "examples": [
               [
                 {
@@ -2172,6 +2218,7 @@
             "maxLength": 64,
             "minLength": 0,
             "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
             "type": "string",
             "x-coralogix-presence": true
           }
@@ -2335,7 +2382,7 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "dpxlExpression": {
-            "description": "The dpxl expression.",
+            "description": "The DataPrime expression that selects the spans. It starts with a version tag, for example `<v1> $l.serviceName == 'checkout'`. The service rejects it next to an application, subsystem, service, action, or tag rule.",
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
@@ -2346,13 +2393,14 @@
             "$ref": "#/components/schemas/quota.v1.Rule"
           },
           "tagRules": {
-            "maxItems": 100,
-            "minItems": 0,
-            "type": "array",
+            "description": "The tag rules. The service does not keep their order.",
             "items": {
               "$ref": "#/components/schemas/TagRule"
             },
-            "description": "The tag rules."
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
           }
         },
         "description": "Span rules."
@@ -2546,7 +2594,7 @@
         "type": "object",
         "properties": {
           "name": {
-            "description": "The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.",
+            "description": "The value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values. The service stores the values in lower case.",
             "maxLength": 65535,
             "minLength": 1,
             "pattern": "^[\\s\\S]*$",
@@ -2591,7 +2639,7 @@
                 "$ref": "#/components/schemas/ArchiveRetention"
               }
             ],
-            "description": "Optional archive retention configuration for the target."
+            "description": "Optional archive retention configuration for the target. The service accepts it and does not store it: a target never returns it."
           },
           "dataset": {
             "maxLength": 512,
@@ -2608,9 +2656,9 @@
             "minLength": 1,
             "pattern": "^[A-Za-z](?:[A-Za-z0-9_]|\\.[A-Za-z0-9_])*$",
             "type": "string",
-            "description": "The dataspace.",
+            "description": "The dataspace. Only `default` is supported. An omitted dataspace is `default`, and the service returns it in lower case.",
             "examples": [
-              "dataspace1"
+              "default"
             ]
           },
           "priority": {

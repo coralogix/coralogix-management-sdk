@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,10 @@ var _ = bytes.MinRead
 // checks if the ExtractTimestampParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ExtractTimestampParameters{}
 
-// ExtractTimestampParameters Extract timestamp parameters.
+// ExtractTimestampParameters Extract timestamp parameters. Sets the log timestamp from the source field.
 type ExtractTimestampParameters struct {
-	// The format.
-	Format *string `json:"format,omitempty"`
+	// The time format, in the syntax that `standard` names. The service accepts an empty string, for example with a standard that has no format.
+	Format string `json:"format"`
 	Standard *FormatStandard `json:"standard,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -35,8 +36,9 @@ type _ExtractTimestampParameters ExtractTimestampParameters
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewExtractTimestampParameters() *ExtractTimestampParameters {
+func NewExtractTimestampParameters(format string) *ExtractTimestampParameters {
 	this := ExtractTimestampParameters{}
+	this.Format = format
 	return &this
 }
 
@@ -48,36 +50,28 @@ func NewExtractTimestampParametersWithDefaults() *ExtractTimestampParameters {
 	return &this
 }
 
-// GetFormat returns the Format field value if set, zero value otherwise.
+// GetFormat returns the Format field value
 func (o *ExtractTimestampParameters) GetFormat() string {
-	if o == nil || IsNil(o.Format) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Format
+
+	return o.Format
 }
 
-// GetFormatOk returns a tuple with the Format field value if set, nil otherwise
+// GetFormatOk returns a tuple with the Format field value
 // and a boolean to check if the value has been set.
 func (o *ExtractTimestampParameters) GetFormatOk() (*string, bool) {
-	if o == nil || IsNil(o.Format) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Format, true
+	return &o.Format, true
 }
 
-// HasFormat returns a boolean if a field has been set.
-func (o *ExtractTimestampParameters) HasFormat() bool {
-	if o != nil && !IsNil(o.Format) {
-		return true
-	}
-
-	return false
-}
-
-// SetFormat gets a reference to the given string and assigns it to the Format field.
+// SetFormat sets field value
 func (o *ExtractTimestampParameters) SetFormat(v string) {
-	o.Format = &v
+	o.Format = v
 }
 
 // GetStandard returns the Standard field value if set, zero value otherwise.
@@ -122,9 +116,7 @@ func (o ExtractTimestampParameters) MarshalJSON() ([]byte, error) {
 
 func (o ExtractTimestampParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Format) {
-		toSerialize["format"] = o.Format
-	}
+	toSerialize["format"] = o.Format
 	if !IsNil(o.Standard) {
 		toSerialize["standard"] = o.Standard
 	}
@@ -137,6 +129,27 @@ func (o ExtractTimestampParameters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ExtractTimestampParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"format",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varExtractTimestampParameters := _ExtractTimestampParameters{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

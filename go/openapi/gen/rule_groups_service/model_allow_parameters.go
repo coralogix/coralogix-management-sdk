@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,12 +21,12 @@ var _ = bytes.MinRead
 // checks if the AllowParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AllowParameters{}
 
-// AllowParameters Allow parameters.
+// AllowParameters Allow parameters. Blocks every log that does not match the regular expression.
 type AllowParameters struct {
-	// The keep blocked logs.
-	KeepBlockedLogs *bool `json:"keepBlockedLogs,omitempty"`
-	// Rule.
-	Rule *string `json:"rule,omitempty"`
+	// Whether the logs that the rule blocks are kept as low-priority logs instead of being dropped.
+	KeepBlockedLogs bool `json:"keepBlockedLogs"`
+	// The regular expression. Logs that do not match it are blocked. Must not be empty.
+	Rule string `json:"rule"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -36,8 +37,10 @@ type _AllowParameters AllowParameters
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewAllowParameters() *AllowParameters {
+func NewAllowParameters(keepBlockedLogs bool, rule string) *AllowParameters {
 	this := AllowParameters{}
+	this.KeepBlockedLogs = keepBlockedLogs
+	this.Rule = rule
 	return &this
 }
 
@@ -49,68 +52,52 @@ func NewAllowParametersWithDefaults() *AllowParameters {
 	return &this
 }
 
-// GetKeepBlockedLogs returns the KeepBlockedLogs field value if set, zero value otherwise.
+// GetKeepBlockedLogs returns the KeepBlockedLogs field value
 func (o *AllowParameters) GetKeepBlockedLogs() bool {
-	if o == nil || IsNil(o.KeepBlockedLogs) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.KeepBlockedLogs
+
+	return o.KeepBlockedLogs
 }
 
-// GetKeepBlockedLogsOk returns a tuple with the KeepBlockedLogs field value if set, nil otherwise
+// GetKeepBlockedLogsOk returns a tuple with the KeepBlockedLogs field value
 // and a boolean to check if the value has been set.
 func (o *AllowParameters) GetKeepBlockedLogsOk() (*bool, bool) {
-	if o == nil || IsNil(o.KeepBlockedLogs) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KeepBlockedLogs, true
+	return &o.KeepBlockedLogs, true
 }
 
-// HasKeepBlockedLogs returns a boolean if a field has been set.
-func (o *AllowParameters) HasKeepBlockedLogs() bool {
-	if o != nil && !IsNil(o.KeepBlockedLogs) {
-		return true
-	}
-
-	return false
-}
-
-// SetKeepBlockedLogs gets a reference to the given bool and assigns it to the KeepBlockedLogs field.
+// SetKeepBlockedLogs sets field value
 func (o *AllowParameters) SetKeepBlockedLogs(v bool) {
-	o.KeepBlockedLogs = &v
+	o.KeepBlockedLogs = v
 }
 
-// GetRule returns the Rule field value if set, zero value otherwise.
+// GetRule returns the Rule field value
 func (o *AllowParameters) GetRule() string {
-	if o == nil || IsNil(o.Rule) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Rule
+
+	return o.Rule
 }
 
-// GetRuleOk returns a tuple with the Rule field value if set, nil otherwise
+// GetRuleOk returns a tuple with the Rule field value
 // and a boolean to check if the value has been set.
 func (o *AllowParameters) GetRuleOk() (*string, bool) {
-	if o == nil || IsNil(o.Rule) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Rule, true
+	return &o.Rule, true
 }
 
-// HasRule returns a boolean if a field has been set.
-func (o *AllowParameters) HasRule() bool {
-	if o != nil && !IsNil(o.Rule) {
-		return true
-	}
-
-	return false
-}
-
-// SetRule gets a reference to the given string and assigns it to the Rule field.
+// SetRule sets field value
 func (o *AllowParameters) SetRule(v string) {
-	o.Rule = &v
+	o.Rule = v
 }
 
 func (o AllowParameters) MarshalJSON() ([]byte, error) {
@@ -123,12 +110,8 @@ func (o AllowParameters) MarshalJSON() ([]byte, error) {
 
 func (o AllowParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.KeepBlockedLogs) {
-		toSerialize["keepBlockedLogs"] = o.KeepBlockedLogs
-	}
-	if !IsNil(o.Rule) {
-		toSerialize["rule"] = o.Rule
-	}
+	toSerialize["keepBlockedLogs"] = o.KeepBlockedLogs
+	toSerialize["rule"] = o.Rule
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -138,6 +121,28 @@ func (o AllowParameters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *AllowParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"keepBlockedLogs",
+		"rule",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varAllowParameters := _AllowParameters{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

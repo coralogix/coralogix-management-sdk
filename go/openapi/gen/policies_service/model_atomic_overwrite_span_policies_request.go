@@ -23,7 +23,7 @@ var _ MappedNullable = &AtomicOverwriteSpanPoliciesRequest{}
 
 // AtomicOverwriteSpanPoliciesRequest In an atomic operation delete all existing span policies and create the provided list by order.
 type AtomicOverwriteSpanPoliciesRequest struct {
-	// List of span policies to create as part of the atomic overwrite.
+	// Replaces every span policy of the team with this list, in this order: the first policy gets order 1. An overwrite that changes the policies gives each a new id; one that sends the stored policies again keeps their ids. An empty list deletes every span policy.
 	Policies []CreateSpanPolicyRequest `json:"policies"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

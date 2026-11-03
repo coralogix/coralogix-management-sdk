@@ -18,7 +18,7 @@ import (
 
 var _ = bytes.MinRead
 
-// Value Value.
+// Value Log severity. The zero value `VALUE_DEBUG_OR_UNSPECIFIED` means debug.
 type Value string
 
 // List of Value

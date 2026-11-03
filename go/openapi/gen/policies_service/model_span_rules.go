@@ -23,10 +23,10 @@ var _ MappedNullable = &SpanRules{}
 // SpanRules Span rules.
 type SpanRules struct {
 	ActionRule *QuotaV1Rule `json:"actionRule,omitempty"`
-	// The dpxl expression.
+	// The DataPrime expression that selects the spans. It starts with a version tag, for example `<v1> $l.serviceName == 'checkout'`. The service rejects it next to an application, subsystem, service, action, or tag rule.
 	DpxlExpression *string `json:"dpxlExpression,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	ServiceRule *QuotaV1Rule `json:"serviceRule,omitempty"`
-	// The tag rules.
+	// The tag rules. The service does not keep their order.
 	TagRules []TagRule `json:"tagRules,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

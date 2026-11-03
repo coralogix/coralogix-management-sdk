@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,8 +23,8 @@ var _ MappedNullable = &RemoveFieldsParameters{}
 
 // RemoveFieldsParameters Remove fields parameters.
 type RemoveFieldsParameters struct {
-	// List of fields.
-	Fields []string `json:"fields,omitempty"`
+	// The fields to remove from the log. At least one.
+	Fields []string `json:"fields"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _RemoveFieldsParameters RemoveFieldsParameters
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRemoveFieldsParameters() *RemoveFieldsParameters {
+func NewRemoveFieldsParameters(fields []string) *RemoveFieldsParameters {
 	this := RemoveFieldsParameters{}
+	this.Fields = fields
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewRemoveFieldsParametersWithDefaults() *RemoveFieldsParameters {
 	return &this
 }
 
-// GetFields returns the Fields field value if set, zero value otherwise.
+// GetFields returns the Fields field value
 func (o *RemoveFieldsParameters) GetFields() []string {
-	if o == nil || IsNil(o.Fields) {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Fields
 }
 
-// GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
+// GetFieldsOk returns a tuple with the Fields field value
 // and a boolean to check if the value has been set.
 func (o *RemoveFieldsParameters) GetFieldsOk() ([]string, bool) {
-	if o == nil || IsNil(o.Fields) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Fields, true
 }
 
-// HasFields returns a boolean if a field has been set.
-func (o *RemoveFieldsParameters) HasFields() bool {
-	if o != nil && !IsNil(o.Fields) {
-		return true
-	}
-
-	return false
-}
-
-// SetFields gets a reference to the given []string and assigns it to the Fields field.
+// SetFields sets field value
 func (o *RemoveFieldsParameters) SetFields(v []string) {
 	o.Fields = v
 }
@@ -89,9 +83,7 @@ func (o RemoveFieldsParameters) MarshalJSON() ([]byte, error) {
 
 func (o RemoveFieldsParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Fields) {
-		toSerialize["fields"] = o.Fields
-	}
+	toSerialize["fields"] = o.Fields
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o RemoveFieldsParameters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RemoveFieldsParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"fields",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRemoveFieldsParameters := _RemoveFieldsParameters{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

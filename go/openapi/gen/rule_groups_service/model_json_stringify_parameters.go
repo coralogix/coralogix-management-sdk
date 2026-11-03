@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,12 +21,12 @@ var _ = bytes.MinRead
 // checks if the JsonStringifyParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JsonStringifyParameters{}
 
-// JsonStringifyParameters Json stringify parameters.
+// JsonStringifyParameters Json stringify parameters. Writes the source field as a JSON string to the destination field.
 type JsonStringifyParameters struct {
-	// The delete source.
-	DeleteSource *bool `json:"deleteSource,omitempty"`
-	// The destination field.
-	DestinationField *string `json:"destinationField,omitempty"`
+	// Whether the source field is removed.
+	DeleteSource bool `json:"deleteSource"`
+	// The field that receives the result. Must not be empty.
+	DestinationField string `json:"destinationField"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -36,8 +37,10 @@ type _JsonStringifyParameters JsonStringifyParameters
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewJsonStringifyParameters() *JsonStringifyParameters {
+func NewJsonStringifyParameters(deleteSource bool, destinationField string) *JsonStringifyParameters {
 	this := JsonStringifyParameters{}
+	this.DeleteSource = deleteSource
+	this.DestinationField = destinationField
 	return &this
 }
 
@@ -49,68 +52,52 @@ func NewJsonStringifyParametersWithDefaults() *JsonStringifyParameters {
 	return &this
 }
 
-// GetDeleteSource returns the DeleteSource field value if set, zero value otherwise.
+// GetDeleteSource returns the DeleteSource field value
 func (o *JsonStringifyParameters) GetDeleteSource() bool {
-	if o == nil || IsNil(o.DeleteSource) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.DeleteSource
+
+	return o.DeleteSource
 }
 
-// GetDeleteSourceOk returns a tuple with the DeleteSource field value if set, nil otherwise
+// GetDeleteSourceOk returns a tuple with the DeleteSource field value
 // and a boolean to check if the value has been set.
 func (o *JsonStringifyParameters) GetDeleteSourceOk() (*bool, bool) {
-	if o == nil || IsNil(o.DeleteSource) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeleteSource, true
+	return &o.DeleteSource, true
 }
 
-// HasDeleteSource returns a boolean if a field has been set.
-func (o *JsonStringifyParameters) HasDeleteSource() bool {
-	if o != nil && !IsNil(o.DeleteSource) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeleteSource gets a reference to the given bool and assigns it to the DeleteSource field.
+// SetDeleteSource sets field value
 func (o *JsonStringifyParameters) SetDeleteSource(v bool) {
-	o.DeleteSource = &v
+	o.DeleteSource = v
 }
 
-// GetDestinationField returns the DestinationField field value if set, zero value otherwise.
+// GetDestinationField returns the DestinationField field value
 func (o *JsonStringifyParameters) GetDestinationField() string {
-	if o == nil || IsNil(o.DestinationField) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DestinationField
+
+	return o.DestinationField
 }
 
-// GetDestinationFieldOk returns a tuple with the DestinationField field value if set, nil otherwise
+// GetDestinationFieldOk returns a tuple with the DestinationField field value
 // and a boolean to check if the value has been set.
 func (o *JsonStringifyParameters) GetDestinationFieldOk() (*string, bool) {
-	if o == nil || IsNil(o.DestinationField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DestinationField, true
+	return &o.DestinationField, true
 }
 
-// HasDestinationField returns a boolean if a field has been set.
-func (o *JsonStringifyParameters) HasDestinationField() bool {
-	if o != nil && !IsNil(o.DestinationField) {
-		return true
-	}
-
-	return false
-}
-
-// SetDestinationField gets a reference to the given string and assigns it to the DestinationField field.
+// SetDestinationField sets field value
 func (o *JsonStringifyParameters) SetDestinationField(v string) {
-	o.DestinationField = &v
+	o.DestinationField = v
 }
 
 func (o JsonStringifyParameters) MarshalJSON() ([]byte, error) {
@@ -123,12 +110,8 @@ func (o JsonStringifyParameters) MarshalJSON() ([]byte, error) {
 
 func (o JsonStringifyParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DeleteSource) {
-		toSerialize["deleteSource"] = o.DeleteSource
-	}
-	if !IsNil(o.DestinationField) {
-		toSerialize["destinationField"] = o.DestinationField
-	}
+	toSerialize["deleteSource"] = o.DeleteSource
+	toSerialize["destinationField"] = o.DestinationField
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -138,6 +121,28 @@ func (o JsonStringifyParameters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *JsonStringifyParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"deleteSource",
+		"destinationField",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varJsonStringifyParameters := _JsonStringifyParameters{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,26 +21,26 @@ var _ = bytes.MinRead
 // checks if the RuleGroup type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RuleGroup{}
 
-// RuleGroup Rule group.
+// RuleGroup Rule group. Every scalar field except `creator` is always returned.
 type RuleGroup struct {
-	// Creator.
+	// Free-form name of the creator, as the client sent it. A request without it stores an empty string, but a response can omit it.
 	Creator *string `json:"creator,omitempty"`
-	// Human-readable description.
-	Description *string `json:"description,omitempty"`
-	// Whether this resource is enabled.
-	Enabled *bool `json:"enabled,omitempty"`
-	// The hidden.
-	Hidden *bool `json:"hidden,omitempty"`
+	// Human-readable description. Defaults to an empty string.
+	Description string `json:"description"`
+	// Whether the group is enabled. Defaults to true.
+	Enabled bool `json:"enabled"`
+	// A free-form flag for clients, for example to hide the group in a UI. The service stores and returns it and does not act on it. Defaults to false.
+	Hidden bool `json:"hidden"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
-	// Display name.
-	Name *string `json:"name,omitempty"`
-	// Sort order.
-	Order *int64 `json:"order,omitempty"`
+	Id string `json:"id"`
+	// Display name. Must not be empty.
+	Name string `json:"name"`
+	// Position of the group among the rule groups of the company. Defaults to 1. A request with 0 places the group last. Groups can share an order: the service does not shift the other groups.
+	Order int64 `json:"order"`
 	// The rule matchers.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`
-	// The rule subgroups.
-	RuleSubgroups []RuleSubgroup `json:"ruleSubgroups,omitempty"`
+	// The rule subgroups, sorted by order.
+	RuleSubgroups []RuleSubgroup `json:"ruleSubgroups"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -50,8 +51,15 @@ type _RuleGroup RuleGroup
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRuleGroup() *RuleGroup {
+func NewRuleGroup(description string, enabled bool, hidden bool, id string, name string, order int64, ruleSubgroups []RuleSubgroup) *RuleGroup {
 	this := RuleGroup{}
+	this.Description = description
+	this.Enabled = enabled
+	this.Hidden = hidden
+	this.Id = id
+	this.Name = name
+	this.Order = order
+	this.RuleSubgroups = ruleSubgroups
 	return &this
 }
 
@@ -95,196 +103,148 @@ func (o *RuleGroup) SetCreator(v string) {
 	o.Creator = &v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *RuleGroup) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroup) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *RuleGroup) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *RuleGroup) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
+// GetEnabled returns the Enabled field value
 func (o *RuleGroup) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled
+
+	return o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroup) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Enabled, true
+	return &o.Enabled, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *RuleGroup) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+// SetEnabled sets field value
 func (o *RuleGroup) SetEnabled(v bool) {
-	o.Enabled = &v
+	o.Enabled = v
 }
 
-// GetHidden returns the Hidden field value if set, zero value otherwise.
+// GetHidden returns the Hidden field value
 func (o *RuleGroup) GetHidden() bool {
-	if o == nil || IsNil(o.Hidden) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Hidden
+
+	return o.Hidden
 }
 
-// GetHiddenOk returns a tuple with the Hidden field value if set, nil otherwise
+// GetHiddenOk returns a tuple with the Hidden field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroup) GetHiddenOk() (*bool, bool) {
-	if o == nil || IsNil(o.Hidden) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Hidden, true
+	return &o.Hidden, true
 }
 
-// HasHidden returns a boolean if a field has been set.
-func (o *RuleGroup) HasHidden() bool {
-	if o != nil && !IsNil(o.Hidden) {
-		return true
-	}
-
-	return false
-}
-
-// SetHidden gets a reference to the given bool and assigns it to the Hidden field.
+// SetHidden sets field value
 func (o *RuleGroup) SetHidden(v bool) {
-	o.Hidden = &v
+	o.Hidden = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *RuleGroup) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroup) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *RuleGroup) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *RuleGroup) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *RuleGroup) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroup) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *RuleGroup) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *RuleGroup) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *RuleGroup) GetOrder() int64 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroup) GetOrderOk() (*int64, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *RuleGroup) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int64 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *RuleGroup) SetOrder(v int64) {
-	o.Order = &v
+	o.Order = v
 }
 
 // GetRuleMatchers returns the RuleMatchers field value if set, zero value otherwise.
@@ -319,34 +279,26 @@ func (o *RuleGroup) SetRuleMatchers(v []RuleMatcher) {
 	o.RuleMatchers = v
 }
 
-// GetRuleSubgroups returns the RuleSubgroups field value if set, zero value otherwise.
+// GetRuleSubgroups returns the RuleSubgroups field value
 func (o *RuleGroup) GetRuleSubgroups() []RuleSubgroup {
-	if o == nil || IsNil(o.RuleSubgroups) {
+	if o == nil {
 		var ret []RuleSubgroup
 		return ret
 	}
+
 	return o.RuleSubgroups
 }
 
-// GetRuleSubgroupsOk returns a tuple with the RuleSubgroups field value if set, nil otherwise
+// GetRuleSubgroupsOk returns a tuple with the RuleSubgroups field value
 // and a boolean to check if the value has been set.
 func (o *RuleGroup) GetRuleSubgroupsOk() ([]RuleSubgroup, bool) {
-	if o == nil || IsNil(o.RuleSubgroups) {
+	if o == nil {
 		return nil, false
 	}
 	return o.RuleSubgroups, true
 }
 
-// HasRuleSubgroups returns a boolean if a field has been set.
-func (o *RuleGroup) HasRuleSubgroups() bool {
-	if o != nil && !IsNil(o.RuleSubgroups) {
-		return true
-	}
-
-	return false
-}
-
-// SetRuleSubgroups gets a reference to the given []RuleSubgroup and assigns it to the RuleSubgroups field.
+// SetRuleSubgroups sets field value
 func (o *RuleGroup) SetRuleSubgroups(v []RuleSubgroup) {
 	o.RuleSubgroups = v
 }
@@ -364,30 +316,16 @@ func (o RuleGroup) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Creator) {
 		toSerialize["creator"] = o.Creator
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.Enabled) {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if !IsNil(o.Hidden) {
-		toSerialize["hidden"] = o.Hidden
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
+	toSerialize["description"] = o.Description
+	toSerialize["enabled"] = o.Enabled
+	toSerialize["hidden"] = o.Hidden
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["order"] = o.Order
 	if !IsNil(o.RuleMatchers) {
 		toSerialize["ruleMatchers"] = o.RuleMatchers
 	}
-	if !IsNil(o.RuleSubgroups) {
-		toSerialize["ruleSubgroups"] = o.RuleSubgroups
-	}
+	toSerialize["ruleSubgroups"] = o.RuleSubgroups
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -397,6 +335,33 @@ func (o RuleGroup) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RuleGroup) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"description",
+		"enabled",
+		"hidden",
+		"id",
+		"name",
+		"order",
+		"ruleSubgroups",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRuleGroup := _RuleGroup{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

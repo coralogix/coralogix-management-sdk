@@ -230,38 +230,41 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "Request to create a new parsing rule group.",
+                "description": "Request to create a new parsing rule group. Update takes the same body and replaces the whole group: a field that the request omits takes its default.",
                 "properties": {
                   "creator": {
-                    "description": "Creator.",
+                    "description": "Free-form name of the creator. The service stores it as sent. Defaults to an empty string.",
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "description": {
-                    "description": "Human-readable description.",
+                    "description": "Human-readable description. Defaults to an empty string.",
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "enabled": {
-                    "description": "Whether this resource is enabled.",
+                    "default": true,
+                    "description": "Whether the group is enabled. Defaults to true.",
                     "type": "boolean",
                     "x-coralogix-presence": true
                   },
                   "hidden": {
-                    "description": "The hidden.",
+                    "default": false,
+                    "description": "A free-form flag for clients, for example to hide the group in a UI. The service stores and returns it and does not act on it. Defaults to false.",
                     "type": "boolean",
                     "x-coralogix-presence": true
                   },
                   "name": {
-                    "description": "Display name.",
-                    "minLength": 0,
+                    "description": "Display name. Must not be empty.",
+                    "minLength": 1,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "order": {
-                    "description": "Sort order.",
+                    "default": 1,
+                    "description": "Position of the group among the rule groups of the company. Defaults to 1. 0 places the group last. Groups can share an order: the service does not shift the other groups.",
                     "format": "int64",
                     "minimum": 0,
                     "type": "integer",
@@ -276,21 +279,31 @@
                     "type": "array"
                   },
                   "ruleSubgroups": {
-                    "description": "The rule subgroups.",
+                    "description": "The rule subgroups. At least one.",
                     "items": {
                       "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
                     },
-                    "minItems": 0,
+                    "minItems": 1,
                     "type": "array"
                   },
                   "teamId": {
-                    "$ref": "#/components/schemas/v1.TeamId"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.TeamId"
+                      }
+                    ],
+                    "description": "Ignored. The service takes the team from the credentials of the request."
                   }
                 },
+                "required": [
+                  "name",
+                  "ruleSubgroups"
+                ],
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -473,7 +486,7 @@
         ]
       },
       "put": {
-        "description": "Updates the specified parsing rule group.",
+        "description": "Replaces the specified parsing rule group with the request body. A field that the request omits takes its default, and the service sets new ids for every subgroup and rule.",
         "operationId": "RuleGroupsService_UpdateRuleGroup",
         "parameters": [
           {
@@ -493,38 +506,41 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "Request to create a new parsing rule group.",
+                "description": "Request to create a new parsing rule group. Update takes the same body and replaces the whole group: a field that the request omits takes its default.",
                 "properties": {
                   "creator": {
-                    "description": "Creator.",
+                    "description": "Free-form name of the creator. The service stores it as sent. Defaults to an empty string.",
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "description": {
-                    "description": "Human-readable description.",
+                    "description": "Human-readable description. Defaults to an empty string.",
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "enabled": {
-                    "description": "Whether this resource is enabled.",
+                    "default": true,
+                    "description": "Whether the group is enabled. Defaults to true.",
                     "type": "boolean",
                     "x-coralogix-presence": true
                   },
                   "hidden": {
-                    "description": "The hidden.",
+                    "default": false,
+                    "description": "A free-form flag for clients, for example to hide the group in a UI. The service stores and returns it and does not act on it. Defaults to false.",
                     "type": "boolean",
                     "x-coralogix-presence": true
                   },
                   "name": {
-                    "description": "Display name.",
-                    "minLength": 0,
+                    "description": "Display name. Must not be empty.",
+                    "minLength": 1,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "order": {
-                    "description": "Sort order.",
+                    "default": 1,
+                    "description": "Position of the group among the rule groups of the company. Defaults to 1. 0 places the group last. Groups can share an order: the service does not shift the other groups.",
                     "format": "int64",
                     "minimum": 0,
                     "type": "integer",
@@ -539,21 +555,31 @@
                     "type": "array"
                   },
                   "ruleSubgroups": {
-                    "description": "The rule subgroups.",
+                    "description": "The rule subgroups. At least one.",
                     "items": {
                       "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup"
                     },
-                    "minItems": 0,
+                    "minItems": 1,
                     "type": "array"
                   },
                   "teamId": {
-                    "$ref": "#/components/schemas/v1.TeamId"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v1.TeamId"
+                      }
+                    ],
+                    "description": "Ignored. The service takes the team from the credentials of the request."
                   }
                 },
+                "required": [
+                  "name",
+                  "ruleSubgroups"
+                ],
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -670,21 +696,25 @@
   "components": {
     "schemas": {
       "AllowParameters": {
+        "required": [
+          "rule",
+          "keepBlockedLogs"
+        ],
         "type": "object",
         "properties": {
           "keepBlockedLogs": {
-            "description": "The keep blocked logs.",
+            "description": "Whether the logs that the rule blocks are kept as low-priority logs instead of being dropped.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "rule": {
-            "description": "Rule.",
-            "minLength": 0,
+            "description": "The regular expression. Logs that do not match it are blocked. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Allow parameters."
+        "description": "Allow parameters. Blocks every log that does not match the regular expression."
       },
       "ApplicationNameConstraint": {
         "type": "object",
@@ -699,21 +729,25 @@
         "description": "Application name constraint."
       },
       "BlockParameters": {
+        "required": [
+          "rule",
+          "keepBlockedLogs"
+        ],
         "type": "object",
         "properties": {
           "keepBlockedLogs": {
-            "description": "The keep blocked logs.",
+            "description": "Whether the logs that the rule blocks are kept as low-priority logs instead of being dropped.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "rule": {
-            "description": "Rule.",
-            "minLength": 0,
+            "description": "The regular expression. Logs that match it are blocked. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Block parameters."
+        "description": "Block parameters. Blocks every log that matches the regular expression."
       },
       "BulkDeleteRuleGroupResponse": {
         "type": "object",
@@ -745,54 +779,67 @@
         "description": "Counts."
       },
       "CreateRuleGroupRequest.CreateRuleSubgroup": {
+        "required": [
+          "rules",
+          "order"
+        ],
         "type": "object",
         "properties": {
           "enabled": {
-            "description": "Whether this resource is enabled.",
+            "default": true,
+            "description": "Whether the subgroup is enabled. Defaults to true.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "order": {
-            "description": "Sort order.",
+            "description": "Position of the subgroup in the group, starting at 1.",
             "format": "int64",
-            "minimum": 0,
+            "minimum": 1,
             "type": "integer",
             "x-coralogix-presence": true
           },
           "rules": {
-            "minItems": 0,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule"
             },
-            "description": "List of rules."
+            "description": "The rules of the subgroup. At least one."
           }
-        }
+        },
+        "description": "A rule subgroup. The service sets its id, and sets a new one on every update of the group."
       },
       "CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule": {
+        "required": [
+          "name",
+          "sourceField",
+          "parameters",
+          "order"
+        ],
         "type": "object",
         "properties": {
           "description": {
-            "description": "Human-readable description.",
+            "description": "Human-readable description. Defaults to an empty string.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "enabled": {
-            "description": "Whether this resource is enabled.",
+            "default": true,
+            "description": "Whether the rule is enabled. Defaults to true.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "name": {
-            "description": "Display name.",
-            "minLength": 0,
+            "description": "Display name. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           },
           "order": {
-            "description": "Sort order.",
+            "description": "Position of the rule in its subgroup, starting at 1.",
             "format": "int64",
-            "minimum": 0,
+            "minimum": 1,
             "type": "integer",
             "x-coralogix-presence": true
           },
@@ -800,12 +847,13 @@
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
-            "description": "The source field.",
-            "minLength": 0,
+            "description": "The field the rule reads: `text`, a `text.<field>` path, or one of `applicationName`, `subsystemName`, `computerName`, `category`, `className`, `methodName`, `threadId`, and `severity`. A rule that deletes its source field must read a `text.<field>` path.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
-        }
+        },
+        "description": "A parsing rule. The service sets its id, and sets a new one on every update of the group."
       },
       "CreateRuleGroupResponse": {
         "type": "object",
@@ -831,7 +879,7 @@
           "DESTINATION_FIELD_TEXT"
         ],
         "type": "string",
-        "description": "Destination field."
+        "description": "Destination field. The zero value `DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED` means the category field."
       },
       "Error": {
         "type": "object",
@@ -854,22 +902,28 @@
         "description": "Standard error response body returned for a failed request."
       },
       "ExtractParameters": {
+        "required": [
+          "rule"
+        ],
         "type": "object",
         "properties": {
           "rule": {
-            "description": "Rule.",
-            "minLength": 0,
+            "description": "The regular expression, with named capture groups, applied to the source field. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Extract parameters."
+        "description": "Extract parameters. The named capture groups of the regular expression become fields of the log."
       },
       "ExtractTimestampParameters": {
+        "required": [
+          "format"
+        ],
         "type": "object",
         "properties": {
           "format": {
-            "description": "The format.",
+            "description": "The time format, in the syntax that `standard` names. The service accepts an empty string, for example with a standard that has no format.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
@@ -878,7 +932,7 @@
             "$ref": "#/components/schemas/FormatStandard"
           }
         },
-        "description": "Extract timestamp parameters."
+        "description": "Extract timestamp parameters. Sets the log timestamp from the source field."
       },
       "FilterPathAndValues": {
         "title": "FilterPathAndValues",
@@ -961,7 +1015,7 @@
           "FORMAT_STANDARD_NANOTS"
         ],
         "type": "string",
-        "description": "Format standard."
+        "description": "Format standard. The zero value `FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED` means strftime."
       },
       "GetCompanyUsageLimitsResponse": {
         "type": "object",
@@ -1064,10 +1118,13 @@
         "description": "Response containing the details of a parsing rule group."
       },
       "JsonExtractParameters": {
+        "required": [
+          "rule"
+        ],
         "type": "object",
         "properties": {
           "destinationFieldText": {
-            "description": "The destination field text.",
+            "description": "The destination path in the log text. Required when `destinationFieldType` is `DESTINATION_FIELD_TEXT`: it must be `text` or start with `text.`.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
@@ -1076,57 +1133,66 @@
             "$ref": "#/components/schemas/DestinationField"
           },
           "rule": {
-            "description": "Rule.",
-            "minLength": 0,
+            "description": "The JSON key whose value is copied. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Json extract parameters."
+        "description": "Json extract parameters. Copies the value of a JSON key into a log field."
       },
       "JsonParseParameters": {
+        "required": [
+          "destinationField",
+          "deleteSource",
+          "overrideDest"
+        ],
         "type": "object",
         "properties": {
           "deleteSource": {
-            "description": "The delete source.",
+            "description": "Whether the source field is removed.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "destinationField": {
-            "description": "The destination field.",
-            "minLength": 0,
+            "description": "The field that receives the result. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           },
           "escapedValue": {
-            "description": "The escaped value.",
+            "description": "Ignored. The service always parses the value as escaped JSON and never returns this field.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "overrideDest": {
-            "description": "The override dest.",
+            "description": "Whether the result replaces a value that the destination field already has.",
             "type": "boolean",
             "x-coralogix-presence": true
           }
         },
-        "description": "Json parse parameters."
+        "description": "Json parse parameters. Parses the JSON string in the source field into an object in the destination field."
       },
       "JsonStringifyParameters": {
+        "required": [
+          "destinationField",
+          "deleteSource"
+        ],
         "type": "object",
         "properties": {
           "deleteSource": {
-            "description": "The delete source.",
+            "description": "Whether the source field is removed.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "destinationField": {
-            "description": "The destination field.",
-            "minLength": 0,
+            "description": "The field that receives the result. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Json stringify parameters."
+        "description": "Json stringify parameters. Writes the source field as a JSON string to the destination field."
       },
       "ListRuleGroupsResponse": {
         "type": "object",
@@ -1159,85 +1225,108 @@
         }
       },
       "ParseParameters": {
+        "required": [
+          "rule",
+          "destinationField"
+        ],
         "type": "object",
         "properties": {
           "destinationField": {
-            "description": "The destination field.",
+            "description": "The field that receives the result. An empty string writes to the source field.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "rule": {
-            "description": "Rule.",
-            "minLength": 0,
+            "description": "The regular expression, with named capture groups, applied to the source field. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Parse parameters."
+        "description": "Parse parameters. Parses the source field with a regular expression and writes the named capture groups to the destination field."
       },
       "RemoveFieldsParameters": {
+        "required": [
+          "fields"
+        ],
         "type": "object",
         "properties": {
           "fields": {
-            "minItems": 0,
+            "minItems": 1,
             "type": "array",
             "items": {
               "minLength": 0,
               "type": "string",
-              "description": "List of fields."
+              "description": "The fields to remove from the log. At least one."
             },
-            "description": "List of fields."
+            "description": "The fields to remove from the log. At least one."
           }
         },
         "description": "Remove fields parameters."
       },
       "ReplaceParameters": {
+        "required": [
+          "rule",
+          "destinationField",
+          "replaceNewVal"
+        ],
         "type": "object",
         "properties": {
           "destinationField": {
-            "description": "The destination field.",
+            "description": "The field that receives the result. An empty string writes to the source field.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "replaceNewVal": {
-            "description": "The replace new val.",
+            "description": "The text that replaces each match. An empty string removes the match.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "rule": {
-            "description": "Rule.",
-            "minLength": 0,
+            "description": "The regular expression that selects the text to replace. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
         },
-        "description": "Replace parameters."
+        "description": "Replace parameters. Replaces the text that the regular expression matches."
       },
       "RuleGroup": {
+        "required": [
+          "id",
+          "name",
+          "description",
+          "enabled",
+          "hidden",
+          "order",
+          "ruleSubgroups"
+        ],
         "type": "object",
         "properties": {
           "creator": {
-            "description": "Creator.",
+            "description": "Free-form name of the creator, as the client sent it. A request without it stores an empty string, but a response can omit it.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "description": {
-            "description": "Human-readable description.",
+            "description": "Human-readable description. Defaults to an empty string.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "enabled": {
-            "description": "Whether this resource is enabled.",
+            "default": true,
+            "description": "Whether the group is enabled. Defaults to true.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "hidden": {
-            "description": "The hidden.",
+            "default": false,
+            "description": "A free-form flag for clients, for example to hide the group in a UI. The service stores and returns it and does not act on it. Defaults to false.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
@@ -1248,13 +1337,14 @@
             "x-coralogix-presence": true
           },
           "name": {
-            "description": "Display name.",
-            "minLength": 0,
+            "description": "Display name. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           },
           "order": {
-            "description": "Sort order.",
+            "default": 1,
+            "description": "Position of the group among the rule groups of the company. Defaults to 1. A request with 0 places the group last. Groups can share an order: the service does not shift the other groups.",
             "format": "int64",
             "minimum": 0,
             "type": "integer",
@@ -1269,15 +1359,15 @@
             "description": "The rule matchers."
           },
           "ruleSubgroups": {
-            "minItems": 0,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RuleSubgroup"
             },
-            "description": "The rule subgroups."
+            "description": "The rule subgroups, sorted by order."
           }
         },
-        "description": "Rule group."
+        "description": "Rule group. Every scalar field except `creator` is always returned."
       },
       "RuleMatcher": {
         "type": "object",
@@ -1400,73 +1490,6 @@
               "jsonParseParameters"
             ],
             "type": "object"
-          },
-          {
-            "type": "object",
-            "not": {
-              "anyOf": [
-                {
-                  "required": [
-                    "extractParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "jsonExtractParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "replaceParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "parseParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "allowParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "blockParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "extractTimestampParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "removeFieldsParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "jsonStringifyParameters"
-                  ],
-                  "type": "object"
-                },
-                {
-                  "required": [
-                    "jsonParseParameters"
-                  ],
-                  "type": "object"
-                }
-              ]
-            }
           }
         ],
         "properties": {
@@ -1501,38 +1524,46 @@
             "$ref": "#/components/schemas/ReplaceParameters"
           }
         },
-        "description": "Rule parameters."
+        "description": "Rule parameters. Exactly one parameters object must be set; an empty object is rejected."
       },
       "RuleSubgroup": {
+        "required": [
+          "id",
+          "enabled",
+          "order",
+          "rules"
+        ],
         "type": "object",
         "properties": {
           "enabled": {
-            "description": "Whether this resource is enabled.",
+            "default": true,
+            "description": "Whether the subgroup is enabled. Defaults to true.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "id": {
-            "description": "Unique identifier.",
+            "description": "Unique identifier. Set by the server, and regenerated for every subgroup on each update of the group.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "order": {
-            "description": "Sort order.",
+            "description": "Position of the subgroup in the group, starting at 1. Get returns the subgroups sorted by order.",
             "format": "int64",
-            "minimum": 0,
+            "minimum": 1,
             "type": "integer",
             "x-coralogix-presence": true
           },
           "rules": {
-            "minItems": 0,
+            "minItems": 1,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/rules.v1.Rule"
             },
-            "description": "List of rules."
+            "description": "The rules of the subgroup, sorted by order."
           }
-        }
+        },
+        "description": "A rule subgroup. Get returns every scalar field."
       },
       "SeverityConstraint": {
         "type": "object",
@@ -1579,7 +1610,7 @@
           "VALUE_CRITICAL"
         ],
         "type": "string",
-        "description": "Value."
+        "description": "Log severity. The zero value `VALUE_DEBUG_OR_UNSPECIFIED` means debug."
       },
       "events.v3.FilterMatcher": {
         "enum": [
@@ -1589,35 +1620,45 @@
         "type": "string"
       },
       "rules.v1.Rule": {
+        "required": [
+          "id",
+          "name",
+          "description",
+          "sourceField",
+          "parameters",
+          "enabled",
+          "order"
+        ],
         "type": "object",
         "properties": {
           "description": {
-            "description": "Human-readable description.",
+            "description": "Human-readable description. Defaults to an empty string.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "enabled": {
-            "description": "Whether this resource is enabled.",
+            "default": true,
+            "description": "Whether the rule is enabled. Defaults to true.",
             "type": "boolean",
             "x-coralogix-presence": true
           },
           "id": {
-            "description": "Unique identifier.",
+            "description": "Unique identifier. Set by the server, and regenerated for every rule on each update of the group.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
           },
           "name": {
-            "description": "Display name.",
-            "minLength": 0,
+            "description": "Display name. Must not be empty.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           },
           "order": {
-            "description": "Sort order.",
+            "description": "Position of the rule in its subgroup, starting at 1. Get returns the rules sorted by order.",
             "format": "int64",
-            "minimum": 0,
+            "minimum": 1,
             "type": "integer",
             "x-coralogix-presence": true
           },
@@ -1625,12 +1666,13 @@
             "$ref": "#/components/schemas/RuleParameters"
           },
           "sourceField": {
-            "description": "The source field.",
-            "minLength": 0,
+            "description": "The field the rule reads: `text`, a `text.<field>` path, or one of `applicationName`, `subsystemName`, `computerName`, `category`, `className`, `methodName`, `threadId`, and `severity`. A rule that deletes its source field must read a `text.<field>` path.",
+            "minLength": 1,
             "type": "string",
             "x-coralogix-presence": true
           }
-        }
+        },
+        "description": "A parsing rule. Get returns every field."
       },
       "v1.TeamId": {
         "type": "object",
@@ -1642,7 +1684,7 @@
             "format": "int64"
           }
         },
-        "description": "Team id."
+        "description": "Team id. Ignored: the service takes the team from the credentials of the request."
       },
       "v3.FilterOperator": {
         "enum": [

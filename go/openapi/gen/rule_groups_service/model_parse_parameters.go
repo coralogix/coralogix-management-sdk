@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,12 +21,12 @@ var _ = bytes.MinRead
 // checks if the ParseParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ParseParameters{}
 
-// ParseParameters Parse parameters.
+// ParseParameters Parse parameters. Parses the source field with a regular expression and writes the named capture groups to the destination field.
 type ParseParameters struct {
-	// The destination field.
-	DestinationField *string `json:"destinationField,omitempty"`
-	// Rule.
-	Rule *string `json:"rule,omitempty"`
+	// The field that receives the result. An empty string writes to the source field.
+	DestinationField string `json:"destinationField"`
+	// The regular expression, with named capture groups, applied to the source field. Must not be empty.
+	Rule string `json:"rule"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -36,8 +37,10 @@ type _ParseParameters ParseParameters
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewParseParameters() *ParseParameters {
+func NewParseParameters(destinationField string, rule string) *ParseParameters {
 	this := ParseParameters{}
+	this.DestinationField = destinationField
+	this.Rule = rule
 	return &this
 }
 
@@ -49,68 +52,52 @@ func NewParseParametersWithDefaults() *ParseParameters {
 	return &this
 }
 
-// GetDestinationField returns the DestinationField field value if set, zero value otherwise.
+// GetDestinationField returns the DestinationField field value
 func (o *ParseParameters) GetDestinationField() string {
-	if o == nil || IsNil(o.DestinationField) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DestinationField
+
+	return o.DestinationField
 }
 
-// GetDestinationFieldOk returns a tuple with the DestinationField field value if set, nil otherwise
+// GetDestinationFieldOk returns a tuple with the DestinationField field value
 // and a boolean to check if the value has been set.
 func (o *ParseParameters) GetDestinationFieldOk() (*string, bool) {
-	if o == nil || IsNil(o.DestinationField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DestinationField, true
+	return &o.DestinationField, true
 }
 
-// HasDestinationField returns a boolean if a field has been set.
-func (o *ParseParameters) HasDestinationField() bool {
-	if o != nil && !IsNil(o.DestinationField) {
-		return true
-	}
-
-	return false
-}
-
-// SetDestinationField gets a reference to the given string and assigns it to the DestinationField field.
+// SetDestinationField sets field value
 func (o *ParseParameters) SetDestinationField(v string) {
-	o.DestinationField = &v
+	o.DestinationField = v
 }
 
-// GetRule returns the Rule field value if set, zero value otherwise.
+// GetRule returns the Rule field value
 func (o *ParseParameters) GetRule() string {
-	if o == nil || IsNil(o.Rule) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Rule
+
+	return o.Rule
 }
 
-// GetRuleOk returns a tuple with the Rule field value if set, nil otherwise
+// GetRuleOk returns a tuple with the Rule field value
 // and a boolean to check if the value has been set.
 func (o *ParseParameters) GetRuleOk() (*string, bool) {
-	if o == nil || IsNil(o.Rule) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Rule, true
+	return &o.Rule, true
 }
 
-// HasRule returns a boolean if a field has been set.
-func (o *ParseParameters) HasRule() bool {
-	if o != nil && !IsNil(o.Rule) {
-		return true
-	}
-
-	return false
-}
-
-// SetRule gets a reference to the given string and assigns it to the Rule field.
+// SetRule sets field value
 func (o *ParseParameters) SetRule(v string) {
-	o.Rule = &v
+	o.Rule = v
 }
 
 func (o ParseParameters) MarshalJSON() ([]byte, error) {
@@ -123,12 +110,8 @@ func (o ParseParameters) MarshalJSON() ([]byte, error) {
 
 func (o ParseParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DestinationField) {
-		toSerialize["destinationField"] = o.DestinationField
-	}
-	if !IsNil(o.Rule) {
-		toSerialize["rule"] = o.Rule
-	}
+	toSerialize["destinationField"] = o.DestinationField
+	toSerialize["rule"] = o.Rule
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -138,6 +121,28 @@ func (o ParseParameters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ParseParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"destinationField",
+		"rule",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varParseParameters := _ParseParameters{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -13,7 +13,6 @@ package policies_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -21,12 +20,12 @@ var _ = bytes.MinRead
 // checks if the LogRules type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogRules{}
 
-// LogRules Log rules for a policy.
+// LogRules Log rules for a policy. Set `severities` or `dpxlExpression`, not both.
 type LogRules struct {
-	// The dpxl expression.
+	// The DataPrime expression that selects the data. It starts with a version tag, for example `<v1> $d.severity == 'INFO'`; the service rejects an expression without one.
 	DpxlExpression *string `json:"dpxlExpression,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// The severities.
-	Severities []QuotaV1Severity `json:"severities"`
+	// The severities. A request without `dpxlExpression` needs at least one, and a request with it must have none. A response with `dpxlExpression` has an empty list.
+	Severities []QuotaV1Severity `json:"severities,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -37,9 +36,8 @@ type _LogRules LogRules
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewLogRules(severities []QuotaV1Severity) *LogRules {
+func NewLogRules() *LogRules {
 	this := LogRules{}
-	this.Severities = severities
 	return &this
 }
 
@@ -83,26 +81,34 @@ func (o *LogRules) SetDpxlExpression(v string) {
 	o.DpxlExpression = &v
 }
 
-// GetSeverities returns the Severities field value
+// GetSeverities returns the Severities field value if set, zero value otherwise.
 func (o *LogRules) GetSeverities() []QuotaV1Severity {
-	if o == nil {
+	if o == nil || IsNil(o.Severities) {
 		var ret []QuotaV1Severity
 		return ret
 	}
-
 	return o.Severities
 }
 
-// GetSeveritiesOk returns a tuple with the Severities field value
+// GetSeveritiesOk returns a tuple with the Severities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *LogRules) GetSeveritiesOk() ([]QuotaV1Severity, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Severities) {
 		return nil, false
 	}
 	return o.Severities, true
 }
 
-// SetSeverities sets field value
+// HasSeverities returns a boolean if a field has been set.
+func (o *LogRules) HasSeverities() bool {
+	if o != nil && !IsNil(o.Severities) {
+		return true
+	}
+
+	return false
+}
+
+// SetSeverities gets a reference to the given []QuotaV1Severity and assigns it to the Severities field.
 func (o *LogRules) SetSeverities(v []QuotaV1Severity) {
 	o.Severities = v
 }
@@ -120,7 +126,9 @@ func (o LogRules) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DpxlExpression) {
 		toSerialize["dpxlExpression"] = o.DpxlExpression
 	}
-	toSerialize["severities"] = o.Severities
+	if !IsNil(o.Severities) {
+		toSerialize["severities"] = o.Severities
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -130,27 +138,6 @@ func (o LogRules) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *LogRules) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"severities",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varLogRules := _LogRules{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -22,11 +22,11 @@ var _ MappedNullable = &V1Target{}
 
 // V1Target This data structure represents a target for quota policies. It defines a named group of datasets with a priority level and optional archive retention configuration.
 type V1Target struct {
-	// Optional archive retention configuration for the target.
+	// Optional archive retention configuration for the target. The service accepts it and does not store it: a target never returns it.
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
 	// The dataset.
 	Dataset *string `json:"dataset,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// The dataspace.
+	// The dataspace. Only `default` is supported. An omitted dataspace is `default`, and the service returns it in lower case.
 	Dataspace *string `json:"dataspace,omitempty" validate:"regexp=^[A-Za-z](?:[A-Za-z0-9_]|\\\\.[A-Za-z0-9_])*$"`
 	// The base priority for the target.
 	Priority *QuotaV1Priority `json:"priority,omitempty"`

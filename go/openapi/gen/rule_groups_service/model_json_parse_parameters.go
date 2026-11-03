@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,16 +21,16 @@ var _ = bytes.MinRead
 // checks if the JsonParseParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JsonParseParameters{}
 
-// JsonParseParameters Json parse parameters.
+// JsonParseParameters Json parse parameters. Parses the JSON string in the source field into an object in the destination field.
 type JsonParseParameters struct {
-	// The delete source.
-	DeleteSource *bool `json:"deleteSource,omitempty"`
-	// The destination field.
-	DestinationField *string `json:"destinationField,omitempty"`
-	// The escaped value.
+	// Whether the source field is removed.
+	DeleteSource bool `json:"deleteSource"`
+	// The field that receives the result. Must not be empty.
+	DestinationField string `json:"destinationField"`
+	// Ignored. The service always parses the value as escaped JSON and never returns this field.
 	EscapedValue *bool `json:"escapedValue,omitempty"`
-	// The override dest.
-	OverrideDest *bool `json:"overrideDest,omitempty"`
+	// Whether the result replaces a value that the destination field already has.
+	OverrideDest bool `json:"overrideDest"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -40,8 +41,11 @@ type _JsonParseParameters JsonParseParameters
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewJsonParseParameters() *JsonParseParameters {
+func NewJsonParseParameters(deleteSource bool, destinationField string, overrideDest bool) *JsonParseParameters {
 	this := JsonParseParameters{}
+	this.DeleteSource = deleteSource
+	this.DestinationField = destinationField
+	this.OverrideDest = overrideDest
 	return &this
 }
 
@@ -53,68 +57,52 @@ func NewJsonParseParametersWithDefaults() *JsonParseParameters {
 	return &this
 }
 
-// GetDeleteSource returns the DeleteSource field value if set, zero value otherwise.
+// GetDeleteSource returns the DeleteSource field value
 func (o *JsonParseParameters) GetDeleteSource() bool {
-	if o == nil || IsNil(o.DeleteSource) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.DeleteSource
+
+	return o.DeleteSource
 }
 
-// GetDeleteSourceOk returns a tuple with the DeleteSource field value if set, nil otherwise
+// GetDeleteSourceOk returns a tuple with the DeleteSource field value
 // and a boolean to check if the value has been set.
 func (o *JsonParseParameters) GetDeleteSourceOk() (*bool, bool) {
-	if o == nil || IsNil(o.DeleteSource) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DeleteSource, true
+	return &o.DeleteSource, true
 }
 
-// HasDeleteSource returns a boolean if a field has been set.
-func (o *JsonParseParameters) HasDeleteSource() bool {
-	if o != nil && !IsNil(o.DeleteSource) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeleteSource gets a reference to the given bool and assigns it to the DeleteSource field.
+// SetDeleteSource sets field value
 func (o *JsonParseParameters) SetDeleteSource(v bool) {
-	o.DeleteSource = &v
+	o.DeleteSource = v
 }
 
-// GetDestinationField returns the DestinationField field value if set, zero value otherwise.
+// GetDestinationField returns the DestinationField field value
 func (o *JsonParseParameters) GetDestinationField() string {
-	if o == nil || IsNil(o.DestinationField) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DestinationField
+
+	return o.DestinationField
 }
 
-// GetDestinationFieldOk returns a tuple with the DestinationField field value if set, nil otherwise
+// GetDestinationFieldOk returns a tuple with the DestinationField field value
 // and a boolean to check if the value has been set.
 func (o *JsonParseParameters) GetDestinationFieldOk() (*string, bool) {
-	if o == nil || IsNil(o.DestinationField) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DestinationField, true
+	return &o.DestinationField, true
 }
 
-// HasDestinationField returns a boolean if a field has been set.
-func (o *JsonParseParameters) HasDestinationField() bool {
-	if o != nil && !IsNil(o.DestinationField) {
-		return true
-	}
-
-	return false
-}
-
-// SetDestinationField gets a reference to the given string and assigns it to the DestinationField field.
+// SetDestinationField sets field value
 func (o *JsonParseParameters) SetDestinationField(v string) {
-	o.DestinationField = &v
+	o.DestinationField = v
 }
 
 // GetEscapedValue returns the EscapedValue field value if set, zero value otherwise.
@@ -149,36 +137,28 @@ func (o *JsonParseParameters) SetEscapedValue(v bool) {
 	o.EscapedValue = &v
 }
 
-// GetOverrideDest returns the OverrideDest field value if set, zero value otherwise.
+// GetOverrideDest returns the OverrideDest field value
 func (o *JsonParseParameters) GetOverrideDest() bool {
-	if o == nil || IsNil(o.OverrideDest) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.OverrideDest
+
+	return o.OverrideDest
 }
 
-// GetOverrideDestOk returns a tuple with the OverrideDest field value if set, nil otherwise
+// GetOverrideDestOk returns a tuple with the OverrideDest field value
 // and a boolean to check if the value has been set.
 func (o *JsonParseParameters) GetOverrideDestOk() (*bool, bool) {
-	if o == nil || IsNil(o.OverrideDest) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OverrideDest, true
+	return &o.OverrideDest, true
 }
 
-// HasOverrideDest returns a boolean if a field has been set.
-func (o *JsonParseParameters) HasOverrideDest() bool {
-	if o != nil && !IsNil(o.OverrideDest) {
-		return true
-	}
-
-	return false
-}
-
-// SetOverrideDest gets a reference to the given bool and assigns it to the OverrideDest field.
+// SetOverrideDest sets field value
 func (o *JsonParseParameters) SetOverrideDest(v bool) {
-	o.OverrideDest = &v
+	o.OverrideDest = v
 }
 
 func (o JsonParseParameters) MarshalJSON() ([]byte, error) {
@@ -191,18 +171,12 @@ func (o JsonParseParameters) MarshalJSON() ([]byte, error) {
 
 func (o JsonParseParameters) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DeleteSource) {
-		toSerialize["deleteSource"] = o.DeleteSource
-	}
-	if !IsNil(o.DestinationField) {
-		toSerialize["destinationField"] = o.DestinationField
-	}
+	toSerialize["deleteSource"] = o.DeleteSource
+	toSerialize["destinationField"] = o.DestinationField
 	if !IsNil(o.EscapedValue) {
 		toSerialize["escapedValue"] = o.EscapedValue
 	}
-	if !IsNil(o.OverrideDest) {
-		toSerialize["overrideDest"] = o.OverrideDest
-	}
+	toSerialize["overrideDest"] = o.OverrideDest
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -212,6 +186,29 @@ func (o JsonParseParameters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *JsonParseParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"deleteSource",
+		"destinationField",
+		"overrideDest",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varJsonParseParameters := _JsonParseParameters{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -31,24 +31,25 @@ type Policy struct {
 	CreatedAt *string `json:"createdAt,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Soft-delete marker; when true the policy has been deleted and is no longer applied.
 	Deleted bool `json:"deleted"`
-	// Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted.
+	// Optional free-text description of the policy's purpose. Only Latin-1 characters are accepted. A policy that `POST /dataplans/policies/v1` created without a description returns an empty string. A policy that an atomic overwrite created without a description can return none.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
-	// Indicates whether the policy is actively evaluated and applied.
+	// Indicates whether the policy is actively evaluated and applied. A create or atomic-overwrite request sets it as the opposite of its `disabled` value; `PUT /dataplans/policies/v1` sets `enabled` directly.
 	Enabled bool `json:"enabled"`
-	// Unique identifier for the policy.
+	// Unique identifier for the policy. The service sets it, and an overwrite that changes the policies gives every policy a new id.
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"`
 	LogRules *LogRules `json:"logRules,omitempty"`
 	// Human-readable name for the policy. Only Latin-1 characters are accepted.
 	Name string `json:"name" validate:"regexp=^[\\\\x00-\\\\xFF]*$"`
-	// Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first.
+	// Ordering priority that determines the sequence in which policies are evaluated. Can be negative for policies placed first. An overwrite sets it to the position of the policy in the request, starting at 1.
 	Order int32 `json:"order"`
 	Priority QuotaV1Priority `json:"priority"`
 	PriorityOverride *PriorityOverride `json:"priorityOverride,omitempty"`
+	// The priority currently in effect, from the quota usage of the team against the usage tiers. Get Company Policies returns it for an enabled policy with a quota-based override.
 	PriorityOverrideStatus *PriorityOverrideStatus `json:"priorityOverrideStatus,omitempty"`
 	RumRules *LogRules `json:"rumRules,omitempty"`
 	SpanRules *SpanRules `json:"spanRules,omitempty"`
 	SubsystemRule *QuotaV1Rule `json:"subsystemRule,omitempty"`
-	// List of data targets/destinations to which this policy routes data.
+	// List of data targets/destinations to which this policy routes data. A log policy created without targets has one target: the `logs` dataset of the `default` dataspace, with the priority and the override of the policy. A span policy has one `spans` target. A RUM policy has none.
 	Targets []V1Target `json:"targets,omitempty"`
 	// Timestamp (RFC 3339) when the policy was last updated.
 	UpdatedAt *string `json:"updatedAt,omitempty" validate:"regexp=^[\\s\\S]*$"`

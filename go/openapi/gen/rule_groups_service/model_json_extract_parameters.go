@@ -13,6 +13,7 @@ package rule_groups_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,13 +21,13 @@ var _ = bytes.MinRead
 // checks if the JsonExtractParameters type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JsonExtractParameters{}
 
-// JsonExtractParameters Json extract parameters.
+// JsonExtractParameters Json extract parameters. Copies the value of a JSON key into a log field.
 type JsonExtractParameters struct {
-	// The destination field text.
+	// The destination path in the log text. Required when `destinationFieldType` is `DESTINATION_FIELD_TEXT`: it must be `text` or start with `text.`.
 	DestinationFieldText *string `json:"destinationFieldText,omitempty"`
 	DestinationFieldType *DestinationField `json:"destinationFieldType,omitempty"`
-	// Rule.
-	Rule *string `json:"rule,omitempty"`
+	// The JSON key whose value is copied. Must not be empty.
+	Rule string `json:"rule"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -37,8 +38,9 @@ type _JsonExtractParameters JsonExtractParameters
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewJsonExtractParameters() *JsonExtractParameters {
+func NewJsonExtractParameters(rule string) *JsonExtractParameters {
 	this := JsonExtractParameters{}
+	this.Rule = rule
 	return &this
 }
 
@@ -114,36 +116,28 @@ func (o *JsonExtractParameters) SetDestinationFieldType(v DestinationField) {
 	o.DestinationFieldType = &v
 }
 
-// GetRule returns the Rule field value if set, zero value otherwise.
+// GetRule returns the Rule field value
 func (o *JsonExtractParameters) GetRule() string {
-	if o == nil || IsNil(o.Rule) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Rule
+
+	return o.Rule
 }
 
-// GetRuleOk returns a tuple with the Rule field value if set, nil otherwise
+// GetRuleOk returns a tuple with the Rule field value
 // and a boolean to check if the value has been set.
 func (o *JsonExtractParameters) GetRuleOk() (*string, bool) {
-	if o == nil || IsNil(o.Rule) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Rule, true
+	return &o.Rule, true
 }
 
-// HasRule returns a boolean if a field has been set.
-func (o *JsonExtractParameters) HasRule() bool {
-	if o != nil && !IsNil(o.Rule) {
-		return true
-	}
-
-	return false
-}
-
-// SetRule gets a reference to the given string and assigns it to the Rule field.
+// SetRule sets field value
 func (o *JsonExtractParameters) SetRule(v string) {
-	o.Rule = &v
+	o.Rule = v
 }
 
 func (o JsonExtractParameters) MarshalJSON() ([]byte, error) {
@@ -162,9 +156,7 @@ func (o JsonExtractParameters) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DestinationFieldType) {
 		toSerialize["destinationFieldType"] = o.DestinationFieldType
 	}
-	if !IsNil(o.Rule) {
-		toSerialize["rule"] = o.Rule
-	}
+	toSerialize["rule"] = o.Rule
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -174,6 +166,27 @@ func (o JsonExtractParameters) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *JsonExtractParameters) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"rule",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varJsonExtractParameters := _JsonExtractParameters{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
