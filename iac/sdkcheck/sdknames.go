@@ -76,7 +76,8 @@ type Ref struct {
 	// pointer type Want. Issues sets Want to it when the SDK has it.
 	WantValue string
 	// ByType: a method that the SDK may name another way. When Name is not
-	// found, the check uses the one method of Owner with type Want (F17).
+	// found, or names a method of another type, the check uses the one method of
+	// Owner with type Want (F17).
 	ByType bool
 	Rule   Rule
 	// Schema is the component name of a type ref that comes from the spec.
@@ -449,6 +450,10 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	case "":
 	case "inline":
 		body := inlineBodyName(method, op)
+		if name == "update" && op.BodyAsCreate && s.bodies["create"] != "" {
+			// One type serves both bodies, with the name of the Create body.
+			body = s.bodies["create"]
+		}
 		s.bodies[name] = body
 		s.add(Ref{Path: path + ".body", Kind: KindType, Name: body, Rule: RuleInlineBody})
 		s.add(Ref{Path: path + ".body", Kind: KindMethod, Owner: builder, Name: body,

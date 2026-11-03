@@ -284,23 +284,69 @@ func requiredParameterIssues(location string, role verb, op foundOp, policy Poli
 	return report
 }
 
-func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.Report {
+// contractSchemas returns the Create and Update bodies as the field checks read them, and the Get
+// resource. The bodies have no request wrapper, and the requestAs and createAs keys are applied.
+// ok is false when a schema cannot be read, or the createAs keys do not fit the Create body.
+func contractSchemas(p Policy, name string, ops map[verb]foundOp) (create, update, get *base.Schema, report issue.Report, ok bool) {
 	create, createErr := schemaOf(p.requestBody(ops[opCreate].op))
 	update, updateErr := schemaOf(p.requestBody(ops[opUpdate].op))
 	get, getErr := schemaOf(responseResourceProxy(ops[opGet].op, name))
-	var report issue.Report
 	if createErr == nil && updateErr == nil && getErr == nil {
 		create, update, report = p.shapeRequests(name, p.idProperty(ops), ops, create, update, get)
 	}
 	if createErr == nil {
 		folded, err := p.foldCreateBody(name, create)
 		if err != nil {
-			return issue.Report{{Code: "CREATE_AS_UNSUPPORTED", Location: fieldLocation(name, "createAs"), Message: err.Error(), Remediation: "Name an object field of the resource and the top-level Create fields that hold its properties."}}
+			return nil, nil, nil, issue.Report{{Code: "CREATE_AS_UNSUPPORTED", Location: fieldLocation(name, "createAs"), Message: err.Error(), Remediation: "Name an object field of the resource and the top-level Create fields that hold its properties."}}, false
 		}
 		create = folded
 	}
 	if createErr != nil || updateErr != nil || getErr != nil {
-		return nil
+		return nil, nil, nil, nil, false // Build reports the schema that it cannot read.
+	}
+	return create, update, get, report, true
+}
+
+// RequestOnlyFields returns the top-level fields that the Create or Update body has and the
+// resource component does not, sorted. The bodies are read as the field checks read them: without
+// the request wrapper, and with the requestAs and createAs keys applied, so a request property
+// that a key maps to a field of the resource is not one of them.
+//
+// A skip line of the resource component can name such a field, although the component has no
+// property of that name, for example a teamId that only the requests have. The field checks treat
+// it as skipped before any other check: the generated requests never send it, and only a request
+// that requires it is an issue (SKIP_REQUIRED_FIELD). A tool that reports a field line whose
+// field the resource component does not have accepts a skip line on one of these fields.
+func RequestOnlyFields(doc *v3.Document, name string, ids OperationIDs, p Policy) ([]string, error) {
+	ops, report := validateOperations(doc, name, ids, p)
+	if len(ops) != len(verbs) {
+		return nil, fmt.Errorf("%s: %w", name, report)
+	}
+	create, update, get, report, ok := contractSchemas(p, name, ops)
+	if !ok && len(report) != 0 {
+		return nil, fmt.Errorf("%s: %w", name, report)
+	}
+	if !ok {
+		return nil, fmt.Errorf("%s: a request or resource schema cannot be read; ValidateWithPolicy reports why", name)
+	}
+	var fields []string
+	for _, field := range append(propertyNames(create), propertyNames(update)...) {
+		if p.UpdateMaskInBody && isUpdateMaskName(field) {
+			// The body mask is no field: Build reads it as the mask, so a skip line cannot apply.
+			continue
+		}
+		if propertyOf(get, field) == nil {
+			fields = append(fields, field)
+		}
+	}
+	slices.Sort(fields)
+	return slices.Compact(fields), nil
+}
+
+func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.Report {
+	create, update, get, report, ok := contractSchemas(p, name, ops)
+	if !ok {
+		return report
 	}
 	// The component is validated by Survey. Build performs the detailed
 	// request/response match after this pass.

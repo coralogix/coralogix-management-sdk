@@ -26,3 +26,10 @@ type WidgetsAPIService struct{}
 
 // GetWidget is the only method with the type func() string.
 func (s *WidgetsAPIService) GetWidget() string { return "" }
+
+// Gadgets has the name that a rule gives the gadgets client, and another type, as a provider
+// clientset accessor of another client of the same tag does.
+func (s *WidgetsAPIService) Gadgets() int { return 0 }
+
+// RestGadgets is the gadgets client under another name.
+func (s *WidgetsAPIService) RestGadgets() bool { return false }

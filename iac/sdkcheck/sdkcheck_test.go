@@ -327,6 +327,103 @@ func TestNamesForARequestShapeThatDiffersFromTheResource(t *testing.T) {
 	}
 }
 
+// When the Update body is the same inline schema as the Create body, openapi-generator makes one
+// type with the name of the Create body, and the Update builder takes it.
+func TestNamesGiveTheUpdateBodyTheCreateBodyName(t *testing.T) {
+	spec := `openapi: 3.1.0
+info: {title: t, version: 1.0.0}
+paths:
+  /v1/things:
+    post:
+      tags: [Things Service]
+      operationId: ThingsService_CreateThing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: {type: string, x-coralogix-presence: true}
+      responses: {'200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Thing'}}}}}
+  /v1/things/{id}:
+    parameters: [{name: id, in: path, required: true, schema: {type: string}}]
+    get:
+      tags: [Things Service]
+      operationId: ThingsService_GetThing
+      responses: {'200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Thing'}}}}}
+    put:
+      tags: [Things Service]
+      operationId: ThingsService_UpdateThing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: {type: string, x-coralogix-presence: true}
+      responses: {'200': {description: ok, content: {application/json: {schema: {$ref: '#/components/schemas/Thing'}}}}}
+    delete:
+      tags: [Things Service]
+      operationId: ThingsService_DeleteThing
+      responses: {'200': {description: ok, content: {application/json: {schema: {type: object}}}}}
+components:
+  schemas:
+    Thing:
+      type: object
+      required: [id]
+      properties:
+        id: {type: string, readOnly: true}
+        name: {type: string, x-coralogix-presence: true}
+`
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	r, err := model.Build(doc, "Thing")
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, "Things Service", "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var setter, field bool
+	for _, ref := range refs {
+		switch ref.SDKName() {
+		case "ApiThingsServiceUpdateThingRequest.ThingsServiceCreateThingRequest":
+			setter = true
+		case "ThingsServiceCreateThingRequest.Name":
+			field = true
+		case "ApiThingsServiceUpdateThingRequest.ThingsServiceUpdateThingRequest", "ThingsServiceUpdateThingRequest":
+			t.Errorf("ref %s names an Update body type that the SDK does not have", ref.SDKName())
+		}
+	}
+	if !setter || !field {
+		t.Fatalf("refs do not set the Update body with the Create body type: setter %t, field %t", setter, field)
+	}
+}
+
+// A ByType method whose name belongs to a method of another type is found by its type.
+func TestIssuesFindsAByTypeMethodWhoseNameHasAnotherType(t *testing.T) {
+	const pkg = "example.com/fakesdk/widgets"
+	refs := []Ref{
+		{Path: "resource", Kind: KindPackage, Pkg: pkg, Name: "widgets"},
+		{Path: "client", Kind: KindMethod, Pkg: pkg, Owner: "WidgetsAPIService", Name: "Gadgets", Want: "func() bool", ByType: true},
+	}
+	loaded, err := Load(refs, filepath.Join("testdata", "fakesdk"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if report := Issues(refs, loaded, func(Ref) Source { return Source{Module: "example.com/fakesdk"} }); len(report) != 0 {
+		t.Fatalf("report = %v", report)
+	}
+	if refs[1].Name != "RestGadgets" {
+		t.Fatalf("ref name = %s, want RestGadgets", refs[1].Name)
+	}
+}
+
 // A collection resource sets the Get query with a builder method, and a written item that holds its
 // fields in a wrapper names them on the wrapper component.
 func TestNamesForAnOverwriteResource(t *testing.T) {

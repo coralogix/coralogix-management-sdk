@@ -118,6 +118,10 @@ type Operation struct {
 	// BodyTitleIsComponent: a component schema has the same name.
 	BodyTitle            string
 	BodyTitleIsComponent bool
+	// BodyAsCreate: the Update body is an inline schema without a title that is the same as the
+	// inline Create body. openapi-generator makes one type of the two, with the name of the Create
+	// body, so the Update builder takes that type.
+	BodyAsCreate bool
 	// RequestComponent is the component schema of the request wrapper property (Policy.RequestWrapper)
 	// of a Create or Update body, for example "IntegrationMetadata". It is "" without a wrapper, and
 	// when the wrapper property has an inline schema. It is the type that the SDK body holds: the

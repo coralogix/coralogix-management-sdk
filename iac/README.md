@@ -141,6 +141,19 @@ A tool renders the expand code from `ResourceField.RequestPath` and `Resource.Up
 
 A `skip` line on a top-level field also ends the shape errors that the model finds inside the field, such as an enum without its zero value: the resource does not manage the field.
 
+## A field that only the requests have
+
+A Create or Update body can have a top-level field that the resource component does not have, such as a `teamId` that the API reads only on write. The model reports it as `FIELD_LIFECYCLE_UNSUPPORTED`. A `skip` line of the resource component can name it: the model then skips it before the lifecycle check, the enum checks, and the other field checks, and Build does not add it, so the generated requests never send it. A request that requires the field still makes the line an error (`SKIP_REQUIRED_FIELD`).
+
+The resource component has no property of that name, so a tool that reports a field line without its field needs another list for a `skip` line. `model.RequestOnlyFields(doc, name, ids, policy)` returns the top-level fields that the Create or Update body has and the resource component does not, read as the field checks read them: without the request wrapper, and with the `requestAs` and `createAs` keys applied. With `Policy.UpdateMaskInBody`, the mask property of the Update body is not in the list: `Build` reads it as the mask. A `skip` line on one of them matches the contract. A line on a field that neither the resource component nor this list has matches nothing, and the tool reports it as unused.
+
+```yaml
+types:
+  RuleGroup:
+    fields:
+      teamId: {skip: true}   # Create and Update have it, Get does not
+```
+
 ## A collection resource
 
 Some released APIs have no item lifecycle. One write replaces every item of a kind, and one Get lists the items of every kind. The resource is then the list: the response component of Get, with one list field. `api.overwrite` describes it.
@@ -191,3 +204,7 @@ types:
 The golden contract is `model/testdata/overwritething.yaml`.
 
 A tool pins `iac` by the pseudo-version of a commit on `master`.
+
+## Create and Update with one inline body
+
+openapi-generator makes one Go type of two inline bodies that are the same schema, and names it after the first: the Create body. When the Update body is an inline schema without a title that renders the same as the inline Create body, the model sets `Update.BodyAsCreate`, and `sdkcheck` expects the Update builder to take the Create body type. The parsing rule groups API has such a pair: `RuleGroupsServiceUpdateRuleGroup(ctx, id).RuleGroupsServiceCreateRuleGroupRequest(body)`. A title names each body, so two titled bodies keep their own types.
