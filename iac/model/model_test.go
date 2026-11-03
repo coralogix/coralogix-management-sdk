@@ -139,6 +139,46 @@ func TestUint64KeepsFormatAndLength(t *testing.T) {
 	}
 }
 
+// protoc-gen-openapiv3 writes a 64-bit number as a digit string without a format. The same schema
+// can be a string that a proto author validates as digits, so the model keeps a String and records
+// the shape: the pattern without a sign is uint64, the one with a sign int64. Another digit pattern
+// records nothing, and an explicit integer format is an integer string as before.
+func TestDigitStringStaysAStringAndRecordsTheShape(t *testing.T) {
+	for _, test := range []struct {
+		pattern, format string
+		kind            Kind
+		wire            bool
+		digits          string
+	}{
+		{pattern: "^[0-9]+$", kind: String, digits: "uint64"},
+		{pattern: "^-?[0-9]+$", kind: String, digits: "int64"},
+		{pattern: "^[A-Z0-9]+$", kind: String},
+		{pattern: "^[0-9]+$", format: "uint64", kind: Integer, wire: true},
+	} {
+		format := ""
+		if test.format != "" {
+			format = "\n      format: " + test.format
+		}
+		doc := loadComponent(t, `
+    Counter:
+      type: string
+      pattern: '`+test.pattern+`'`+format+`
+      minLength: 1
+      maxLength: 20
+`)
+		typeValue, problems := Survey(doc, "Counter")
+		if len(problems) != 0 {
+			t.Fatal(problems)
+		}
+		if typeValue.Kind != test.kind || typeValue.WireString != test.wire || typeValue.DigitString != test.digits {
+			t.Errorf("%s %s: type = %+v, want kind %s, wire string %t, digit string %q", test.pattern, test.format, typeValue, test.kind, test.wire, test.digits)
+		}
+		if typeValue.MaxLength == nil || *typeValue.MaxLength != 20 {
+			t.Errorf("%s %s: maxLength = %v, want 20", test.pattern, test.format, typeValue.MaxLength)
+		}
+	}
+}
+
 func TestPresenceContract(t *testing.T) {
 	data := validSpec(t)
 	doc, err := Load(data)
