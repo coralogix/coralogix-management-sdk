@@ -423,3 +423,59 @@ func TestIssuesFindsAByTypeMethodWhoseNameHasAnotherType(t *testing.T) {
 		t.Fatalf("ref name = %s, want RestGadgets", refs[1].Name)
 	}
 }
+
+// A collection resource sets the Get query with a builder method, and a written item that holds its
+// fields in a wrapper names them on the wrapper component.
+func TestNamesForAnOverwriteResource(t *testing.T) {
+	raw, err := os.ReadFile("../model/testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(raw)
+	if err != nil {
+		t.Fatal(err)
+	}
+	write := "ThingsService_OverwriteKindAThings"
+	policy := model.Policy{
+		Existing: true, Overwrite: true, GetQuery: map[string]string{"kind": "THING_KIND_A"},
+		Operations:      model.OperationIDs{Create: write, Get: "ThingsService_ListThings", Update: write, Delete: write},
+		RequestWrappers: map[string]string{"Thing": "thing"},
+		RequestNames:    map[string]string{"Thing.enabled": "disabled"},
+		RequestNegated:  []string{"Thing.enabled"},
+	}
+	r, err := model.BuildWithPolicy(doc, "ThingList", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	has := func(path string, kind Kind, want string) {
+		t.Helper()
+		for _, ref := range refs {
+			if ref.Path == path && ref.Kind == kind && strings.TrimSpace(ref.SDKName()+" "+ref.Want) == want {
+				return
+			}
+		}
+		t.Errorf("no %s ref %q at %s", kind, want, path)
+	}
+	has("get.query.kind", KindMethod, "ApiThingsServiceListThingsRequest.Kind func(kind ThingKind) ApiThingsServiceListThingsRequest")
+	has("get.query.kind.THING_KIND_A", KindConst, "THINGKIND_THING_KIND_A")
+	has("delete.body", KindType, "OverwriteKindAThingsRequest")
+	has("create.body.things.name.via.thing", KindField, "KindAThingWrite.Thing *ThingCore")
+	has("create.body.things.name", KindField, "ThingCore.Name *string")
+	has("create.body.things.enabled", KindField, "ThingCore.Disabled *bool")
+	has("create.body.things.aRules", KindField, "KindAThingWrite.ARules *Rules")
+	// The response keeps its own names.
+	has("fields.things.enabled", KindField, "Thing.Enabled *bool")
+	for _, ref := range refs {
+		if strings.HasPrefix(ref.Path, "fields.") && strings.Contains(ref.Path, ".via.") {
+			t.Errorf("response ref %s goes through a request wrapper", ref.Path)
+		}
+	}
+}

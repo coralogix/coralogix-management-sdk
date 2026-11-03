@@ -59,6 +59,15 @@ type Policy struct {
 	// {"Thing.definitionKey": "integrationKey", "Thing.parameters": "spec.parameters"}. The API
 	// names a value in a request differently from the Get response.
 	RequestNames map[string]string
+	// RequestWrappers maps a nested component of the resource to the property of its request
+	// component that holds its fields, for example {"Policy": "policy"} when a write sends each
+	// item as {"policy": {"name": ...}, "logRules": {...}} and Get returns {"name": ..., "logRules": ...}.
+	// A field of the request component beside the wrapper keeps its place. A nested RequestNames
+	// path is then relative to the wrapper.
+	RequestWrappers map[string]string
+	// RequestNegated lists "Component.field" of boolean fields that a request sends negated, under
+	// the name that RequestNames gives, for example enabled sent as disabled.
+	RequestNegated []string
 	// CustomMethods means Get, Update, and Delete are not the Create path with an id.
 	// Get and Delete each carry the same {id} path parameter. Update has no path
 	// parameter. New resources leave this false.
@@ -88,6 +97,16 @@ type Policy struct {
 	// Operations names the lifecycle operationIds, and the List, from behavior-overrides.
 	// Flags still override an empty slot. A flag and the file cannot name different ids.
 	Operations OperationIDs
+	// Overwrite means that the resource is the whole list that one write operation replaces (a
+	// collection resource): Get has no path parameter and returns every item, and Create, Update,
+	// and Delete are that one write, which Operations names three times. Delete sends every field
+	// empty. The write response is not the resource, so a tool reads the resource with Get after
+	// Create and Update. The write path can differ from the Get path.
+	Overwrite bool
+	// GetQuery are the query parameters that Get always sends, with their values, for a Get that
+	// returns the items of several resources, such as one list per source type. The parameter is
+	// not a resource field. Only an Overwrite resource has it.
+	GetQuery map[string]string
 	// DeleteOperation is the operationId of the operation that removes the resource
 	// when the API has no DELETE. It is a POST on the Get path plus one segment, for
 	// example /things/{id}/archive, with the id path parameter of Get, no request
@@ -263,6 +282,9 @@ func oneOperationID(v verb, fromFile, flag string) (string, error) {
 
 // methods returns the HTTP methods that the operation of the lifecycle step may use.
 func (p Policy) methods(v verb) []string {
+	if p.Overwrite && v != opGet {
+		return []string{"PUT", "POST"}
+	}
 	if v == opDelete && p.DeleteOperation != "" {
 		return []string{"POST"}
 	}
@@ -448,11 +470,12 @@ type EnumValue struct {
 	API, Name string
 }
 
-// asMap makes t, a list of objects, a map keyed by a string property of the object when a
-// keyedBy line says so. The map value is the rest of the object, or one property of it. A line
-// that does not fit leaves t a list: the generator reports the line.
+// asMap makes t, a list or a set of objects, a map keyed by a string property of the object when
+// a keyedBy line says so. The map value is the rest of the object, or one property of it. A map has
+// no order, so an unordered list keys the same way. A line that does not fit leaves t as it is:
+// the generator reports the line.
 func (p *Policy) asMap(component, field string, t *Type) {
-	if p == nil || t == nil || component == "" || t.Kind != List || t.Elem == nil || t.Elem.Kind != Object {
+	if p == nil || t == nil || component == "" || t.Kind != List && t.Kind != Set || t.Elem == nil || t.Elem.Kind != Object {
 		return
 	}
 	line, ok := p.KeyedBy[component+"."+field]

@@ -76,6 +76,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceCreateOutgoin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createOutgoingWebhookRequest == nil {
+		return localVarReturnValue, nil, reportError("createOutgoingWebhookRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1327,6 +1330,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceTestOutgoingW
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.testOutgoingWebhookRequest == nil {
+		return localVarReturnValue, nil, reportError("testOutgoingWebhookRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1469,6 +1475,9 @@ func (a *OutgoingWebhooksServiceAPIService) OutgoingWebhooksServiceUpdateOutgoin
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.updateOutgoingWebhookRequest == nil {
+		return localVarReturnValue, nil, reportError("updateOutgoingWebhookRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

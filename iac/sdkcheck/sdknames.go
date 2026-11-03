@@ -372,6 +372,27 @@ type resolver struct {
 }
 
 // addOnce adds a type ref that another walk of the same component may have added.
+// requestHolder returns the Go type that holds f in the request object owner, and the property
+// name of f there. A field of a request item that sits in a wrapper or under another name
+// (RequestPath) is a field of the last object of the path; the objects on the way are fields too.
+func (s *resolver) requestHolder(path, owner string, f *model.Field) (holder, leaf string) {
+	if len(f.RequestPath) == 0 {
+		return owner, f.Name
+	}
+	holder = owner
+	for i, segment := range f.RequestPath[:len(f.RequestPath)-1] {
+		if i >= len(f.RequestObjects) {
+			break
+		}
+		object := goTypeName(f.RequestObjects[i])
+		via := path + ".via." + segment
+		s.addOnce(Ref{Path: via, Kind: KindField, Owner: holder, Name: goFieldName(segment), Want: "*" + object, WantValue: object, Rule: RuleProperty})
+		s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: f.RequestObjects[i]})
+		holder = object
+	}
+	return holder, f.RequestPath[len(f.RequestPath)-1]
+}
+
 func (s *resolver) addOnce(ref Ref) {
 	if !slices.ContainsFunc(s.refs, func(r Ref) bool { return r.Kind == ref.Kind && r.Name == ref.Name && r.Path == ref.Path }) {
 		s.add(ref)
@@ -404,6 +425,22 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	s.add(Ref{Path: path, Kind: KindMethod, Owner: client, Name: method,
 		Want: "func(" + params + ") " + builder, Rule: RuleOperationID})
 	s.add(Ref{Path: path, Kind: KindType, Name: builder, Rule: RuleOperationID})
+	if name == "get" {
+		for _, q := range r.GetQuery {
+			// The Go SDK sets a query parameter with a builder method named after it.
+			goType, err := ValueType(q.Type)
+			if err != nil {
+				return fmt.Errorf("%s.query.%s: %w", path, q.Name, err)
+			}
+			s.add(Ref{Path: path + ".query." + q.Name, Kind: KindMethod, Owner: builder, Name: camelize(q.Name),
+				Want: "func(" + lowerFirst(camelize(q.Name)) + " " + goType + ") " + builder, Rule: RuleParameter})
+			if q.Type.Kind == model.Enum {
+				enum := goTypeName(q.Type.Schema)
+				s.addOnce(Ref{Path: path + ".query." + q.Name, Kind: KindType, Name: enum, Rule: RuleComponent, Schema: q.Type.Schema})
+				s.add(Ref{Path: path + ".query." + q.Name + "." + q.Value, Kind: KindConst, Name: enumConstName(enum, q.Value), Rule: RuleEnumValue})
+			}
+		}
+	}
 	if name == "update" && !r.Replace && !r.MaskInBody {
 		s.add(Ref{Path: path + ".mask", Kind: KindMethod, Owner: builder, Name: goFieldName(r.UpdateMask),
 			Want: "func(" + lowerFirst(goFieldName(r.UpdateMask)) + " string) " + builder, Rule: RuleParameter})
@@ -513,7 +550,12 @@ func (s *resolver) nested(path string, t *model.Type) error {
 		s.add(Ref{Path: path, Kind: KindType, Name: name, Rule: RuleComponent, Schema: t.Schema})
 		for _, f := range t.Fields {
 			child := path + "." + f.Name
-			if err := s.field(child, name, f.Name, f.Type, f.Attrs.Required); err != nil {
+			holder, leaf := name, f.Name
+			if t.Model != "" {
+				// A request type: the field can sit in a wrapper or under another name.
+				holder, leaf = s.requestHolder(child, name, f)
+			}
+			if err := s.field(child, holder, leaf, f.Type, f.Attrs.Required); err != nil {
 				return err
 			}
 			if err := s.nested(child, f.Type); err != nil {

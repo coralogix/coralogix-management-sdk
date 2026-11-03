@@ -154,6 +154,55 @@ types:
       teamId: {skip: true}   # Create and Update have it, Get does not
 ```
 
+## A collection resource
+
+Some released APIs have no item lifecycle. One write replaces every item of a kind, and one Get lists the items of every kind. The resource is then the list: the response component of Get, with one list field. `api.overwrite` describes it.
+
+| Key | Meaning | Model |
+|---|---|---|
+| `api.overwrite` | The resource is the whole list that one write replaces. `api.operations` names that write as `create`, `update`, and `delete`. Delete sends every list empty. The write response is not the resource, so a tool reads the resource with Get after Create and Update. The write path can differ from the Get path. | `Policy.Overwrite`, `Resource.Overwrite` |
+| `api.overwrite.getQuery` | Query parameters that Get always sends, with their values, when Get lists the items of more than one resource. The value must be one that the parameter accepts. | `Policy.GetQuery`, `Resource.GetQuery` (sorted, with the type of each parameter) |
+| `requestWrapper` (tool line of a nested component) | The request object of the component holds its fields in this property, for example `{"policy": {"name": ...}, "logRules": {...}}` for a Get item `{"name": ..., "logRules": ...}`. A field beside the wrapper keeps its place. A new field of the wrapper needs no line. | `Policy.RequestWrappers`, `Field.RequestPath`, `Field.RequestObjects` |
+| `requestAs` (field line of a nested component) | As on the resource component, relative to the `requestWrapper` of the component. | `Policy.RequestNames`, `Field.RequestPath` |
+| `negate` (field line) | The request sends the opposite of the boolean field, for example `enabled` sent as `disabled`. | `Policy.RequestNegated`, `Field.Negated` |
+
+An overwrite resource is a singleton: no call takes an id. Each field that the write sends is a list or a map, because Delete sends it empty, and the list takes the item limits of the write: Get lists the items of every resource that its query can select. A required list that accepts `[]` is the contract here, not an issue.
+
+When the write of one kind sends one arm of a `oneOf` of the Get item as a plain field, it always selects that arm. The other arms are not in the request, so they are computed. A tool can leave them out of the resource.
+
+```yaml
+api:
+  overwrite:
+    getQuery: {source_type: SOURCE_TYPE_LOGS}
+  operations:
+    create: PoliciesService_AtomicOverwriteLogPolicies
+    get: PoliciesService_GetCompanyPolicies
+    update: PoliciesService_AtomicOverwriteLogPolicies
+    delete: PoliciesService_AtomicOverwriteLogPolicies
+types:
+  Policy:
+    requestWrapper: policy         # the tool reads this line into Exceptions.RequestWrappers
+    fields:
+      enabled: {requestAs: disabled, negate: true}
+```
+
+`sdkcheck.Names` adds the builder method of each Get query parameter and the constant of an enum value, the inline body of the write for Delete, and the fields of a request item through its wrapper (`KindAThingWrite.Thing`, then `ThingCore.Name`). The response keeps its own names.
+
+| Code | Problem |
+|---|---|
+| `OVERWRITE_SHAPE_UNSUPPORTED` | An operation has a path parameter, or Create, Update, and Delete are not one write. |
+| `OVERWRITE_FIELD_NOT_COLLECTION` | The write sends a field that is not a list or a map. |
+| `GET_QUERY_UNKNOWN` | Get has no query parameter of that name. |
+| `GET_QUERY_VALUE_INVALID` | The parameter does not accept the value. |
+| `REQUEST_WRAPPER_NOT_FOUND` | The request object of the component has no object property of that name. |
+| `REQUEST_NAME_NOT_FOUND` | A nested `requestAs` path is not in the request object. |
+| `REQUEST_NAME_CONFLICT` | A field is both beside and inside the wrapper, or two lines map one field. |
+| `REQUEST_NAME_INCONSISTENT` | Create and Update hold a nested field at different paths. |
+| `REQUEST_NEGATED_UNSUPPORTED` | The negated field is not a boolean. |
+| `REQUEST_NAME_UNKNOWN_FIELD` | A nested line names a component that the resource does not hold, or matches no request of it. |
+
+The golden contract is `model/testdata/overwritething.yaml`.
+
 A tool pins `iac` by the pseudo-version of a commit on `master`.
 
 ## Create and Update with one inline body

@@ -13,6 +13,7 @@ package outgoing_webhooks_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the OutgoingWebhookInputData type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutgoingWebhookInputData{}
 
-// OutgoingWebhookInputData Outgoing webhook input data.
+// OutgoingWebhookInputData Outgoing webhook input data. The selected config determines the type. A URL is required for Generic, Slack, Microsoft Teams workflow, Jira, Opsgenie, and Demisto webhooks. Microsoft Teams writes are rejected because this type is deprecated. Send Log needs no URL. A service policy may reject a supplied Send Log URL. An update replaces the config and cannot change the webhook type.
 type OutgoingWebhookInputData struct {
 	AwsEventBridge *AwsEventBridgeConfig `json:"awsEventBridge,omitempty"`
 	Demisto *DemistoConfig `json:"demisto,omitempty"`
@@ -33,7 +34,7 @@ type OutgoingWebhookInputData struct {
 	// Ms teams workflow config.
 	MsTeamsWorkflow map[string]interface{} `json:"msTeamsWorkflow,omitempty"`
 	// Display name.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Opsgenie config.
 	Opsgenie map[string]interface{} `json:"opsgenie,omitempty"`
 	PagerDuty *PagerDutyConfig `json:"pagerDuty,omitempty"`
@@ -44,6 +45,7 @@ type OutgoingWebhookInputData struct {
 	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _OutgoingWebhookInputData OutgoingWebhookInputData
@@ -52,8 +54,9 @@ type _OutgoingWebhookInputData OutgoingWebhookInputData
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewOutgoingWebhookInputData() *OutgoingWebhookInputData {
+func NewOutgoingWebhookInputData(name string) *OutgoingWebhookInputData {
 	this := OutgoingWebhookInputData{}
+	this.Name = name
 	return &this
 }
 
@@ -321,36 +324,28 @@ func (o *OutgoingWebhookInputData) SetMsTeamsWorkflow(v map[string]interface{}) 
 	o.MsTeamsWorkflow = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *OutgoingWebhookInputData) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *OutgoingWebhookInputData) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OutgoingWebhookInputData) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *OutgoingWebhookInputData) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 // GetOpsgenie returns the Opsgenie field value if set, zero value otherwise.
@@ -579,9 +574,7 @@ func (o OutgoingWebhookInputData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MsTeamsWorkflow) {
 		toSerialize["msTeamsWorkflow"] = o.MsTeamsWorkflow
 	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
+	toSerialize["name"] = o.Name
 	if !IsNil(o.Opsgenie) {
 		toSerialize["opsgenie"] = o.Opsgenie
 	}
@@ -600,45 +593,50 @@ func (o OutgoingWebhookInputData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["genericWebhook"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["slack"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["pagerDuty"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["sendLog"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["emailGroup"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["microsoftTeams"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["jira"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["opsgenie"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["demisto"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["awsEventBridge"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["ibmEventNotifications"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["msTeamsWorkflow"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["genericWebhook"]; exists {
@@ -686,6 +684,68 @@ func (o OutgoingWebhookInputData) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *OutgoingWebhookInputData) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	requiredOneOfGroup0Matches := 0
+	if _, exists := allProperties["genericWebhook"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["slack"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["pagerDuty"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["sendLog"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["emailGroup"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["microsoftTeams"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["jira"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["opsgenie"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["demisto"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["awsEventBridge"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["ibmEventNotifications"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if _, exists := allProperties["msTeamsWorkflow"]; exists {
+		requiredOneOfGroup0Matches++
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
+	}
+
 	varOutgoingWebhookInputData := _OutgoingWebhookInputData{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -700,44 +760,44 @@ func (o *OutgoingWebhookInputData) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["genericWebhook"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["slack"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["pagerDuty"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["sendLog"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["emailGroup"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["microsoftTeams"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["jira"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["opsgenie"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["demisto"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["awsEventBridge"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["ibmEventNotifications"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["msTeamsWorkflow"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [genericWebhook, slack, pagerDuty, sendLog, emailGroup, microsoftTeams, jira, opsgenie, demisto, awsEventBridge, ibmEventNotifications, msTeamsWorkflow] may be set"}
 		}
 
@@ -758,6 +818,7 @@ func (o *OutgoingWebhookInputData) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "url")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err
