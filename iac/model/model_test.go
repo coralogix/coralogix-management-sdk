@@ -1833,3 +1833,69 @@ func TestOneOfNoArmRule(t *testing.T) {
 		})
 	}
 }
+
+// A request can require more items than the response declares: another write can leave fewer
+// items than a request allows. The resource takes the minimum of the requests. A request that
+// allows fewer items than the response, or a Create and an Update that disagree, is still refused.
+func TestRequestCanRequireMoreItemsThanTheResponse(t *testing.T) {
+	const create = "                destinations:\n                  type: array\n                  items: {type: string, pattern: '^https://[a-z.]+$'}\n                tags:\n"
+	const response = "        destinations:\n          type: array\n          items: {type: string, pattern: '^https://[a-z.]+$'}\n"
+	withMin := func(text string, min int) string {
+		return strings.Replace(text, "type: array\n", fmt.Sprintf("type: array\n%sminItems: %d\n", strings.Repeat(" ", strings.Index(text, "type: array")-strings.LastIndex(text[:strings.Index(text, "type: array")], "\n")-1), min), 1)
+	}
+	tests := map[string]struct {
+		createMin, updateMin, responseMin int // 0: none
+		wantMin                           int64
+		wantIssue                         bool
+	}{
+		"requests require one item":               {createMin: 1, updateMin: 1, wantMin: 1},
+		"response requires one item":              {responseMin: 1, wantIssue: true},
+		"Create and Update disagree":              {createMin: 1, updateMin: 2, wantIssue: true},
+		"requests require more than the response": {createMin: 2, updateMin: 2, responseMin: 1, wantMin: 2},
+	}
+	for name, test := range tests {
+		t.Run(name, func(t *testing.T) {
+			spec := string(validSpec(t))
+			if strings.Count(spec, create) != 2 || strings.Count(spec, response) != 1 {
+				t.Fatal("fixture text not found")
+			}
+			first := strings.Index(spec, create)
+			second := first + len(create) + strings.Index(spec[first+len(create):], create)
+			parts := []string{spec[:first], create, spec[first+len(create) : second], create, spec[second+len(create):]}
+			if test.createMin > 0 {
+				parts[1] = withMin(create, test.createMin)
+			}
+			if test.updateMin > 0 {
+				parts[3] = withMin(create, test.updateMin)
+			}
+			spec = strings.Join(parts, "")
+			if test.responseMin > 0 {
+				spec = strings.Replace(spec, response, withMin(response, test.responseMin), 1)
+			}
+			doc, err := Load([]byte(spec))
+			if err != nil {
+				t.Fatal(err)
+			}
+			var found []issue.Issue
+			for _, item := range Validate(doc, "Thing", OperationIDs{}) {
+				if item.Location == "components.schemas.Thing.destinations" {
+					found = append(found, item)
+				}
+			}
+			resource, buildErr := Build(doc, "Thing")
+			if test.wantIssue {
+				if len(found) != 1 || found[0].Code != "FIELD_TYPE_INCONSISTENT" || buildErr == nil {
+					t.Fatalf("issues = %v, Build error = %v, want one FIELD_TYPE_INCONSISTENT and a Build error", found, buildErr)
+				}
+				return
+			}
+			if len(found) != 0 || buildErr != nil {
+				t.Fatalf("issues = %v, Build error = %v, want none", found, buildErr)
+			}
+			index := slices.IndexFunc(resource.Fields, func(field *ResourceField) bool { return field.Name == "destinations" })
+			if got := resource.Fields[index].Type.MinItems; got == nil || *got != test.wantMin {
+				t.Fatalf("destinations minItems = %v, want %d", got, test.wantMin)
+			}
+		})
+	}
+}
