@@ -1056,9 +1056,10 @@ func TestCollectionContracts(t *testing.T) {
 
 func TestCollectionSetPreservesMapGetAndListRequests(t *testing.T) {
 	object := func(fieldKind Kind) *Type {
-		return &Type{Kind: Object, WireKind: Object, Schema: "Item", Fields: []*Field{{
-			Name: "enabled", Attrs: Attrs{Required: true}, Type: &Type{Kind: fieldKind, WireKind: fieldKind},
-		}}}
+		return &Type{Kind: Object, WireKind: Object, Schema: "Item", Fields: []*Field{
+			{Name: "enabled", Attrs: Attrs{Required: true}, Type: &Type{Kind: fieldKind, WireKind: fieldKind}},
+			{Name: "scopes", Type: &Type{Kind: List, WireKind: List, Elem: &Type{Kind: String, WireKind: String}}},
+		}}
 	}
 	policy := Policy{Sets: []string{"Thing.items"}}
 	get := &Type{Kind: Map, WireKind: Map, Elem: object(Bool)}
@@ -1102,6 +1103,34 @@ func TestCollectionSetPreservesMapGetAndListRequests(t *testing.T) {
 			t.Fatal("expected list response/map request to fail")
 		}
 	})
+}
+
+func TestCollectionSetThenKeyedByProducesTerraformMap(t *testing.T) {
+	object := &Type{Kind: Object, WireKind: Object, Schema: "Item", Fields: []*Field{
+		{Name: "name", Type: &Type{Kind: String, WireKind: String}},
+		{Name: "enabled", Type: &Type{Kind: Bool, WireKind: Bool}},
+	}}
+	policy := Policy{
+		Sets: []string{"Thing.items"},
+		KeyedBy: map[string]KeyedLine{
+			"Thing.items": {Key: "name"},
+		},
+	}
+	get := &Type{Kind: Map, WireKind: Map, Elem: object}
+	create := &Type{Kind: List, WireKind: List, Elem: object}
+	update := &Type{Kind: List, WireKind: List, Elem: object}
+	for _, typ := range []*Type{get, create, update} {
+		policy.asSet("Thing", "items", typ)
+	}
+	if err := mergeRequests("Thing.items", get, create, update); err != nil {
+		t.Fatalf("collection: set followed by keyedBy should accept matching item types: %v", err)
+	}
+	if get.Kind != Map || get.Keyed == nil {
+		t.Fatalf("Terraform response kind = %s, keyed = %#v; want a keyed map", get.Kind, get.Keyed)
+	}
+	if got := get.CreateType(); got.Kind != Map || got.WireKind != List || got.Keyed == nil {
+		t.Fatalf("Terraform Create type = (%s, wire %s), keyed = %#v; want keyed map backed by API list", got.Kind, got.WireKind, got.Keyed)
+	}
 }
 
 func TestPatchUpdateContract(t *testing.T) {
