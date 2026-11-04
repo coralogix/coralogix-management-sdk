@@ -203,12 +203,24 @@ func isSupportedMapGetListRequest(get, req *Type) bool {
 }
 
 func sameTypeLimits(get, req *Type) bool {
-	if get.Kind == Set && req.Kind == Set && get.WireKind == Map && req.WireKind == List {
-		return samePointer(get.MinLength, req.MinLength) && samePointer(get.MaxLength, req.MaxLength) && get.Pattern == req.Pattern &&
-			samePointer(get.Minimum, req.Minimum) && samePointer(get.Maximum, req.Maximum) &&
-			collectionLimit(get.MinItems) == collectionLimit(req.MinItems) && samePointer(get.MaxItems, req.MaxItems)
+	if isSupportedMapGetListRequest(get, req) {
+		return sameMapListSetLimits(get, req)
 	}
 	return sameLimits(get, req)
+}
+
+func sameMapListSetLimits(get, req *Type) bool {
+	return samePointer(get.MinLength, req.MinLength) &&
+		samePointer(get.MaxLength, req.MaxLength) &&
+		get.Pattern == req.Pattern &&
+		samePointer(get.Minimum, req.Minimum) &&
+		samePointer(get.Maximum, req.Maximum) &&
+		sameCollectionLimit(get.MinItems, req.MinItems) &&
+		samePointer(get.MaxItems, req.MaxItems)
+}
+
+func sameCollectionLimit(a, b *int64) bool {
+	return collectionLimit(a) == collectionLimit(b)
 }
 
 // Empty and omitted collection limits have the same meaning for these wire
