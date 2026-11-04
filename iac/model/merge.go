@@ -156,12 +156,15 @@ func mergeFields(location string, get, req *Type, op verb) error {
 func typeDifference(get, req *Type, op verb) string {
 	// A set override can normalize one legacy mismatch: Get returns an object
 	// map, while Create and Replace accept lists of matching objects.
-	if get.Kind == Set && req.Kind == Set && (get.WireKind == Map || req.WireKind == Map) &&
-		!(get.WireKind == Map && req.WireKind == List && get.Elem != nil && req.Elem != nil && get.Elem.Kind == Object && req.Elem.Kind == Object) {
-		return fmt.Sprintf("wire collection kinds %s and %s are not supported with collection: set", req.WireKind, get.WireKind)
+	if get.Kind == Set && req.Kind == Set {
+		switch {
+		case isSupportedMapGetListRequest(get, req):
+		case get.WireKind == Map || req.WireKind == Map:
+			return fmt.Sprintf("wire collection kinds %s and %s are not supported with collection: set", req.WireKind, get.WireKind)
+		}
 	}
 	switch {
-	case get.Kind != req.Kind && !(get.Kind == Set && req.Kind == Set && get.WireKind == Map && req.WireKind == List && get.Elem != nil && req.Elem != nil && get.Elem.Kind == Object && req.Elem.Kind == Object):
+	case get.Kind != req.Kind && !isSupportedMapGetListRequest(get, req):
 		return fmt.Sprintf("kind %s, want %s", req.Kind, get.Kind)
 	case get.Format != req.Format || get.WireString != req.WireString:
 		return fmt.Sprintf("format %q, want %q", req.Format, get.Format)
@@ -190,6 +193,13 @@ func writeLimits(get, req *Type) *Type {
 
 func raisesMinItems(get, req *Type) bool {
 	return !get.requestMinItems && req.MinItems != nil && (get.MinItems == nil || *req.MinItems > *get.MinItems)
+}
+
+func isSupportedMapGetListRequest(get, req *Type) bool {
+	return get.Kind == Set && req.Kind == Set &&
+		get.WireKind == Map && req.WireKind == List &&
+		get.Elem != nil && req.Elem != nil &&
+		get.Elem.Kind == Object && req.Elem.Kind == Object
 }
 
 func sameTypeLimits(get, req *Type) bool {
