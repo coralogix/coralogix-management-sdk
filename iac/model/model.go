@@ -276,7 +276,7 @@ type OneOfGroup struct {
 type Type struct {
 	Kind Kind
 	// WireKind is the collection kind used by this operation's API schema. Kind is
-	// the Terraform-facing kind and can differ when an explicit collection: set
+	// the consumer-facing kind and can differ when an explicit collection: set
 	// override normalizes a list or a map of objects.
 	WireKind Kind
 	// CreateWireKind and UpdateWireKind preserve the corresponding request shape
