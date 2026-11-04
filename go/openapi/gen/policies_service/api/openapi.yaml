@@ -2656,7 +2656,7 @@
             "minLength": 1,
             "pattern": "^[A-Za-z](?:[A-Za-z0-9_]|\\.[A-Za-z0-9_])*$",
             "type": "string",
-            "description": "The dataspace. Only `default` is supported. An omitted dataspace is `default`, and the service returns it in lower case.",
+            "description": "The dataspace. Only `default` is supported, in any letter case; the service rejects another value with `400`. A log policy target reads back with the value as sent, and with `default` when it is omitted. Span and RUM policies reject targets in a request: a span policy reads back with one `spans` target in `default`, and a RUM policy with none.",
             "examples": [
               "default"
             ]
