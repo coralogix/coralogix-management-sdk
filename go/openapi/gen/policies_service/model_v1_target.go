@@ -26,7 +26,7 @@ type V1Target struct {
 	ArchiveRetention *ArchiveRetention `json:"archiveRetention,omitempty"`
 	// The dataset.
 	Dataset *string `json:"dataset,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// The dataspace. Only `default` is supported. An omitted dataspace is `default`, and the service returns it in lower case.
+	// The dataspace. Only `default` is supported, in any letter case; the service rejects another value with `400`. A log policy target reads back with the value as sent, and with `default` when it is omitted. Span and RUM policies reject targets in a request: a span policy reads back with one `spans` target in `default`, and a RUM policy with none.
 	Dataspace *string `json:"dataspace,omitempty" validate:"regexp=^[A-Za-z](?:[A-Za-z0-9_]|\\\\.[A-Za-z0-9_])*$"`
 	// The base priority for the target.
 	Priority *QuotaV1Priority `json:"priority,omitempty"`
