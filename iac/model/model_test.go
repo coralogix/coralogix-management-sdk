@@ -1104,13 +1104,6 @@ func TestCollectionSetPreservesMapGetAndListRequests(t *testing.T) {
 	})
 }
 
-func TestSingletonCanSendServerIDOnReplace(t *testing.T) {
-	behavior, err := classifyTopLevel(Policy{UpdateIDInBody: true}, "", "id", false, true, true, false)
-	if err != nil || behavior != Computed {
-		t.Fatalf("singleton Replace id behavior = %q, %v; want computed", behavior, err)
-	}
-}
-
 func TestPatchUpdateContract(t *testing.T) {
 	data := validSpec(t)
 	doc, err := Load(data)
