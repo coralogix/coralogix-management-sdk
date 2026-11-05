@@ -176,6 +176,10 @@ type Response struct {
 	// not return the resource (an existing resource). It is a string, and Create reads the
 	// resource with Get.
 	ID string
+	// IDWrapperField is the property inside ID that holds the id when ID is a one-property object
+	// that the policy unwraps, as the id field of the resource is: "id" for {"thingId": {"id": 1}}.
+	// The id is then a string or an integer. "" when ID holds the id itself.
+	IDWrapperField string
 	// Empty is true when the response schema has no fields, for example many
 	// Delete responses. The SDK then returns map[string]interface{}.
 	Empty bool

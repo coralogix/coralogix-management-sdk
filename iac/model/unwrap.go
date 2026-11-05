@@ -29,10 +29,14 @@ func (r *Resource) unwrap() error {
 		if err != nil {
 			return err
 		}
+		// The id can be inside a wrapper: the calls send the inner value as the path parameter, and
+		// the wrapper on the type says where to read it. Only one wrapper, around an id type.
 		if len(t.Wrappers) != 0 && f.Name == r.IDField {
-			return unwrapError(fieldLocation(r.Name, f.Name), "UNWRAP_COMPONENT_UNSUPPORTED",
-				"The resource id cannot be inside a wrapper: the generated calls send it as a path parameter.",
-				"Delete the unwrap line or the list entry that names the wrapper of the id.")
+			if _, ok := supportedIDType(t); !ok || len(t.Wrappers) != 1 {
+				return unwrapError(fieldLocation(r.Name, f.Name), "UNWRAP_COMPONENT_UNSUPPORTED",
+					"The resource id can be inside one wrapper only, around a string, int32, or int64 value: the generated calls send that value as a path parameter.",
+					"Delete the unwrap line or the list entry that names the wrapper of the id.")
+			}
 		}
 		f.Type = t
 	}

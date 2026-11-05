@@ -480,8 +480,13 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	s.add(Ref{Path: path, Kind: KindMethod, Owner: builder, Name: "Execute",
 		Want: "func() (*" + resp + ", *http.Response, error)", Rule: RuleOperationID})
 	if op.Response.ID != "" {
+		want := "string"
+		if op.Response.IDWrapperField != "" && r.IDType != nil && len(r.IDType.Wrappers) == 1 {
+			// The response holds the wrapper of the id, as the id field of the resource does.
+			want = goTypeName(r.IDType.Wrappers[0].Schema)
+		}
 		s.add(Ref{Path: path + ".response." + op.Response.ID, Kind: KindField, Owner: resp,
-			Name: goFieldName(op.Response.ID), Want: "*string", WantValue: "string", Rule: RuleProperty})
+			Name: goFieldName(op.Response.ID), Want: "*" + want, WantValue: want, Rule: RuleProperty})
 	}
 	if r.WriteReturnsResource && (name == "create" || name == "update") {
 		// A tool copies each resource field from the write response.

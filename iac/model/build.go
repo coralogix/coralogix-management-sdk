@@ -133,14 +133,18 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 		if index < 0 {
 			return nil, nil, fmt.Errorf("%s: no field %q for the id path parameter", r.Name, r.IDField)
 		}
-		r.IDType = r.Fields[index].Type
-		if r.Create.Response.ID != "" && r.IDType.Kind != String {
-			return nil, nil, fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
-		}
 	}
 	r.pruneSkipped()
 	if err := r.unwrap(); err != nil {
 		return nil, nil, err
+	}
+	// The id type is the value after unwrap: an id inside a wrapper is the value inside it.
+	if !r.Singleton {
+		index := slices.IndexFunc(r.Fields, func(field *ResourceField) bool { return field.Name == r.IDField })
+		r.IDType = r.Fields[index].Type
+		if err := r.checkCreateResponseID(); err != nil {
+			return nil, nil, err
+		}
 	}
 	r.zeroDefaults()
 	return r, r.readList(doc, ops[opGet], ids.List), nil
@@ -760,11 +764,65 @@ func (r *Resource) idResponse(out Response, proxy *base.SchemaProxy) (Response, 
 	if err != nil {
 		return Response{}, fmt.Errorf("response %s.%s: %w", out.Schema, key, err)
 	}
+	// The id can be inside a one-property object that the policy unwraps, as the id field of the
+	// resource is.
+	if component := wrapperComponent(property); component != "" && r.Policy.unwraps(out.Schema, key, component) {
+		inner, err := wrappedIDField(property)
+		if err != nil {
+			return Response{}, fmt.Errorf("response %s.%s: %w", out.Schema, key, err)
+		}
+		out.ID, out.IDWrapperField = key, inner
+		return out, nil
+	}
 	if !slices.Equal(ps.Type, []string{"string"}) {
-		return Response{}, fmt.Errorf("response %s.%s has type %v, want a string id", out.Schema, key, ps.Type)
+		return Response{}, fmt.Errorf("response %s.%s has type %v, want a string id, or a wrapper of the id that the policy unwraps (api.createResponseOnlyIDProperty)", out.Schema, key, ps.Type)
 	}
 	out.ID = key
 	return out, nil
+}
+
+// checkCreateResponseID checks that the id of a Create response that holds only the id has the
+// shape of the id field: a string, or the same wrapper around the same property.
+func (r *Resource) checkCreateResponseID() error {
+	resp := r.Create.Response
+	switch {
+	case resp.ID == "":
+		return nil
+	case resp.IDWrapperField == "" && (r.IDType.Kind != String || len(r.IDType.Wrappers) != 0):
+		return fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
+	case resp.IDWrapperField != "" && (len(r.IDType.Wrappers) != 1 || r.IDType.Wrappers[0].Field != resp.IDWrapperField):
+		return fmt.Errorf("%s: the Create response holds the id in %s.%s, but the id field is not in a wrapper with that property", r.Name, resp.ID, resp.IDWrapperField)
+	}
+	return nil
+}
+
+// wrappedIDField returns the one property of the object in proxy, an object or allOf one $ref
+// to one, when it holds a string or an int32 or int64 id.
+func wrappedIDField(proxy *base.SchemaProxy) (string, error) {
+	s, err := schemaOf(proxy)
+	if err != nil {
+		return "", err
+	}
+	if len(s.AllOf) == 1 {
+		if s, err = schemaOf(s.AllOf[0]); err != nil {
+			return "", err
+		}
+	}
+	names := propertyNames(s)
+	if len(names) != 1 {
+		return "", fmt.Errorf("the wrapper of the id has %d properties, want 1", len(names))
+	}
+	inner, err := schemaOf(propertyOf(s, names[0]))
+	if err != nil {
+		return "", fmt.Errorf("%s: %w", names[0], err)
+	}
+	switch {
+	case slices.Equal(inner.Type, []string{"string"}) && inner.Format == "":
+	case slices.Equal(inner.Type, []string{"integer"}) && (inner.Format == "int32" || inner.Format == "int64"):
+	default:
+		return "", fmt.Errorf("the id %s has type %v/%s, want a string, int32, or int64 id", names[0], inner.Type, inner.Format)
+	}
+	return names[0], nil
 }
 
 // wrapperKeys returns the properties of a response that wraps the resource. A released API can
