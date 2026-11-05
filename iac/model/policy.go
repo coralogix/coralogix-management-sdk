@@ -445,10 +445,11 @@ func (p *Policy) computed(component, field string) bool {
 	return p != nil && component != "" && slices.Contains(p.Computed, component+"."+field)
 }
 
-// asSet makes t, the type of component.field, a set when a collection: set line says so, and a
-// map when a keyedBy line says so.
+// asSet applies collection: set to component.field, retaining the API collection in WireKind so
+// callers can convert operation-specific shapes. It then applies keyedBy, if present; keyedBy wins
+// when both overrides target the same field, so the final collection type is a map.
 func (p *Policy) asSet(component, field string, t *Type) {
-	if p != nil && t != nil && t.Kind == List && component != "" && slices.Contains(p.Sets, component+"."+field) {
+	if p != nil && t != nil && (t.Kind == List || t.Kind == Map && t.Elem != nil && t.Elem.Kind == Object) && component != "" && slices.Contains(p.Sets, component+"."+field) {
 		t.Kind = Set
 	}
 	p.asMap(component, field, t)
