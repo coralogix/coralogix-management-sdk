@@ -9646,7 +9646,7 @@ paths:
           x-coralogix-presence: true
   /dataengine/retention-tags/v1:
     get:
-      description: Returns all available retention tags.
+      description: Returns all retention tags of the team, ordered by `order`.
       operationId: RetentionsService_GetRetentions
       responses:
         '200':
@@ -9677,7 +9677,10 @@ paths:
       tags:
         - Retentions Service
     post:
-      description: Creates a new retention tag.
+      description: >-
+        Renames retention tags by id and returns the retentions of the request,
+        in request order. A retention that the request leaves out keeps its
+        name. An update cannot add or remove retentions or change their order.
       operationId: RetentionsService_UpdateRetentions
       requestBody:
         content:
@@ -9686,7 +9689,11 @@ paths:
               description: This data structure is used to update retentions
               properties:
                 retentionUpdateElements:
-                  description: List of retention tag updates to apply.
+                  description: >-
+                    List of retention tag updates to apply. A retention that the
+                    list leaves out keeps its name, and an empty list changes
+                    nothing. The list holds at most the number of retention tags
+                    of the team.
                   items:
                     $ref: '#/components/schemas/RetentionUpdateElement'
                   minItems: 0
@@ -9715,6 +9722,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           description: Unauthorized request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: The request changes the name of the first retention
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: An id does not exist
         '500':
           content:
             application/json:
@@ -13354,9 +13373,41 @@ paths:
                   - $ref: '#/components/schemas/v1.FilterOperator'
                 description: The operator for the meta labels filter
               searchQuery:
-                allOf:
-                  - $ref: '#/components/schemas/IncidentSearchQuery'
-                description: Search query for incidents
+                description: Incident search query.
+                oneOf:
+                  - required:
+                      - incidentField
+                    type: object
+                  - required:
+                      - contextualLabel
+                    type: object
+                properties:
+                  contextualLabel:
+                    description: The contextual label to search in.
+                    maxLength: 256
+                    minLength: 1
+                    pattern: ^[\s\S]*$
+                    type: string
+                    x-coralogix-presence: true
+                  incidentField:
+                    allOf:
+                      - $ref: '#/components/schemas/IncidentFields'
+                    description: The field to search in
+                    examples:
+                      - INCIDENTS_FIELDS_STATUS
+                  query:
+                    description: The search query
+                    examples:
+                      - error
+                    maxLength: 4096
+                    minLength: 1
+                    pattern: ^[\s\S]*$
+                    type: string
+                    x-coralogix-presence: true
+                required:
+                  - query
+                title: Incident search query
+                type: object
               severity:
                 description: Filter by incident severity
                 items:
@@ -34723,6 +34774,8 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
     GetRetentionsResponse:
+      required:
+        - retentions
       type: object
       properties:
         retentions:
@@ -34730,7 +34783,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/archive.v1.Retention'
-          description: The retentions.
+          description: >-
+            The retentions of the team, ordered by `order`. The team has a fixed
+            number of retentions, and a read creates the missing ones with
+            default names.
       description: Response containing the current data retention settings.
     GetRuleGroupModelMappingRequest.CreateRuleSubgroup:
       type: object
@@ -47328,16 +47384,26 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/
     RetentionUpdateElement:
+      required:
+        - id
+        - name
       type: object
       properties:
         id:
-          description: Unique identifier.
-          minLength: 0
+          description: >-
+            The id of an existing retention of the team. Must be a UUID: another
+            value answers 400, and an id that does not exist answers 404.
+          minLength: 1
           type: string
           x-coralogix-presence: true
         name:
-          description: Display name.
-          minLength: 0
+          description: >-
+            The new display name. Names are unique within the request. The name
+            of the first retention, `Default`, cannot change: another name
+            answers 403.
+          maxLength: 255
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_-]+$
           type: string
           x-coralogix-presence: true
     RevisionLifecycle:
@@ -54366,25 +54432,40 @@ components:
       description: Pagination response.
     archive.v1.Retention:
       title: Retention
+      required:
+        - id
+        - order
+        - name
+        - editable
       type: object
       properties:
         editable:
-          description: The editable.
+          description: >-
+            Whether an update can change the name. Only the first retention,
+            `Default`, is not editable. In the update response, it is false for
+            a retention named `Default` and true otherwise.
+          readOnly: true
           type: boolean
           x-coralogix-presence: true
         id:
-          description: Unique identifier.
-          minLength: 0
+          description: Unique identifier. The service sets it.
+          minLength: 1
+          readOnly: true
           type: string
           x-coralogix-presence: true
         name:
-          description: Display name.
-          minLength: 0
+          description: Display name. The first retention is named `Default`.
+          maxLength: 255
+          minLength: 1
+          pattern: ^[a-zA-Z0-9_-]+$
           type: string
           x-coralogix-presence: true
         order:
-          description: Sort order.
+          description: >-
+            Sort order, starting at 1. The service sets it, and an update cannot
+            change it.
           format: int32
+          readOnly: true
           type: integer
           x-coralogix-presence: true
       description: This data structure represents a retention

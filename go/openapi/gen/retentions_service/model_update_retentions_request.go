@@ -23,7 +23,7 @@ var _ MappedNullable = &UpdateRetentionsRequest{}
 
 // UpdateRetentionsRequest This data structure is used to update retentions
 type UpdateRetentionsRequest struct {
-	// List of retention tag updates to apply.
+	// List of retention tag updates to apply. A retention that the list leaves out keeps its name, and an empty list changes nothing. The list holds at most the number of retention tags of the team.
 	RetentionUpdateElements []RetentionUpdateElement `json:"retentionUpdateElements"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
