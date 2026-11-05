@@ -107,6 +107,10 @@ type Policy struct {
 	// returns the items of several resources, such as one list per source type. The parameter is
 	// not a resource field. Only an Overwrite resource has it.
 	GetQuery map[string]string
+	// WriteReturnsResource means that the write of an Overwrite resource returns the resource: its
+	// response has every field of the Get response, with the same shape. A tool then takes the
+	// state from the write response, with no Get. Only an Overwrite resource has it.
+	WriteReturnsResource bool
 	// DeleteOperation is the operationId of the operation that removes the resource
 	// when the API has no DELETE. It is a POST on the Get path plus one segment, for
 	// example /things/{id}/archive, with the id path parameter of Get, no request

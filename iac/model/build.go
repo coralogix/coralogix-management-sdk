@@ -124,7 +124,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	}
 	r.readRequestComponents(ops)
 	if r.Overwrite {
-		if err := r.readOverwrite(ops[opGet]); err != nil {
+		if err := r.readOverwrite(doc, ops[opGet]); err != nil {
 			return nil, nil, err
 		}
 	}
@@ -1852,7 +1852,7 @@ func UpdateMaskRule(pattern string) (valid func(string) bool, leaf bool, err err
 // readOverwrite checks the fields and the Get query of an Overwrite resource. Delete sends every
 // field that Update sends empty, so each is a list or a map. Each GetQuery parameter is a query
 // parameter of Get, and its value is one that the parameter accepts.
-func (r *Resource) readOverwrite(get foundOp) error {
+func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 	for _, f := range r.Fields {
 		if f.Update == nil || f.Type == nil {
 			continue
@@ -1866,6 +1866,11 @@ func (r *Resource) readOverwrite(get foundOp) error {
 				message:     fmt.Sprintf("The write of an overwrite resource sends %q, a %s. Delete sends every field empty, so each must be a list or a map.", f.Name, f.Type.Kind),
 				remediation: "Model the resource as the lists that the write replaces, or skip the field.",
 			}
+		}
+	}
+	if r.Policy.WriteReturnsResource {
+		if err := r.readWriteResponse(doc); err != nil {
+			return err
 		}
 	}
 	if len(r.Policy.GetQuery) == 0 {
@@ -1894,6 +1899,67 @@ func (r *Resource) readOverwrite(get foundOp) error {
 		r.GetQuery = append(r.GetQuery, QueryValue{Name: name, Value: value, Type: t})
 	}
 	return nil
+}
+
+// readWriteResponse checks that the write response has every property of the resource component,
+// with the same shape, so a tool can take the state from it (Policy.WriteReturnsResource).
+func (r *Resource) readWriteResponse(doc *v3.Document) error {
+	location := "behavior-overrides.yaml:api.overwrite.writeReturnsResource"
+	fail := func(message string) error {
+		return &contractError{
+			code:        "WRITE_RESPONSE_NOT_RESOURCE",
+			location:    location,
+			message:     message,
+			remediation: "Delete the line: the resource is read with Get after the write.",
+		}
+	}
+	name := r.Create.Response.Schema
+	if r.Create.Response.Empty || name == "" {
+		return fail(fmt.Sprintf("The write %s returns no fields, so it does not return the resource.", r.Create.OperationID))
+	}
+	component := func(name string) *base.Schema {
+		if doc.Components == nil || doc.Components.Schemas == nil {
+			return nil
+		}
+		s, _ := schemaOf(doc.Components.Schemas.GetOrZero(name))
+		return s
+	}
+	resource, written := component(r.Name), component(name)
+	for _, property := range propertyNames(resource) {
+		// A required property is a value in the SDK, and an optional one a pointer, so both must agree
+		// for a tool to copy it.
+		required := slices.Contains(resource.Required, property) == slices.Contains(written.Required, property)
+		if !required || !sameShape(propertyOf(resource, property), propertyOf(written, property)) {
+			return fail(fmt.Sprintf("The write response %s does not have %s.%s with the same shape and requiredness.", name, r.Name, property))
+		}
+	}
+	r.WriteReturnsResource = true
+	return nil
+}
+
+// sameShape reports whether two property schemas hold the same value: the same component, or the
+// same type and format, with items of the same shape.
+func sameShape(a, b *base.SchemaProxy) bool {
+	if a == nil || b == nil {
+		return false
+	}
+	if ra, rb := unwrapRef(a), unwrapRef(b); ra != "" || rb != "" {
+		return ra == rb
+	}
+	sa, errA := schemaOf(a)
+	sb, errB := schemaOf(b)
+	if errA != nil || errB != nil || !slices.Equal(sa.Type, sb.Type) || sa.Format != sb.Format || sa.AdditionalProperties != nil || sb.AdditionalProperties != nil {
+		return false
+	}
+	if sa.Properties != nil || sb.Properties != nil {
+		return false // an inline object
+	}
+	itemsA := sa.Items != nil && sa.Items.IsA()
+	itemsB := sb.Items != nil && sb.Items.IsA()
+	if itemsA || itemsB {
+		return itemsA && itemsB && sameShape(sa.Items.A, sb.Items.A)
+	}
+	return true
 }
 
 // queryValueProblem says why value is not a value of the query parameter schema proxy, or "".

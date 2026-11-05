@@ -483,6 +483,16 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 		s.add(Ref{Path: path + ".response." + op.Response.ID, Kind: KindField, Owner: resp,
 			Name: goFieldName(op.Response.ID), Want: "*string", WantValue: "string", Rule: RuleProperty})
 	}
+	if r.WriteReturnsResource && (name == "create" || name == "update") {
+		// A tool copies each resource field from the write response.
+		for _, f := range r.Fields {
+			if f.InGet {
+				if err := s.field(path+".response."+f.Name, resp, f.Name, f.Type, f.Get != nil && f.Get.Required); err != nil {
+					return err
+				}
+			}
+		}
+	}
 	if op.Response.Field != "" {
 		s.add(Ref{Path: path + ".response." + op.Response.Field, Kind: KindField, Owner: resp,
 			Name: goFieldName(op.Response.Field), Want: "*" + goTypeName(r.Name), WantValue: goTypeName(r.Name), Rule: RuleProperty})

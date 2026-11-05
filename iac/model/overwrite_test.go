@@ -172,6 +172,24 @@ func TestOverwriteResourceIssues(t *testing.T) {
 			edit: func(p *Policy) { p.GetQuery = map[string]string{"kind": "THING_KIND_A", "limit": "3000000000"} },
 			want: "GET_QUERY_VALUE_INVALID",
 		},
+		"write response without the resource fields": {
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
+		},
+		"write response with other items": {
+			spec: func(s string) string {
+				return strings.Replace(writeReturnsThings(s), "        things:\n          type: array\n          minItems: 0\n          maxItems: 50\n          items: {$ref: '#/components/schemas/Thing'}", "        things:\n          type: array\n          minItems: 0\n          maxItems: 50\n          items: {$ref: '#/components/schemas/KindAThingWrite'}", 1)
+			},
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
+		},
+		"write response that requires an optional field": {
+			spec: func(s string) string {
+				return strings.Replace(writeReturnsThings(s), "    OverwriteResponse:\n      type: object\n", "    OverwriteResponse:\n      type: object\n      required: [things]\n", 1)
+			},
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
+		},
 		"wrapper not in the request":  {edit: func(p *Policy) { p.RequestWrappers = map[string]string{"Thing": "core"} }, want: "REQUEST_WRAPPER_NOT_FOUND"},
 		"nested path not found":       {edit: func(p *Policy) { p.RequestNames = map[string]string{"Thing.enabled": "off"} }, want: "REQUEST_NAME_NOT_FOUND"},
 		"negated field is not a bool": {edit: func(p *Policy) { p.RequestNegated = []string{"Thing.enabled", "Thing.name"} }, want: "REQUEST_NEGATED_UNSUPPORTED"},
@@ -362,5 +380,41 @@ func TestNestedRequestPathInOneRequest(t *testing.T) {
 	var ce *contractError
 	if err := p.missingNestedNames("ThingList", used); !errors.As(err, &ce) || ce.code != "REQUEST_NAME_NOT_FOUND" {
 		t.Fatalf("missing = %v, want REQUEST_NAME_NOT_FOUND", err)
+	}
+}
+
+// writeReturnsThings makes the write of testdata/overwritething.yaml return the things it wrote
+// under the name of the resource field.
+func writeReturnsThings(s string) string {
+	return strings.Replace(s, "    OverwriteResponse:\n      type: object\n      properties:\n        created:", "    OverwriteResponse:\n      type: object\n      properties:\n        things:", 1)
+}
+
+// A write that returns every field of the resource, with the same shape, can give the state, so a
+// tool needs no Get after it.
+func TestOverwriteWriteReturnsResource(t *testing.T) {
+	raw, err := os.ReadFile("testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := Load([]byte(writeReturnsThings(string(raw))))
+	if err != nil {
+		t.Fatal(err)
+	}
+	policy := overwritePolicy()
+	policy.WriteReturnsResource = true
+	r, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !r.WriteReturnsResource || r.Create.Response.Schema != "OverwriteResponse" || r.Update.Response.Schema != "OverwriteResponse" {
+		t.Fatalf("WriteReturnsResource = %t, responses %q and %q", r.WriteReturnsResource, r.Create.Response.Schema, r.Update.Response.Schema)
+	}
+	// Without the key, the same contract still reads the resource with Get.
+	r, err = BuildWithPolicy(doc, "ThingList", OperationIDs{}, overwritePolicy())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if r.WriteReturnsResource {
+		t.Fatal("WriteReturnsResource is set without the key")
 	}
 }
