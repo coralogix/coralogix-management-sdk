@@ -16,6 +16,7 @@ package model
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"slices"
 	"strings"
@@ -171,6 +172,38 @@ func TestOverwriteResourceIssues(t *testing.T) {
 			},
 			edit: func(p *Policy) { p.GetQuery = map[string]string{"kind": "THING_KIND_A", "limit": "3000000000"} },
 			want: "GET_QUERY_VALUE_INVALID",
+		},
+		"write response without the resource fields": {
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
+		},
+		"write response with other items": {
+			spec: func(s string) string {
+				return strings.Replace(writeReturnsThings(s), "        things:\n          type: array\n          minItems: 0\n          maxItems: 50\n          items: {$ref: '#/components/schemas/Thing'}", "        things:\n          type: array\n          minItems: 0\n          maxItems: 50\n          items: {$ref: '#/components/schemas/KindAThingWrite'}", 1)
+			},
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
+		},
+		"write response that requires an optional field": {
+			spec: func(s string) string {
+				return strings.Replace(writeReturnsThings(s), "    OverwriteResponse:\n      type: object\n", "    OverwriteResponse:\n      type: object\n      required: [things]\n", 1)
+			},
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
+		},
+		"nullable write response list": {
+			spec: func(s string) string {
+				return strings.Replace(writeReturnsThings(s), "        things:\n          type: array\n          minItems: 0\n          maxItems: 50\n", "        things:\n          type: array\n          nullable: true\n          minItems: 0\n          maxItems: 50\n", 1)
+			},
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
+		},
+		"write response that is an array": {
+			spec: func(s string) string {
+				return strings.Replace(writeReturnsThings(s), "    OverwriteResponse:\n      type: object\n", "    OverwriteResponse:\n      type: array\n      items: {$ref: '#/components/schemas/Thing'}\n", 1)
+			},
+			edit: func(p *Policy) { p.WriteReturnsResource = true },
+			want: "WRITE_RESPONSE_NOT_RESOURCE",
 		},
 		"wrapper not in the request":  {edit: func(p *Policy) { p.RequestWrappers = map[string]string{"Thing": "core"} }, want: "REQUEST_WRAPPER_NOT_FOUND"},
 		"nested path not found":       {edit: func(p *Policy) { p.RequestNames = map[string]string{"Thing.enabled": "off"} }, want: "REQUEST_NAME_NOT_FOUND"},
@@ -362,5 +395,181 @@ func TestNestedRequestPathInOneRequest(t *testing.T) {
 	var ce *contractError
 	if err := p.missingNestedNames("ThingList", used); !errors.As(err, &ce) || ce.code != "REQUEST_NAME_NOT_FOUND" {
 		t.Fatalf("missing = %v, want REQUEST_NAME_NOT_FOUND", err)
+	}
+}
+
+// writeReturnsThings makes the write of testdata/overwritething.yaml return the things it wrote
+// under the name of the resource field.
+func writeReturnsThings(s string) string {
+	return strings.Replace(s, "    OverwriteResponse:\n      type: object\n      properties:\n        created:", "    OverwriteResponse:\n      type: object\n      properties:\n        things:", 1)
+}
+
+// A write that returns every field of the resource, with the same shape, can give the state, so a
+// tool needs no Get after it.
+func TestOverwriteWriteReturnsResource(t *testing.T) {
+	raw, err := os.ReadFile("testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := Load([]byte(writeReturnsThings(string(raw))))
+	if err != nil {
+		t.Fatal(err)
+	}
+	policy := overwritePolicy()
+	policy.WriteReturnsResource = true
+	r, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !r.WriteReturnsResource || r.Create.Response.Schema != "OverwriteResponse" || r.Update.Response.Schema != "OverwriteResponse" {
+		t.Fatalf("WriteReturnsResource = %t, responses %q and %q", r.WriteReturnsResource, r.Create.Response.Schema, r.Update.Response.Schema)
+	}
+	// Without the key, the same contract still reads the resource with Get.
+	r, err = BuildWithPolicy(doc, "ThingList", OperationIDs{}, overwritePolicy())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if r.WriteReturnsResource {
+		t.Fatal("WriteReturnsResource is set without the key")
+	}
+}
+
+// A map field of the resource matches a write response map whose values have the same shape, and
+// not one whose values differ.
+func TestOverwriteWriteReturnsResourceMap(t *testing.T) {
+	raw, err := os.ReadFile("testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	// toMap turns the list of item at the indent into a map whose values are value.
+	toMap := func(s, indent, max, item, value string) string {
+		list := fmt.Sprintf("%[1]stype: array\n%[1]sminItems: 0\n%[1]smaxItems: %[2]s\n%[1]sitems: {$ref: '#/components/schemas/%[3]s'}", indent, max, item)
+		if !strings.Contains(s, list) {
+			t.Fatalf("the spec has no list of %s with maxItems %s", item, max)
+		}
+		return strings.Replace(s, list, indent+"type: object\n"+indent+"additionalProperties: {$ref: '#/components/schemas/"+value+"'}", 1)
+	}
+	for name, test := range map[string]struct {
+		value           string
+		emptyProperties bool // the maps also have "properties: {}", another way to write a map
+		want            bool
+	}{
+		"same values":                   {value: "Thing", want: true},
+		"other values":                  {value: "KindAThingWrite", want: false},
+		"same values, empty properties": {value: "Thing", emptyProperties: true, want: true},
+	} {
+		t.Run(name, func(t *testing.T) {
+			spec := writeReturnsThings(string(raw))
+			spec = toMap(spec, "          ", "1000", "Thing", "Thing")                           // the resource
+			spec = toMap(spec, "                  ", "50", "KindAThingWrite", "KindAThingWrite") // the write request
+			spec = toMap(spec, "          ", "50", "Thing", test.value)                          // the write response
+			if test.emptyProperties {
+				spec = strings.ReplaceAll(spec, "          type: object\n          additionalProperties:", "          type: object\n          properties: {}\n          additionalProperties:")
+				if !strings.Contains(spec, "properties: {}") {
+					t.Fatal("the spec has no map to give empty properties")
+				}
+			}
+			doc, err := Load([]byte(spec))
+			if err != nil {
+				t.Fatal(err)
+			}
+			policy := overwritePolicy()
+			policy.WriteReturnsResource = true
+			r, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, policy)
+			if test.want {
+				if err != nil || !r.WriteReturnsResource {
+					t.Fatalf("err = %v", err)
+				}
+				return
+			}
+			var ce *contractError
+			if !errors.As(err, &ce) || ce.code != "WRITE_RESPONSE_NOT_RESOURCE" {
+				t.Fatalf("err = %v, want WRITE_RESPONSE_NOT_RESOURCE", err)
+			}
+		})
+	}
+}
+
+// A resource with oneOf groups matches a write response with the same groups and "no arm" rules, in
+// any order, and not one with other rules.
+func TestOverwriteWriteReturnsResourceOneOf(t *testing.T) {
+	raw, err := os.ReadFile("testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	const (
+		arms     = "      oneOf:\n        - {type: object, required: [things]}\n        - {type: object, required: [others]}\n"
+		swapped  = "      oneOf:\n        - {type: object, required: [others]}\n        - {type: object, required: [things]}\n"
+		noArm    = arms + "        - {not: {anyOf: [{required: [things]}, {required: [others]}]}}\n"
+		thirdArm = arms + "        - {type: object, required: [third]}\n      properties:\n        third:\n          type: array\n          items: {$ref: '#/components/schemas/Thing'}\n"
+		response = "    OverwriteResponse:\n      type: object\n"
+	)
+	// build gives the resource, the write request, and the write response a second list, "others",
+	// and a oneOf of the two lists, and with extra a third list outside the oneOf.
+	build := func(t *testing.T, extra bool) string {
+		spec := writeReturnsThings(string(raw))
+		for _, edit := range []struct{ indent, max, item string }{
+			{"          ", "1000", "Thing"},
+			{"                  ", "50", "KindAThingWrite"},
+			{"          ", "50", "Thing"},
+		} {
+			list := fmt.Sprintf("%[1]stype: array\n%[1]sminItems: 0\n%[1]smaxItems: %[2]s\n%[1]sitems: {$ref: '#/components/schemas/%[3]s'}", edit.indent, edit.max, edit.item)
+			parent := edit.indent[2:]
+			holder := parent[2:]
+			old := holder + "properties:\n" + parent + "things:\n" + list
+			if strings.Count(spec, old) != 1 {
+				t.Fatalf("the spec has no single list of %s with maxItems %s", edit.item, edit.max)
+			}
+			added := "\n" + parent + "others:\n" + list
+			if extra {
+				added += "\n" + parent + "extra:\n" + list
+			}
+			oneOf := holder + "oneOf:\n" + holder + "  - {type: object, required: [things]}\n" + holder + "  - {type: object, required: [others]}\n"
+			spec = strings.Replace(spec, old, oneOf+old+added, 1)
+		}
+		// A oneOf arm cannot be required.
+		return strings.Replace(spec, "              required: [things]\n", "", 1)
+	}
+	for name, test := range map[string]struct {
+		extra    bool
+		from, to string // the change of the write response
+		want     bool
+	}{
+		"same arms":                        {want: true},
+		"arms in another order":            {from: arms, to: swapped, want: true},
+		"write response allows no arm":     {from: arms, to: noArm, want: false},
+		"write response with another arm":  {from: arms + "      properties:\n", to: thirdArm, want: false},
+		"same group beside a field":        {extra: true, want: true},
+		"write response without the group": {extra: true, from: arms, to: "", want: false},
+	} {
+		t.Run(name, func(t *testing.T) {
+			spec := build(t, test.extra)
+			if test.from != "" {
+				if strings.Count(spec, response+test.from) != 1 {
+					t.Fatal("the write response has no oneOf to change")
+				}
+				spec = strings.Replace(spec, response+test.from, response+test.to, 1)
+			}
+			doc, err := Load([]byte(spec))
+			if err != nil {
+				t.Fatal(err)
+			}
+			policy := overwritePolicy()
+			if _, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, policy); err != nil {
+				t.Fatalf("without the key: %v", err)
+			}
+			policy.WriteReturnsResource = true
+			r, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, policy)
+			if test.want {
+				if err != nil || !r.WriteReturnsResource {
+					t.Fatalf("with the key: %v", err)
+				}
+				return
+			}
+			var ce *contractError
+			if !errors.As(err, &ce) || ce.code != "WRITE_RESPONSE_NOT_RESOURCE" {
+				t.Fatalf("err = %v, want WRITE_RESPONSE_NOT_RESOURCE", err)
+			}
+		})
 	}
 }

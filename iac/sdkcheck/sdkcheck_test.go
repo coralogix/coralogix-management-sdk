@@ -517,3 +517,99 @@ func TestNamesForAnOverwriteResource(t *testing.T) {
 		}
 	}
 }
+
+// A write body without a wrapper can hold the list of the resource under another name. The SDK
+// names of that list are those of the request path.
+func TestNamesForARenamedFieldOfAnUnwrappedBody(t *testing.T) {
+	raw, err := os.ReadFile("../model/testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := strings.Replace(string(raw), "required: [things]\n              properties:\n                things:", "required: [thingWrites]\n              properties:\n                thingWrites:", 1)
+	if spec == string(raw) {
+		t.Fatal("the spec has no write body property things")
+	}
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	write := "ThingsService_OverwriteKindAThings"
+	policy := model.Policy{
+		Existing: true, Overwrite: true, GetQuery: map[string]string{"kind": "THING_KIND_A"},
+		Operations:      model.OperationIDs{Create: write, Get: "ThingsService_ListThings", Update: write, Delete: write},
+		RequestWrappers: map[string]string{"Thing": "thing"},
+		RequestNames:    map[string]string{"ThingList.things": "thingWrites", "Thing.enabled": "disabled"},
+		RequestNegated:  []string{"Thing.enabled"},
+	}
+	r, err := model.BuildWithPolicy(doc, "ThingList", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, path := range []string{"create.body.things", "update.body.things"} {
+		found := false
+		for _, ref := range refs {
+			if ref.Path != path || ref.Kind != KindField {
+				continue
+			}
+			found = true
+			if got := ref.SDKName(); got != "OverwriteKindAThingsRequest.ThingWrites" {
+				t.Errorf("%s = %s, want OverwriteKindAThingsRequest.ThingWrites", path, got)
+			}
+		}
+		if !found {
+			t.Errorf("no field ref at %s", path)
+		}
+	}
+}
+
+// A write that returns the resource has the resource fields on its response type, which a tool
+// copies into the resource.
+func TestNamesForAWriteThatReturnsTheResource(t *testing.T) {
+	raw, err := os.ReadFile("../model/testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := strings.Replace(string(raw), "    OverwriteResponse:\n      type: object\n      properties:\n        created:", "    OverwriteResponse:\n      type: object\n      properties:\n        things:", 1)
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	write := "ThingsService_OverwriteKindAThings"
+	policy := model.Policy{
+		Existing: true, Overwrite: true, WriteReturnsResource: true, GetQuery: map[string]string{"kind": "THING_KIND_A"},
+		Operations:      model.OperationIDs{Create: write, Get: "ThingsService_ListThings", Update: write, Delete: write},
+		RequestWrappers: map[string]string{"Thing": "thing"},
+		RequestNames:    map[string]string{"Thing.enabled": "disabled"},
+		RequestNegated:  []string{"Thing.enabled"},
+	}
+	r, err := model.BuildWithPolicy(doc, "ThingList", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, path := range []string{"create.response.things", "update.response.things"} {
+		if !slices.ContainsFunc(refs, func(ref Ref) bool {
+			return ref.Path == path && ref.Kind == KindField && ref.SDKName()+" "+ref.Want == "OverwriteResponse.Things []Thing"
+		}) {
+			t.Errorf("no field ref OverwriteResponse.Things []Thing at %s", path)
+		}
+	}
+	if slices.ContainsFunc(refs, func(ref Ref) bool { return ref.Path == "delete.response.things" }) {
+		t.Error("Delete has a ref for the write response: its response is not read")
+	}
+}

@@ -124,7 +124,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	}
 	r.readRequestComponents(ops)
 	if r.Overwrite {
-		if err := r.readOverwrite(ops[opGet]); err != nil {
+		if err := r.readOverwrite(doc, ops[opGet]); err != nil {
 			return nil, nil, err
 		}
 	}
@@ -1852,7 +1852,7 @@ func UpdateMaskRule(pattern string) (valid func(string) bool, leaf bool, err err
 // readOverwrite checks the fields and the Get query of an Overwrite resource. Delete sends every
 // field that Update sends empty, so each is a list or a map. Each GetQuery parameter is a query
 // parameter of Get, and its value is one that the parameter accepts.
-func (r *Resource) readOverwrite(get foundOp) error {
+func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 	for _, f := range r.Fields {
 		if f.Update == nil || f.Type == nil {
 			continue
@@ -1866,6 +1866,11 @@ func (r *Resource) readOverwrite(get foundOp) error {
 				message:     fmt.Sprintf("The write of an overwrite resource sends %q, a %s. Delete sends every field empty, so each must be a list or a map.", f.Name, f.Type.Kind),
 				remediation: "Model the resource as the lists that the write replaces, or skip the field.",
 			}
+		}
+	}
+	if r.Policy.WriteReturnsResource {
+		if err := r.readWriteResponse(doc); err != nil {
+			return err
 		}
 	}
 	if len(r.Policy.GetQuery) == 0 {
@@ -1894,6 +1899,99 @@ func (r *Resource) readOverwrite(get foundOp) error {
 		r.GetQuery = append(r.GetQuery, QueryValue{Name: name, Value: value, Type: t})
 	}
 	return nil
+}
+
+// readWriteResponse checks that the write response has every property of the resource component,
+// with the same shape, so a tool can take the state from it (Policy.WriteReturnsResource).
+func (r *Resource) readWriteResponse(doc *v3.Document) error {
+	location := "behavior-overrides.yaml:api.overwrite.writeReturnsResource"
+	fail := func(message string) error {
+		return &contractError{
+			code:        "WRITE_RESPONSE_NOT_RESOURCE",
+			location:    location,
+			message:     message,
+			remediation: "Delete the line: the resource is read with Get after the write.",
+		}
+	}
+	name := r.Create.Response.Schema
+	if r.Create.Response.Empty || name == "" {
+		return fail(fmt.Sprintf("The write %s returns no fields, so it does not return the resource.", r.Create.OperationID))
+	}
+	if problem := writeResponseDifference(doc, &r.Policy, r.Name, name); problem != "" {
+		return fail(problem)
+	}
+	r.WriteReturnsResource = true
+	return nil
+}
+
+// writeResponseDifference says why the component written does not hold the resource component
+// resource, so that a tool cannot copy each field of the resource from it, or "".
+func writeResponseDifference(doc *v3.Document, policy *Policy, resource, written string) string {
+	read := func(component string) (*Type, error) {
+		if doc.Components == nil || doc.Components.Schemas == nil {
+			return nil, errors.New("the contract has no components")
+		}
+		return typeOf(doc.Components.Schemas.GetOrZero(component), "components.schemas."+component, walk{policy: policy})
+	}
+	r, err := read(resource)
+	if err != nil {
+		return fmt.Sprintf("The resource %s: %s.", resource, err)
+	}
+	// typeOf rejects the keywords that the model cannot express, such as nullable.
+	w, err := read(written)
+	if err != nil {
+		return fmt.Sprintf("The write response %s: %s.", written, err)
+	}
+	// An object whose properties are all arms of a oneOf is a OneOf. The SDK holds each arm as a
+	// field, so it is copied like the fields of an object.
+	if w.Kind != r.Kind || w.Kind != Object && w.Kind != OneOf {
+		return fmt.Sprintf("The write response %s is a %s, and %s is a %s.", written, w.Kind, resource, r.Kind)
+	}
+	// The fields of a OneOf are its arms, so the response can have no other arm. An object can
+	// have fields that the resource does not.
+	if w.AllowNone != r.AllowNone || !sameGroups(w.Groups, r.Groups) || r.Kind == OneOf && !sameSet(fieldNames(w), fieldNames(r)) {
+		return fmt.Sprintf("The write response %s has other oneOf rules than %s.", written, resource)
+	}
+	for _, f := range r.Fields {
+		i := slices.IndexFunc(w.Fields, func(wf *Field) bool { return wf.Name == f.Name })
+		// A required property is a value in the SDK, and an optional one a pointer, so both must agree
+		// for a tool to copy it.
+		if i < 0 || w.Fields[i].Attrs.Required != f.Attrs.Required || !sameWire(f.Type, w.Fields[i].Type) {
+			return fmt.Sprintf("The write response %s does not have %s.%s with the same shape and requiredness.", written, resource, f.Name)
+		}
+	}
+	return ""
+}
+
+// sameGroups reports whether two lists of oneOf groups have the same arms and the same "no arm" rule,
+// in any order.
+func sameGroups(a, b []OneOfGroup) bool {
+	if !sameGroupArms(a, b) {
+		return false
+	}
+	for _, g := range a {
+		if matchingGroup(b, g).AllowNone != g.AllowNone {
+			return false
+		}
+	}
+	return true
+}
+
+// sameWire reports whether two types hold the same value in the SDK: the same kind on the wire, the
+// same component, format, and string encoding, and elements of the same shape. An inline object
+// with fields has no component, so the SDK gives each place its own type. A free-form inline object,
+// without fields, is a map[string]interface{} in every place.
+func sameWire(a, b *Type) bool {
+	if a == nil || b == nil {
+		return a == b
+	}
+	if a.WireKind != b.WireKind || a.Schema != b.Schema || a.Format != b.Format || a.WireString != b.WireString {
+		return false
+	}
+	if a.Kind == Object && a.Schema == "" && (len(a.Fields) != 0 || len(b.Fields) != 0) {
+		return false
+	}
+	return sameWire(a.Elem, b.Elem)
 }
 
 // queryValueProblem says why value is not a value of the query parameter schema proxy, or "".

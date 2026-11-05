@@ -51,9 +51,13 @@ type Resource struct {
 	Singleton bool
 	// Overwrite is true when the resource is the whole list that one write operation replaces
 	// (Policy.Overwrite). Create, Update, and Delete are that write; Delete sends every field
-	// empty. The write response is not read: a tool reads the resource with Get after the write.
-	// An Overwrite resource is a singleton.
+	// empty. The write response is not read: a tool reads the resource with Get after the write,
+	// unless WriteReturnsResource is set. An Overwrite resource is a singleton.
 	Overwrite bool
+	// WriteReturnsResource is true when the write of an Overwrite resource returns the resource
+	// (Policy.WriteReturnsResource): the response of Create and Update has every field of the
+	// resource under its name, with the same shape. A tool takes the state from it, with no Get.
+	WriteReturnsResource bool
 	// GetQuery are the query parameters that Get always sends, with their values, sorted by name
 	// (Policy.GetQuery). It is nil when Get sends none.
 	GetQuery []QueryValue
