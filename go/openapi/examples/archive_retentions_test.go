@@ -41,28 +41,21 @@ func TestArchiveRetentions(t *testing.T) {
 
 	var updateElems []retentions.RetentionUpdateElement
 	for _, r := range getResp.Retentions {
-		elem := retentions.RetentionUpdateElement{}
-		if r.Id != nil {
-			elem.Id = r.Id
-		}
-		if r.Name != nil {
-			elem.Name = r.Name
-		}
-		updateElems = append(updateElems, elem)
+		updateElems = append(updateElems, retentions.RetentionUpdateElement{Id: r.Id, Name: r.Name})
 	}
 
 	var wantName string
-	if len(updateElems) > 1 && updateElems[1].Name != nil {
+	if len(updateElems) > 1 && updateElems[1].Name != "" {
 		// Earlier runs left "_updated" suffixes. Remove them so the name never grows.
-		baseName := *updateElems[1].Name
+		baseName := updateElems[1].Name
 		for strings.HasSuffix(baseName, "_updated") {
 			baseName = strings.TrimSuffix(baseName, "_updated")
 		}
 		wantName = baseName + "_updated"
-		updateElems[1].Name = retentions.PtrString(wantName)
+		updateElems[1].Name = wantName
 
 		restoreElems := slices.Clone(updateElems)
-		restoreElems[1].Name = retentions.PtrString(baseName)
+		restoreElems[1].Name = baseName
 		t.Cleanup(func() {
 			_, httpResp, err := client.
 				RetentionsServiceUpdateRetentions(context.Background()).

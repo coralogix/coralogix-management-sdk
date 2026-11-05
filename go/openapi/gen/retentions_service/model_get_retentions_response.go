@@ -13,6 +13,7 @@ package retentions_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,8 +23,8 @@ var _ MappedNullable = &GetRetentionsResponse{}
 
 // GetRetentionsResponse Response containing the current data retention settings.
 type GetRetentionsResponse struct {
-	// The retentions.
-	Retentions []ArchiveV1Retention `json:"retentions,omitempty"`
+	// The retentions of the team, ordered by `order`. The team has a fixed number of retentions, and a read creates the missing ones with default names.
+	Retentions []ArchiveV1Retention `json:"retentions"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _GetRetentionsResponse GetRetentionsResponse
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewGetRetentionsResponse() *GetRetentionsResponse {
+func NewGetRetentionsResponse(retentions []ArchiveV1Retention) *GetRetentionsResponse {
 	this := GetRetentionsResponse{}
+	this.Retentions = retentions
 	return &this
 }
 
@@ -47,34 +49,26 @@ func NewGetRetentionsResponseWithDefaults() *GetRetentionsResponse {
 	return &this
 }
 
-// GetRetentions returns the Retentions field value if set, zero value otherwise.
+// GetRetentions returns the Retentions field value
 func (o *GetRetentionsResponse) GetRetentions() []ArchiveV1Retention {
-	if o == nil || IsNil(o.Retentions) {
+	if o == nil {
 		var ret []ArchiveV1Retention
 		return ret
 	}
+
 	return o.Retentions
 }
 
-// GetRetentionsOk returns a tuple with the Retentions field value if set, nil otherwise
+// GetRetentionsOk returns a tuple with the Retentions field value
 // and a boolean to check if the value has been set.
 func (o *GetRetentionsResponse) GetRetentionsOk() ([]ArchiveV1Retention, bool) {
-	if o == nil || IsNil(o.Retentions) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Retentions, true
 }
 
-// HasRetentions returns a boolean if a field has been set.
-func (o *GetRetentionsResponse) HasRetentions() bool {
-	if o != nil && !IsNil(o.Retentions) {
-		return true
-	}
-
-	return false
-}
-
-// SetRetentions gets a reference to the given []ArchiveV1Retention and assigns it to the Retentions field.
+// SetRetentions sets field value
 func (o *GetRetentionsResponse) SetRetentions(v []ArchiveV1Retention) {
 	o.Retentions = v
 }
@@ -89,9 +83,7 @@ func (o GetRetentionsResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetRetentionsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Retentions) {
-		toSerialize["retentions"] = o.Retentions
-	}
+	toSerialize["retentions"] = o.Retentions
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o GetRetentionsResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetRetentionsResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"retentions",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetRetentionsResponse := _GetRetentionsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
