@@ -1054,6 +1054,85 @@ func TestCollectionContracts(t *testing.T) {
 	}
 }
 
+func TestCollectionSetPreservesMapGetAndListRequests(t *testing.T) {
+	object := func(fieldKind Kind) *Type {
+		return &Type{Kind: Object, WireKind: Object, Schema: "Item", Fields: []*Field{
+			{Name: "enabled", Attrs: Attrs{Required: true}, Type: &Type{Kind: fieldKind, WireKind: fieldKind}},
+			{Name: "scopes", Type: &Type{Kind: List, WireKind: List, Elem: &Type{Kind: String, WireKind: String}}},
+		}}
+	}
+	policy := Policy{Sets: []string{"Thing.items"}}
+	get := &Type{Kind: Map, WireKind: Map, Elem: object(Bool)}
+	create := &Type{Kind: List, WireKind: List, Elem: object(Bool)}
+	update := &Type{Kind: List, WireKind: List, Elem: object(Bool)}
+	policy.asSet("Thing", "items", get)
+	policy.asSet("Thing", "items", create)
+	policy.asSet("Thing", "items", update)
+	if err := mergeRequests("Thing.items", get, create, update); err != nil {
+		t.Fatalf("explicit set override should accept a matching map/list pair: %v", err)
+	}
+	if got := get.CreateType(); got.Kind != Set || got.WireKind != List {
+		t.Fatalf("Create type = (%s, wire %s), want (set, wire list)", got.Kind, got.WireKind)
+	}
+	if got := get.UpdateType(); got.Kind != Set || got.WireKind != List {
+		t.Fatalf("Update type = (%s, wire %s), want (set, wire list)", got.Kind, got.WireKind)
+	}
+
+	t.Run("without override", func(t *testing.T) {
+		response := &Type{Kind: Map, WireKind: Map, Elem: object(Object)}
+		request := &Type{Kind: List, WireKind: List, Elem: object(Object)}
+		if err := mergeRequests("Thing.items", response, request, request); err == nil {
+			t.Fatal("expected map/list mismatch to fail without collection normalization")
+		}
+	})
+	t.Run("mismatched values", func(t *testing.T) {
+		response := &Type{Kind: Map, WireKind: Map, Elem: object(Bool)}
+		request := &Type{Kind: List, WireKind: List, Elem: object(String)}
+		policy.asSet("Thing", "items", response)
+		policy.asSet("Thing", "items", request)
+		if err := mergeRequests("Thing.items", response, request, request); err == nil {
+			t.Fatal("expected a mismatched map value and list item to fail")
+		}
+	})
+	t.Run("unsupported direction", func(t *testing.T) {
+		response := &Type{Kind: List, WireKind: List, Elem: object(Bool)}
+		request := &Type{Kind: Map, WireKind: Map, Elem: object(Bool)}
+		policy.asSet("Thing", "items", response)
+		policy.asSet("Thing", "items", request)
+		if err := mergeRequests("Thing.items", response, request, request); err == nil {
+			t.Fatal("expected list response/map request to fail")
+		}
+	})
+}
+
+func TestCollectionSetThenKeyedByProducesKeyedMap(t *testing.T) {
+	object := &Type{Kind: Object, WireKind: Object, Schema: "Item", Fields: []*Field{
+		{Name: "name", Type: &Type{Kind: String, WireKind: String}},
+		{Name: "enabled", Type: &Type{Kind: Bool, WireKind: Bool}},
+	}}
+	policy := Policy{
+		Sets: []string{"Thing.items"},
+		KeyedBy: map[string]KeyedLine{
+			"Thing.items": {Key: "name"},
+		},
+	}
+	get := &Type{Kind: Map, WireKind: Map, Elem: object}
+	create := &Type{Kind: List, WireKind: List, Elem: object}
+	update := &Type{Kind: List, WireKind: List, Elem: object}
+	for _, typ := range []*Type{get, create, update} {
+		policy.asSet("Thing", "items", typ)
+	}
+	if err := mergeRequests("Thing.items", get, create, update); err != nil {
+		t.Fatalf("collection: set followed by keyedBy should accept matching item types: %v", err)
+	}
+	if get.Kind != Map || get.Keyed == nil {
+		t.Fatalf("resource response kind = %s, keyed = %#v; want a keyed map", get.Kind, get.Keyed)
+	}
+	if got := get.CreateType(); got.Kind != Map || got.WireKind != List || got.Keyed == nil {
+		t.Fatalf("resource Create type = (%s, wire %s), keyed = %#v; want keyed map backed by API list", got.Kind, got.WireKind, got.Keyed)
+	}
+}
+
 func TestPatchUpdateContract(t *testing.T) {
 	data := validSpec(t)
 	doc, err := Load(data)
