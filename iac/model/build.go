@@ -1917,49 +1917,50 @@ func (r *Resource) readWriteResponse(doc *v3.Document) error {
 	if r.Create.Response.Empty || name == "" {
 		return fail(fmt.Sprintf("The write %s returns no fields, so it does not return the resource.", r.Create.OperationID))
 	}
-	component := func(name string) *base.Schema {
+	read := func(component string) (*Type, error) {
 		if doc.Components == nil || doc.Components.Schemas == nil {
-			return nil
+			return nil, errors.New("the contract has no components")
 		}
-		s, _ := schemaOf(doc.Components.Schemas.GetOrZero(name))
-		return s
+		return typeOf(doc.Components.Schemas.GetOrZero(component), "components.schemas."+component, walk{policy: &r.Policy})
 	}
-	resource, written := component(r.Name), component(name)
-	for _, property := range propertyNames(resource) {
+	resource, err := read(r.Name)
+	if err != nil {
+		return err
+	}
+	// typeOf rejects the keywords that the model cannot express, such as nullable.
+	written, err := read(name)
+	if err != nil {
+		return fail(fmt.Sprintf("The write response %s: %s.", name, err))
+	}
+	if written.Kind != Object {
+		return fail(fmt.Sprintf("The write response %s is a %s, not an object.", name, written.Kind))
+	}
+	for _, f := range resource.Fields {
+		i := slices.IndexFunc(written.Fields, func(w *Field) bool { return w.Name == f.Name })
 		// A required property is a value in the SDK, and an optional one a pointer, so both must agree
 		// for a tool to copy it.
-		required := slices.Contains(resource.Required, property) == slices.Contains(written.Required, property)
-		if !required || !sameShape(propertyOf(resource, property), propertyOf(written, property)) {
-			return fail(fmt.Sprintf("The write response %s does not have %s.%s with the same shape and requiredness.", name, r.Name, property))
+		if i < 0 || written.Fields[i].Attrs.Required != f.Attrs.Required || !sameWire(f.Type, written.Fields[i].Type) {
+			return fail(fmt.Sprintf("The write response %s does not have %s.%s with the same shape and requiredness.", name, r.Name, f.Name))
 		}
 	}
 	r.WriteReturnsResource = true
 	return nil
 }
 
-// sameShape reports whether two property schemas hold the same value: the same component, or the
-// same type and format, with items of the same shape.
-func sameShape(a, b *base.SchemaProxy) bool {
+// sameWire reports whether two types hold the same value in the SDK: the same kind on the wire, the
+// same component, format, and string encoding, and elements of the same shape. An inline object
+// has no component, so the SDK gives each place its own type.
+func sameWire(a, b *Type) bool {
 	if a == nil || b == nil {
+		return a == b
+	}
+	if a.WireKind != b.WireKind || a.Schema != b.Schema || a.Format != b.Format || a.WireString != b.WireString {
 		return false
 	}
-	if ra, rb := unwrapRef(a), unwrapRef(b); ra != "" || rb != "" {
-		return ra == rb
-	}
-	sa, errA := schemaOf(a)
-	sb, errB := schemaOf(b)
-	if errA != nil || errB != nil || !slices.Equal(sa.Type, sb.Type) || sa.Format != sb.Format || sa.AdditionalProperties != nil || sb.AdditionalProperties != nil {
+	if a.Kind == Object && a.Schema == "" {
 		return false
 	}
-	if sa.Properties != nil || sb.Properties != nil {
-		return false // an inline object
-	}
-	itemsA := sa.Items != nil && sa.Items.IsA()
-	itemsB := sb.Items != nil && sb.Items.IsA()
-	if itemsA || itemsB {
-		return itemsA && itemsB && sameShape(sa.Items.A, sb.Items.A)
-	}
-	return true
+	return sameWire(a.Elem, b.Elem)
 }
 
 // queryValueProblem says why value is not a value of the query parameter schema proxy, or "".
