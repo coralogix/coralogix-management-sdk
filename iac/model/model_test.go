@@ -1105,7 +1105,7 @@ func TestCollectionSetPreservesMapGetAndListRequests(t *testing.T) {
 	})
 }
 
-func TestCollectionSetThenKeyedByProducesTerraformMap(t *testing.T) {
+func TestCollectionSetThenKeyedByProducesKeyedMap(t *testing.T) {
 	object := &Type{Kind: Object, WireKind: Object, Schema: "Item", Fields: []*Field{
 		{Name: "name", Type: &Type{Kind: String, WireKind: String}},
 		{Name: "enabled", Type: &Type{Kind: Bool, WireKind: Bool}},
@@ -1126,10 +1126,10 @@ func TestCollectionSetThenKeyedByProducesTerraformMap(t *testing.T) {
 		t.Fatalf("collection: set followed by keyedBy should accept matching item types: %v", err)
 	}
 	if get.Kind != Map || get.Keyed == nil {
-		t.Fatalf("Terraform response kind = %s, keyed = %#v; want a keyed map", get.Kind, get.Keyed)
+		t.Fatalf("resource response kind = %s, keyed = %#v; want a keyed map", get.Kind, get.Keyed)
 	}
 	if got := get.CreateType(); got.Kind != Map || got.WireKind != List || got.Keyed == nil {
-		t.Fatalf("Terraform Create type = (%s, wire %s), keyed = %#v; want keyed map backed by API list", got.Kind, got.WireKind, got.Keyed)
+		t.Fatalf("resource Create type = (%s, wire %s), keyed = %#v; want keyed map backed by API list", got.Kind, got.WireKind, got.Keyed)
 	}
 }
 

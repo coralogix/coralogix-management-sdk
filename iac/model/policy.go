@@ -447,7 +447,7 @@ func (p *Policy) computed(component, field string) bool {
 
 // asSet applies collection: set to component.field, retaining the API collection in WireKind so
 // callers can convert operation-specific shapes. It then applies keyedBy, if present; keyedBy wins
-// when both overrides target the same field, so the final Terraform collection is a map.
+// when both overrides target the same field, so the final collection type is a map.
 func (p *Policy) asSet(component, field string, t *Type) {
 	if p != nil && t != nil && (t.Kind == List || t.Kind == Map && t.Elem != nil && t.Elem.Kind == Object) && component != "" && slices.Contains(p.Sets, component+"."+field) {
 		t.Kind = Set
