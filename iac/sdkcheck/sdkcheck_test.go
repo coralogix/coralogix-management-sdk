@@ -69,6 +69,26 @@ func TestFieldTypeUsesOperationWireCollection(t *testing.T) {
 			}
 		})
 	}
+
+	keyed := &model.Type{Kind: model.Object, WireKind: model.Object, Schema: "Item"}
+	for _, test := range []struct {
+		name, want string
+		wire       model.Kind
+	}{
+		{name: "keyed Get map", wire: model.Map, want: "map[string]Item"},
+		{name: "keyed write list", wire: model.List, want: "[]Item"},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			typeValue := &model.Type{
+				Kind: model.Map, WireKind: test.wire,
+				Keyed: &model.Keyed{Key: "name", Item: keyed},
+			}
+			got, _, err := fieldType(typeValue)
+			if err != nil || got != test.want {
+				t.Fatalf("fieldType = %q, %v; want %q", got, err, test.want)
+			}
+		})
+	}
 }
 
 // Names lists only names of the SDK module: the generated package of the tag and the cxsdk

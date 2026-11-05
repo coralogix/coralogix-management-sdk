@@ -595,7 +595,19 @@ func fieldType(t *model.Type) (string, Rule, error) {
 		return "map[string]interface{}", RuleEmptyObject, nil
 	}
 	if t.Keyed != nil {
-		return "[]" + goTypeName(t.Keyed.Item.Schema), RuleProperty, nil
+		kind := t.WireKind
+		if kind == "" {
+			kind = model.List
+		}
+		item := goTypeName(t.Keyed.Item.Schema)
+		switch kind {
+		case model.Map:
+			return "map[string]" + item, RuleProperty, nil
+		case model.List, model.Set:
+			return "[]" + item, RuleProperty, nil
+		default:
+			return "", "", fmt.Errorf("keyed collection wire kind %s is not supported", kind)
+		}
 	}
 	kind := t.WireKind
 	if kind == "" {
