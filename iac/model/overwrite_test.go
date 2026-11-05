@@ -489,3 +489,87 @@ func TestOverwriteWriteReturnsResourceMap(t *testing.T) {
 		})
 	}
 }
+
+// A resource with oneOf groups matches a write response with the same groups and "no arm" rules, in
+// any order, and not one with other rules.
+func TestOverwriteWriteReturnsResourceOneOf(t *testing.T) {
+	raw, err := os.ReadFile("testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	const (
+		arms     = "      oneOf:\n        - {type: object, required: [things]}\n        - {type: object, required: [others]}\n"
+		swapped  = "      oneOf:\n        - {type: object, required: [others]}\n        - {type: object, required: [things]}\n"
+		noArm    = arms + "        - {not: {anyOf: [{required: [things]}, {required: [others]}]}}\n"
+		thirdArm = arms + "        - {type: object, required: [third]}\n      properties:\n        third:\n          type: array\n          items: {$ref: '#/components/schemas/Thing'}\n"
+		response = "    OverwriteResponse:\n      type: object\n"
+	)
+	// build gives the resource, the write request, and the write response a second list, "others",
+	// and a oneOf of the two lists, and with extra a third list outside the oneOf.
+	build := func(t *testing.T, extra bool) string {
+		spec := writeReturnsThings(string(raw))
+		for _, edit := range []struct{ indent, max, item string }{
+			{"          ", "1000", "Thing"},
+			{"                  ", "50", "KindAThingWrite"},
+			{"          ", "50", "Thing"},
+		} {
+			list := fmt.Sprintf("%[1]stype: array\n%[1]sminItems: 0\n%[1]smaxItems: %[2]s\n%[1]sitems: {$ref: '#/components/schemas/%[3]s'}", edit.indent, edit.max, edit.item)
+			parent := edit.indent[2:]
+			holder := parent[2:]
+			old := holder + "properties:\n" + parent + "things:\n" + list
+			if strings.Count(spec, old) != 1 {
+				t.Fatalf("the spec has no single list of %s with maxItems %s", edit.item, edit.max)
+			}
+			added := "\n" + parent + "others:\n" + list
+			if extra {
+				added += "\n" + parent + "extra:\n" + list
+			}
+			oneOf := holder + "oneOf:\n" + holder + "  - {type: object, required: [things]}\n" + holder + "  - {type: object, required: [others]}\n"
+			spec = strings.Replace(spec, old, oneOf+old+added, 1)
+		}
+		// A oneOf arm cannot be required.
+		return strings.Replace(spec, "              required: [things]\n", "", 1)
+	}
+	for name, test := range map[string]struct {
+		extra    bool
+		from, to string // the change of the write response
+		want     bool
+	}{
+		"same arms":                        {want: true},
+		"arms in another order":            {from: arms, to: swapped, want: true},
+		"write response allows no arm":     {from: arms, to: noArm, want: false},
+		"write response with another arm":  {from: arms + "      properties:\n", to: thirdArm, want: false},
+		"same group beside a field":        {extra: true, want: true},
+		"write response without the group": {extra: true, from: arms, to: "", want: false},
+	} {
+		t.Run(name, func(t *testing.T) {
+			spec := build(t, test.extra)
+			if test.from != "" {
+				if strings.Count(spec, response+test.from) != 1 {
+					t.Fatal("the write response has no oneOf to change")
+				}
+				spec = strings.Replace(spec, response+test.from, response+test.to, 1)
+			}
+			doc, err := Load([]byte(spec))
+			if err != nil {
+				t.Fatal(err)
+			}
+			policy := overwritePolicy()
+			if _, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, policy); err != nil {
+				t.Fatalf("without the key: %v", err)
+			}
+			policy.WriteReturnsResource = true
+			r, err := BuildWithPolicy(doc, "ThingList", OperationIDs{}, policy)
+			if test.want {
+				if err != nil || !r.WriteReturnsResource {
+					t.Fatalf("with the key: %v", err)
+				}
+				return
+			}
+			var ce *contractError
+			if !errors.As(err, &ce) || ce.code != "WRITE_RESPONSE_NOT_RESOURCE" {
+				t.Fatalf("err = %v, want WRITE_RESPONSE_NOT_RESOURCE", err)
+			}
+		})
+	}
+}

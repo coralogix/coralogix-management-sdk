@@ -1917,39 +1917,70 @@ func (r *Resource) readWriteResponse(doc *v3.Document) error {
 	if r.Create.Response.Empty || name == "" {
 		return fail(fmt.Sprintf("The write %s returns no fields, so it does not return the resource.", r.Create.OperationID))
 	}
-	read := func(component string) (*Type, error) {
-		if doc.Components == nil || doc.Components.Schemas == nil {
-			return nil, errors.New("the contract has no components")
-		}
-		return typeOf(doc.Components.Schemas.GetOrZero(component), "components.schemas."+component, walk{policy: &r.Policy})
-	}
-	resource, err := read(r.Name)
-	if err != nil {
-		return err
-	}
-	// typeOf rejects the keywords that the model cannot express, such as nullable.
-	written, err := read(name)
-	if err != nil {
-		return fail(fmt.Sprintf("The write response %s: %s.", name, err))
-	}
-	if written.Kind != Object {
-		return fail(fmt.Sprintf("The write response %s is a %s, not an object.", name, written.Kind))
-	}
-	for _, f := range resource.Fields {
-		i := slices.IndexFunc(written.Fields, func(w *Field) bool { return w.Name == f.Name })
-		// A required property is a value in the SDK, and an optional one a pointer, so both must agree
-		// for a tool to copy it.
-		if i < 0 || written.Fields[i].Attrs.Required != f.Attrs.Required || !sameWire(f.Type, written.Fields[i].Type) {
-			return fail(fmt.Sprintf("The write response %s does not have %s.%s with the same shape and requiredness.", name, r.Name, f.Name))
-		}
+	if problem := writeResponseDifference(doc, &r.Policy, r.Name, name); problem != "" {
+		return fail(problem)
 	}
 	r.WriteReturnsResource = true
 	return nil
 }
 
+// writeResponseDifference says why the component written does not hold the resource component
+// resource, so that a tool cannot copy each field of the resource from it, or "".
+func writeResponseDifference(doc *v3.Document, policy *Policy, resource, written string) string {
+	read := func(component string) (*Type, error) {
+		if doc.Components == nil || doc.Components.Schemas == nil {
+			return nil, errors.New("the contract has no components")
+		}
+		return typeOf(doc.Components.Schemas.GetOrZero(component), "components.schemas."+component, walk{policy: policy})
+	}
+	r, err := read(resource)
+	if err != nil {
+		return fmt.Sprintf("The resource %s: %s.", resource, err)
+	}
+	// typeOf rejects the keywords that the model cannot express, such as nullable.
+	w, err := read(written)
+	if err != nil {
+		return fmt.Sprintf("The write response %s: %s.", written, err)
+	}
+	// An object whose properties are all arms of a oneOf is a OneOf. The SDK holds each arm as a
+	// field, so it is copied like the fields of an object.
+	if w.Kind != r.Kind || w.Kind != Object && w.Kind != OneOf {
+		return fmt.Sprintf("The write response %s is a %s, and %s is a %s.", written, w.Kind, resource, r.Kind)
+	}
+	// The fields of a OneOf are its arms, so the response can have no other arm. An object can
+	// have fields that the resource does not.
+	if w.AllowNone != r.AllowNone || !sameGroups(w.Groups, r.Groups) || r.Kind == OneOf && !sameSet(fieldNames(w), fieldNames(r)) {
+		return fmt.Sprintf("The write response %s has other oneOf rules than %s.", written, resource)
+	}
+	for _, f := range r.Fields {
+		i := slices.IndexFunc(w.Fields, func(wf *Field) bool { return wf.Name == f.Name })
+		// A required property is a value in the SDK, and an optional one a pointer, so both must agree
+		// for a tool to copy it.
+		if i < 0 || w.Fields[i].Attrs.Required != f.Attrs.Required || !sameWire(f.Type, w.Fields[i].Type) {
+			return fmt.Sprintf("The write response %s does not have %s.%s with the same shape and requiredness.", written, resource, f.Name)
+		}
+	}
+	return ""
+}
+
+// sameGroups reports whether two lists of oneOf groups have the same arms and the same "no arm" rule,
+// in any order.
+func sameGroups(a, b []OneOfGroup) bool {
+	if !sameGroupArms(a, b) {
+		return false
+	}
+	for _, g := range a {
+		if matchingGroup(b, g).AllowNone != g.AllowNone {
+			return false
+		}
+	}
+	return true
+}
+
 // sameWire reports whether two types hold the same value in the SDK: the same kind on the wire, the
 // same component, format, and string encoding, and elements of the same shape. An inline object
-// has no component, so the SDK gives each place its own type.
+// with fields has no component, so the SDK gives each place its own type. A free-form inline object,
+// without fields, is a map[string]interface{} in every place.
 func sameWire(a, b *Type) bool {
 	if a == nil || b == nil {
 		return a == b
@@ -1957,7 +1988,7 @@ func sameWire(a, b *Type) bool {
 	if a.WireKind != b.WireKind || a.Schema != b.Schema || a.Format != b.Format || a.WireString != b.WireString {
 		return false
 	}
-	if a.Kind == Object && a.Schema == "" {
+	if a.Kind == Object && a.Schema == "" && (len(a.Fields) != 0 || len(b.Fields) != 0) {
 		return false
 	}
 	return sameWire(a.Elem, b.Elem)
