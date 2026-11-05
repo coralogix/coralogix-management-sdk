@@ -1,0 +1,81 @@
+name: Notify the Terraform provider of a spec change
+
+# Fires a repository_dispatch (event_type: sdk-spec-updated) at
+# coralogix/terraform-provider-coralogix whenever openapi.yaml changes on master,
+# which is when a facade sync PR (sync-latest-spec.yaml) merges. The provider's
+# regenerate-generated-resources.yml pins this commit, regenerates its generated
+# resources, and opens a PR when their code changes.
+#
+# Token: the openapi-facade-automation GitHub App, which must be installed on
+# terraform-provider-coralogix with Contents: write. A repository_dispatch cannot
+# use the default GITHUB_TOKEN across repositories.
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - openapi.yaml
+
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: "coralogix-management-sdk commit SHA to send (leave empty to use the ref this workflow runs against)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve commit SHA
+        id: sha
+        env:
+          INPUT_SHA: ${{ github.event.inputs.commit_sha }}
+          RUN_SHA: ${{ github.sha }}
+        run: |
+          SHA="${INPUT_SHA:-$RUN_SHA}"
+          if ! [[ "$SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::commit_sha must be a full 40-character commit SHA"
+            exit 1
+          fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Decode GitHub App private key
+        id: pkey
+        env:
+          RAW_KEY: ${{ secrets.OPENAPI_FACADE_AUTOMATION_APP_PRIVATE_KEY }}
+        run: |
+          decoded=$(printf '%b' "$RAW_KEY")
+          while IFS= read -r line; do
+            [ -n "$line" ] && echo "::add-mask::$line"
+          done <<< "$decoded"
+          {
+            echo 'key<<PKEY_EOF'
+            printf '%s\n' "$decoded"
+            echo 'PKEY_EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Mint GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.OPENAPI_FACADE_AUTOMATION_APP_ID }}
+          private-key: ${{ steps.pkey.outputs.key }}
+          owner: coralogix
+          repositories: terraform-provider-coralogix
+
+      - name: Dispatch sdk-spec-updated to terraform-provider-coralogix
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          repository: coralogix/terraform-provider-coralogix
+          event-type: sdk-spec-updated
+          client-payload: |
+            {
+              "commit_sha": "${{ steps.sha.outputs.sha }}",
+              "source": "coralogix-management-sdk"
+            }
