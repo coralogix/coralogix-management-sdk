@@ -327,7 +327,7 @@ func (s *resolver) operations(r *model.Resource, client string) error {
 	}
 	for _, o := range ops {
 		// A singleton has no id in the path (D18).
-		withID := o.id && !r.Singleton && (o.name != "update" || !r.Policy.UpdateIDInBody)
+		withID := o.id && !r.Singleton && (o.name != "update" || !r.Policy.UpdateIDInBody) && (o.name != "get" || r.Policy.GetByIDs == "")
 		if err := s.operation(r, o.name, o.op, client, withID); err != nil {
 			return err
 		}
@@ -425,6 +425,11 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	s.add(Ref{Path: path, Kind: KindMethod, Owner: client, Name: method,
 		Want: "func(" + params + ") " + builder, Rule: RuleOperationID})
 	s.add(Ref{Path: path, Kind: KindType, Name: builder, Rule: RuleOperationID})
+	if name == "get" && r.Policy.GetByIDs != "" {
+		query := r.Policy.GetByIDs
+		s.add(Ref{Path: path + ".ids", Kind: KindMethod, Owner: builder, Name: goFieldName(query),
+			Want: "func(" + lowerFirst(goFieldName(query)) + " []string) " + builder, Rule: RuleParameter})
+	}
 	if name == "get" {
 		for _, q := range r.GetQuery {
 			// The Go SDK sets a query parameter with a builder method named after it.
@@ -477,8 +482,12 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 			Name: goFieldName(op.Response.ID), Want: "*string", WantValue: "string", Rule: RuleProperty})
 	}
 	if op.Response.Field != "" {
+		want, value := "*"+goTypeName(r.Name), goTypeName(r.Name)
+		if op.Response.Items {
+			want, value = "[]"+goTypeName(r.Name), ""
+		}
 		s.add(Ref{Path: path + ".response." + op.Response.Field, Kind: KindField, Owner: resp,
-			Name: goFieldName(op.Response.Field), Want: "*" + goTypeName(r.Name), WantValue: goTypeName(r.Name), Rule: RuleProperty})
+			Name: goFieldName(op.Response.Field), Want: want, WantValue: value, Rule: RuleProperty})
 	}
 	return nil
 }

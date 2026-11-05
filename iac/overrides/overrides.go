@@ -34,6 +34,8 @@ import (
 
 // API is the HTTP contract of a released resource.
 type API struct {
+	// GetByIDs names the Get query parameter that accepts a list of string ids.
+	GetByIDs string `yaml:"getByIDs"`
 	// RequestWrapper is the property of the Create and Update bodies that holds the resource.
 	RequestWrapper string `yaml:"requestWrapper"`
 	// UpdateIDInBody: Update has no id in its path. The id is a field of the resource.
@@ -277,6 +279,7 @@ func (e Exceptions) Policy() model.Policy {
 		CreateResponseOnlyIDProperty: e.API.CreateResponseOnlyIDProperty,
 		CustomMethods:                e.API.CustomMethods,
 		UpdateMaskInBody:             e.API.UpdateMaskInBody,
+		GetByIDs:                     e.API.GetByIDs,
 		RequestWrappers:              maps.Clone(e.RequestWrappers),
 	}
 	if e.API.Overwrite != nil {
