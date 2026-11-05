@@ -206,7 +206,7 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 			continue
 		}
 		if f.Create != nil {
-			if err := s.requestField("create.body."+f.Name, s.bodies["create"], f.Name, f.Type.CreateType(), f.Create.Required); err != nil {
+			if err := s.requestPathField(f, "create", s.bodies["create"], f.Type.CreateType(), f.Create.Required); err != nil {
 				return err
 			}
 		}
@@ -216,7 +216,7 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 	}
 	for _, f := range r.Fields {
 		if f.Update != nil {
-			if err := s.requestField("update.body."+f.Name, s.bodies["update"], f.Name, f.Type.UpdateType(), f.Update.Required); err != nil {
+			if err := s.requestPathField(f, "update", s.bodies["update"], f.Type.UpdateType(), f.Update.Required); err != nil {
 				return err
 			}
 		}
@@ -280,27 +280,34 @@ func (s *resolver) requestComponent(r *model.Resource, name, wrapper, component 
 		if attrs == nil {
 			continue
 		}
-		segments := strings.Split(f.Name, ".")
-		if f.RequestPath != "" {
-			segments = strings.Split(f.RequestPath, ".")
-		}
-		if len(f.RequestObjects) != len(segments)-1 {
-			return fmt.Errorf("%s.body.%s: the request path %q goes through %d objects with a component, want %d", name, f.Name, f.RequestPath, len(f.RequestObjects), len(segments)-1)
-		}
-		path := name + ".body." + f.Name
-		holder := owner
-		for i, segment := range segments[:len(segments)-1] {
-			object := goTypeName(f.RequestObjects[i])
-			via := path + ".via." + segment // the object that the path goes through, not the field itself
-			s.add(Ref{Path: via, Kind: KindField, Owner: holder, Name: goFieldName(segment), Want: "*" + object, WantValue: object, Rule: RuleProperty})
-			s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: f.RequestObjects[i]})
-			holder = object
-		}
-		if err := s.requestField(path, holder, segments[len(segments)-1], t, attrs.Required); err != nil {
+		if err := s.requestPathField(f, name, owner, t, attrs.Required); err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+// requestPathField adds the Go field that holds a resource field in the Create or Update request
+// object owner: the field of its name, or the field at its request path (requestAs), through the
+// objects that the path goes through.
+func (s *resolver) requestPathField(f *model.ResourceField, name, owner string, t *model.Type, required bool) error {
+	segments := strings.Split(f.Name, ".")
+	if f.RequestPath != "" {
+		segments = strings.Split(f.RequestPath, ".")
+	}
+	if len(f.RequestObjects) != len(segments)-1 {
+		return fmt.Errorf("%s.body.%s: the request path %q goes through %d objects with a component, want %d", name, f.Name, f.RequestPath, len(f.RequestObjects), len(segments)-1)
+	}
+	path := name + ".body." + f.Name
+	holder := owner
+	for i, segment := range segments[:len(segments)-1] {
+		object := goTypeName(f.RequestObjects[i])
+		via := path + ".via." + segment // the object that the path goes through, not the field itself
+		s.add(Ref{Path: via, Kind: KindField, Owner: holder, Name: goFieldName(segment), Want: "*" + object, WantValue: object, Rule: RuleProperty})
+		s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: f.RequestObjects[i]})
+		holder = object
+	}
+	return s.requestField(path, holder, segments[len(segments)-1], t, required)
 }
 
 // requestField adds the Go field of a request body, and the request
