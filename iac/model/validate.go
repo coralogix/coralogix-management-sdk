@@ -587,9 +587,12 @@ func resourceIDIssues(p Policy, name string, ops map[verb]foundOp, get *base.Sch
 	if err != nil {
 		return report
 	}
-	// An id inside a wrapper that the policy unwraps is the value inside it.
-	if component := wrapperComponent(property); component != "" && p.unwraps(name, id, component) && resourceType.Kind == Object && wrapperProblem(resourceType) == "" {
-		resourceType = resourceType.Fields[0].Type
+	// An id inside a wrapper that the policy unwraps is the value inside it. A wrapper that cannot
+	// collapse stays an object, which is not an id type.
+	if component := wrapperComponent(property); component != "" && p.unwraps(name, id, component) {
+		if inner, err := collapse(location, name, id, resourceType); err == nil {
+			resourceType = inner
+		}
 	}
 	resourceKind, supported := supportedIDType(resourceType)
 	if !supported {

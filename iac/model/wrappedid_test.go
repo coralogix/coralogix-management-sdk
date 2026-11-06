@@ -82,8 +82,19 @@ func TestWrappedID(t *testing.T) {
 	if id.Type.Kind != Integer || id.Type.Format != "int64" || len(id.Type.Wrappers) != 1 || id.Type.Wrappers[0].Schema != "ThingId" || id.Type.Wrappers[0].Field != "id" {
 		t.Fatalf("id type = %+v, want int64 inside ThingId.id", id.Type)
 	}
-	if got := r.Create.Response; got.ID != "thingId" || got.IDWrapperField != "id" {
+	if got := r.Create.Response; got.ID != "thingId" || got.idType == nil || !sameIDWrapper(got.idType, id.Type) {
 		t.Fatalf("create response = %+v, want the id in thingId.id", got)
+	}
+}
+
+// BuildWithPolicy is exported, so a caller can skip Validate. A policy that skips the id field
+// returns an error that names the id, not a panic.
+func TestWrappedIDSkipped(t *testing.T) {
+	doc := loadWrappedIDThing(t)
+	policy := wrappedIDPolicy()
+	policy.Skip = []string{"GetThingResponse.thingId"}
+	if _, err := BuildWithPolicy(doc, "GetThingResponse", wrappedIDOps, policy); err == nil || !strings.Contains(err.Error(), `"thingId"`) {
+		t.Fatalf("build err = %v, want the skipped id field rejected", err)
 	}
 }
 

@@ -173,13 +173,12 @@ type Response struct {
 	// wrapper (proto google.api.http response_body).
 	Direct bool
 	// ID is the property that holds only the id of the resource, for a Create response that does
-	// not return the resource (an existing resource). It is a string, and Create reads the
-	// resource with Get.
+	// not return the resource (an existing resource). It is a string, or the same wrapper of the id
+	// as the id field of the resource has, and Create reads the resource with Get.
 	ID string
-	// IDWrapperField is the property inside ID that holds the id when ID is a one-property object
-	// that the policy unwraps, as the id field of the resource is: "id" for {"thingId": {"id": 1}}.
-	// The id is then a string or an integer. "" when ID holds the id itself.
-	IDWrapperField string
+	// idType is the type of ID after the wrapper that the policy unwraps collapses, or nil when ID
+	// holds a string id itself.
+	idType *Type
 	// Empty is true when the response schema has no fields, for example many
 	// Delete responses. The SDK then returns map[string]interface{}.
 	Empty bool
