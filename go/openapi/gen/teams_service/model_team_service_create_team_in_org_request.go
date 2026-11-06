@@ -23,11 +23,11 @@ var _ MappedNullable = &TeamServiceCreateTeamInOrgRequest{}
 
 // TeamServiceCreateTeamInOrgRequest Request to create a team in the calling user's organization.
 type TeamServiceCreateTeamInOrgRequest struct {
-	// Daily quota to assign to the new team, in quota units per day. Defaults to 0.01 when omitted.
+	// Daily quota to assign to the new team, in quota units per day. A value greater than 0.01 moves that value minus 0.01 from the organization's default team to the new team. The service ignores an omitted value, or a value of 0.01 or less, and gives the team the minimum quota. The service stores the quota as a 32-bit float.
 	DailyQuota *float64 `json:"dailyQuota,omitempty"`
 	// Email addresses of the users to add to the new team as administrators.
 	TeamAdminsEmail []string `json:"teamAdminsEmail,omitempty"`
-	// Display name of the team to create.
+	// Display name of the team to create. Unique in the organization: a name that another team has answers 400.
 	TeamName string `json:"teamName" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
