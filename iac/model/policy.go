@@ -31,6 +31,12 @@ import (
 // generator builds a Policy from the behavior-overrides file, and it fails
 // when a line of that file matches nothing.
 type Policy struct {
+	// Required lists fields that a released client requires even when Create leaves them optional.
+	// Update can require them because the client always supplies them.
+	Required []string
+	// GetByIDs names the string-array Get query parameter used to read one resource through a
+	// batch endpoint. Existing resources only; Delete supplies the id path parameter.
+	GetByIDs string
 	// Existing turns on the rules that are true for every released resource:
 	//   - a response may wrap the resource in one property;
 	//   - the request schema may be the resource schema (a shared payload), and
@@ -332,7 +338,7 @@ func (p Policy) fixedRequest(component, field string) bool {
 }
 
 func (p Policy) released(component, field string) bool {
-	return p.Existing && component != "" && slices.Contains(p.Released, component+"."+field)
+	return p.Existing && component != "" && (slices.Contains(p.Released, component+"."+field) || slices.Contains(p.Required, component+"."+field))
 }
 
 // OverridesDefault reports whether the behavior-overrides file replaces the default of the field.
