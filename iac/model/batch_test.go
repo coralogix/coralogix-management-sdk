@@ -83,7 +83,7 @@ func TestReleasedRequiredFieldCanBeOptionalOnCreate(t *testing.T) {
 	if codes := reportCodes(ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p)); !slices.Contains(codes, "FIELD_REQUIREDNESS_UNSUPPORTED") {
 		t.Fatalf("codes %v do not contain FIELD_REQUIREDNESS_UNSUPPORTED", codes)
 	}
-	p.Required = []string{"BatchThing.name"}
+	p.ClientRequired = []string{"BatchThing.name"}
 	if issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p); len(issues) != 0 {
 		t.Fatal(issues)
 	}

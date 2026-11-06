@@ -212,7 +212,7 @@ resource; Delete supplies the identity path parameter. The model records the res
 `Response.Items`, and SDK checks include the array query setter and response slice. A tool sends
 one id and keeps its released selection behavior. New resources still require a direct Get.
 
-`Policy.Required` records fields that a released client always supplies, even when Create makes
+`Policy.ClientRequired` records fields that a released client always supplies, even when Create makes
 them optional. Such a field can be required in Update without losing the identity or value needed
 for later changes.
 

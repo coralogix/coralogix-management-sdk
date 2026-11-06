@@ -704,7 +704,7 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	// keeps it, the plan has it too, so Update can always send it. Without one, a change of another
 	// attribute plans the field unknown, and Update would leave out a field that it requires.
 	kept := p.computed(name, field) && p.keepsState(name, field) && slices.Contains(get.Required, field)
-	if cp != nil && up != nil && !slices.Contains(create.Required, field) && slices.Contains(update.Required, field) && !kept && !(p.Existing && slices.Contains(p.Required, name+"."+field)) {
+	if cp != nil && up != nil && !slices.Contains(create.Required, field) && slices.Contains(update.Required, field) && !kept && !(p.Existing && slices.Contains(p.ClientRequired, name+"."+field)) {
 		report = append(report, issue.Issue{
 			Code:        "FIELD_REQUIREDNESS_UNSUPPORTED",
 			Location:    location,
