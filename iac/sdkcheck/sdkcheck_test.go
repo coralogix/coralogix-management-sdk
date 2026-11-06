@@ -613,3 +613,36 @@ func TestNamesForAWriteThatReturnsTheResource(t *testing.T) {
 		t.Error("Delete has a ref for the write response: its response is not read")
 	}
 }
+
+// A Create response that holds the wrapper of the id, as the id field of the resource does, needs
+// the SDK type of that wrapper, not a string.
+func TestNamesWrappedCreateResponseID(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "wrappedidthing.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	r, err := model.BuildWithPolicy(doc, "GetThingResponse", model.OperationIDs{
+		Create: "WrappedThingsService_CreateThing",
+		Get:    "WrappedThingsService_GetThing",
+		Update: "WrappedThingsService_UpdateThing",
+		Delete: "WrappedThingsService_DeleteThing",
+	}, model.Policy{Existing: true, IDProperty: "thingId", CreateResponseOnlyIDProperty: "thingId", Unwrap: []string{"ThingId"}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, "Wrapped Things Service", "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	i := slices.IndexFunc(refs, func(ref Ref) bool { return ref.Path == "create.response.thingId" })
+	if i < 0 {
+		t.Fatal("no ref for create.response.thingId")
+	}
+	if got := refs[i]; got.Want != "*ThingId" || got.WantValue != "ThingId" {
+		t.Fatalf("create.response.thingId wants %s / %s, want *ThingId / ThingId", got.Want, got.WantValue)
+	}
+}
