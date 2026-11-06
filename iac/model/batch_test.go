@@ -20,6 +20,8 @@ import (
 	"slices"
 	"strings"
 	"testing"
+
+	v3 "github.com/pb33f/libopenapi/datamodel/high/v3"
 )
 
 func TestBatchGet(t *testing.T) {
@@ -170,5 +172,51 @@ func TestContractSchemasBatchResponse(t *testing.T) {
 				}
 			})
 		}
+	}
+}
+
+func TestBatchGetUpdatePaths(t *testing.T) {
+	data, err := os.ReadFile("testdata/batchthing.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, tt := range []struct {
+		name, path    string
+		customMethods bool
+		wantError     string
+	}{
+		{name: "item path", path: "/batch/v1/things/{id}"},
+		{name: "unrelated path", path: "/unrelated/{id}", wantError: "api.getByIDs Update must use Get path/{id}"},
+		{name: "custom path", path: "/unrelated/{id}", customMethods: true},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			doc, err := Load(data)
+			if err != nil {
+				t.Fatal(err)
+			}
+			collection := doc.Paths.PathItems.GetOrZero("/batch/v1/things")
+			item := doc.Paths.PathItems.GetOrZero(tt.path)
+			if item == nil {
+				item = &v3.PathItem{}
+				doc.Paths.PathItems.Set(tt.path, item)
+			}
+			item.Put, collection.Put = collection.Put, nil
+			item.Put.Parameters = doc.Paths.PathItems.GetOrZero("/batch/v1/things/{id}").Delete.Parameters
+			p := Policy{Existing: true, GetByIDs: "ids", CustomMethods: tt.customMethods, ReadOnly: []string{"BatchThing.id"}}
+			issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p)
+			_, err = BuildWithPolicy(doc, "BatchThing", OperationIDs{}, p)
+			if tt.wantError == "" {
+				if len(issues) != 0 || err != nil {
+					t.Fatalf("valid Update path: issues=%v, Build error=%v", issues, err)
+				}
+				return
+			}
+			if len(issues) != 1 || issues[0].Code != "RESOURCE_LIFECYCLE_INCOMPLETE" || issues[0].Message != tt.wantError {
+				t.Fatalf("want batch path diagnostic %q, got %v", tt.wantError, issues)
+			}
+			if err == nil || err.Error() != tt.wantError {
+				t.Fatalf("Build error = %v, want %q", err, tt.wantError)
+			}
+		})
 	}
 }

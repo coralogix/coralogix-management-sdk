@@ -70,9 +70,9 @@ func (r *Resource) readBatchOperations(ops map[verb]foundOp) error {
 		if err != nil || other != id {
 			return fmt.Errorf("%s must use the same id path parameter as Delete", role)
 		}
-	}
-	if !r.Policy.CustomMethods && ops[opDelete].path != get.path+"/{"+id+"}" {
-		return fmt.Errorf("api.getByIDs Delete must use Get path/{%s}", id)
+		if !r.Policy.CustomMethods && ops[role].path != get.path+"/{"+id+"}" {
+			return fmt.Errorf("api.getByIDs %s must use Get path/{%s}", role, id)
+		}
 	}
 	if get.path != ops[opCreate].path && !r.Policy.CustomMethods {
 		return fmt.Errorf("api.getByIDs Get must use the Create path")
