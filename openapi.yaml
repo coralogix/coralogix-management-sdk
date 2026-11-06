@@ -2140,7 +2140,11 @@ paths:
                 dailyQuota:
                   description: >-
                     Daily quota to assign to the new team, in quota units per
-                    day. Defaults to 0.01 when omitted.
+                    day. A value greater than 0.01 moves that value minus 0.01
+                    from the organization's default team to the new team. The
+                    service ignores an omitted value, or a value of 0.01 or
+                    less, and gives the team the minimum quota. The service
+                    stores the quota as a 32-bit float.
                   format: double
                   type: number
                   x-coralogix-presence: true
@@ -2160,7 +2164,9 @@ paths:
                   minItems: 0
                   type: array
                 teamName:
-                  description: Display name of the team to create.
+                  description: >-
+                    Display name of the team to create. Unique in the
+                    organization: a name that another team has answers 400.
                   maxLength: 255
                   minLength: 1
                   pattern: ^[\s\S]*$
@@ -2266,14 +2272,18 @@ paths:
                 dailyQuota:
                   description: >-
                     New daily quota for the team, in quota units per day. Omit
-                    to keep the current quota.
+                    to keep the current quota. Must be greater than 0: the
+                    service answers 400 for 0 or less. The quota moves between
+                    this team and the organization's default team, and the
+                    service stores it as a 32-bit float.
                   format: double
                   type: number
                   x-coralogix-presence: true
                 teamName:
                   description: >-
                     New display name for the team. Omit to keep the current
-                    name.
+                    name. A name that another team of the organization has is
+                    rejected.
                   maxLength: 255
                   minLength: 1
                   pattern: ^[\s\S]*$
@@ -28128,13 +28138,17 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/
     CreateTeamInOrgResponse:
+      required:
+        - teamId
       type: object
       properties:
         teamId:
           allOf:
             - $ref: '#/components/schemas/v2.TeamId'
           description: Identifier of the created team.
-      description: Response containing the identifier of the created team.
+      description: >-
+        Response containing the identifier of the created team. Read the team
+        with the get operation.
     CreateUserRequest:
       type: object
       properties:
@@ -35115,17 +35129,27 @@ components:
         url: >-
           https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
     GetTeamResponse:
+      required:
+        - teamId
+        - teamName
+        - dailyQuota
+        - retention
       type: object
       properties:
         dailyQuota:
           type: number
-          description: Daily quota assigned to the team, in quota units per day.
+          description: >-
+            Daily quota assigned to the team, in quota units per day. The
+            service stores the quota as a 32-bit float, so the value reads back
+            as the nearest 32-bit float: 0.3 reads back as 0.30000001192092896.
           format: double
         retention:
           maximum: 2147483647
           minimum: 0
           type: integer
-          description: Retention period of the team's data, in days.
+          description: >-
+            Retention period of the team's data, in days. Set by the service; a
+            request cannot change it.
           format: int32
         teamId:
           allOf:
@@ -35133,10 +35157,10 @@ components:
           description: Identifier of the team.
         teamName:
           maxLength: 255
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Display name of the team.
+          description: Display name of the team. Unique in the organization; never empty.
       description: Response containing the requested team.
     GetTemplateResponse:
       title: Get template response
@@ -40146,10 +40170,10 @@ components:
           description: The team id.
         teamName:
           maxLength: 255
-          minLength: 0
+          minLength: 1
           pattern: ^[\s\S]*$
           type: string
-          description: Display name of the team.
+          description: Display name of the team. Unique in the organization; never empty.
       description: A team and the quota and retention settings assigned to it.
     ListTextValue:
       title: List text value
