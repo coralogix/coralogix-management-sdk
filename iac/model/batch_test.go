@@ -55,6 +55,18 @@ func TestBatchGet(t *testing.T) {
 			old: "name: ids, in: query, required: true", replacement: "name: ids, in: query, required: false",
 			policy: Policy{Existing: true, GetByIDs: "missing", UpdateIDInBody: true}, wantError: `api.getByIDs: no query parameter "missing"`,
 		},
+		"single id query": {
+			old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: array, minItems: 1, maxItems: 1, items: {type: string}}",
+			policy: p,
+		},
+		"query requires two ids": {
+			old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: array, minItems: 2, items: {type: string}}",
+			policy: p, wantError: "api.getByIDs query parameter must accept one id",
+		},
+		"query accepts no ids": {
+			old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: array, maxItems: 0, items: {type: string}}",
+			policy: p, wantError: "api.getByIDs query parameter must accept one id",
+		},
 		"scalar query": {
 			old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: string}",
 			policy: p, wantError: "api.getByIDs needs an array query parameter",
@@ -76,6 +88,15 @@ func TestBatchGet(t *testing.T) {
 				t.Fatal(err)
 			}
 			issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, tt.policy)
+			if tt.wantError == "" {
+				if len(issues) != 0 {
+					t.Fatal(issues)
+				}
+				if _, err := BuildWithPolicy(doc, "BatchThing", OperationIDs{}, tt.policy); err != nil {
+					t.Fatal(err)
+				}
+				return
+			}
 			var diagnostics []string
 			for _, issue := range issues {
 				diagnostics = append(diagnostics, issue.Code+": "+issue.Message)

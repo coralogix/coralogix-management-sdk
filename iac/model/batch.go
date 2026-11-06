@@ -42,6 +42,9 @@ func (r *Resource) readBatchOperations(ops map[verb]foundOp) error {
 		if err != nil || !slices.Equal(s.Type, []string{"array"}) || s.Items == nil || s.Items.A == nil {
 			return fmt.Errorf("api.getByIDs needs an array query parameter")
 		}
+		if s.MinItems != nil && *s.MinItems > 1 || s.MaxItems != nil && *s.MaxItems < 1 {
+			return fmt.Errorf("api.getByIDs query parameter must accept one id")
+		}
 		item, err := schemaOf(s.Items.A)
 		if err != nil || !slices.Equal(item.Type, []string{"string"}) {
 			return fmt.Errorf("api.getByIDs needs string ids")
