@@ -45,12 +45,28 @@ func TestBatchGet(t *testing.T) {
 	tests := map[string]struct {
 		old, replacement string
 		policy           Policy
+		wantError        string
 	}{
-		"new resource":    {policy: Policy{GetByIDs: "ids", UpdateIDInBody: true}},
-		"missing query":   {policy: Policy{Existing: true, GetByIDs: "missing", UpdateIDInBody: true}},
-		"scalar query":    {old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: string}", policy: p},
-		"numeric query":   {old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: array, items: {type: integer, format: int32}}", policy: p},
-		"single response": {old: "things: {type: array, items: {$ref: '#/components/schemas/BatchThing'}}", replacement: "things: {$ref: '#/components/schemas/BatchThing'}", policy: p},
+		"new resource": {
+			old: "name: ids, in: query, required: true", replacement: "name: ids, in: query, required: false",
+			policy: Policy{GetByIDs: "ids", UpdateIDInBody: true}, wantError: "api.getByIDs is only for existing resources",
+		},
+		"missing query": {
+			old: "name: ids, in: query, required: true", replacement: "name: ids, in: query, required: false",
+			policy: Policy{Existing: true, GetByIDs: "missing", UpdateIDInBody: true}, wantError: `api.getByIDs: no query parameter "missing"`,
+		},
+		"scalar query": {
+			old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: string}",
+			policy: p, wantError: "api.getByIDs needs an array query parameter",
+		},
+		"numeric query": {
+			old: "schema: {type: array, items: {type: string}}", replacement: "schema: {type: array, items: {type: integer, format: int32}}",
+			policy: p, wantError: "api.getByIDs needs string ids",
+		},
+		"single response": {
+			old: "things: {type: array, items: {$ref: '#/components/schemas/BatchThing'}}", replacement: "things: {$ref: '#/components/schemas/BatchThing'}",
+			policy: p, wantError: "Get: api.getByIDs needs a response array of BatchThing",
+		},
 	}
 	for name, tt := range tests {
 		t.Run(name, func(t *testing.T) {
@@ -59,11 +75,16 @@ func TestBatchGet(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, tt.policy); len(issues) == 0 {
-				t.Fatal("invalid batch contract was eligible")
+			issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, tt.policy)
+			var diagnostics []string
+			for _, issue := range issues {
+				diagnostics = append(diagnostics, issue.Code+": "+issue.Message)
 			}
-			if _, err := BuildWithPolicy(doc, "BatchThing", OperationIDs{}, tt.policy); err == nil {
-				t.Fatal("invalid batch contract built")
+			if !slices.Contains(diagnostics, "RESOURCE_LIFECYCLE_INCOMPLETE: "+tt.wantError) {
+				t.Fatalf("want batch diagnostic %q, got %v", tt.wantError, issues)
+			}
+			if _, err := BuildWithPolicy(doc, "BatchThing", OperationIDs{}, tt.policy); err == nil || err.Error() != tt.wantError {
+				t.Fatalf("Build error = %v, want %q", err, tt.wantError)
 			}
 		})
 	}

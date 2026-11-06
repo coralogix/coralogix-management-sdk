@@ -38,18 +38,26 @@ func TestBatchGetSDKNames(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := map[string]string{
-		"get":                 "func(ctx context.Context) ApiBatchThingsServiceGetBatchThingRequest",
-		"get.ids":             "func(ids []string) ApiBatchThingsServiceGetBatchThingRequest",
-		"get.response.things": "[]BatchThing",
+	want := map[string]Ref{
+		"get": {
+			Kind: KindMethod, Owner: "BatchThingsServiceAPIService", Name: "BatchThingsServiceGetBatchThing",
+			Want: "func(ctx context.Context) ApiBatchThingsServiceGetBatchThingRequest",
+		},
+		"get.ids": {
+			Kind: KindMethod, Owner: "ApiBatchThingsServiceGetBatchThingRequest", Name: "Ids",
+			Want: "func(ids []string) ApiBatchThingsServiceGetBatchThingRequest",
+		},
+		"get.response.things": {
+			Kind: KindField, Owner: "GetBatchThingResponse", Name: "Things", Want: "[]BatchThing",
+		},
 	}
 	for _, ref := range refs {
 		expected, ok := want[ref.Path]
 		if !ok || ref.Kind == KindType {
 			continue
 		}
-		if ref.Want != expected {
-			t.Fatalf("%s: %s, want %s", ref.Path, ref.Want, expected)
+		if ref.Kind != expected.Kind || ref.Owner != expected.Owner || ref.Name != expected.Name || ref.Want != expected.Want {
+			t.Fatalf("%s: %+v, want %+v", ref.Path, ref, expected)
 		}
 		delete(want, ref.Path)
 	}
