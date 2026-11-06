@@ -87,7 +87,7 @@ func requestSchemaSeparationIssues(p Policy, name string, ops map[verb]foundOp) 
 	}
 	create, createErr := rootSchemaIdentity(bodyProxy(ops[opCreate].op))
 	update, updateErr := rootSchemaIdentity(bodyProxy(ops[opUpdate].op))
-	resource, resourceErr := rootSchemaIdentity(responseResourceProxy(ops[opGet].op, name))
+	resource, resourceErr := rootSchemaIdentity(p.responseResourceProxy(ops[opGet].op, name))
 	if createErr != nil || updateErr != nil || resourceErr != nil {
 		return nil
 	}
@@ -290,7 +290,7 @@ func requiredParameterIssues(location string, role verb, op foundOp, policy Poli
 func contractSchemas(p Policy, name string, ops map[verb]foundOp) (create, update, get *base.Schema, report issue.Report, ok bool) {
 	create, createErr := schemaOf(p.requestBody(ops[opCreate].op))
 	update, updateErr := schemaOf(p.requestBody(ops[opUpdate].op))
-	get, getErr := schemaOf(responseResourceProxy(ops[opGet].op, name))
+	get, getErr := schemaOf(p.responseResourceProxy(ops[opGet].op, name))
 	if createErr == nil && updateErr == nil && getErr == nil {
 		create, update, report = p.shapeRequests(name, p.idProperty(ops), ops, create, update, get)
 	}
@@ -1606,7 +1606,7 @@ func requestContractProperty(parent *base.Schema, name string) *base.SchemaProxy
 	return proxy
 }
 
-func responseResourceProxy(op *v3.Operation, name string) *base.SchemaProxy {
+func (p Policy) responseResourceProxy(op *v3.Operation, name string) *base.SchemaProxy {
 	if op == nil || op.Responses == nil || op.Responses.Codes == nil {
 		return nil
 	}
@@ -1634,8 +1634,10 @@ func responseResourceProxy(op *v3.Operation, name string) *base.SchemaProxy {
 	}
 	for _, field := range propertyNames(s) {
 		proxy := propertyOf(s, field)
-		if ps, err := schemaOf(proxy); err == nil && slices.Equal(ps.Type, []string{"array"}) && ps.Items != nil && ps.Items.A != nil {
-			proxy = ps.Items.A
+		if p.GetByIDs != "" {
+			if ps, err := schemaOf(proxy); err == nil && slices.Equal(ps.Type, []string{"array"}) && ps.Items != nil && ps.Items.A != nil {
+				proxy = ps.Items.A
+			}
 		}
 		if unwrapRef(proxy) == componentPrefix+name {
 			// The property can be "allOf: [$ref: X]". Return the $ref, whose schema has the fields.

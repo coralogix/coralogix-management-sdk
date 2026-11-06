@@ -15,7 +15,9 @@
 package model
 
 import (
+	"fmt"
 	"os"
+	"slices"
 	"strings"
 	"testing"
 )
@@ -78,8 +80,8 @@ func TestReleasedRequiredFieldCanBeOptionalOnCreate(t *testing.T) {
 		t.Fatal(err)
 	}
 	p := Policy{Existing: true, GetByIDs: "ids", UpdateIDInBody: true, ReadOnly: []string{"BatchThing.id"}}
-	if issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p); len(issues) == 0 {
-		t.Fatal("optional Create with required Update must be rejected")
+	if codes := reportCodes(ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p)); !slices.Contains(codes, "FIELD_REQUIREDNESS_UNSUPPORTED") {
+		t.Fatalf("codes %v do not contain FIELD_REQUIREDNESS_UNSUPPORTED", codes)
 	}
 	p.Required = []string{"BatchThing.name"}
 	if issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p); len(issues) != 0 {
@@ -87,5 +89,44 @@ func TestReleasedRequiredFieldCanBeOptionalOnCreate(t *testing.T) {
 	}
 	if _, err := BuildWithPolicy(doc, "BatchThing", OperationIDs{}, p); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestContractSchemasBatchResponse(t *testing.T) {
+	data, err := os.ReadFile("testdata/batchthing.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, array := range []bool{false, true} {
+		for _, batch := range []bool{false, true} {
+			t.Run(fmt.Sprintf("array=%t/batch=%t", array, batch), func(t *testing.T) {
+				source := string(data)
+				if !array {
+					source = strings.Replace(source, "things: {type: array, items: {$ref: '#/components/schemas/BatchThing'}}", "things: {$ref: '#/components/schemas/BatchThing'}", 1)
+				}
+				doc, err := Load([]byte(source))
+				if err != nil {
+					t.Fatal(err)
+				}
+				p := Policy{Existing: true, GetByIDs: "ids", UpdateIDInBody: true, ReadOnly: []string{"BatchThing.id"}}
+				ops, err := findOperations(doc, "BatchThing", OperationIDs{}, p)
+				if err != nil {
+					t.Fatal(err)
+				}
+				if !batch {
+					p.GetByIDs = ""
+				}
+				_, _, get, issues, ok := contractSchemas(p, "BatchThing", ops)
+				if len(issues) != 0 {
+					t.Fatal(issues)
+				}
+				if want := !array || batch; ok != want {
+					t.Fatalf("resource schema found = %t, want %t", ok, want)
+				}
+				if ok && propertyOf(get, "name") == nil {
+					t.Fatal("resolved schema has no resource name field")
+				}
+			})
+		}
 	}
 }
