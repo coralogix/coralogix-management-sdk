@@ -12103,6 +12103,20 @@ paths:
             pattern: ^[A-Za-z0-9_-]+$
             type: string
             x-coralogix-presence: true
+        - description: >-
+            Response view. BASIC returns group metadata without configuration
+            families. FULL returns the complete group. Omitted or unspecified
+            retains the current full response.
+          in: query
+          name: view
+          required: false
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ConfigurationGroupView'
+            description: >-
+              Response view. BASIC returns group metadata without configuration
+              families. FULL returns the complete group. Omitted or unspecified
+              retains the current full response.
       responses:
         '200':
           content:
@@ -26432,6 +26446,12 @@ components:
       description: >-
         A group of versioned Collector configurations. Use its ID for get,
         update, and archive operations.
+    ConfigurationGroupView:
+      enum:
+        - CONFIGURATION_GROUP_VIEW_UNSPECIFIED
+        - CONFIGURATION_GROUP_VIEW_BASIC
+        - CONFIGURATION_GROUP_VIEW_FULL
+      type: string
     ConfigurationOverlay:
       required:
         - id
