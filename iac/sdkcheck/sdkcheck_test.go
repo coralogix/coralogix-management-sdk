@@ -53,6 +53,44 @@ func thingNames(t *testing.T, zeroConstants func(string) bool) []Ref {
 	return refs
 }
 
+func TestFieldTypeUsesOperationWireCollection(t *testing.T) {
+	object := &model.Type{Kind: model.Object, WireKind: model.Object, Schema: "Item", Fields: []*model.Field{{Name: "name", Type: &model.Type{Kind: model.String, WireKind: model.String}}}}
+	for _, test := range []struct {
+		name, want string
+		wire       model.Kind
+	}{
+		{name: "request list", wire: model.List, want: "[]Item"},
+		{name: "response map", wire: model.Map, want: "map[string]Item"},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			got, _, err := fieldType(&model.Type{Kind: model.Set, WireKind: test.wire, Elem: object})
+			if err != nil || got != test.want {
+				t.Fatalf("fieldType = %q, %v; want %q", got, err, test.want)
+			}
+		})
+	}
+
+	keyed := &model.Type{Kind: model.Object, WireKind: model.Object, Schema: "Item"}
+	for _, test := range []struct {
+		name, want string
+		wire       model.Kind
+	}{
+		{name: "keyed Get map", wire: model.Map, want: "map[string]Item"},
+		{name: "keyed write list", wire: model.List, want: "[]Item"},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			typeValue := &model.Type{
+				Kind: model.Map, WireKind: test.wire,
+				Keyed: &model.Keyed{Key: "name", Item: keyed},
+			}
+			got, _, err := fieldType(typeValue)
+			if err != nil || got != test.want {
+				t.Fatalf("fieldType = %q, %v; want %q", got, err, test.want)
+			}
+		})
+	}
+}
+
 // Names lists only names of the SDK module: the generated package of the tag and the cxsdk
 // package. A tool appends the names of its own code.
 func TestNamesListsOnlySDKNames(t *testing.T) {
@@ -477,5 +515,134 @@ func TestNamesForAnOverwriteResource(t *testing.T) {
 		if strings.HasPrefix(ref.Path, "fields.") && strings.Contains(ref.Path, ".via.") {
 			t.Errorf("response ref %s goes through a request wrapper", ref.Path)
 		}
+	}
+}
+
+// A write body without a wrapper can hold the list of the resource under another name. The SDK
+// names of that list are those of the request path.
+func TestNamesForARenamedFieldOfAnUnwrappedBody(t *testing.T) {
+	raw, err := os.ReadFile("../model/testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := strings.Replace(string(raw), "required: [things]\n              properties:\n                things:", "required: [thingWrites]\n              properties:\n                thingWrites:", 1)
+	if spec == string(raw) {
+		t.Fatal("the spec has no write body property things")
+	}
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	write := "ThingsService_OverwriteKindAThings"
+	policy := model.Policy{
+		Existing: true, Overwrite: true, GetQuery: map[string]string{"kind": "THING_KIND_A"},
+		Operations:      model.OperationIDs{Create: write, Get: "ThingsService_ListThings", Update: write, Delete: write},
+		RequestWrappers: map[string]string{"Thing": "thing"},
+		RequestNames:    map[string]string{"ThingList.things": "thingWrites", "Thing.enabled": "disabled"},
+		RequestNegated:  []string{"Thing.enabled"},
+	}
+	r, err := model.BuildWithPolicy(doc, "ThingList", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, path := range []string{"create.body.things", "update.body.things"} {
+		found := false
+		for _, ref := range refs {
+			if ref.Path != path || ref.Kind != KindField {
+				continue
+			}
+			found = true
+			if got := ref.SDKName(); got != "OverwriteKindAThingsRequest.ThingWrites" {
+				t.Errorf("%s = %s, want OverwriteKindAThingsRequest.ThingWrites", path, got)
+			}
+		}
+		if !found {
+			t.Errorf("no field ref at %s", path)
+		}
+	}
+}
+
+// A write that returns the resource has the resource fields on its response type, which a tool
+// copies into the resource.
+func TestNamesForAWriteThatReturnsTheResource(t *testing.T) {
+	raw, err := os.ReadFile("../model/testdata/overwritething.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := strings.Replace(string(raw), "    OverwriteResponse:\n      type: object\n      properties:\n        created:", "    OverwriteResponse:\n      type: object\n      properties:\n        things:", 1)
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	write := "ThingsService_OverwriteKindAThings"
+	policy := model.Policy{
+		Existing: true, Overwrite: true, WriteReturnsResource: true, GetQuery: map[string]string{"kind": "THING_KIND_A"},
+		Operations:      model.OperationIDs{Create: write, Get: "ThingsService_ListThings", Update: write, Delete: write},
+		RequestWrappers: map[string]string{"Thing": "thing"},
+		RequestNames:    map[string]string{"Thing.enabled": "disabled"},
+		RequestNegated:  []string{"Thing.enabled"},
+	}
+	r, err := model.BuildWithPolicy(doc, "ThingList", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, path := range []string{"create.response.things", "update.response.things"} {
+		if !slices.ContainsFunc(refs, func(ref Ref) bool {
+			return ref.Path == path && ref.Kind == KindField && ref.SDKName()+" "+ref.Want == "OverwriteResponse.Things []Thing"
+		}) {
+			t.Errorf("no field ref OverwriteResponse.Things []Thing at %s", path)
+		}
+	}
+	if slices.ContainsFunc(refs, func(ref Ref) bool { return ref.Path == "delete.response.things" }) {
+		t.Error("Delete has a ref for the write response: its response is not read")
+	}
+}
+
+// A Create response that holds the wrapper of the id, as the id field of the resource does, needs
+// the SDK type of that wrapper, not a string.
+func TestNamesWrappedCreateResponseID(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "wrappedidthing.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	r, err := model.BuildWithPolicy(doc, "GetThingResponse", model.OperationIDs{
+		Create: "WrappedThingsService_CreateThing",
+		Get:    "WrappedThingsService_GetThing",
+		Update: "WrappedThingsService_UpdateThing",
+		Delete: "WrappedThingsService_DeleteThing",
+	}, model.Policy{Existing: true, IDProperty: "thingId", CreateResponseOnlyIDProperty: "thingId", Unwrap: []string{"ThingId"}})
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, "Wrapped Things Service", "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	i := slices.IndexFunc(refs, func(ref Ref) bool { return ref.Path == "create.response.thingId" })
+	if i < 0 {
+		t.Fatal("no ref for create.response.thingId")
+	}
+	if got := refs[i]; got.Want != "*ThingId" || got.WantValue != "ThingId" {
+		t.Fatalf("create.response.thingId wants %s / %s, want *ThingId / ThingId", got.Want, got.WantValue)
 	}
 }

@@ -238,7 +238,7 @@ func TestCheckRequestShapeKeys(t *testing.T) {
 func TestPolicyStatesTheOverwriteKeys(t *testing.T) {
 	e := Exceptions{
 		API: API{
-			Overwrite:  &Overwrite{GetQuery: map[string]string{"source_type": "SOURCE_TYPE_LOGS"}},
+			Overwrite:  &Overwrite{GetQuery: map[string]string{"source_type": "SOURCE_TYPE_LOGS"}, WriteReturnsResource: true},
 			Operations: &Operations{Create: "W", Get: "G", Update: "W", Delete: "W"},
 		},
 		Fields:          map[string]map[string]Field{"Policy": {"enabled": {RequestAs: "disabled", Negate: true}}},
@@ -248,8 +248,8 @@ func TestPolicyStatesTheOverwriteKeys(t *testing.T) {
 		t.Fatal(err)
 	}
 	p := e.Policy()
-	if !p.Overwrite || !reflect.DeepEqual(p.GetQuery, map[string]string{"source_type": "SOURCE_TYPE_LOGS"}) {
-		t.Errorf("overwrite = %t, get query = %v", p.Overwrite, p.GetQuery)
+	if !p.Overwrite || !p.WriteReturnsResource || !reflect.DeepEqual(p.GetQuery, map[string]string{"source_type": "SOURCE_TYPE_LOGS"}) {
+		t.Errorf("overwrite = %t, write returns resource = %t, get query = %v", p.Overwrite, p.WriteReturnsResource, p.GetQuery)
 	}
 	if !reflect.DeepEqual(p.RequestWrappers, map[string]string{"Policy": "policy"}) || !reflect.DeepEqual(p.RequestNegated, []string{"Policy.enabled"}) || p.RequestNames["Policy.enabled"] != "disabled" {
 		t.Errorf("wrappers = %v, negated = %v, names = %v", p.RequestWrappers, p.RequestNegated, p.RequestNames)
@@ -278,11 +278,11 @@ func TestCheckOverwriteKeys(t *testing.T) {
 
 func TestOverwriteKeysParse(t *testing.T) {
 	var api API
-	in := "overwrite:\n  getQuery: {source_type: SOURCE_TYPE_SPANS}\noperations: {create: W, get: G, update: W, delete: W}\n"
+	in := "overwrite:\n  getQuery: {source_type: SOURCE_TYPE_SPANS}\n  writeReturnsResource: true\noperations: {create: W, get: G, update: W, delete: W}\n"
 	if err := yaml.Unmarshal([]byte(in), &api); err != nil {
 		t.Fatal(err)
 	}
-	if api.Overwrite == nil || api.Overwrite.GetQuery["source_type"] != "SOURCE_TYPE_SPANS" {
+	if api.Overwrite == nil || api.Overwrite.GetQuery["source_type"] != "SOURCE_TYPE_SPANS" || !api.Overwrite.WriteReturnsResource {
 		t.Fatalf("overwrite = %+v", api.Overwrite)
 	}
 	var line Field

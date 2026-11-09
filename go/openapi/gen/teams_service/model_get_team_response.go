@@ -13,6 +13,7 @@ package teams_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,14 +23,14 @@ var _ MappedNullable = &GetTeamResponse{}
 
 // GetTeamResponse Response containing the requested team.
 type GetTeamResponse struct {
-	// Daily quota assigned to the team, in quota units per day.
-	DailyQuota *float64 `json:"dailyQuota,omitempty"`
-	// Retention period of the team's data, in days.
-	Retention *int32 `json:"retention,omitempty"`
+	// Daily quota assigned to the team, in quota units per day. The service stores the quota as a 32-bit float, so the value reads back as the nearest 32-bit float: 0.3 reads back as 0.30000001192092896.
+	DailyQuota float64 `json:"dailyQuota"`
+	// Retention period of the team's data, in days. Set by the service; a request cannot change it.
+	Retention int32 `json:"retention"`
 	// Identifier of the team.
-	TeamId *V2TeamId `json:"teamId,omitempty"`
-	// Display name of the team.
-	TeamName *string `json:"teamName,omitempty" validate:"regexp=^[\\s\\S]*$"`
+	TeamId V2TeamId `json:"teamId"`
+	// Display name of the team. Unique in the organization; never empty.
+	TeamName string `json:"teamName" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -40,8 +41,12 @@ type _GetTeamResponse GetTeamResponse
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewGetTeamResponse() *GetTeamResponse {
+func NewGetTeamResponse(dailyQuota float64, retention int32, teamId V2TeamId, teamName string) *GetTeamResponse {
 	this := GetTeamResponse{}
+	this.DailyQuota = dailyQuota
+	this.Retention = retention
+	this.TeamId = teamId
+	this.TeamName = teamName
 	return &this
 }
 
@@ -53,132 +58,100 @@ func NewGetTeamResponseWithDefaults() *GetTeamResponse {
 	return &this
 }
 
-// GetDailyQuota returns the DailyQuota field value if set, zero value otherwise.
+// GetDailyQuota returns the DailyQuota field value
 func (o *GetTeamResponse) GetDailyQuota() float64 {
-	if o == nil || IsNil(o.DailyQuota) {
+	if o == nil {
 		var ret float64
 		return ret
 	}
-	return *o.DailyQuota
+
+	return o.DailyQuota
 }
 
-// GetDailyQuotaOk returns a tuple with the DailyQuota field value if set, nil otherwise
+// GetDailyQuotaOk returns a tuple with the DailyQuota field value
 // and a boolean to check if the value has been set.
 func (o *GetTeamResponse) GetDailyQuotaOk() (*float64, bool) {
-	if o == nil || IsNil(o.DailyQuota) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DailyQuota, true
+	return &o.DailyQuota, true
 }
 
-// HasDailyQuota returns a boolean if a field has been set.
-func (o *GetTeamResponse) HasDailyQuota() bool {
-	if o != nil && !IsNil(o.DailyQuota) {
-		return true
-	}
-
-	return false
-}
-
-// SetDailyQuota gets a reference to the given float64 and assigns it to the DailyQuota field.
+// SetDailyQuota sets field value
 func (o *GetTeamResponse) SetDailyQuota(v float64) {
-	o.DailyQuota = &v
+	o.DailyQuota = v
 }
 
-// GetRetention returns the Retention field value if set, zero value otherwise.
+// GetRetention returns the Retention field value
 func (o *GetTeamResponse) GetRetention() int32 {
-	if o == nil || IsNil(o.Retention) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Retention
+
+	return o.Retention
 }
 
-// GetRetentionOk returns a tuple with the Retention field value if set, nil otherwise
+// GetRetentionOk returns a tuple with the Retention field value
 // and a boolean to check if the value has been set.
 func (o *GetTeamResponse) GetRetentionOk() (*int32, bool) {
-	if o == nil || IsNil(o.Retention) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Retention, true
+	return &o.Retention, true
 }
 
-// HasRetention returns a boolean if a field has been set.
-func (o *GetTeamResponse) HasRetention() bool {
-	if o != nil && !IsNil(o.Retention) {
-		return true
-	}
-
-	return false
-}
-
-// SetRetention gets a reference to the given int32 and assigns it to the Retention field.
+// SetRetention sets field value
 func (o *GetTeamResponse) SetRetention(v int32) {
-	o.Retention = &v
+	o.Retention = v
 }
 
-// GetTeamId returns the TeamId field value if set, zero value otherwise.
+// GetTeamId returns the TeamId field value
 func (o *GetTeamResponse) GetTeamId() V2TeamId {
-	if o == nil || IsNil(o.TeamId) {
+	if o == nil {
 		var ret V2TeamId
 		return ret
 	}
-	return *o.TeamId
+
+	return o.TeamId
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// GetTeamIdOk returns a tuple with the TeamId field value
 // and a boolean to check if the value has been set.
 func (o *GetTeamResponse) GetTeamIdOk() (*V2TeamId, bool) {
-	if o == nil || IsNil(o.TeamId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TeamId, true
+	return &o.TeamId, true
 }
 
-// HasTeamId returns a boolean if a field has been set.
-func (o *GetTeamResponse) HasTeamId() bool {
-	if o != nil && !IsNil(o.TeamId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTeamId gets a reference to the given V2TeamId and assigns it to the TeamId field.
+// SetTeamId sets field value
 func (o *GetTeamResponse) SetTeamId(v V2TeamId) {
-	o.TeamId = &v
+	o.TeamId = v
 }
 
-// GetTeamName returns the TeamName field value if set, zero value otherwise.
+// GetTeamName returns the TeamName field value
 func (o *GetTeamResponse) GetTeamName() string {
-	if o == nil || IsNil(o.TeamName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.TeamName
+
+	return o.TeamName
 }
 
-// GetTeamNameOk returns a tuple with the TeamName field value if set, nil otherwise
+// GetTeamNameOk returns a tuple with the TeamName field value
 // and a boolean to check if the value has been set.
 func (o *GetTeamResponse) GetTeamNameOk() (*string, bool) {
-	if o == nil || IsNil(o.TeamName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TeamName, true
+	return &o.TeamName, true
 }
 
-// HasTeamName returns a boolean if a field has been set.
-func (o *GetTeamResponse) HasTeamName() bool {
-	if o != nil && !IsNil(o.TeamName) {
-		return true
-	}
-
-	return false
-}
-
-// SetTeamName gets a reference to the given string and assigns it to the TeamName field.
+// SetTeamName sets field value
 func (o *GetTeamResponse) SetTeamName(v string) {
-	o.TeamName = &v
+	o.TeamName = v
 }
 
 func (o GetTeamResponse) MarshalJSON() ([]byte, error) {
@@ -191,18 +164,10 @@ func (o GetTeamResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetTeamResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DailyQuota) {
-		toSerialize["dailyQuota"] = o.DailyQuota
-	}
-	if !IsNil(o.Retention) {
-		toSerialize["retention"] = o.Retention
-	}
-	if !IsNil(o.TeamId) {
-		toSerialize["teamId"] = o.TeamId
-	}
-	if !IsNil(o.TeamName) {
-		toSerialize["teamName"] = o.TeamName
-	}
+	toSerialize["dailyQuota"] = o.DailyQuota
+	toSerialize["retention"] = o.Retention
+	toSerialize["teamId"] = o.TeamId
+	toSerialize["teamName"] = o.TeamName
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -212,6 +177,30 @@ func (o GetTeamResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetTeamResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"dailyQuota",
+		"retention",
+		"teamId",
+		"teamName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetTeamResponse := _GetTeamResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

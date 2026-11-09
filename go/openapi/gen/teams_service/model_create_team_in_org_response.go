@@ -13,6 +13,7 @@ package teams_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,10 @@ var _ = bytes.MinRead
 // checks if the CreateTeamInOrgResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateTeamInOrgResponse{}
 
-// CreateTeamInOrgResponse Response containing the identifier of the created team.
+// CreateTeamInOrgResponse Response containing the identifier of the created team. Read the team with the get operation.
 type CreateTeamInOrgResponse struct {
 	// Identifier of the created team.
-	TeamId *V2TeamId `json:"teamId,omitempty"`
+	TeamId V2TeamId `json:"teamId"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _CreateTeamInOrgResponse CreateTeamInOrgResponse
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCreateTeamInOrgResponse() *CreateTeamInOrgResponse {
+func NewCreateTeamInOrgResponse(teamId V2TeamId) *CreateTeamInOrgResponse {
 	this := CreateTeamInOrgResponse{}
+	this.TeamId = teamId
 	return &this
 }
 
@@ -47,36 +49,28 @@ func NewCreateTeamInOrgResponseWithDefaults() *CreateTeamInOrgResponse {
 	return &this
 }
 
-// GetTeamId returns the TeamId field value if set, zero value otherwise.
+// GetTeamId returns the TeamId field value
 func (o *CreateTeamInOrgResponse) GetTeamId() V2TeamId {
-	if o == nil || IsNil(o.TeamId) {
+	if o == nil {
 		var ret V2TeamId
 		return ret
 	}
-	return *o.TeamId
+
+	return o.TeamId
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// GetTeamIdOk returns a tuple with the TeamId field value
 // and a boolean to check if the value has been set.
 func (o *CreateTeamInOrgResponse) GetTeamIdOk() (*V2TeamId, bool) {
-	if o == nil || IsNil(o.TeamId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TeamId, true
+	return &o.TeamId, true
 }
 
-// HasTeamId returns a boolean if a field has been set.
-func (o *CreateTeamInOrgResponse) HasTeamId() bool {
-	if o != nil && !IsNil(o.TeamId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTeamId gets a reference to the given V2TeamId and assigns it to the TeamId field.
+// SetTeamId sets field value
 func (o *CreateTeamInOrgResponse) SetTeamId(v V2TeamId) {
-	o.TeamId = &v
+	o.TeamId = v
 }
 
 func (o CreateTeamInOrgResponse) MarshalJSON() ([]byte, error) {
@@ -89,9 +83,7 @@ func (o CreateTeamInOrgResponse) MarshalJSON() ([]byte, error) {
 
 func (o CreateTeamInOrgResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TeamId) {
-		toSerialize["teamId"] = o.TeamId
-	}
+	toSerialize["teamId"] = o.TeamId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o CreateTeamInOrgResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CreateTeamInOrgResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"teamId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCreateTeamInOrgResponse := _CreateTeamInOrgResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

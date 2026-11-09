@@ -107,6 +107,10 @@ type Policy struct {
 	// returns the items of several resources, such as one list per source type. The parameter is
 	// not a resource field. Only an Overwrite resource has it.
 	GetQuery map[string]string
+	// WriteReturnsResource means that the write of an Overwrite resource returns the resource: its
+	// response has every field of the Get response, with the same shape. A tool then takes the
+	// state from the write response, with no Get. Only an Overwrite resource has it.
+	WriteReturnsResource bool
 	// DeleteOperation is the operationId of the operation that removes the resource
 	// when the API has no DELETE. It is a POST on the Get path plus one segment, for
 	// example /things/{id}/archive, with the id path parameter of Get, no request
@@ -445,10 +449,11 @@ func (p *Policy) computed(component, field string) bool {
 	return p != nil && component != "" && slices.Contains(p.Computed, component+"."+field)
 }
 
-// asSet makes t, the type of component.field, a set when a collection: set line says so, and a
-// map when a keyedBy line says so.
+// asSet applies collection: set to component.field, retaining the API collection in WireKind so
+// callers can convert operation-specific shapes. It then applies keyedBy, if present; keyedBy wins
+// when both overrides target the same field, so the final collection type is a map.
 func (p *Policy) asSet(component, field string, t *Type) {
-	if p != nil && t != nil && t.Kind == List && component != "" && slices.Contains(p.Sets, component+"."+field) {
+	if p != nil && t != nil && (t.Kind == List || t.Kind == Map && t.Elem != nil && t.Elem.Kind == Object) && component != "" && slices.Contains(p.Sets, component+"."+field) {
 		t.Kind = Set
 	}
 	p.asMap(component, field, t)

@@ -22,9 +22,9 @@ var _ MappedNullable = &TeamServiceUpdateTeamRequest{}
 
 // TeamServiceUpdateTeamRequest Request to update a team. Omitted optional fields keep their existing values.
 type TeamServiceUpdateTeamRequest struct {
-	// New daily quota for the team, in quota units per day. Omit to keep the current quota.
+	// New daily quota for the team, in quota units per day. Omit to keep the current quota. Must be greater than 0: the service answers 400 for 0 or less. The quota moves between this team and the organization's default team, and the service stores it as a 32-bit float.
 	DailyQuota *float64 `json:"dailyQuota,omitempty"`
-	// New display name for the team. Omit to keep the current name.
+	// New display name for the team. Omit to keep the current name. A name that another team of the organization has is rejected.
 	TeamName *string `json:"teamName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

@@ -498,6 +498,7 @@ type ApiConfigurationGroupServiceListConfigurationGroupsRequest struct {
 	includeArchived *bool
 	pageSize *int32
 	pageToken *string
+	view *ConfigurationGroupView
 }
 
 // When true, include archived groups, each with its latest configuration family, including an archived family.
@@ -515,6 +516,12 @@ func (r ApiConfigurationGroupServiceListConfigurationGroupsRequest) PageSize(pag
 // Opaque token returned by a previous list response. Send it with the same include_archived value as that request.
 func (r ApiConfigurationGroupServiceListConfigurationGroupsRequest) PageToken(pageToken string) ApiConfigurationGroupServiceListConfigurationGroupsRequest {
 	r.pageToken = &pageToken
+	return r
+}
+
+// Response view. BASIC returns group metadata without configuration families. FULL returns the complete group. Omitted or unspecified retains the current full response.
+func (r ApiConfigurationGroupServiceListConfigurationGroupsRequest) View(view ConfigurationGroupView) ApiConfigurationGroupServiceListConfigurationGroupsRequest {
+	r.view = &view
 	return r
 }
 
@@ -570,6 +577,11 @@ func (a *FleetManagerConfigurationGroupsAPIService) ConfigurationGroupServiceLis
 	}
 	if r.pageToken != nil {
 		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	if r.view != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "view", r.view, "form", ""); err != nil {
 			return localVarReturnValue, nil, err
 		}
 	}

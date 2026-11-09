@@ -124,7 +124,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	}
 	r.readRequestComponents(ops)
 	if r.Overwrite {
-		if err := r.readOverwrite(ops[opGet]); err != nil {
+		if err := r.readOverwrite(doc, ops[opGet]); err != nil {
 			return nil, nil, err
 		}
 	}
@@ -133,14 +133,21 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 		if index < 0 {
 			return nil, nil, fmt.Errorf("%s: no field %q for the id path parameter", r.Name, r.IDField)
 		}
-		r.IDType = r.Fields[index].Type
-		if r.Create.Response.ID != "" && r.IDType.Kind != String {
-			return nil, nil, fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
-		}
 	}
 	r.pruneSkipped()
 	if err := r.unwrap(); err != nil {
 		return nil, nil, err
+	}
+	// The id type is the value after unwrap: an id inside a wrapper is the value inside it.
+	if !r.Singleton {
+		index := slices.IndexFunc(r.Fields, func(field *ResourceField) bool { return field.Name == r.IDField })
+		if index < 0 {
+			return nil, nil, fmt.Errorf("%s: the policy skips the id field %q", r.Name, r.IDField)
+		}
+		r.IDType = r.Fields[index].Type
+		if err := r.checkCreateResponseID(); err != nil {
+			return nil, nil, err
+		}
 	}
 	r.zeroDefaults()
 	return r, r.readList(doc, ops[opGet], ids.List), nil
@@ -760,11 +767,50 @@ func (r *Resource) idResponse(out Response, proxy *base.SchemaProxy) (Response, 
 	if err != nil {
 		return Response{}, fmt.Errorf("response %s.%s: %w", out.Schema, key, err)
 	}
+	// The id can be inside a one-property object that the policy unwraps, as the id field of the
+	// resource is.
+	if component := wrapperComponent(property); component != "" && r.Policy.unwraps(out.Schema, key, component) {
+		at := "components.schemas." + out.Schema + "." + key
+		t, err := typeOf(property, at, walk{policy: &r.Policy})
+		if err != nil {
+			return Response{}, err
+		}
+		if t, err = collapse(at, out.Schema, key, t); err != nil {
+			return Response{}, err
+		}
+		if _, ok := supportedIDType(t); !ok {
+			return Response{}, fmt.Errorf("response %s.%s holds %s in its wrapper, want a string, int32, or int64 id", out.Schema, key, typeLabel(t))
+		}
+		out.ID, out.idType = key, t
+		return out, nil
+	}
 	if !slices.Equal(ps.Type, []string{"string"}) {
-		return Response{}, fmt.Errorf("response %s.%s has type %v, want a string id", out.Schema, key, ps.Type)
+		return Response{}, fmt.Errorf("response %s.%s has type %v, want a string id, or a wrapper of the id that the policy unwraps (api.createResponseOnlyIDProperty)", out.Schema, key, ps.Type)
 	}
 	out.ID = key
 	return out, nil
+}
+
+// checkCreateResponseID checks that the id of a Create response that holds only the id has the
+// shape of the id field: a string, or the same wrapper around the same property.
+func (r *Resource) checkCreateResponseID() error {
+	resp := r.Create.Response
+	switch {
+	case resp.ID == "":
+		return nil
+	case resp.idType == nil && (r.IDType.Kind != String || len(r.IDType.Wrappers) != 0):
+		return fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
+	case resp.idType != nil && !sameIDWrapper(resp.idType, r.IDType):
+		w := resp.idType.Wrappers[0]
+		return fmt.Errorf("%s: the Create response holds the id in %s.%s, but the id field is not the same id in a %s wrapper", r.Name, resp.ID, w.Field, w.Schema)
+	}
+	return nil
+}
+
+// sameIDWrapper reports whether two ids are the same value inside the same one wrapper.
+func sameIDWrapper(a, b *Type) bool {
+	return len(a.Wrappers) == 1 && len(b.Wrappers) == 1 && a.Wrappers[0].Schema == b.Wrappers[0].Schema &&
+		a.Wrappers[0].Field == b.Wrappers[0].Field && a.Kind == b.Kind && a.Format == b.Format
 }
 
 // wrapperKeys returns the properties of a response that wraps the resource. A released API can
@@ -1351,6 +1397,7 @@ func typeOf(proxy *base.SchemaProxy, path string, w walk) (*Type, error) {
 	if err := fillType(t, s, path, w); err != nil {
 		return nil, err
 	}
+	t.WireKind = t.Kind
 	t.Zero, t.ZeroValid = scalarZero(s)
 	return t, nil
 }
@@ -1851,7 +1898,7 @@ func UpdateMaskRule(pattern string) (valid func(string) bool, leaf bool, err err
 // readOverwrite checks the fields and the Get query of an Overwrite resource. Delete sends every
 // field that Update sends empty, so each is a list or a map. Each GetQuery parameter is a query
 // parameter of Get, and its value is one that the parameter accepts.
-func (r *Resource) readOverwrite(get foundOp) error {
+func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 	for _, f := range r.Fields {
 		if f.Update == nil || f.Type == nil {
 			continue
@@ -1865,6 +1912,11 @@ func (r *Resource) readOverwrite(get foundOp) error {
 				message:     fmt.Sprintf("The write of an overwrite resource sends %q, a %s. Delete sends every field empty, so each must be a list or a map.", f.Name, f.Type.Kind),
 				remediation: "Model the resource as the lists that the write replaces, or skip the field.",
 			}
+		}
+	}
+	if r.Policy.WriteReturnsResource {
+		if err := r.readWriteResponse(doc); err != nil {
+			return err
 		}
 	}
 	if len(r.Policy.GetQuery) == 0 {
@@ -1893,6 +1945,99 @@ func (r *Resource) readOverwrite(get foundOp) error {
 		r.GetQuery = append(r.GetQuery, QueryValue{Name: name, Value: value, Type: t})
 	}
 	return nil
+}
+
+// readWriteResponse checks that the write response has every property of the resource component,
+// with the same shape, so a tool can take the state from it (Policy.WriteReturnsResource).
+func (r *Resource) readWriteResponse(doc *v3.Document) error {
+	location := "behavior-overrides.yaml:api.overwrite.writeReturnsResource"
+	fail := func(message string) error {
+		return &contractError{
+			code:        "WRITE_RESPONSE_NOT_RESOURCE",
+			location:    location,
+			message:     message,
+			remediation: "Delete the line: the resource is read with Get after the write.",
+		}
+	}
+	name := r.Create.Response.Schema
+	if r.Create.Response.Empty || name == "" {
+		return fail(fmt.Sprintf("The write %s returns no fields, so it does not return the resource.", r.Create.OperationID))
+	}
+	if problem := writeResponseDifference(doc, &r.Policy, r.Name, name); problem != "" {
+		return fail(problem)
+	}
+	r.WriteReturnsResource = true
+	return nil
+}
+
+// writeResponseDifference says why the component written does not hold the resource component
+// resource, so that a tool cannot copy each field of the resource from it, or "".
+func writeResponseDifference(doc *v3.Document, policy *Policy, resource, written string) string {
+	read := func(component string) (*Type, error) {
+		if doc.Components == nil || doc.Components.Schemas == nil {
+			return nil, errors.New("the contract has no components")
+		}
+		return typeOf(doc.Components.Schemas.GetOrZero(component), "components.schemas."+component, walk{policy: policy})
+	}
+	r, err := read(resource)
+	if err != nil {
+		return fmt.Sprintf("The resource %s: %s.", resource, err)
+	}
+	// typeOf rejects the keywords that the model cannot express, such as nullable.
+	w, err := read(written)
+	if err != nil {
+		return fmt.Sprintf("The write response %s: %s.", written, err)
+	}
+	// An object whose properties are all arms of a oneOf is a OneOf. The SDK holds each arm as a
+	// field, so it is copied like the fields of an object.
+	if w.Kind != r.Kind || w.Kind != Object && w.Kind != OneOf {
+		return fmt.Sprintf("The write response %s is a %s, and %s is a %s.", written, w.Kind, resource, r.Kind)
+	}
+	// The fields of a OneOf are its arms, so the response can have no other arm. An object can
+	// have fields that the resource does not.
+	if w.AllowNone != r.AllowNone || !sameGroups(w.Groups, r.Groups) || r.Kind == OneOf && !sameSet(fieldNames(w), fieldNames(r)) {
+		return fmt.Sprintf("The write response %s has other oneOf rules than %s.", written, resource)
+	}
+	for _, f := range r.Fields {
+		i := slices.IndexFunc(w.Fields, func(wf *Field) bool { return wf.Name == f.Name })
+		// A required property is a value in the SDK, and an optional one a pointer, so both must agree
+		// for a tool to copy it.
+		if i < 0 || w.Fields[i].Attrs.Required != f.Attrs.Required || !sameWire(f.Type, w.Fields[i].Type) {
+			return fmt.Sprintf("The write response %s does not have %s.%s with the same shape and requiredness.", written, resource, f.Name)
+		}
+	}
+	return ""
+}
+
+// sameGroups reports whether two lists of oneOf groups have the same arms and the same "no arm" rule,
+// in any order.
+func sameGroups(a, b []OneOfGroup) bool {
+	if !sameGroupArms(a, b) {
+		return false
+	}
+	for _, g := range a {
+		if matchingGroup(b, g).AllowNone != g.AllowNone {
+			return false
+		}
+	}
+	return true
+}
+
+// sameWire reports whether two types hold the same value in the SDK: the same kind on the wire, the
+// same component, format, and string encoding, and elements of the same shape. An inline object
+// with fields has no component, so the SDK gives each place its own type. A free-form inline object,
+// without fields, is a map[string]interface{} in every place.
+func sameWire(a, b *Type) bool {
+	if a == nil || b == nil {
+		return a == b
+	}
+	if a.WireKind != b.WireKind || a.Schema != b.Schema || a.Format != b.Format || a.WireString != b.WireString {
+		return false
+	}
+	if a.Kind == Object && a.Schema == "" && (len(a.Fields) != 0 || len(b.Fields) != 0) {
+		return false
+	}
+	return sameWire(a.Elem, b.Elem)
 }
 
 // queryValueProblem says why value is not a value of the query parameter schema proxy, or "".

@@ -206,7 +206,7 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 			continue
 		}
 		if f.Create != nil {
-			if err := s.requestField("create.body."+f.Name, s.bodies["create"], f.Name, f.Type.CreateType(), f.Create.Required); err != nil {
+			if err := s.requestPathField(f, "create", s.bodies["create"], f.Type.CreateType(), f.Create.Required); err != nil {
 				return err
 			}
 		}
@@ -216,7 +216,7 @@ func (s *resolver) bodyFields(r *model.Resource, resource string) error {
 	}
 	for _, f := range r.Fields {
 		if f.Update != nil {
-			if err := s.requestField("update.body."+f.Name, s.bodies["update"], f.Name, f.Type.UpdateType(), f.Update.Required); err != nil {
+			if err := s.requestPathField(f, "update", s.bodies["update"], f.Type.UpdateType(), f.Update.Required); err != nil {
 				return err
 			}
 		}
@@ -280,27 +280,34 @@ func (s *resolver) requestComponent(r *model.Resource, name, wrapper, component 
 		if attrs == nil {
 			continue
 		}
-		segments := strings.Split(f.Name, ".")
-		if f.RequestPath != "" {
-			segments = strings.Split(f.RequestPath, ".")
-		}
-		if len(f.RequestObjects) != len(segments)-1 {
-			return fmt.Errorf("%s.body.%s: the request path %q goes through %d objects with a component, want %d", name, f.Name, f.RequestPath, len(f.RequestObjects), len(segments)-1)
-		}
-		path := name + ".body." + f.Name
-		holder := owner
-		for i, segment := range segments[:len(segments)-1] {
-			object := goTypeName(f.RequestObjects[i])
-			via := path + ".via." + segment // the object that the path goes through, not the field itself
-			s.add(Ref{Path: via, Kind: KindField, Owner: holder, Name: goFieldName(segment), Want: "*" + object, WantValue: object, Rule: RuleProperty})
-			s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: f.RequestObjects[i]})
-			holder = object
-		}
-		if err := s.requestField(path, holder, segments[len(segments)-1], t, attrs.Required); err != nil {
+		if err := s.requestPathField(f, name, owner, t, attrs.Required); err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+// requestPathField adds the Go field that holds a resource field in the Create or Update request
+// object owner: the field of its name, or the field at its request path (requestAs), through the
+// objects that the path goes through.
+func (s *resolver) requestPathField(f *model.ResourceField, name, owner string, t *model.Type, required bool) error {
+	segments := strings.Split(f.Name, ".")
+	if f.RequestPath != "" {
+		segments = strings.Split(f.RequestPath, ".")
+	}
+	if len(f.RequestObjects) != len(segments)-1 {
+		return fmt.Errorf("%s.body.%s: the request path %q goes through %d objects with a component, want %d", name, f.Name, f.RequestPath, len(f.RequestObjects), len(segments)-1)
+	}
+	path := name + ".body." + f.Name
+	holder := owner
+	for i, segment := range segments[:len(segments)-1] {
+		object := goTypeName(f.RequestObjects[i])
+		via := path + ".via." + segment // the object that the path goes through, not the field itself
+		s.add(Ref{Path: via, Kind: KindField, Owner: holder, Name: goFieldName(segment), Want: "*" + object, WantValue: object, Rule: RuleProperty})
+		s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: f.RequestObjects[i]})
+		holder = object
+	}
+	return s.requestField(path, holder, segments[len(segments)-1], t, required)
 }
 
 // requestField adds the Go field of a request body, and the request
@@ -473,8 +480,24 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	s.add(Ref{Path: path, Kind: KindMethod, Owner: builder, Name: "Execute",
 		Want: "func() (*" + resp + ", *http.Response, error)", Rule: RuleOperationID})
 	if op.Response.ID != "" {
+		want := "string"
+		if r.IDType != nil && len(r.IDType.Wrappers) == 1 {
+			// The build checks that the response holds the same wrapper of the id as the id field
+			// of the resource.
+			want = goTypeName(r.IDType.Wrappers[0].Schema)
+		}
 		s.add(Ref{Path: path + ".response." + op.Response.ID, Kind: KindField, Owner: resp,
-			Name: goFieldName(op.Response.ID), Want: "*string", WantValue: "string", Rule: RuleProperty})
+			Name: goFieldName(op.Response.ID), Want: "*" + want, WantValue: want, Rule: RuleProperty})
+	}
+	if r.WriteReturnsResource && (name == "create" || name == "update") {
+		// A tool copies each resource field from the write response.
+		for _, f := range r.Fields {
+			if f.InGet {
+				if err := s.field(path+".response."+f.Name, resp, f.Name, f.Type, f.Get != nil && f.Get.Required); err != nil {
+					return err
+				}
+			}
+		}
 	}
 	if op.Response.Field != "" {
 		s.add(Ref{Path: path + ".response." + op.Response.Field, Kind: KindField, Owner: resp,
@@ -595,9 +618,25 @@ func fieldType(t *model.Type) (string, Rule, error) {
 		return "map[string]interface{}", RuleEmptyObject, nil
 	}
 	if t.Keyed != nil {
-		return "[]" + goTypeName(t.Keyed.Item.Schema), RuleProperty, nil
+		kind := t.WireKind
+		if kind == "" {
+			kind = model.List
+		}
+		item := goTypeName(t.Keyed.Item.Schema)
+		switch kind {
+		case model.Map:
+			return "map[string]" + item, RuleProperty, nil
+		case model.List, model.Set:
+			return "[]" + item, RuleProperty, nil
+		default:
+			return "", "", fmt.Errorf("keyed collection wire kind %s is not supported", kind)
+		}
 	}
-	if t.Kind == model.List || t.Kind == model.Set || t.Kind == model.Map {
+	kind := t.WireKind
+	if kind == "" {
+		kind = t.Kind
+	}
+	if kind == model.List || kind == model.Set || kind == model.Map {
 		elem, _, err := fieldType(t.Elem)
 		if err != nil {
 			return "", "", err
@@ -605,7 +644,7 @@ func fieldType(t *model.Type) (string, Rule, error) {
 		if !strings.HasPrefix(elem, "*") {
 			return "", "", fmt.Errorf("%s of %s is not supported", t.Kind, elem)
 		}
-		if t.Kind == model.Map {
+		if kind == model.Map {
 			return "map[string]" + elem[1:], RuleProperty, nil
 		}
 		return "[]" + elem[1:], RuleProperty, nil

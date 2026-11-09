@@ -44,7 +44,6 @@ type IncidentQueryFilter struct {
 	MetaLabels []IncidentMetaLabel `json:"metaLabels,omitempty"`
 	// The operator for the meta labels filter
 	MetaLabelsOp *V1FilterOperator `json:"metaLabelsOp,omitempty"`
-	// Search query for incidents
 	SearchQuery *IncidentSearchQuery `json:"searchQuery,omitempty"`
 	// Filter by incident severity
 	Severity []IncidentSeverity `json:"severity,omitempty"`

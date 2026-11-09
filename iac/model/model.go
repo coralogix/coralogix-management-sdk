@@ -51,9 +51,13 @@ type Resource struct {
 	Singleton bool
 	// Overwrite is true when the resource is the whole list that one write operation replaces
 	// (Policy.Overwrite). Create, Update, and Delete are that write; Delete sends every field
-	// empty. The write response is not read: a tool reads the resource with Get after the write.
-	// An Overwrite resource is a singleton.
+	// empty. The write response is not read: a tool reads the resource with Get after the write,
+	// unless WriteReturnsResource is set. An Overwrite resource is a singleton.
 	Overwrite bool
+	// WriteReturnsResource is true when the write of an Overwrite resource returns the resource
+	// (Policy.WriteReturnsResource): the response of Create and Update has every field of the
+	// resource under its name, with the same shape. A tool takes the state from it, with no Get.
+	WriteReturnsResource bool
 	// GetQuery are the query parameters that Get always sends, with their values, sorted by name
 	// (Policy.GetQuery). It is nil when Get sends none.
 	GetQuery []QueryValue
@@ -169,9 +173,12 @@ type Response struct {
 	// wrapper (proto google.api.http response_body).
 	Direct bool
 	// ID is the property that holds only the id of the resource, for a Create response that does
-	// not return the resource (an existing resource). It is a string, and Create reads the
-	// resource with Get.
+	// not return the resource (an existing resource). It is a string, or the same wrapper of the id
+	// as the id field of the resource has, and Create reads the resource with Get.
 	ID string
+	// idType is the type of ID after the wrapper that the policy unwraps collapses, or nil when ID
+	// holds a string id itself.
+	idType *Type
 	// Empty is true when the response schema has no fields, for example many
 	// Delete responses. The SDK then returns map[string]interface{}.
 	Empty bool
@@ -274,8 +281,15 @@ type OneOfGroup struct {
 
 // Type is the type of a field.
 type Type struct {
-	Kind   Kind
-	Schema string // component name, "" for an inline schema
+	Kind Kind
+	// WireKind is the collection kind used by this operation's API schema. Kind is
+	// the consumer-facing kind and can differ when an explicit collection: set
+	// override normalizes a list or a map of objects.
+	WireKind Kind
+	// CreateWireKind and UpdateWireKind preserve the corresponding request shape
+	// on the resource type so requestType can expose it to generators.
+	CreateWireKind, UpdateWireKind Kind
+	Schema                         string // component name, "" for an inline schema
 	// CreateSchema and UpdateSchema are the components of an Object or a
 	// OneOf in the Create and Update requests. They can differ from Schema,
 	// the component in the resource response. "" when the request does not
