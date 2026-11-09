@@ -280,13 +280,13 @@ func TestScopes(t *testing.T) {
 	description := "Data Access Rule intended for testing"
 	defaultExpr := "<v1>true"
 	createReq := scopes.CreateScopeRequest{
-		DisplayName:       "Test Data Access Rule",
+		DisplayName:       scopes.PtrString("Test Data Access Rule"),
 		Description:       &description,
-		DefaultExpression: &defaultExpr,
+		DefaultExpression: defaultExpr,
 		Filters: []scopes.ScopesV1Filter{
 			{
-				EntityType: scopes.V1ENTITYTYPE_ENTITY_TYPE_LOGS.Ptr(),
-				Expression: scopes.PtrString("<v1> foo == 'bar'"),
+				EntityType: scopes.V1ENTITYTYPE_ENTITY_TYPE_LOGS,
+				Expression: "<v1> foo == 'bar'",
 			},
 		},
 	}
@@ -301,9 +301,9 @@ func TestScopes(t *testing.T) {
 
 	newDisplayName := "Updated Test Data Access Rule"
 	updateReq := scopes.UpdateScopeRequest{
-		Id:                *scopeID,
-		DisplayName:       newDisplayName,
-		DefaultExpression: *created.Scope.DefaultExpression,
+		Id:                scopeID,
+		DisplayName:       scopes.PtrString(newDisplayName),
+		DefaultExpression: created.Scope.DefaultExpression,
 		Filters:           created.Scope.Filters,
 	}
 
@@ -316,11 +316,11 @@ func TestScopes(t *testing.T) {
 
 	getResp, httpResp, err := client.
 		ScopesServiceGetTeamScopesByIds(ctx).
-		Ids([]string{*scopeID}).
+		Ids([]string{scopeID}).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Greater(t, len(getResp.Scopes), 0)
-	require.Equal(t, newDisplayName, *getResp.Scopes[0].DisplayName)
+	require.Equal(t, newDisplayName, getResp.Scopes[0].DisplayName)
 
 	listResp, httpResp, err := client.
 		ScopesServiceGetTeamScopes(ctx).
@@ -329,7 +329,7 @@ func TestScopes(t *testing.T) {
 	require.GreaterOrEqual(t, len(listResp.Scopes), 1)
 
 	_, httpResp, err = client.
-		ScopesServiceDeleteScope(ctx, *scopeID).
+		ScopesServiceDeleteScope(ctx, scopeID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
