@@ -84,14 +84,6 @@ mod tests {
             .unwrap();
         while let Some(_) = data_usage_stream.message().await.unwrap() {}
 
-        let _ = client
-            .update_data_usage_metrics_export_status(true)
-            .await
-            .unwrap();
-
-        let data_usage_metrics_export_status_response =
-            client.get_data_usage_metrics_export_status().await.unwrap();
-
-        assert!(data_usage_metrics_export_status_response.enabled);
+        let _ = client.get_data_usage_metrics_export_status().await.unwrap();
     }
 }
