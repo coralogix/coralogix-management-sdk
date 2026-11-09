@@ -166,6 +166,8 @@ type ListOperation struct {
 
 // Response is the 200 response body.
 type Response struct {
+	// Items: Field holds an array of resources. GetByIDs reads one id through this batch API.
+	Items  bool
 	Schema string // component name, "" for an inline empty object
 	// Field is the property that wraps the resource, for example "aiEvaluation".
 	// It is empty when the response does not return the resource, or is the

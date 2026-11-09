@@ -145,6 +145,9 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 			return nil, nil, fmt.Errorf("%s: the policy skips the id field %q", r.Name, r.IDField)
 		}
 		r.IDType = r.Fields[index].Type
+		if policy.GetByIDs != "" && r.IDType.Kind != String {
+			return nil, nil, fmt.Errorf("api.getByIDs needs a string resource id")
+		}
 		if err := r.checkCreateResponseID(); err != nil {
 			return nil, nil, err
 		}
@@ -255,6 +258,9 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 func unsupportedRequiredParameters(role verb, op foundOp, policy Policy) []*v3.Parameter {
 	var params []*v3.Parameter
 	for _, p := range slices.Concat(op.item.Parameters, op.op.Parameters) {
+		if role == opGet && policy.Existing && policy.GetByIDs != "" && p.In == "query" && p.Name == policy.GetByIDs {
+			continue // readBatchOperations checks the query type and identity.
+		}
 		if role == opUpdate && p.In == "query" && isUpdateMaskName(p.Name) {
 			continue
 		}
@@ -288,6 +294,9 @@ func matchingOperations(doc *v3.Document, name string, role verb, explicit strin
 }
 
 func (r *Resource) readOperations(ops map[verb]foundOp) error {
+	if r.Policy.GetByIDs != "" {
+		return r.readBatchOperations(ops)
+	}
 	if r.Policy.Overwrite {
 		if err := checkOverwrite(ops); err != nil {
 			return err
@@ -729,7 +738,16 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	if len(keys) != 1 {
 		return Response{}, fmt.Errorf("response %s has properties %v, want one that wraps %s", name, propertyNames(s), r.Name)
 	}
-	inner, err := componentName(unwrapRef(propertyOf(s, keys[0])))
+	innerProxy := propertyOf(s, keys[0])
+	if v == opGet && r.Policy.GetByIDs != "" {
+		items, err := schemaOf(innerProxy)
+		if err != nil || !slices.Equal(items.Type, []string{"array"}) || items.Items == nil || items.Items.A == nil {
+			return Response{}, fmt.Errorf("api.getByIDs needs a response array of %s", r.Name)
+		}
+		out.Items = true
+		innerProxy = items.Items.A
+	}
+	inner, err := componentName(unwrapRef(innerProxy))
 	if err != nil {
 		return Response{}, fmt.Errorf("response %s.%s: %w", name, keys[0], err)
 	}

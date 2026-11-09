@@ -23,14 +23,14 @@ var _ MappedNullable = &CreateScopeRequest{}
 
 // CreateScopeRequest This data structure represents a request to create a scope
 type CreateScopeRequest struct {
-	// The default expression.
-	DefaultExpression *string `json:"defaultExpression,omitempty"`
-	// Human-readable description.
+	// Required default expression with a version tag, for example `<v1>true` or `<v1>false`. Omitted or empty expressions are rejected.
+	DefaultExpression string `json:"defaultExpression"`
+	// Human-readable description. Omission leaves it unset. An explicitly empty string is stored and returned as an empty string.
 	Description *string `json:"description,omitempty"`
-	// The display name.
-	DisplayName string `json:"displayName"`
-	// List of filters.
-	Filters []ScopesV1Filter `json:"filters"`
+	// Display name. Omitted or empty names are stored and returned as an empty string.
+	DisplayName *string `json:"displayName,omitempty"`
+	// Filters applied by this scope. Omitted or empty lists are stored and returned as an empty list.
+	Filters []ScopesV1Filter `json:"filters,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -41,10 +41,9 @@ type _CreateScopeRequest CreateScopeRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCreateScopeRequest(displayName string, filters []ScopesV1Filter) *CreateScopeRequest {
+func NewCreateScopeRequest(defaultExpression string) *CreateScopeRequest {
 	this := CreateScopeRequest{}
-	this.DisplayName = displayName
-	this.Filters = filters
+	this.DefaultExpression = defaultExpression
 	return &this
 }
 
@@ -56,36 +55,28 @@ func NewCreateScopeRequestWithDefaults() *CreateScopeRequest {
 	return &this
 }
 
-// GetDefaultExpression returns the DefaultExpression field value if set, zero value otherwise.
+// GetDefaultExpression returns the DefaultExpression field value
 func (o *CreateScopeRequest) GetDefaultExpression() string {
-	if o == nil || IsNil(o.DefaultExpression) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DefaultExpression
+
+	return o.DefaultExpression
 }
 
-// GetDefaultExpressionOk returns a tuple with the DefaultExpression field value if set, nil otherwise
+// GetDefaultExpressionOk returns a tuple with the DefaultExpression field value
 // and a boolean to check if the value has been set.
 func (o *CreateScopeRequest) GetDefaultExpressionOk() (*string, bool) {
-	if o == nil || IsNil(o.DefaultExpression) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultExpression, true
+	return &o.DefaultExpression, true
 }
 
-// HasDefaultExpression returns a boolean if a field has been set.
-func (o *CreateScopeRequest) HasDefaultExpression() bool {
-	if o != nil && !IsNil(o.DefaultExpression) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultExpression gets a reference to the given string and assigns it to the DefaultExpression field.
+// SetDefaultExpression sets field value
 func (o *CreateScopeRequest) SetDefaultExpression(v string) {
-	o.DefaultExpression = &v
+	o.DefaultExpression = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -120,50 +111,66 @@ func (o *CreateScopeRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetDisplayName returns the DisplayName field value
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *CreateScopeRequest) GetDisplayName() string {
-	if o == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
-
-	return o.DisplayName
+	return *o.DisplayName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateScopeRequest) GetDisplayNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		return nil, false
 	}
-	return &o.DisplayName, true
+	return o.DisplayName, true
 }
 
-// SetDisplayName sets field value
+// HasDisplayName returns a boolean if a field has been set.
+func (o *CreateScopeRequest) HasDisplayName() bool {
+	if o != nil && !IsNil(o.DisplayName) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
 func (o *CreateScopeRequest) SetDisplayName(v string) {
-	o.DisplayName = v
+	o.DisplayName = &v
 }
 
-// GetFilters returns the Filters field value
+// GetFilters returns the Filters field value if set, zero value otherwise.
 func (o *CreateScopeRequest) GetFilters() []ScopesV1Filter {
-	if o == nil {
+	if o == nil || IsNil(o.Filters) {
 		var ret []ScopesV1Filter
 		return ret
 	}
-
 	return o.Filters
 }
 
-// GetFiltersOk returns a tuple with the Filters field value
+// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateScopeRequest) GetFiltersOk() ([]ScopesV1Filter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Filters) {
 		return nil, false
 	}
 	return o.Filters, true
 }
 
-// SetFilters sets field value
+// HasFilters returns a boolean if a field has been set.
+func (o *CreateScopeRequest) HasFilters() bool {
+	if o != nil && !IsNil(o.Filters) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilters gets a reference to the given []ScopesV1Filter and assigns it to the Filters field.
 func (o *CreateScopeRequest) SetFilters(v []ScopesV1Filter) {
 	o.Filters = v
 }
@@ -178,14 +185,16 @@ func (o CreateScopeRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateScopeRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefaultExpression) {
-		toSerialize["defaultExpression"] = o.DefaultExpression
-	}
+	toSerialize["defaultExpression"] = o.DefaultExpression
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["displayName"] = o.DisplayName
-	toSerialize["filters"] = o.Filters
+	if !IsNil(o.DisplayName) {
+		toSerialize["displayName"] = o.DisplayName
+	}
+	if !IsNil(o.Filters) {
+		toSerialize["filters"] = o.Filters
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -199,8 +208,7 @@ func (o *CreateScopeRequest) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"displayName",
-		"filters",
+		"defaultExpression",
 	}
 
 	allProperties := make(map[string]interface{})

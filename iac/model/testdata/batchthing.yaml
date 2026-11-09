@@ -1,0 +1,89 @@
+openapi: 3.1.0
+info: {title: batchthing, version: 1.0.0}
+paths:
+  /batch/v1/things:
+    post:
+      tags: [Batch Things Service]
+      operationId: BatchThingsService_CreateBatchThing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: Create Batch Thing Request
+              type: object
+              required: [name]
+              properties:
+                name: {type: string, minLength: 1}
+                note: {type: string, x-coralogix-presence: true}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/WriteBatchThingResponse'}
+    put:
+      tags: [Batch Things Service]
+      operationId: BatchThingsService_UpdateBatchThing
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: Update Batch Thing Request
+              type: object
+              required: [id, name]
+              properties:
+                id: {type: string, minLength: 1}
+                name: {type: string, minLength: 1}
+                note: {type: string, x-coralogix-presence: true}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/WriteBatchThingResponse'}
+    get:
+      tags: [Batch Things Service]
+      operationId: BatchThingsService_GetBatchThing
+      parameters:
+        - {name: ids, in: query, required: true, schema: {type: array, items: {type: string}}}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/GetBatchThingResponse'}
+  /batch/v1/things/{id}:
+    delete:
+      tags: [Batch Things Service]
+      operationId: BatchThingsService_DeleteBatchThing
+      parameters:
+        - {name: id, in: path, required: true, schema: {type: string}}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/DeleteBatchThingResponse'}
+components:
+  schemas:
+    DeleteBatchThingResponse:
+      type: object
+    WriteBatchThingResponse:
+      type: object
+      required: [thing]
+      properties:
+        thing: {$ref: '#/components/schemas/BatchThing'}
+    GetBatchThingResponse:
+      type: object
+      required: [things]
+      properties:
+        things: {type: array, items: {$ref: '#/components/schemas/BatchThing'}}
+    BatchThing:
+      type: object
+      required: [id, name]
+      properties:
+        id: {type: string, minLength: 1}
+        name: {type: string, minLength: 1}
+        note: {type: string, x-coralogix-presence: true}
