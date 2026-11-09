@@ -297,7 +297,7 @@ func TestIDPropertyForAnotherPathParameter(t *testing.T) {
 const pinnedOpenAPI = "go/pkg/mod/github.com/coralogix/coralogix-management-sdk@v1.9.4-0.20261016082651-37b0b2075c43/openapi.yaml"
 
 // The deployed integration has a request shape that differs from its read shape. With the keys,
-// only the Parameter union remains.
+// no issue remains.
 func TestDeployedIntegrationRequestShape(t *testing.T) {
 	home, err := os.UserHomeDir()
 	if err != nil {
@@ -329,14 +329,11 @@ func TestDeployedIntegrationRequestShape(t *testing.T) {
 		},
 		Skip: []string{"DeployedIntegrationInformation.integrationStatus"},
 	}
+	// The Parameter union has scalar arms with presence. The model reads them since an arm may carry
+	// the presence mark, so the report has no issue. The released resource still skips the field,
+	// because its value is a dynamic one, not because the union is unreadable.
 	report := ValidateWithPolicy(doc, "DeployedIntegrationInformation", OperationIDs{}, p)
-	if len(report) == 0 {
-		t.Fatal("no issues: the Parameter union is not supported, so the report must name it")
-	}
 	for _, i := range report {
-		union := strings.Contains(i.Message, "parameters[]") && strings.Contains(i.Message, "oneOf arm")
-		if !union {
-			t.Errorf("%s at %s: %s, want only the Parameter union issues", i.Code, i.Location, i.Message)
-		}
+		t.Errorf("%s at %s: %s, want no issue", i.Code, i.Location, i.Message)
 	}
 }
