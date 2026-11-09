@@ -1584,8 +1584,8 @@ func groupsOnlyAllOf(s *base.Schema) bool {
 }
 
 // oneOfGroups returns the oneOf groups of s: its own oneOf, and the oneOf of
-// each allOf entry. The arms must be fields with no attributes, and a field
-// is in at most one group.
+// each allOf entry. The arms must be fields with no attributes, except for
+// presence (see armAttrs), and a field is in at most one group.
 func oneOfGroups(s *base.Schema, path string, fields []*Field) ([]OneOfGroup, error) {
 	schemas := []*base.Schema{s}
 	for _, proxy := range s.AllOf {
@@ -1616,7 +1616,7 @@ func oneOfGroups(s *base.Schema, path string, fields []*Field) ([]OneOfGroup, er
 				return nil, fmt.Errorf("%s: oneOf arm %s is not a field", path, arm)
 			case used[arm]:
 				return nil, fmt.Errorf("%s: oneOf arm %s is in two groups", path, arm)
-			case f.Attrs != (Attrs{}):
+			case armAttrs(f.Attrs) != (Attrs{}):
 				return nil, fmt.Errorf("%s: oneOf arm %s has attributes %+v, want none", path, arm, f.Attrs)
 			}
 			used[arm] = true
@@ -1624,6 +1624,15 @@ func oneOfGroups(s *base.Schema, path string, fields []*Field) ([]OneOfGroup, er
 		groups = append(groups, g)
 	}
 	return groups, nil
+}
+
+// armAttrs returns the attributes of a oneOf arm that count against it. An arm is set or not
+// set, so presence is what it already is: the OpenAPI fork marks a scalar arm (a wrapped bool,
+// string, or number) with x-coralogix-presence, and that mark states nothing that the group does
+// not. Any other attribute, such as a default or a required mark, would mean something else.
+func armAttrs(a Attrs) Attrs {
+	a.Presence = false
+	return a
 }
 
 func objectFields(s *base.Schema, path string, w walk, component string) ([]*Field, error) {
@@ -1798,7 +1807,8 @@ func stringType(t *Type, s *base.Schema, w walk) error {
 	case len(s.Enum) != 0:
 		t.Kind = Enum
 		t.MinLength, t.MaxLength = nil, nil
-		zero, err := enumZero(s.Enum, w.policy != nil && w.policy.enumAnyPrefix(t.Schema))
+		anyPrefix := w.policy != nil && w.policy.enumAnyPrefix(t.Schema)
+		zero, err := enumZero(s.Enum, anyPrefix)
 		if err != nil {
 			return err
 		}
@@ -1812,7 +1822,8 @@ func stringType(t *Type, s *base.Schema, w walk) error {
 		for _, n := range s.Enum[start:] {
 			t.Values = append(t.Values, n.Value)
 		}
-		if len(t.Values) == 0 {
+		if len(t.Values) == 0 && !(anyPrefix && zero != "") {
+			// An existing resource may have an enum with its zero value only (see enumZero).
 			return errors.New("enum has no values")
 		}
 	case s.Format == "int64" || s.Format == "uint64":
@@ -1841,7 +1852,8 @@ func stringType(t *Type, s *base.Schema, w walk) error {
 // A later business value may also end in _UNSPECIFIED. With anyPrefix (existing
 // resources), a business value need not use the prefix. A first value that is
 // not *_UNSPECIFIED is a business value: the returned sentinel is empty, and
-// the caller keeps every value. An empty sentinel is not the protobuf zero.
+// the caller keeps every value. An empty sentinel is not the protobuf zero. With anyPrefix, an
+// enum with the zero value only has that value as its zero.
 func enumZero(values []*yaml.Node, anyPrefix bool) (string, error) {
 	if len(values) < 1 {
 		return "", errors.New("enum has no values")
@@ -1862,6 +1874,13 @@ func enumZero(values []*yaml.Node, anyPrefix bool) (string, error) {
 		return "", nil
 	}
 	if len(values) < 2 {
+		if anyPrefix {
+			// An existing resource can have an enum with one value, which the proto names
+			// <PREFIX>_UNSPECIFIED because it is the first. It is the zero value, as the first value of
+			// every other enum of an existing resource is, and the resource names how a tool shows it.
+			// A new resource still needs a business value next to the zero value.
+			return zero, nil
+		}
 		return "", errors.New("enum needs one zero value and at least one business value")
 	}
 	for _, value := range values[1:] {
