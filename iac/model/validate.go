@@ -87,7 +87,7 @@ func requestSchemaSeparationIssues(p Policy, name string, ops map[verb]foundOp) 
 	}
 	create, createErr := rootSchemaIdentity(bodyProxy(ops[opCreate].op))
 	update, updateErr := rootSchemaIdentity(bodyProxy(ops[opUpdate].op))
-	resource, resourceErr := rootSchemaIdentity(responseResourceProxy(ops[opGet].op, name))
+	resource, resourceErr := rootSchemaIdentity(p.responseResourceProxy(ops[opGet].op, name))
 	if createErr != nil || updateErr != nil || resourceErr != nil {
 		return nil
 	}
@@ -290,7 +290,7 @@ func requiredParameterIssues(location string, role verb, op foundOp, policy Poli
 func contractSchemas(p Policy, name string, ops map[verb]foundOp) (create, update, get *base.Schema, report issue.Report, ok bool) {
 	create, createErr := schemaOf(p.requestBody(ops[opCreate].op))
 	update, updateErr := schemaOf(p.requestBody(ops[opUpdate].op))
-	get, getErr := schemaOf(responseResourceProxy(ops[opGet].op, name))
+	get, getErr := schemaOf(p.responseResourceProxy(ops[opGet].op, name))
 	if createErr == nil && updateErr == nil && getErr == nil {
 		create, update, report = p.shapeRequests(name, p.idProperty(ops), ops, create, update, get)
 	}
@@ -534,6 +534,13 @@ func oneOfArmNames(t *Type) []string {
 // names, or the one named like the single path parameter of Get. It is "" when Get does not have
 // exactly one path parameter.
 func (p Policy) idProperty(ops map[verb]foundOp) string {
+	if p.GetByIDs != "" {
+		if p.IDProperty != "" {
+			return p.IDProperty
+		}
+		id, _ := idParam(ops[opDelete])
+		return id
+	}
 	params := pathParams(ops[opGet])
 	if len(params) != 1 {
 		return ""
@@ -549,7 +556,7 @@ func resourceIDIssues(p Policy, name string, ops map[verb]foundOp, get *base.Sch
 	if id == "" {
 		return nil // Build reports an unsupported resource identity shape.
 	}
-	if params := pathParams(ops[opGet]); p.IDProperty != "" && params[0].Name == p.IDProperty {
+	if params := pathParams(ops[opGet]); p.IDProperty != "" && len(params) == 1 && params[0].Name == p.IDProperty {
 		return issue.Report{{
 			Code:        "ID_PROPERTY_UNNEEDED",
 			Location:    "components.schemas." + name + "." + id,
@@ -704,7 +711,7 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	// keeps it, the plan has it too, so Update can always send it. Without one, a change of another
 	// attribute plans the field unknown, and Update would leave out a field that it requires.
 	kept := p.computed(name, field) && p.keepsState(name, field) && slices.Contains(get.Required, field)
-	if cp != nil && up != nil && !slices.Contains(create.Required, field) && slices.Contains(update.Required, field) && !kept {
+	if cp != nil && up != nil && !slices.Contains(create.Required, field) && slices.Contains(update.Required, field) && !kept && !(p.Existing && slices.Contains(p.ClientRequired, name+"."+field)) {
 		report = append(report, issue.Issue{
 			Code:        "FIELD_REQUIREDNESS_UNSUPPORTED",
 			Location:    location,
@@ -1606,7 +1613,7 @@ func requestContractProperty(parent *base.Schema, name string) *base.SchemaProxy
 	return proxy
 }
 
-func responseResourceProxy(op *v3.Operation, name string) *base.SchemaProxy {
+func (p Policy) responseResourceProxy(op *v3.Operation, name string) *base.SchemaProxy {
 	if op == nil || op.Responses == nil || op.Responses.Codes == nil {
 		return nil
 	}
@@ -1634,6 +1641,11 @@ func responseResourceProxy(op *v3.Operation, name string) *base.SchemaProxy {
 	}
 	for _, field := range propertyNames(s) {
 		proxy := propertyOf(s, field)
+		if p.GetByIDs != "" {
+			if ps, err := schemaOf(proxy); err == nil && slices.Equal(ps.Type, []string{"array"}) && ps.Items != nil && ps.Items.A != nil {
+				proxy = ps.Items.A
+			}
+		}
 		if unwrapRef(proxy) == componentPrefix+name {
 			// The property can be "allOf: [$ref: X]". Return the $ref, whose schema has the fields.
 			if !proxy.IsReference() {

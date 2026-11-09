@@ -220,7 +220,7 @@ func (r *Resource) listItemID(get foundOp, items itemArray) *contractError {
 			message:     fmt.Sprintf("The List item %s has no id property %q.", items.component, r.IDField),
 			remediation: "Return the resource id in each List item."}
 	}
-	want, err := schemaOf(propertyOf(mustSchema(responseResourceProxy(get.op, r.Name)), r.IDField))
+	want, err := schemaOf(propertyOf(mustSchema(r.Policy.responseResourceProxy(get.op, r.Name)), r.IDField))
 	got, gotErr := schemaOf(id)
 	if err != nil || gotErr != nil || !slices.Equal(got.Type, want.Type) || got.Format != want.Format {
 		return &contractError{code: "LIST_ITEM_ID_TYPE_INCOMPATIBLE", location: location,

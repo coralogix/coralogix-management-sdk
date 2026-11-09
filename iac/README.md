@@ -206,6 +206,17 @@ The golden contract is `model/testdata/overwritething.yaml`.
 
 A tool pins `iac` by the pseudo-version of a commit on `master`.
 
+### Existing batch reads
+
+`api.getByIDs` names a Get query parameter containing string ids. Get returns an array of the
+resource; Delete supplies the identity path parameter. The model records the response as
+`Response.Items`, and SDK checks include the array query setter and response slice. A tool sends
+one id and keeps its released selection behavior. New resources still require a direct Get.
+
+`Policy.ClientRequired` records fields that a released client always supplies, even when Create makes
+them optional. Such a field can be required in Update without losing the identity or value needed
+for later changes.
+
 ## Create and Update with one inline body
 
 openapi-generator makes one Go type of two inline bodies that are the same schema, and names it after the first: the Create body. When the Update body is an inline schema without a title that renders the same as the inline Create body, the model sets `Update.BodyAsCreate`, and `sdkcheck` expects the Update builder to take the Create body type. The parsing rule groups API has such a pair: `RuleGroupsServiceUpdateRuleGroup(ctx, id).RuleGroupsServiceCreateRuleGroupRequest(body)`. A title names each body, so two titled bodies keep their own types.
