@@ -206,6 +206,55 @@ func TestPolicyStatesTheRequestShapeKeys(t *testing.T) {
 	}
 }
 
+// updateAs is a field line of the shared overrides: it reaches the policy as the Update path only.
+func TestPolicyStatesTheUpdatePathKey(t *testing.T) {
+	e := Exceptions{Fields: map[string]map[string]Field{"Thing": {
+		"name":    {UpdateAs: "newName"},
+		"enabled": {RequestAs: "active", UpdateAs: "isActive"},
+		"id":      {},
+	}}}
+	got := e.Policy()
+	if want := map[string]string{"Thing.name": "newName", "Thing.enabled": "isActive"}; !reflect.DeepEqual(got.UpdateNames, want) {
+		t.Fatalf("UpdateNames = %v, want %v", got.UpdateNames, want)
+	}
+	if want := map[string]string{"Thing.enabled": "active"}; !reflect.DeepEqual(got.RequestNames, want) {
+		t.Fatalf("RequestNames = %v, want %v", got.RequestNames, want)
+	}
+	if p := (Exceptions{}).Policy(); p.UpdateNames != nil {
+		t.Fatalf("UpdateNames without the key = %v", p.UpdateNames)
+	}
+	for _, path := range []string{"b..c", ".b", "b."} {
+		if err := (Field{UpdateAs: path}).Check(); err == nil || !strings.Contains(err.Error(), "updateAs") {
+			t.Fatalf("Field{UpdateAs: %q}.Check() = %v, want an updateAs error", path, err)
+		}
+	}
+	if err := (Field{UpdateAs: "d.e"}).Check(); err != nil {
+		t.Fatalf("Check() = %v", err)
+	}
+}
+
+// itemName is a field line of the shared overrides: it reaches the policy.
+func TestPolicyStatesTheItemNameKey(t *testing.T) {
+	e := Exceptions{Fields: map[string]map[string]Field{"Thing": {"presets": {ItemName: "name"}, "id": {}}}}
+	if got, want := e.Policy().ItemNames, map[string]string{"Thing.presets": "name"}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("ItemNames = %v, want %v", got, want)
+	}
+	if p := (Exceptions{}).Policy(); p.ItemNames != nil {
+		t.Fatalf("ItemNames without the key = %v", p.ItemNames)
+	}
+}
+
+// updateDefault is a field line of the shared overrides: it reaches the policy.
+func TestPolicyStatesTheUpdateDefaultKey(t *testing.T) {
+	e := Exceptions{Fields: map[string]map[string]Field{"Thing": {"enabled": {UpdateDefault: "true"}, "id": {}}}}
+	if got, want := e.Policy().UpdateDefaults, map[string]string{"Thing.enabled": "true"}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("UpdateDefaults = %v, want %v", got, want)
+	}
+	if p := (Exceptions{}).Policy(); p.UpdateDefaults != nil {
+		t.Fatalf("UpdateDefaults without the key = %v", p.UpdateDefaults)
+	}
+}
+
 func TestCheckRequestShapeKeys(t *testing.T) {
 	tests := map[string]struct {
 		api  API

@@ -28,6 +28,7 @@ import (
 	"github.com/coralogix/coralogix-management-sdk/iac/issue"
 	"github.com/pb33f/libopenapi/datamodel/high/base"
 	v3 "github.com/pb33f/libopenapi/datamodel/high/v3"
+	"go.yaml.in/yaml/v4"
 )
 
 // Validate collects every detectable eligibility issue before generation.
@@ -704,7 +705,7 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	}
 	gp := propertyOf(get, field)
 	location := fieldLocation(name, field)
-	if _, err := classifyTopLevel(p, idParam, field, cp != nil, up != nil, gp != nil, schemaDefault(up) != nil); err != nil {
+	if _, err := classifyTopLevel(p, idParam, field, cp != nil, up != nil, gp != nil, p.withUpdateDefault(name, field, schemaDefault(up)) != nil); err != nil {
 		return issue.Report{{Code: "FIELD_LIFECYCLE_UNSUPPORTED", Location: location, Message: fmt.Sprintf("The field locations are Create=%t, Update=%t, Get=%t.", cp != nil, up != nil, gp != nil), Remediation: "Use a managed, immutable, or computed field lifecycle."}}
 	}
 	// A computed line on a field that Get requires has a value in state. With a plan modifier that
@@ -728,7 +729,7 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	if !p.released(name, field) && !p.Overwrite {
 		report = append(report, fieldPresenceIssue(location+".create", field, create, cp, schemaDefault(cp))...)
 		// Generation reads the Create default. A field that only Update has declares it there.
-		updateDefault := schemaDefault(up)
+		updateDefault := p.withUpdateDefault(name, field, schemaDefault(up))
 		if cp != nil {
 			updateDefault = schemaDefault(cp)
 		}
@@ -774,6 +775,8 @@ func fieldDefaultContractIssues(p Policy, name, location, field string, create, 
 	createDefault := schemaDefault(cp)
 	updateDefault := schemaDefault(up)
 	report = append(report, defaultValueIssues(location+".create", cp)...)
+	report = append(report, updateDefaultIssues(p, name, field, location, cp, up, gp)...)
+	updateDefault = p.withUpdateDefault(name, field, updateDefault)
 	report = append(report, defaultValueIssues(location+".update", up)...)
 	if p.OverridesDefault(name, field) {
 		return report // the default line of the overrides replaces the declared default
@@ -806,6 +809,60 @@ func fieldDefaultContractIssues(p Policy, name, location, field string, create, 
 		report = append(report, nestedDefaultIssues(p, location+"."+candidate.name, candidate.proxy, false, map[*base.Schema]bool{})...)
 	}
 	return report
+}
+
+// updateDefaultIssues checks an updateDefault line: it states the value that Create leaves in a
+// field that only Update can set, in a resource that users already have. The contract must not
+// declare it, and the value must fit the type of the field.
+func updateDefaultIssues(p Policy, name, field, location string, cp, up, gp *base.SchemaProxy) issue.Report {
+	if _, ok := p.UpdateDefaults[name+"."+field]; !ok {
+		return nil
+	}
+	unsupported := func(message, remediation string) issue.Report {
+		return issue.Report{{Code: "UPDATE_DEFAULT_UNSUPPORTED", Location: location, Message: message, Remediation: remediation}}
+	}
+	switch {
+	case !p.Existing:
+		return unsupported("updateDefault is for a resource that users already have.", "Declare the default in the contract, or delete the updateDefault line.")
+	case cp != nil || up == nil || gp == nil:
+		return unsupported(fmt.Sprintf("The field locations are Create=%t, Update=%t, Get=%t.", cp != nil, up != nil, gp != nil), "Use updateDefault on a field that Update and Get have and Create does not.")
+	case schemaDefault(up) != nil:
+		return issue.Report{{Code: "OVERRIDE_UNUSED", Location: location, Message: "The Update field already declares the default.", Remediation: "Delete the updateDefault line."}}
+	}
+	return updateDefaultValueIssues(location, up, p.UpdateDefaults[name+"."+field])
+}
+
+// updateDefaultNodeTags are the YAML tags that a default of each scalar type has.
+var updateDefaultNodeTags = map[string]string{"string": "!!str", "boolean": "!!bool", "integer": "!!int", "number": "!!float"}
+
+// updateDefaultValueIssues checks that the value of an updateDefault line is a value of the Update
+// field: the type, the enum, and the limits that the default of a contract has to satisfy.
+func updateDefaultValueIssues(location string, proxy *base.SchemaProxy, value string) issue.Report {
+	schema, err := schemaOf(proxy)
+	if err != nil {
+		return nil
+	}
+	merged := *schema
+	if target := refSiblingTarget(proxy, schema); target != nil {
+		merged = *target
+	}
+	tag := updateDefaultNodeTags[""]
+	if len(merged.Type) == 1 {
+		tag = updateDefaultNodeTags[merged.Type[0]]
+	}
+	if tag == "" {
+		return issue.Report{{Code: "UPDATE_DEFAULT_UNSUPPORTED", Location: location, Message: "The Update field is no string, boolean, integer, or number, so it has no scalar value to declare.", Remediation: "Use updateDefault on a scalar field, or delete the line."}}
+	}
+	merged.Default = &yaml.Node{Kind: yaml.ScalarNode, Tag: tag, Value: value}
+	if err := validateScalarDefault(&merged); err != nil {
+		return issue.Report{{
+			Code:        "FIELD_DEFAULT_INVALID",
+			Location:    location,
+			Message:     "The updateDefault value is invalid: " + err.Error() + ".",
+			Remediation: "Give a value that has the Update field type and satisfies its limits.",
+		}}
+	}
+	return nil
 }
 
 // declaredDefaultIssues checks that a declared server default fits the field: optional in Create
@@ -1199,6 +1256,12 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 		return nil
 	}
 	get, err := typeOf(gp, location, walk{policy: &p})
+	if err == nil {
+		var contract *contractError
+		if err = p.projectItems(name, field, get); errors.As(err, &contract) {
+			return issue.Report{contract.issue()}
+		}
+	}
 	p.asSet(name, field, get)
 	if err != nil {
 		return nil
@@ -1226,6 +1289,9 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 		get.MinItems, get.MaxItems = requests[0].MinItems, requests[0].MaxItems
 	}
 	var contract *contractError
+	if _, _, err := p.collapseRequestWrappers(name, field, get, &requests); errors.As(err, &contract) {
+		return issue.Report{contract.issue()}
+	}
 	if err := mergeRequests(location, get, requests[0], requests[1]); errors.As(err, &contract) {
 		return issue.Report{contract.issue()}
 	}

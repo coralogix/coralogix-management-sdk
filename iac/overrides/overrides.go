@@ -131,6 +131,21 @@ type Field struct {
 	// integrationParameters.parameters. A request property that the field covers is not a
 	// separate field. Only a field of the resource component can have it.
 	RequestAs string `yaml:"requestAs"`
+	// UpdateAs is the path of the property that holds the field in the Update body only, for an
+	// API that names a value in Update differently from Create and Get ("name" in Create and Get,
+	// "newName" in Update). The Create body keeps the path of requestAs, or the field name.
+	UpdateAs string `yaml:"updateAs"`
+	// UpdateDefault is the value that a new resource has in a field that only Update can set: Create
+	// cannot send the field, so the API stores this value. The contract does not declare it as a
+	// default of the Update field, because there an omitted value keeps the stored value instead of
+	// setting this one. The field is then managed: the generated Create follows with an Update when
+	// the configuration sets another value. Only a field of the resource component that Update and
+	// Get have and Create does not.
+	UpdateDefault string `yaml:"updateDefault"`
+	// ItemName shows a list or set of objects as the strings of one property of the items, for a
+	// resource whose API reads each item as an object and takes the property as the item in the
+	// requests (a preset with a name and its permissions in Get, and the preset name in Create).
+	ItemName string `yaml:"itemName"`
 	// Negate: the request sends the opposite of this boolean field, under the name that requestAs
 	// gives, for example enabled sent as disabled.
 	Negate bool `yaml:"negate"`
@@ -233,6 +248,9 @@ func (l Field) Check() error {
 	if l.RequestAs != "" && slices.Contains(strings.Split(l.RequestAs, "."), "") {
 		return fmt.Errorf("requestAs is a request path of dot-separated names; %q is not one", l.RequestAs)
 	}
+	if l.UpdateAs != "" && slices.Contains(strings.Split(l.UpdateAs, "."), "") {
+		return fmt.Errorf("updateAs is a request path of dot-separated names; %q is not one", l.UpdateAs)
+	}
 	if l.Collection != "" && l.Collection != "set" {
 		return fmt.Errorf("collection is %q, want set", l.Collection)
 	}
@@ -319,6 +337,24 @@ func (e Exceptions) Policy() model.Policy {
 					p.RequestNames = map[string]string{}
 				}
 				p.RequestNames[name+"."+field] = line.RequestAs
+			}
+			if line.ItemName != "" {
+				if p.ItemNames == nil {
+					p.ItemNames = map[string]string{}
+				}
+				p.ItemNames[name+"."+field] = line.ItemName
+			}
+			if line.UpdateDefault != "" {
+				if p.UpdateDefaults == nil {
+					p.UpdateDefaults = map[string]string{}
+				}
+				p.UpdateDefaults[name+"."+field] = line.UpdateDefault
+			}
+			if line.UpdateAs != "" {
+				if p.UpdateNames == nil {
+					p.UpdateNames = map[string]string{}
+				}
+				p.UpdateNames[name+"."+field] = line.UpdateAs
 			}
 			if line.Negate {
 				p.RequestNegated = append(p.RequestNegated, name+"."+field)

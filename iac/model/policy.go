@@ -65,6 +65,19 @@ type Policy struct {
 	// {"Thing.definitionKey": "integrationKey", "Thing.parameters": "spec.parameters"}. The API
 	// names a value in a request differently from the Get response.
 	RequestNames map[string]string
+	// UpdateNames is RequestNames for the Update body only: a field line with updateAs. The Create
+	// body keeps the path of RequestNames, or the name of the field, for an API that names a value
+	// in Update differently ("name" in Create, "newName" in Update).
+	UpdateNames map[string]string
+	// UpdateDefaults maps a top-level field of the resource component ("Component.field") that only
+	// Update and Get have to the value that Create leaves in it (a field line with updateDefault).
+	// The contract does not declare it: an omitted value in Update keeps the stored value. It
+	// makes the field managed, with this value as the server default that Create stores.
+	UpdateDefaults map[string]string
+	// ItemNames maps a list or set field of the resource component ("Component.field") to the
+	// string property of its items. The response holds each item as an object, and the requests
+	// send the property as the item: the resource shows the strings.
+	ItemNames map[string]string
 	// RequestWrappers maps a nested component of the resource to the property of its request
 	// component that holds its fields, for example {"Policy": "policy"} when a write sends each
 	// item as {"policy": {"name": ...}, "logRules": {...}} and Get returns {"name": ..., "logRules": ...}.
@@ -341,6 +354,28 @@ func (p Policy) released(component, field string) bool {
 	return p.Existing && component != "" && (slices.Contains(p.Released, component+"."+field) || slices.Contains(p.ClientRequired, component+"."+field))
 }
 
+// updateDefault returns the value that Create leaves in a field that only Update can set, from an
+// updateDefault line, or nil.
+func (p Policy) updateDefault(component, field string) *string {
+	if !p.Existing || component == "" {
+		return nil
+	}
+	v, ok := p.UpdateDefaults[component+"."+field]
+	if !ok {
+		return nil
+	}
+	return &v
+}
+
+// withUpdateDefault returns the contract default of a request field, or the value of an
+// updateDefault line when the contract declares none.
+func (p Policy) withUpdateDefault(component, field string, contract *string) *string {
+	if contract != nil {
+		return contract
+	}
+	return p.updateDefault(component, field)
+}
+
 // OverridesDefault reports whether the behavior-overrides file replaces the default of the field.
 // Then the generated resource does not use the server default of the contract.
 func (p Policy) OverridesDefault(component, field string) bool {
@@ -458,6 +493,37 @@ func (p *Policy) computed(component, field string) bool {
 // asSet applies collection: set to component.field, retaining the API collection in WireKind so
 // callers can convert operation-specific shapes. It then applies keyedBy, if present; keyedBy wins
 // when both overrides target the same field, so the final collection type is a map.
+// projectItems shows the list or set t of the field as the strings of one property of its items,
+// when an itemName line says so: Get holds each item as an object with that property, and the
+// requests send the property as a string.
+func (p Policy) projectItems(component, field string, t *Type) error {
+	property, ok := p.ItemNames[component+"."+field]
+	if !ok || t == nil {
+		return nil
+	}
+	location := fieldLocation(component, field)
+	unsupported := func(message string) error {
+		return &contractError{code: "ITEM_NAME_UNSUPPORTED", location: location, message: message,
+			remediation: "Name a list or set of objects with a string property in an existing resource, or delete the itemName line."}
+	}
+	switch {
+	case !p.Existing:
+		return unsupported("itemName is for a resource that users already have.")
+	case t.Kind != List && t.Kind != Set || t.Elem == nil || t.Elem.Kind != Object || t.Elem.Schema == "" || len(t.Elem.Wrappers) != 0:
+		return unsupported("the field is not a list or set of objects with a component.")
+	}
+	item := fieldNamed(t.Elem.Fields, property)
+	switch {
+	case item == nil:
+		return unsupported(fmt.Sprintf("the items of %s have no property %q.", t.Elem.Schema, property))
+	case item.Type.Kind != String || len(item.Type.Wrappers) != 0 || item.Type.Format != "":
+		return unsupported(fmt.Sprintf("the property %q of %s is not a plain string.", property, t.Elem.Schema))
+	}
+	t.Projected = &Projection{Schema: t.Elem.Schema, Property: property, Required: item.Attrs.Required}
+	t.Elem = item.Type
+	return nil
+}
+
 func (p *Policy) asSet(component, field string, t *Type) {
 	if p != nil && t != nil && (t.Kind == List || t.Kind == Map && t.Elem != nil && t.Elem.Kind == Object) && component != "" && slices.Contains(p.Sets, component+"."+field) {
 		t.Kind = Set

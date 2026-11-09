@@ -41,6 +41,9 @@ func (r *Resource) unwrap() error {
 		f.Type = t
 	}
 	r.UnwrapUsed = u.used
+	for line := range r.requestUnwrapUsed {
+		r.UnwrapUsed[line] = true
+	}
 	r.HiddenWrappers = map[string]bool{}
 	for component := range u.collapsed {
 		if !u.kept[component] {

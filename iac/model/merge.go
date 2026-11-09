@@ -368,6 +368,7 @@ func (t *Type) requestType(op verb) *Type {
 		return nil
 	}
 	out := *t
+	out.Projected = nil // the requests send the strings
 	out.Elem = t.Elem.requestType(op)
 	out.WireKind = t.WireKind
 	if op == opCreate && t.CreateWireKind != "" {
@@ -377,6 +378,21 @@ func (t *Type) requestType(op verb) *Type {
 		out.WireKind = t.UpdateWireKind
 	}
 	out.Wrappers = requestWrappers(t.Wrappers, op)
+	if w := t.RequestWrapper; w != nil {
+		schema, attrs := w.CreateSchema, w.Create
+		if op == opUpdate {
+			schema, attrs = w.UpdateSchema, w.Update
+		}
+		if schema != "" {
+			outer := *w
+			outer.Schema = schema
+			if attrs != nil {
+				outer.Attrs = *attrs
+			}
+			out.Wrappers = append([]Wrapper{outer}, out.Wrappers...)
+		}
+	}
+	out.RequestWrapper = nil
 	if t.Kind != Object && t.Kind != OneOf {
 		return &out
 	}
