@@ -6,7 +6,7 @@ name: Notify the Terraform provider of a spec change
 # regenerate-generated-resources.yml pins this commit, regenerates its generated
 # resources, and opens a PR when their code changes.
 #
-# Token: the openapi-facade-automation GitHub App, which must be installed on
+# Token: the eco-system-automation GitHub App, which must be installed on
 # terraform-provider-coralogix with Contents: write. A repository_dispatch cannot
 # use the default GITHUB_TOKEN across repositories.
 
@@ -47,7 +47,7 @@ jobs:
       - name: Decode GitHub App private key
         id: pkey
         env:
-          RAW_KEY: ${{ secrets.OPENAPI_FACADE_AUTOMATION_APP_PRIVATE_KEY }}
+          RAW_KEY: ${{ secrets.ECO_SYSTEM_AUTOMATION_APP_PRIVATE_KEY }}
         run: |
           decoded=$(printf '%b' "$RAW_KEY")
           while IFS= read -r line; do
@@ -63,7 +63,7 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.OPENAPI_FACADE_AUTOMATION_APP_ID }}
+          app-id: ${{ secrets.ECO_SYSTEM_AUTOMATION_APP_ID }}
           private-key: ${{ steps.pkey.outputs.key }}
           owner: coralogix
           repositories: terraform-provider-coralogix
