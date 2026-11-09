@@ -283,3 +283,36 @@ func TestItemNameIssues(t *testing.T) {
 		})
 	}
 }
+
+// The value of an updateDefault line must be a value of the Update field: its type, its enum, and
+// its limits, as the default of a contract has to be.
+func TestUpdateDefaultValueFitsTheUpdateField(t *testing.T) {
+	doc := keyDocWithoutPermissions(t)
+	p := keyPolicy()
+	p.UpdateDefaults["KeyThing.enabled"] = "not-a-boolean"
+	if got := keyCodes(t, doc, p); !slices.Contains(got, "FIELD_DEFAULT_INVALID") {
+		t.Errorf("issues = %v, want FIELD_DEFAULT_INVALID for a boolean field with the value not-a-boolean", got)
+	}
+	p.UpdateDefaults["KeyThing.enabled"] = "false"
+	if got := keyCodes(t, doc, p); len(got) != 0 {
+		t.Errorf("issues = %v, want none for the value false", got)
+	}
+
+	// An enum and a limit on a string field.
+	for _, test := range []struct{ schema, value string }{
+		{"{type: string, enum: [a, b], x-coralogix-presence: true}", "c"},
+		{"{type: string, maxLength: 2, x-coralogix-presence: true}", "abc"},
+		{"{type: integer, format: int32, minimum: 1, x-coralogix-presence: true}", "0"},
+		{"{type: integer, x-coralogix-presence: true}", "1.5"},
+	} {
+		spec := strings.Replace(string(doc), "isEnabled: {type: boolean, x-coralogix-presence: true}", "isEnabled: "+test.schema, 1)
+		// The resource response has to hold the same type as Update.
+		spec = strings.Replace(spec, "enabled: {type: boolean, x-coralogix-presence: true}", "enabled: "+test.schema, 1)
+		p := keyPolicy()
+		p.UpdateDefaults["KeyThing.enabled"] = test.value
+		got := keyCodes(t, []byte(spec), p)
+		if !slices.Contains(got, "FIELD_DEFAULT_INVALID") {
+			t.Errorf("%s with %q: issues = %v, want FIELD_DEFAULT_INVALID", test.schema, test.value, got)
+		}
+	}
+}

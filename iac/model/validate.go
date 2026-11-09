@@ -28,6 +28,7 @@ import (
 	"github.com/coralogix/coralogix-management-sdk/iac/issue"
 	"github.com/pb33f/libopenapi/datamodel/high/base"
 	v3 "github.com/pb33f/libopenapi/datamodel/high/v3"
+	"go.yaml.in/yaml/v4"
 )
 
 // Validate collects every detectable eligibility issue before generation.
@@ -827,6 +828,39 @@ func updateDefaultIssues(p Policy, name, field, location string, cp, up, gp *bas
 		return unsupported(fmt.Sprintf("The field locations are Create=%t, Update=%t, Get=%t.", cp != nil, up != nil, gp != nil), "Use updateDefault on a field that Update and Get have and Create does not.")
 	case schemaDefault(up) != nil:
 		return issue.Report{{Code: "OVERRIDE_UNUSED", Location: location, Message: "The Update field already declares the default.", Remediation: "Delete the updateDefault line."}}
+	}
+	return updateDefaultValueIssues(location, up, p.UpdateDefaults[name+"."+field])
+}
+
+// updateDefaultNodeTags are the YAML tags that a default of each scalar type has.
+var updateDefaultNodeTags = map[string]string{"string": "!!str", "boolean": "!!bool", "integer": "!!int", "number": "!!float"}
+
+// updateDefaultValueIssues checks that the value of an updateDefault line is a value of the Update
+// field: the type, the enum, and the limits that the default of a contract has to satisfy.
+func updateDefaultValueIssues(location string, proxy *base.SchemaProxy, value string) issue.Report {
+	schema, err := schemaOf(proxy)
+	if err != nil {
+		return nil
+	}
+	merged := *schema
+	if target := refSiblingTarget(proxy, schema); target != nil {
+		merged = *target
+	}
+	tag := updateDefaultNodeTags[""]
+	if len(merged.Type) == 1 {
+		tag = updateDefaultNodeTags[merged.Type[0]]
+	}
+	if tag == "" {
+		return issue.Report{{Code: "UPDATE_DEFAULT_UNSUPPORTED", Location: location, Message: "The Update field is no string, boolean, integer, or number, so it has no scalar value to declare.", Remediation: "Use updateDefault on a scalar field, or delete the line."}}
+	}
+	merged.Default = &yaml.Node{Kind: yaml.ScalarNode, Tag: tag, Value: value}
+	if err := validateScalarDefault(&merged); err != nil {
+		return issue.Report{{
+			Code:        "FIELD_DEFAULT_INVALID",
+			Location:    location,
+			Message:     "The updateDefault value is invalid: " + err.Error() + ".",
+			Remediation: "Give a value that has the Update field type and satisfies its limits.",
+		}}
 	}
 	return nil
 }

@@ -282,3 +282,31 @@ func TestBodyTitleCollidesOnlyWithinTheTag(t *testing.T) {
 		})
 	}
 }
+
+// A request can hold the wrapper that the response holds under another component name. The wrapper
+// is not request-only then: the unwrap pass collapses it with the response, in every request.
+func TestRequestWrapperOfAnotherNameIsLeftToUnwrap(t *testing.T) {
+	spec := wrapSpec(t)
+	text := string(spec)
+	// Only the Create body names the copy; the Update body and the response keep Label.
+	text = strings.Replace(text, "mainLabel: {$ref: '#/components/schemas/Label'}", "mainLabel: {$ref: '#/components/schemas/CreateLabel'}", 1)
+	text = strings.Replace(text, "    Label:\n", "    CreateLabel:\n      type: object\n      required: []\n      properties:\n        value: {type: string, x-coralogix-presence: true}\n    Label:\n", 1)
+	if got := wrapCodes(t, []byte(text), wrapPolicy()); len(got) != 0 {
+		t.Fatalf("issues = %v, want none", got)
+	}
+	doc, err := Load([]byte(text))
+	if err != nil {
+		t.Fatal(err)
+	}
+	r, err := BuildWithPolicy(doc, "WrapThing", OperationIDs{}, wrapPolicy())
+	if err != nil {
+		t.Fatal(err)
+	}
+	f := wrapField(t, r, "mainLabel")
+	if f.Type.Kind != String || f.Type.RequestWrapper != nil || len(f.Type.Wrappers) != 1 || f.Type.Wrappers[0].Schema != "Label" {
+		t.Fatalf("mainLabel = %s, request wrapper %+v, wrappers %v; want a string in the shared wrapper Label", f.Type.Kind, f.Type.RequestWrapper, f.Type.Wrappers)
+	}
+	if got := f.Type.Wrappers[0].CreateSchema; got != "CreateLabel" {
+		t.Errorf("Create wrapper = %q, want CreateLabel", got)
+	}
+}

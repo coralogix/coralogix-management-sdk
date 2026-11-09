@@ -33,7 +33,7 @@ func (p Policy) collapseRequestWrappers(resource, field string, get *Type, reque
 		if req == nil || req.Kind != Object || req.Schema == "" || wrapperProblem(req) != "" {
 			continue
 		}
-		if get != nil && get.Kind == Object && get.Schema == req.Schema {
+		if holdsSameWrapper(get, req, requestVerbs[i]) {
 			continue // the response holds the wrapper: unwrap handles it for every request
 		}
 		if !u.decide(resource, field, req.Schema) {
@@ -59,4 +59,14 @@ func (p Policy) collapseRequestWrappers(resource, field string, get *Type, reque
 		requests[i] = &value
 	}
 	return w, u.used, nil
+}
+
+// requestVerbs are the operations of the two request types of collapseRequestWrappers.
+var requestVerbs = [2]verb{opCreate, opUpdate}
+
+// holdsSameWrapper reports whether the response holds the object that the request holds, as an
+// object of the same shape. A request can use another component name for it (CreateLabel for
+// Label): the shape decides, because the merge accepts a request component of another name.
+func holdsSameWrapper(get, req *Type, op verb) bool {
+	return get != nil && get.Kind == Object && typeDifference(get, req, op) == ""
 }
