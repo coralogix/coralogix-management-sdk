@@ -12,7 +12,7 @@ name = "cleanup"
 path = "src/bin/cleanup.rs"
 
 [dependencies]
-octocrab = "0.42"
+octocrab = "0.54"
 serde = { version = "1", features = ["derive"] }
 toml_edit = "0.22"
 tokio = { version = "1", features = ["full"] }

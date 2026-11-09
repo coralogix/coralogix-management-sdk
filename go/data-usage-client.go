@@ -29,9 +29,6 @@ type GetLogsCountRequest = dataUsage.GetLogsCountRequest
 // GetDataUsageMetricsExportStatusRequest is a request to get the metrics export status.
 type GetDataUsageMetricsExportStatusRequest = dataUsage.GetDataUsageMetricsExportStatusRequest
 
-// UpdateDataUsageMetricsExportStatusRequest is a request to update the metrics export status.
-type UpdateDataUsageMetricsExportStatusRequest = dataUsage.UpdateDataUsageMetricsExportStatusRequest
-
 // GetDataUsageRequest is a request to get the data usage.
 type GetDataUsageRequest = dataUsage.GetDataUsageRequest
 
@@ -43,9 +40,6 @@ type LogsCountStream = dataUsage.DataUsageService_GetLogsCountClient
 
 // GetDataUsageMetricsExportStatusResponse is a response to the GetDataUsageMetricsExportStatusRequest.
 type GetDataUsageMetricsExportStatusResponse = dataUsage.GetDataUsageMetricsExportStatusResponse
-
-// UpdateDataUsageMetricsExportStatusResponse is a response to the UpdateDataUsageMetricsExportStatusRequest.
-type UpdateDataUsageMetricsExportStatusResponse = dataUsage.UpdateDataUsageMetricsExportStatusResponse
 
 // DataUsageStream is a response to the GetDataUsageRequest.
 type DataUsageStream = dataUsage.DataUsageService_GetDataUsageClient
@@ -75,11 +69,10 @@ const (
 
 // RPC names.
 const (
-	GetSpansCountRPC                      = dataUsage.DataUsageService_GetSpansCount_FullMethodName
-	GetLogsCountRPC                       = dataUsage.DataUsageService_GetLogsCount_FullMethodName
-	GetDataUsageMetricsExportStatusRPC    = dataUsage.DataUsageService_GetDataUsageMetricsExportStatus_FullMethodName
-	UpdateDataUsageMetricsExportStatusRPC = dataUsage.DataUsageService_UpdateDataUsageMetricsExportStatus_FullMethodName
-	GetDataUsageRPC                       = dataUsage.DataUsageService_GetDataUsage_FullMethodName
+	GetSpansCountRPC                   = dataUsage.DataUsageService_GetSpansCount_FullMethodName
+	GetLogsCountRPC                    = dataUsage.DataUsageService_GetLogsCount_FullMethodName
+	GetDataUsageMetricsExportStatusRPC = dataUsage.DataUsageService_GetDataUsageMetricsExportStatus_FullMethodName
+	GetDataUsageRPC                    = dataUsage.DataUsageService_GetDataUsage_FullMethodName
 )
 
 // DataUsageClient is a client for the Coralogix Data Usage API.
@@ -135,23 +128,6 @@ func (c DataUsageClient) GetDataUsageMetricsExportStatus(ctx context.Context, re
 	response, err := client.GetDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, GetDataUsageMetricsExportStatusRPC, dataPlansFeatureGroupID)
-	}
-	return response, nil
-}
-
-// UpdateDataUsageMetricsExportStatus updates the metrics export status.
-func (c DataUsageClient) UpdateDataUsageMetricsExportStatus(ctx context.Context, req *dataUsage.UpdateDataUsageMetricsExportStatusRequest) (*dataUsage.UpdateDataUsageMetricsExportStatusResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	conn := callProperties.Connection
-	defer conn.Close()
-	client := dataUsage.NewDataUsageServiceClient(conn)
-	response, err := client.UpdateDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
-	if err != nil {
-		return nil, NewSdkAPIError(err, UpdateDataUsageMetricsExportStatusRPC, dataPlansFeatureGroupID)
 	}
 	return response, nil
 }

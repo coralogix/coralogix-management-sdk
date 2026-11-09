@@ -13,6 +13,7 @@ package scopes_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,9 +23,10 @@ var _ MappedNullable = &ScopesV1Filter{}
 
 // ScopesV1Filter This data structure represents a filter
 type ScopesV1Filter struct {
-	EntityType *V1EntityType `json:"entityType,omitempty"`
-	// The expression.
-	Expression *string `json:"expression,omitempty"`
+	// Entity type of the filter. `ENTITY_TYPE_UNSPECIFIED` is not accepted.
+	EntityType V1EntityType `json:"entityType"`
+	// Expression with a version tag, for example `<v1>true`. Omitted or empty expressions are rejected.
+	Expression string `json:"expression"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -35,8 +37,10 @@ type _ScopesV1Filter ScopesV1Filter
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewScopesV1Filter() *ScopesV1Filter {
+func NewScopesV1Filter(entityType V1EntityType, expression string) *ScopesV1Filter {
 	this := ScopesV1Filter{}
+	this.EntityType = entityType
+	this.Expression = expression
 	return &this
 }
 
@@ -48,68 +52,52 @@ func NewScopesV1FilterWithDefaults() *ScopesV1Filter {
 	return &this
 }
 
-// GetEntityType returns the EntityType field value if set, zero value otherwise.
+// GetEntityType returns the EntityType field value
 func (o *ScopesV1Filter) GetEntityType() V1EntityType {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		var ret V1EntityType
 		return ret
 	}
-	return *o.EntityType
+
+	return o.EntityType
 }
 
-// GetEntityTypeOk returns a tuple with the EntityType field value if set, nil otherwise
+// GetEntityTypeOk returns a tuple with the EntityType field value
 // and a boolean to check if the value has been set.
 func (o *ScopesV1Filter) GetEntityTypeOk() (*V1EntityType, bool) {
-	if o == nil || IsNil(o.EntityType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EntityType, true
+	return &o.EntityType, true
 }
 
-// HasEntityType returns a boolean if a field has been set.
-func (o *ScopesV1Filter) HasEntityType() bool {
-	if o != nil && !IsNil(o.EntityType) {
-		return true
-	}
-
-	return false
-}
-
-// SetEntityType gets a reference to the given V1EntityType and assigns it to the EntityType field.
+// SetEntityType sets field value
 func (o *ScopesV1Filter) SetEntityType(v V1EntityType) {
-	o.EntityType = &v
+	o.EntityType = v
 }
 
-// GetExpression returns the Expression field value if set, zero value otherwise.
+// GetExpression returns the Expression field value
 func (o *ScopesV1Filter) GetExpression() string {
-	if o == nil || IsNil(o.Expression) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Expression
+
+	return o.Expression
 }
 
-// GetExpressionOk returns a tuple with the Expression field value if set, nil otherwise
+// GetExpressionOk returns a tuple with the Expression field value
 // and a boolean to check if the value has been set.
 func (o *ScopesV1Filter) GetExpressionOk() (*string, bool) {
-	if o == nil || IsNil(o.Expression) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Expression, true
+	return &o.Expression, true
 }
 
-// HasExpression returns a boolean if a field has been set.
-func (o *ScopesV1Filter) HasExpression() bool {
-	if o != nil && !IsNil(o.Expression) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpression gets a reference to the given string and assigns it to the Expression field.
+// SetExpression sets field value
 func (o *ScopesV1Filter) SetExpression(v string) {
-	o.Expression = &v
+	o.Expression = v
 }
 
 func (o ScopesV1Filter) MarshalJSON() ([]byte, error) {
@@ -122,12 +110,8 @@ func (o ScopesV1Filter) MarshalJSON() ([]byte, error) {
 
 func (o ScopesV1Filter) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EntityType) {
-		toSerialize["entityType"] = o.EntityType
-	}
-	if !IsNil(o.Expression) {
-		toSerialize["expression"] = o.Expression
-	}
+	toSerialize["entityType"] = o.EntityType
+	toSerialize["expression"] = o.Expression
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -137,6 +121,28 @@ func (o ScopesV1Filter) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ScopesV1Filter) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"entityType",
+		"expression",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varScopesV1Filter := _ScopesV1Filter{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

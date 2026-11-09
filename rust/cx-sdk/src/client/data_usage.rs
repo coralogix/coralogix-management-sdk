@@ -44,8 +44,6 @@ use cx_api::proto::com::coralogix::datausage::v2::{
     GetLogsCountResponse,
     GetSpansCountRequest,
     GetSpansCountResponse,
-    UpdateDataUsageMetricsExportStatusRequest,
-    UpdateDataUsageMetricsExportStatusResponse,
     data_usage_service_client::DataUsageServiceClient,
 };
 use tokio::sync::Mutex;
@@ -202,36 +200,6 @@ impl DataUsageClient {
                     status,
                     endpoint: "/com.coralogix.datausage.v2.DataUsageService/GetLogsCount".into(),
                     feature_group: DATA_PLANS_FEATURE_GROUP_ID.into(),
-                })
-            })?
-            .into_inner())
-    }
-
-    /// Updates the data usage metrics export status.
-    ///
-    /// # Arguments
-    /// * `enabled` - Whether to enable or disable the data usage metrics export.
-    pub async fn update_data_usage_metrics_export_status(
-        &self,
-        enabled: bool,
-    ) -> Result<UpdateDataUsageMetricsExportStatusResponse> {
-        Ok(self
-            .service_client
-            .lock()
-            .await
-            .update_data_usage_metrics_export_status(make_request_with_metadata(
-                UpdateDataUsageMetricsExportStatusRequest {
-                    enabled
-                },
-                &self.metadata_map,
-            ))
-            .await
-            .map_err(|status| {
-                SdkError::ApiError(SdkApiError {
-                    status,
-                    endpoint: "/com.coralogix.datausage.v2.DataUsageService/UpdateDataUsageMetricsExportStatus"
-                        .into(),
-                        feature_group: DATA_PLANS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
