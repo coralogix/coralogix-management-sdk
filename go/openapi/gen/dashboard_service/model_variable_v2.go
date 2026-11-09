@@ -31,8 +31,8 @@ type VariableV2 struct {
 	DisplayName string `json:"displayName" validate:"regexp=^[\\s\\S]*$"`
 	// How the variable is rendered in the dashboard header. A concrete value is required — VARIABLE_DISPLAY_TYPE_V2_UNSPECIFIED is rejected.
 	DisplayType VariableDisplayTypeV2 `json:"displayType"`
-	// Variable's unique identifier
-	Id UUID `json:"id"`
+	// Variable's unique identifier. Assigned by the server. Dashboards created before this field existed return variables without it, so it must not be treated as always present when reading.
+	Id *UUID `json:"id,omitempty"`
 	// Variable name, used to reference the variable in widget queries. Should match ^[a-zA-Z0-9_]+$ and be unique within the dashboard.
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
 	Source VariableSourceV2 `json:"source"`
@@ -47,11 +47,10 @@ type _VariableV2 VariableV2
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewVariableV2(displayName string, displayType VariableDisplayTypeV2, id UUID, name string, source VariableSourceV2, value VariableValueV2) *VariableV2 {
+func NewVariableV2(displayName string, displayType VariableDisplayTypeV2, name string, source VariableSourceV2, value VariableValueV2) *VariableV2 {
 	this := VariableV2{}
 	this.DisplayName = displayName
 	this.DisplayType = displayType
-	this.Id = id
 	this.Name = name
 	this.Source = source
 	this.Value = value
@@ -178,28 +177,36 @@ func (o *VariableV2) SetDisplayType(v VariableDisplayTypeV2) {
 	o.DisplayType = v
 }
 
-// GetId returns the Id field value
+// GetId returns the Id field value if set, zero value otherwise.
 func (o *VariableV2) GetId() UUID {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret UUID
 		return ret
 	}
-
-	return o.Id
+	return *o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *VariableV2) GetIdOk() (*UUID, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id, true
 }
 
-// SetId sets field value
+// HasId returns a boolean if a field has been set.
+func (o *VariableV2) HasId() bool {
+	if o != nil && !IsNil(o.Id) {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given UUID and assigns it to the Id field.
 func (o *VariableV2) SetId(v UUID) {
-	o.Id = v
+	o.Id = &v
 }
 
 // GetName returns the Name field value
@@ -292,7 +299,9 @@ func (o VariableV2) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["displayName"] = o.DisplayName
 	toSerialize["displayType"] = o.DisplayType
-	toSerialize["id"] = o.Id
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["source"] = o.Source
 	toSerialize["value"] = o.Value
@@ -311,7 +320,6 @@ func (o *VariableV2) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"displayName",
 		"displayType",
-		"id",
 		"name",
 		"source",
 		"value",

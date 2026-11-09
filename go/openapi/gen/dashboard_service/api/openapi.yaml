@@ -13668,7 +13668,6 @@
       },
       "VariableV2": {
         "required": [
-          "id",
           "name",
           "displayName",
           "displayType",
@@ -13712,7 +13711,7 @@
                 "$ref": "#/components/schemas/UUID"
               }
             ],
-            "description": "Variable's unique identifier"
+            "description": "Variable's unique identifier. Assigned by the server. Dashboards created before this field existed return variables without it, so it must not be treated as always present when reading."
           },
           "name": {
             "description": "Variable name, used to reference the variable in widget queries. Should match ^[a-zA-Z0-9_]+$ and be unique within the dashboard.",

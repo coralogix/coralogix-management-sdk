@@ -1648,7 +1648,10 @@ paths:
       tags:
         - Scopes Service
     put:
-      description: Updates an existing data access scope.
+      description: >-
+        Replaces the data access scope identified by id in the request body.
+        Omitted displayName, description, and filters are cleared. The
+        defaultExpression field is required.
       operationId: ScopesService_UpdateScope
       requestBody:
         content:
@@ -1657,40 +1660,50 @@ paths:
               description: This data structure represents a request to update a scope
               properties:
                 defaultExpression:
-                  description: The default expression.
+                  description: >-
+                    Required default expression with a version tag, for example
+                    `<v1>true` or `<v1>false`. Omitted or empty expressions are
+                    rejected.
                   examples:
                     - <v1>true
-                  minLength: 0
+                  minLength: 1
                   type: string
                 description:
-                  description: Human-readable description.
+                  description: >-
+                    Human-readable description. Omission clears the stored
+                    description. An explicitly empty string is stored and
+                    returned as an empty string.
                   examples:
                     - The best scope
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 displayName:
-                  description: The display name.
+                  description: >-
+                    Display name. Omitted or empty names are stored and returned
+                    as an empty string. Omission on replacement clears the
+                    stored name.
                   examples:
                     - my-scope
                   minLength: 0
                   type: string
                 filters:
-                  description: List of filters.
+                  description: >-
+                    Filters applied by this scope. Omitted or empty lists are
+                    stored and returned as an empty list. Omission on
+                    replacement clears the stored filters.
                   items:
                     $ref: '#/components/schemas/scopes.v1.Filter'
                   minItems: 0
                   type: array
                 id:
-                  description: Unique identifier.
+                  description: Identifier of the scope to replace.
                   examples:
                     - 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
-                  minLength: 0
+                  minLength: 1
                   type: string
               required:
                 - id
-                - displayName
-                - filters
                 - defaultExpression
               title: Update Scope Request
               type: object
@@ -1733,33 +1746,42 @@ paths:
               description: This data structure represents a request to create a scope
               properties:
                 defaultExpression:
-                  description: The default expression.
+                  description: >-
+                    Required default expression with a version tag, for example
+                    `<v1>true` or `<v1>false`. Omitted or empty expressions are
+                    rejected.
                   examples:
                     - <v1>true
-                  minLength: 0
+                  minLength: 1
                   type: string
                 description:
-                  description: Human-readable description.
+                  description: >-
+                    Human-readable description. Omission leaves it unset. An
+                    explicitly empty string is stored and returned as an empty
+                    string.
                   examples:
                     - The best scope
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 displayName:
-                  description: The display name.
+                  description: >-
+                    Display name. Omitted or empty names are stored and returned
+                    as an empty string.
                   examples:
                     - my-scope
                   minLength: 0
                   type: string
                 filters:
-                  description: List of filters.
+                  description: >-
+                    Filters applied by this scope. Omitted or empty lists are
+                    stored and returned as an empty list.
                   items:
                     $ref: '#/components/schemas/scopes.v1.Filter'
                   minItems: 0
                   type: array
               required:
-                - displayName
-                - filters
+                - defaultExpression
               title: Create Scope Request
               type: object
         required: true
@@ -1828,15 +1850,15 @@ paths:
       description: Deletes the data access scope with the specified ID.
       operationId: ScopesService_DeleteScope
       parameters:
-        - description: Unique identifier.
+        - description: Identifier of the scope to delete.
           in: path
           name: id
           required: true
           schema:
-            description: Unique identifier.
+            description: Identifier of the scope to delete.
             examples:
               - 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
-            minLength: 0
+            minLength: 1
             type: string
       responses:
         '200':
@@ -22500,6 +22522,19 @@ components:
           minimum: 0
           type: integer
           x-coralogix-presence: true
+        evaluationPeriodMinutes:
+          description: >-
+            How often the alert is evaluated, in minutes. Optional: when omitted
+            on create or replace, the value is min(10, timeframeMinutes). Must
+            not exceed timeframeMinutes.
+          examples:
+            - 10
+          format: int32
+          maximum: 15
+          minimum: 1
+          type: integer
+          x-coralogix-presence: true
+          x-stability: preview
         noDataPolicy:
           allOf:
             - $ref: '#/components/schemas/NoDataPolicy'
@@ -22579,6 +22614,19 @@ components:
           minimum: 0
           type: integer
           x-coralogix-presence: true
+        evaluationPeriodMinutes:
+          description: >-
+            How often the alert is evaluated, in minutes. Optional: when omitted
+            on create or replace, the value is min(10, timeframeMinutes). Must
+            not exceed timeframeMinutes.
+          examples:
+            - 10
+          format: int32
+          maximum: 15
+          minimum: 1
+          type: integer
+          x-coralogix-presence: true
+          x-stability: preview
         noDataPolicy:
           allOf:
             - $ref: '#/components/schemas/NoDataPolicy'
@@ -53090,7 +53138,6 @@ components:
       description: Value display options.
     VariableV2:
       required:
-        - id
         - name
         - displayName
         - displayType
@@ -53126,7 +53173,10 @@ components:
         id:
           allOf:
             - $ref: '#/components/schemas/UUID'
-          description: Variable's unique identifier
+          description: >-
+            Variable's unique identifier. Assigned by the server. Dashboards
+            created before this field existed return variables without it, so it
+            must not be treated as always present when reading.
         name:
           description: >-
             Variable name, used to reference the variable in widget queries.
@@ -55172,14 +55222,23 @@ components:
       description: A parsing rule. Get returns every field.
     scopes.v1.Filter:
       title: Filter
+      required:
+        - entityType
+        - expression
       type: object
       properties:
         entityType:
-          $ref: '#/components/schemas/v1.EntityType'
+          allOf:
+            - $ref: '#/components/schemas/v1.EntityType'
+          description: >-
+            Entity type of the filter. `ENTITY_TYPE_UNSPECIFIED` is not
+            accepted.
         expression:
-          minLength: 0
+          minLength: 1
           type: string
-          description: The expression.
+          description: >-
+            Expression with a version tag, for example `<v1>true`. Omitted or
+            empty expressions are rejected.
           examples:
             - <v1>true
       description: This data structure represents a filter
@@ -55510,12 +55569,20 @@ components:
           description: Version number.
     v1.Scope:
       title: Scope
+      required:
+        - id
+        - displayName
+        - teamId
+        - filters
+        - defaultExpression
       type: object
       properties:
         defaultExpression:
-          minLength: 0
+          minLength: 1
           type: string
-          description: The default expression.
+          description: >-
+            Default expression with a version tag, for example `<v1>true` or
+            `<v1>false`.
           examples:
             - <v1>true
         description:
@@ -55528,7 +55595,9 @@ components:
         displayName:
           minLength: 0
           type: string
-          description: The display name.
+          description: >-
+            Display name. Omitted or empty names are stored and returned as an
+            empty string.
           examples:
             - my-scope
         filters:
@@ -55536,17 +55605,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/scopes.v1.Filter'
-          description: List of filters.
+          description: >-
+            Filters applied by this scope. Omitted or empty lists are stored and
+            returned as an empty list.
         id:
-          minLength: 0
+          minLength: 1
           type: string
-          description: Unique identifier.
+          description: Unique identifier assigned by the server.
+          readOnly: true
           examples:
             - 60c82be2-413f-4b8e-8201-7f5c51e2ef2b
         teamId:
           type: integer
-          description: Team identifier.
+          description: Identifier of the authenticated team. Assigned by the server.
           format: int32
+          readOnly: true
           examples:
             - 1234
       description: This data structure represents a scope
