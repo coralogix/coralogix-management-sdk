@@ -244,6 +244,17 @@ func TestPolicyStatesTheItemNameKey(t *testing.T) {
 	}
 }
 
+// updateDefault is a field line of the shared overrides: it reaches the policy.
+func TestPolicyStatesTheUpdateDefaultKey(t *testing.T) {
+	e := Exceptions{Fields: map[string]map[string]Field{"Thing": {"enabled": {UpdateDefault: "true"}, "id": {}}}}
+	if got, want := e.Policy().UpdateDefaults, map[string]string{"Thing.enabled": "true"}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("UpdateDefaults = %v, want %v", got, want)
+	}
+	if p := (Exceptions{}).Policy(); p.UpdateDefaults != nil {
+		t.Fatalf("UpdateDefaults without the key = %v", p.UpdateDefaults)
+	}
+}
+
 func TestCheckRequestShapeKeys(t *testing.T) {
 	tests := map[string]struct {
 		api  API

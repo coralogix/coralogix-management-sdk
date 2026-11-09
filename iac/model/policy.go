@@ -69,6 +69,11 @@ type Policy struct {
 	// body keeps the path of RequestNames, or the name of the field, for an API that names a value
 	// in Update differently ("name" in Create, "newName" in Update).
 	UpdateNames map[string]string
+	// UpdateDefaults maps a top-level field of the resource component ("Component.field") that only
+	// Update and Get have to the value that Create leaves in it (a field line with updateDefault).
+	// The contract does not declare it: an omitted value in Update keeps the stored value. It
+	// makes the field managed, with this value as the server default that Create stores.
+	UpdateDefaults map[string]string
 	// ItemNames maps a list or set field of the resource component ("Component.field") to the
 	// string property of its items. The response holds each item as an object, and the requests
 	// send the property as the item: the resource shows the strings.
@@ -347,6 +352,28 @@ func (p Policy) fixedRequest(component, field string) bool {
 
 func (p Policy) released(component, field string) bool {
 	return p.Existing && component != "" && (slices.Contains(p.Released, component+"."+field) || slices.Contains(p.ClientRequired, component+"."+field))
+}
+
+// updateDefault returns the value that Create leaves in a field that only Update can set, from an
+// updateDefault line, or nil.
+func (p Policy) updateDefault(component, field string) *string {
+	if !p.Existing || component == "" {
+		return nil
+	}
+	v, ok := p.UpdateDefaults[component+"."+field]
+	if !ok {
+		return nil
+	}
+	return &v
+}
+
+// withUpdateDefault returns the contract default of a request field, or the value of an
+// updateDefault line when the contract declares none.
+func (p Policy) withUpdateDefault(component, field string, contract *string) *string {
+	if contract != nil {
+		return contract
+	}
+	return p.updateDefault(component, field)
 }
 
 // OverridesDefault reports whether the behavior-overrides file replaces the default of the field.

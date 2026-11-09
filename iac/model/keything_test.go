@@ -29,6 +29,7 @@ func keyPolicy() Policy {
 		IDProperty:                   "id",
 		CreateResponseOnlyIDProperty: "keyId",
 		UpdateNames:                  map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
+		UpdateDefaults:               map[string]string{"KeyThing.enabled": "true"},
 		Skip:                         []string{"KeyThing.presets", "KeyThing.permissions"},
 		Operations: OperationIDs{
 			Create: "KeyThingsService_CreateKeyThing", Get: "KeyThingsService_GetKeyThing",
@@ -111,6 +112,30 @@ func TestUpdateAsNamesTheUpdatePathOnly(t *testing.T) {
 	p.UpdateNames = nil
 	if got := keyCodes(t, keyDocWithoutPermissions(t), p); !slices.Contains(got, "FIELD_LIFECYCLE_UNSUPPORTED") {
 		t.Fatalf("issues = %v, want FIELD_LIFECYCLE_UNSUPPORTED without updateAs", got)
+	}
+}
+
+// updateDefault makes a field that only Update can set managed, and gives the value that Create
+// stores. Without the line the field is refused, and the line is refused where it does not apply.
+func TestUpdateDefaultManagesAnUpdateOnlyField(t *testing.T) {
+	r := buildKey(t, keyDocWithoutPermissions(t), keyPolicy())
+	enabled := renameField(t, r, "enabled")
+	if enabled.Behavior != Normal || enabled.Update == nil || enabled.Update.Default == nil || *enabled.Update.Default != "true" {
+		t.Fatalf("enabled: behavior %s, update %+v, want a managed field whose Create default is true", enabled.Behavior, enabled.Update)
+	}
+	p := keyPolicy()
+	p.UpdateDefaults = nil
+	if got := keyCodes(t, keyDocWithoutPermissions(t), p); !slices.Contains(got, "FIELD_LIFECYCLE_UNSUPPORTED") {
+		t.Errorf("issues = %v, want FIELD_LIFECYCLE_UNSUPPORTED without updateDefault", got)
+	}
+	p = keyPolicy()
+	p.UpdateDefaults["KeyThing.name"] = "x"
+	if got := keyCodes(t, keyDocWithoutPermissions(t), p); !slices.Contains(got, "UPDATE_DEFAULT_UNSUPPORTED") {
+		t.Errorf("issues = %v, want UPDATE_DEFAULT_UNSUPPORTED for a field that Create has", got)
+	}
+	declared := strings.Replace(string(keyDocWithoutPermissions(t)), "isEnabled: {type: boolean, x-coralogix-presence: true}", "isEnabled: {type: boolean, default: true, x-coralogix-presence: true}", 1)
+	if got := keyCodes(t, []byte(declared), keyPolicy()); !slices.Contains(got, "OVERRIDE_UNUSED") {
+		t.Errorf("issues = %v, want OVERRIDE_UNUSED when the contract declares the default", got)
 	}
 }
 

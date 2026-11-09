@@ -704,7 +704,7 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	}
 	gp := propertyOf(get, field)
 	location := fieldLocation(name, field)
-	if _, err := classifyTopLevel(p, idParam, field, cp != nil, up != nil, gp != nil, schemaDefault(up) != nil); err != nil {
+	if _, err := classifyTopLevel(p, idParam, field, cp != nil, up != nil, gp != nil, p.withUpdateDefault(name, field, schemaDefault(up)) != nil); err != nil {
 		return issue.Report{{Code: "FIELD_LIFECYCLE_UNSUPPORTED", Location: location, Message: fmt.Sprintf("The field locations are Create=%t, Update=%t, Get=%t.", cp != nil, up != nil, gp != nil), Remediation: "Use a managed, immutable, or computed field lifecycle."}}
 	}
 	// A computed line on a field that Get requires has a value in state. With a plan modifier that
@@ -728,7 +728,7 @@ func validateFieldContract(p Policy, name, idParam, field string, create, update
 	if !p.released(name, field) && !p.Overwrite {
 		report = append(report, fieldPresenceIssue(location+".create", field, create, cp, schemaDefault(cp))...)
 		// Generation reads the Create default. A field that only Update has declares it there.
-		updateDefault := schemaDefault(up)
+		updateDefault := p.withUpdateDefault(name, field, schemaDefault(up))
 		if cp != nil {
 			updateDefault = schemaDefault(cp)
 		}
@@ -774,6 +774,8 @@ func fieldDefaultContractIssues(p Policy, name, location, field string, create, 
 	createDefault := schemaDefault(cp)
 	updateDefault := schemaDefault(up)
 	report = append(report, defaultValueIssues(location+".create", cp)...)
+	report = append(report, updateDefaultIssues(p, name, field, location, cp, up, gp)...)
+	updateDefault = p.withUpdateDefault(name, field, updateDefault)
 	report = append(report, defaultValueIssues(location+".update", up)...)
 	if p.OverridesDefault(name, field) {
 		return report // the default line of the overrides replaces the declared default
@@ -806,6 +808,27 @@ func fieldDefaultContractIssues(p Policy, name, location, field string, create, 
 		report = append(report, nestedDefaultIssues(p, location+"."+candidate.name, candidate.proxy, false, map[*base.Schema]bool{})...)
 	}
 	return report
+}
+
+// updateDefaultIssues checks an updateDefault line: it states the value that Create leaves in a
+// field that only Update can set, in a resource that users already have. The contract must not
+// declare it, and the value must fit the type of the field.
+func updateDefaultIssues(p Policy, name, field, location string, cp, up, gp *base.SchemaProxy) issue.Report {
+	if _, ok := p.UpdateDefaults[name+"."+field]; !ok {
+		return nil
+	}
+	unsupported := func(message, remediation string) issue.Report {
+		return issue.Report{{Code: "UPDATE_DEFAULT_UNSUPPORTED", Location: location, Message: message, Remediation: remediation}}
+	}
+	switch {
+	case !p.Existing:
+		return unsupported("updateDefault is for a resource that users already have.", "Declare the default in the contract, or delete the updateDefault line.")
+	case cp != nil || up == nil || gp == nil:
+		return unsupported(fmt.Sprintf("The field locations are Create=%t, Update=%t, Get=%t.", cp != nil, up != nil, gp != nil), "Use updateDefault on a field that Update and Get have and Create does not.")
+	case schemaDefault(up) != nil:
+		return issue.Report{{Code: "OVERRIDE_UNUSED", Location: location, Message: "The Update field already declares the default.", Remediation: "Delete the updateDefault line."}}
+	}
+	return nil
 }
 
 // declaredDefaultIssues checks that a declared server default fits the field: optional in Create

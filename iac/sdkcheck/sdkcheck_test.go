@@ -672,8 +672,9 @@ func TestNamesForAnUpdatePathThatDiffersFromCreate(t *testing.T) {
 	}
 	policy := model.Policy{
 		Existing: true, IDProperty: "id", CreateResponseOnlyIDProperty: "keyId",
-		UpdateNames: map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
-		Skip:        []string{"KeyThing.presets", "KeyThing.permissions"},
+		UpdateNames:    map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
+		UpdateDefaults: map[string]string{"KeyThing.enabled": "true"},
+		Skip:           []string{"KeyThing.presets", "KeyThing.permissions"},
 		Operations: model.OperationIDs{
 			Create: "KeyThingsService_CreateKeyThing", Get: "KeyThingsService_GetKeyThing",
 			Update: "KeyThingsService_UpdateKeyThing", Delete: "KeyThingsService_DeleteKeyThing",
@@ -738,8 +739,9 @@ func TestNamesForAWrapperThatOnlyUpdateHolds(t *testing.T) {
 	}
 	policy := model.Policy{
 		Existing: true, IDProperty: "id", CreateResponseOnlyIDProperty: "keyId",
-		UpdateNames: map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
-		Skip:        []string{"KeyThing.presets"}, Unwrap: []string{"KeyThingPermissions"}, Released: []string{"KeyThing.permissions"},
+		UpdateNames:    map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
+		UpdateDefaults: map[string]string{"KeyThing.enabled": "true"},
+		Skip:           []string{"KeyThing.presets"}, Unwrap: []string{"KeyThingPermissions"}, Released: []string{"KeyThing.permissions"},
 		Operations: model.OperationIDs{
 			Create: "KeyThingsService_CreateKeyThing", Get: "KeyThingsService_GetKeyThing",
 			Update: "KeyThingsService_UpdateKeyThing", Delete: "KeyThingsService_DeleteKeyThing",
@@ -804,8 +806,9 @@ func TestNamesForAListShownAsItemNames(t *testing.T) {
 	}
 	policy := model.Policy{
 		Existing: true, IDProperty: "id", CreateResponseOnlyIDProperty: "keyId",
-		UpdateNames: map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
-		Unwrap:      []string{"KeyThingPresets", "KeyThingPermissions"}, ItemNames: map[string]string{"KeyThing.presets": "name"},
+		UpdateNames:    map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
+		UpdateDefaults: map[string]string{"KeyThing.enabled": "true"},
+		Unwrap:         []string{"KeyThingPresets", "KeyThingPermissions"}, ItemNames: map[string]string{"KeyThing.presets": "name"},
 		Released: []string{"KeyThing.presets", "KeyThing.permissions"},
 		Operations: model.OperationIDs{
 			Create: "KeyThingsService_CreateKeyThing", Get: "KeyThingsService_GetKeyThing",

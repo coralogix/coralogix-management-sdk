@@ -1253,7 +1253,7 @@ func (r *Resource) resourceField(name string, createBody, updateBody, getSchema 
 		return nil, fmt.Errorf("update body: %w", err)
 	}
 	gp := propertyOf(getSchema, name)
-	behavior, err := classifyTopLevel(r.Policy, r.ID(), name, cp != nil, up != nil, gp != nil, schemaDefault(up) != nil)
+	behavior, err := classifyTopLevel(r.Policy, r.ID(), name, cp != nil, up != nil, gp != nil, r.Policy.withUpdateDefault(r.Name, name, schemaDefault(up)) != nil)
 	if err != nil {
 		return nil, fmt.Errorf("%s: %w", name, err)
 	}
@@ -1301,6 +1301,10 @@ func (r *Resource) resourceField(name string, createBody, updateBody, getSchema 
 		}
 		a.Required = slices.Contains(r.Policy.requiredOf(r.Name, loc.body.Required), name)
 		*loc.attrs = &a
+	}
+	if cp == nil && f.Update != nil && f.Update.Default == nil {
+		// Create cannot send the field: an updateDefault line gives the value that it stores.
+		f.Update.Default = r.Policy.updateDefault(r.Name, name)
 	}
 	for i := range requests {
 		if requests[i], err = r.Policy.shapeNested(r.Name, fieldLocation(r.Name, name), f.Type, requests[i], r.shapeUsed); err != nil {
