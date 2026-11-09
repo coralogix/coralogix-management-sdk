@@ -2497,6 +2497,18 @@
             "type": "integer",
             "x-coralogix-presence": true
           },
+          "evaluationPeriodMinutes": {
+            "description": "How often the alert is evaluated, in minutes. Optional: when omitted on create or replace, the value is min(10, timeframeMinutes). Must not exceed timeframeMinutes.",
+            "examples": [
+              10
+            ],
+            "format": "int32",
+            "maximum": 15,
+            "minimum": 1,
+            "type": "integer",
+            "x-coralogix-presence": true,
+            "x-stability": "preview"
+          },
           "noDataPolicy": {
             "allOf": [
               {
@@ -2600,6 +2612,18 @@
             "minimum": 0,
             "type": "integer",
             "x-coralogix-presence": true
+          },
+          "evaluationPeriodMinutes": {
+            "description": "How often the alert is evaluated, in minutes. Optional: when omitted on create or replace, the value is min(10, timeframeMinutes). Must not exceed timeframeMinutes.",
+            "examples": [
+              10
+            ],
+            "format": "int32",
+            "maximum": 15,
+            "minimum": 1,
+            "type": "integer",
+            "x-coralogix-presence": true,
+            "x-stability": "preview"
           },
           "noDataPolicy": {
             "allOf": [

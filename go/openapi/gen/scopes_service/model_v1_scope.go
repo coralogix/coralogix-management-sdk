@@ -13,6 +13,7 @@ package scopes_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,18 +23,18 @@ var _ MappedNullable = &V1Scope{}
 
 // V1Scope This data structure represents a scope
 type V1Scope struct {
-	// The default expression.
-	DefaultExpression *string `json:"defaultExpression,omitempty"`
+	// Default expression with a version tag, for example `<v1>true` or `<v1>false`.
+	DefaultExpression string `json:"defaultExpression"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty"`
-	// The display name.
-	DisplayName *string `json:"displayName,omitempty"`
-	// List of filters.
-	Filters []ScopesV1Filter `json:"filters,omitempty"`
-	// Unique identifier.
-	Id *string `json:"id,omitempty"`
-	// Team identifier.
-	TeamId *int32 `json:"teamId,omitempty"`
+	// Display name. Omitted or empty names are stored and returned as an empty string.
+	DisplayName string `json:"displayName"`
+	// Filters applied by this scope. Omitted or empty lists are stored and returned as an empty list.
+	Filters []ScopesV1Filter `json:"filters"`
+	// Unique identifier assigned by the server.
+	Id string `json:"id"`
+	// Identifier of the authenticated team. Assigned by the server.
+	TeamId int32 `json:"teamId"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -44,8 +45,13 @@ type _V1Scope V1Scope
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewV1Scope() *V1Scope {
+func NewV1Scope(defaultExpression string, displayName string, filters []ScopesV1Filter, id string, teamId int32) *V1Scope {
 	this := V1Scope{}
+	this.DefaultExpression = defaultExpression
+	this.DisplayName = displayName
+	this.Filters = filters
+	this.Id = id
+	this.TeamId = teamId
 	return &this
 }
 
@@ -57,36 +63,28 @@ func NewV1ScopeWithDefaults() *V1Scope {
 	return &this
 }
 
-// GetDefaultExpression returns the DefaultExpression field value if set, zero value otherwise.
+// GetDefaultExpression returns the DefaultExpression field value
 func (o *V1Scope) GetDefaultExpression() string {
-	if o == nil || IsNil(o.DefaultExpression) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DefaultExpression
+
+	return o.DefaultExpression
 }
 
-// GetDefaultExpressionOk returns a tuple with the DefaultExpression field value if set, nil otherwise
+// GetDefaultExpressionOk returns a tuple with the DefaultExpression field value
 // and a boolean to check if the value has been set.
 func (o *V1Scope) GetDefaultExpressionOk() (*string, bool) {
-	if o == nil || IsNil(o.DefaultExpression) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultExpression, true
+	return &o.DefaultExpression, true
 }
 
-// HasDefaultExpression returns a boolean if a field has been set.
-func (o *V1Scope) HasDefaultExpression() bool {
-	if o != nil && !IsNil(o.DefaultExpression) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultExpression gets a reference to the given string and assigns it to the DefaultExpression field.
+// SetDefaultExpression sets field value
 func (o *V1Scope) SetDefaultExpression(v string) {
-	o.DefaultExpression = &v
+	o.DefaultExpression = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -121,132 +119,100 @@ func (o *V1Scope) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+// GetDisplayName returns the DisplayName field value
 func (o *V1Scope) GetDisplayName() string {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+
+	return o.DisplayName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetDisplayNameOk returns a tuple with the DisplayName field value
 // and a boolean to check if the value has been set.
 func (o *V1Scope) GetDisplayNameOk() (*string, bool) {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return &o.DisplayName, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *V1Scope) HasDisplayName() bool {
-	if o != nil && !IsNil(o.DisplayName) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+// SetDisplayName sets field value
 func (o *V1Scope) SetDisplayName(v string) {
-	o.DisplayName = &v
+	o.DisplayName = v
 }
 
-// GetFilters returns the Filters field value if set, zero value otherwise.
+// GetFilters returns the Filters field value
 func (o *V1Scope) GetFilters() []ScopesV1Filter {
-	if o == nil || IsNil(o.Filters) {
+	if o == nil {
 		var ret []ScopesV1Filter
 		return ret
 	}
+
 	return o.Filters
 }
 
-// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
+// GetFiltersOk returns a tuple with the Filters field value
 // and a boolean to check if the value has been set.
 func (o *V1Scope) GetFiltersOk() ([]ScopesV1Filter, bool) {
-	if o == nil || IsNil(o.Filters) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Filters, true
 }
 
-// HasFilters returns a boolean if a field has been set.
-func (o *V1Scope) HasFilters() bool {
-	if o != nil && !IsNil(o.Filters) {
-		return true
-	}
-
-	return false
-}
-
-// SetFilters gets a reference to the given []ScopesV1Filter and assigns it to the Filters field.
+// SetFilters sets field value
 func (o *V1Scope) SetFilters(v []ScopesV1Filter) {
 	o.Filters = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *V1Scope) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *V1Scope) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *V1Scope) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *V1Scope) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetTeamId returns the TeamId field value if set, zero value otherwise.
+// GetTeamId returns the TeamId field value
 func (o *V1Scope) GetTeamId() int32 {
-	if o == nil || IsNil(o.TeamId) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.TeamId
+
+	return o.TeamId
 }
 
-// GetTeamIdOk returns a tuple with the TeamId field value if set, nil otherwise
+// GetTeamIdOk returns a tuple with the TeamId field value
 // and a boolean to check if the value has been set.
 func (o *V1Scope) GetTeamIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.TeamId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TeamId, true
+	return &o.TeamId, true
 }
 
-// HasTeamId returns a boolean if a field has been set.
-func (o *V1Scope) HasTeamId() bool {
-	if o != nil && !IsNil(o.TeamId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTeamId gets a reference to the given int32 and assigns it to the TeamId field.
+// SetTeamId sets field value
 func (o *V1Scope) SetTeamId(v int32) {
-	o.TeamId = &v
+	o.TeamId = v
 }
 
 func (o V1Scope) MarshalJSON() ([]byte, error) {
@@ -259,24 +225,14 @@ func (o V1Scope) MarshalJSON() ([]byte, error) {
 
 func (o V1Scope) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DefaultExpression) {
-		toSerialize["defaultExpression"] = o.DefaultExpression
-	}
+	toSerialize["defaultExpression"] = o.DefaultExpression
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.DisplayName) {
-		toSerialize["displayName"] = o.DisplayName
-	}
-	if !IsNil(o.Filters) {
-		toSerialize["filters"] = o.Filters
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.TeamId) {
-		toSerialize["teamId"] = o.TeamId
-	}
+	toSerialize["displayName"] = o.DisplayName
+	toSerialize["filters"] = o.Filters
+	toSerialize["id"] = o.Id
+	toSerialize["teamId"] = o.TeamId
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -286,6 +242,31 @@ func (o V1Scope) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *V1Scope) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"defaultExpression",
+		"displayName",
+		"filters",
+		"id",
+		"teamId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varV1Scope := _V1Scope{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

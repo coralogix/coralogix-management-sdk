@@ -23,15 +23,15 @@ var _ MappedNullable = &UpdateScopeRequest{}
 
 // UpdateScopeRequest This data structure represents a request to update a scope
 type UpdateScopeRequest struct {
-	// The default expression.
+	// Required default expression with a version tag, for example `<v1>true` or `<v1>false`. Omitted or empty expressions are rejected.
 	DefaultExpression string `json:"defaultExpression"`
-	// Human-readable description.
+	// Human-readable description. Omission clears the stored description. An explicitly empty string is stored and returned as an empty string.
 	Description *string `json:"description,omitempty"`
-	// The display name.
-	DisplayName string `json:"displayName"`
-	// List of filters.
-	Filters []ScopesV1Filter `json:"filters"`
-	// Unique identifier.
+	// Display name. Omitted or empty names are stored and returned as an empty string. Omission on replacement clears the stored name.
+	DisplayName *string `json:"displayName,omitempty"`
+	// Filters applied by this scope. Omitted or empty lists are stored and returned as an empty list. Omission on replacement clears the stored filters.
+	Filters []ScopesV1Filter `json:"filters,omitempty"`
+	// Identifier of the scope to replace.
 	Id string `json:"id"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -43,11 +43,9 @@ type _UpdateScopeRequest UpdateScopeRequest
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewUpdateScopeRequest(defaultExpression string, displayName string, filters []ScopesV1Filter, id string) *UpdateScopeRequest {
+func NewUpdateScopeRequest(defaultExpression string, id string) *UpdateScopeRequest {
 	this := UpdateScopeRequest{}
 	this.DefaultExpression = defaultExpression
-	this.DisplayName = displayName
-	this.Filters = filters
 	this.Id = id
 	return &this
 }
@@ -116,50 +114,66 @@ func (o *UpdateScopeRequest) SetDescription(v string) {
 	o.Description = &v
 }
 
-// GetDisplayName returns the DisplayName field value
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *UpdateScopeRequest) GetDisplayName() string {
-	if o == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
-
-	return o.DisplayName
+	return *o.DisplayName
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateScopeRequest) GetDisplayNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		return nil, false
 	}
-	return &o.DisplayName, true
+	return o.DisplayName, true
 }
 
-// SetDisplayName sets field value
+// HasDisplayName returns a boolean if a field has been set.
+func (o *UpdateScopeRequest) HasDisplayName() bool {
+	if o != nil && !IsNil(o.DisplayName) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
 func (o *UpdateScopeRequest) SetDisplayName(v string) {
-	o.DisplayName = v
+	o.DisplayName = &v
 }
 
-// GetFilters returns the Filters field value
+// GetFilters returns the Filters field value if set, zero value otherwise.
 func (o *UpdateScopeRequest) GetFilters() []ScopesV1Filter {
-	if o == nil {
+	if o == nil || IsNil(o.Filters) {
 		var ret []ScopesV1Filter
 		return ret
 	}
-
 	return o.Filters
 }
 
-// GetFiltersOk returns a tuple with the Filters field value
+// GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateScopeRequest) GetFiltersOk() ([]ScopesV1Filter, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Filters) {
 		return nil, false
 	}
 	return o.Filters, true
 }
 
-// SetFilters sets field value
+// HasFilters returns a boolean if a field has been set.
+func (o *UpdateScopeRequest) HasFilters() bool {
+	if o != nil && !IsNil(o.Filters) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilters gets a reference to the given []ScopesV1Filter and assigns it to the Filters field.
 func (o *UpdateScopeRequest) SetFilters(v []ScopesV1Filter) {
 	o.Filters = v
 }
@@ -202,8 +216,12 @@ func (o UpdateScopeRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["displayName"] = o.DisplayName
-	toSerialize["filters"] = o.Filters
+	if !IsNil(o.DisplayName) {
+		toSerialize["displayName"] = o.DisplayName
+	}
+	if !IsNil(o.Filters) {
+		toSerialize["filters"] = o.Filters
+	}
 	toSerialize["id"] = o.Id
 
 	for key, value := range o.AdditionalProperties {
@@ -219,8 +237,6 @@ func (o *UpdateScopeRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"defaultExpression",
-		"displayName",
-		"filters",
 		"id",
 	}
 

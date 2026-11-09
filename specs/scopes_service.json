@@ -78,7 +78,7 @@
         ]
       },
       "put": {
-        "description": "Updates an existing data access scope.",
+        "description": "Replaces the data access scope identified by id in the request body. Omitted displayName, description, and filters are cleared. The defaultExpression field is required.",
         "operationId": "ScopesService_UpdateScope",
         "requestBody": {
           "content": {
@@ -87,15 +87,15 @@
                 "description": "This data structure represents a request to update a scope",
                 "properties": {
                   "defaultExpression": {
-                    "description": "The default expression.",
+                    "description": "Required default expression with a version tag, for example `<v1>true` or `<v1>false`. Omitted or empty expressions are rejected.",
                     "examples": [
                       "<v1>true"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "description": {
-                    "description": "Human-readable description.",
+                    "description": "Human-readable description. Omission clears the stored description. An explicitly empty string is stored and returned as an empty string.",
                     "examples": [
                       "The best scope"
                     ],
@@ -104,7 +104,7 @@
                     "x-coralogix-presence": true
                   },
                   "displayName": {
-                    "description": "The display name.",
+                    "description": "Display name. Omitted or empty names are stored and returned as an empty string. Omission on replacement clears the stored name.",
                     "examples": [
                       "my-scope"
                     ],
@@ -112,7 +112,7 @@
                     "type": "string"
                   },
                   "filters": {
-                    "description": "List of filters.",
+                    "description": "Filters applied by this scope. Omitted or empty lists are stored and returned as an empty list. Omission on replacement clears the stored filters.",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
                     },
@@ -120,18 +120,16 @@
                     "type": "array"
                   },
                   "id": {
-                    "description": "Unique identifier.",
+                    "description": "Identifier of the scope to replace.",
                     "examples": [
                       "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string"
                   }
                 },
                 "required": [
                   "id",
-                  "displayName",
-                  "filters",
                   "defaultExpression"
                 ],
                 "title": "Update Scope Request",
@@ -198,15 +196,15 @@
                 "description": "This data structure represents a request to create a scope",
                 "properties": {
                   "defaultExpression": {
-                    "description": "The default expression.",
+                    "description": "Required default expression with a version tag, for example `<v1>true` or `<v1>false`. Omitted or empty expressions are rejected.",
                     "examples": [
                       "<v1>true"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "description": {
-                    "description": "Human-readable description.",
+                    "description": "Human-readable description. Omission leaves it unset. An explicitly empty string is stored and returned as an empty string.",
                     "examples": [
                       "The best scope"
                     ],
@@ -215,7 +213,7 @@
                     "x-coralogix-presence": true
                   },
                   "displayName": {
-                    "description": "The display name.",
+                    "description": "Display name. Omitted or empty names are stored and returned as an empty string.",
                     "examples": [
                       "my-scope"
                     ],
@@ -223,7 +221,7 @@
                     "type": "string"
                   },
                   "filters": {
-                    "description": "List of filters.",
+                    "description": "Filters applied by this scope. Omitted or empty lists are stored and returned as an empty list.",
                     "items": {
                       "$ref": "#/components/schemas/scopes.v1.Filter"
                     },
@@ -232,8 +230,7 @@
                   }
                 },
                 "required": [
-                  "displayName",
-                  "filters"
+                  "defaultExpression"
                 ],
                 "title": "Create Scope Request",
                 "type": "object"
@@ -348,16 +345,16 @@
         "operationId": "ScopesService_DeleteScope",
         "parameters": [
           {
-            "description": "Unique identifier.",
+            "description": "Identifier of the scope to delete.",
             "in": "path",
             "name": "id",
             "required": true,
             "schema": {
-              "description": "Unique identifier.",
+              "description": "Identifier of the scope to delete.",
               "examples": [
                 "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
               ],
-              "minLength": 0,
+              "minLength": 1,
               "type": "string"
             }
           }
@@ -589,15 +586,24 @@
       },
       "scopes.v1.Filter": {
         "title": "Filter",
+        "required": [
+          "entityType",
+          "expression"
+        ],
         "type": "object",
         "properties": {
           "entityType": {
-            "$ref": "#/components/schemas/v1.EntityType"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v1.EntityType"
+              }
+            ],
+            "description": "Entity type of the filter. `ENTITY_TYPE_UNSPECIFIED` is not accepted."
           },
           "expression": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
-            "description": "The expression.",
+            "description": "Expression with a version tag, for example `<v1>true`. Omitted or empty expressions are rejected.",
             "examples": [
               "<v1>true"
             ]
@@ -620,12 +626,19 @@
       },
       "v1.Scope": {
         "title": "Scope",
+        "required": [
+          "id",
+          "displayName",
+          "teamId",
+          "filters",
+          "defaultExpression"
+        ],
         "type": "object",
         "properties": {
           "defaultExpression": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
-            "description": "The default expression.",
+            "description": "Default expression with a version tag, for example `<v1>true` or `<v1>false`.",
             "examples": [
               "<v1>true"
             ]
@@ -642,7 +655,7 @@
           "displayName": {
             "minLength": 0,
             "type": "string",
-            "description": "The display name.",
+            "description": "Display name. Omitted or empty names are stored and returned as an empty string.",
             "examples": [
               "my-scope"
             ]
@@ -653,20 +666,22 @@
             "items": {
               "$ref": "#/components/schemas/scopes.v1.Filter"
             },
-            "description": "List of filters."
+            "description": "Filters applied by this scope. Omitted or empty lists are stored and returned as an empty list."
           },
           "id": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
-            "description": "Unique identifier.",
+            "description": "Unique identifier assigned by the server.",
+            "readOnly": true,
             "examples": [
               "60c82be2-413f-4b8e-8201-7f5c51e2ef2b"
             ]
           },
           "teamId": {
             "type": "integer",
-            "description": "Team identifier.",
+            "description": "Identifier of the authenticated team. Assigned by the server.",
             "format": "int32",
+            "readOnly": true,
             "examples": [
               1234
             ]
