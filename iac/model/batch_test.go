@@ -220,3 +220,43 @@ func TestBatchGetUpdatePaths(t *testing.T) {
 		})
 	}
 }
+
+func TestBatchGetWrappedIDs(t *testing.T) {
+	data, err := os.ReadFile("testdata/batchthing.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, tt := range []struct {
+		name, value, wantError string
+	}{
+		{name: "string", value: "{type: string, minLength: 1}"},
+		{name: "integer", value: "{type: integer, format: int64}", wantError: "api.getByIDs needs a string resource id"},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			source := strings.ReplaceAll(string(data), "id: {type: string, minLength: 1}", "id: {$ref: '#/components/schemas/BatchThingID'}")
+			source += "    BatchThingID:\n      type: object\n      required: [value]\n      properties:\n        value: " + tt.value + "\n"
+			doc, err := Load([]byte(source))
+			if err != nil {
+				t.Fatal(err)
+			}
+			p := Policy{Existing: true, GetByIDs: "ids", UpdateIDInBody: true, ReadOnly: []string{"BatchThing.id"}, Unwrap: []string{"BatchThingID"}}
+			issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p)
+			r, err := BuildWithPolicy(doc, "BatchThing", OperationIDs{}, p)
+			if tt.wantError != "" {
+				if err == nil || err.Error() != tt.wantError {
+					t.Fatalf("Build error = %v, want %q", err, tt.wantError)
+				}
+				if !strings.Contains(issues.Error(), tt.wantError) {
+					t.Fatalf("want batch id diagnostic %q, got %v", tt.wantError, issues)
+				}
+				return
+			}
+			if len(issues) != 0 || err != nil {
+				t.Fatalf("wrapped string id: issues=%v, Build error=%v", issues, err)
+			}
+			if r.IDType.Kind != String || len(r.IDType.Wrappers) != 1 || r.IDType.Wrappers[0].Schema != "BatchThingID" || r.IDType.Wrappers[0].Field != "value" {
+				t.Fatalf("id type = %+v, want string inside BatchThingID.value", r.IDType)
+			}
+		})
+	}
+}

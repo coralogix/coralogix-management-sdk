@@ -131,12 +131,58 @@
                   "description": "The operator for the meta labels filter"
                 },
                 "searchQuery": {
-                  "allOf": [
+                  "description": "Incident search query.",
+                  "oneOf": [
                     {
-                      "$ref": "#/components/schemas/IncidentSearchQuery"
+                      "required": [
+                        "incidentField"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "required": [
+                        "contextualLabel"
+                      ],
+                      "type": "object"
                     }
                   ],
-                  "description": "Search query for incidents"
+                  "properties": {
+                    "contextualLabel": {
+                      "description": "The contextual label to search in.",
+                      "maxLength": 256,
+                      "minLength": 1,
+                      "pattern": "^[\\s\\S]*$",
+                      "type": "string",
+                      "x-coralogix-presence": true
+                    },
+                    "incidentField": {
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/IncidentFields"
+                        }
+                      ],
+                      "description": "The field to search in",
+                      "examples": [
+                        "INCIDENTS_FIELDS_STATUS"
+                      ]
+                    },
+                    "query": {
+                      "description": "The search query",
+                      "examples": [
+                        "error"
+                      ],
+                      "maxLength": 4096,
+                      "minLength": 1,
+                      "pattern": "^[\\s\\S]*$",
+                      "type": "string",
+                      "x-coralogix-presence": true
+                    }
+                  },
+                  "required": [
+                    "query"
+                  ],
+                  "title": "Incident search query",
+                  "type": "object"
                 },
                 "severity": {
                   "description": "Filter by incident severity",

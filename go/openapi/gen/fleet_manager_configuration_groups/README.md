@@ -97,6 +97,7 @@ Class | Method | HTTP request | Description
  - [ConfigurationGroup](docs/ConfigurationGroup.md)
  - [ConfigurationGroupServiceCreateConfigurationGroupRequest](docs/ConfigurationGroupServiceCreateConfigurationGroupRequest.md)
  - [ConfigurationGroupServiceUpdateConfigurationGroupRequest](docs/ConfigurationGroupServiceUpdateConfigurationGroupRequest.md)
+ - [ConfigurationGroupView](docs/ConfigurationGroupView.md)
  - [ConfigurationOverlaySource](docs/ConfigurationOverlaySource.md)
  - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)

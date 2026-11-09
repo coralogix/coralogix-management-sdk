@@ -28,7 +28,7 @@ type ListTeamsResponseTeamInfo struct {
 	Retention *int32 `json:"retention,omitempty"`
 	// The team id.
 	TeamId *V2TeamId `json:"teamId,omitempty"`
-	// Display name of the team.
+	// Display name of the team. Unique in the organization; never empty.
 	TeamName *string `json:"teamName,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

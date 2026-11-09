@@ -590,9 +590,16 @@ func resourceIDIssues(p Policy, name string, ops map[verb]foundOp, get *base.Sch
 			Remediation: "List the resource id field in the Get response schema's required fields.",
 		})
 	}
-	resourceType, err := typeOf(property, location, walk{})
+	resourceType, err := typeOf(property, location, walk{policy: &p})
 	if err != nil {
 		return report
+	}
+	// An id inside a wrapper that the policy unwraps is the value inside it. A wrapper that cannot
+	// collapse stays an object, which is not an id type.
+	if component := wrapperComponent(property); component != "" && p.unwraps(name, id, component) {
+		if inner, err := collapse(location, name, id, resourceType); err == nil {
+			resourceType = inner
+		}
 	}
 	resourceKind, supported := supportedIDType(resourceType)
 	if !supported {

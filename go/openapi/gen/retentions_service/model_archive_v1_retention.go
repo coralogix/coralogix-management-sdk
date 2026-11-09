@@ -13,6 +13,7 @@ package retentions_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,14 +23,14 @@ var _ MappedNullable = &ArchiveV1Retention{}
 
 // ArchiveV1Retention This data structure represents a retention
 type ArchiveV1Retention struct {
-	// The editable.
-	Editable *bool `json:"editable,omitempty"`
-	// Unique identifier.
-	Id *string `json:"id,omitempty"`
-	// Display name.
-	Name *string `json:"name,omitempty"`
-	// Sort order.
-	Order *int32 `json:"order,omitempty"`
+	// Whether an update can change the name. Only the first retention, `Default`, is not editable. In the update response, it is false for a retention named `Default` and true otherwise.
+	Editable bool `json:"editable"`
+	// Unique identifier. The service sets it.
+	Id string `json:"id"`
+	// Display name. The first retention is named `Default`.
+	Name string `json:"name" validate:"regexp=^[a-zA-Z0-9_-]+$"`
+	// Sort order, starting at 1. The service sets it, and an update cannot change it.
+	Order int32 `json:"order"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -40,8 +41,12 @@ type _ArchiveV1Retention ArchiveV1Retention
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewArchiveV1Retention() *ArchiveV1Retention {
+func NewArchiveV1Retention(editable bool, id string, name string, order int32) *ArchiveV1Retention {
 	this := ArchiveV1Retention{}
+	this.Editable = editable
+	this.Id = id
+	this.Name = name
+	this.Order = order
 	return &this
 }
 
@@ -53,132 +58,100 @@ func NewArchiveV1RetentionWithDefaults() *ArchiveV1Retention {
 	return &this
 }
 
-// GetEditable returns the Editable field value if set, zero value otherwise.
+// GetEditable returns the Editable field value
 func (o *ArchiveV1Retention) GetEditable() bool {
-	if o == nil || IsNil(o.Editable) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Editable
+
+	return o.Editable
 }
 
-// GetEditableOk returns a tuple with the Editable field value if set, nil otherwise
+// GetEditableOk returns a tuple with the Editable field value
 // and a boolean to check if the value has been set.
 func (o *ArchiveV1Retention) GetEditableOk() (*bool, bool) {
-	if o == nil || IsNil(o.Editable) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Editable, true
+	return &o.Editable, true
 }
 
-// HasEditable returns a boolean if a field has been set.
-func (o *ArchiveV1Retention) HasEditable() bool {
-	if o != nil && !IsNil(o.Editable) {
-		return true
-	}
-
-	return false
-}
-
-// SetEditable gets a reference to the given bool and assigns it to the Editable field.
+// SetEditable sets field value
 func (o *ArchiveV1Retention) SetEditable(v bool) {
-	o.Editable = &v
+	o.Editable = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ArchiveV1Retention) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ArchiveV1Retention) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ArchiveV1Retention) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ArchiveV1Retention) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *ArchiveV1Retention) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *ArchiveV1Retention) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ArchiveV1Retention) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *ArchiveV1Retention) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *ArchiveV1Retention) GetOrder() int32 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *ArchiveV1Retention) GetOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *ArchiveV1Retention) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int32 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *ArchiveV1Retention) SetOrder(v int32) {
-	o.Order = &v
+	o.Order = v
 }
 
 func (o ArchiveV1Retention) MarshalJSON() ([]byte, error) {
@@ -191,18 +164,10 @@ func (o ArchiveV1Retention) MarshalJSON() ([]byte, error) {
 
 func (o ArchiveV1Retention) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Editable) {
-		toSerialize["editable"] = o.Editable
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
+	toSerialize["editable"] = o.Editable
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["order"] = o.Order
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -212,6 +177,30 @@ func (o ArchiveV1Retention) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ArchiveV1Retention) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"editable",
+		"id",
+		"name",
+		"order",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varArchiveV1Retention := _ArchiveV1Retention{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

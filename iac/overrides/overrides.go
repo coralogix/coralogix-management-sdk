@@ -101,6 +101,10 @@ type Overwrite struct {
 	// GetQuery are the query parameters that Get always sends, with their values, for a Get that
 	// lists the items of more than one resource, for example {source_type: SOURCE_TYPE_LOGS}.
 	GetQuery map[string]string `yaml:"getQuery"`
+	// WriteReturnsResource says that the write returns the resource: its response has every field
+	// of the Get response, with the same shape. Create and Update then take the state from the
+	// write response, with no Get.
+	WriteReturnsResource bool `yaml:"writeReturnsResource"`
 }
 
 // Field is the part of a field line that describes the API. A tool embeds it in its own
@@ -285,6 +289,7 @@ func (e Exceptions) Policy() model.Policy {
 	if e.API.Overwrite != nil {
 		p.Overwrite = true
 		p.GetQuery = maps.Clone(e.API.Overwrite.GetQuery)
+		p.WriteReturnsResource = e.API.Overwrite.WriteReturnsResource
 	}
 	if e.API.Operations != nil {
 		p.Operations = model.OperationIDs{

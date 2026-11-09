@@ -165,7 +165,7 @@ func (r ApiRetentionsServiceGetRetentionsRequest) Execute() (*GetRetentionsRespo
 /*
 RetentionsServiceGetRetentions Get Retentions
 
-Returns all available retention tags.
+Returns all retention tags of the team, ordered by `order`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceGetRetentionsRequest
@@ -433,7 +433,7 @@ func (r ApiRetentionsServiceUpdateRetentionsRequest) Execute() (*UpdateRetention
 /*
 RetentionsServiceUpdateRetentions Update Retentions
 
-Creates a new retention tag.
+Renames retention tags by id and returns the retentions of the request, in request order. A retention that the request leaves out keeps its name. An update cannot add or remove retentions or change their order.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiRetentionsServiceUpdateRetentionsRequest
@@ -522,6 +522,28 @@ func (a *RetentionsServiceAPIService) RetentionsServiceUpdateRetentionsExecute(r
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
