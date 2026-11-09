@@ -141,6 +141,8 @@ A tool renders the expand code from `ResourceField.RequestPath` and `Resource.Up
 
 A `skip` line on a top-level field also ends the shape errors that the model finds inside the field, such as an enum without its zero value: the resource does not manage the field.
 
+A `oneOf` arm is a field that is set or not set, so it is allowed to carry `x-coralogix-presence`: the OpenAPI fork writes the mark on a scalar arm (a wrapped bool, string, or number), and it states what the arm already is. Any other attribute on an arm (a default, `required`, `readOnly`) is still an error. An enum of an existing resource may have its zero value only, for example `LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED`: the value is the zero value, as the first value of every other enum of an existing resource is, and the resource names how a tool shows it. A new resource still needs a business value next to the zero value.
+
 ## A field that only the requests have
 
 A Create or Update body can have a top-level field that the resource component does not have, such as a `teamId` that the API reads only on write. The model reports it as `FIELD_LIFECYCLE_UNSUPPORTED`. A `skip` line of the resource component can name it: the model then skips it before the lifecycle check, the enum checks, and the other field checks, and Build does not add it, so the generated requests never send it. A request that requires the field still makes the line an error (`SKIP_REQUIRED_FIELD`).
