@@ -182,7 +182,7 @@ ScopesServiceDeleteScope Delete Scope
 Deletes the data access scope with the specified ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Unique identifier.
+ @param id Identifier of the scope to delete.
  @return ApiScopesServiceDeleteScopeRequest
 */
 func (a *ScopesServiceAPIService) ScopesServiceDeleteScope(ctx context.Context, id string) ApiScopesServiceDeleteScopeRequest {
@@ -214,8 +214,8 @@ func (a *ScopesServiceAPIService) ScopesServiceDeleteScopeExecute(r ApiScopesSer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if strlen(r.id) < 0 {
-		return localVarReturnValue, nil, reportError("id must have at least 0 elements")
+	if strlen(r.id) < 1 {
+		return localVarReturnValue, nil, reportError("id must have at least 1 elements")
 	}
 
 	// to determine the Content-Type header
@@ -612,7 +612,7 @@ func (r ApiScopesServiceUpdateScopeRequest) Execute() (*UpdateScopeResponse, *ht
 /*
 ScopesServiceUpdateScope Update Scope
 
-Updates an existing data access scope.
+Replaces the data access scope identified by id in the request body. Omitted displayName, description, and filters are cleared. The defaultExpression field is required.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiScopesServiceUpdateScopeRequest

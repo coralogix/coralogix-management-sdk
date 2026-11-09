@@ -26,6 +26,8 @@ type AnalyticsImmediateType struct {
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
+	// How often the alert is evaluated, in minutes. Optional: when omitted on create or replace, the value is min(10, timeframeMinutes). Must not exceed timeframeMinutes.
+	EvaluationPeriodMinutes *int32 `json:"evaluationPeriodMinutes,omitempty"`
 	// Configuration for how to treat and what state to give to an alert with no data
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The evaluation window duration in minutes
@@ -117,6 +119,38 @@ func (o *AnalyticsImmediateType) HasEvaluationDelayMs() bool {
 // SetEvaluationDelayMs gets a reference to the given int32 and assigns it to the EvaluationDelayMs field.
 func (o *AnalyticsImmediateType) SetEvaluationDelayMs(v int32) {
 	o.EvaluationDelayMs = &v
+}
+
+// GetEvaluationPeriodMinutes returns the EvaluationPeriodMinutes field value if set, zero value otherwise.
+func (o *AnalyticsImmediateType) GetEvaluationPeriodMinutes() int32 {
+	if o == nil || IsNil(o.EvaluationPeriodMinutes) {
+		var ret int32
+		return ret
+	}
+	return *o.EvaluationPeriodMinutes
+}
+
+// GetEvaluationPeriodMinutesOk returns a tuple with the EvaluationPeriodMinutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalyticsImmediateType) GetEvaluationPeriodMinutesOk() (*int32, bool) {
+	if o == nil || IsNil(o.EvaluationPeriodMinutes) {
+		return nil, false
+	}
+	return o.EvaluationPeriodMinutes, true
+}
+
+// HasEvaluationPeriodMinutes returns a boolean if a field has been set.
+func (o *AnalyticsImmediateType) HasEvaluationPeriodMinutes() bool {
+	if o != nil && !IsNil(o.EvaluationPeriodMinutes) {
+		return true
+	}
+
+	return false
+}
+
+// SetEvaluationPeriodMinutes gets a reference to the given int32 and assigns it to the EvaluationPeriodMinutes field.
+func (o *AnalyticsImmediateType) SetEvaluationPeriodMinutes(v int32) {
+	o.EvaluationPeriodMinutes = &v
 }
 
 // GetNoDataPolicy returns the NoDataPolicy field value if set, zero value otherwise.
@@ -231,6 +265,9 @@ func (o AnalyticsImmediateType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EvaluationDelayMs) {
 		toSerialize["evaluationDelayMs"] = o.EvaluationDelayMs
 	}
+	if !IsNil(o.EvaluationPeriodMinutes) {
+		toSerialize["evaluationPeriodMinutes"] = o.EvaluationPeriodMinutes
+	}
 	if !IsNil(o.NoDataPolicy) {
 		toSerialize["noDataPolicy"] = o.NoDataPolicy
 	}
@@ -265,6 +302,7 @@ func (o *AnalyticsImmediateType) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "dataprimeQuery")
 		delete(additionalProperties, "evaluationDelayMs")
+		delete(additionalProperties, "evaluationPeriodMinutes")
 		delete(additionalProperties, "noDataPolicy")
 		delete(additionalProperties, "timeframeMinutes")
 		delete(additionalProperties, "useRowsAsPermutations")
