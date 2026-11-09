@@ -99,7 +99,7 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	}
 	policy.CreateUnwrapped = policy.unwrappedCreate(ops)
 	// The write of an overwrite resource replaces every item, also when it is a POST.
-	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Overwrite, Policy: policy, shapeUsed: map[string]bool{}}
+	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Overwrite, Policy: policy, shapeUsed: map[string]bool{}, requestUnwrapUsed: map[string]bool{}}
 	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
 	if err := r.readOperations(ops); err != nil {
 		return nil, nil, err
@@ -983,6 +983,7 @@ func (r *Resource) readFields(doc *v3.Document, ops map[verb]foundOp) error {
 			return fmt.Errorf("%s: %w", r.Name, err)
 		}
 		f.RequestPath = r.Policy.requestNames(r.Name)[n]
+		f.UpdateRequestPath = r.Policy.updateRequestNames(r.Name)[n]
 		r.Fields = append(r.Fields, f)
 	}
 	groups, err := r.rootGroups(createBody)
@@ -1244,6 +1245,9 @@ func (r *Resource) resourceField(name string, createBody, updateBody, getSchema 
 	}
 	// The Get type comes first: Classify ensures that the field is in Get.
 	if f.Type, err = typeOf(gp, name, walk{policy: &r.Policy}); err == nil {
+		err = r.Policy.projectItems(r.Name, name, f.Type)
+	}
+	if err == nil {
 		r.Policy.asSet(r.Name, name, f.Type)
 	}
 	if err != nil {
@@ -1289,8 +1293,19 @@ func (r *Resource) resourceField(name string, createBody, updateBody, getSchema 
 		// Get lists the items of every resource that its query can select; the write limits one.
 		f.Type.MinItems, f.Type.MaxItems = requests[0].MinItems, requests[0].MaxItems
 	}
+	wrapper, used, err := r.Policy.collapseRequestWrappers(r.Name, name, f.Type, &requests)
+	if err != nil {
+		return nil, err
+	}
 	if err := mergeRequests(fieldLocation(r.Name, name), f.Type, requests[0], requests[1]); err != nil {
 		return nil, err
+	}
+	if wrapper != nil {
+		// The value that the response holds directly sits in a wrapper in a request.
+		f.Type.RequestWrapper = wrapper
+	}
+	for line := range used {
+		r.requestUnwrapUsed[line] = true
 	}
 	return f, nil
 }

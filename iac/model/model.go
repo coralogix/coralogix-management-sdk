@@ -97,6 +97,8 @@ type Resource struct {
 	List *ListOperation
 	// shapeUsed collects the nested request lines that Build applied (Policy.shapeNested).
 	shapeUsed map[string]bool
+	// requestUnwrapUsed collects the unwrap lines that collapsed a wrapper that only a request holds.
+	requestUnwrapUsed map[string]bool
 	// ListProblem says in one sentence why List is nil although the Create path has a GET. It
 	// is "" when List is set, or the Create path has no GET. A List that OperationIDs names
 	// has no problem: Build fails instead.
@@ -212,6 +214,28 @@ type ResourceField struct {
 	// integrationParameters. It is nil for a path of one segment, and when a segment has an inline
 	// schema.
 	RequestObjects []string
+	// UpdateRequestPath and UpdateRequestObjects are the same for the Update body, when it holds the
+	// field at another path than the Create body (an updateAs line). "" means that the Update body
+	// uses RequestPath.
+	UpdateRequestPath    string
+	UpdateRequestObjects []string
+}
+
+// RequestPathOf returns the dot-separated path of the property that holds the field in the Update
+// body (update) or in the Create body, after the request wrapper. "" means the field name.
+func (f *ResourceField) RequestPathOf(update bool) string {
+	if update && f.UpdateRequestPath != "" {
+		return f.UpdateRequestPath
+	}
+	return f.RequestPath
+}
+
+// RequestObjectsOf returns the components of the objects that RequestPathOf goes through.
+func (f *ResourceField) RequestObjectsOf(update bool) []string {
+	if update && f.UpdateRequestPath != "" {
+		return f.UpdateRequestObjects
+	}
+	return f.RequestObjects
 }
 
 // Field is a field of a nested object, or an arm of a oneOf.
@@ -348,6 +372,16 @@ type Type struct {
 	// rest of the type is the value inside them, which the generated code shows. They are set only by
 	// the unwrap lines of a behavior-overrides file.
 	Wrappers []Wrapper
+	// RequestWrapper is a wrapper that only a request holds, set on a top-level field by an unwrap
+	// entry: Create and Get hold the value, and Update holds it in a one-property object. Only its
+	// CreateSchema or UpdateSchema is set. The resource response view does not have it; the request
+	// view of that request has it as its outermost wrapper (CreateType and UpdateType).
+	RequestWrapper *Wrapper
+	// Projected is set on a List or Set of strings that the API holds as a list of objects in the
+	// resource response, and that the requests send as the strings: an itemName line. Elem is the
+	// type of the property that the resource shows. It is nil in the Create and Update request types,
+	// whose items are the strings.
+	Projected *Projection
 	// Keyed is set on a Map that the API sends as a list of objects, keyed by a property of the
 	// object (a keyedBy line). Elem is the object without the key, or the value property. On an
 	// Object (keyedBy object: true), each field is the item of one value of the enum key.
@@ -355,6 +389,16 @@ type Type struct {
 	// Variant tells apart the items that one component makes for a keyedBy object: the Go name
 	// of the attribute that holds the item of each value.
 	Variant string
+}
+
+// Projection is the object that holds each item of a list in the resource response, when the
+// resource shows one string property of it.
+type Projection struct {
+	// Schema is the component of the item in the resource response, and Property the string
+	// property that the resource shows.
+	Schema, Property string
+	// Required says whether the response requires Property in the item.
+	Required bool
 }
 
 // Keyed is the list of objects that the API holds for a map of the generated resource.

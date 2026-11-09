@@ -646,3 +646,203 @@ func TestNamesWrappedCreateResponseID(t *testing.T) {
 		t.Fatalf("create.response.thingId wants %s / %s, want *ThingId / ThingId", got.Want, got.WantValue)
 	}
 }
+
+// A field that Update holds under another name is a field of the Update body of that name, and the
+// Create body keeps the field name.
+func TestNamesForAnUpdatePathThatDiffersFromCreate(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "keything.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := string(data)
+	for _, r := range [][2]string{
+		{"required: [name, keyPermissions]", "required: [name]"},
+		{"                keyPermissions: {$ref: '#/components/schemas/CreateKeyThingRequest.KeyPermissions'}\n", ""},
+		{"required: [id, name, enabled, hashed, keyPermissions]", "required: [id, name, enabled, hashed]"},
+		{"        keyPermissions: {$ref: '#/components/schemas/KeyThing.KeyPermissions'}\n", ""},
+	} {
+		if !strings.Contains(spec, r[0]) {
+			t.Fatalf("the contract has no %q", r[0])
+		}
+		spec = strings.ReplaceAll(spec, r[0], r[1])
+	}
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	policy := model.Policy{
+		Existing: true, IDProperty: "id", CreateResponseOnlyIDProperty: "keyId",
+		UpdateNames: map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
+		Skip:        []string{"KeyThing.presets", "KeyThing.permissions"},
+		Operations: model.OperationIDs{
+			Create: "KeyThingsService_CreateKeyThing", Get: "KeyThingsService_GetKeyThing",
+			Update: "KeyThingsService_UpdateKeyThing", Delete: "KeyThingsService_DeleteKeyThing",
+		},
+	}
+	r, err := model.BuildWithPolicy(doc, "KeyThing", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := map[string]string{}
+	for _, ref := range refs {
+		if ref.Kind == KindField && strings.HasSuffix(ref.Path, ".body.name") || ref.Path == "update.body.enabled" || ref.Path == "create.body.enabled" {
+			got[ref.Path] = ref.SDKName() + " " + ref.Want
+		}
+	}
+	for path, want := range map[string]string{
+		"create.body.name":    "CreateKeyThingRequest.Name *string",
+		"update.body.name":    "UpdateKeyThingRequest.NewName *string",
+		"update.body.enabled": "UpdateKeyThingRequest.IsEnabled *bool",
+	} {
+		if got[path] != want {
+			t.Errorf("%s = %q, want %q", path, got[path], want)
+		}
+	}
+	if _, ok := got["create.body.enabled"]; ok {
+		t.Error("the Create body has a ref for enabled, which only Update sends")
+	}
+}
+
+// A wrapper that only Update holds is a type and a field of the Update body, and the Create body
+// and the response hold the list itself.
+func TestNamesForAWrapperThatOnlyUpdateHolds(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "keything.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := string(data)
+	for _, r := range [][2]string{
+		{"required: [name, keyPermissions]", "required: [name]"},
+		{"                keyPermissions: {$ref: '#/components/schemas/CreateKeyThingRequest.KeyPermissions'}\n",
+			"                permissions: {type: array, items: {type: string, minLength: 1}}\n"},
+		{"required: [id, name, enabled, hashed, keyPermissions]", "required: [id, name, enabled, hashed, permissions]"},
+		{"        keyPermissions: {$ref: '#/components/schemas/KeyThing.KeyPermissions'}\n",
+			"        permissions: {type: array, items: {type: string, minLength: 1}}\n"},
+	} {
+		if !strings.Contains(spec, r[0]) {
+			t.Fatalf("the contract has no %q", r[0])
+		}
+		spec = strings.ReplaceAll(spec, r[0], r[1])
+	}
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	policy := model.Policy{
+		Existing: true, IDProperty: "id", CreateResponseOnlyIDProperty: "keyId",
+		UpdateNames: map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
+		Skip:        []string{"KeyThing.presets"}, Unwrap: []string{"KeyThingPermissions"}, Released: []string{"KeyThing.permissions"},
+		Operations: model.OperationIDs{
+			Create: "KeyThingsService_CreateKeyThing", Get: "KeyThingsService_GetKeyThing",
+			Update: "KeyThingsService_UpdateKeyThing", Delete: "KeyThingsService_DeleteKeyThing",
+		},
+	}
+	r, err := model.BuildWithPolicy(doc, "KeyThing", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := map[string]string{}
+	for _, ref := range refs {
+		got[ref.Path+" "+string(ref.Kind)] = ref.SDKName() + " " + ref.Want
+	}
+	for path, want := range map[string]string{
+		"update.body.permissions field":             "UpdateKeyThingRequest.Permissions *KeyThingPermissions",
+		"update.body.permissions.permissions field": "KeyThingPermissions.Permissions []string",
+		"create.body.permissions field":             "CreateKeyThingRequest.Permissions []string",
+	} {
+		if got[path] != want {
+			t.Errorf("%s = %q, want %q", path, got[path], want)
+		}
+	}
+	for path, ref := range got {
+		if strings.Contains(ref, "*.") || strings.HasPrefix(ref, ".") {
+			t.Errorf("%s has a ref without a component: %q", path, ref)
+		}
+	}
+}
+
+// A list that the resource shows as the strings of one property of its items has the type of the
+// items in the response, and the property is a field of that type. The requests hold the strings.
+func TestNamesForAListShownAsItemNames(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "keything.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	spec := string(data)
+	for _, r := range [][2]string{
+		{"required: [name, keyPermissions]", "required: [name]"},
+		{"                keyPermissions: {$ref: '#/components/schemas/CreateKeyThingRequest.KeyPermissions'}\n",
+			"                presets: {type: array, items: {type: string, minLength: 1}}\n                permissions: {type: array, items: {type: string, minLength: 1}}\n"},
+		{"required: [id, name, enabled, hashed, keyPermissions]", "required: [id, name, enabled, hashed, presets, permissions]"},
+		{"        keyPermissions: {$ref: '#/components/schemas/KeyThing.KeyPermissions'}\n",
+			"        presets: {type: array, items: {$ref: '#/components/schemas/PresetThing'}}\n        permissions: {type: array, items: {type: string, minLength: 1}}\n"},
+	} {
+		if !strings.Contains(spec, r[0]) {
+			t.Fatalf("the contract has no %q", r[0])
+		}
+		spec = strings.ReplaceAll(spec, r[0], r[1])
+	}
+	doc, err := model.Load([]byte(spec))
+	if err != nil {
+		t.Fatal(err)
+	}
+	policy := model.Policy{
+		Existing: true, IDProperty: "id", CreateResponseOnlyIDProperty: "keyId",
+		UpdateNames: map[string]string{"KeyThing.name": "newName", "KeyThing.enabled": "isEnabled"},
+		Unwrap:      []string{"KeyThingPresets", "KeyThingPermissions"}, ItemNames: map[string]string{"KeyThing.presets": "name"},
+		Released: []string{"KeyThing.presets", "KeyThing.permissions"},
+		Operations: model.OperationIDs{
+			Create: "KeyThingsService_CreateKeyThing", Get: "KeyThingsService_GetKeyThing",
+			Update: "KeyThingsService_UpdateKeyThing", Delete: "KeyThingsService_DeleteKeyThing",
+		},
+	}
+	r, err := model.BuildWithPolicy(doc, "KeyThing", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := map[string]string{}
+	for _, ref := range refs {
+		got[ref.Path+" "+string(ref.Kind)] = ref.SDKName() + " " + ref.Want
+	}
+	for path, want := range map[string]string{
+		"update.body.presets field":         "UpdateKeyThingRequest.Presets *KeyThingPresets",
+		"update.body.presets.presets field": "KeyThingPresets.Presets []string",
+		"create.body.presets field":         "CreateKeyThingRequest.Presets []string",
+	} {
+		if got[path] != want {
+			t.Errorf("%s = %q, want %q", path, got[path], want)
+		}
+	}
+	for path, want := range map[string]string{
+		"fields.presets field":      "KeyThing.Presets []PresetThing",
+		"fields.presets.name field": "PresetThing.Name *string",
+	} {
+		if got[path] != want {
+			t.Errorf("%s = %q, want %q", path, got[path], want)
+		}
+	}
+}

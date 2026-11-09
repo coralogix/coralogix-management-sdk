@@ -37,14 +37,14 @@ func (p Policy) updateIDOutsideWrapper() bool {
 // Validation and Build both read the bodies this way, so the field has the normal lifecycle and
 // its type is checked as usual. Without these keys it returns the bodies unchanged.
 func (p Policy) shapeRequests(name, id string, ops map[verb]foundOp, create, update, get *base.Schema) (c, u *base.Schema, report issue.Report) {
-	if len(p.RequestNames) == 0 && !p.UpdateIDOutsideWrapper {
+	if len(p.RequestNames) == 0 && len(p.UpdateNames) == 0 && !p.UpdateIDOutsideWrapper {
 		return create, update, nil
 	}
 	c, u = create, update
 	if p.UpdateIDOutsideWrapper {
 		u, report = p.withOutsideID(ops, id, update)
 	}
-	if len(p.RequestNames) != 0 {
+	if len(p.RequestNames) != 0 || len(p.UpdateNames) != 0 {
 		var names issue.Report
 		c, u, names = p.renameRequestFields(name, c, u, get)
 		report = append(report, names...)
@@ -99,49 +99,94 @@ func bodySchemaOrNil(proxy *base.SchemaProxy) *base.Schema {
 	return s
 }
 
-// renameRequestFields moves each property that a requestAs line names to the top level of the Create and
-// Update bodies under the name of the resource field.
+// renameRequestFields moves each property that a requestAs or updateAs line names to the top level of the
+// Create and Update bodies under the name of the resource field. A requestAs line names the path in both
+// bodies; an updateAs line names another path in the Update body only.
 func (p Policy) renameRequestFields(name string, create, update, get *base.Schema) (c, u *base.Schema, report issue.Report) {
-	names := p.requestNames(name)
-	fields := make([]string, 0, len(names))
-	for field := range names {
-		fields = append(fields, field)
+	names := [2]map[string]string{p.requestNames(name), p.updateRequestNames(name)}
+	fields := make([]string, 0, len(names[0])+len(names[1]))
+	for _, set := range names {
+		for field := range set {
+			if !slices.Contains(fields, field) {
+				fields = append(fields, field)
+			}
+		}
 	}
 	slices.Sort(fields)
-	var valid []string // the fields whose line can be applied
-	byPath := map[string]string{}
+	var valid [2][]string // the fields whose line can be applied, for the Create and the Update body
+	byPath := [2]map[string]string{{}, {}}
 	for _, field := range fields {
-		path := names[field]
 		location := fieldLocation(name, field)
 		if propertyOf(get, field) == nil {
+			path := names[0][field]
+			if path == "" {
+				path = names[1][field]
+			}
 			report = append(report, issue.Issue{Code: "REQUEST_NAME_UNKNOWN_FIELD", Location: location, Message: fmt.Sprintf("The overrides map the request path %q to %q, which is not a property of %s.", path, field, name), Remediation: "Name a property of the resource component, or delete the line."})
 			continue
 		}
-		if path == field {
+		// The Update path is the updateAs path, or else the requestAs path.
+		paths := [2]string{names[0][field], names[0][field]}
+		if updateAs, ok := names[1][field]; ok {
+			paths[1] = updateAs
+			if updateAs == paths[0] || (paths[0] == "" && updateAs == field) {
+				report = append(report, issue.Issue{Code: "OVERRIDE_UNUSED", Location: "behavior-overrides.yaml:types." + name + "." + field, Message: fmt.Sprintf("the Update body already holds the field at %q", updateAs), Remediation: "Delete the updateAs line."})
+				continue
+			}
+		}
+		if paths[0] == field && paths[1] == field {
 			report = append(report, issue.Issue{Code: "OVERRIDE_UNUSED", Location: "behavior-overrides.yaml:types." + name + "." + field, Message: fmt.Sprintf("the requests already name the field %q like the resource", field), Remediation: "Delete the line."})
 			continue
 		}
-		if other, clash := overlappingPath(byPath, path); clash {
-			report = append(report, issue.Issue{Code: "REQUEST_NAME_DUPLICATE", Location: location, Message: fmt.Sprintf("The request path %q is also used by %q (the paths are the same, or one holds the other).", path, other), Remediation: "Map each request property to one resource field."})
+		clash := false
+		for i, path := range paths {
+			if path == "" || path == field {
+				continue // this body keeps the name of the field
+			}
+			if other, overlap := overlappingPath(byPath[i], path); overlap {
+				report = append(report, issue.Issue{Code: "REQUEST_NAME_DUPLICATE", Location: location, Message: fmt.Sprintf("The request path %q is also used by %q (the paths are the same, or one holds the other).", path, other), Remediation: "Map each request property to one resource field."})
+				clash = true
+				break
+			}
+		}
+		if clash {
 			continue
 		}
-		byPath[path] = field
-		valid = append(valid, field)
+		for i, path := range paths {
+			if path == "" || path == field {
+				continue
+			}
+			byPath[i][path] = field
+			valid[i] = append(valid[i], field)
+		}
+	}
+	// The path of each field in each body, after the requestAs and updateAs lines.
+	paths := [2]map[string]string{{}, {}}
+	for _, field := range fields {
+		paths[0][field] = names[0][field]
+		paths[1][field] = names[0][field]
+		if updateAs, ok := names[1][field]; ok {
+			paths[1][field] = updateAs
+		}
 	}
 	c, u = create, update
 	var found [2]map[string]bool
 	for i, body := range []*base.Schema{create, update} {
 		var shaped *base.Schema
-		shaped, found[i], report = p.renameIn(name, body, valid, report)
+		shaped, found[i], report = p.renameIn(name, body, valid[i], paths[i], report)
 		if i == 0 {
 			c = shaped
 		} else {
 			u = shaped
 		}
 	}
-	for _, field := range valid {
-		if !found[0][field] && !found[1][field] {
-			report = append(report, issue.Issue{Code: "REQUEST_NAME_NOT_FOUND", Location: fieldLocation(name, field), Message: fmt.Sprintf("Neither the Create nor the Update body has the property %q that the overrides map to %q.", names[field], field), Remediation: "Fix the path in requestAs, or delete the line."})
+	for _, field := range fields {
+		if (slices.Contains(valid[0], field) || slices.Contains(valid[1], field)) && !found[0][field] && !found[1][field] {
+			path := paths[0][field]
+			if path == "" || path == field {
+				path = paths[1][field]
+			}
+			report = append(report, issue.Issue{Code: "REQUEST_NAME_NOT_FOUND", Location: fieldLocation(name, field), Message: fmt.Sprintf("Neither the Create nor the Update body has the property %q that the overrides map to %q.", path, field), Remediation: "Fix the path in requestAs or updateAs, or delete the line."})
 		}
 	}
 	return c, u, report
@@ -160,12 +205,11 @@ func overlappingPath(byPath map[string]string, path string) (string, bool) {
 
 // renameIn moves the properties of the fields that it finds in body to the top level. found says
 // which fields the body has.
-func (p Policy) renameIn(name string, body *base.Schema, fields []string, report issue.Report) (*base.Schema, map[string]bool, issue.Report) {
+func (p Policy) renameIn(name string, body *base.Schema, fields []string, names map[string]string, report issue.Report) (*base.Schema, map[string]bool, issue.Report) {
 	found := map[string]bool{}
 	if body == nil {
 		return body, found, report
 	}
-	names := p.requestNames(name)
 	type move struct {
 		field    string
 		leaf     *base.SchemaProxy
@@ -290,6 +334,9 @@ func (r *Resource) readRequestComponents(ops map[verb]foundOp) {
 		}
 	}
 	for _, f := range r.Fields {
+		if op := ops[opUpdate].op; op != nil && strings.Contains(f.UpdateRequestPath, ".") {
+			f.UpdateRequestObjects = r.Policy.requestObjects(op, strings.Split(f.UpdateRequestPath, "."))
+		}
 		if f.RequestPath == "" || strings.Count(f.RequestPath, ".") == 0 {
 			continue
 		}
@@ -340,6 +387,18 @@ func (p Policy) requestObjects(op *v3.Operation, path []string) []string {
 		out = append(out, name)
 		if cur, err = schemaOf(proxy); err != nil {
 			return nil
+		}
+	}
+	return out
+}
+
+// updateRequestNames returns the Update request path of each field of the resource component that a
+// field line gives an updateAs.
+func (p Policy) updateRequestNames(resource string) map[string]string {
+	out := map[string]string{}
+	for key, path := range p.UpdateNames {
+		if component, field, ok := strings.Cut(key, "."); ok && component == resource {
+			out[field] = path
 		}
 	}
 	return out

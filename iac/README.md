@@ -107,6 +107,7 @@ A released API can take a value in a Create or Update request under another name
 | Key | Meaning | Model |
 |---|---|---|
 | `requestAs` (field line) | The path of the property that holds the field in the Create and Update bodies, after the `requestWrapper` is removed, dot-separated through object properties, for example `integrationParameters.parameters`. Only a field of the resource component can have it. | `Policy.RequestNames`, `ResourceField.RequestPath` |
+| `updateAs` (field line) | The path of the property that holds the field in the Update body only, for an API that names a value differently in Update than in Create and Get (`name` in Create and Get, `newName` in Update). The Create body keeps the path of `requestAs`, or the field name. | `Policy.UpdateNames`, `ResourceField.UpdateRequestPath`, `ResourceField.RequestPathOf(update)` |
 | `api.updateIDOutsideWrapper` | With `requestWrapper` and `updateIDInBody`, the Update body carries the id property beside the wrapper property, not inside it. | `Policy.UpdateIDOutsideWrapper`, `Resource.UpdateIDOutsideWrapper` |
 
 The model matches the field by its request path, so the request property is not a separate request-only field, and the type checks run on the leaf. A path that only one body has makes the field absent from the other request. A container object that loses all its properties to the keys is not a field either. `api.idProperty` names the id field when the path parameter has another name (`integration_id` and `id`).
@@ -140,6 +141,14 @@ types:
 A tool renders the expand code from `ResourceField.RequestPath` and `Resource.UpdateIDOutsideWrapper`. The model also records the component that the request wrapper holds (`Operation.RequestComponent`, for example `IntegrationMetadata`) and the components of the objects that a dotted path goes through (`ResourceField.RequestObjects`). `sdkcheck.Names` reads all of them: the wrapper field has the request component as its type, a renamed field is a field of that component or of an object inside it, and the Update id beside the wrapper is a field of the Update body.
 
 A `skip` line on a top-level field also ends the shape errors that the model finds inside the field, such as an enum without its zero value: the resource does not manage the field.
+
+### A wrapper that only a request holds
+
+When Create and Get hold a list and Update holds the same list in a one-property object (`{"presets": {"presets": ["a"]}}`), an `unwrap` entry for the Update component collapses the wrapper before the Update type is compared with the type in the response. The model records it as `Type.RequestWrapper`, a `Wrapper` that has an `UpdateSchema` (or a `CreateSchema`) and no `Schema`: `UpdateType()` has it as its outermost wrapper, and `CreateType()` and the response type have none. A wrapper that the response holds too is left to `unwrap`, which collapses it in every request.
+
+### A list of objects shown as strings
+
+`itemName: <property>` on the field line of a list or set shows the items of the response as the strings of one property of each item. The response holds each preset as `{"name": "APM", "permissions": [...]}`, and Create and Update send `"APM"`. `Type.Projected` names the item component and the property in the response view, `Elem` is the type of the property, and the request types have no projection. `ITEM_NAME_UNSUPPORTED` says that the field is no list or set of components, that the item has no such property, or that the property is no plain string. `sdkcheck.Names` adds the item component and its property.
 
 ## A field that only the requests have
 

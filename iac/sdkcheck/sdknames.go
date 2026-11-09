@@ -291,20 +291,22 @@ func (s *resolver) requestComponent(r *model.Resource, name, wrapper, component 
 // object owner: the field of its name, or the field at its request path (requestAs), through the
 // objects that the path goes through.
 func (s *resolver) requestPathField(f *model.ResourceField, name, owner string, t *model.Type, required bool) error {
+	update := name == "update"
 	segments := strings.Split(f.Name, ".")
-	if f.RequestPath != "" {
-		segments = strings.Split(f.RequestPath, ".")
+	if path := f.RequestPathOf(update); path != "" {
+		segments = strings.Split(path, ".")
 	}
-	if len(f.RequestObjects) != len(segments)-1 {
-		return fmt.Errorf("%s.body.%s: the request path %q goes through %d objects with a component, want %d", name, f.Name, f.RequestPath, len(f.RequestObjects), len(segments)-1)
+	objects := f.RequestObjectsOf(update)
+	if len(objects) != len(segments)-1 {
+		return fmt.Errorf("%s.body.%s: the request path %q goes through %d objects with a component, want %d", name, f.Name, f.RequestPathOf(update), len(objects), len(segments)-1)
 	}
 	path := name + ".body." + f.Name
 	holder := owner
 	for i, segment := range segments[:len(segments)-1] {
-		object := goTypeName(f.RequestObjects[i])
+		object := goTypeName(objects[i])
 		via := path + ".via." + segment // the object that the path goes through, not the field itself
 		s.add(Ref{Path: via, Kind: KindField, Owner: holder, Name: goFieldName(segment), Want: "*" + object, WantValue: object, Rule: RuleProperty})
-		s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: f.RequestObjects[i]})
+		s.addOnce(Ref{Path: via, Kind: KindType, Name: object, Rule: RuleComponent, Schema: objects[i]})
 		holder = object
 	}
 	return s.requestField(path, holder, segments[len(segments)-1], t, required)
@@ -539,6 +541,9 @@ func (s *resolver) field(path, owner, name string, t *model.Type, allowValue boo
 // nested adds the types, fields, and enum constants inside t. It walks each
 // component schema once, so a path shows the first place that uses it.
 func (s *resolver) nested(path string, t *model.Type) error {
+	if t.Projected != nil {
+		return s.projected(path, t)
+	}
 	if len(t.Wrappers) != 0 {
 		return s.wrappers(path, t)
 	}
@@ -589,6 +594,19 @@ func (s *resolver) nested(path string, t *model.Type) error {
 	return nil
 }
 
+// projected adds the type of the items of a list that the resource shows as the strings of one
+// property, and that property. The resource response holds the items as objects.
+func (s *resolver) projected(path string, t *model.Type) error {
+	p := t.Projected
+	if s.seen[p.Schema] {
+		return nil
+	}
+	s.seen[p.Schema] = true
+	name := goTypeName(p.Schema)
+	s.add(Ref{Path: path, Kind: KindType, Name: name, Rule: RuleComponent, Schema: p.Schema})
+	return s.field(path+"."+p.Property, name, p.Property, t.Elem, p.Required)
+}
+
 // wrappers adds the type of each wrapper of t and the field that holds the value, then the names
 // inside the value. A wrapper that another place walked as an object has the same field type.
 func (s *resolver) wrappers(path string, t *model.Type) error {
@@ -611,6 +629,9 @@ func (s *resolver) wrappers(path string, t *model.Type) error {
 // fieldType is the Go type of an optional SDK struct field. A required field
 // can also be the value type (see field).
 func fieldType(t *model.Type) (string, Rule, error) {
+	if t.Projected != nil {
+		return "[]" + goTypeName(t.Projected.Schema), RuleProperty, nil
+	}
 	if len(t.Wrappers) != 0 {
 		return "*" + goTypeName(t.Wrappers[0].Schema), RuleProperty, nil
 	}

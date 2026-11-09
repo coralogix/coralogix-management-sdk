@@ -1192,6 +1192,12 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 		return nil
 	}
 	get, err := typeOf(gp, location, walk{policy: &p})
+	if err == nil {
+		var contract *contractError
+		if err = p.projectItems(name, field, get); errors.As(err, &contract) {
+			return issue.Report{contract.issue()}
+		}
+	}
 	p.asSet(name, field, get)
 	if err != nil {
 		return nil
@@ -1219,6 +1225,9 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 		get.MinItems, get.MaxItems = requests[0].MinItems, requests[0].MaxItems
 	}
 	var contract *contractError
+	if _, _, err := p.collapseRequestWrappers(name, field, get, &requests); errors.As(err, &contract) {
+		return issue.Report{contract.issue()}
+	}
 	if err := mergeRequests(location, get, requests[0], requests[1]); errors.As(err, &contract) {
 		return issue.Report{contract.issue()}
 	}
