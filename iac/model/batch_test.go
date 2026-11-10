@@ -260,3 +260,27 @@ func TestBatchGetWrappedIDs(t *testing.T) {
 		})
 	}
 }
+
+func TestBatchGetBodyIDWithoutReadOnlyOverride(t *testing.T) {
+	data, err := os.ReadFile("testdata/batchthing.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	p := Policy{Existing: true, GetByIDs: "ids", UpdateIDInBody: true}
+	doc, err := Load(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if issues := ValidateWithPolicy(doc, "BatchThing", OperationIDs{}, p); len(issues) != 0 {
+		t.Fatal(issues)
+	}
+	r, err := BuildWithPolicy(doc, "BatchThing", OperationIDs{}, p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, field := range r.Fields {
+		if field.Name == "id" && field.Behavior != Computed {
+			t.Fatalf("id behavior = %s, want computed", field.Behavior)
+		}
+	}
+}
