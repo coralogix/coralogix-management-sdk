@@ -355,10 +355,8 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 	names = append(names, propertyNames(update)...)
 	slices.Sort(names)
 	names = slices.Compact(names)
-	idParam, bodyOnlyID := "", ""
+	idParam, bodyOnlyID := p.idProperty(ops), ""
 	if params := pathParams(ops[opGet]); len(params) == 1 {
-		// The id property, which api.idProperty can name apart from the path parameter.
-		idParam = p.idProperty(ops)
 		if len(pathParams(ops[opUpdate])) == 0 && !p.UpdateIDInBody {
 			bodyOnlyID = idParam
 		}
