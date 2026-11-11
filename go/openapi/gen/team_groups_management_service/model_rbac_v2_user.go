@@ -13,6 +13,7 @@ package team_groups_management_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -26,20 +27,20 @@ type RbacV2User struct {
 	AccessType *AccessType `json:"accessType,omitempty"`
 	// List of allowed login modes. Can include SSO, local authentication, or both.
 	AllowedLoginMode []AllowedLoginMode `json:"allowedLoginMode,omitempty"`
-	// User first name
+	// User first name. Omitted when the user has no first name.
 	FirstName *string `json:"firstName,omitempty"`
 	// IDs of the team groups this user is a member of.
 	GroupIds []int64 `json:"groupIds,omitempty"`
-	// User last name
+	// User last name. Omitted when the user has no last name.
 	LastName *string `json:"lastName,omitempty"`
 	// User status: [Active, Inactive]
 	Status *UserStatus `json:"status,omitempty"`
 	// Associated account id. An account can have many users.
 	UserAccountId *int64 `json:"userAccountId,omitempty"`
 	// Unique user id
-	UserId *string `json:"userId,omitempty"`
+	UserId string `json:"userId" validate:"regexp=^[\\s\\S]+$"`
 	// Unique username
-	Username *string `json:"username,omitempty"`
+	Username string `json:"username" validate:"regexp=^[\\s\\S]+$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -50,8 +51,10 @@ type _RbacV2User RbacV2User
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewRbacV2User() *RbacV2User {
+func NewRbacV2User(userId string, username string) *RbacV2User {
 	this := RbacV2User{}
+	this.UserId = userId
+	this.Username = username
 	return &this
 }
 
@@ -287,68 +290,52 @@ func (o *RbacV2User) SetUserAccountId(v int64) {
 	o.UserAccountId = &v
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *RbacV2User) GetUserId() string {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *RbacV2User) GetUserIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *RbacV2User) HasUserId() bool {
-	if o != nil && !IsNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *RbacV2User) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
-// GetUsername returns the Username field value if set, zero value otherwise.
+// GetUsername returns the Username field value
 func (o *RbacV2User) GetUsername() string {
-	if o == nil || IsNil(o.Username) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Username
+
+	return o.Username
 }
 
-// GetUsernameOk returns a tuple with the Username field value if set, nil otherwise
+// GetUsernameOk returns a tuple with the Username field value
 // and a boolean to check if the value has been set.
 func (o *RbacV2User) GetUsernameOk() (*string, bool) {
-	if o == nil || IsNil(o.Username) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Username, true
+	return &o.Username, true
 }
 
-// HasUsername returns a boolean if a field has been set.
-func (o *RbacV2User) HasUsername() bool {
-	if o != nil && !IsNil(o.Username) {
-		return true
-	}
-
-	return false
-}
-
-// SetUsername gets a reference to the given string and assigns it to the Username field.
+// SetUsername sets field value
 func (o *RbacV2User) SetUsername(v string) {
-	o.Username = &v
+	o.Username = v
 }
 
 func (o RbacV2User) MarshalJSON() ([]byte, error) {
@@ -382,12 +369,8 @@ func (o RbacV2User) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UserAccountId) {
 		toSerialize["userAccountId"] = o.UserAccountId
 	}
-	if !IsNil(o.UserId) {
-		toSerialize["userId"] = o.UserId
-	}
-	if !IsNil(o.Username) {
-		toSerialize["username"] = o.Username
-	}
+	toSerialize["userId"] = o.UserId
+	toSerialize["username"] = o.Username
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -397,6 +380,28 @@ func (o RbacV2User) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RbacV2User) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"userId",
+		"username",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRbacV2User := _RbacV2User{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

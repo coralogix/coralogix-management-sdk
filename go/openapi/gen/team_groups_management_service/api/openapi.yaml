@@ -1498,6 +1498,10 @@
       },
       "rbac.v2.User": {
         "title": "User",
+        "required": [
+          "userId",
+          "username"
+        ],
         "type": "object",
         "properties": {
           "accessType": {
@@ -1518,9 +1522,10 @@
             "description": "List of allowed login modes. Can include SSO, local authentication, or both."
           },
           "firstName": {
+            "description": "User first name. Omitted when the user has no first name.",
             "minLength": 0,
             "type": "string",
-            "description": "User first name"
+            "x-coralogix-presence": true
           },
           "groupIds": {
             "minItems": 0,
@@ -1534,9 +1539,10 @@
             "description": "IDs of the team groups this user is a member of."
           },
           "lastName": {
+            "description": "User last name. Omitted when the user has no last name.",
             "minLength": 0,
             "type": "string",
-            "description": "User last name"
+            "x-coralogix-presence": true
           },
           "status": {
             "allOf": [
@@ -1553,12 +1559,16 @@
             "format": "int64"
           },
           "userId": {
-            "minLength": 0,
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]+$",
             "type": "string",
             "description": "Unique user id"
           },
           "username": {
-            "minLength": 0,
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]+$",
             "type": "string",
             "description": "Unique username"
           }
