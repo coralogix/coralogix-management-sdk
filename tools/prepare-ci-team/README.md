@@ -87,9 +87,10 @@ After the preparation job succeeds, each acceptance job can run
 `go run ./tools/prepare-ci-team lookup` from its pinned SDK checkout. This
 mode needs only `CORALOGIX_API_KEY` for the same team and a new
 `PREPARE_CI_TEAM_OUTPUT_FILE` path in that job's private runner directory. It
-sends only integration GET requests. It requires active Slack and PagerDuty
-registrations, then writes their IDs and a new one-way connector test value
-to the private file. It does not start the Collector or create anything.
+sends only GET requests. It resolves the authenticated team's ID with the
+Identity API and requires active Slack and PagerDuty registrations. It writes
+the team and integration IDs and a new one-way connector test value to the
+private file. It does not start the Collector or create anything.
 
 The acceptance job can read the file into its own job environment. Remove
 the file after use. Do not print it or pass the IDs through public job

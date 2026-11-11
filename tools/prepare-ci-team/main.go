@@ -28,6 +28,7 @@ const (
 	evaluationsURL  = "https://api.eu2.coralogix.com/mgmt/openapi/5/ai/evaluations/v3"
 	integrationsURL = "https://api.eu2.coralogix.com/mgmt/openapi/5/integrations/integrations/v1"
 	archiveURL      = "https://api.eu2.coralogix.com/mgmt/openapi/5/logs/data-setup/v2"
+	identityURL     = "https://api.eu2.coralogix.com/mgmt/openapi/5/aaa/identity/v1/whoami"
 	apmURL          = "https://api.eu2.coralogix.com/v2/entities/ENTITY_TYPE_SERVICE"
 )
 
@@ -38,6 +39,7 @@ type dependencies struct {
 	evaluationsURL  string
 	integrationsURL string
 	archiveURL      string
+	identityURL     string
 	apmURL          string
 	seedAPM         func(context.Context, string, time.Time) error
 	progress        io.Writer
@@ -57,6 +59,7 @@ func productionDependencies() dependencies {
 		evaluationsURL:  evaluationsURL,
 		integrationsURL: integrationsURL,
 		archiveURL:      archiveURL,
+		identityURL:     identityURL,
 		apmURL:          apmURL,
 		seedAPM:         seedAPMService,
 		progress:        os.Stderr,
@@ -124,6 +127,10 @@ func lookupFixtureIDs(ctx context.Context, deps dependencies, managementKey stri
 	if managementKey == "" {
 		return output, errors.New("CORALOGIX_API_KEY is required for lookup")
 	}
+	teamID, err := lookupTeamID(ctx, deps, managementKey)
+	if err != nil {
+		return output, err
+	}
 	slackID, err := findIntegrationPrerequisites(ctx, deps, managementKey)
 	if err != nil {
 		return output, err
@@ -139,13 +146,18 @@ func lookupFixtureIDs(ctx context.Context, deps dependencies, managementKey stri
 	if err != nil {
 		return output, errors.New("generate connector test value")
 	}
-	return fixtureOutput{applicationName, subsystemName, serviceName, pagerDutyID, connectorKey, slackID}, nil
+	return fixtureOutput{
+		Application: applicationName, Subsystem: subsystemName, APMService: serviceName,
+		TeamID: teamID, PagerDutyIntegrationID: pagerDutyID,
+		PagerDutyConnectorKey: connectorKey, SlackIntegrationID: slackID,
+	}, nil
 }
 
 type fixtureOutput struct {
 	Application            string `json:"application"`
 	Subsystem              string `json:"subsystem"`
 	APMService             string `json:"apmService"`
+	TeamID                 string `json:"teamId,omitempty"`
 	PagerDutyIntegrationID string `json:"pagerDutyIntegrationId"`
 	PagerDutyConnectorKey  string `json:"pagerDutyConnectorKey"`
 	SlackIntegrationID     string `json:"slackIntegrationId"`
@@ -253,7 +265,10 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 			if err != nil {
 				return output, errors.New("generate connector test value")
 			}
-			return fixtureOutput{applicationName, subsystemName, serviceName, pdID, key, slackID}, nil
+			return fixtureOutput{
+				Application: applicationName, Subsystem: subsystemName, APMService: serviceName,
+				PagerDutyIntegrationID: pdID, PagerDutyConnectorKey: key, SlackIntegrationID: slackID,
+			}, nil
 		}
 
 		select {

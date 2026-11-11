@@ -98,17 +98,18 @@ func fakeDependencies(t *testing.T, response func(*http.Request) (*http.Response
 		client:    &http.Client{Transport: roundTripFunc(response)},
 		ingestURL: "https://test.invalid/v1/traces", aiURL: "https://test.invalid/mgmt/openapi/5/ai/applications/v3",
 		evaluationsURL: "https://test.invalid/mgmt/openapi/5/ai/evaluations/v3", integrationsURL: "https://test.invalid/mgmt/openapi/5/integrations/integrations/v1",
-		archiveURL: "https://test.invalid/mgmt/openapi/5/logs/data-setup/v2",
-		apmURL:     "https://test.invalid/v2/entities/ENTITY_TYPE_SERVICE",
-		seedAPM:    func(context.Context, string, time.Time) error { return nil },
-		pollEvery:  time.Millisecond, timeout: time.Second, currentTime: time.Now,
+		archiveURL:  "https://test.invalid/mgmt/openapi/5/logs/data-setup/v2",
+		identityURL: "https://test.invalid/mgmt/openapi/5/aaa/identity/v1/whoami",
+		apmURL:      "https://test.invalid/v2/entities/ENTITY_TYPE_SERVICE",
+		seedAPM:     func(context.Context, string, time.Time) error { return nil },
+		pollEvery:   time.Millisecond, timeout: time.Second, currentTime: time.Now,
 	}
 }
 
 func TestProductionManagementURLsUseSDKBase(t *testing.T) {
 	deps := productionDependencies()
 	base := "https://api.eu2.coralogix.com/mgmt/openapi/5/"
-	for _, url := range []string{deps.aiURL, deps.evaluationsURL, deps.integrationsURL, deps.archiveURL} {
+	for _, url := range []string{deps.aiURL, deps.evaluationsURL, deps.integrationsURL, deps.archiveURL, deps.identityURL} {
 		if !strings.HasPrefix(url, base) {
 			t.Fatalf("management URL does not use SDK base: %q", url)
 		}
@@ -122,13 +123,13 @@ func TestWriteFixtureOutputKeepsIDsOutOfStdout(t *testing.T) {
 	privatePath := filepath.Join(t.TempDir(), "fixtures.json")
 	result := fixtureOutput{
 		Application: applicationName, Subsystem: subsystemName, APMService: serviceName,
-		PagerDutyIntegrationID: "fixture-pd", PagerDutyConnectorKey: "fixture-key", SlackIntegrationID: "fixture-slack",
+		TeamID: "1234", PagerDutyIntegrationID: "fixture-pd", PagerDutyConnectorKey: "fixture-key", SlackIntegrationID: "fixture-slack",
 	}
 	var stdout bytes.Buffer
 	if err := writeFixtureOutput(&stdout, privatePath, result); err != nil {
 		t.Fatal(err)
 	}
-	for _, private := range []string{"fixture-pd", "fixture-key", "fixture-slack"} {
+	for _, private := range []string{"1234", "fixture-pd", "fixture-key", "fixture-slack"} {
 		if strings.Contains(stdout.String(), private) {
 			t.Fatal("stdout contains a private fixture value")
 		}
@@ -142,7 +143,7 @@ func TestWriteFixtureOutputKeepsIDsOutOfStdout(t *testing.T) {
 		t.Fatal("stdout does not contain the public fixture names")
 	}
 	data, err := os.ReadFile(privatePath)
-	if err != nil || !strings.Contains(string(data), "fixture-pd") || !strings.Contains(string(data), "fixture-slack") {
+	if err != nil || !strings.Contains(string(data), `"teamId":"1234"`) || !strings.Contains(string(data), "fixture-pd") || !strings.Contains(string(data), "fixture-slack") {
 		t.Fatal("private fixture file is incomplete")
 	}
 	info, err := os.Stat(privatePath)
@@ -164,7 +165,7 @@ func TestLookupFixtureIDsUsesReadsOnly(t *testing.T) {
 		return fixtureResponse(t, r)
 	})
 	result, err := lookupFixtureIDs(context.Background(), deps, "management-secret")
-	if err != nil || reads != 3 || result.SlackIntegrationID != "fixture-slack" || result.PagerDutyIntegrationID != "fixture-pd" || len(result.PagerDutyConnectorKey) != 36 {
+	if err != nil || reads != 4 || result.TeamID != "1234" || result.SlackIntegrationID != "fixture-slack" || result.PagerDutyIntegrationID != "fixture-pd" || len(result.PagerDutyConnectorKey) != 36 {
 		t.Fatalf("lookup did not return the active registrations: reads=%d err=%v", reads, err)
 	}
 }
@@ -185,9 +186,37 @@ func TestLookupFixtureIDsRequiresActivePagerDuty(t *testing.T) {
 	}
 }
 
+func TestLookupFixtureIDsRejectsMissingTeamID(t *testing.T) {
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.Method != http.MethodGet || r.URL.Path != "/mgmt/openapi/5/aaa/identity/v1/whoami" {
+			t.Fatal("lookup continued without a team ID")
+		}
+		return jsonResponse(200, `{"teamName":"fixture-team"}`), nil
+	})
+	_, err := lookupFixtureIDs(context.Background(), deps, "management-secret")
+	if err == nil || !strings.Contains(err.Error(), "decode team identity") || strings.Contains(err.Error(), "management-secret") {
+		t.Fatalf("wrong missing team ID error: %v", err)
+	}
+}
+
+func TestLookupFixtureIDsRejectsIdentityAuthorization(t *testing.T) {
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.Method != http.MethodGet || r.URL.Path != "/mgmt/openapi/5/aaa/identity/v1/whoami" {
+			t.Fatal("lookup continued after identity authorization failure")
+		}
+		return jsonResponse(403, `{"message":"private response"}`), nil
+	})
+	_, err := lookupFixtureIDs(context.Background(), deps, "management-secret")
+	if err == nil || !strings.Contains(err.Error(), "HTTP 403") || strings.Contains(err.Error(), "private response") {
+		t.Fatalf("wrong identity authorization error: %v", err)
+	}
+}
+
 func fixtureResponse(t *testing.T, r *http.Request) (*http.Response, error) {
 	t.Helper()
 	switch r.URL.Path {
+	case "/mgmt/openapi/5/aaa/identity/v1/whoami":
+		return jsonResponse(200, `{"teamId":1234,"teamName":"fixture-team"}`), nil
 	case "/mgmt/openapi/5/integrations/integrations/v1":
 		return jsonResponse(200, `{"integrations":[{"integration":{"id":"pagerduty-incidents"}},{"integration":{"id":"slack-central"}}]}`), nil
 	case "/mgmt/openapi/5/integrations/integrations/v1/pagerduty-incidents":
