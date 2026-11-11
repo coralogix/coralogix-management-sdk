@@ -184,7 +184,7 @@ func validateRole(role verb, candidates []foundOp, explicit string, p Policy, fo
 	case 1:
 		candidate := candidates[0]
 		report := operationCandidateIssues(location, role, candidate, p)
-		if role == opDelete && p.DeleteOperation != "" && len(report) == 0 {
+		if role == opDelete && p.DeleteOperation != "" && p.DeleteIDs == "" && len(report) == 0 {
 			report = deleteActionIssues(location, candidate, found)
 		}
 		if len(report) == 0 {

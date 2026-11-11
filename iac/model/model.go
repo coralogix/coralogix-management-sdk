@@ -66,6 +66,9 @@ type Resource struct {
 	// ListFilters are the query parameters that narrow the List by a resource field, sorted by
 	// parameter (Policy.ListFilters). A filter can match more than the resource.
 	ListFilters []ListFilter
+	// DeleteValues are the properties of the Delete body that a remove always sends beside the id
+	// array Policy.DeleteIDs, with their values, sorted by name (Policy.DeleteValues).
+	DeleteValues []QueryValue
 	// GetQuery are the query parameters that Get always sends, with their values, sorted by name
 	// (Policy.GetQuery). It is nil when Get sends none.
 	GetQuery []QueryValue

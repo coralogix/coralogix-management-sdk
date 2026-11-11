@@ -15,10 +15,13 @@
 package overrides
 
 import (
+	"os"
 	"slices"
 	"testing"
 
 	"go.yaml.in/yaml/v4"
+
+	"github.com/coralogix/coralogix-management-sdk/iac/model"
 )
 
 func exceptionsOf(t *testing.T, source string) Exceptions {
@@ -91,5 +94,76 @@ func TestGetFromListPolicy(t *testing.T) {
 		if err := exceptionsOf(t, source).API.Check(); err == nil {
 			t.Errorf("%q passes the check", source)
 		}
+	}
+}
+
+func TestDeleteIDsPolicy(t *testing.T) {
+	for _, source := range []string{
+		"api:\n  operations: {create: C, get: G, update: U, delete: D}\n  delete: {ids: memberIds, values: {status: INACTIVE}}\n",
+		"api:\n  delete: {operation: D, ids: memberIds, values: {status: INACTIVE}}\n",
+	} {
+		e := exceptionsOf(t, source)
+		if err := e.API.Check(); err != nil {
+			t.Fatalf("%q: %v", source, err)
+		}
+		if p := e.Policy(); p.DeleteIDs != "memberIds" || len(p.DeleteValues) != 1 || p.DeleteValues["status"] != "INACTIVE" {
+			t.Fatalf("policy %+v", p)
+		}
+	}
+	for _, source := range []string{
+		"api: {delete: {ids: memberIds}}\n",
+		"api: {delete: {operation: D, values: {status: INACTIVE}}}\n",
+		"api: {delete: {operation: D, ids: memberIds, values: {status: ''}}}\n",
+		"api:\n  operations: {create: C, get: G, update: U, delete: D}\n  delete: {operation: D, ids: memberIds}\n",
+	} {
+		if err := exceptionsOf(t, source).API.Check(); err == nil {
+			t.Errorf("%q passes the check", source)
+		}
+	}
+}
+
+// TestMemberThingPolicyBuildsResource reads the keys of the members contract from an overrides file.
+func TestMemberThingPolicyBuildsResource(t *testing.T) {
+	e := exceptionsOf(t, `api:
+  requestWrapper: template
+  updateIDInBody: true
+  updateIDOutsideWrapper: true
+  serverSetID: true
+  idProperty: memberId
+  batchWrite:
+    createResult: {resource: member, status: status, created: [CREATE_MEMBER_STATUS_CREATED], message: message}
+  createValues: {onboardingMode: ONBOARDING_MODE_NO_INVITE}
+  getFromList:
+    filters: {login: login}
+  operations:
+    create: MembersService_CreateMembers
+    get: MembersService_SearchMembers
+    update: MembersService_UpdateMembers
+    delete: MembersService_UpdateMembersStatuses
+  delete:
+    ids: memberIds
+    values: {status: MEMBER_STATUS_INACTIVE}
+fields: {Member: {memberId: {readOnly: true}}}
+`)
+	if err := e.API.Check(); err != nil {
+		t.Fatal(err)
+	}
+	raw, err := os.ReadFile("../model/testdata/memberthing.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(raw)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if issues := model.ValidateWithPolicy(doc, "Member", model.OperationIDs{}, e.Policy()); len(issues) != 0 {
+		t.Fatal(issues)
+	}
+	r, err := model.BuildWithPolicy(doc, "Member", model.OperationIDs{}, e.Policy())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !r.GetFromList || r.ID() != "memberId" || r.Create.Response.Result == nil || len(r.CreateValues) != 1 || len(r.DeleteValues) != 1 || len(r.ListFilters) != 1 {
+		t.Fatalf("members resource: %+v", r)
 	}
 }

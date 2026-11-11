@@ -309,6 +309,9 @@ func (r *Resource) readOperations(ops map[verb]foundOp) error {
 	if r.Policy.GetFromList {
 		return r.readListOperations(ops)
 	}
+	if r.Policy.DeleteIDs != "" {
+		return errors.New("api.delete.ids is for a resource that is read from its List (api.getFromList)")
+	}
 	if r.Policy.GetByIDs != "" {
 		return r.readBatchOperations(ops)
 	}
@@ -463,7 +466,7 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 			return fmt.Errorf("%s: no request body", v)
 		}
 	}
-	if r.Policy.DeleteOperation != "" && ops[opDelete].op.RequestBody != nil {
+	if r.Policy.DeleteOperation != "" && r.Policy.DeleteIDs == "" && ops[opDelete].op.RequestBody != nil {
 		return fmt.Errorf("%s: %s has a request body, want none", opDelete, r.Delete.OperationID)
 	}
 	return nil
@@ -476,8 +479,8 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 func (r *Resource) readBodyTitles(doc *v3.Document, ops map[verb]foundOp) {
 	referenced := schemasReferencedByTags(doc, operationTags(ops))
 	targets := map[verb]*Operation{opCreate: &r.Create, opUpdate: &r.Update}
-	if r.Overwrite {
-		targets[opDelete] = &r.Delete // the Delete of an overwrite resource is the write
+	if r.Overwrite || r.Policy.DeleteIDs != "" {
+		targets[opDelete] = &r.Delete // the write of an overwrite resource, or a remove through a body
 	}
 	for v, o := range targets {
 		proxy := bodyProxy(ops[v].op)

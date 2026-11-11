@@ -124,11 +124,18 @@ type Operations struct {
 }
 
 // Delete is how a released resource is removed when the API has no DELETE, for example a
-// POST /things/{id}/archive. It is an object, so that a later key can add a step before the call.
+// POST /things/{id}/archive, or a PATCH that sets the status of a batch of ids.
 type Delete struct {
 	// Operation is the operationId of a POST whose path is the Get path plus one segment. It
-	// takes the id path parameter of Get and no request body. Its response is ignored.
+	// takes the id path parameter of Get and no request body. Its response is ignored. With ids,
+	// it is the operation that takes the body, and api.operations.delete can name it instead.
 	Operation string `yaml:"operation"`
+	// IDs is the string-array property of the request body that carries the id, for a remove with
+	// no path parameter, for example userIds. The array accepts one id. Only with api.getFromList.
+	IDs string `yaml:"ids"`
+	// Values are the other properties of that body that a remove always sends, with their values,
+	// for example {status: USER_STATUS_INACTIVE}.
+	Values map[string]string `yaml:"values"`
 }
 
 // Overwrite describes a collection resource: the list that one write operation replaces.
@@ -245,8 +252,16 @@ func (a API) Check() error {
 	if r := a.batchCreateResult(); r != nil && (r.Resource == "" || r.Status == "" || len(r.Created) == 0) {
 		return errors.New("api.batchWrite.createResult needs resource, status, and created")
 	}
-	if a.Delete != nil && a.Delete.Operation == "" {
-		return errors.New("api.delete.operation is required")
+	if d := a.Delete; d != nil && d.Operation == "" && (d.IDs == "" || a.Operations == nil || a.Operations.Delete == "") {
+		return errors.New("api.delete.operation is required, unless api.delete.ids removes through api.operations.delete")
+	}
+	if d := a.Delete; d != nil && len(d.Values) != 0 && d.IDs == "" {
+		return errors.New("api.delete.values needs api.delete.ids")
+	}
+	if a.Delete != nil {
+		if err := checkValues("api.delete.values", a.Delete.Values); err != nil {
+			return err
+		}
 	}
 	if a.Overwrite != nil {
 		if o := a.Operations; o == nil || o.Create == "" || o.Create != o.Update || o.Create != o.Delete {
@@ -271,7 +286,7 @@ func (a API) Check() error {
 	if o.Create == "" || o.Get == "" || o.Update == "" || o.Delete == "" {
 		return errors.New("api.operations needs create, get, update, and delete")
 	}
-	if a.Delete != nil {
+	if a.Delete != nil && a.Delete.Operation != "" {
 		return errors.New("api.delete and api.operations both name the Delete operation: keep only api.operations.delete")
 	}
 	return nil
@@ -394,8 +409,8 @@ func (e Exceptions) Policy() model.Policy {
 			List:   e.API.Operations.List,
 		}
 	}
-	if e.API.Delete != nil {
-		p.DeleteOperation = e.API.Delete.Operation
+	if d := e.API.Delete; d != nil {
+		p.DeleteOperation, p.DeleteIDs, p.DeleteValues = d.Operation, d.IDs, maps.Clone(d.Values)
 	}
 	p.Unwrap = slices.Clone(e.Unwrap)
 	for _, name := range sortedKeys(e.Fields) {

@@ -153,6 +153,13 @@ type Policy struct {
 	// body, and a response that the generated code ignores. "" means a DELETE on
 	// the Get path.
 	DeleteOperation string
+	// DeleteIDs is the string-array property of the Delete body that carries the id, when the remove
+	// operation has no path parameter and takes a batch of ids, for example "userIds". The body
+	// accepts one id. Only a GetFromList resource has it.
+	DeleteIDs string
+	// DeleteValues are the other properties of the Delete body that a remove always sends, with
+	// their values, for example {"status": "USER_STATUS_INACTIVE"}.
+	DeleteValues map[string]string
 	// UpdateMaskInBody: PATCH updateMask is an optional property of the JSON
 	// body, not a query parameter. The generated update sets it to the same
 	// changed-field mask a query parameter would send. A full replace (PUT)
@@ -346,6 +353,9 @@ func oneOperationID(v verb, fromFile, flag string) (string, error) {
 func (p Policy) methods(v verb) []string {
 	if p.Overwrite && v != opGet {
 		return []string{"PUT", "POST"}
+	}
+	if v == opDelete && p.DeleteIDs != "" {
+		return []string{"POST", "PUT", "PATCH"}
 	}
 	if v == opDelete && p.DeleteOperation != "" {
 		return []string{"POST"}

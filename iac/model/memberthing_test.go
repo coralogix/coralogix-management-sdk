@@ -488,3 +488,113 @@ func TestMemberGetFromListIssues(t *testing.T) {
 		})
 	}
 }
+
+// memberPolicy describes the golden members contract with every key.
+func memberPolicy() Policy {
+	p := memberListPolicy()
+	p.Operations.Delete = "MembersService_UpdateMembersStatuses"
+	p.DeleteIDs, p.DeleteValues = "memberIds", map[string]string{"status": "MEMBER_STATUS_INACTIVE"}
+	return p
+}
+
+func TestMemberThingBuilds(t *testing.T) {
+	r := buildMember(t, memberSource(t), memberPolicy())
+	if !r.GetFromList || r.IDParam != "" || r.ID() != "memberId" || r.Singleton {
+		t.Fatalf("identity: %+v", r)
+	}
+	if r.Delete.Method != "PATCH" || r.Delete.Body != "inline" || r.Delete.BodyTitle != "UpdateMemberStatusRequest" || r.Delete.BodyTitleIsComponent {
+		t.Fatalf("delete: %+v", r.Delete)
+	}
+	if len(r.DeleteValues) != 1 || r.DeleteValues[0].Name != "status" || r.DeleteValues[0].Value != "MEMBER_STATUS_INACTIVE" || r.DeleteValues[0].Type.Schema != "MemberStatus" {
+		t.Fatalf("delete values: %+v", r.DeleteValues)
+	}
+	if !r.Create.BodyItems || !r.Update.BodyItems || r.Create.Response.Result == nil || !r.Update.Response.Items || !r.Get.Response.Items || len(r.CreateValues) != 1 || len(r.ListFilters) != 1 {
+		t.Fatalf("resource: %+v", r)
+	}
+	// The resource of the golden contract is new nowhere: without Existing, no key applies.
+	p := memberPolicy()
+	p.Existing = false
+	doc, err := Load([]byte(memberSource(t)))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := BuildWithPolicy(doc, "Member", OperationIDs{}, p); err == nil {
+		t.Fatal("a new resource builds with the keys of a released one")
+	}
+}
+
+func TestMemberDeleteIDsIssues(t *testing.T) {
+	const memberIDs = "                memberIds:\n                  type: array\n                  minItems: 1\n"
+	deletes := func(edit func(*Policy)) Policy {
+		p := memberPolicy()
+		edit(&p)
+		return p
+	}
+	tests := map[string]struct {
+		paths, edits  []string
+		policy        Policy
+		code, message string
+	}{
+		"no ids property": {
+			policy: deletes(func(p *Policy) { p.DeleteIDs = "ids" }),
+			code:   "DELETE_IDS_NOT_FOUND", message: `no property "ids" for the ids`,
+		},
+		"numeric ids": {
+			policy: deletes(func(p *Policy) { p.DeleteIDs = "memberAccountIds" }),
+			code:   "DELETE_IDS_NOT_STRING_ARRAY", message: `"memberAccountIds" is not an array of string ids`,
+		},
+		"scalar ids": {
+			policy: deletes(func(p *Policy) { p.DeleteIDs, p.DeleteValues = "teamId", nil }),
+			code:   "DELETE_IDS_NOT_STRING_ARRAY", message: `"teamId" is not an array of string ids`,
+		},
+		"two ids required": {
+			edits:  []string{memberIDs, "                memberIds:\n                  type: array\n                  minItems: 2\n"},
+			policy: memberPolicy(), code: "DELETE_IDS_ONE_ITEM_REFUSED", message: `"memberIds" does not accept one id`,
+		},
+		"unknown value": {
+			policy: deletes(func(p *Policy) { p.DeleteValues = map[string]string{"reason": "LEFT"} }),
+			code:   "DELETE_VALUE_UNKNOWN", message: `no property "reason" beside the ids`,
+		},
+		"ids as a value": {
+			policy: deletes(func(p *Policy) { p.DeleteValues = map[string]string{"memberIds": "x"} }),
+			code:   "DELETE_VALUE_UNKNOWN", message: `no property "memberIds" beside the ids`,
+		},
+		"invalid value": {
+			policy: deletes(func(p *Policy) { p.DeleteValues = map[string]string{"status": "MEMBER_STATUS_GONE"} }),
+			code:   "DELETE_VALUE_INVALID", message: "is not a value of its enum",
+		},
+		"zero value": {
+			policy: deletes(func(p *Policy) { p.DeleteValues = map[string]string{"status": "MEMBER_STATUS_UNSPECIFIED"} }),
+			code:   "DELETE_VALUE_INVALID", message: "is the zero value",
+		},
+		"required property": {
+			edits:  []string{"              title: UpdateMemberStatusRequest\n              type: object\n", "              title: UpdateMemberStatusRequest\n              type: object\n              required: [teamId]\n"},
+			policy: memberPolicy(), code: "DELETE_BODY_REQUIRED_PROPERTY", message: `requires "teamId", which a remove does not send`,
+		},
+		"required value": {
+			edits:  []string{"              title: UpdateMemberStatusRequest\n              type: object\n", "              title: UpdateMemberStatusRequest\n              type: object\n              required: [memberIds, status]\n"},
+			policy: memberPolicy(),
+		},
+		"delete by id": {
+			paths: memberWithItemPaths,
+			policy: deletes(func(p *Policy) {
+				p.GetFromList, p.ListFilters, p.Operations.Get = false, nil, "MembersService_GetMember"
+			}),
+			code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.delete.ids is for a resource that is read from its List",
+		},
+		"delete method": {
+			policy: deletes(func(p *Policy) { p.DeleteIDs = "" }),
+			code:   "OPERATION_METHOD_INCOMPATIBLE", message: "MembersService_UpdateMembersStatuses is PATCH, want DELETE",
+		},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			source := memberSource(t, tt.paths, tt.edits)
+			if tt.code == "" {
+				buildMember(t, source, tt.policy)
+				return
+			}
+			memberIssue(t, source, tt.policy, tt.code, tt.message)
+		})
+	}
+}

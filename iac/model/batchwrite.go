@@ -161,18 +161,29 @@ func (r *Resource) readCreateValues(create foundOp) error {
 			return fail("CREATE_VALUE_UNKNOWN", fmt.Sprintf("The Create body of %s has no property %q beside %q.", create.op.OperationId, name, wrapper),
 				"Name a property beside the request wrapper, or delete the line.")
 		}
-		t, err := typeOf(proxy, location, walk{policy: &r.Policy})
-		problem := queryValueProblem(proxy, value)
-		switch {
-		case err != nil || !slices.Contains([]Kind{String, Bool, Integer, Number, Enum}, t.Kind):
-			problem = "is not a value of a scalar or an enum property"
-		case problem == "" && t.Kind == Enum && value == t.EnumZero:
-			problem = "is the zero value, which an omitted property already sends"
-		}
+		fixed, problem := r.fixedValue(proxy, name, value, location)
 		if problem != "" {
-			return fail("CREATE_VALUE_INVALID", fmt.Sprintf("The value %q of the property %q %s.", value, name, problem), "Use a value that the property accepts.")
+			return fail("CREATE_VALUE_INVALID", problem, "Use a value that the property accepts.")
 		}
-		r.CreateValues = append(r.CreateValues, QueryValue{Name: name, Value: value, Type: t})
+		r.CreateValues = append(r.CreateValues, fixed)
 	}
 	return nil
+}
+
+// fixedValue reads a body property that a call always sends with value. problem says why the value
+// does not fit: the property is a scalar or an enum, the value is one that it accepts, and it is not
+// the zero value of an enum, which an omitted property already sends.
+func (r *Resource) fixedValue(proxy *base.SchemaProxy, name, value, location string) (QueryValue, string) {
+	t, err := typeOf(proxy, location, walk{policy: &r.Policy})
+	problem := queryValueProblem(proxy, value)
+	switch {
+	case err != nil || !slices.Contains([]Kind{String, Bool, Integer, Number, Enum}, t.Kind):
+		problem = "is not a value of a scalar or an enum property"
+	case problem == "" && t.Kind == Enum && value == t.EnumZero:
+		problem = "is the zero value, which an omitted property already sends"
+	}
+	if problem != "" {
+		return QueryValue{}, fmt.Sprintf("The value %q of the property %q %s.", value, name, problem)
+	}
+	return QueryValue{Name: name, Value: value, Type: t}, ""
 }
