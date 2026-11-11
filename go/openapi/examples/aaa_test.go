@@ -45,11 +45,11 @@ func TestApiKeys(t *testing.T) {
 
 	name := "My APM KEY"
 	createReq := apikeys.CreateApiKeyRequest{
-		Name: &name,
-		Owner: &apikeys.Owner{
+		Name: name,
+		Owner: apikeys.Owner{
 			TeamId: &teamID,
 		},
-		KeyPermissions: &apikeys.CreateApiKeyRequestKeyPermissions{
+		KeyPermissions: apikeys.CreateApiKeyRequestKeyPermissions{
 			Presets:     []string{"APM"},
 			Permissions: []string{"ALERTS-MAP:READ"},
 		},
@@ -67,20 +67,20 @@ func TestApiKeys(t *testing.T) {
 		NewName: &newName,
 	}
 	_, httpResp, err = client.
-		ApiKeysServiceUpdateApiKey(context.Background(), *created.KeyId).
+		ApiKeysServiceUpdateApiKey(context.Background(), created.KeyId).
 		UpdateApiKeyRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	require.Eventually(t, func() bool {
-		updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), *created.KeyId).Execute()
-		if cxsdk.NewAPIError(httpResp, err) != nil || updated.KeyInfo == nil || updated.KeyInfo.Name == nil {
+		updated, httpResp, err := client.ApiKeysServiceGetApiKey(context.Background(), created.KeyId).Execute()
+		if cxsdk.NewAPIError(httpResp, err) != nil {
 			return false
 		}
-		return *updated.KeyInfo.Name == newName
+		return updated.KeyInfo.Name == newName
 	}, time.Minute, 2*time.Second)
 
-	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), *created.KeyId).Execute()
+	_, httpResp, err = client.ApiKeysServiceDeleteApiKey(context.Background(), created.KeyId).Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
 
