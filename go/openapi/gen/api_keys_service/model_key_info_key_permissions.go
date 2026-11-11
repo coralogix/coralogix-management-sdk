@@ -22,9 +22,9 @@ var _ MappedNullable = &KeyInfoKeyPermissions{}
 
 // KeyInfoKeyPermissions This data structure represents the permissions on an API key.
 type KeyInfoKeyPermissions struct {
-	// Permissions.
+	// Permissions that the key has besides its presets. Empty when the key has none. A permission that a preset also holds is listed here when the request named it.
 	Permissions []string `json:"permissions,omitempty"`
-	// Presets.
+	// Presets of the key, each with the permissions that it stands for. Empty when the key has no preset.
 	Presets []PresetInfo `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
