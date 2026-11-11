@@ -73,6 +73,9 @@ func (a *APIKeysServiceAPIService) ApiKeysServiceCreateApiKeyExecute(r ApiApiKey
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createApiKeyRequest == nil {
+		return localVarReturnValue, nil, reportError("createApiKeyRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

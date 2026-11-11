@@ -66,16 +66,16 @@
                 "description": "This data structure is used to create an API key.",
                 "properties": {
                   "accessPolicy": {
-                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups. An empty string is no policy. A key that a team owns accepts only team-custom-api-keys permissions in the policy.",
                     "examples": [
-                      "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
+                      "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-custom-api-keys:ReadAccessPolicy\":\"grant\",\"team-custom-api-keys:Manage\":\"deny\",\"team-custom-api-keys:UpdateAccessPolicy\":\"deny\",\"team-custom-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
                     ],
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "hashed": {
-                    "description": "Whether the value is stored as a one-way hash.",
+                    "description": "Whether the value is stored as a one-way hash. Omitting it is the same as false. The API cannot read the value of a hashed key again.",
                     "examples": [
                       true
                     ],
@@ -85,22 +85,33 @@
                     "$ref": "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
                   },
                   "name": {
-                    "description": "Display name.",
+                    "description": "Display name. Not unique: another key can have the same name.",
                     "examples": [
                       "my_api_key"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "owner": {
-                    "$ref": "#/components/schemas/Owner"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Owner"
+                      }
+                    ],
+                    "description": "Owner of the key. A key that a team owns can be created only for the team of the caller. An organisation cannot own a key that this operation creates: it answers 400."
                   }
                 },
+                "required": [
+                  "name",
+                  "owner",
+                  "keyPermissions"
+                ],
                 "title": "Create Api Key Request",
                 "type": "object"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -273,16 +284,16 @@
                 "description": "This data structure is used to update an API key.",
                 "properties": {
                   "accessPolicy": {
-                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string.",
+                    "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string. Omit to keep the policy.",
                     "examples": [
-                      "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
+                      "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-custom-api-keys:ReadAccessPolicy\":\"grant\",\"team-custom-api-keys:Manage\":\"deny\",\"team-custom-api-keys:UpdateAccessPolicy\":\"deny\",\"team-custom-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
                     ],
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "isActive": {
-                    "description": "Whether the API key is active. Set to false to deactivate without deleting.",
+                    "description": "Whether the API key is active. Set to false to deactivate without deleting. Omit to keep the current state. A new key is active, and the create operation cannot change that.",
                     "examples": [
                       true
                     ],
@@ -290,19 +301,29 @@
                     "x-coralogix-presence": true
                   },
                   "newName": {
-                    "description": "New display name for the API key.",
+                    "description": "New display name for the API key. Omit to keep the name.",
                     "examples": [
                       "my_new_name"
                     ],
-                    "minLength": 0,
+                    "minLength": 1,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "permissions": {
-                    "$ref": "#/components/schemas/UpdateApiKeyRequest.Permissions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/UpdateApiKeyRequest.Permissions"
+                      }
+                    ],
+                    "description": "Replaces the permissions of the key. Omit to keep them. An object without permissions removes every permission."
                   },
                   "presets": {
-                    "$ref": "#/components/schemas/Presets"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Presets"
+                      }
+                    ],
+                    "description": "Replaces the presets of the key. Omit to keep them. An object without presets removes every preset."
                   }
                 },
                 "title": "Update Api Key Request",
@@ -563,12 +584,12 @@
             "items": {
               "minLength": 0,
               "type": "string",
-              "description": "List of permissions.",
+              "description": "List of permissions. The service rejects a permission that appears twice.",
               "examples": [
                 "read_logs"
               ]
             },
-            "description": "List of permissions."
+            "description": "List of permissions. The service rejects a permission that appears twice."
           },
           "presets": {
             "minItems": 0,
@@ -576,12 +597,12 @@
             "items": {
               "minLength": 0,
               "type": "string",
-              "description": "List of permission presets.",
+              "description": "Names of the permission presets. The service matches a name in any case and rejects a name that appears twice. The request needs at least one preset or permission.",
               "examples": [
                 "my_preset"
               ]
             },
-            "description": "List of permission presets."
+            "description": "Names of the permission presets. The service matches a name in any case and rejects a name that appears twice. The request needs at least one preset or permission."
           }
         },
         "description": "This data structure allows to specify loose permissions and permission presets for an API key.",
@@ -592,6 +613,11 @@
       },
       "CreateApiKeyResponse": {
         "title": "Create Api Key Response",
+        "required": [
+          "keyId",
+          "name",
+          "value"
+        ],
         "type": "object",
         "properties": {
           "keyId": {
@@ -613,13 +639,13 @@
           "value": {
             "minLength": 0,
             "type": "string",
-            "description": "The value.",
+            "description": "The value of the key. A hashed key has it here too, once: the get operation never returns the value of a hashed key.",
             "examples": [
               "my_api_key_value"
             ]
           }
         },
-        "description": "This data structure is the response obtained when creating an API key.",
+        "description": "This data structure is the response obtained when creating an API key. Read the key with the get operation.",
         "externalDocs": {
           "description": "Find out more about api keys",
           "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -722,6 +748,9 @@
       },
       "GetApiKeyResponse": {
         "title": "Get Api Key Response",
+        "required": [
+          "keyInfo"
+        ],
         "type": "object",
         "properties": {
           "keyInfo": {
@@ -793,12 +822,20 @@
       },
       "KeyInfo": {
         "title": "Key Info",
+        "required": [
+          "name",
+          "owner",
+          "active",
+          "hashed",
+          "keyPermissions",
+          "id"
+        ],
         "type": "object",
         "properties": {
           "accessPolicy": {
-            "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups.",
+            "description": "JSON string representing the access policy for this API key. Defines granular permissions for users and groups. The service stores the policy as compact JSON in no stable key order, and adds the permissions of the owner type that the policy does not set, as deny, so the key can read back with more permissions than were sent. Absent when the key has no policy.",
             "examples": [
-              "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"data-ingest-api-keys:ReadAccessPolicy\":\"grant\",\"data-ingest-api-keys:Manage\":\"deny\",\"data-ingest-api-keys:UpdateAccessPolicy\":\"deny\",\"data-ingest-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
+              "{\"version\":\"2025-01-01\",\"default\":{\"permissions\":{\"team-custom-api-keys:ReadAccessPolicy\":\"grant\",\"team-custom-api-keys:Manage\":\"deny\",\"team-custom-api-keys:UpdateAccessPolicy\":\"deny\",\"team-custom-api-keys:ReadConfig\":\"grant\"}},\"rules\":[]}"
             ],
             "minLength": 0,
             "type": "string",
@@ -827,9 +864,9 @@
             "$ref": "#/components/schemas/KeyInfo.KeyPermissions"
           },
           "name": {
-            "minLength": 0,
+            "minLength": 1,
             "type": "string",
-            "description": "Display name.",
+            "description": "Display name. Not unique: another key can have the same name. Never empty.",
             "examples": [
               "my_api_key"
             ]
@@ -845,7 +882,7 @@
             ]
           },
           "value": {
-            "description": "The value.",
+            "description": "The secret value of the key. Set for every key that is not hashed, and absent for a hashed key, whose value only the create operation returns.",
             "minLength": 0,
             "type": "string",
             "x-coralogix-presence": true
@@ -867,9 +904,9 @@
             "items": {
               "minLength": 0,
               "type": "string",
-              "description": "Permissions."
+              "description": "Permissions that the key has besides its presets. Empty when the key has none. A permission that a preset also holds is listed here when the request named it."
             },
-            "description": "Permissions."
+            "description": "Permissions that the key has besides its presets. Empty when the key has none. A permission that a preset also holds is listed here when the request named it."
           },
           "presets": {
             "minItems": 0,
@@ -877,7 +914,7 @@
             "items": {
               "$ref": "#/components/schemas/PresetInfo"
             },
-            "description": "Presets."
+            "description": "Presets of the key, each with the permissions that it stands for. Empty when the key has no preset."
           }
         },
         "description": "This data structure represents the permissions on an API key.",
@@ -1011,6 +1048,10 @@
       },
       "PresetInfo": {
         "title": "Preset Info",
+        "required": [
+          "name",
+          "permissions"
+        ],
         "type": "object",
         "properties": {
           "name": {

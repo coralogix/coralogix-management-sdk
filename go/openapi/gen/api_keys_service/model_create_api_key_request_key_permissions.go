@@ -22,9 +22,9 @@ var _ MappedNullable = &CreateApiKeyRequestKeyPermissions{}
 
 // CreateApiKeyRequestKeyPermissions This data structure allows to specify loose permissions and permission presets for an API key.
 type CreateApiKeyRequestKeyPermissions struct {
-	// List of permissions.
+	// List of permissions. The service rejects a permission that appears twice.
 	Permissions []string `json:"permissions,omitempty"`
-	// List of permission presets.
+	// Names of the permission presets. The service matches a name in any case and rejects a name that appears twice. The request needs at least one preset or permission.
 	Presets []string `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

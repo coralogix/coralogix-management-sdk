@@ -13,6 +13,7 @@ package api_keys_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,19 +23,19 @@ var _ MappedNullable = &KeyInfo{}
 
 // KeyInfo This data structure represents the information associated with an API key.
 type KeyInfo struct {
-	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups.
+	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups. The service stores the policy as compact JSON in no stable key order, and adds the permissions of the owner type that the policy does not set, as deny, so the key can read back with more permissions than were sent. Absent when the key has no policy.
 	AccessPolicy *string `json:"accessPolicy,omitempty"`
 	// Whether this resource is active.
-	Active *bool `json:"active,omitempty"`
+	Active bool `json:"active"`
 	// Whether the value is stored as a one-way hash.
-	Hashed *bool `json:"hashed,omitempty"`
+	Hashed bool `json:"hashed"`
 	// Unique identifier.
-	Id *string `json:"id,omitempty"`
-	KeyPermissions *KeyInfoKeyPermissions `json:"keyPermissions,omitempty"`
-	// Display name.
-	Name *string `json:"name,omitempty"`
-	Owner *Owner `json:"owner,omitempty"`
-	// The value.
+	Id string `json:"id"`
+	KeyPermissions KeyInfoKeyPermissions `json:"keyPermissions"`
+	// Display name. Not unique: another key can have the same name. Never empty.
+	Name string `json:"name"`
+	Owner Owner `json:"owner"`
+	// The secret value of the key. Set for every key that is not hashed, and absent for a hashed key, whose value only the create operation returns.
 	Value *string `json:"value,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -46,8 +47,14 @@ type _KeyInfo KeyInfo
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewKeyInfo() *KeyInfo {
+func NewKeyInfo(active bool, hashed bool, id string, keyPermissions KeyInfoKeyPermissions, name string, owner Owner) *KeyInfo {
 	this := KeyInfo{}
+	this.Active = active
+	this.Hashed = hashed
+	this.Id = id
+	this.KeyPermissions = keyPermissions
+	this.Name = name
+	this.Owner = owner
 	return &this
 }
 
@@ -91,196 +98,148 @@ func (o *KeyInfo) SetAccessPolicy(v string) {
 	o.AccessPolicy = &v
 }
 
-// GetActive returns the Active field value if set, zero value otherwise.
+// GetActive returns the Active field value
 func (o *KeyInfo) GetActive() bool {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Active
+
+	return o.Active
 }
 
-// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// GetActiveOk returns a tuple with the Active field value
 // and a boolean to check if the value has been set.
 func (o *KeyInfo) GetActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Active, true
+	return &o.Active, true
 }
 
-// HasActive returns a boolean if a field has been set.
-func (o *KeyInfo) HasActive() bool {
-	if o != nil && !IsNil(o.Active) {
-		return true
-	}
-
-	return false
-}
-
-// SetActive gets a reference to the given bool and assigns it to the Active field.
+// SetActive sets field value
 func (o *KeyInfo) SetActive(v bool) {
-	o.Active = &v
+	o.Active = v
 }
 
-// GetHashed returns the Hashed field value if set, zero value otherwise.
+// GetHashed returns the Hashed field value
 func (o *KeyInfo) GetHashed() bool {
-	if o == nil || IsNil(o.Hashed) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Hashed
+
+	return o.Hashed
 }
 
-// GetHashedOk returns a tuple with the Hashed field value if set, nil otherwise
+// GetHashedOk returns a tuple with the Hashed field value
 // and a boolean to check if the value has been set.
 func (o *KeyInfo) GetHashedOk() (*bool, bool) {
-	if o == nil || IsNil(o.Hashed) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Hashed, true
+	return &o.Hashed, true
 }
 
-// HasHashed returns a boolean if a field has been set.
-func (o *KeyInfo) HasHashed() bool {
-	if o != nil && !IsNil(o.Hashed) {
-		return true
-	}
-
-	return false
-}
-
-// SetHashed gets a reference to the given bool and assigns it to the Hashed field.
+// SetHashed sets field value
 func (o *KeyInfo) SetHashed(v bool) {
-	o.Hashed = &v
+	o.Hashed = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *KeyInfo) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *KeyInfo) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *KeyInfo) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *KeyInfo) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetKeyPermissions returns the KeyPermissions field value if set, zero value otherwise.
+// GetKeyPermissions returns the KeyPermissions field value
 func (o *KeyInfo) GetKeyPermissions() KeyInfoKeyPermissions {
-	if o == nil || IsNil(o.KeyPermissions) {
+	if o == nil {
 		var ret KeyInfoKeyPermissions
 		return ret
 	}
-	return *o.KeyPermissions
+
+	return o.KeyPermissions
 }
 
-// GetKeyPermissionsOk returns a tuple with the KeyPermissions field value if set, nil otherwise
+// GetKeyPermissionsOk returns a tuple with the KeyPermissions field value
 // and a boolean to check if the value has been set.
 func (o *KeyInfo) GetKeyPermissionsOk() (*KeyInfoKeyPermissions, bool) {
-	if o == nil || IsNil(o.KeyPermissions) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KeyPermissions, true
+	return &o.KeyPermissions, true
 }
 
-// HasKeyPermissions returns a boolean if a field has been set.
-func (o *KeyInfo) HasKeyPermissions() bool {
-	if o != nil && !IsNil(o.KeyPermissions) {
-		return true
-	}
-
-	return false
-}
-
-// SetKeyPermissions gets a reference to the given KeyInfoKeyPermissions and assigns it to the KeyPermissions field.
+// SetKeyPermissions sets field value
 func (o *KeyInfo) SetKeyPermissions(v KeyInfoKeyPermissions) {
-	o.KeyPermissions = &v
+	o.KeyPermissions = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *KeyInfo) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *KeyInfo) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *KeyInfo) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *KeyInfo) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
-// GetOwner returns the Owner field value if set, zero value otherwise.
+// GetOwner returns the Owner field value
 func (o *KeyInfo) GetOwner() Owner {
-	if o == nil || IsNil(o.Owner) {
+	if o == nil {
 		var ret Owner
 		return ret
 	}
-	return *o.Owner
+
+	return o.Owner
 }
 
-// GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
+// GetOwnerOk returns a tuple with the Owner field value
 // and a boolean to check if the value has been set.
 func (o *KeyInfo) GetOwnerOk() (*Owner, bool) {
-	if o == nil || IsNil(o.Owner) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Owner, true
+	return &o.Owner, true
 }
 
-// HasOwner returns a boolean if a field has been set.
-func (o *KeyInfo) HasOwner() bool {
-	if o != nil && !IsNil(o.Owner) {
-		return true
-	}
-
-	return false
-}
-
-// SetOwner gets a reference to the given Owner and assigns it to the Owner field.
+// SetOwner sets field value
 func (o *KeyInfo) SetOwner(v Owner) {
-	o.Owner = &v
+	o.Owner = v
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
@@ -328,24 +287,12 @@ func (o KeyInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AccessPolicy) {
 		toSerialize["accessPolicy"] = o.AccessPolicy
 	}
-	if !IsNil(o.Active) {
-		toSerialize["active"] = o.Active
-	}
-	if !IsNil(o.Hashed) {
-		toSerialize["hashed"] = o.Hashed
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.KeyPermissions) {
-		toSerialize["keyPermissions"] = o.KeyPermissions
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Owner) {
-		toSerialize["owner"] = o.Owner
-	}
+	toSerialize["active"] = o.Active
+	toSerialize["hashed"] = o.Hashed
+	toSerialize["id"] = o.Id
+	toSerialize["keyPermissions"] = o.KeyPermissions
+	toSerialize["name"] = o.Name
+	toSerialize["owner"] = o.Owner
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
@@ -358,6 +305,32 @@ func (o KeyInfo) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *KeyInfo) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"active",
+		"hashed",
+		"id",
+		"keyPermissions",
+		"name",
+		"owner",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varKeyInfo := _KeyInfo{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

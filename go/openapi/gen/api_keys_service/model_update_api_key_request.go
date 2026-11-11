@@ -22,13 +22,15 @@ var _ MappedNullable = &UpdateApiKeyRequest{}
 
 // UpdateApiKeyRequest This data structure is used to update an API key.
 type UpdateApiKeyRequest struct {
-	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string.
+	// JSON string representing the access policy for this API key. Defines granular permissions for users and groups. To delete an existing policy, pass an empty string. Omit to keep the policy.
 	AccessPolicy *string `json:"accessPolicy,omitempty"`
-	// Whether the API key is active. Set to false to deactivate without deleting.
+	// Whether the API key is active. Set to false to deactivate without deleting. Omit to keep the current state. A new key is active, and the create operation cannot change that.
 	IsActive *bool `json:"isActive,omitempty"`
-	// New display name for the API key.
+	// New display name for the API key. Omit to keep the name.
 	NewName *string `json:"newName,omitempty"`
+	// Replaces the permissions of the key. Omit to keep them. An object without permissions removes every permission.
 	Permissions *UpdateApiKeyRequestPermissions `json:"permissions,omitempty"`
+	// Replaces the presets of the key. Omit to keep them. An object without presets removes every preset.
 	Presets *Presets `json:"presets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
