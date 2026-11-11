@@ -36,6 +36,9 @@ import (
 type API struct {
 	// GetByIDs names the Get query parameter that accepts a list of string ids.
 	GetByIDs string `yaml:"getByIDs"`
+	// GetFromList says that no operation reads one resource by its id: Get is the List, and a tool
+	// selects the item whose idProperty is the id.
+	GetFromList *GetFromList `yaml:"getFromList"`
 	// RequestWrapper is the property of the Create and Update bodies that holds the resource.
 	RequestWrapper string `yaml:"requestWrapper"`
 	// UpdateIDInBody: Update has no id in its path. The id is a field of the resource.
@@ -80,6 +83,13 @@ type API struct {
 	// CreateValues are the properties beside requestWrapper that Create always sends, with their
 	// values, for example {onboardingMode: ONBOARDING_MODE_NO_INVITE}. They are not resource fields.
 	CreateValues map[string]string `yaml:"createValues"`
+}
+
+// GetFromList describes a Get that reads the List.
+type GetFromList struct {
+	// Filters maps a query parameter of the List to the resource field that it narrows the List by,
+	// for example {username: username}. A filter can match more items; the id selects the item.
+	Filters map[string]string `yaml:"filters"`
 }
 
 // BatchWrite describes writes that take an array of request items.
@@ -224,6 +234,14 @@ func (a API) Check() error {
 	if err := checkValues("api.createValues", a.CreateValues); err != nil {
 		return err
 	}
+	if a.GetFromList != nil && a.GetByIDs != "" {
+		return errors.New("api.getFromList and api.getByIDs both say how Get reads the resource: keep one")
+	}
+	if a.GetFromList != nil {
+		if err := checkValues("api.getFromList.filters", a.GetFromList.Filters); err != nil {
+			return err
+		}
+	}
 	if r := a.batchCreateResult(); r != nil && (r.Resource == "" || r.Status == "" || len(r.Created) == 0) {
 		return errors.New("api.batchWrite.createResult needs resource, status, and created")
 	}
@@ -234,7 +252,7 @@ func (a API) Check() error {
 		if o := a.Operations; o == nil || o.Create == "" || o.Create != o.Update || o.Create != o.Delete {
 			return errors.New("api.overwrite needs api.operations to name the write as create, update, and delete")
 		}
-		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" || a.BatchWrite != nil || len(a.CreateValues) != 0 {
+		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" || a.BatchWrite != nil || len(a.CreateValues) != 0 || a.GetFromList != nil {
 			return errors.New("api.overwrite describes a resource without an id or a wrapper; it cannot go with the other api keys")
 		}
 		for name, value := range a.Overwrite.GetQuery {
@@ -355,6 +373,9 @@ func (e Exceptions) Policy() model.Policy {
 		BatchWrite:                   e.API.BatchWrite != nil,
 		CreateValues:                 maps.Clone(e.API.CreateValues),
 		RequestWrappers:              maps.Clone(e.RequestWrappers),
+	}
+	if e.API.GetFromList != nil {
+		p.GetFromList, p.ListFilters = true, maps.Clone(e.API.GetFromList.Filters)
 	}
 	if r := e.API.batchCreateResult(); r != nil {
 		p.CreateResult = &model.CreateResultLine{Resource: r.Resource, Status: r.Status, Created: slices.Clone(r.Created), Message: r.Message}

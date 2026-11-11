@@ -164,7 +164,7 @@ func (r *Resource) readListOperation(get, f foundOp) (*ListOperation, *contractE
 		IDField:       r.IDField,
 		Paged:         pagedList(f, s),
 	}
-	if err := r.listItemID(get, items); err != nil {
+	if err := r.listItemID(get, f, items); err != nil {
 		return nil, err
 	}
 	if name, err := schemaOf(propertyOf(items.schema, "name")); err == nil && slices.Equal(name.Type, []string{"string"}) {
@@ -211,14 +211,18 @@ func objectSchema(s *base.Schema) bool {
 }
 
 // listItemID checks that the item has the id property of the resource, with the type of the
-// id in the Get response. A tool reads the id of an item to call Get.
-func (r *Resource) listItemID(get foundOp, items itemArray) *contractError {
+// id in the Get response. A tool reads the id of an item to call Get. When the List is Get
+// (Policy.GetFromList), there is no other read to compare the id with.
+func (r *Resource) listItemID(get, list foundOp, items itemArray) *contractError {
 	location := "components.schemas." + items.component + "." + r.IDField
 	id := propertyOf(items.schema, r.IDField)
 	if id == nil {
 		return &contractError{code: "LIST_ITEM_ID_MISSING", location: "components.schemas." + items.component,
 			message:     fmt.Sprintf("The List item %s has no id property %q.", items.component, r.IDField),
 			remediation: "Return the resource id in each List item."}
+	}
+	if list.op == get.op {
+		return nil
 	}
 	want, err := schemaOf(propertyOf(mustSchema(r.Policy.responseResourceProxy(get.op, r.Name)), r.IDField))
 	got, gotErr := schemaOf(id)

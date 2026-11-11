@@ -58,6 +58,14 @@ type Resource struct {
 	// (Policy.WriteReturnsResource): the response of Create and Update has every field of the
 	// resource under its name, with the same shape. A tool takes the state from it, with no Get.
 	WriteReturnsResource bool
+	// GetFromList is true when Get is the List (Policy.GetFromList): no operation reads one resource by
+	// its id. A tool pages List, optionally narrowed by ListFilters, and selects the item whose
+	// IDField is the id; no such item means that the resource is missing. Get.Response holds the
+	// items (Items) in List.ItemsField.
+	GetFromList bool
+	// ListFilters are the query parameters that narrow the List by a resource field, sorted by
+	// parameter (Policy.ListFilters). A filter can match more than the resource.
+	ListFilters []ListFilter
 	// GetQuery are the query parameters that Get always sends, with their values, sorted by name
 	// (Policy.GetQuery). It is nil when Get sends none.
 	GetQuery []QueryValue
@@ -147,6 +155,13 @@ type QueryValue struct {
 	Name  string // the parameter or property name, for example "source_type"
 	Value string // the value as the query string holds it, for example "SOURCE_TYPE_LOGS"
 	Type  *Type  // the type of the parameter: an Enum names its component
+}
+
+// ListFilter is a query parameter of the List that narrows it by a resource field.
+type ListFilter struct {
+	Param string // the query parameter, for example "username"
+	Field string // the resource field that it matches
+	Type  *Type  // the type of the parameter, the scalar type of the field
 }
 
 // ListOperation is a GET that returns the resources in one array. The model records the facts

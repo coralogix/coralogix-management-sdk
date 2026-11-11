@@ -75,3 +75,21 @@ func TestCreateValuesPolicy(t *testing.T) {
 		t.Fatal("an empty create value passes the check")
 	}
 }
+
+func TestGetFromListPolicy(t *testing.T) {
+	e := exceptionsOf(t, "api: {idProperty: memberId, getFromList: {filters: {login: login}}}\n")
+	if err := e.API.Check(); err != nil {
+		t.Fatal(err)
+	}
+	if p := e.Policy(); !p.GetFromList || len(p.ListFilters) != 1 || p.ListFilters["login"] != "login" {
+		t.Fatalf("policy %+v", p)
+	}
+	if p := exceptionsOf(t, "api: {getFromList: {}}\n").Policy(); !p.GetFromList || len(p.ListFilters) != 0 {
+		t.Fatalf("policy without filters %+v", p)
+	}
+	for _, source := range []string{"api: {getByIDs: ids, getFromList: {}}\n", "api: {getFromList: {filters: {login: ''}}}\n"} {
+		if err := exceptionsOf(t, source).API.Check(); err == nil {
+			t.Errorf("%q passes the check", source)
+		}
+	}
+}

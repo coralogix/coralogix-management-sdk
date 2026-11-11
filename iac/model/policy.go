@@ -37,6 +37,13 @@ type Policy struct {
 	// GetByIDs names the string-array Get query parameter used to read one resource through a
 	// batch endpoint. Existing resources only; Delete supplies the id path parameter.
 	GetByIDs string
+	// GetFromList means that no operation reads one resource by its id: Get is the List, and a tool
+	// selects the item whose IDProperty is the id. Existing resources only.
+	GetFromList bool
+	// ListFilters maps a query parameter of the List to the resource field that it narrows the List
+	// by, for example {"username": "username"}. A filter is a hint: it can match more items, so a tool
+	// still selects the item by its id. Only a GetFromList resource has it.
+	ListFilters map[string]string
 	// BatchWrite means that the Create and Update bodies are arrays of one request component, and a
 	// tool sends one item. The model reads the item where it reads a body. Existing resources only.
 	BatchWrite bool

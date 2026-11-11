@@ -155,7 +155,16 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 			return nil, nil, err
 		}
 	}
+	if err := r.readListFilters(ops[opGet]); err != nil {
+		return nil, nil, err
+	}
 	r.zeroDefaults()
+	if r.GetFromList {
+		if ids.List != "" && ids.List != r.Get.OperationID {
+			return r, fmt.Errorf("api.getFromList reads the List with Get %s, and the List is %s", r.Get.OperationID, ids.List), nil
+		}
+		return r, nil, nil
+	}
 	return r, r.readList(doc, ops[opGet], ids.List), nil
 }
 
@@ -235,7 +244,7 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 		}
 	}
 	get, singleton := found[opGet]
-	singleton = singleton && len(pathParams(get)) == 0
+	singleton = singleton && len(pathParams(get)) == 0 && !p.GetFromList
 	for _, v := range verbs {
 		f, ok := found[v]
 		suffix := "_" + string(v) + name
@@ -297,6 +306,9 @@ func matchingOperations(doc *v3.Document, name string, role verb, explicit strin
 }
 
 func (r *Resource) readOperations(ops map[verb]foundOp) error {
+	if r.Policy.GetFromList {
+		return r.readListOperations(ops)
+	}
 	if r.Policy.GetByIDs != "" {
 		return r.readBatchOperations(ops)
 	}
@@ -754,7 +766,7 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	if arrays {
 		items := arrayItems(innerProxy)
 		if items == nil && v == opGet {
-			return Response{}, fmt.Errorf("api.getByIDs needs a response array of %s", r.Name)
+			return Response{}, fmt.Errorf("%s needs a response array of %s", r.Policy.readKey(), r.Name)
 		}
 		if items != nil {
 			out.Items, innerProxy = true, items
@@ -867,7 +879,19 @@ func (r *Resource) wrapperKeys(s *base.Schema, arrays bool) []string {
 // itemsResponse reports whether the response of the lifecycle step v can hold the resource in an
 // array: the batch Get of GetByIDs, and the Update of BatchWrite.
 func (p Policy) itemsResponse(v verb) bool {
-	return v == opGet && p.GetByIDs != "" || v == opUpdate && p.BatchWrite
+	return v == opGet && p.readsItems() || v == opUpdate && p.BatchWrite
+}
+
+// readsItems reports whether Get reads an array that holds the resource: a batch Get (GetByIDs), or
+// the List (GetFromList).
+func (p Policy) readsItems() bool { return p.GetByIDs != "" || p.GetFromList }
+
+// readKey is the overrides key that makes Get read an array.
+func (p Policy) readKey() string {
+	if p.GetFromList {
+		return "api.getFromList"
+	}
+	return "api.getByIDs"
 }
 
 // responseRef returns a 200 response schema that is "$ref: X", or the $ref

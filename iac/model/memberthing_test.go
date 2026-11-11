@@ -367,3 +367,124 @@ func TestMemberCreateValueIssues(t *testing.T) {
 		})
 	}
 }
+
+// memberWithDeletePath gives the golden members contract a Delete of one member by its id path parameter,
+// so a test can describe the List read apart from the batch Delete.
+var memberWithDeletePath = []string{
+	"  /members/v1:updateStatuses:\n", "  /members/v1/{memberId}:\n" + memberItemPaths[strings.Index(memberItemPaths, "    delete:"):] + "  /members/v1:updateStatuses:\n",
+	"components:\n  schemas:\n", "components:\n  schemas:\n" + memberItemSchemas,
+}
+
+// memberListPolicy describes the members contract read from its List, and removed by id.
+func memberListPolicy() Policy {
+	p := memberBatchPolicy()
+	p.CreateResult = memberCreateResult()
+	p.CreateValues = map[string]string{"onboardingMode": "ONBOARDING_MODE_NO_INVITE"}
+	p.GetFromList, p.IDProperty, p.ListFilters = true, "memberId", map[string]string{"login": "login"}
+	p.Operations.Get = "MembersService_SearchMembers"
+	return p
+}
+
+func TestMemberGetFromList(t *testing.T) {
+	r := buildMember(t, memberSource(t, memberWithDeletePath), memberListPolicy())
+	if !r.GetFromList || r.Singleton || r.ID() != "memberId" || r.IDParam != "memberId" || r.IDType.Kind != String {
+		t.Fatalf("identity: %+v", r)
+	}
+	if got := r.Get.Response; got.Schema != "SearchMembersResponse" || got.Field != "members" || !got.Items {
+		t.Fatalf("get response: %+v", got)
+	}
+	l := r.List
+	if l == nil || l.OperationID != r.Get.OperationID || l.ItemsField != "members" || !l.Full || l.IDField != "memberId" || !l.Paged {
+		t.Fatalf("list: %+v", l)
+	}
+	if len(r.ListFilters) != 1 || r.ListFilters[0].Param != "login" || r.ListFilters[0].Field != "login" || r.ListFilters[0].Type.Kind != String {
+		t.Fatalf("filters: %+v", r.ListFilters)
+	}
+	if r.Delete.Path != "/members/v1/{memberId}" || r.Update.Path != r.Create.Path {
+		t.Fatalf("paths: update %s, delete %s", r.Update.Path, r.Delete.Path)
+	}
+	// Without filters, Get reads the whole List.
+	p := memberListPolicy()
+	p.ListFilters = nil
+	if r := buildMember(t, memberSource(t, memberWithDeletePath), p); len(r.ListFilters) != 0 {
+		t.Fatalf("filters without lines: %+v", r.ListFilters)
+	}
+	// The List can be named, if it is Get.
+	p.Operations.List = p.Operations.Get
+	buildMember(t, memberSource(t, memberWithDeletePath), p)
+}
+
+func TestMemberGetFromListIssues(t *testing.T) {
+	const listItems = "        members:\n          type: array\n          minItems: 0\n          items: {$ref: '#/components/schemas/Member'}\n    UpdateMembersStatusesResponse:"
+	listPolicy := func(edit func(*Policy)) Policy {
+		p := memberListPolicy()
+		edit(&p)
+		return p
+	}
+	tests := map[string]struct {
+		paths, edits  []string // paths are the operations by id; nil is the Delete by id
+		policy        Policy
+		code, message string
+	}{
+		"not a list": {
+			edits:  []string{listItems, "        members: {$ref: '#/components/schemas/Member'}\n    UpdateMembersStatusesResponse:"},
+			policy: memberListPolicy(), code: "GET_FROM_LIST_NOT_LIST", message: "is not a List that the model can describe: The response SearchMembersResponse has no array",
+		},
+		"summary items": {
+			edits: []string{
+				listItems, "        members:\n          type: array\n          items: {$ref: '#/components/schemas/MemberSummary'}\n    MemberSummary:\n      type: object\n      properties:\n        memberId: {type: string, minLength: 0}\n    UpdateMembersStatusesResponse:",
+			},
+			policy: memberListPolicy(), code: "GET_FROM_LIST_NOT_FULL", message: "The List item MemberSummary is not Member",
+		},
+		"no id property": {
+			policy: listPolicy(func(p *Policy) { p.IDProperty = "" }),
+			code:   "GET_FROM_LIST_ID_PROPERTY_REQUIRED", message: "must name the id property",
+		},
+		"new resource": {
+			policy: listPolicy(func(p *Policy) { p.Existing = false }),
+			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.createValues is only for existing resources",
+		},
+		"update id in path": {
+			policy: listPolicy(func(p *Policy) { p.UpdateIDInBody, p.UpdateIDOutsideWrapper = false, false }),
+			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList needs api.updateIDInBody",
+		},
+		"with getByIDs": {
+			policy: listPolicy(func(p *Policy) { p.GetByIDs = "login" }),
+			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList and api.getByIDs both say how Get reads the resource",
+		},
+		"another list": {
+			policy: listPolicy(func(p *Policy) { p.Operations.List = "MembersService_UpdateMembersStatuses" }),
+			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList reads the List with Get MembersService_SearchMembers",
+		},
+		"unknown filter": {
+			policy: listPolicy(func(p *Policy) { p.ListFilters = map[string]string{"status": "status"} }),
+			code:   "LIST_FILTER_UNKNOWN", message: `no query parameter "status"`,
+		},
+		"paging filter": {
+			policy: listPolicy(func(p *Policy) { p.ListFilters = map[string]string{"page_size": "memberAccountId"} }),
+			code:   "LIST_FILTER_UNKNOWN", message: `no query parameter "page_size"`,
+		},
+		"unknown field": {
+			policy: listPolicy(func(p *Policy) { p.ListFilters = map[string]string{"login": "nickname"} }),
+			code:   "LIST_FILTER_FIELD_UNKNOWN", message: `no field "nickname"`,
+		},
+		"other type": {
+			policy: listPolicy(func(p *Policy) { p.ListFilters = map[string]string{"team_id": "login"} }),
+			code:   "LIST_FILTER_TYPE_INCOMPATIBLE", message: `The filter "team_id" does not have the scalar type of the field "login"`,
+		},
+		"filters without the list read": {
+			paths:  memberWithItemPaths,
+			policy: listPolicy(func(p *Policy) { p.GetFromList, p.IDProperty, p.Operations.Get = false, "", "MembersService_GetMember" }),
+			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList.filters needs api.getFromList",
+		},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			paths := tt.paths
+			if paths == nil {
+				paths = memberWithDeletePath
+			}
+			memberIssue(t, memberSource(t, paths, tt.edits), tt.policy, tt.code, tt.message)
+		})
+	}
+}
