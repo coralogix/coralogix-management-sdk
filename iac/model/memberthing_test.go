@@ -323,3 +323,47 @@ func TestMemberCreateResultIssues(t *testing.T) {
 		})
 	}
 }
+
+func TestMemberCreateValues(t *testing.T) {
+	p := memberBatchPolicy()
+	p.CreateResult = memberCreateResult()
+	p.CreateValues = map[string]string{"onboardingMode": "ONBOARDING_MODE_NO_INVITE"}
+	r := buildMember(t, memberSource(t, memberWithItemPaths), p)
+	if len(r.CreateValues) != 1 {
+		t.Fatalf("create values %+v", r.CreateValues)
+	}
+	v := r.CreateValues[0]
+	if v.Name != "onboardingMode" || v.Value != "ONBOARDING_MODE_NO_INVITE" || v.Type.Kind != Enum || v.Type.Schema != "OnboardingMode" {
+		t.Fatalf("create value %+v, type %+v", v, v.Type)
+	}
+	if slices.ContainsFunc(r.Fields, func(f *ResourceField) bool { return f.Name == "onboardingMode" }) {
+		t.Fatal("a create value is a resource field")
+	}
+}
+
+func TestMemberCreateValueIssues(t *testing.T) {
+	values := func(name, value string) Policy {
+		p := memberBatchPolicy()
+		p.CreateResult = memberCreateResult()
+		p.CreateValues = map[string]string{name: value}
+		return p
+	}
+	notExisting := values("onboardingMode", "ONBOARDING_MODE_NO_INVITE")
+	notExisting.Existing, notExisting.BatchWrite, notExisting.CreateResult = false, false, nil
+	tests := map[string]struct {
+		policy        Policy
+		code, message string
+	}{
+		"unknown property":   {values("teamId", "1"), "CREATE_VALUE_UNKNOWN", `no property "teamId" beside "template"`},
+		"inside the wrapper": {values("login", "admin"), "CREATE_VALUE_INSIDE_WRAPPER", `"login" is the request wrapper "template" or a property inside it`},
+		"the wrapper":        {values("template", "x"), "CREATE_VALUE_INSIDE_WRAPPER", `"template" is the request wrapper`},
+		"unknown value":      {values("onboardingMode", "ONBOARDING_MODE_LATER"), "CREATE_VALUE_INVALID", "is not a value of its enum"},
+		"zero value":         {values("onboardingMode", "ONBOARDING_MODE_UNSPECIFIED"), "CREATE_VALUE_INVALID", "is the zero value"},
+		"new resource":       {notExisting, "RESOURCE_LIFECYCLE_INCOMPLETE", "api.createValues is only for existing resources"},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			memberIssue(t, memberSource(t, memberWithItemPaths), tt.policy, tt.code, tt.message)
+		})
+	}
+}

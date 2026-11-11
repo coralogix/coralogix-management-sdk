@@ -62,3 +62,16 @@ func TestCreateResultPolicy(t *testing.T) {
 		}
 	}
 }
+
+func TestCreateValuesPolicy(t *testing.T) {
+	e := exceptionsOf(t, "api: {requestWrapper: template, createValues: {onboardingMode: ONBOARDING_MODE_NO_INVITE}}\n")
+	if err := e.API.Check(); err != nil {
+		t.Fatal(err)
+	}
+	if got := e.Policy().CreateValues; len(got) != 1 || got["onboardingMode"] != "ONBOARDING_MODE_NO_INVITE" {
+		t.Fatalf("create values %v", got)
+	}
+	if err := exceptionsOf(t, "api: {createValues: {onboardingMode: ''}}\n").API.Check(); err == nil {
+		t.Fatal("an empty create value passes the check")
+	}
+}

@@ -77,6 +77,9 @@ type API struct {
 	// BatchWrite says that the Create and Update bodies are arrays of one request component. A tool
 	// sends one item.
 	BatchWrite *BatchWrite `yaml:"batchWrite"`
+	// CreateValues are the properties beside requestWrapper that Create always sends, with their
+	// values, for example {onboardingMode: ONBOARDING_MODE_NO_INVITE}. They are not resource fields.
+	CreateValues map[string]string `yaml:"createValues"`
 }
 
 // BatchWrite describes writes that take an array of request items.
@@ -218,6 +221,9 @@ func (a API) Check() error {
 	if a.UpdateIDOutsideWrapper && (a.RequestWrapper == "" || !a.UpdateIDInBody) {
 		return errors.New("api.updateIDOutsideWrapper needs api.requestWrapper and api.updateIDInBody")
 	}
+	if err := checkValues("api.createValues", a.CreateValues); err != nil {
+		return err
+	}
 	if r := a.batchCreateResult(); r != nil && (r.Resource == "" || r.Status == "" || len(r.Created) == 0) {
 		return errors.New("api.batchWrite.createResult needs resource, status, and created")
 	}
@@ -228,7 +234,7 @@ func (a API) Check() error {
 		if o := a.Operations; o == nil || o.Create == "" || o.Create != o.Update || o.Create != o.Delete {
 			return errors.New("api.overwrite needs api.operations to name the write as create, update, and delete")
 		}
-		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" || a.BatchWrite != nil {
+		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" || a.BatchWrite != nil || len(a.CreateValues) != 0 {
 			return errors.New("api.overwrite describes a resource without an id or a wrapper; it cannot go with the other api keys")
 		}
 		for name, value := range a.Overwrite.GetQuery {
@@ -249,6 +255,17 @@ func (a API) Check() error {
 	}
 	if a.Delete != nil {
 		return errors.New("api.delete and api.operations both name the Delete operation: keep only api.operations.delete")
+	}
+	return nil
+}
+
+// checkValues checks a map of property names to the values that a call always sends: neither can be
+// empty.
+func checkValues(key string, values map[string]string) error {
+	for name, value := range values {
+		if name == "" || value == "" {
+			return fmt.Errorf("%s maps a property to a value; neither can be empty", key)
+		}
 	}
 	return nil
 }
@@ -336,6 +353,7 @@ func (e Exceptions) Policy() model.Policy {
 		UpdateMaskInBody:             e.API.UpdateMaskInBody,
 		GetByIDs:                     e.API.GetByIDs,
 		BatchWrite:                   e.API.BatchWrite != nil,
+		CreateValues:                 maps.Clone(e.API.CreateValues),
 		RequestWrappers:              maps.Clone(e.RequestWrappers),
 	}
 	if r := e.API.batchCreateResult(); r != nil {

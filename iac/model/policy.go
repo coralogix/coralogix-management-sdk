@@ -43,6 +43,10 @@ type Policy struct {
 	// CreateResult describes the Create response of a BatchWrite resource that answers with one
 	// result per request item. nil means that Create returns the resource.
 	CreateResult *CreateResultLine
+	// CreateValues are the properties of the Create body beside the RequestWrapper that Create always
+	// sends, with their values, for example {"onboardingMode": "ONBOARDING_MODE_NO_INVITE"}. They are
+	// not fields of the resource. Existing resources only.
+	CreateValues map[string]string
 	// Existing turns on the rules that are true for every released resource:
 	//   - a response may wrap the resource in one property;
 	//   - the request schema may be the resource schema (a shared payload), and

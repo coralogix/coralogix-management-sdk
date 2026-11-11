@@ -17,6 +17,7 @@ package model
 import (
 	"errors"
 	"fmt"
+	"maps"
 	"slices"
 	"strings"
 
@@ -127,4 +128,51 @@ func (r *Resource) resultResponse(out Response, proxy *base.SchemaProxy) (Respon
 	out.Result = &WriteResult{Items: results.field, Component: results.component, Resource: line.Resource, Status: line.Status,
 		StatusType: statusType, Created: slices.Clone(line.Created), Message: line.Message}
 	return out, nil
+}
+
+// readCreateValues reads the properties beside the request wrapper that Create always sends, with
+// their values (Policy.CreateValues). Each is a scalar or an enum, and the value is one that it accepts
+// and not its zero value, which sending nothing already means.
+func (r *Resource) readCreateValues(create foundOp) error {
+	if len(r.Policy.CreateValues) == 0 {
+		return nil
+	}
+	if !r.Policy.Existing {
+		return errors.New("api.createValues is only for existing resources")
+	}
+	wrapper := r.Policy.WrapperOf(true)
+	body, _, _ := validationObject(bodySchemaOrNil(r.Policy.bodyOf(create.op)))
+	inside := mustSchema(r.Policy.requestBody(create.op))
+	for _, name := range slices.Sorted(maps.Keys(r.Policy.CreateValues)) {
+		value := r.Policy.CreateValues[name]
+		location := "behavior-overrides.yaml:api.createValues." + name
+		fail := func(code, message, remediation string) error {
+			return &contractError{code: code, location: location, message: message, remediation: remediation}
+		}
+		proxy := propertyOf(body, name)
+		switch {
+		case wrapper == "":
+			return fail("CREATE_VALUE_UNKNOWN", fmt.Sprintf("Create %s has no request wrapper, so no property %q sits beside it.", create.op.OperationId, name),
+				"Set requestWrapper, or delete the line.")
+		case name == wrapper || propertyOf(inside, name) != nil:
+			return fail("CREATE_VALUE_INSIDE_WRAPPER", fmt.Sprintf("%q is the request wrapper %q or a property inside it: a field of the resource, not a fixed value.", name, wrapper),
+				"Name a property beside the request wrapper, or delete the line.")
+		case proxy == nil:
+			return fail("CREATE_VALUE_UNKNOWN", fmt.Sprintf("The Create body of %s has no property %q beside %q.", create.op.OperationId, name, wrapper),
+				"Name a property beside the request wrapper, or delete the line.")
+		}
+		t, err := typeOf(proxy, location, walk{policy: &r.Policy})
+		problem := queryValueProblem(proxy, value)
+		switch {
+		case err != nil || !slices.Contains([]Kind{String, Bool, Integer, Number, Enum}, t.Kind):
+			problem = "is not a value of a scalar or an enum property"
+		case problem == "" && t.Kind == Enum && value == t.EnumZero:
+			problem = "is the zero value, which an omitted property already sends"
+		}
+		if problem != "" {
+			return fail("CREATE_VALUE_INVALID", fmt.Sprintf("The value %q of the property %q %s.", value, name, problem), "Use a value that the property accepts.")
+		}
+		r.CreateValues = append(r.CreateValues, QueryValue{Name: name, Value: value, Type: t})
+	}
+	return nil
 }

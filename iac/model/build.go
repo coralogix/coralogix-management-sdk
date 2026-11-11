@@ -101,6 +101,9 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	// The write of an overwrite resource replaces every item, also when it is a POST.
 	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Overwrite, Policy: policy, shapeUsed: map[string]bool{}, requestUnwrapUsed: map[string]bool{}}
 	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
+	if err := r.readCreateValues(ops[opCreate]); err != nil {
+		return nil, nil, err
+	}
 	if err := r.readOperations(ops); err != nil {
 		return nil, nil, err
 	}

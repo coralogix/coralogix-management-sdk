@@ -61,6 +61,9 @@ type Resource struct {
 	// GetQuery are the query parameters that Get always sends, with their values, sorted by name
 	// (Policy.GetQuery). It is nil when Get sends none.
 	GetQuery []QueryValue
+	// CreateValues are the properties beside the request wrapper that Create always sends, with their
+	// values, sorted by name (Policy.CreateValues). They are not resource fields.
+	CreateValues []QueryValue
 	// Replace is true when Update is a full replace (PUT, E11): the body has
 	// every Update field, and the server clears a field that the body does
 	// not have. It has no update mask. False: PATCH with an update mask.
@@ -139,9 +142,9 @@ type Operation struct {
 	Response         Response
 }
 
-// QueryValue is a query parameter that an operation always sends, and its value.
+// QueryValue is a query parameter or a body property that an operation always sends, and its value.
 type QueryValue struct {
-	Name  string // the parameter name, for example "source_type"
+	Name  string // the parameter or property name, for example "source_type"
 	Value string // the value as the query string holds it, for example "SOURCE_TYPE_LOGS"
 	Type  *Type  // the type of the parameter: an Enum names its component
 }
