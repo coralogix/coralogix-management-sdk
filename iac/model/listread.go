@@ -20,6 +20,7 @@ import (
 	"maps"
 	"slices"
 
+	"github.com/pb33f/libopenapi/datamodel/high/base"
 	v3 "github.com/pb33f/libopenapi/datamodel/high/v3"
 )
 
@@ -69,7 +70,38 @@ func (r *Resource) readListOperations(ops map[verb]foundOp) error {
 		return err
 	}
 	r.GetFromList, r.List = true, list
+	r.readPaging(get)
 	return nil
+}
+
+// readPaging records the query parameters that page Get, and the property of its response that holds
+// the next page token.
+func (r *Resource) readPaging(get foundOp) {
+	for _, p := range slices.Concat(get.item.Parameters, get.op.Parameters) {
+		if p.In != "query" || !pagingName(p.Name) {
+			continue
+		}
+		if t, err := typeOf(p.Schema, listLocation+"."+p.Name, walk{policy: &r.Policy}); err == nil {
+			r.PageParameters = append(r.PageParameters, Parameter{Name: p.Name, Type: t})
+		}
+	}
+	response := mustSchema(responseRef(mustProxy(okSchema(get.op))))
+	for _, name := range propertyNames(response) {
+		if normalName(name) != "nextpagetoken" {
+			continue
+		}
+		if t, err := typeOf(propertyOf(response, name), listLocation+"."+name, walk{policy: &r.Policy}); err == nil {
+			r.NextPage = &Parameter{Name: name, Type: t}
+		}
+	}
+}
+
+// mustProxy returns proxy, or nil when err is set.
+func mustProxy(proxy *base.SchemaProxy, err error) *base.SchemaProxy {
+	if err != nil {
+		return nil
+	}
+	return proxy
 }
 
 // readDeleteOperation reads the Delete of a GetFromList resource: it takes the id in its one path

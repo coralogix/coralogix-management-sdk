@@ -397,6 +397,13 @@ func TestMemberGetFromList(t *testing.T) {
 	if l == nil || l.OperationID != r.Get.OperationID || l.ItemsField != "members" || !l.Full || l.IDField != "memberId" || !l.Paged {
 		t.Fatalf("list: %+v", l)
 	}
+	var paging []string
+	for _, p := range r.PageParameters {
+		paging = append(paging, p.Name+":"+string(p.Type.Kind)+":"+p.Type.Format)
+	}
+	if !slices.Equal(paging, []string{"page_size:integer:int64", "page_token:integer:int64"}) || r.NextPage == nil || r.NextPage.Name != "nextPageToken" || r.NextPage.Type.Format != "int64" {
+		t.Fatalf("paging %v, next page %+v", paging, r.NextPage)
+	}
 	if len(r.ListFilters) != 1 || r.ListFilters[0].Param != "login" || r.ListFilters[0].Field != "login" || r.ListFilters[0].Type.Kind != String {
 		t.Fatalf("filters: %+v", r.ListFilters)
 	}

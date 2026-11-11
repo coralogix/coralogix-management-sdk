@@ -66,6 +66,12 @@ type Resource struct {
 	// ListFilters are the query parameters that narrow the List by a resource field, sorted by
 	// parameter (Policy.ListFilters). A filter can match more than the resource.
 	ListFilters []ListFilter
+	// PageParameters are the query parameters that page the Get of a GetFromList resource, in the
+	// order of the contract, and NextPage is the response property that holds the token of the next
+	// page, nil when the response has none. A parameter or property whose type the model cannot read,
+	// such as a pagination object, is left out.
+	PageParameters []Parameter
+	NextPage       *Parameter
 	// DeleteValues are the properties of the Delete body that a remove always sends beside the id
 	// array Policy.DeleteIDs, with their values, sorted by name (Policy.DeleteValues).
 	DeleteValues []QueryValue
@@ -186,6 +192,12 @@ type ListOperation struct {
 	// Paged is true when the List has a query parameter that pages the result (a page token,
 	// size, or offset, a limit, or a pagination object), or the response has a next page token.
 	Paged bool
+}
+
+// Parameter is a query parameter or a response property, and its type.
+type Parameter struct {
+	Name string
+	Type *Type
 }
 
 // Response is the 200 response body.
