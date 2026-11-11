@@ -79,9 +79,24 @@ type API struct {
 	BatchWrite *BatchWrite `yaml:"batchWrite"`
 }
 
-// BatchWrite describes writes that take an array of request items. It is an object, so that a key can
-// describe what a write answers.
-type BatchWrite struct{}
+// BatchWrite describes writes that take an array of request items.
+type BatchWrite struct {
+	// CreateResult describes a Create that answers with one result per request item, in request
+	// order, instead of the resource. A status per item says whether it was created.
+	CreateResult *CreateResult `yaml:"createResult"`
+}
+
+// CreateResult names the properties of one result of a batch Create.
+type CreateResult struct {
+	// Resource is the property that holds the created resource.
+	Resource string `yaml:"resource"`
+	// Status is the enum property with the status of the item, and Created are its values that mean
+	// that the item was created.
+	Status  string   `yaml:"status"`
+	Created []string `yaml:"created"`
+	// Message is the string property that says why an item was not created, "" for none.
+	Message string `yaml:"message"`
+}
 
 // Operations names the four lifecycle operationIds, and the List. The four lifecycle ids are
 // set together, or not at all.
@@ -203,6 +218,9 @@ func (a API) Check() error {
 	if a.UpdateIDOutsideWrapper && (a.RequestWrapper == "" || !a.UpdateIDInBody) {
 		return errors.New("api.updateIDOutsideWrapper needs api.requestWrapper and api.updateIDInBody")
 	}
+	if r := a.batchCreateResult(); r != nil && (r.Resource == "" || r.Status == "" || len(r.Created) == 0) {
+		return errors.New("api.batchWrite.createResult needs resource, status, and created")
+	}
 	if a.Delete != nil && a.Delete.Operation == "" {
 		return errors.New("api.delete.operation is required")
 	}
@@ -233,6 +251,14 @@ func (a API) Check() error {
 		return errors.New("api.delete and api.operations both name the Delete operation: keep only api.operations.delete")
 	}
 	return nil
+}
+
+// batchCreateResult returns the createResult line of api.batchWrite, or nil.
+func (a API) batchCreateResult() *CreateResult {
+	if a.BatchWrite == nil {
+		return nil
+	}
+	return a.BatchWrite.CreateResult
 }
 
 // Check checks the createAs, collection, and keyedBy keys of a field line.
@@ -311,6 +337,9 @@ func (e Exceptions) Policy() model.Policy {
 		GetByIDs:                     e.API.GetByIDs,
 		BatchWrite:                   e.API.BatchWrite != nil,
 		RequestWrappers:              maps.Clone(e.RequestWrappers),
+	}
+	if r := e.API.batchCreateResult(); r != nil {
+		p.CreateResult = &model.CreateResultLine{Resource: r.Resource, Status: r.Status, Created: slices.Clone(r.Created), Message: r.Message}
 	}
 	if e.API.Overwrite != nil {
 		p.Overwrite = true

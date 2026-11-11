@@ -17,7 +17,10 @@ package model
 import (
 	"errors"
 	"fmt"
+	"slices"
 	"strings"
+
+	"github.com/pb33f/libopenapi/datamodel/high/base"
 )
 
 // batchWriteLocation is the line of the behavior-overrides file that says the writes take arrays.
@@ -63,4 +66,65 @@ func (r *Resource) readBatchBodies(ops map[verb]foundOp) error {
 		o.Body, o.BodyItems = component, true
 	}
 	return nil
+}
+
+// resultResponse reads the Create response of a BatchWrite resource that answers with one result per
+// request item (Policy.CreateResult). The response has one array of result components. A result holds
+// the resource in a property, and the status of the item in an enum property.
+func (r *Resource) resultResponse(out Response, proxy *base.SchemaProxy) (Response, error) {
+	line := r.Policy.CreateResult
+	if !r.Policy.BatchWrite {
+		return Response{}, errors.New("api.batchWrite.createResult needs api.batchWrite")
+	}
+	location := batchWriteLocation + ".createResult"
+	fail := func(code, message, remediation string) (Response, error) {
+		return Response{}, &contractError{code: code, location: location, message: message, remediation: remediation}
+	}
+	s, err := schemaOf(proxy)
+	if err != nil {
+		return Response{}, fmt.Errorf("response %s: %w", out.Schema, err)
+	}
+	arrays := itemArrays(s)
+	switch {
+	case len(arrays) == 0:
+		return fail("CREATE_RESULT_ITEMS_NOT_FOUND", fmt.Sprintf("The Create response %s has no array of result components.", out.Schema),
+			"Name a Create that answers with one result per request item, or delete createResult.")
+	case len(arrays) > 1:
+		return fail("CREATE_RESULT_ITEMS_AMBIGUOUS", fmt.Sprintf("The Create response %s has more than one array of components.", out.Schema),
+			"Return the results in the only array of components of the Create response.")
+	}
+	results := arrays[0]
+	if resource, err := componentName(unwrapRef(propertyOf(results.schema, line.Resource))); err != nil || resource != r.Name {
+		return fail("CREATE_RESULT_RESOURCE_NOT_FOUND", fmt.Sprintf("The result %s has no property %q that holds %s.", results.component, line.Resource, r.Name),
+			"Name the result property that holds the created resource.")
+	}
+	status := propertyOf(results.schema, line.Status)
+	statusType, err := typeOf(status, fieldLocation(results.component, line.Status), walk{policy: &r.Policy})
+	if status == nil || err != nil || statusType.Kind != Enum {
+		return fail("CREATE_RESULT_STATUS_NOT_ENUM", fmt.Sprintf("The result %s has no enum property %q.", results.component, line.Status),
+			"Name the enum property that holds the status of the item.")
+	}
+	if len(line.Created) == 0 {
+		return fail("CREATE_RESULT_STATUS_VALUE_INVALID", "createResult names no status value that means created.",
+			"List the status values that mean that the item was created.")
+	}
+	for _, value := range line.Created {
+		problem := queryValueProblem(status, value)
+		if value == statusType.EnumZero {
+			problem = "is the zero value"
+		}
+		if problem != "" {
+			return fail("CREATE_RESULT_STATUS_VALUE_INVALID", fmt.Sprintf("The status value %q of %s.%s %s.", value, results.component, line.Status, problem),
+				"List business values of the status enum.")
+		}
+	}
+	if line.Message != "" {
+		if message, err := schemaOf(propertyOf(results.schema, line.Message)); err != nil || !slices.Equal(message.Type, []string{"string"}) {
+			return fail("CREATE_RESULT_MESSAGE_NOT_STRING", fmt.Sprintf("The result %s has no string property %q.", results.component, line.Message),
+				"Name the string property that says why an item was not created, or delete message.")
+		}
+	}
+	out.Result = &WriteResult{Items: results.field, Component: results.component, Resource: line.Resource, Status: line.Status,
+		StatusType: statusType, Created: slices.Clone(line.Created), Message: line.Message}
+	return out, nil
 }

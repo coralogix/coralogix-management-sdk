@@ -723,6 +723,9 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	if v == opCreate && r.Policy.CreateResponseOnlyIDProperty != "" {
 		return r.idResponse(out, proxy)
 	}
+	if v == opCreate && r.Policy.CreateResult != nil {
+		return r.resultResponse(out, proxy)
+	}
 	if !wrapped {
 		return emptyResponse(out, proxy)
 	}

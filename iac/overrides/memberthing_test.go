@@ -15,6 +15,7 @@
 package overrides
 
 import (
+	"slices"
 	"testing"
 
 	"go.yaml.in/yaml/v4"
@@ -43,5 +44,21 @@ func TestBatchWritePolicy(t *testing.T) {
 	overwrite := exceptionsOf(t, "api: {batchWrite: {}, overwrite: {}, operations: {create: W, get: G, update: W, delete: W}}\n")
 	if err := overwrite.API.Check(); err == nil {
 		t.Fatal("api.overwrite goes with api.batchWrite")
+	}
+}
+
+func TestCreateResultPolicy(t *testing.T) {
+	e := exceptionsOf(t, "api:\n  batchWrite:\n    createResult: {resource: member, status: status, created: [CREATED], message: message}\n")
+	if err := e.API.Check(); err != nil {
+		t.Fatal(err)
+	}
+	r := e.Policy().CreateResult
+	if r == nil || r.Resource != "member" || r.Status != "status" || r.Message != "message" || !slices.Equal(r.Created, []string{"CREATED"}) {
+		t.Fatalf("create result %+v", r)
+	}
+	for _, line := range []string{"{status: status, created: [CREATED]}", "{resource: member, created: [CREATED]}", "{resource: member, status: status}"} {
+		if err := exceptionsOf(t, "api: {batchWrite: {createResult: "+line+"}}\n").API.Check(); err == nil {
+			t.Errorf("createResult %s passes the check", line)
+		}
 	}
 }

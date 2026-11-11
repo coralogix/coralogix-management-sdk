@@ -190,6 +190,24 @@ type Response struct {
 	// Empty is true when the response schema has no fields, for example many
 	// Delete responses. The SDK then returns map[string]interface{}.
 	Empty bool
+	// Result is the answer of a batch Create that holds one result per request item
+	// (Policy.CreateResult), nil otherwise. Field is then "".
+	Result *WriteResult
+}
+
+// WriteResult is the answer of a batch Create: one result per request item, in request order. A tool
+// sends one item and reads the first result. The item is created only when Status holds one of
+// Created, and Resource then holds it. Otherwise Message, when the result has it, says why.
+type WriteResult struct {
+	Items     string // the response property that holds the results, for example "results"
+	Component string // the component of a result, for example "CreateThingResult"
+	Resource  string // the result property that holds the resource
+	Status    string // the enum property with the status of the item
+	// StatusType is the enum of Status. Created are its values that mean created, in the order of
+	// the line; none is the zero value.
+	StatusType *Type
+	Created    []string
+	Message    string // the string property with a message, "" when the line names none
 }
 
 // Behavior is how a top-level field is managed. See Classify.

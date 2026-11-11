@@ -238,3 +238,88 @@ func TestMemberArrayBodyNeedsBatchWrite(t *testing.T) {
 		t.Fatal("an array body builds without api.batchWrite")
 	}
 }
+
+// memberCreateResult is the createResult line of the members contract.
+func memberCreateResult() *CreateResultLine {
+	return &CreateResultLine{Resource: "member", Status: "status", Created: []string{"CREATE_MEMBER_STATUS_CREATED"}, Message: "message"}
+}
+
+func TestMemberCreateResult(t *testing.T) {
+	p := memberBatchPolicy()
+	p.CreateResult = memberCreateResult()
+	r := buildMember(t, memberSource(t, memberWithItemPaths), p)
+	got := r.Create.Response
+	if got.Schema != "CreateMembersResponse" || got.Field != "" || got.Items || got.Result == nil {
+		t.Fatalf("create response: %+v", got)
+	}
+	result := *got.Result
+	if result.Items != "results" || result.Component != "CreateMemberResult" || result.Resource != "member" || result.Status != "status" || result.Message != "message" {
+		t.Fatalf("create result: %+v", result)
+	}
+	if result.StatusType.Kind != Enum || result.StatusType.Schema != "CreateMemberStatus" || !slices.Equal(result.Created, []string{"CREATE_MEMBER_STATUS_CREATED"}) {
+		t.Fatalf("create status: %+v, %v", result.StatusType, result.Created)
+	}
+	p.CreateResult.Message = ""
+	if r := buildMember(t, memberSource(t, memberWithItemPaths), p); r.Create.Response.Result.Message != "" {
+		t.Fatalf("message without a line: %+v", r.Create.Response.Result)
+	}
+}
+
+func TestMemberCreateResultIssues(t *testing.T) {
+	const results = "        results:\n          type: array\n          minItems: 0\n          items: {$ref: '#/components/schemas/CreateMemberResult'}\n"
+	line := func(edit func(*CreateResultLine)) Policy {
+		p := memberBatchPolicy()
+		p.CreateResult = memberCreateResult()
+		edit(p.CreateResult)
+		return p
+	}
+	same := func(*CreateResultLine) {}
+	withoutBatch := line(same)
+	withoutBatch.BatchWrite = false
+	tests := map[string]struct {
+		edits         []string
+		policy        Policy
+		code, message string
+	}{
+		"no results array": {
+			edits: []string{results, "        results: {$ref: '#/components/schemas/CreateMemberResult'}\n"}, policy: line(same),
+			code: "CREATE_RESULT_ITEMS_NOT_FOUND", message: "has no array of result components",
+		},
+		"two results arrays": {
+			edits: []string{results, results + "        failures:\n          type: array\n          items: {$ref: '#/components/schemas/CreateMemberResult'}\n"}, policy: line(same),
+			code: "CREATE_RESULT_ITEMS_AMBIGUOUS", message: "has more than one array of components",
+		},
+		"resource property": {
+			policy: line(func(l *CreateResultLine) { l.Resource = "login" }),
+			code:   "CREATE_RESULT_RESOURCE_NOT_FOUND", message: `no property "login" that holds Member`,
+		},
+		"status not enum": {
+			policy: line(func(l *CreateResultLine) { l.Status = "login" }),
+			code:   "CREATE_RESULT_STATUS_NOT_ENUM", message: `no enum property "login"`,
+		},
+		"unknown status": {
+			policy: line(func(l *CreateResultLine) { l.Created = []string{"CREATE_MEMBER_STATUS_DONE"} }),
+			code:   "CREATE_RESULT_STATUS_VALUE_INVALID", message: "is not a value of its enum",
+		},
+		"zero status": {
+			policy: line(func(l *CreateResultLine) { l.Created = []string{"CREATE_MEMBER_STATUS_UNSPECIFIED"} }),
+			code:   "CREATE_RESULT_STATUS_VALUE_INVALID", message: "is the zero value",
+		},
+		"no status": {
+			policy: line(func(l *CreateResultLine) { l.Created = nil }),
+			code:   "CREATE_RESULT_STATUS_VALUE_INVALID", message: "names no status value",
+		},
+		"message not string": {
+			policy: line(func(l *CreateResultLine) { l.Message = "member" }),
+			code:   "CREATE_RESULT_MESSAGE_NOT_STRING", message: `no string property "member"`,
+		},
+		"without batch write": {
+			policy: withoutBatch, code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.batchWrite.createResult needs api.batchWrite",
+		},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			memberIssue(t, memberSource(t, memberWithItemPaths, tt.edits), tt.policy, tt.code, tt.message)
+		})
+	}
+}

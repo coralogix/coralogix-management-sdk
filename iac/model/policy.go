@@ -40,6 +40,9 @@ type Policy struct {
 	// BatchWrite means that the Create and Update bodies are arrays of one request component, and a
 	// tool sends one item. The model reads the item where it reads a body. Existing resources only.
 	BatchWrite bool
+	// CreateResult describes the Create response of a BatchWrite resource that answers with one
+	// result per request item. nil means that Create returns the resource.
+	CreateResult *CreateResultLine
 	// Existing turns on the rules that are true for every released resource:
 	//   - a response may wrap the resource in one property;
 	//   - the request schema may be the resource schema (a shared payload), and
@@ -565,6 +568,14 @@ type KeyedLine struct {
 	Object     bool
 	Arms       map[string]string
 	KeyAs      string
+}
+
+// CreateResultLine names the properties of a result of a batch Create: the property that holds the
+// resource, the enum property with the status of the item, the status values that mean that the
+// item was created, and the string property with a message ("" for none).
+type CreateResultLine struct {
+	Resource, Status, Message string
+	Created                   []string
 }
 
 // EnumValue is an accepted API value of an enum and the name that the generated resource gives it.
