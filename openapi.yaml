@@ -22557,7 +22557,7 @@ components:
           examples:
             - 10
           format: int32
-          maximum: 15
+          maximum: 1440
           minimum: 1
           type: integer
           x-coralogix-presence: true
@@ -22649,7 +22649,7 @@ components:
           examples:
             - 10
           format: int32
-          maximum: 15
+          maximum: 1440
           minimum: 1
           type: integer
           x-coralogix-presence: true
