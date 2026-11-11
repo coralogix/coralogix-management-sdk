@@ -74,7 +74,14 @@ type API struct {
 	// The generated update sets it to the same changed-field mask a query
 	// parameter would send.
 	UpdateMaskInBody bool `yaml:"updateMaskInBody"`
+	// BatchWrite says that the Create and Update bodies are arrays of one request component. A tool
+	// sends one item.
+	BatchWrite *BatchWrite `yaml:"batchWrite"`
 }
+
+// BatchWrite describes writes that take an array of request items. It is an object, so that a key can
+// describe what a write answers.
+type BatchWrite struct{}
 
 // Operations names the four lifecycle operationIds, and the List. The four lifecycle ids are
 // set together, or not at all.
@@ -203,7 +210,7 @@ func (a API) Check() error {
 		if o := a.Operations; o == nil || o.Create == "" || o.Create != o.Update || o.Create != o.Delete {
 			return errors.New("api.overwrite needs api.operations to name the write as create, update, and delete")
 		}
-		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" {
+		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" || a.BatchWrite != nil {
 			return errors.New("api.overwrite describes a resource without an id or a wrapper; it cannot go with the other api keys")
 		}
 		for name, value := range a.Overwrite.GetQuery {
@@ -302,6 +309,7 @@ func (e Exceptions) Policy() model.Policy {
 		CustomMethods:                e.API.CustomMethods,
 		UpdateMaskInBody:             e.API.UpdateMaskInBody,
 		GetByIDs:                     e.API.GetByIDs,
+		BatchWrite:                   e.API.BatchWrite != nil,
 		RequestWrappers:              maps.Clone(e.RequestWrappers),
 	}
 	if e.API.Overwrite != nil {

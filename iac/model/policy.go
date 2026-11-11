@@ -37,6 +37,9 @@ type Policy struct {
 	// GetByIDs names the string-array Get query parameter used to read one resource through a
 	// batch endpoint. Existing resources only; Delete supplies the id path parameter.
 	GetByIDs string
+	// BatchWrite means that the Create and Update bodies are arrays of one request component, and a
+	// tool sends one item. The model reads the item where it reads a body. Existing resources only.
+	BatchWrite bool
 	// Existing turns on the rules that are true for every released resource:
 	//   - a response may wrap the resource in one property;
 	//   - the request schema may be the resource schema (a shared payload), and
@@ -221,7 +224,7 @@ func (p Policy) unwrappedCreate(ops map[verb]foundOp) bool {
 		return false
 	}
 	has := func(v verb) bool {
-		s, err := schemaOf(bodyProxy(ops[v].op))
+		s, err := schemaOf(p.bodyOf(ops[v].op))
 		return err == nil && propertyOf(s, p.RequestWrapper) != nil
 	}
 	return !has(opCreate) && has(opUpdate)
@@ -230,7 +233,7 @@ func (p Policy) unwrappedCreate(ops map[verb]foundOp) bool {
 // requestBody returns the schema that holds the resource in a Create or Update
 // body. With a request wrapper it is the wrapper property.
 func (p Policy) requestBody(op *v3.Operation) *base.SchemaProxy {
-	proxy := bodyProxy(op)
+	proxy := p.bodyOf(op)
 	if p.RequestWrapper == "" || proxy == nil {
 		return referencedSchema(proxy)
 	}
@@ -242,6 +245,28 @@ func (p Policy) requestBody(op *v3.Operation) *base.SchemaProxy {
 		return referencedSchema(inner)
 	}
 	return proxy // a later check reports the missing wrapper property
+}
+
+// bodyOf returns the JSON body of op as it holds one resource: the item of an array body under
+// BatchWrite, or the body itself.
+func (p Policy) bodyOf(op *v3.Operation) *base.SchemaProxy {
+	proxy := bodyProxy(op)
+	if !p.BatchWrite {
+		return proxy
+	}
+	if items := arrayItems(proxy); items != nil {
+		return items
+	}
+	return proxy
+}
+
+// arrayItems returns the items of an array schema, or nil when proxy is no array.
+func arrayItems(proxy *base.SchemaProxy) *base.SchemaProxy {
+	s, err := schemaOf(proxy)
+	if err != nil || !slices.Equal(s.Type, []string{"array"}) || s.Items == nil || !s.Items.IsA() {
+		return nil
+	}
+	return s.Items.A
 }
 
 // referencedSchema returns the schema that allOf: [$ref] refers to, or proxy itself. The OpenAPI

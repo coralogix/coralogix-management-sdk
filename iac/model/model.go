@@ -120,6 +120,9 @@ type Operation struct {
 	Path        string
 	OperationID string
 	Body        string // "" (no body), "inline", or a component name
+	// BodyItems: the body is an array of the component Body (Policy.BatchWrite), and a tool sends one
+	// item, for example []CreateThingRequest.
+	BodyItems bool
 	// BodyTitle is the "title" of an inline body, "" when it has none.
 	// BodyTitleIsComponent: a component schema has the same name.
 	BodyTitle            string
@@ -166,7 +169,8 @@ type ListOperation struct {
 
 // Response is the 200 response body.
 type Response struct {
-	// Items: Field holds an array of resources. GetByIDs reads one id through this batch API.
+	// Items: Field holds an array of resources. GetByIDs reads one id through this batch API, and the
+	// Update of a BatchWrite resource returns the item that it wrote.
 	Items  bool
 	Schema string // component name, "" for an inline empty object
 	// Field is the property that wraps the resource, for example "aiEvaluation".

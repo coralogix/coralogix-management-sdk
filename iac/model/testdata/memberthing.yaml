@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info: {title: memberthing, version: 1.0.0}
+paths:
+  /members/v1:
+    get:
+      tags: [Members Service]
+      operationId: MembersService_SearchMembers
+      parameters:
+        - {name: team_id, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
+        - {name: login, in: query, required: false, schema: {type: string, minLength: 0}}
+        - {name: page_size, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
+        - {name: page_token, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/SearchMembersResponse'}
+    post:
+      tags: [Members Service]
+      operationId: MembersService_CreateMembers
+      parameters:
+        - {name: team_id, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 0
+              items: {$ref: '#/components/schemas/CreateMemberRequest'}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CreateMembersResponse'}
+    put:
+      tags: [Members Service]
+      operationId: MembersService_UpdateMembers
+      parameters:
+        - {name: team_id, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 0
+              items: {$ref: '#/components/schemas/UpdateMemberRequest'}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/UpdateMembersResponse'}
+  /members/v1:updateStatuses:
+    patch:
+      tags: [Members Service]
+      operationId: MembersService_UpdateMembersStatuses
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: UpdateMemberStatusRequest
+              type: object
+              properties:
+                status:
+                  allOf:
+                    - $ref: '#/components/schemas/MemberStatus'
+                teamId: {type: integer, format: int64, minimum: 0}
+                memberAccountIds:
+                  type: array
+                  minItems: 0
+                  items: {type: integer, format: int64, minimum: 0}
+                memberIds:
+                  type: array
+                  minItems: 1
+                  maxItems: 1000
+                  items: {type: string, minLength: 1, maxLength: 255}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/UpdateMembersStatusesResponse'}
+components:
+  schemas:
+    Member:
+      title: Member
+      type: object
+      properties:
+        displayName: {type: string, minLength: 0}
+        groupIds:
+          type: array
+          minItems: 0
+          items: {type: integer, format: int64, minimum: 0}
+        login: {type: string, minLength: 0}
+        loginModes:
+          type: array
+          minItems: 0
+          maxItems: 2
+          items: {$ref: '#/components/schemas/LoginMode'}
+        memberAccountId: {type: integer, format: int64, minimum: 0}
+        memberId: {type: string, minLength: 0}
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MemberStatus'
+    MemberTemplate:
+      type: object
+      properties:
+        displayName: {type: string, minLength: 0}
+        login: {type: string, minLength: 0}
+        loginModes:
+          type: array
+          minItems: 0
+          maxItems: 2
+          items: {$ref: '#/components/schemas/LoginMode'}
+        status:
+          allOf:
+            - $ref: '#/components/schemas/MemberStatus'
+    CreateMemberRequest:
+      type: object
+      properties:
+        onboardingMode:
+          allOf:
+            - $ref: '#/components/schemas/OnboardingMode'
+        template:
+          allOf:
+            - $ref: '#/components/schemas/MemberTemplate'
+    UpdateMemberRequest:
+      type: object
+      properties:
+        memberAccountId: {type: integer, format: int64, minimum: 0}
+        memberId: {type: string, minLength: 1, maxLength: 255, x-coralogix-presence: true}
+        template:
+          allOf:
+            - $ref: '#/components/schemas/MemberTemplate'
+    CreateMemberResult:
+      type: object
+      required: [login]
+      properties:
+        login: {type: string, minLength: 1, maxLength: 255}
+        message: {type: string, minLength: 1, maxLength: 1024, x-coralogix-presence: true}
+        member:
+          allOf:
+            - $ref: '#/components/schemas/Member'
+        memberAccountId: {type: integer, format: int64, minimum: 0, x-coralogix-presence: true}
+        memberId: {type: string, minLength: 1, maxLength: 255, x-coralogix-presence: true}
+        status: {$ref: '#/components/schemas/CreateMemberStatus'}
+    CreateMemberStatus:
+      type: string
+      enum:
+        - CREATE_MEMBER_STATUS_UNSPECIFIED
+        - CREATE_MEMBER_STATUS_CREATED
+        - CREATE_MEMBER_STATUS_ALREADY_EXISTS
+        - CREATE_MEMBER_STATUS_INVITED
+        - CREATE_MEMBER_STATUS_FAILED
+    CreateMembersResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          minItems: 0
+          items: {$ref: '#/components/schemas/CreateMemberResult'}
+    UpdateMembersResponse:
+      type: object
+      properties:
+        memberAccountIds:
+          type: array
+          minItems: 0
+          items: {type: integer, format: int64, minimum: 0}
+        members:
+          type: array
+          minItems: 0
+          items: {$ref: '#/components/schemas/Member'}
+    SearchMembersResponse:
+      title: SearchMembersResponse
+      type: object
+      properties:
+        nextPageToken: {type: integer, format: int64, minimum: 0, x-coralogix-presence: true}
+        totalCount: {type: integer, format: int64, minimum: 0}
+        members:
+          type: array
+          minItems: 0
+          items: {$ref: '#/components/schemas/Member'}
+    UpdateMembersStatusesResponse:
+      type: object
+      properties:
+        memberAccountIds:
+          type: array
+          minItems: 0
+          items: {type: integer, format: int64, minimum: 0}
+    LoginMode:
+      type: string
+      enum: [LOGIN_MODE_UNSPECIFIED, LOGIN_MODE_SSO, LOGIN_MODE_PASSWORD]
+    MemberStatus:
+      type: string
+      enum: [MEMBER_STATUS_UNSPECIFIED, MEMBER_STATUS_ACTIVE, MEMBER_STATUS_INACTIVE]
+    OnboardingMode:
+      type: string
+      enum: [ONBOARDING_MODE_UNSPECIFIED, ONBOARDING_MODE_INVITE_LINK, ONBOARDING_MODE_NO_INVITE]

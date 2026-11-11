@@ -434,7 +434,12 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 		if o.Body, err = bodyName(f.op); err != nil {
 			return fmt.Errorf("%s: %w", v, err)
 		}
-		if o.Response, err = r.response(f.op, v); err != nil {
+	}
+	if err := r.readBatchBodies(ops); err != nil {
+		return err
+	}
+	for _, v := range verbs {
+		if targets[v].Response, err = r.response(ops[v].op, v); err != nil {
 			return fmt.Errorf("%s: %w", v, err)
 		}
 	}
@@ -467,7 +472,7 @@ func (r *Resource) readBodyTitles(doc *v3.Document, ops map[verb]foundOp) {
 		o.BodyTitle = proxy.Schema().Title
 		o.BodyTitleIsComponent = o.BodyTitle != "" && referenced[o.BodyTitle]
 	}
-	r.Update.BodyAsCreate = sameInlineBodies(bodyProxy(ops[opCreate].op), bodyProxy(ops[opUpdate].op))
+	r.Update.BodyAsCreate = sameInlineBodies(r.Policy.bodyOf(ops[opCreate].op), r.Policy.bodyOf(ops[opUpdate].op))
 }
 
 // sameInlineBodies reports whether two inline bodies without a title are the same schema.
@@ -734,18 +739,20 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	if err != nil {
 		return Response{}, err
 	}
-	keys := r.wrapperKeys(s)
+	arrays := r.Policy.itemsResponse(v)
+	keys := r.wrapperKeys(s, arrays)
 	if len(keys) != 1 {
 		return Response{}, fmt.Errorf("response %s has properties %v, want one that wraps %s", name, propertyNames(s), r.Name)
 	}
 	innerProxy := propertyOf(s, keys[0])
-	if v == opGet && r.Policy.GetByIDs != "" {
-		items, err := schemaOf(innerProxy)
-		if err != nil || !slices.Equal(items.Type, []string{"array"}) || items.Items == nil || items.Items.A == nil {
+	if arrays {
+		items := arrayItems(innerProxy)
+		if items == nil && v == opGet {
 			return Response{}, fmt.Errorf("api.getByIDs needs a response array of %s", r.Name)
 		}
-		out.Items = true
-		innerProxy = items.Items.A
+		if items != nil {
+			out.Items, innerProxy = true, items
+		}
 	}
 	inner, err := componentName(unwrapRef(innerProxy))
 	if err != nil {
@@ -834,16 +841,27 @@ func sameIDWrapper(a, b *Type) bool {
 // wrapperKeys returns the properties of a response that wraps the resource. A released API can
 // return other values next to the resource, such as the ids of objects that the call also
 // changed, so existing mode keeps only the properties that hold the resource. The generated
-// code reads only the resource.
-func (r *Resource) wrapperKeys(s *base.Schema) []string {
+// code reads only the resource. With arrays, a property that holds an array of the resource holds it
+// too.
+func (r *Resource) wrapperKeys(s *base.Schema, arrays bool) []string {
 	keys := propertyNames(s)
 	if len(keys) == 1 || !r.Policy.Existing {
 		return keys
 	}
 	return slices.DeleteFunc(keys, func(key string) bool {
-		inner, err := componentName(unwrapRef(propertyOf(s, key)))
+		proxy := propertyOf(s, key)
+		if items := arrayItems(proxy); arrays && items != nil {
+			proxy = items
+		}
+		inner, err := componentName(unwrapRef(proxy))
 		return err != nil || inner != r.Name
 	})
+}
+
+// itemsResponse reports whether the response of the lifecycle step v can hold the resource in an
+// array: the batch Get of GetByIDs, and the Update of BatchWrite.
+func (p Policy) itemsResponse(v verb) bool {
+	return v == opGet && p.GetByIDs != "" || v == opUpdate && p.BatchWrite
 }
 
 // responseRef returns a 200 response schema that is "$ref: X", or the $ref
