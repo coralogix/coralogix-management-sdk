@@ -453,8 +453,8 @@ func TestMemberGetFromListIssues(t *testing.T) {
 			code:   "GET_FROM_LIST_ID_PROPERTY_REQUIRED", message: "must name the id property",
 		},
 		"new resource": {
-			policy: listPolicy(func(p *Policy) { p.Existing = false }),
-			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.createValues is only for existing resources",
+			policy: listPolicy(func(p *Policy) { p.Existing, p.CreateValues = false, nil }),
+			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList is only for existing resources",
 		},
 		"update id in path": {
 			policy: listPolicy(func(p *Policy) { p.UpdateIDInBody, p.UpdateIDOutsideWrapper = false, false }),
