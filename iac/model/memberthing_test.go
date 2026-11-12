@@ -373,6 +373,40 @@ func TestMemberCreateValueIssues(t *testing.T) {
 	}
 }
 
+// memberWithNumberOnboarding replaces the enum onboarding mode of the Create body with a bounded
+// number, so the tests can pin the schema validation of a fixed numeric value.
+var memberWithNumberOnboarding = []string{
+	"        onboardingMode:\n          allOf:\n            - $ref: '#/components/schemas/OnboardingMode'\n",
+	"        onboardingMode: {type: number, format: double, minimum: 0, maximum: 1}\n",
+}
+
+func TestMemberCreateValueNumberIssues(t *testing.T) {
+	values := func(value string) Policy {
+		p := memberBatchPolicy()
+		p.CreateResult = memberCreateResult()
+		p.CreateValues = map[string]string{"onboardingMode": value}
+		return p
+	}
+	tests := map[string]struct {
+		value, message string
+	}{
+		"not a number":  {"not-a-number", "is not a number"},
+		"above maximum": {"2", "is above the maximum 1"},
+		"below minimum": {"-0.5", "is below the minimum 0"},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			memberIssue(t, memberSource(t, memberWithItemPaths, memberWithNumberOnboarding), values(tt.value), "CREATE_VALUE_INVALID", tt.message)
+		})
+	}
+	t.Run("value in range", func(t *testing.T) {
+		r := buildMember(t, memberSource(t, memberWithItemPaths, memberWithNumberOnboarding), values("0.5"))
+		if len(r.CreateValues) != 1 || r.CreateValues[0].Name != "onboardingMode" || r.CreateValues[0].Value != "0.5" || r.CreateValues[0].Type.Kind != Number {
+			t.Fatalf("create values %+v", r.CreateValues)
+		}
+	})
+}
+
 // memberWithDeletePath gives the golden members contract a Delete of one member by its id path parameter,
 // so a test can describe the List read apart from the batch Delete.
 var memberWithDeletePath = []string{

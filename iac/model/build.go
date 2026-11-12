@@ -2228,6 +2228,15 @@ func queryValueProblem(proxy *base.SchemaProxy, value string) string {
 			return "is not an int32"
 		}
 		return numberRangeProblem(s, float64(n))
+	case slices.Contains(s.Type, "number"):
+		n, err := strconv.ParseFloat(value, 64)
+		if err != nil {
+			return "is not a number"
+		}
+		if math.IsNaN(n) || math.IsInf(n, 0) {
+			return "is not a finite number"
+		}
+		return numberRangeProblem(s, n)
 	}
 	return ""
 }
