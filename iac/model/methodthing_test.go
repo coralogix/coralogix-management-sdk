@@ -18,6 +18,7 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+	"strings"
 	"testing"
 )
 
@@ -52,11 +53,17 @@ var methodOps = OperationIDs{
 
 func loadMethodThing(t *testing.T) *DocumentAlias {
 	t.Helper()
+	return loadMethodThingEdited(t, func(s string) string { return s })
+}
+
+// loadMethodThingEdited loads the fixture after edit changed its text.
+func loadMethodThingEdited(t *testing.T, edit func(string) string) *DocumentAlias {
+	t.Helper()
 	data, err := os.ReadFile(filepath.Join("testdata", "methodthing.yaml"))
 	if err != nil {
 		t.Fatal(err)
 	}
-	doc, err := Load(data)
+	doc, err := Load([]byte(edit(string(data))))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -73,7 +80,8 @@ func methodCodes(t *testing.T, p Policy) []string {
 }
 
 // A PUT Create, a POST Update, an integer id in the Create response, and a oneOf whose other arm
-// is skipped pass the checks, and the POST Update replaces the resource.
+// is skipped pass the checks. The model records the POST Update and that it has no update mask. It
+// does not call the Update a replace: the tool decides which fields to send.
 func TestMethodPolicyBuilds(t *testing.T) {
 	if codes := methodCodes(t, methodPolicy()); len(codes) != 0 {
 		t.Fatalf("issues = %v, want none", codes)
@@ -82,8 +90,11 @@ func TestMethodPolicyBuilds(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !r.Replace {
-		t.Error("a POST Update that the policy states must replace the resource")
+	if r.Replace {
+		t.Error("a POST Update that the policy states is no full replace: the API does not say that an omitted field is cleared")
+	}
+	if r.UpdateMethod != "POST" || r.UpdateMask != "" || r.MaskInBody {
+		t.Errorf("update method = %q, update mask = %q, mask in body = %v, want POST and no mask", r.UpdateMethod, r.UpdateMask, r.MaskInBody)
 	}
 	if len(r.Groups) != 0 {
 		t.Errorf("groups = %v, want none: the oneOf has one arm left", r.Groups)
@@ -110,13 +121,32 @@ func TestRootOneOfWithASkippedArm(t *testing.T) {
 	}
 }
 
-// A Create response id that is an integer is refused when it is not the type of the id field.
-func TestIntegerCreateResponseIDMustMatchTheIDField(t *testing.T) {
+// A Create response id that is an integer and has the type of the id field (int64 here) passes.
+func TestIntegerCreateResponseIDMatchingTheIDField(t *testing.T) {
 	r, err := BuildWithPolicy(loadMethodThing(t), "MethodThing", methodOps, methodPolicy())
 	if err != nil {
 		t.Fatal(err)
 	}
 	if r.Create.Response.ID != "id" || r.IDType.Format != "int64" {
 		t.Fatalf("response id = %q, id type = %+v, want id as int64", r.Create.Response.ID, r.IDType)
+	}
+}
+
+// A Create response id that is an integer of another width than the id field is refused: here the
+// response id is int32 and the id field is int64.
+func TestIntegerCreateResponseIDMismatchingTheIDField(t *testing.T) {
+	doc := loadMethodThingEdited(t, func(s string) string {
+		const line = "\n        id: {type: integer, format: int64, minimum: 0}"
+		if strings.Count(s, line) != 1 {
+			t.Fatalf("the fixture has %d lines %q, want 1", strings.Count(s, line), line)
+		}
+		return strings.Replace(s, line, "\n        id: {type: integer, format: int32, minimum: 0}", 1)
+	})
+	_, err := BuildWithPolicy(doc, "MethodThing", methodOps, methodPolicy())
+	if err == nil {
+		t.Fatal("BuildWithPolicy returned no error for an int32 Create response id and an int64 id field")
+	}
+	if want := "the Create response holds the id as"; !strings.Contains(err.Error(), want) {
+		t.Fatalf("error = %q, want it to contain %q", err, want)
 	}
 }

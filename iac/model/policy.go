@@ -95,7 +95,8 @@ type Policy struct {
 	// of some resources has it. "" means the standard POST.
 	CreateMethod string
 	// UpdateMethod is "POST" for an Update that is a POST of the resource path. Such an Update
-	// replaces the resource, as a PUT does. "" means the standard PATCH or PUT.
+	// has no update mask, and the model does not call it a replace: Resource.Replace stays false,
+	// and Resource.UpdateMethod records the method. "" means the standard PATCH or PUT.
 	UpdateMethod string
 	// CreateResponseOnlyIDProperty is the property of the Create response that holds the id, when the
 	// response does not return the resource (an existing resource only). Create reads the

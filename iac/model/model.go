@@ -63,11 +63,17 @@ type Resource struct {
 	GetQuery []QueryValue
 	// Replace is true when Update is a full replace (PUT, E11): the body has
 	// every Update field, and the server clears a field that the body does
-	// not have. It has no update mask. False: PATCH with an update mask.
+	// not have. It has no update mask. False: PATCH with an update mask, or an Update by POST
+	// (UpdateMethod), which has none.
 	Replace bool
+	// UpdateMethod is "POST" when the policy states that Update is a POST of the resource path
+	// (Policy.UpdateMethod), "" otherwise. Such an Update has no update mask, and it is not a
+	// full replace: Replace is false, and the API does not say that a field the body omits is
+	// cleared. A tool decides which fields to send.
+	UpdateMethod string
 	// UpdateMask is the update-mask name: the query parameter, or the JSON body
-	// property when MaskInBody is set. It is "" for a full replace. It is not
-	// a resource field.
+	// property when MaskInBody is set. It is "" for a full replace and for an Update by POST. It
+	// is not a resource field.
 	UpdateMask string
 	// UpdateMaskPattern is the "pattern" of the update mask string, "" when
 	// the spec has none. It shows which mask paths the API accepts.

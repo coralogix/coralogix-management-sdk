@@ -1726,7 +1726,7 @@ func (p Policy) responseResourceProxy(op *v3.Operation, name string) *base.Schem
 }
 
 func validateBuiltResource(r *Resource) issue.Report {
-	if r.Replace {
+	if r.Replace || r.UpdateMethod == "POST" {
 		return nil
 	}
 	if r.UpdateMaskPattern == "" {

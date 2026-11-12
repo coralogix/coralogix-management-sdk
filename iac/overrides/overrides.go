@@ -81,7 +81,8 @@ type API struct {
 }
 
 // Methods are the HTTP methods of the Create and Update operations when the API uses PUT for
-// Create or POST for Update. An Update by POST replaces the resource, as an Update by PUT does.
+// Create or POST for Update. An Update by POST has no update mask. It is not a replace: a tool
+// decides which fields to send.
 type Methods struct {
 	// Create is PUT, for a Create that is a PUT of the collection path.
 	Create string `yaml:"create"`
