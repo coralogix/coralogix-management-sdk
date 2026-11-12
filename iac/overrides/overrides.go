@@ -258,6 +258,9 @@ func (a API) Check() error {
 	if r := a.batchCreateResult(); r != nil && (r.Resource == "" || r.Status == "" || len(r.Created) == 0) {
 		return errors.New("api.batchWrite.createResult needs resource, status, and created")
 	}
+	if a.batchCreateResult() != nil && a.CreateResponseOnlyIDProperty != "" {
+		return errors.New("api.batchWrite.createResult and api.createResponseOnlyIDProperty both say what the Create response holds: keep one")
+	}
 	if d := a.Delete; d != nil && d.Operation == "" && (d.IDs == "" || a.Operations == nil || a.Operations.Delete == "") {
 		return errors.New("api.delete.operation is required, unless api.delete.ids removes through api.operations.delete")
 	}

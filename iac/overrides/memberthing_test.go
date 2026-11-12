@@ -17,6 +17,7 @@ package overrides
 import (
 	"os"
 	"slices"
+	"strings"
 	"testing"
 
 	"go.yaml.in/yaml/v4"
@@ -63,6 +64,16 @@ func TestCreateResultPolicy(t *testing.T) {
 		if err := exceptionsOf(t, "api: {batchWrite: {createResult: "+line+"}}\n").API.Check(); err == nil {
 			t.Errorf("createResult %s passes the check", line)
 		}
+	}
+}
+
+// TestCreateResultRefusesOnlyID shows that a Create response holds results or only the id, not both:
+// the model would read the id and drop the results.
+func TestCreateResultRefusesOnlyID(t *testing.T) {
+	e := exceptionsOf(t, "api:\n  createResponseOnlyIDProperty: memberId\n  batchWrite:\n    createResult: {resource: member, status: status, created: [CREATED]}\n")
+	err := e.API.Check()
+	if err == nil || !strings.Contains(err.Error(), "api.batchWrite.createResult and api.createResponseOnlyIDProperty both say what the Create response holds") {
+		t.Fatalf("Check error = %v", err)
 	}
 }
 
