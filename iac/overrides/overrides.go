@@ -90,6 +90,9 @@ type GetFromList struct {
 	// Filters maps a query parameter of the List to the resource field that it narrows the List by,
 	// for example {username: username}. A filter can match more items; the id selects the item.
 	Filters map[string]string `yaml:"filters"`
+	// Query are the query parameters that Get always sends to the List, with their values, for a List
+	// that also has the resources that a remove deactivated, for example {status: USER_STATUS_ACTIVE}.
+	Query map[string]string `yaml:"query"`
 }
 
 // BatchWrite describes writes that take an array of request items.
@@ -248,6 +251,9 @@ func (a API) Check() error {
 		if err := checkValues("api.getFromList.filters", a.GetFromList.Filters); err != nil {
 			return err
 		}
+		if err := checkValues("api.getFromList.query", a.GetFromList.Query); err != nil {
+			return err
+		}
 	}
 	if r := a.batchCreateResult(); r != nil && (r.Resource == "" || r.Status == "" || len(r.Created) == 0) {
 		return errors.New("api.batchWrite.createResult needs resource, status, and created")
@@ -390,7 +396,7 @@ func (e Exceptions) Policy() model.Policy {
 		RequestWrappers:              maps.Clone(e.RequestWrappers),
 	}
 	if e.API.GetFromList != nil {
-		p.GetFromList, p.ListFilters = true, maps.Clone(e.API.GetFromList.Filters)
+		p.GetFromList, p.ListFilters, p.GetQuery = true, maps.Clone(e.API.GetFromList.Filters), maps.Clone(e.API.GetFromList.Query)
 	}
 	if r := e.API.batchCreateResult(); r != nil {
 		p.CreateResult = &model.CreateResultLine{Resource: r.Resource, Status: r.Status, Created: slices.Clone(r.Created), Message: r.Message}

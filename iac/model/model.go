@@ -59,8 +59,8 @@ type Resource struct {
 	// resource under its name, with the same shape. A tool takes the state from it, with no Get.
 	WriteReturnsResource bool
 	// GetFromList is true when Get is the List (Policy.GetFromList): no operation reads one resource by
-	// its id. A tool pages List, optionally narrowed by ListFilters, and selects the item whose
-	// IDField is the id; no such item means that the resource is missing. Get.Response holds the
+	// its id. A tool pages List with GetQuery, optionally narrowed by ListFilters, and selects the
+	// item whose IDField is the id; no such item means that the resource is missing. Get.Response holds the
 	// items (Items) in List.ItemsField.
 	GetFromList bool
 	// ListFilters are the query parameters that narrow the List by a resource field, sorted by

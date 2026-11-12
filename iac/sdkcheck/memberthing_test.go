@@ -31,7 +31,7 @@ func memberPolicy() model.Policy {
 		BatchWrite:   true,
 		CreateResult: &model.CreateResultLine{Resource: "member", Status: "status", Created: []string{"CREATE_MEMBER_STATUS_CREATED"}, Message: "message"},
 		CreateValues: map[string]string{"onboardingMode": "ONBOARDING_MODE_NO_INVITE"},
-		GetFromList:  true, ListFilters: map[string]string{"login": "login"},
+		GetFromList:  true, ListFilters: map[string]string{"login": "login"}, GetQuery: map[string]string{"status": "MEMBER_STATUS_ACTIVE"},
 		DeleteIDs: "memberIds", DeleteValues: map[string]string{"status": "MEMBER_STATUS_INACTIVE"},
 		Operations: model.OperationIDs{Create: "MembersService_CreateMembers", Get: "MembersService_SearchMembers", Update: "MembersService_UpdateMembers", Delete: "MembersService_UpdateMembersStatuses"},
 	}
@@ -73,11 +73,13 @@ func TestMemberThingSDKNames(t *testing.T) {
 			{Kind: KindType, Name: "ApiMembersServiceSearchMembersRequest"},
 			{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "Execute", Want: "func() (*SearchMembersResponse, *http.Response, error)"},
 		},
-		"get.page.page_size":         {{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "PageSize", Want: "func(pageSize int64) ApiMembersServiceSearchMembersRequest"}},
-		"get.page.page_token":        {{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "PageToken", Want: "func(pageToken int64) ApiMembersServiceSearchMembersRequest"}},
-		"get.filter.login":           {{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "Login", Want: "func(login string) ApiMembersServiceSearchMembersRequest"}},
-		"get.response.members":       {{Kind: KindField, Owner: "SearchMembersResponse", Name: "Members", Want: "[]Member"}},
-		"get.response.nextPageToken": {{Kind: KindField, Owner: "SearchMembersResponse", Name: "NextPageToken", Want: "*int64"}},
+		"get.page.page_size":                    {{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "PageSize", Want: "func(pageSize int64) ApiMembersServiceSearchMembersRequest"}},
+		"get.page.page_token":                   {{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "PageToken", Want: "func(pageToken int64) ApiMembersServiceSearchMembersRequest"}},
+		"get.filter.login":                      {{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "Login", Want: "func(login string) ApiMembersServiceSearchMembersRequest"}},
+		"get.query.status":                      {{Kind: KindMethod, Owner: "ApiMembersServiceSearchMembersRequest", Name: "Status", Want: "func(status MemberStatus) ApiMembersServiceSearchMembersRequest"}, {Kind: KindType, Name: "MemberStatus"}},
+		"get.query.status.MEMBER_STATUS_ACTIVE": {{Kind: KindConst, Name: "MEMBERSTATUS_MEMBER_STATUS_ACTIVE"}},
+		"get.response.members":                  {{Kind: KindField, Owner: "SearchMembersResponse", Name: "Members", Want: "[]Member"}},
+		"get.response.nextPageToken":            {{Kind: KindField, Owner: "SearchMembersResponse", Name: "NextPageToken", Want: "*int64"}},
 		"update.body": {
 			{Kind: KindType, Name: "UpdateMemberRequest"},
 			{Kind: KindMethod, Owner: "ApiMembersServiceUpdateMembersRequest", Name: "UpdateMemberRequest", Want: "func(updateMemberRequest []UpdateMemberRequest) ApiMembersServiceUpdateMembersRequest"},
@@ -141,7 +143,7 @@ func TestMemberThingSDKNamesWithoutList(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, path := range []string{"get.page.page_token", "get.filter.login", "get.response.nextPageToken", "get.response.members"} {
+	for _, path := range []string{"get.page.page_token", "get.filter.login", "get.query.status", "get.response.nextPageToken", "get.response.members"} {
 		if !slices.ContainsFunc(refs, func(ref Ref) bool { return ref.Path == path }) {
 			t.Errorf("no ref %s without the List", path)
 		}

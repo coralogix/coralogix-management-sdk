@@ -71,7 +71,24 @@ func (r *Resource) readListOperations(ops map[verb]foundOp) error {
 	}
 	r.GetFromList, r.List = true, list
 	r.readPaging(get)
-	return nil
+	return r.readListQuery(get)
+}
+
+// readListQuery reads the query parameters that the List read of Get always sends (Policy.GetQuery),
+// for example the status of the resources that a remove has not deactivated. A tool pages the List
+// and narrows it by its filters itself, so a fixed value is neither a paging parameter nor a filter.
+func (r *Resource) readListQuery(get foundOp) error {
+	for _, name := range slices.Sorted(maps.Keys(r.Policy.GetQuery)) {
+		if pagingName(name) {
+			return &contractError{code: "GET_QUERY_UNKNOWN", location: getFromListLocation + ".query." + name,
+				message:     fmt.Sprintf("The query parameter %q pages the List, which a tool does itself.", name),
+				remediation: "Name a query parameter of the List that is not a paging parameter, or delete the line."}
+		}
+		if _, filter := r.Policy.ListFilters[name]; filter {
+			return fmt.Errorf("api.getFromList.query and api.getFromList.filters both name %q; keep one", name)
+		}
+	}
+	return r.readGetQuery(get, getFromListLocation+".query")
 }
 
 // readPaging records the query parameters that page Get, and the property of its response that holds

@@ -8,6 +8,7 @@ paths:
       parameters:
         - {name: team_id, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
         - {name: login, in: query, required: false, schema: {type: string, minLength: 0}}
+        - {name: status, in: query, required: false, schema: {$ref: '#/components/schemas/MemberStatus'}}
         - {name: page_size, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
         - {name: page_token, in: query, required: false, schema: {type: integer, format: int64, minimum: 0}}
       responses:

@@ -309,6 +309,9 @@ func (r *Resource) readOperations(ops map[verb]foundOp) error {
 	if r.Policy.GetFromList {
 		return r.readListOperations(ops)
 	}
+	if len(r.Policy.GetQuery) != 0 && !r.Policy.Overwrite {
+		return errors.New("api.getFromList.query needs api.getFromList")
+	}
 	if r.Policy.DeleteIDs != "" {
 		return errors.New("api.delete.ids is for a resource that is read from its List (api.getFromList)")
 	}
@@ -2026,6 +2029,13 @@ func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 			return err
 		}
 	}
+	return r.readGetQuery(get, "behavior-overrides.yaml:api.overwrite.getQuery")
+}
+
+// readGetQuery reads the query parameters that Get always sends (Policy.GetQuery). Each is a query
+// parameter of Get, and its value is one that the parameter accepts. key is the line of the
+// behavior-overrides file that states them.
+func (r *Resource) readGetQuery(get foundOp, key string) error {
 	if len(r.Policy.GetQuery) == 0 {
 		return nil
 	}
@@ -2037,7 +2047,7 @@ func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 	}
 	for _, name := range slices.Sorted(maps.Keys(r.Policy.GetQuery)) {
 		value := r.Policy.GetQuery[name]
-		location := "behavior-overrides.yaml:api.overwrite.getQuery." + name
+		location := key + "." + name
 		p := params[name]
 		if p == nil {
 			return &contractError{code: "GET_QUERY_UNKNOWN", location: location, message: fmt.Sprintf("Get %s has no query parameter %q.", get.op.OperationId, name), remediation: "Name a query parameter of Get, or delete the line."}
@@ -2048,6 +2058,9 @@ func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 		t, err := typeOf(p.Schema, location, walk{policy: &r.Policy})
 		if err != nil {
 			return &contractError{code: "GET_QUERY_VALUE_INVALID", location: location, message: fmt.Sprintf("The query parameter %q has a type that the model cannot read: %s.", name, err), remediation: "Use a scalar or an enum query parameter."}
+		}
+		if !slices.Contains([]Kind{String, Bool, Integer, Number, Enum}, t.Kind) {
+			return &contractError{code: "GET_QUERY_VALUE_INVALID", location: location, message: fmt.Sprintf("The query parameter %q is a %s, not a scalar or an enum.", name, t.Kind), remediation: "Use a scalar or an enum query parameter."}
 		}
 		r.GetQuery = append(r.GetQuery, QueryValue{Name: name, Value: value, Type: t})
 	}

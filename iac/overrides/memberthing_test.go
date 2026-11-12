@@ -80,17 +80,17 @@ func TestCreateValuesPolicy(t *testing.T) {
 }
 
 func TestGetFromListPolicy(t *testing.T) {
-	e := exceptionsOf(t, "api: {idProperty: memberId, getFromList: {filters: {login: login}}}\n")
+	e := exceptionsOf(t, "api: {idProperty: memberId, getFromList: {filters: {login: login}, query: {status: MEMBER_STATUS_ACTIVE}}}\n")
 	if err := e.API.Check(); err != nil {
 		t.Fatal(err)
 	}
-	if p := e.Policy(); !p.GetFromList || len(p.ListFilters) != 1 || p.ListFilters["login"] != "login" {
+	if p := e.Policy(); !p.GetFromList || len(p.ListFilters) != 1 || p.ListFilters["login"] != "login" || len(p.GetQuery) != 1 || p.GetQuery["status"] != "MEMBER_STATUS_ACTIVE" {
 		t.Fatalf("policy %+v", p)
 	}
-	if p := exceptionsOf(t, "api: {getFromList: {}}\n").Policy(); !p.GetFromList || len(p.ListFilters) != 0 {
+	if p := exceptionsOf(t, "api: {getFromList: {}}\n").Policy(); !p.GetFromList || len(p.ListFilters) != 0 || len(p.GetQuery) != 0 {
 		t.Fatalf("policy without filters %+v", p)
 	}
-	for _, source := range []string{"api: {getByIDs: ids, getFromList: {}}\n", "api: {getFromList: {filters: {login: ''}}}\n"} {
+	for _, source := range []string{"api: {getByIDs: ids, getFromList: {}}\n", "api: {getFromList: {filters: {login: ''}}}\n", "api: {getFromList: {query: {status: ''}}}\n"} {
 		if err := exceptionsOf(t, source).API.Check(); err == nil {
 			t.Errorf("%q passes the check", source)
 		}
@@ -135,6 +135,7 @@ func TestMemberThingPolicyBuildsResource(t *testing.T) {
   createValues: {onboardingMode: ONBOARDING_MODE_NO_INVITE}
   getFromList:
     filters: {login: login}
+    query: {status: MEMBER_STATUS_ACTIVE}
   operations:
     create: MembersService_CreateMembers
     get: MembersService_SearchMembers
@@ -163,7 +164,7 @@ fields: {Member: {memberId: {readOnly: true}}}
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !r.GetFromList || r.ID() != "memberId" || r.Create.Response.Result == nil || len(r.CreateValues) != 1 || len(r.DeleteValues) != 1 || len(r.ListFilters) != 1 {
+	if !r.GetFromList || r.ID() != "memberId" || r.Create.Response.Result == nil || len(r.CreateValues) != 1 || len(r.DeleteValues) != 1 || len(r.ListFilters) != 1 || len(r.GetQuery) != 1 {
 		t.Fatalf("members resource: %+v", r)
 	}
 }

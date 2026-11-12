@@ -381,6 +381,7 @@ func memberListPolicy() Policy {
 	p.CreateResult = memberCreateResult()
 	p.CreateValues = map[string]string{"onboardingMode": "ONBOARDING_MODE_NO_INVITE"}
 	p.GetFromList, p.IDProperty, p.ListFilters = true, "memberId", map[string]string{"login": "login"}
+	p.GetQuery = map[string]string{"status": "MEMBER_STATUS_ACTIVE"}
 	p.Operations.Get = "MembersService_SearchMembers"
 	return p
 }
@@ -407,14 +408,18 @@ func TestMemberGetFromList(t *testing.T) {
 	if len(r.ListFilters) != 1 || r.ListFilters[0].Param != "login" || r.ListFilters[0].Field != "login" || r.ListFilters[0].Type.Kind != String {
 		t.Fatalf("filters: %+v", r.ListFilters)
 	}
+	// Get always asks the List for active members: a removed member is inactive, and still listed.
+	if len(r.GetQuery) != 1 || r.GetQuery[0].Name != "status" || r.GetQuery[0].Value != "MEMBER_STATUS_ACTIVE" || r.GetQuery[0].Type.Kind != Enum || r.GetQuery[0].Type.Schema != "MemberStatus" {
+		t.Fatalf("get query: %+v", r.GetQuery)
+	}
 	if r.Delete.Path != "/members/v1/{memberId}" || r.Update.Path != r.Create.Path {
 		t.Fatalf("paths: update %s, delete %s", r.Update.Path, r.Delete.Path)
 	}
-	// Without filters, Get reads the whole List.
+	// Without filters and a query, Get reads the whole List.
 	p := memberListPolicy()
-	p.ListFilters = nil
-	if r := buildMember(t, memberSource(t, memberWithDeletePath), p); len(r.ListFilters) != 0 {
-		t.Fatalf("filters without lines: %+v", r.ListFilters)
+	p.ListFilters, p.GetQuery = nil, nil
+	if r := buildMember(t, memberSource(t, memberWithDeletePath), p); len(r.ListFilters) != 0 || len(r.GetQuery) != 0 {
+		t.Fatalf("filters and query without lines: %+v, %+v", r.ListFilters, r.GetQuery)
 	}
 	// The List can be named, if it is Get.
 	p.Operations.List = p.Operations.Get
@@ -464,8 +469,8 @@ func TestMemberGetFromListIssues(t *testing.T) {
 			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList reads the List with Get MembersService_SearchMembers",
 		},
 		"unknown filter": {
-			policy: listPolicy(func(p *Policy) { p.ListFilters = map[string]string{"status": "status"} }),
-			code:   "LIST_FILTER_UNKNOWN", message: `no query parameter "status"`,
+			policy: listPolicy(func(p *Policy) { p.ListFilters = map[string]string{"nickname": "login"} }),
+			code:   "LIST_FILTER_UNKNOWN", message: `no query parameter "nickname"`,
 		},
 		"paging filter": {
 			policy: listPolicy(func(p *Policy) { p.ListFilters = map[string]string{"page_size": "memberAccountId"} }),
@@ -480,9 +485,47 @@ func TestMemberGetFromListIssues(t *testing.T) {
 			code:   "LIST_FILTER_TYPE_INCOMPATIBLE", message: `The filter "team_id" does not have the scalar type of the field "login"`,
 		},
 		"filters without the list read": {
-			paths:  memberWithItemPaths,
-			policy: listPolicy(func(p *Policy) { p.GetFromList, p.IDProperty, p.Operations.Get = false, "", "MembersService_GetMember" }),
-			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList.filters needs api.getFromList",
+			paths: memberWithItemPaths,
+			policy: listPolicy(func(p *Policy) {
+				p.GetFromList, p.IDProperty, p.GetQuery, p.Operations.Get = false, "", nil, "MembersService_GetMember"
+			}),
+			code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList.filters needs api.getFromList",
+		},
+		"unknown query": {
+			policy: listPolicy(func(p *Policy) { p.GetQuery = map[string]string{"state": "MEMBER_STATUS_ACTIVE"} }),
+			code:   "GET_QUERY_UNKNOWN", message: `no query parameter "state"`,
+		},
+		"paging query": {
+			policy: listPolicy(func(p *Policy) { p.GetQuery = map[string]string{"page_size": "100"} }),
+			code:   "GET_QUERY_UNKNOWN", message: `The query parameter "page_size" pages the List`,
+		},
+		"query value": {
+			policy: listPolicy(func(p *Policy) { p.GetQuery = map[string]string{"status": "MEMBER_STATUS_GONE"} }),
+			code:   "GET_QUERY_VALUE_INVALID", message: "is not a value of its enum",
+		},
+		"query type": {
+			edits:  []string{"        - {name: page_size,", "        - {name: statuses, in: query, required: false, schema: {type: array, items: {$ref: '#/components/schemas/MemberStatus'}}}\n        - {name: page_size,"},
+			policy: listPolicy(func(p *Policy) { p.GetQuery = map[string]string{"statuses": "MEMBER_STATUS_ACTIVE"} }),
+			code:   "GET_QUERY_VALUE_INVALID", message: `The query parameter "statuses" is a list, not a scalar or an enum`,
+		},
+		"query and filter": {
+			policy: listPolicy(func(p *Policy) { p.GetQuery = map[string]string{"login": "admin"} }),
+			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: `api.getFromList.query and api.getFromList.filters both name "login"`,
+		},
+		"query without the list read": {
+			paths: memberWithItemPaths,
+			policy: listPolicy(func(p *Policy) {
+				p.GetFromList, p.IDProperty, p.ListFilters, p.Operations.Get = false, "", nil, "MembersService_GetMember"
+			}),
+			code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList.query needs api.getFromList",
+		},
+		"query on a new resource": {
+			paths: memberWithItemPaths,
+			policy: listPolicy(func(p *Policy) {
+				p.Existing, p.BatchWrite, p.CreateResult, p.CreateValues = false, false, nil, nil
+				p.GetFromList, p.IDProperty, p.ListFilters, p.Operations.Get = false, "", nil, "MembersService_GetMember"
+			}),
+			code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList.query needs api.getFromList",
 		},
 	}
 	for name, tt := range tests {
@@ -515,7 +558,7 @@ func TestMemberThingBuilds(t *testing.T) {
 	if len(r.DeleteValues) != 1 || r.DeleteValues[0].Name != "status" || r.DeleteValues[0].Value != "MEMBER_STATUS_INACTIVE" || r.DeleteValues[0].Type.Schema != "MemberStatus" {
 		t.Fatalf("delete values: %+v", r.DeleteValues)
 	}
-	if !r.Create.BodyItems || !r.Update.BodyItems || r.Create.Response.Result == nil || !r.Update.Response.Items || !r.Get.Response.Items || len(r.CreateValues) != 1 || len(r.ListFilters) != 1 {
+	if !r.Create.BodyItems || !r.Update.BodyItems || r.Create.Response.Result == nil || !r.Update.Response.Items || !r.Get.Response.Items || len(r.CreateValues) != 1 || len(r.ListFilters) != 1 || len(r.GetQuery) != 1 {
 		t.Fatalf("resource: %+v", r)
 	}
 	// The resource of the golden contract is new nowhere: without Existing, no key applies.
@@ -585,7 +628,7 @@ func TestMemberDeleteIDsIssues(t *testing.T) {
 		"delete by id": {
 			paths: memberWithItemPaths,
 			policy: deletes(func(p *Policy) {
-				p.GetFromList, p.ListFilters, p.Operations.Get = false, nil, "MembersService_GetMember"
+				p.GetFromList, p.ListFilters, p.GetQuery, p.Operations.Get = false, nil, nil, "MembersService_GetMember"
 			}),
 			code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.delete.ids is for a resource that is read from its List",
 		},

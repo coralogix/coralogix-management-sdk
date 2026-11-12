@@ -140,8 +140,10 @@ type Policy struct {
 	// Create and Update. The write path can differ from the Get path.
 	Overwrite bool
 	// GetQuery are the query parameters that Get always sends, with their values, for a Get that
-	// returns the items of several resources, such as one list per source type. The parameter is
-	// not a resource field. Only an Overwrite resource has it.
+	// returns the items of several resources, such as one list per source type, or for the List read
+	// of a GetFromList resource, such as the status of the resources that a remove has not
+	// deactivated. The parameter is not a resource field. Only an Overwrite or a GetFromList
+	// resource has it.
 	GetQuery map[string]string
 	// WriteReturnsResource means that the write of an Overwrite resource returns the resource: its
 	// response has every field of the Get response, with the same shape. A tool then takes the
