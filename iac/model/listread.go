@@ -94,7 +94,17 @@ func (r *Resource) readListQuery(get foundOp) error {
 // readPaging records the query parameters that page Get, and the property of its response that holds
 // the next page token.
 func (r *Resource) readPaging(get foundOp) {
-	for _, p := range slices.Concat(get.item.Parameters, get.op.Parameters) {
+	overridden := map[string]bool{}
+	for _, p := range get.op.Parameters {
+		if p.In == "query" {
+			overridden[p.Name] = true
+		}
+	}
+	parameters := slices.DeleteFunc(slices.Clone(get.item.Parameters), func(p *v3.Parameter) bool {
+		return p.In == "query" && overridden[p.Name]
+	})
+	parameters = append(parameters, get.op.Parameters...)
+	for _, p := range parameters {
 		if p.In != "query" || !pagingName(p.Name) {
 			continue
 		}

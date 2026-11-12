@@ -276,6 +276,8 @@ func TestMemberCreateResultIssues(t *testing.T) {
 	same := func(*CreateResultLine) {}
 	withoutBatch := line(same)
 	withoutBatch.BatchWrite = false
+	withOnlyID := line(same)
+	withOnlyID.CreateResponseOnlyIDProperty = "memberId"
 	tests := map[string]struct {
 		edits         []string
 		policy        Policy
@@ -315,6 +317,9 @@ func TestMemberCreateResultIssues(t *testing.T) {
 		},
 		"without batch write": {
 			policy: withoutBatch, code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.batchWrite.createResult needs api.batchWrite",
+		},
+		"with only-id response": {
+			policy: withOnlyID, code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.batchWrite.createResult and api.createResponseOnlyIDProperty both say what the Create response holds",
 		},
 	}
 	for name, tt := range tests {
@@ -424,6 +429,20 @@ func TestMemberGetFromList(t *testing.T) {
 	// The List can be named, if it is Get.
 	p.Operations.List = p.Operations.Get
 	buildMember(t, memberSource(t, memberWithDeletePath), p)
+}
+
+func TestMemberGetFromListOperationPagingOverridesPath(t *testing.T) {
+	source := memberSource(t, memberWithDeletePath, []string{
+		"  /members/v1:\n    get:\n", "  /members/v1:\n    parameters:\n      - {name: page_token, in: query, required: false, schema: {type: string}}\n    get:\n",
+	})
+	r := buildMember(t, source, memberListPolicy())
+	var paging []string
+	for _, p := range r.PageParameters {
+		paging = append(paging, p.Name+":"+string(p.Type.Kind)+":"+p.Type.Format)
+	}
+	if !slices.Equal(paging, []string{"page_size:integer:int64", "page_token:integer:int64"}) {
+		t.Fatalf("paging parameters: %v", paging)
+	}
 }
 
 func TestMemberGetFromListIssues(t *testing.T) {

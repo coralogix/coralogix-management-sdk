@@ -699,6 +699,9 @@ func okSchema(op *v3.Operation) (*base.SchemaProxy, error) {
 // no fields: its Get needs no id. A tool then reads the resource with Get.
 func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	wrapped := v != opDelete
+	if v == opCreate && r.Policy.CreateResponseOnlyIDProperty != "" && r.Policy.CreateResult != nil {
+		return Response{}, errors.New("api.batchWrite.createResult and api.createResponseOnlyIDProperty both say what the Create response holds: keep one")
+	}
 	schema, err := okSchema(op)
 	if err != nil {
 		return Response{}, err
