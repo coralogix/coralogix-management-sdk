@@ -64,6 +64,10 @@ type API struct {
 	// Update has no path parameter, and the id stays in the body. New resources
 	// keep the stricter path rules.
 	CustomMethods bool `yaml:"customMethods"`
+	// Methods names the HTTP method of a lifecycle step that a released API did not give the
+	// standard one: Create is a PUT, and Update is a POST. The model expects a POST Create and a
+	// PATCH or PUT Update.
+	Methods *Methods `yaml:"methods"`
 	// Operations names the lifecycle operationIds when they do not end in
 	// _Create, _Get, _Update, or _Delete plus the resource name. A generator then
 	// needs no operation flags. It can also name the List.
@@ -112,6 +116,16 @@ type CreateResult struct {
 	Created []string `yaml:"created"`
 	// Message is the string property that says why an item was not created, "" for none.
 	Message string `yaml:"message"`
+}
+
+// Methods are the HTTP methods of the Create and Update operations when the API uses PUT for
+// Create or POST for Update. An Update by POST has no update mask. It is not a replace: a tool
+// decides which fields to send.
+type Methods struct {
+	// Create is PUT, for a Create that is a PUT of the collection path.
+	Create string `yaml:"create"`
+	// Update is POST, for an Update that is a POST of the resource path.
+	Update string `yaml:"update"`
 }
 
 // Operations names the four lifecycle operationIds, and the List. The four lifecycle ids are
@@ -272,11 +286,22 @@ func (a API) Check() error {
 			return err
 		}
 	}
+	if m := a.Methods; m != nil {
+		if m.Create == "" && m.Update == "" {
+			return errors.New("api.methods names no method: set create, update, or both")
+		}
+		if m.Create != "" && m.Create != "PUT" {
+			return fmt.Errorf("api.methods.create is %q: only PUT differs from the POST that a Create has by default", m.Create)
+		}
+		if m.Update != "" && m.Update != "POST" {
+			return fmt.Errorf("api.methods.update is %q: only POST differs from the PATCH or PUT that an Update has by default", m.Update)
+		}
+	}
 	if a.Overwrite != nil {
 		if o := a.Operations; o == nil || o.Create == "" || o.Create != o.Update || o.Create != o.Delete {
 			return errors.New("api.overwrite needs api.operations to name the write as create, update, and delete")
 		}
-		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" || a.BatchWrite != nil || len(a.CreateValues) != 0 || a.GetFromList != nil {
+		if a.Delete != nil || a.RequestWrapper != "" || a.UpdateIDInBody || a.ClientSetID || a.ServerSetID || a.IDProperty != "" || a.CustomMethods || a.Methods != nil || a.UpdateMaskInBody || a.CreateResponseOnlyIDProperty != "" || a.BatchWrite != nil || len(a.CreateValues) != 0 || a.GetFromList != nil {
 			return errors.New("api.overwrite describes a resource without an id or a wrapper; it cannot go with the other api keys")
 		}
 		for name, value := range a.Overwrite.GetQuery {
@@ -403,6 +428,9 @@ func (e Exceptions) Policy() model.Policy {
 	}
 	if r := e.API.batchCreateResult(); r != nil {
 		p.CreateResult = &model.CreateResultLine{Resource: r.Resource, Status: r.Status, Created: slices.Clone(r.Created), Message: r.Message}
+	}
+	if m := e.API.Methods; m != nil {
+		p.CreateMethod, p.UpdateMethod = m.Create, m.Update
 	}
 	if e.API.Overwrite != nil {
 		p.Overwrite = true

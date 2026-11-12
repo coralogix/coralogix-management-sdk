@@ -530,6 +530,13 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 			// The build checks that the response holds the same wrapper of the id as the id field
 			// of the resource.
 			want = goTypeName(r.IDType.Wrappers[0].Schema)
+		} else if r.IDType != nil && r.IDType.Kind != model.String {
+			// The build checks that the response holds the id as the same integer as the id field.
+			goType, _, err := fieldType(r.IDType)
+			if err != nil {
+				return fmt.Errorf("%s.response.%s: %w", path, op.Response.ID, err)
+			}
+			want = strings.TrimPrefix(goType, "*")
 		}
 		s.add(Ref{Path: path + ".response." + op.Response.ID, Kind: KindField, Owner: resp,
 			Name: goFieldName(op.Response.ID), Want: "*" + want, WantValue: want, Rule: RuleProperty})

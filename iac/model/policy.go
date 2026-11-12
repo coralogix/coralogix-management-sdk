@@ -108,6 +108,13 @@ type Policy struct {
 	// Get and Delete each carry the same {id} path parameter. Update has no path
 	// parameter. New resources leave this false.
 	CustomMethods bool
+	// CreateMethod is "PUT" for a Create that is a PUT of the collection path, as the released API
+	// of some resources has it. "" means the standard POST.
+	CreateMethod string
+	// UpdateMethod is "POST" for an Update that is a POST of the resource path. Such an Update
+	// has no update mask, and the model does not call it a replace: Resource.Replace stays false,
+	// and Resource.UpdateMethod records the method. "" means the standard PATCH or PUT.
+	UpdateMethod string
 	// CreateResponseOnlyIDProperty is the property of the Create response that holds the id, when the
 	// response does not return the resource (an existing resource only). Create reads the
 	// resource with Get. "" means that the Create response holds the resource.
@@ -361,6 +368,12 @@ func (p Policy) methods(v verb) []string {
 	}
 	if v == opDelete && p.DeleteOperation != "" {
 		return []string{"POST"}
+	}
+	if v == opCreate && p.CreateMethod != "" {
+		return []string{p.CreateMethod}
+	}
+	if v == opUpdate && p.UpdateMethod != "" {
+		return []string{p.UpdateMethod}
 	}
 	return verbMethods[v]
 }
@@ -705,4 +718,24 @@ func inGroup(groups []OneOfGroup, name string) bool {
 		}
 	}
 	return false
+}
+
+// withoutSkippedArms returns the groups of the resource component name without the arms that the
+// policy skips, and without a group that has fewer than two arms left.
+func (p Policy) withoutSkippedArms(component string, groups []OneOfGroup) []OneOfGroup {
+	var out []OneOfGroup
+	for _, g := range groups {
+		kept := make([]string, 0, len(g.Arms))
+		for _, arm := range g.Arms {
+			if !p.skips(component, arm) {
+				kept = append(kept, arm)
+			}
+		}
+		if len(kept) < 2 {
+			continue
+		}
+		g.Arms = kept
+		out = append(out, g)
+	}
+	return out
 }

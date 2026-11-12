@@ -98,8 +98,10 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 		return nil, nil, err
 	}
 	policy.CreateUnwrapped = policy.unwrappedCreate(ops)
-	// The write of an overwrite resource replaces every item, also when it is a POST.
-	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Overwrite, Policy: policy, shapeUsed: map[string]bool{}, requestUnwrapUsed: map[string]bool{}}
+	// The write of an overwrite resource replaces every item, also when it is a POST. An Update
+	// that the policy states as a POST is no replace: the model records the method and that the
+	// call has no update mask, and the tool decides which fields to send.
+	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Overwrite, UpdateMethod: policy.UpdateMethod, Policy: policy, shapeUsed: map[string]bool{}, requestUnwrapUsed: map[string]bool{}}
 	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
 	if err := r.readCreateValues(ops[opCreate]); err != nil {
 		return nil, nil, err
@@ -833,8 +835,21 @@ func (r *Resource) idResponse(out Response, proxy *base.SchemaProxy) (Response, 
 		out.ID, out.idType = key, t
 		return out, nil
 	}
+	// An id that is a plain integer, as the id of the resource is.
+	if slices.Equal(ps.Type, []string{"integer"}) {
+		at := "components.schemas." + out.Schema + "." + key
+		t, err := typeOf(property, at, walk{policy: &r.Policy})
+		if err != nil {
+			return Response{}, err
+		}
+		if _, ok := supportedIDType(t); !ok {
+			return Response{}, fmt.Errorf("response %s.%s holds %s, want a string, int32, or int64 id", out.Schema, key, typeLabel(t))
+		}
+		out.ID, out.idType = key, t
+		return out, nil
+	}
 	if !slices.Equal(ps.Type, []string{"string"}) {
-		return Response{}, fmt.Errorf("response %s.%s has type %v, want a string id, or a wrapper of the id that the policy unwraps (api.createResponseOnlyIDProperty)", out.Schema, key, ps.Type)
+		return Response{}, fmt.Errorf("response %s.%s has type %v, want a string or integer id, or a wrapper of the id that the policy unwraps (api.createResponseOnlyIDProperty)", out.Schema, key, ps.Type)
 	}
 	out.ID = key
 	return out, nil
@@ -846,6 +861,11 @@ func (r *Resource) checkCreateResponseID() error {
 	resp := r.Create.Response
 	switch {
 	case resp.ID == "":
+		return nil
+	case resp.idType != nil && len(resp.idType.Wrappers) == 0:
+		if len(r.IDType.Wrappers) != 0 || r.IDType.Kind != resp.idType.Kind || r.IDType.Format != resp.idType.Format {
+			return fmt.Errorf("%s: the Create response holds the id as %s, but the id field is %s", r.Name, typeLabel(resp.idType), typeLabel(r.IDType))
+		}
 		return nil
 	case resp.idType == nil && (r.IDType.Kind != String || len(r.IDType.Wrappers) != 0):
 		return fmt.Errorf("%s: the Create response holds the id as a string, but the id field is not a string", r.Name)
@@ -1091,6 +1111,12 @@ func (r *Resource) rootGroups(requestSchema *base.Schema) ([]OneOfGroup, error) 
 		if err != nil {
 			return nil, err
 		}
+		// A skipped arm is never sent, so a group with one arm left is no group.
+		if kept := r.Policy.withoutSkippedArms(r.Name, []OneOfGroup{g}); len(kept) == 0 {
+			continue
+		} else {
+			g = kept[0]
+		}
 		for _, arm := range g.Arms {
 			i := slices.IndexFunc(r.Fields, func(f *ResourceField) bool { return f.Name == arm })
 			switch {
@@ -1164,6 +1190,12 @@ func (r *Resource) checkUpdateContract(updateBody *base.Schema, update foundOp) 
 func (r *Resource) checkUpdateMask(updateBody *base.Schema, update foundOp) error {
 	bodyMask := maskProperty(updateBody)
 	params := maskParameters(update)
+	if r.UpdateMethod == "POST" {
+		if r.Policy.UpdateMaskInBody {
+			return errors.New("api.updateMaskInBody does not apply to an Update by POST, which has no update mask")
+		}
+		return checkNoUpdateMask("an Update by POST", bodyMask, params)
+	}
 	if r.Policy.UpdateMaskInBody {
 		if r.Replace {
 			return errors.New("api.updateMaskInBody does not apply to a full replace (PUT)")
@@ -1171,7 +1203,7 @@ func (r *Resource) checkUpdateMask(updateBody *base.Schema, update foundOp) erro
 		return r.readBodyUpdateMask(updateBody, bodyMask, params)
 	}
 	if r.Replace {
-		return checkNoUpdateMask(bodyMask, params)
+		return checkNoUpdateMask("a full replace (PUT)", bodyMask, params)
 	}
 	if bodyMask != "" {
 		return fmt.Errorf("update body: %s must be a query parameter, not a body property", bodyMask)
@@ -1185,12 +1217,12 @@ func (r *Resource) checkUpdateMask(updateBody *base.Schema, update foundOp) erro
 	return r.readUpdateMask(params[0])
 }
 
-func checkNoUpdateMask(bodyMask string, params []*v3.Parameter) error {
+func checkNoUpdateMask(what, bodyMask string, params []*v3.Parameter) error {
 	if bodyMask != "" {
-		return fmt.Errorf("update body: a full replace (PUT) has no %s property", bodyMask)
+		return fmt.Errorf("update body: %s has no %s property", what, bodyMask)
 	}
 	if len(params) != 0 {
-		return fmt.Errorf("update parameters: a full replace (PUT) has no %s parameter", params[0].Name)
+		return fmt.Errorf("update parameters: %s has no %s parameter", what, params[0].Name)
 	}
 	return nil
 }
