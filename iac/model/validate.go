@@ -374,7 +374,7 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 	report = append(report, bodyIDIssues(p, ops, create, update)...)
 	report = append(report, serverSetIDIssues(p, name, ops, create, update)...)
 	report = append(report, skippedIDIssues(p, name, ops)...)
-	report = append(report, rootGroupContractIssues(name, create, update, get)...)
+	report = append(report, rootGroupContractIssues(p, name, create, update, get)...)
 	return report
 }
 
@@ -1148,13 +1148,17 @@ func patternIssues(location string, schema *base.Schema) issue.Report {
 	return nil
 }
 
-func rootGroupContractIssues(name string, create, update, get *base.Schema) issue.Report {
+func rootGroupContractIssues(p Policy, name string, create, update, get *base.Schema) issue.Report {
 	createGroups, createErr := rootContractGroups(create)
 	updateGroups, updateErr := rootContractGroups(update)
 	getGroups, getErr := rootContractGroups(get)
 	if createErr != nil || updateErr != nil || getErr != nil {
 		return nil // The schema survey and build report malformed oneOf shapes.
 	}
+	// A skipped arm is never sent, so a group with one arm left is no group of the resource.
+	createGroups = p.withoutSkippedArms(name, createGroups)
+	updateGroups = p.withoutSkippedArms(name, updateGroups)
+	getGroups = p.withoutSkippedArms(name, getGroups)
 	if reflect.DeepEqual(createGroups, updateGroups) && reflect.DeepEqual(createGroups, getGroups) {
 		return nil
 	}
@@ -1722,7 +1726,7 @@ func (p Policy) responseResourceProxy(op *v3.Operation, name string) *base.Schem
 }
 
 func validateBuiltResource(r *Resource) issue.Report {
-	if r.Replace {
+	if r.Replace || r.UpdateMethod == "POST" {
 		return nil
 	}
 	if r.UpdateMaskPattern == "" {

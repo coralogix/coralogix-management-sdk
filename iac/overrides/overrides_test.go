@@ -342,3 +342,24 @@ func TestOverwriteKeysParse(t *testing.T) {
 		t.Fatalf("line = %+v", line)
 	}
 }
+
+func TestMethodsCheck(t *testing.T) {
+	for _, tc := range []struct {
+		name    string
+		methods *Methods
+		wantErr bool
+	}{
+		{"put create and post update", &Methods{Create: "PUT", Update: "POST"}, false},
+		{"only update", &Methods{Update: "POST"}, false},
+		{"empty", &Methods{}, true},
+		{"post create is the default", &Methods{Create: "POST"}, true},
+		{"patch update is the default", &Methods{Update: "PATCH"}, true},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			err := API{Methods: tc.methods}.Check()
+			if (err != nil) != tc.wantErr {
+				t.Fatalf("Check() = %v, want error: %v", err, tc.wantErr)
+			}
+		})
+	}
+}
