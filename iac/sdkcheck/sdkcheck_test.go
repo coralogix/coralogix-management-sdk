@@ -849,3 +849,49 @@ func TestNamesForAListShownAsItemNames(t *testing.T) {
 		}
 	}
 }
+
+// An Update by POST has no update mask: the names hold no mask method for it, and building them
+// must not read the empty mask name.
+func TestNamesForAnUpdateByPOSTHaveNoMask(t *testing.T) {
+	raw, err := os.ReadFile("../model/testdata/methodthing.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(raw)
+	if err != nil {
+		t.Fatal(err)
+	}
+	policy := model.Policy{
+		Existing: true, CreateMethod: "PUT", UpdateMethod: "POST",
+		IDProperty: "thingId", CreateResponseOnlyIDProperty: "id",
+		Skip:   []string{"MethodThing.parentId"},
+		Unwrap: []string{"MethodThingPermissions"},
+		UpdateNames: map[string]string{
+			"MethodThing.name": "newName", "MethodThing.description": "newDescription", "MethodThing.permissions": "newPermissions",
+		},
+		Operations: model.OperationIDs{
+			Create: "MethodThingsService_CreateMethodThing", Get: "MethodThingsService_GetMethodThing",
+			Update: "MethodThingsService_UpdateMethodThing", Delete: "MethodThingsService_DeleteMethodThing",
+		},
+	}
+	r, err := model.BuildWithPolicy(doc, "MethodThing", model.OperationIDs{}, policy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if r.UpdateMethod != "POST" || r.UpdateMask != "" {
+		t.Fatalf("update method = %q, update mask = %q, want POST and no mask", r.UpdateMethod, r.UpdateMask)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, ref := range refs {
+		if ref.Path == "update.mask" {
+			t.Errorf("ref %s: an Update by POST has no mask method", ref.Path)
+		}
+	}
+}

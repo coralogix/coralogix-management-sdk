@@ -455,7 +455,7 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 			}
 		}
 	}
-	if name == "update" && !r.Replace && !r.MaskInBody {
+	if name == "update" && !r.Replace && !r.MaskInBody && r.UpdateMask != "" {
 		s.add(Ref{Path: path + ".mask", Kind: KindMethod, Owner: builder, Name: goFieldName(r.UpdateMask),
 			Want: "func(" + lowerFirst(goFieldName(r.UpdateMask)) + " string) " + builder, Rule: RuleParameter})
 	}
