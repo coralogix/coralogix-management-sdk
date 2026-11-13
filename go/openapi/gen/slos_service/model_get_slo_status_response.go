@@ -26,7 +26,7 @@ var _ MappedNullable = &GetSloStatusResponse{}
 type GetSloStatusResponse struct {
 	// Time at which the evaluation was performed, as an RFC 3339 UTC timestamp on a whole-minute instant (suffix `Z`, no fractional seconds).
 	ComputedAt time.Time `json:"computedAt" validate:"regexp=^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$"`
-	// Inclusive lower bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`).
+	// Inclusive lower bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`). For calendar-aligned SLOs whose effective upper bound is 00:00 UTC on the first day of a month, equals the start of the previous UTC calendar month when the lower bound was defaulted or clamped to month start; a requested `from` later than that month start is applied unchanged (subject to month-start clamping only when earlier).
 	EffectiveFrom time.Time `json:"effectiveFrom" validate:"regexp=^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$"`
 	// Exclusive upper bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`).
 	EffectiveTo time.Time `json:"effectiveTo" validate:"regexp=^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:00Z$"`

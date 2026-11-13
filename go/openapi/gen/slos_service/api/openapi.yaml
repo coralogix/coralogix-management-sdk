@@ -1174,12 +1174,12 @@
             }
           },
           {
-            "description": "Inclusive lower bound of the evaluation window. When omitted, defaults to the start of the SLO configured rolling time frame ending at the effective upper bound. RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds).",
+            "description": "Inclusive lower bound of the evaluation window. When omitted, defaults to the start of the SLO configured evaluation window ending at the effective upper bound: for rolling windows, the configured lookback; for calendar-aligned windows, the UTC month-start of the calendar month that contains the instant just before the effective upper bound (earlier values are clamped to that month start). Because `to` is exclusive, when the effective upper bound is 00:00 UTC on the first day of a month, that default is the start of the previous UTC calendar month. RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds).",
             "in": "query",
             "name": "from",
             "required": false,
             "schema": {
-              "description": "Inclusive lower bound of the evaluation window. When omitted, defaults to the start of the SLO configured rolling time frame ending at the effective upper bound. RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds).",
+              "description": "Inclusive lower bound of the evaluation window. When omitted, defaults to the start of the SLO configured evaluation window ending at the effective upper bound: for rolling windows, the configured lookback; for calendar-aligned windows, the UTC month-start of the calendar month that contains the instant just before the effective upper bound (earlier values are clamped to that month start). Because `to` is exclusive, when the effective upper bound is 00:00 UTC on the first day of a month, that default is the start of the previous UTC calendar month. RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds).",
               "format": "date-time",
               "maxLength": 20,
               "minLength": 20,
@@ -1189,12 +1189,12 @@
             }
           },
           {
-            "description": "Exclusive upper bound of the evaluation window. When omitted, defaults to the current time with sub-minute precision truncated toward zero to the preceding whole UTC minute (for example 12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds).",
+            "description": "Exclusive upper bound of the evaluation window. When omitted, defaults to the current time with sub-minute precision truncated toward zero to the preceding whole UTC minute (for example 12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds). For calendar-aligned SLOs, a value of 00:00 UTC on the first day of a month covers through the end of the previous month only (no instants in the new month are included).",
             "in": "query",
             "name": "to",
             "required": false,
             "schema": {
-              "description": "Exclusive upper bound of the evaluation window. When omitted, defaults to the current time with sub-minute precision truncated toward zero to the preceding whole UTC minute (for example 12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds).",
+              "description": "Exclusive upper bound of the evaluation window. When omitted, defaults to the current time with sub-minute precision truncated toward zero to the preceding whole UTC minute (for example 12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a whole-minute instant (suffix `Z`, seconds `00`, no fractional seconds). For calendar-aligned SLOs, a value of 00:00 UTC on the first day of a month covers through the end of the previous month only (no instants in the new month are included).",
               "format": "date-time",
               "maxLength": 20,
               "minLength": 20,
@@ -1245,7 +1245,7 @@
                 }
               }
             },
-            "description": "Bad Request (for example invalid grouping slice, an evaluation window wider than 28 days after applying defaults for `from` and/or `to`, or `from` and `to` that normalize to an empty window with `effectiveFrom` >= `effectiveTo`)."
+            "description": "Bad Request (for example invalid grouping slice, an evaluation window wider than 32 days after applying defaults for `from` and/or `to`, or `from` and `to` that normalize to an empty window with `effectiveFrom` >= `effectiveTo`)."
           },
           "401": {
             "content": {
@@ -2123,7 +2123,7 @@
             "x-coralogix-presence": true
           },
           "effectiveFrom": {
-            "description": "Inclusive lower bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`).",
+            "description": "Inclusive lower bound of the evaluation window that was applied, after defaults, as an RFC 3339 UTC whole-minute instant (suffix `Z`). For calendar-aligned SLOs whose effective upper bound is 00:00 UTC on the first day of a month, equals the start of the previous UTC calendar month when the lower bound was defaulted or clamped to month start; a requested `from` later than that month start is applied unchanged (subject to month-start clamping only when earlier).",
             "format": "date-time",
             "maxLength": 20,
             "minLength": 20,

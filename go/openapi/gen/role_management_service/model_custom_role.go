@@ -13,6 +13,7 @@ package role_management_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -24,17 +25,17 @@ var _ MappedNullable = &CustomRole{}
 type CustomRole struct {
 	// Human-readable description.
 	Description *string `json:"description,omitempty"`
-	// Display name.
+	// Display name. Unique in the team: the create and update operations answer 409 for a name that another role of the team has.
 	Name *string `json:"name,omitempty"`
 	// The parent role id.
 	ParentRoleId *int64 `json:"parentRoleId,omitempty"`
 	// The parent role name.
 	ParentRoleName *string `json:"parentRoleName,omitempty"`
-	// List of permissions.
+	// List of permissions. The get operation returns the permissions that the role owns, in the case that they were written in. The list operation returns them together with the permissions of the parent role.
 	Permissions []string `json:"permissions,omitempty"`
 	// The role id.
-	RoleId *int64 `json:"roleId,omitempty"`
-	// Team identifier.
+	RoleId int64 `json:"roleId"`
+	// Team identifier. The team of the credential, when the create operation was called without one.
 	TeamId *int64 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -46,8 +47,9 @@ type _CustomRole CustomRole
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCustomRole() *CustomRole {
+func NewCustomRole(roleId int64) *CustomRole {
 	this := CustomRole{}
+	this.RoleId = roleId
 	return &this
 }
 
@@ -219,36 +221,28 @@ func (o *CustomRole) SetPermissions(v []string) {
 	o.Permissions = v
 }
 
-// GetRoleId returns the RoleId field value if set, zero value otherwise.
+// GetRoleId returns the RoleId field value
 func (o *CustomRole) GetRoleId() int64 {
-	if o == nil || IsNil(o.RoleId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.RoleId
+
+	return o.RoleId
 }
 
-// GetRoleIdOk returns a tuple with the RoleId field value if set, nil otherwise
+// GetRoleIdOk returns a tuple with the RoleId field value
 // and a boolean to check if the value has been set.
 func (o *CustomRole) GetRoleIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.RoleId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.RoleId, true
+	return &o.RoleId, true
 }
 
-// HasRoleId returns a boolean if a field has been set.
-func (o *CustomRole) HasRoleId() bool {
-	if o != nil && !IsNil(o.RoleId) {
-		return true
-	}
-
-	return false
-}
-
-// SetRoleId gets a reference to the given int64 and assigns it to the RoleId field.
+// SetRoleId sets field value
 func (o *CustomRole) SetRoleId(v int64) {
-	o.RoleId = &v
+	o.RoleId = v
 }
 
 // GetTeamId returns the TeamId field value if set, zero value otherwise.
@@ -308,9 +302,7 @@ func (o CustomRole) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Permissions) {
 		toSerialize["permissions"] = o.Permissions
 	}
-	if !IsNil(o.RoleId) {
-		toSerialize["roleId"] = o.RoleId
-	}
+	toSerialize["roleId"] = o.RoleId
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
@@ -323,6 +315,27 @@ func (o CustomRole) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CustomRole) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"roleId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCustomRole := _CustomRole{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

@@ -22,10 +22,11 @@ var _ MappedNullable = &RoleManagementServiceUpdateRoleRequest{}
 
 // RoleManagementServiceUpdateRoleRequest Request for updating a custom role.
 type RoleManagementServiceUpdateRoleRequest struct {
-	// The new description.
+	// The new description. Omit to keep the description.
 	NewDescription *string `json:"newDescription,omitempty"`
-	// The new name.
+	// The new name. Omit to keep the name. The service answers 409 for a name that another role of the team has.
 	NewName *string `json:"newName,omitempty"`
+	// Replaces the permissions of the role. Omit to keep them. An object without permissions removes every permission. The parent role cannot be changed.
 	NewPermissions *V2Permissions `json:"newPermissions,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

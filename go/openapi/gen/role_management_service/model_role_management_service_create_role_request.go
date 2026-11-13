@@ -20,22 +20,23 @@ var _ = bytes.MinRead
 // checks if the RoleManagementServiceCreateRoleRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RoleManagementServiceCreateRoleRequest{}
 
-// RoleManagementServiceCreateRoleRequest Request for creating a custom role.
+// RoleManagementServiceCreateRoleRequest Request for creating a custom role. A parent role is required, by id or by name: the service answers 400 without one.
 type RoleManagementServiceCreateRoleRequest struct {
-	// Human-readable description.
+	// Human-readable description. Omitting it is the same as the empty string.
 	Description *string `json:"description,omitempty"`
-	// Display name.
+	// Display name. Unique in the team: the service answers 409 for a name that another role of the team has.
 	Name *string `json:"name,omitempty"`
 	// The parent role id.
 	ParentRoleId *int64 `json:"parentRoleId,omitempty"`
-	// The parent role name.
+	// The parent role name. It is case-sensitive: the service answers 400 for a name that no system role has.
 	ParentRoleName *string `json:"parentRoleName,omitempty"`
-	// List of permissions.
+	// List of permissions. Each must be a permission that the service knows, in any case, or the service answers 400. The service keeps the case that it was given. Permissions that differ only in case are one permission, and the service keeps the first in ASCII order. Omitting the list creates a role without permissions.
 	Permissions []string `json:"permissions,omitempty"`
 	// Team identifier.
 	TeamId *int64 `json:"teamId,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
+	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _RoleManagementServiceCreateRoleRequest RoleManagementServiceCreateRoleRequest
@@ -277,15 +278,20 @@ func (o RoleManagementServiceCreateRoleRequest) ToMap() (map[string]interface{},
 	if !IsNil(o.TeamId) {
 		toSerialize["teamId"] = o.TeamId
 	}
-	optionalOneOfGroup0Matches := 0
+	requiredOneOfGroup0Matches := 0
 	if _, exists := toSerialize["parentRoleId"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["parentRoleName"]; exists {
-		optionalOneOfGroup0Matches++
+		requiredOneOfGroup0Matches++
 	}
-	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [parentRoleId, parentRoleName] may be set"}
+	if requiredOneOfGroup0Matches == 0 {
+		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
+			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [parentRoleId, parentRoleName] must be set"}
+		}
+	}
+	if requiredOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [parentRoleId, parentRoleName] must be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["parentRoleId"]; exists {
@@ -317,14 +323,14 @@ func (o *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) (err
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		optionalOneOfGroup0MatchesInPayload := 0
+		requiredOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["parentRoleId"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["parentRoleName"]; exists {
-			optionalOneOfGroup0MatchesInPayload++
+			requiredOneOfGroup0MatchesInPayload++
 		}
-		if optionalOneOfGroup0MatchesInPayload > 1 {
+		if requiredOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [parentRoleId, parentRoleName] may be set"}
 		}
 
@@ -336,6 +342,7 @@ func (o *RoleManagementServiceCreateRoleRequest) UnmarshalJSON(data []byte) (err
 		delete(additionalProperties, "teamId")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
+		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err
