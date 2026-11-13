@@ -645,7 +645,9 @@ paths:
         content:
           application/json:
             schema:
-              description: Request for creating a custom role.
+              description: >-
+                Request for creating a custom role. A parent role is required,
+                by id or by name: the service answers 400 without one.
               oneOf:
                 - required:
                     - parentRoleId
@@ -653,22 +655,17 @@ paths:
                 - required:
                     - parentRoleName
                   type: object
-                - not:
-                    anyOf:
-                      - required:
-                          - parentRoleId
-                        type: object
-                      - required:
-                          - parentRoleName
-                        type: object
-                  type: object
               properties:
                 description:
-                  description: Human-readable description.
+                  description: >-
+                    Human-readable description. Omitting it is the same as the
+                    empty string.
                   minLength: 0
                   type: string
                 name:
-                  description: Display name.
+                  description: >-
+                    Display name. Unique in the team: the service answers 409
+                    for a name that another role of the team has.
                   minLength: 0
                   type: string
                 parentRoleId:
@@ -677,13 +674,27 @@ paths:
                   minimum: 0
                   type: integer
                 parentRoleName:
-                  description: The parent role name.
+                  description: >-
+                    The parent role name. It is case-sensitive: the service
+                    answers 400 for a name that no system role has.
                   minLength: 0
                   type: string
                 permissions:
-                  description: List of permissions.
+                  description: >-
+                    List of permissions. Each must be a permission that the
+                    service knows, in any case, or the service answers 400. The
+                    service keeps the case that it was given. Permissions that
+                    differ only in case are one permission, and the service
+                    keeps the first in ASCII order. Omitting the list creates a
+                    role without permissions.
                   items:
-                    description: List of permissions.
+                    description: >-
+                      List of permissions. Each must be a permission that the
+                      service knows, in any case, or the service answers 400.
+                      The service keeps the case that it was given. Permissions
+                      that differ only in case are one permission, and the
+                      service keeps the first in ASCII order. Omitting the list
+                      creates a role without permissions.
                     minLength: 0
                     type: string
                   minItems: 0
@@ -778,17 +789,24 @@ paths:
               description: Request for updating a custom role.
               properties:
                 newDescription:
-                  description: The new description.
+                  description: The new description. Omit to keep the description.
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 newName:
-                  description: The new name.
+                  description: >-
+                    The new name. Omit to keep the name. The service answers 409
+                    for a name that another role of the team has.
                   minLength: 0
                   type: string
                   x-coralogix-presence: true
                 newPermissions:
-                  $ref: '#/components/schemas/v2.Permissions'
+                  allOf:
+                    - $ref: '#/components/schemas/v2.Permissions'
+                  description: >-
+                    Replaces the permissions of the role. Omit to keep them. An
+                    object without permissions removes every permission. The
+                    parent role cannot be changed.
               type: object
       responses:
         '200':
@@ -20001,8 +20019,14 @@ paths:
             type: array
         - description: >-
             Inclusive lower bound of the evaluation window. When omitted,
-            defaults to the start of the SLO configured rolling time frame
-            ending at the effective upper bound. RFC 3339 UTC date-time on a
+            defaults to the start of the SLO configured evaluation window ending
+            at the effective upper bound: for rolling windows, the configured
+            lookback; for calendar-aligned windows, the UTC month-start of the
+            calendar month that contains the instant just before the effective
+            upper bound (earlier values are clamped to that month start).
+            Because `to` is exclusive, when the effective upper bound is 00:00
+            UTC on the first day of a month, that default is the start of the
+            previous UTC calendar month. RFC 3339 UTC date-time on a
             whole-minute instant (suffix `Z`, seconds `00`, no fractional
             seconds).
           in: query
@@ -20011,10 +20035,16 @@ paths:
           schema:
             description: >-
               Inclusive lower bound of the evaluation window. When omitted,
-              defaults to the start of the SLO configured rolling time frame
-              ending at the effective upper bound. RFC 3339 UTC date-time on a
-              whole-minute instant (suffix `Z`, seconds `00`, no fractional
-              seconds).
+              defaults to the start of the SLO configured evaluation window
+              ending at the effective upper bound: for rolling windows, the
+              configured lookback; for calendar-aligned windows, the UTC
+              month-start of the calendar month that contains the instant just
+              before the effective upper bound (earlier values are clamped to
+              that month start). Because `to` is exclusive, when the effective
+              upper bound is 00:00 UTC on the first day of a month, that default
+              is the start of the previous UTC calendar month. RFC 3339 UTC
+              date-time on a whole-minute instant (suffix `Z`, seconds `00`, no
+              fractional seconds).
             format: date-time
             maxLength: 20
             minLength: 20
@@ -20027,7 +20057,9 @@ paths:
             toward zero to the preceding whole UTC minute (for example 12:30:37Z
             becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a
             whole-minute instant (suffix `Z`, seconds `00`, no fractional
-            seconds).
+            seconds). For calendar-aligned SLOs, a value of 00:00 UTC on the
+            first day of a month covers through the end of the previous month
+            only (no instants in the new month are included).
           in: query
           name: to
           required: false
@@ -20038,7 +20070,9 @@ paths:
               toward zero to the preceding whole UTC minute (for example
               12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on
               a whole-minute instant (suffix `Z`, seconds `00`, no fractional
-              seconds).
+              seconds). For calendar-aligned SLOs, a value of 00:00 UTC on the
+              first day of a month covers through the end of the previous month
+              only (no instants in the new month are included).
             format: date-time
             maxLength: 20
             minLength: 20
@@ -20083,7 +20117,7 @@ paths:
                 $ref: '#/components/schemas/Error'
           description: >-
             Bad Request (for example invalid grouping slice, an evaluation
-            window wider than 28 days after applying defaults for `from` and/or
+            window wider than 32 days after applying defaults for `from` and/or
             `to`, or `from` and `to` that normalize to an empty window with
             `effectiveFrom` >= `effectiveTo`).
         '401':
@@ -28050,6 +28084,8 @@ components:
         Response confirming quota allocation rule set has been successfully
         created
     CreateRoleResponse:
+      required:
+        - id
       type: object
       properties:
         id:
@@ -28057,7 +28093,9 @@ components:
           type: integer
           description: Unique identifier.
           format: int64
-      description: Response returned after successfully creating a custom role.
+      description: >-
+        Response returned after successfully creating a custom role. It holds
+        only the id of the new role: read the role with the get operation.
     CreateRuleGroupRequest.CreateRuleSubgroup:
       required:
         - rules
@@ -28675,6 +28713,8 @@ components:
           description: Expected score for this example.
       description: A single labeled example for a custom evaluation.
     CustomRole:
+      required:
+        - roleId
       type: object
       properties:
         description:
@@ -28684,7 +28724,9 @@ components:
         name:
           minLength: 0
           type: string
-          description: Display name.
+          description: >-
+            Display name. Unique in the team: the create and update operations
+            answer 409 for a name that another role of the team has.
         parentRoleId:
           minimum: 0
           type: integer
@@ -28700,8 +28742,16 @@ components:
           items:
             minLength: 0
             type: string
-            description: List of permissions.
-          description: List of permissions.
+            description: >-
+              List of permissions. The get operation returns the permissions
+              that the role owns, in the case that they were written in. The
+              list operation returns them together with the permissions of the
+              parent role.
+          description: >-
+            List of permissions. The get operation returns the permissions that
+            the role owns, in the case that they were written in. The list
+            operation returns them together with the permissions of the parent
+            role.
         roleId:
           minimum: 0
           type: integer
@@ -28710,7 +28760,9 @@ components:
         teamId:
           minimum: 0
           type: integer
-          description: Team identifier.
+          description: >-
+            Team identifier. The team of the credential, when the create
+            operation was called without one.
           format: int64
       description: Custom role.
     CustomSectionOptions:
@@ -34258,6 +34310,8 @@ components:
           description: The custom evaluations in the catalog.
       description: Response containing the custom evaluations in the catalog.
     GetCustomRoleResponse:
+      required:
+        - role
       type: object
       properties:
         role:
@@ -35067,7 +35121,12 @@ components:
           description: >-
             Inclusive lower bound of the evaluation window that was applied,
             after defaults, as an RFC 3339 UTC whole-minute instant (suffix
-            `Z`).
+            `Z`). For calendar-aligned SLOs whose effective upper bound is 00:00
+            UTC on the first day of a month, equals the start of the previous
+            UTC calendar month when the lower bound was defaulted or clamped to
+            month start; a requested `from` later than that month start is
+            applied unchanged (subject to month-start clamping only when
+            earlier).
           format: date-time
           maxLength: 20
           minLength: 20
@@ -55187,6 +55246,9 @@ components:
       type: string
     rbac.v2.User:
       title: User
+      required:
+        - userId
+        - username
       type: object
       properties:
         accessType:
@@ -55207,7 +55269,7 @@ components:
         firstName:
           minLength: 0
           type: string
-          description: User first name
+          description: User first name. Omitted when the user has no first name.
         groupIds:
           minItems: 0
           type: array
@@ -55220,7 +55282,7 @@ components:
         lastName:
           minLength: 0
           type: string
-          description: User last name
+          description: User last name. Omitted when the user has no last name.
         status:
           allOf:
             - $ref: '#/components/schemas/UserStatus'
@@ -55231,11 +55293,15 @@ components:
           description: Associated account id. An account can have many users.
           format: int64
         userId:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]+$
           type: string
           description: Unique user id
         username:
-          minLength: 0
+          maxLength: 255
+          minLength: 1
+          pattern: ^[\s\S]+$
           type: string
           description: Unique username
       description: >-

@@ -13,6 +13,7 @@ package role_management_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -22,7 +23,7 @@ var _ MappedNullable = &GetCustomRoleResponse{}
 
 // GetCustomRoleResponse Response containing the details of a custom role.
 type GetCustomRoleResponse struct {
-	Role *CustomRole `json:"role,omitempty"`
+	Role CustomRole `json:"role"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -33,8 +34,9 @@ type _GetCustomRoleResponse GetCustomRoleResponse
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewGetCustomRoleResponse() *GetCustomRoleResponse {
+func NewGetCustomRoleResponse(role CustomRole) *GetCustomRoleResponse {
 	this := GetCustomRoleResponse{}
+	this.Role = role
 	return &this
 }
 
@@ -46,36 +48,28 @@ func NewGetCustomRoleResponseWithDefaults() *GetCustomRoleResponse {
 	return &this
 }
 
-// GetRole returns the Role field value if set, zero value otherwise.
+// GetRole returns the Role field value
 func (o *GetCustomRoleResponse) GetRole() CustomRole {
-	if o == nil || IsNil(o.Role) {
+	if o == nil {
 		var ret CustomRole
 		return ret
 	}
-	return *o.Role
+
+	return o.Role
 }
 
-// GetRoleOk returns a tuple with the Role field value if set, nil otherwise
+// GetRoleOk returns a tuple with the Role field value
 // and a boolean to check if the value has been set.
 func (o *GetCustomRoleResponse) GetRoleOk() (*CustomRole, bool) {
-	if o == nil || IsNil(o.Role) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Role, true
+	return &o.Role, true
 }
 
-// HasRole returns a boolean if a field has been set.
-func (o *GetCustomRoleResponse) HasRole() bool {
-	if o != nil && !IsNil(o.Role) {
-		return true
-	}
-
-	return false
-}
-
-// SetRole gets a reference to the given CustomRole and assigns it to the Role field.
+// SetRole sets field value
 func (o *GetCustomRoleResponse) SetRole(v CustomRole) {
-	o.Role = &v
+	o.Role = v
 }
 
 func (o GetCustomRoleResponse) MarshalJSON() ([]byte, error) {
@@ -88,9 +82,7 @@ func (o GetCustomRoleResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetCustomRoleResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Role) {
-		toSerialize["role"] = o.Role
-	}
+	toSerialize["role"] = o.Role
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -100,6 +92,27 @@ func (o GetCustomRoleResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *GetCustomRoleResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"role",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varGetCustomRoleResponse := _GetCustomRoleResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))

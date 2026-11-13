@@ -772,13 +772,13 @@ func (r ApiSlosServiceGetSloStatusRequest) GroupingKeyValue(groupingKeyValue []s
 	return r
 }
 
-// Inclusive lower bound of the evaluation window. When omitted, defaults to the start of the SLO configured rolling time frame ending at the effective upper bound. RFC 3339 UTC date-time on a whole-minute instant (suffix &#x60;Z&#x60;, seconds &#x60;00&#x60;, no fractional seconds).
+// Inclusive lower bound of the evaluation window. When omitted, defaults to the start of the SLO configured evaluation window ending at the effective upper bound: for rolling windows, the configured lookback; for calendar-aligned windows, the UTC month-start of the calendar month that contains the instant just before the effective upper bound (earlier values are clamped to that month start). Because &#x60;to&#x60; is exclusive, when the effective upper bound is 00:00 UTC on the first day of a month, that default is the start of the previous UTC calendar month. RFC 3339 UTC date-time on a whole-minute instant (suffix &#x60;Z&#x60;, seconds &#x60;00&#x60;, no fractional seconds).
 func (r ApiSlosServiceGetSloStatusRequest) From(from time.Time) ApiSlosServiceGetSloStatusRequest {
 	r.from = &from
 	return r
 }
 
-// Exclusive upper bound of the evaluation window. When omitted, defaults to the current time with sub-minute precision truncated toward zero to the preceding whole UTC minute (for example 12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a whole-minute instant (suffix &#x60;Z&#x60;, seconds &#x60;00&#x60;, no fractional seconds).
+// Exclusive upper bound of the evaluation window. When omitted, defaults to the current time with sub-minute precision truncated toward zero to the preceding whole UTC minute (for example 12:30:37Z becomes 12:30:00Z). When set, RFC 3339 UTC date-time on a whole-minute instant (suffix &#x60;Z&#x60;, seconds &#x60;00&#x60;, no fractional seconds). For calendar-aligned SLOs, a value of 00:00 UTC on the first day of a month covers through the end of the previous month only (no instants in the new month are included).
 func (r ApiSlosServiceGetSloStatusRequest) To(to time.Time) ApiSlosServiceGetSloStatusRequest {
 	r.to = &to
 	return r

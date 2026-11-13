@@ -78,7 +78,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "description": "Request for creating a custom role.",
+                "description": "Request for creating a custom role. A parent role is required, by id or by name: the service answers 400 without one.",
                 "oneOf": [
                   {
                     "required": [
@@ -91,35 +91,16 @@
                       "parentRoleName"
                     ],
                     "type": "object"
-                  },
-                  {
-                    "not": {
-                      "anyOf": [
-                        {
-                          "required": [
-                            "parentRoleId"
-                          ],
-                          "type": "object"
-                        },
-                        {
-                          "required": [
-                            "parentRoleName"
-                          ],
-                          "type": "object"
-                        }
-                      ]
-                    },
-                    "type": "object"
                   }
                 ],
                 "properties": {
                   "description": {
-                    "description": "Human-readable description.",
+                    "description": "Human-readable description. Omitting it is the same as the empty string.",
                     "minLength": 0,
                     "type": "string"
                   },
                   "name": {
-                    "description": "Display name.",
+                    "description": "Display name. Unique in the team: the service answers 409 for a name that another role of the team has.",
                     "minLength": 0,
                     "type": "string"
                   },
@@ -130,14 +111,14 @@
                     "type": "integer"
                   },
                   "parentRoleName": {
-                    "description": "The parent role name.",
+                    "description": "The parent role name. It is case-sensitive: the service answers 400 for a name that no system role has.",
                     "minLength": 0,
                     "type": "string"
                   },
                   "permissions": {
-                    "description": "List of permissions.",
+                    "description": "List of permissions. Each must be a permission that the service knows, in any case, or the service answers 400. The service keeps the case that it was given. Permissions that differ only in case are one permission, and the service keeps the first in ASCII order. Omitting the list creates a role without permissions.",
                     "items": {
-                      "description": "List of permissions.",
+                      "description": "List of permissions. Each must be a permission that the service knows, in any case, or the service answers 400. The service keeps the case that it was given. Permissions that differ only in case are one permission, and the service keeps the first in ASCII order. Omitting the list creates a role without permissions.",
                       "minLength": 0,
                       "type": "string"
                     },
@@ -287,19 +268,24 @@
                 "description": "Request for updating a custom role.",
                 "properties": {
                   "newDescription": {
-                    "description": "The new description.",
+                    "description": "The new description. Omit to keep the description.",
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "newName": {
-                    "description": "The new name.",
+                    "description": "The new name. Omit to keep the name. The service answers 409 for a name that another role of the team has.",
                     "minLength": 0,
                     "type": "string",
                     "x-coralogix-presence": true
                   },
                   "newPermissions": {
-                    "$ref": "#/components/schemas/v2.Permissions"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/v2.Permissions"
+                      }
+                    ],
+                    "description": "Replaces the permissions of the role. Omit to keep them. An object without permissions removes every permission. The parent role cannot be changed."
                   }
                 },
                 "type": "object"
@@ -498,6 +484,9 @@
   "components": {
     "schemas": {
       "CreateRoleResponse": {
+        "required": [
+          "id"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -507,9 +496,12 @@
             "format": "int64"
           }
         },
-        "description": "Response returned after successfully creating a custom role."
+        "description": "Response returned after successfully creating a custom role. It holds only the id of the new role: read the role with the get operation."
       },
       "CustomRole": {
+        "required": [
+          "roleId"
+        ],
         "type": "object",
         "properties": {
           "description": {
@@ -520,7 +512,7 @@
           "name": {
             "minLength": 0,
             "type": "string",
-            "description": "Display name."
+            "description": "Display name. Unique in the team: the create and update operations answer 409 for a name that another role of the team has."
           },
           "parentRoleId": {
             "minimum": 0,
@@ -539,9 +531,9 @@
             "items": {
               "minLength": 0,
               "type": "string",
-              "description": "List of permissions."
+              "description": "List of permissions. The get operation returns the permissions that the role owns, in the case that they were written in. The list operation returns them together with the permissions of the parent role."
             },
-            "description": "List of permissions."
+            "description": "List of permissions. The get operation returns the permissions that the role owns, in the case that they were written in. The list operation returns them together with the permissions of the parent role."
           },
           "roleId": {
             "minimum": 0,
@@ -552,7 +544,7 @@
           "teamId": {
             "minimum": 0,
             "type": "integer",
-            "description": "Team identifier.",
+            "description": "Team identifier. The team of the credential, when the create operation was called without one.",
             "format": "int64"
           }
         },
@@ -654,6 +646,9 @@
         "description": "This data structure represents a filter"
       },
       "GetCustomRoleResponse": {
+        "required": [
+          "role"
+        ],
         "type": "object",
         "properties": {
           "role": {

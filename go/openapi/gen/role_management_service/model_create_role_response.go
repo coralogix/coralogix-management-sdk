@@ -13,6 +13,7 @@ package role_management_service
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 var _ = bytes.MinRead
@@ -20,10 +21,10 @@ var _ = bytes.MinRead
 // checks if the CreateRoleResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateRoleResponse{}
 
-// CreateRoleResponse Response returned after successfully creating a custom role.
+// CreateRoleResponse Response returned after successfully creating a custom role. It holds only the id of the new role: read the role with the get operation.
 type CreateRoleResponse struct {
 	// Unique identifier.
-	Id *int64 `json:"id,omitempty"`
+	Id int64 `json:"id"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -34,8 +35,9 @@ type _CreateRoleResponse CreateRoleResponse
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewCreateRoleResponse() *CreateRoleResponse {
+func NewCreateRoleResponse(id int64) *CreateRoleResponse {
 	this := CreateRoleResponse{}
+	this.Id = id
 	return &this
 }
 
@@ -47,36 +49,28 @@ func NewCreateRoleResponseWithDefaults() *CreateRoleResponse {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *CreateRoleResponse) GetId() int64 {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *CreateRoleResponse) GetIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *CreateRoleResponse) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given int64 and assigns it to the Id field.
+// SetId sets field value
 func (o *CreateRoleResponse) SetId(v int64) {
-	o.Id = &v
+	o.Id = v
 }
 
 func (o CreateRoleResponse) MarshalJSON() ([]byte, error) {
@@ -89,9 +83,7 @@ func (o CreateRoleResponse) MarshalJSON() ([]byte, error) {
 
 func (o CreateRoleResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -101,6 +93,27 @@ func (o CreateRoleResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *CreateRoleResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varCreateRoleResponse := _CreateRoleResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
