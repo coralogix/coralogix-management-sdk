@@ -70,6 +70,10 @@ func productionDependencies() dependencies {
 }
 
 func main() {
+	if err := protectProcessSecrets(); err != nil {
+		fmt.Fprintln(os.Stderr, "prepare CI team: protect process credentials")
+		os.Exit(1)
+	}
 	if len(os.Args) > 2 || len(os.Args) == 2 && os.Args[1] != "lookup" {
 		fmt.Fprintln(os.Stderr, "prepare CI team: usage: prepare-ci-team [lookup]")
 		os.Exit(2)
