@@ -1,19 +1,22 @@
 # Prepare one EU2 CI team
 
 Run this command before live acceptance jobs. It sends synthetic GenAI traces
-for 20 fixed AI application names. The names stay the same on every run.
+for 20 application names derived from one required prefix. The names stay the
+same on every run when the prefix stays the same.
 It sends a separate server span through a short-lived OpenTelemetry Collector
 Contrib process. The Collector generates full and compact Span Metrics. The
 command then polls the AI application catalog and the APM v2 service list
 every 10 seconds for up to 10 minutes. It checks that all 20 AI applications
 are visible and that enough evaluation targets are free for parallel tests.
-The local Collector has a separate 15-second startup limit. This limit ends
-before catalog polling begins.
+The local Collector has a separate 15-second startup limit. It stays running
+during catalog polling so that pending metric exports can retry. The command
+stops it after polling.
 During catalog polling, stderr shows the AI application, unused evaluation
 target, and APM service (V2) states after each check. These lines contain
 no IDs or credential values.
-On success, stdout contains only the fixture names. Public CI logs must not
-contain team integration IDs or generated connector values.
+On success, stdout contains fixture names. Suppress this output in public CI.
+Public CI logs must not contain application names, team integration IDs, or
+generated connector values.
 
 This command passed once on an existing EU2 team. A fresh-team run still needs
 to confirm the AI entry, the APM v2 service list entry, and the APM v2 Span
@@ -27,6 +30,10 @@ Set these environment variables for the same EU2 team:
 - `CORALOGIX_SEND_YOUR_DATA_API_KEY`: telemetry key.
 - `PAGERDUTY_REST_API_KEY`: PagerDuty REST API key.
 - `PAGERDUTY_USER_EMAIL`: PagerDuty actor email.
+- `CI_PREP_AI_APPLICATION_PREFIX`: a stable, private name for the AI application
+  family. Use 3 to 40 lowercase letters, digits, or hyphens. Start with a
+  letter and end with a letter or digit. The command adds `-02` through
+  `-20` for the other applications.
 
 `ARCHIVE_LOGS_BUCKET` is an optional, non-credential input. It names an existing
 logs-and-traces S3 bucket in EU2. The command uses it only if the team has no
@@ -63,14 +70,14 @@ command creates its temporary Collector configuration in container memory.
 Install a pinned `otelcol-contrib` binary on `PATH`. The command uses the EU2
 APM v2 HTTP entity list for its service check. It starts `otelcol-contrib` with a temporary configuration that
 contains an environment reference, not a key value. It removes that file and
-stops the process after the metrics flush interval. Run from the SDK root:
+stops the process after catalog polling. Run from the SDK root:
 
 ```sh
 go run ./tools/prepare-ci-team
 ```
 
 On success, stdout contains one JSON object with `application`, `subsystem`,
-and `apmService`. These names are safe to put in a public CI log.
+and `apmService`. Keep this output out of public CI logs.
 
 For a native run that needs integration IDs, set `PREPARE_CI_TEAM_OUTPUT_FILE`
 to a new private file path. The command creates that file with mode `0600` and
@@ -80,7 +87,7 @@ The connector key is a new UUID-shaped test value for one-way PagerDuty
 connector CRUD. It is not a PagerDuty service routing key. Keep this file on
 the runner. Do not print it or copy its values into public job outputs. The
 local Docker launcher does not mount a private output file; it prints only
-the safe names.
+fixture names to the local terminal.
 
 ## Read-only lookup in acceptance jobs
 

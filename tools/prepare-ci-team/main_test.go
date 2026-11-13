@@ -15,6 +15,21 @@ import (
 
 type roundTripFunc func(*http.Request) (*http.Response, error)
 
+const testApplicationPrefix = "example-ai"
+
+func TestAIApplicationPrefixValidation(t *testing.T) {
+	for _, value := range []string{"example-ai", "ai-123"} {
+		if !validAIApplicationPrefix(value) {
+			t.Fatal("valid application prefix was rejected")
+		}
+	}
+	for _, value := range []string{"", "a", "Uppercase", "a/b", "ai-"} {
+		if validAIApplicationPrefix(value) {
+			t.Fatal("invalid application prefix was accepted")
+		}
+	}
+}
+
 func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }
 func jsonResponse(status int, body string) *http.Response {
 	return &http.Response{StatusCode: status, Body: io.NopCloser(strings.NewReader(body))}
@@ -28,7 +43,7 @@ func TestTracePayloads(t *testing.T) {
 		kind    int
 		count   int
 	}{
-		{"AI", aiTracePayload, applicationName, 3, aiApplicationCount}, {"APM", serverTracePayload, serviceName, 2, 1},
+		{"AI", func(now time.Time) ([]byte, error) { return aiTracePayload(now, testApplicationPrefix) }, testApplicationPrefix, 3, aiApplicationCount}, {"APM", serverTracePayload, serviceName, 2, 1},
 	} {
 		payload, err := test.build(time.Now())
 		if err != nil {
@@ -76,7 +91,7 @@ func TestTracePayloads(t *testing.T) {
 			span := resourceSpans.ScopeSpans[0].Spans[0]
 			service := test.service
 			if test.name == "AI" {
-				service = aiApplicationName(index)
+				service = aiApplicationName(testApplicationPrefix, index)
 			}
 			if attrs["service.name"] != service || test.name == "AI" && attrs["cx.application.name"] != service || attrs["cx.subsystem.name"] != subsystemName || span.Kind != test.kind || len(span.TraceID) != 32 || len(span.SpanID) != 16 {
 				t.Fatalf("%s: wrong resource or span", test.name)
@@ -106,13 +121,14 @@ func TestTracePayloads(t *testing.T) {
 func fakeDependencies(t *testing.T, response func(*http.Request) (*http.Response, error)) dependencies {
 	t.Helper()
 	return dependencies{
+		aiPrefix:  testApplicationPrefix,
 		client:    &http.Client{Transport: roundTripFunc(response)},
 		ingestURL: "https://test.invalid/v1/traces", aiURL: "https://test.invalid/mgmt/openapi/5/ai/applications/v3",
 		evaluationsURL: "https://test.invalid/mgmt/openapi/5/ai/evaluations/v3", integrationsURL: "https://test.invalid/mgmt/openapi/5/integrations/integrations/v1",
 		archiveURL:  "https://test.invalid/mgmt/openapi/5/logs/data-setup/v2",
 		identityURL: "https://test.invalid/mgmt/openapi/5/aaa/identity/v1/whoami",
 		apmURL:      "https://test.invalid/v2/entities/ENTITY_TYPE_SERVICE",
-		seedAPM:     func(context.Context, string, time.Time) error { return nil },
+		seedAPM:     func(context.Context, string, time.Time) (func(), error) { return func() {}, nil },
 		pollEvery:   time.Millisecond, timeout: time.Second, currentTime: time.Now,
 	}
 }
@@ -133,7 +149,7 @@ func TestProductionManagementURLsUseSDKBase(t *testing.T) {
 func TestWriteFixtureOutputKeepsIDsOutOfStdout(t *testing.T) {
 	privatePath := filepath.Join(t.TempDir(), "fixtures.json")
 	result := fixtureOutput{
-		Application: applicationName, Subsystem: subsystemName, APMService: serviceName,
+		Application: testApplicationPrefix, Subsystem: subsystemName, APMService: serviceName,
 		TeamID: "1234", PagerDutyIntegrationID: "fixture-pd", PagerDutyConnectorKey: "fixture-key", SlackIntegrationID: "fixture-slack",
 	}
 	var stdout bytes.Buffer
@@ -150,7 +166,7 @@ func TestWriteFixtureOutputKeepsIDsOutOfStdout(t *testing.T) {
 		Subsystem   string `json:"subsystem"`
 		APMService  string `json:"apmService"`
 	}
-	if err := json.Unmarshal(stdout.Bytes(), &public); err != nil || public.Application != applicationName || public.Subsystem != subsystemName || public.APMService != serviceName {
+	if err := json.Unmarshal(stdout.Bytes(), &public); err != nil || public.Application != testApplicationPrefix || public.Subsystem != subsystemName || public.APMService != serviceName {
 		t.Fatal("stdout does not contain the public fixture names")
 	}
 	data, err := os.ReadFile(privatePath)
@@ -241,7 +257,7 @@ func fixtureResponse(t *testing.T, r *http.Request) (*http.Response, error) {
 	case "/mgmt/openapi/5/ai/applications/v3":
 		applications := make([]map[string]string, 0, aiApplicationCount)
 		for index := range aiApplicationCount {
-			applications = append(applications, map[string]string{"application": aiApplicationName(index), "subsystem": subsystemName})
+			applications = append(applications, map[string]string{"application": aiApplicationName(testApplicationPrefix, index), "subsystem": subsystemName})
 		}
 		body, err := json.Marshal(map[string]any{"aiApplications": applications})
 		if err != nil {
@@ -260,6 +276,7 @@ func fixtureResponse(t *testing.T, r *http.Request) (*http.Response, error) {
 
 func TestPreparePollsAndReturnsFixtures(t *testing.T) {
 	var aiReads, apmReads, seeds int
+	var collectorRunning bool
 	var progress bytes.Buffer
 	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
 		if r.URL.Path == "/mgmt/openapi/5/ai/applications/v3" {
@@ -269,6 +286,9 @@ func TestPreparePollsAndReturnsFixtures(t *testing.T) {
 			}
 		}
 		if r.URL.Path == "/v2/entities/ENTITY_TYPE_SERVICE" {
+			if !collectorRunning {
+				t.Error("Collector stopped before catalog readiness")
+			}
 			apmReads++
 			if r.Header.Get("Authorization") != "Bearer management-secret" {
 				t.Error("wrong APM catalog key")
@@ -286,16 +306,20 @@ func TestPreparePollsAndReturnsFixtures(t *testing.T) {
 		return fixtureResponse(t, r)
 	})
 	deps.progress = &progress
-	deps.seedAPM = func(_ context.Context, key string, _ time.Time) error {
+	deps.seedAPM = func(_ context.Context, key string, _ time.Time) (func(), error) {
 		seeds++
+		collectorRunning = true
 		if key != "send-secret" {
 			t.Error("wrong APM key")
 		}
-		return nil
+		return func() { collectorRunning = false }, nil
 	}
 	result, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", "")
 	if err != nil {
 		t.Fatal(err)
+	}
+	if collectorRunning {
+		t.Fatal("Collector was not stopped after catalog readiness")
 	}
 	if seeds != 1 || aiReads != 2 || apmReads != 2 || result.PagerDutyIntegrationID != "fixture-pd" || result.SlackIntegrationID != "fixture-slack" || len(result.PagerDutyConnectorKey) != 36 {
 		t.Fatalf("unexpected fixture result or call counts")
@@ -320,7 +344,7 @@ func TestAIApplicationsRequireAllFixtures(t *testing.T) {
 		if r.URL.Path != "/mgmt/openapi/5/ai/applications/v3" {
 			t.Fatalf("unexpected path %q", r.URL.Path)
 		}
-		return jsonResponse(200, `{"aiApplications":[{"application":"ci-acceptance-ai","subsystem":"ci-acceptance"}]}`), nil
+		return jsonResponse(200, `{"aiApplications":[{"application":"example-ai","subsystem":"ci-acceptance"}]}`), nil
 	})
 	ready, err := hasAIApplications(context.Background(), deps, "management-secret")
 	if err != nil || ready {
@@ -333,7 +357,7 @@ func TestAIApplicationsRequireFreeCapacity(t *testing.T) {
 		if r.URL.Path != "/mgmt/openapi/5/ai/evaluations/v3" {
 			t.Fatalf("unexpected path %q", r.URL.Path)
 		}
-		if r.URL.Query().Get("application") == aiApplicationName(19) {
+		if r.URL.Query().Get("application") == aiApplicationName(testApplicationPrefix, 19) {
 			return jsonResponse(200, `{"aiEvaluations":[]}`), nil
 		}
 		return jsonResponse(200, `{"aiEvaluations":[{"target":"RESPONSE"},{"target":"PROMPT"}]}`), nil
@@ -489,6 +513,7 @@ func TestAuthorizationFailsFast(t *testing.T) {
 }
 
 func TestTimeoutNamesMissingCatalogAndTarget(t *testing.T) {
+	var collectorStopped bool
 	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
 		if r.URL.Path == "/mgmt/openapi/5/ai/evaluations/v3" {
 			return jsonResponse(200, `{"aiEvaluations":[{"target":"RESPONSE"},{"target":"PROMPT"}]}`), nil
@@ -498,8 +523,14 @@ func TestTimeoutNamesMissingCatalogAndTarget(t *testing.T) {
 		}
 		return fixtureResponse(t, r)
 	})
+	deps.seedAPM = func(context.Context, string, time.Time) (func(), error) {
+		return func() { collectorStopped = true }, nil
+	}
 	deps.timeout = 15 * time.Millisecond
 	_, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", "")
+	if !collectorStopped {
+		t.Fatal("Collector was not stopped after catalog timeout")
+	}
 	if err == nil || !strings.Contains(err.Error(), "free targets=false") || !strings.Contains(err.Error(), serviceName) {
 		t.Fatalf("wrong timeout error: %v", err)
 	}

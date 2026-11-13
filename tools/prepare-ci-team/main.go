@@ -19,7 +19,6 @@ import (
 )
 
 const (
-	applicationName    = "ci-acceptance-ai"
 	aiApplicationCount = 20
 	subsystemName      = "ci-acceptance"
 	serviceName        = "ci-acceptance-apm"
@@ -35,6 +34,7 @@ const (
 
 type dependencies struct {
 	client          *http.Client
+	aiPrefix        string
 	ingestURL       string
 	aiURL           string
 	evaluationsURL  string
@@ -42,7 +42,7 @@ type dependencies struct {
 	archiveURL      string
 	identityURL     string
 	apmURL          string
-	seedAPM         func(context.Context, string, time.Time) error
+	seedAPM         func(context.Context, string, time.Time) (func(), error)
 	progress        io.Writer
 	pollEvery       time.Duration
 	timeout         time.Duration
@@ -51,6 +51,7 @@ type dependencies struct {
 
 func productionDependencies() dependencies {
 	return dependencies{
+		aiPrefix: os.Getenv("CI_PREP_AI_APPLICATION_PREFIX"),
 		client: &http.Client{
 			Timeout:       15 * time.Second,
 			CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse },
@@ -152,14 +153,14 @@ func lookupFixtureIDs(ctx context.Context, deps dependencies, managementKey stri
 		return output, errors.New("generate connector test value")
 	}
 	return fixtureOutput{
-		Application: applicationName, Subsystem: subsystemName, APMService: serviceName,
+		Application: deps.aiPrefix, Subsystem: subsystemName, APMService: serviceName,
 		TeamID: teamID, PagerDutyIntegrationID: pagerDutyID,
 		PagerDutyConnectorKey: connectorKey, SlackIntegrationID: slackID,
 	}, nil
 }
 
 type fixtureOutput struct {
-	Application            string `json:"application"`
+	Application            string `json:"application,omitempty"`
 	Subsystem              string `json:"subsystem"`
 	APMService             string `json:"apmService"`
 	TeamID                 string `json:"teamId,omitempty"`
@@ -196,6 +197,9 @@ func writeFixtureOutput(stdout io.Writer, privatePath string, result fixtureOutp
 
 func prepare(parent context.Context, deps dependencies, managementKey, sendDataKey, pagerDutyKey, pagerDutyEmail, archiveBucket string) (fixtureOutput, error) {
 	var output fixtureOutput
+	if !validAIApplicationPrefix(deps.aiPrefix) {
+		return output, errors.New("CI_PREP_AI_APPLICATION_PREFIX must be 3 to 40 lowercase letters, digits, or hyphens, start with a letter, and end with a letter or digit")
+	}
 	if managementKey == "" || sendDataKey == "" || pagerDutyKey == "" || pagerDutyEmail == "" {
 		return output, errors.New("all four credential environment variables are required")
 	}
@@ -214,9 +218,11 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 	if err := seedAITrace(parent, deps, sendDataKey); err != nil {
 		return output, err
 	}
-	if err := deps.seedAPM(parent, sendDataKey, deps.currentTime()); err != nil {
+	stopAPM, err := deps.seedAPM(parent, sendDataKey, deps.currentTime())
+	if err != nil {
 		return output, err
 	}
+	defer stopAPM()
 	ctx, cancel := context.WithTimeout(parent, deps.timeout)
 	defer cancel()
 	poll := time.NewTicker(deps.pollEvery)
@@ -271,7 +277,7 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 				return output, errors.New("generate connector test value")
 			}
 			return fixtureOutput{
-				Application: applicationName, Subsystem: subsystemName, APMService: serviceName,
+				Application: deps.aiPrefix, Subsystem: subsystemName, APMService: serviceName,
 				PagerDutyIntegrationID: pdID, PagerDutyConnectorKey: key, SlackIntegrationID: slackID,
 			}, nil
 		}
@@ -288,7 +294,7 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 }
 
 func seedAITrace(ctx context.Context, deps dependencies, sendDataKey string) error {
-	payload, err := aiTracePayload(deps.currentTime())
+	payload, err := aiTracePayload(deps.currentTime(), deps.aiPrefix)
 	if err != nil {
 		return fmt.Errorf("build CI trace seed: %w", err)
 	}
@@ -320,7 +326,7 @@ func seedAITrace(ctx context.Context, deps dependencies, sendDataKey string) err
 	return nil
 }
 
-func aiTracePayload(now time.Time) ([]byte, error) {
+func aiTracePayload(now time.Time, prefix string) ([]byte, error) {
 	start := strconv.FormatInt(now.Add(-time.Millisecond).UnixNano(), 10)
 	end := strconv.FormatInt(now.UnixNano(), 10)
 	attribute := func(key, value string) map[string]any {
@@ -348,7 +354,7 @@ func aiTracePayload(now time.Time) ([]byte, error) {
 				attribute("gen_ai.output.messages", `[{"role":"assistant","parts":[{"type":"text","content":"Fixture ready"}]}]`),
 			},
 		}}
-		application := aiApplicationName(index)
+		application := aiApplicationName(prefix, index)
 		resourceSpans = append(resourceSpans, map[string]any{
 			"resource": map[string]any{"attributes": []map[string]any{
 				attribute("service.name", application),
@@ -362,11 +368,26 @@ func aiTracePayload(now time.Time) ([]byte, error) {
 	return json.Marshal(map[string]any{"resourceSpans": resourceSpans})
 }
 
-func aiApplicationName(index int) string {
+func aiApplicationName(prefix string, index int) string {
 	if index == 0 {
-		return applicationName
+		return prefix
 	}
-	return fmt.Sprintf("%s-%02d", applicationName, index+1)
+	return fmt.Sprintf("%s-%02d", prefix, index+1)
+}
+
+func validAIApplicationPrefix(value string) bool {
+	if len(value) < 3 || len(value) > 40 || value[0] < 'a' || value[0] > 'z' {
+		return false
+	}
+	for index, char := range value {
+		if char >= 'a' && char <= 'z' || char >= '0' && char <= '9' {
+			continue
+		}
+		if char != '-' || index == len(value)-1 {
+			return false
+		}
+	}
+	return true
 }
 
 func randomID(size int) (string, error) {
@@ -422,7 +443,7 @@ func hasAIApplications(ctx context.Context, deps dependencies, managementKey str
 		}
 		ready := true
 		for index := range aiApplicationCount {
-			if !seen[aiApplicationName(index)] {
+			if !seen[aiApplicationName(deps.aiPrefix, index)] {
 				ready = false
 				break
 			}
@@ -440,7 +461,7 @@ func hasAIApplications(ctx context.Context, deps dependencies, managementKey str
 func hasUnusedEvaluationTarget(ctx context.Context, deps dependencies, managementKey string) (bool, error) {
 	var freePrompt, freeResponse int
 	for index := range aiApplicationCount {
-		used, err := usedEvaluationTargets(ctx, deps, managementKey, aiApplicationName(index))
+		used, err := usedEvaluationTargets(ctx, deps, managementKey, aiApplicationName(deps.aiPrefix, index))
 		if err != nil {
 			return false, err
 		}

@@ -82,42 +82,61 @@ func serverTracePayload(now time.Time) ([]byte, error) {
 	}}})
 }
 
-func seedAPMService(ctx context.Context, sendDataKey string, now time.Time) error {
+func seedAPMService(ctx context.Context, sendDataKey string, now time.Time) (func(), error) {
 	listener, err := net.Listen("tcp", "127.0.0.1:0")
 	if err != nil {
-		return errors.New("reserve Collector port")
+		return nil, errors.New("reserve Collector port")
 	}
 	port := listener.Addr().(*net.TCPAddr).Port
 	listener.Close()
 
 	config, err := os.CreateTemp("", "prepare-ci-collector-*.yaml")
 	if err != nil {
-		return errors.New("create Collector configuration")
+		return nil, errors.New("create Collector configuration")
 	}
 	defer os.Remove(config.Name())
 	if err := config.Chmod(0600); err != nil {
 		config.Close()
-		return errors.New("protect Collector configuration")
+		return nil, errors.New("protect Collector configuration")
 	}
 	if _, err := config.WriteString(collectorConfig(port)); err != nil {
 		config.Close()
-		return errors.New("write Collector configuration")
+		return nil, errors.New("write Collector configuration")
 	}
 	if err := config.Close(); err != nil {
-		return errors.New("close Collector configuration")
+		return nil, errors.New("close Collector configuration")
 	}
 
 	cmd := exec.CommandContext(ctx, "otelcol-contrib", "--config", config.Name())
 	cmd.Env = []string{"CORALOGIX_SEND_YOUR_DATA_API_KEY=" + sendDataKey}
 	cmd.Stdout, cmd.Stderr = nil, nil
 	if err := cmd.Start(); err != nil {
-		return errors.New("start otelcol-contrib")
+		return nil, errors.New("start otelcol-contrib")
 	}
-	defer func() { _ = cmd.Process.Kill(); _ = cmd.Wait() }()
+	stop := func() {
+		_ = cmd.Process.Signal(os.Interrupt)
+		done := make(chan struct{})
+		go func() {
+			_ = cmd.Wait()
+			close(done)
+		}()
+		select {
+		case <-done:
+		case <-time.After(15 * time.Second):
+			_ = cmd.Process.Kill()
+			<-done
+		}
+	}
+	accepted := false
+	defer func() {
+		if !accepted {
+			stop()
+		}
+	}()
 
 	payload, err := serverTracePayload(now)
 	if err != nil {
-		return errors.New("build APM trace seed")
+		return nil, errors.New("build APM trace seed")
 	}
 	client := &http.Client{Timeout: 2 * time.Second}
 	url := fmt.Sprintf("http://127.0.0.1:%d/v1/traces", port)
@@ -126,30 +145,26 @@ func seedAPMService(ctx context.Context, sendDataKey string, now time.Time) erro
 	for {
 		req, err := http.NewRequestWithContext(ctx, http.MethodPost, url, bytes.NewReader(payload))
 		if err != nil {
-			return errors.New("build local APM trace request")
+			return nil, errors.New("build local APM trace request")
 		}
 		req.Header.Set("Content-Type", "application/json")
 		resp, err := client.Do(req)
 		if err == nil {
 			resp.Body.Close()
 			if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-				return fmt.Errorf("Collector rejected APM trace: HTTP %d", resp.StatusCode)
+				return nil, fmt.Errorf("Collector rejected APM trace: HTTP %d", resp.StatusCode)
 			}
 			break
 		}
 		select {
 		case <-ctx.Done():
-			return errors.New("Collector APM seed canceled")
+			return nil, errors.New("Collector APM seed canceled")
 		case <-deadline.C:
-			return errors.New("local Collector did not accept the APM trace within 15 seconds; catalog polling has not started")
+			return nil, errors.New("local Collector did not accept the APM trace within 15 seconds; catalog polling has not started")
 		case <-time.After(100 * time.Millisecond):
 		}
 	}
-	// The connectors flush on a five-second interval. Give both metric exports time to finish.
-	select {
-	case <-ctx.Done():
-		return errors.New("Collector metrics flush canceled")
-	case <-time.After(12 * time.Second):
-		return nil
-	}
+	// Keep the Collector running while the catalog is polled. It can retry exports.
+	accepted = true
+	return stop, nil
 }

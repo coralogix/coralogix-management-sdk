@@ -13,7 +13,7 @@ cd "$script_dir/../.."
 docker build -t prepare-ci-team:local tools/prepare-ci-team
 
 need_terminal=false
-for name in CORALOGIX_API_KEY CORALOGIX_SEND_YOUR_DATA_API_KEY PAGERDUTY_REST_API_KEY PAGERDUTY_USER_EMAIL; do
+for name in CORALOGIX_API_KEY CORALOGIX_SEND_YOUR_DATA_API_KEY PAGERDUTY_REST_API_KEY PAGERDUTY_USER_EMAIL CI_PREP_AI_APPLICATION_PREFIX; do
   if [[ -z ${!name-} ]]; then
     need_terminal=true
   fi
@@ -28,12 +28,13 @@ if $need_terminal; then
   fi
 fi
 
-for name in CORALOGIX_API_KEY CORALOGIX_SEND_YOUR_DATA_API_KEY PAGERDUTY_REST_API_KEY PAGERDUTY_USER_EMAIL; do
+for name in CORALOGIX_API_KEY CORALOGIX_SEND_YOUR_DATA_API_KEY PAGERDUTY_REST_API_KEY PAGERDUTY_USER_EMAIL CI_PREP_AI_APPLICATION_PREFIX; do
   case "$name" in
     CORALOGIX_API_KEY) label='Coralogix management API key' ;;
     CORALOGIX_SEND_YOUR_DATA_API_KEY) label='Coralogix Send Your Data API key' ;;
     PAGERDUTY_REST_API_KEY) label='PagerDuty REST API key' ;;
     PAGERDUTY_USER_EMAIL) label='PagerDuty user email' ;;
+    CI_PREP_AI_APPLICATION_PREFIX) label='AI application prefix' ;;
   esac
   if [[ -n ${!name-} ]]; then
     printf '%s: using exported value\n' "$label" >&2
@@ -71,4 +72,5 @@ docker run --rm --read-only --tmpfs /tmp:rw,nosuid,nodev,mode=1777,size=32m \
   --cap-drop=ALL --security-opt no-new-privileges \
   -e CORALOGIX_API_KEY -e CORALOGIX_SEND_YOUR_DATA_API_KEY \
   -e PAGERDUTY_REST_API_KEY -e PAGERDUTY_USER_EMAIL \
+  -e CI_PREP_AI_APPLICATION_PREFIX \
   -e ARCHIVE_LOGS_BUCKET prepare-ci-team:local
