@@ -26,8 +26,9 @@ func TestTracePayloads(t *testing.T) {
 		build   func(time.Time) ([]byte, error)
 		service string
 		kind    int
+		count   int
 	}{
-		{"AI", aiTracePayload, applicationName, 3}, {"APM", serverTracePayload, serviceName, 2},
+		{"AI", aiTracePayload, applicationName, 3, aiApplicationCount}, {"APM", serverTracePayload, serviceName, 2, 1},
 	} {
 		payload, err := test.build(time.Now())
 		if err != nil {
@@ -61,18 +62,28 @@ func TestTracePayloads(t *testing.T) {
 		if err := json.Unmarshal(payload, &doc); err != nil {
 			t.Fatal(err)
 		}
-		if len(doc.ResourceSpans) != 1 || len(doc.ResourceSpans[0].ScopeSpans) != 1 || len(doc.ResourceSpans[0].ScopeSpans[0].Spans) != 1 {
+		if len(doc.ResourceSpans) != test.count {
 			t.Fatalf("%s: wrong span count", test.name)
 		}
-		attrs := map[string]string{}
-		for _, a := range doc.ResourceSpans[0].Resource.Attributes {
-			attrs[a.Key] = a.Value.StringValue
-		}
-		span := doc.ResourceSpans[0].ScopeSpans[0].Spans[0]
-		if attrs["service.name"] != test.service || attrs["cx.subsystem.name"] != subsystemName || span.Kind != test.kind || len(span.TraceID) != 32 || len(span.SpanID) != 16 {
-			t.Fatalf("%s: wrong resource or span", test.name)
-		}
-		if test.name == "AI" {
+		for index, resourceSpans := range doc.ResourceSpans {
+			if len(resourceSpans.ScopeSpans) != 1 || len(resourceSpans.ScopeSpans[0].Spans) != 1 {
+				t.Fatalf("%s: wrong scope or span count", test.name)
+			}
+			attrs := map[string]string{}
+			for _, a := range resourceSpans.Resource.Attributes {
+				attrs[a.Key] = a.Value.StringValue
+			}
+			span := resourceSpans.ScopeSpans[0].Spans[0]
+			service := test.service
+			if test.name == "AI" {
+				service = aiApplicationName(index)
+			}
+			if attrs["service.name"] != service || test.name == "AI" && attrs["cx.application.name"] != service || attrs["cx.subsystem.name"] != subsystemName || span.Kind != test.kind || len(span.TraceID) != 32 || len(span.SpanID) != 16 {
+				t.Fatalf("%s: wrong resource or span", test.name)
+			}
+			if test.name != "AI" {
+				continue
+			}
 			genAI := map[string]string{}
 			for _, a := range span.Attributes {
 				genAI[a.Key] = a.Value.StringValue
@@ -228,7 +239,15 @@ func fixtureResponse(t *testing.T, r *http.Request) (*http.Response, error) {
 	case "/v1/traces":
 		return jsonResponse(200, `{}`), nil
 	case "/mgmt/openapi/5/ai/applications/v3":
-		return jsonResponse(200, `{"aiApplications":[{"application":"ci-acceptance-ai","subsystem":"ci-acceptance"}]}`), nil
+		applications := make([]map[string]string, 0, aiApplicationCount)
+		for index := range aiApplicationCount {
+			applications = append(applications, map[string]string{"application": aiApplicationName(index), "subsystem": subsystemName})
+		}
+		body, err := json.Marshal(map[string]any{"aiApplications": applications})
+		if err != nil {
+			t.Fatal(err)
+		}
+		return jsonResponse(200, string(body)), nil
 	case "/mgmt/openapi/5/ai/evaluations/v3":
 		return jsonResponse(200, `{"aiEvaluations":[]}`), nil
 	case "/v2/entities/ENTITY_TYPE_SERVICE":
@@ -282,8 +301,8 @@ func TestPreparePollsAndReturnsFixtures(t *testing.T) {
 		t.Fatalf("unexpected fixture result or call counts")
 	}
 	for _, want := range []string{
-		"catalog check 1: AI application=missing, unused evaluation target=not checked, APM service (V2)=missing",
-		"catalog check 2: AI application=ready, unused evaluation target=ready, APM service (V2)=ready",
+		"catalog check 1: AI applications=missing, free evaluation targets=not checked, APM service (V2)=missing",
+		"catalog check 2: AI applications=ready, free evaluation targets=ready, APM service (V2)=ready",
 	} {
 		if !strings.Contains(progress.String(), want) {
 			t.Errorf("missing progress state %q", want)
@@ -293,6 +312,35 @@ func TestPreparePollsAndReturnsFixtures(t *testing.T) {
 		if strings.Contains(progress.String(), secret) {
 			t.Fatal("progress contains a credential")
 		}
+	}
+}
+
+func TestAIApplicationsRequireAllFixtures(t *testing.T) {
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.URL.Path != "/mgmt/openapi/5/ai/applications/v3" {
+			t.Fatalf("unexpected path %q", r.URL.Path)
+		}
+		return jsonResponse(200, `{"aiApplications":[{"application":"ci-acceptance-ai","subsystem":"ci-acceptance"}]}`), nil
+	})
+	ready, err := hasAIApplications(context.Background(), deps, "management-secret")
+	if err != nil || ready {
+		t.Fatalf("one application passed the twenty-application readiness check: ready=%t err=%v", ready, err)
+	}
+}
+
+func TestAIApplicationsRequireFreeCapacity(t *testing.T) {
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.URL.Path != "/mgmt/openapi/5/ai/evaluations/v3" {
+			t.Fatalf("unexpected path %q", r.URL.Path)
+		}
+		if r.URL.Query().Get("application") == aiApplicationName(19) {
+			return jsonResponse(200, `{"aiEvaluations":[]}`), nil
+		}
+		return jsonResponse(200, `{"aiEvaluations":[{"target":"RESPONSE"},{"target":"PROMPT"}]}`), nil
+	})
+	ready, err := hasUnusedEvaluationTarget(context.Background(), deps, "management-secret")
+	if err != nil || ready {
+		t.Fatalf("one free application passed the capacity check: ready=%t err=%v", ready, err)
 	}
 }
 
@@ -452,7 +500,7 @@ func TestTimeoutNamesMissingCatalogAndTarget(t *testing.T) {
 	})
 	deps.timeout = 15 * time.Millisecond
 	_, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", "")
-	if err == nil || !strings.Contains(err.Error(), "unused target=false") || !strings.Contains(err.Error(), serviceName) {
+	if err == nil || !strings.Contains(err.Error(), "free targets=false") || !strings.Contains(err.Error(), serviceName) {
 		t.Fatalf("wrong timeout error: %v", err)
 	}
 	for _, secret := range []string{"management-secret", "send-secret"} {

@@ -1,11 +1,12 @@
 # Prepare one EU2 CI team
 
-Run this command before live acceptance jobs. It sends a synthetic GenAI trace.
+Run this command before live acceptance jobs. It sends synthetic GenAI traces
+for 20 fixed AI application names. The names stay the same on every run.
 It sends a separate server span through a short-lived OpenTelemetry Collector
 Contrib process. The Collector generates full and compact Span Metrics. The
 command then polls the AI application catalog and the APM v2 service list
-every 10 seconds for up to 10 minutes. It also checks that the AI application
-has a free evaluation target.
+every 10 seconds for up to 10 minutes. It checks that all 20 AI applications
+are visible and that enough evaluation targets are free for parallel tests.
 The local Collector has a separate 15-second startup limit. This limit ends
 before catalog polling begins.
 During catalog polling, stderr shows the AI application, unused evaluation

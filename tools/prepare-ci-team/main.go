@@ -19,9 +19,10 @@ import (
 )
 
 const (
-	applicationName = "ci-acceptance-ai"
-	subsystemName   = "ci-acceptance"
-	serviceName     = "ci-acceptance-apm"
+	applicationName    = "ci-acceptance-ai"
+	aiApplicationCount = 20
+	subsystemName      = "ci-acceptance"
+	serviceName        = "ci-acceptance-apm"
 
 	ingestURL       = "https://ingress.eu2.coralogix.com/v1/traces"
 	aiURL           = "https://api.eu2.coralogix.com/mgmt/openapi/5/ai/applications/v3"
@@ -229,7 +230,7 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 		aiReady, targetReady, apmReady = false, false, false
 		lastError = nil
 		aiState, targetState, apmState := "missing", "not checked", "missing"
-		aiReady, err = hasAIApplication(ctx, deps, managementKey)
+		aiReady, err = hasAIApplications(ctx, deps, managementKey)
 		if err != nil {
 			if !isRetryableCatalogError(err) {
 				return output, err
@@ -262,7 +263,7 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 			apmState = "ready"
 		}
 		if deps.progress != nil {
-			fmt.Fprintf(deps.progress, "prepare CI team: catalog check %d: AI application=%s, unused evaluation target=%s, APM service (V2)=%s\n", attempt, aiState, targetState, apmState)
+			fmt.Fprintf(deps.progress, "prepare CI team: catalog check %d: AI applications=%s, free evaluation targets=%s, APM service (V2)=%s\n", attempt, aiState, targetState, apmState)
 		}
 		if aiReady && targetReady && apmReady {
 			key, err := randomUUID()
@@ -278,9 +279,9 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 		select {
 		case <-ctx.Done():
 			if lastError != nil {
-				return output, fmt.Errorf("timed out waiting for AI application %q (ready=%t, unused target=%t) and APM service %q (V2 ready=%t); last catalog error: %v", applicationName, aiReady, targetReady, serviceName, apmReady, lastError)
+				return output, fmt.Errorf("timed out waiting for %d AI applications (ready=%t, free targets=%t) and APM service %q (V2 ready=%t); last catalog error: %v", aiApplicationCount, aiReady, targetReady, serviceName, apmReady, lastError)
 			}
-			return output, fmt.Errorf("timed out waiting for AI application %q (ready=%t, unused target=%t) and APM service %q (V2 ready=%t); check trace archive and APM service discovery", applicationName, aiReady, targetReady, serviceName, apmReady)
+			return output, fmt.Errorf("timed out waiting for %d AI applications (ready=%t, free targets=%t) and APM service %q (V2 ready=%t); check trace archive and APM service discovery", aiApplicationCount, aiReady, targetReady, serviceName, apmReady)
 		case <-poll.C:
 		}
 	}
@@ -320,22 +321,23 @@ func seedAITrace(ctx context.Context, deps dependencies, sendDataKey string) err
 }
 
 func aiTracePayload(now time.Time) ([]byte, error) {
-	traceID, err := randomID(16)
-	if err != nil {
-		return nil, err
-	}
-	aiID, err := randomID(8)
-	if err != nil {
-		return nil, err
-	}
 	start := strconv.FormatInt(now.Add(-time.Millisecond).UnixNano(), 10)
 	end := strconv.FormatInt(now.UnixNano(), 10)
 	attribute := func(key, value string) map[string]any {
 		return map[string]any{"key": key, "value": map[string]string{"stringValue": value}}
 	}
-	spans := []map[string]any{
-		{
-			"traceId": traceID, "spanId": aiID,
+	resourceSpans := make([]any, 0, aiApplicationCount)
+	for index := range aiApplicationCount {
+		traceID, err := randomID(16)
+		if err != nil {
+			return nil, err
+		}
+		spanID, err := randomID(8)
+		if err != nil {
+			return nil, err
+		}
+		spans := []map[string]any{{
+			"traceId": traceID, "spanId": spanID,
 			"name": "chat ci-fixture", "kind": 3,
 			"startTimeUnixNano": start, "endTimeUnixNano": end,
 			"attributes": []map[string]any{
@@ -345,17 +347,26 @@ func aiTracePayload(now time.Time) ([]byte, error) {
 				attribute("gen_ai.input.messages", `[{"role":"user","parts":[{"type":"text","content":"CI fixture"}]}]`),
 				attribute("gen_ai.output.messages", `[{"role":"assistant","parts":[{"type":"text","content":"Fixture ready"}]}]`),
 			},
-		},
+		}}
+		application := aiApplicationName(index)
+		resourceSpans = append(resourceSpans, map[string]any{
+			"resource": map[string]any{"attributes": []map[string]any{
+				attribute("service.name", application),
+				attribute("cx.application.name", application),
+				attribute("cx.subsystem.name", subsystemName),
+				attribute("deployment.environment.name", "ci"),
+			}},
+			"scopeSpans": []any{map[string]any{"scope": map[string]string{"name": "coralogix-ci-team-setup"}, "spans": spans}},
+		})
 	}
-	return json.Marshal(map[string]any{"resourceSpans": []any{map[string]any{
-		"resource": map[string]any{"attributes": []map[string]any{
-			attribute("service.name", applicationName),
-			attribute("cx.application.name", applicationName),
-			attribute("cx.subsystem.name", subsystemName),
-			attribute("deployment.environment.name", "ci"),
-		}},
-		"scopeSpans": []any{map[string]any{"scope": map[string]string{"name": "coralogix-ci-team-setup"}, "spans": spans}},
-	}}})
+	return json.Marshal(map[string]any{"resourceSpans": resourceSpans})
+}
+
+func aiApplicationName(index int) string {
+	if index == 0 {
+		return applicationName
+	}
+	return fmt.Sprintf("%s-%02d", applicationName, index+1)
 }
 
 func randomID(size int) (string, error) {
@@ -376,7 +387,8 @@ func randomUUID() (string, error) {
 	return fmt.Sprintf("%x-%x-%x-%x-%x", value[:4], value[4:6], value[6:8], value[8:10], value[10:]), nil
 }
 
-func hasAIApplication(ctx context.Context, deps dependencies, managementKey string) (bool, error) {
+func hasAIApplications(ctx context.Context, deps dependencies, managementKey string) (bool, error) {
+	seen := make(map[string]bool, aiApplicationCount)
 	for page := 0; page < 10; page++ {
 		url := deps.aiURL + "?page_size=1000&page_offset=" + strconv.Itoa(page)
 		req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
@@ -404,9 +416,19 @@ func hasAIApplication(ctx context.Context, deps dependencies, managementKey stri
 			return false, fmt.Errorf("decode AI applications: %w", err)
 		}
 		for _, app := range result.AIApplications {
-			if app.Application == applicationName && app.Subsystem == subsystemName {
-				return true, nil
+			if app.Subsystem == subsystemName {
+				seen[app.Application] = true
 			}
+		}
+		ready := true
+		for index := range aiApplicationCount {
+			if !seen[aiApplicationName(index)] {
+				ready = false
+				break
+			}
+		}
+		if ready {
+			return true, nil
 		}
 		if len(result.AIApplications) < 1000 {
 			return false, nil
@@ -416,21 +438,41 @@ func hasAIApplication(ctx context.Context, deps dependencies, managementKey stri
 }
 
 func hasUnusedEvaluationTarget(ctx context.Context, deps dependencies, managementKey string) (bool, error) {
+	var freePrompt, freeResponse int
+	for index := range aiApplicationCount {
+		used, err := usedEvaluationTargets(ctx, deps, managementKey, aiApplicationName(index))
+		if err != nil {
+			return false, err
+		}
+		if used[""] {
+			return false, nil
+		}
+		if !used["prompt"] {
+			freePrompt++
+		}
+		if !used["response"] {
+			freeResponse++
+		}
+	}
+	return freePrompt >= 4 && freeResponse >= 4 && freePrompt+freeResponse >= aiApplicationCount, nil
+}
+
+func usedEvaluationTargets(ctx context.Context, deps dependencies, managementKey, application string) (map[string]bool, error) {
 	used := map[string]bool{}
 	for page := 0; page < 10; page++ {
-		url := deps.evaluationsURL + "?application=" + applicationName + "&subsystem=" + subsystemName + "&page_size=200&page_offset=" + strconv.Itoa(page)
+		url := deps.evaluationsURL + "?application=" + application + "&subsystem=" + subsystemName + "&page_size=200&page_offset=" + strconv.Itoa(page)
 		req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
 		if err != nil {
-			return false, errors.New("build AI evaluation request")
+			return nil, errors.New("build AI evaluation request")
 		}
 		req.Header.Set("Authorization", "Bearer "+managementKey)
 		resp, err := deps.client.Do(req)
 		if err != nil {
-			return false, errors.New("list AI evaluations: request failed")
+			return nil, errors.New("list AI evaluations: request failed")
 		}
 		if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 			resp.Body.Close()
-			return false, statusError{operation: "list AI evaluations", status: resp.StatusCode}
+			return nil, statusError{operation: "list AI evaluations", status: resp.StatusCode}
 		}
 		var result struct {
 			AIEvaluations []struct {
@@ -440,19 +482,16 @@ func hasUnusedEvaluationTarget(ctx context.Context, deps dependencies, managemen
 		err = json.NewDecoder(io.LimitReader(resp.Body, 1<<20)).Decode(&result)
 		resp.Body.Close()
 		if err != nil {
-			return false, errors.New("decode AI evaluations")
+			return nil, errors.New("decode AI evaluations")
 		}
 		for _, evaluation := range result.AIEvaluations {
-			if evaluation.Target == "" {
-				return false, nil
-			}
 			used[strings.ToLower(evaluation.Target)] = true
 		}
 		if len(result.AIEvaluations) < 200 {
-			return !used["response"] || !used["prompt"], nil
+			return used, nil
 		}
 	}
-	return false, errors.New("AI evaluation list exceeded 10 pages")
+	return nil, errors.New("AI evaluation list exceeded 10 pages")
 }
 
 type statusError struct {
