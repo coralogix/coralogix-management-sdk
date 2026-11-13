@@ -249,13 +249,13 @@ func TestCustomRoles(t *testing.T) {
 	}
 
 	_, httpResp, err = client.
-		RoleManagementServiceUpdateRole(ctx, *roleID).
+		RoleManagementServiceUpdateRole(ctx, roleID).
 		RoleManagementServiceUpdateRoleRequest(updateReq).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 
 	getResp, httpResp, err := client.
-		RoleManagementServiceGetCustomRole(ctx, *roleID).
+		RoleManagementServiceGetCustomRole(ctx, roleID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 	require.Equal(t, newDesc, getResp.Role.GetDescription())
@@ -267,7 +267,7 @@ func TestCustomRoles(t *testing.T) {
 	require.GreaterOrEqual(t, len(listResp.Roles), 1)
 
 	_, httpResp, err = client.
-		RoleManagementServiceDeleteRole(ctx, *roleID).
+		RoleManagementServiceDeleteRole(ctx, roleID).
 		Execute()
 	require.NoError(t, cxsdk.NewAPIError(httpResp, err))
 }
