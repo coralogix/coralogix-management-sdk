@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"os"
@@ -128,6 +129,7 @@ func fakeDependencies(t *testing.T, response func(*http.Request) (*http.Response
 		archiveURL:  "https://test.invalid/mgmt/openapi/5/logs/data-setup/v2",
 		identityURL: "https://test.invalid/mgmt/openapi/5/aaa/identity/v1/whoami",
 		apmURL:      "https://test.invalid/v2/entities/ENTITY_TYPE_SERVICE",
+		sloURL:      "https://test.invalid/mgmt/openapi/5/slo/slos/v1",
 		seedAPM:     func(context.Context, string, time.Time) (func(), error) { return func() {}, nil },
 		pollEvery:   time.Millisecond, timeout: time.Second, currentTime: time.Now,
 	}
@@ -143,6 +145,9 @@ func TestProductionManagementURLsUseSDKBase(t *testing.T) {
 	}
 	if deps.apmURL != "https://api.eu2.coralogix.com/v2/entities/ENTITY_TYPE_SERVICE" {
 		t.Fatalf("wrong APM V2 service URL: %q", deps.apmURL)
+	}
+	if deps.sloURL != "https://api.eu2.coralogix.com/mgmt/openapi/5/slo/slos/v1" {
+		t.Fatalf("wrong SLO URL: %q", deps.sloURL)
 	}
 }
 
@@ -268,6 +273,31 @@ func fixtureResponse(t *testing.T, r *http.Request) (*http.Response, error) {
 		return jsonResponse(200, `{"aiEvaluations":[]}`), nil
 	case "/v2/entities/ENTITY_TYPE_SERVICE":
 		return jsonResponse(200, `{"entities":[{"name":"ci-acceptance-apm"}]}`), nil
+	case "/mgmt/openapi/5/slo/slos/v1":
+		if r.Method == http.MethodGet {
+			if r.Header.Get("Authorization") != "Bearer management-secret" {
+				t.Errorf("wrong SLO catalog probe list")
+			}
+			return jsonResponse(200, `{"slos":[]}`), nil
+		}
+		if r.Method != http.MethodPost || r.Header.Get("Authorization") != "Bearer management-secret" {
+			t.Errorf("wrong SLO catalog probe request")
+		}
+		var body struct {
+			Name   string `json:"name"`
+			APMSli struct {
+				Services []string `json:"services"`
+			} `json:"apmSli"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&body); err != nil || body.Name != sloProbeName || len(body.APMSli.Services) != 1 || body.APMSli.Services[0] != serviceName {
+			t.Errorf("wrong SLO catalog probe body")
+		}
+		return jsonResponse(200, `{"slo":{"id":"fixture-slo"}}`), nil
+	case "/mgmt/openapi/5/slo/slos/v1/fixture-slo":
+		if r.Method != http.MethodDelete || r.Header.Get("Authorization") != "Bearer management-secret" {
+			t.Errorf("wrong SLO catalog probe delete")
+		}
+		return jsonResponse(200, `{}`), nil
 	default:
 		t.Errorf("unexpected path %q", r.URL.Path)
 		return jsonResponse(404, `{}`), nil
@@ -325,8 +355,8 @@ func TestPreparePollsAndReturnsFixtures(t *testing.T) {
 		t.Fatalf("unexpected fixture result or call counts")
 	}
 	for _, want := range []string{
-		"catalog check 1: AI applications=missing, free evaluation targets=not checked, APM service (V2)=missing",
-		"catalog check 2: AI applications=ready, free evaluation targets=ready, APM service (V2)=ready",
+		"catalog check 1: AI applications=missing, free evaluation targets=not checked, APM service (V2)=missing, SLO catalog=not checked",
+		"catalog check 2: AI applications=ready, free evaluation targets=ready, APM service (V2)=ready, SLO catalog=ready",
 	} {
 		if !strings.Contains(progress.String(), want) {
 			t.Errorf("missing progress state %q", want)
@@ -609,6 +639,78 @@ func TestAPMV2CatalogResponse(t *testing.T) {
 		if err != nil && (strings.Contains(err.Error(), "management-secret") || strings.Contains(err.Error(), "secret response")) {
 			t.Fatal("APM V2 error disclosed response or key")
 		}
+	}
+}
+
+func TestSLOCatalogMissRetries(t *testing.T) {
+	var creates int
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1" && r.Method == http.MethodPost {
+			creates++
+			if creates == 1 {
+				return jsonResponse(400, `{"message":"One or more APM SLO services not found in catalog"}`), nil
+			}
+		}
+		return fixtureResponse(t, r)
+	})
+	if _, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", ""); err != nil || creates != 2 {
+		t.Fatalf("catalog miss was not retried: creates=%d err=%v", creates, err)
+	}
+}
+
+func TestSLOCatalogOtherErrorStops(t *testing.T) {
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1" && r.Method == http.MethodPost {
+			return jsonResponse(400, `{"message":"secret response"}`), nil
+		}
+		return fixtureResponse(t, r)
+	})
+	_, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", "")
+	if err == nil || !strings.Contains(err.Error(), "create SLO catalog probe: HTTP 400") || strings.Contains(err.Error(), "secret response") {
+		t.Fatalf("wrong SLO catalog error: %v", err)
+	}
+}
+
+func TestSLOCatalogLostCreateIsDeletedBeforeRetry(t *testing.T) {
+	var posts int
+	var deletedLost bool
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1" && r.Method == http.MethodGet {
+			if posts == 1 && !deletedLost {
+				return jsonResponse(200, `{"slos":[{"id":"lost-slo","name":"ci-acceptance-apm-probe"},{"id":"keep","name":"other"}]}`), nil
+			}
+			return jsonResponse(200, `{"slos":[]}`), nil
+		}
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1" && r.Method == http.MethodPost {
+			posts++
+			if posts == 1 {
+				return nil, errors.New("connection reset")
+			}
+		}
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1/lost-slo" && r.Method == http.MethodDelete {
+			deletedLost = true
+			return jsonResponse(200, `{}`), nil
+		}
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1/keep" {
+			t.Error("deleted an SLO that is not the probe")
+		}
+		return fixtureResponse(t, r)
+	})
+	if _, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", ""); err != nil || posts != 2 || !deletedLost {
+		t.Fatalf("lost create was not deleted before retry: posts=%d deleted=%t err=%v", posts, deletedLost, err)
+	}
+}
+
+func TestSLOCatalogDeleteFailureStops(t *testing.T) {
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1/fixture-slo" {
+			return jsonResponse(500, `{"message":"secret response"}`), nil
+		}
+		return fixtureResponse(t, r)
+	})
+	_, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", "")
+	if err == nil || !strings.Contains(err.Error(), "delete SLO catalog probe: HTTP 500") || strings.Contains(err.Error(), "secret response") || strings.Contains(err.Error(), "fixture-slo") {
+		t.Fatalf("wrong SLO delete error: %v", err)
 	}
 }
 

@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"os/exec"
 	"strconv"
@@ -22,6 +23,7 @@ const (
 	aiApplicationCount = 20
 	subsystemName      = "ci-acceptance"
 	serviceName        = "ci-acceptance-apm"
+	sloProbeName       = "ci-acceptance-apm-probe"
 
 	ingestURL       = "https://ingress.eu2.coralogix.com/v1/traces"
 	aiURL           = "https://api.eu2.coralogix.com/mgmt/openapi/5/ai/applications/v3"
@@ -30,6 +32,7 @@ const (
 	archiveURL      = "https://api.eu2.coralogix.com/mgmt/openapi/5/logs/data-setup/v2"
 	identityURL     = "https://api.eu2.coralogix.com/mgmt/openapi/5/aaa/identity/v1/whoami"
 	apmURL          = "https://api.eu2.coralogix.com/v2/entities/ENTITY_TYPE_SERVICE"
+	sloURL          = "https://api.eu2.coralogix.com/mgmt/openapi/5/slo/slos/v1"
 )
 
 type dependencies struct {
@@ -42,6 +45,7 @@ type dependencies struct {
 	archiveURL      string
 	identityURL     string
 	apmURL          string
+	sloURL          string
 	seedAPM         func(context.Context, string, time.Time) (func(), error)
 	progress        io.Writer
 	pollEvery       time.Duration
@@ -63,6 +67,7 @@ func productionDependencies() dependencies {
 		archiveURL:      archiveURL,
 		identityURL:     identityURL,
 		apmURL:          apmURL,
+		sloURL:          sloURL,
 		seedAPM:         seedAPMService,
 		progress:        os.Stderr,
 		pollEvery:       10 * time.Second,
@@ -228,14 +233,14 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 	poll := time.NewTicker(deps.pollEvery)
 	defer poll.Stop()
 
-	var aiReady, targetReady, apmReady bool
+	var aiReady, targetReady, apmReady, sloReady bool
 	var lastError error
 	attempt := 0
 	for {
 		attempt++
-		aiReady, targetReady, apmReady = false, false, false
+		aiReady, targetReady, apmReady, sloReady = false, false, false, false
 		lastError = nil
-		aiState, targetState, apmState := "missing", "not checked", "missing"
+		aiState, targetState, apmState, sloState := "missing", "not checked", "missing", "not checked"
 		aiReady, err = hasAIApplications(ctx, deps, managementKey)
 		if err != nil {
 			if !isRetryableCatalogError(err) {
@@ -267,11 +272,23 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 			apmState = "retrying"
 		} else if apmReady {
 			apmState = "ready"
+			sloReady, err = hasSLOCatalog(ctx, deps, managementKey)
+			if err != nil {
+				if !isRetryableCatalogError(err) {
+					return output, err
+				}
+				lastError = err
+				sloState = "retrying"
+			} else if sloReady {
+				sloState = "ready"
+			} else {
+				sloState = "missing"
+			}
 		}
 		if deps.progress != nil {
-			fmt.Fprintf(deps.progress, "prepare CI team: catalog check %d: AI applications=%s, free evaluation targets=%s, APM service (V2)=%s\n", attempt, aiState, targetState, apmState)
+			fmt.Fprintf(deps.progress, "prepare CI team: catalog check %d: AI applications=%s, free evaluation targets=%s, APM service (V2)=%s, SLO catalog=%s\n", attempt, aiState, targetState, apmState, sloState)
 		}
-		if aiReady && targetReady && apmReady {
+		if aiReady && targetReady && apmReady && sloReady {
 			key, err := randomUUID()
 			if err != nil {
 				return output, errors.New("generate connector test value")
@@ -285,9 +302,9 @@ func prepare(parent context.Context, deps dependencies, managementKey, sendDataK
 		select {
 		case <-ctx.Done():
 			if lastError != nil {
-				return output, fmt.Errorf("timed out waiting for %d AI applications (ready=%t, free targets=%t) and APM service %q (V2 ready=%t); last catalog error: %v", aiApplicationCount, aiReady, targetReady, serviceName, apmReady, lastError)
+				return output, fmt.Errorf("timed out waiting for %d AI applications (ready=%t, free targets=%t), APM service %q (V2 ready=%t), and SLO catalog (ready=%t); last catalog error: %v", aiApplicationCount, aiReady, targetReady, serviceName, apmReady, sloReady, lastError)
 			}
-			return output, fmt.Errorf("timed out waiting for %d AI applications (ready=%t, free targets=%t) and APM service %q (V2 ready=%t); check trace archive and APM service discovery", aiApplicationCount, aiReady, targetReady, serviceName, apmReady)
+			return output, fmt.Errorf("timed out waiting for %d AI applications (ready=%t, free targets=%t), APM service %q (V2 ready=%t), and SLO catalog (ready=%t); check trace archive, APM service discovery, and the SLO catalog", aiApplicationCount, aiReady, targetReady, serviceName, apmReady, sloReady)
 		case <-poll.C:
 		}
 	}
@@ -524,7 +541,15 @@ func (e statusError) Error() string {
 	return fmt.Sprintf("%s: HTTP %d", e.operation, e.status)
 }
 
+type stopError struct{ message string }
+
+func (e stopError) Error() string { return e.message }
+
 func isRetryableCatalogError(err error) bool {
+	var stop stopError
+	if errors.As(err, &stop) {
+		return false
+	}
 	var status statusError
 	if errors.As(err, &status) {
 		return status.status == http.StatusTooManyRequests || status.status >= 500
@@ -563,4 +588,132 @@ func hasAPMService(ctx context.Context, deps dependencies, managementKey string)
 		}
 	}
 	return false, nil
+}
+
+func hasSLOCatalog(ctx context.Context, deps dependencies, managementKey string) (bool, error) {
+	if err := deleteNamedSLOProbes(ctx, deps, managementKey); err != nil {
+		return false, err
+	}
+	payload, err := json.Marshal(map[string]any{
+		"name":                      sloProbeName,
+		"targetThresholdPercentage": 99,
+		"sloTimeFrame":              "SLO_TIME_FRAME_7_DAYS",
+		"productType":               "SLO_PRODUCT_TYPE_APM",
+		"apmSli": map[string]any{
+			"services":    []string{serviceName},
+			"errorConfig": map[string]any{},
+		},
+	})
+	if err != nil {
+		return false, errors.New("build SLO catalog probe")
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, deps.sloURL, bytes.NewReader(payload))
+	if err != nil {
+		return false, errors.New("build SLO catalog probe request")
+	}
+	req.Header.Set("Authorization", "Bearer "+managementKey)
+	req.Header.Set("Content-Type", "application/json")
+	resp, err := deps.client.Do(req)
+	if err != nil {
+		return false, cleanupSLOProbeAttempt(ctx, deps, managementKey, errors.New("create SLO catalog probe: request failed"))
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+	if err != nil {
+		return false, cleanupSLOProbeAttempt(ctx, deps, managementKey, errors.New("create SLO catalog probe: read failed"))
+	}
+	if resp.StatusCode == http.StatusBadRequest && bytes.Contains(body, []byte("not found in catalog")) {
+		return false, nil
+	}
+	if resp.StatusCode >= 500 {
+		return false, cleanupSLOProbeAttempt(ctx, deps, managementKey, statusError{operation: "create SLO catalog probe", status: resp.StatusCode})
+	}
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return false, statusError{operation: "create SLO catalog probe", status: resp.StatusCode}
+	}
+	var created struct {
+		Slo struct {
+			ID string `json:"id"`
+		} `json:"slo"`
+	}
+	if err := json.Unmarshal(body, &created); err != nil || created.Slo.ID == "" {
+		if err := deleteNamedSLOProbes(ctx, deps, managementKey); err != nil {
+			return false, err
+		}
+		return true, nil
+	}
+	if err := deleteSLOProbe(ctx, deps, managementKey, created.Slo.ID); err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
+func cleanupSLOProbeAttempt(ctx context.Context, deps dependencies, managementKey string, cause error) error {
+	if err := deleteNamedSLOProbes(ctx, deps, managementKey); err != nil {
+		return err
+	}
+	return cause
+}
+
+func deleteNamedSLOProbes(ctx context.Context, deps dependencies, managementKey string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, deps.sloURL, nil)
+	if err != nil {
+		return errors.New("build SLO catalog probe list request")
+	}
+	req.Header.Set("Authorization", "Bearer "+managementKey)
+	resp, err := deps.client.Do(req)
+	if err != nil {
+		return errors.New("list SLO catalog probes: request failed")
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(io.LimitReader(resp.Body, 8<<20))
+	if err != nil {
+		return errors.New("list SLO catalog probes: read failed")
+	}
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return statusError{operation: "list SLO catalog probes", status: resp.StatusCode}
+	}
+	var listed struct {
+		SLOs []struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"slos"`
+	}
+	if err := json.Unmarshal(body, &listed); err != nil {
+		return errors.New("decode SLO catalog probes")
+	}
+	for _, slo := range listed.SLOs {
+		if slo.Name != sloProbeName {
+			continue
+		}
+		if slo.ID == "" {
+			return stopError{message: "list SLO catalog probes omitted id"}
+		}
+		if err := deleteSLOProbe(ctx, deps, managementKey, slo.ID); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func deleteSLOProbe(ctx context.Context, deps dependencies, managementKey, id string) error {
+	endpoint, err := url.JoinPath(deps.sloURL, url.PathEscape(id))
+	if err != nil {
+		return stopError{message: "build SLO catalog probe delete request"}
+	}
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, endpoint, nil)
+	if err != nil {
+		return stopError{message: "build SLO catalog probe delete request"}
+	}
+	req.Header.Set("Authorization", "Bearer "+managementKey)
+	resp, err := deps.client.Do(req)
+	if err != nil {
+		return stopError{message: "delete SLO catalog probe: request failed"}
+	}
+	defer resp.Body.Close()
+	_, _ = io.Copy(io.Discard, io.LimitReader(resp.Body, 1<<20))
+	if resp.StatusCode == http.StatusNotFound || (resp.StatusCode >= 200 && resp.StatusCode < 300) {
+		return nil
+	}
+	return stopError{message: fmt.Sprintf("delete SLO catalog probe: HTTP %d", resp.StatusCode)}
 }

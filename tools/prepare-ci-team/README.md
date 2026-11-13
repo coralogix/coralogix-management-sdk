@@ -5,15 +5,18 @@ for 20 application names derived from one required prefix. The names stay the
 same on every run when the prefix stays the same.
 It sends a separate server span through a short-lived OpenTelemetry Collector
 Contrib process. The Collector generates full and compact Span Metrics. The
-command then polls the AI application catalog and the APM v2 service list
-every 10 seconds for up to 10 minutes. It checks that all 20 AI applications
-are visible and that enough evaluation targets are free for parallel tests.
+command then polls the AI application catalog, the APM v2 service list, and
+the SLO catalog every 10 seconds for up to 10 minutes. It checks that all 20
+AI applications are visible and that enough evaluation targets are free for
+parallel tests. After the APM service is present, it creates an APM error SLO
+for that service. A catalog miss stays in the loop. A successful create is
+deleted before the command finishes.
 The local Collector has a separate 15-second startup limit. It stays running
 during catalog polling so that pending metric exports can retry. The command
 stops it after polling.
 During catalog polling, stderr shows the AI application, unused evaluation
-target, and APM service (V2) states after each check. These lines contain
-no IDs or credential values.
+target, APM service (V2), and SLO catalog states after each check. These lines
+contain no IDs or credential values.
 On success, stdout contains fixture names. Suppress this output in public CI.
 Public CI logs must not contain application names, team integration IDs, or
 generated connector values.
@@ -147,9 +150,12 @@ fresh-team run is still required before use in the shared acceptance workflow.
 
 The selected team must archive GenAI traces to S3 for AI Center discovery.
 The Collector must export compact Span Metrics for APM v2 discovery. The
-command checks the APM v2 entity list. This check does not test whether the
-SLO API accepts that service. The first fresh-team run must verify SLO
-creation separately. The command does not inspect the S3 object or exported
+command checks the APM v2 entity list. After that service is present, each
+poll creates an APM error SLO named `ci-acceptance-apm-probe` for
+`ci-acceptance-apm`. A response that says the service is not in the catalog
+means the catalog is not ready. Before each create, and after a lost create
+response, the command deletes every SLO with that name. Any other SLO error
+stops the command. The command does not inspect the S3 object or exported
 metric body.
 Management reads use the EU2 `/mgmt/openapi/5` base path.
 
