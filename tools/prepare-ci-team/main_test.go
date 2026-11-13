@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"io"
 	"net/http"
 	"os"
@@ -273,6 +274,12 @@ func fixtureResponse(t *testing.T, r *http.Request) (*http.Response, error) {
 	case "/v2/entities/ENTITY_TYPE_SERVICE":
 		return jsonResponse(200, `{"entities":[{"name":"ci-acceptance-apm"}]}`), nil
 	case "/mgmt/openapi/5/slo/slos/v1":
+		if r.Method == http.MethodGet {
+			if r.Header.Get("Authorization") != "Bearer management-secret" {
+				t.Errorf("wrong SLO catalog probe list")
+			}
+			return jsonResponse(200, `{"slos":[]}`), nil
+		}
 		if r.Method != http.MethodPost || r.Header.Get("Authorization") != "Bearer management-secret" {
 			t.Errorf("wrong SLO catalog probe request")
 		}
@@ -661,6 +668,36 @@ func TestSLOCatalogOtherErrorStops(t *testing.T) {
 	_, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", "")
 	if err == nil || !strings.Contains(err.Error(), "create SLO catalog probe: HTTP 400") || strings.Contains(err.Error(), "secret response") {
 		t.Fatalf("wrong SLO catalog error: %v", err)
+	}
+}
+
+func TestSLOCatalogLostCreateIsDeletedBeforeRetry(t *testing.T) {
+	var posts int
+	var deletedLost bool
+	deps := fakeDependencies(t, func(r *http.Request) (*http.Response, error) {
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1" && r.Method == http.MethodGet {
+			if posts == 1 && !deletedLost {
+				return jsonResponse(200, `{"slos":[{"id":"lost-slo","name":"ci-acceptance-apm-probe"},{"id":"keep","name":"other"}]}`), nil
+			}
+			return jsonResponse(200, `{"slos":[]}`), nil
+		}
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1" && r.Method == http.MethodPost {
+			posts++
+			if posts == 1 {
+				return nil, errors.New("connection reset")
+			}
+		}
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1/lost-slo" && r.Method == http.MethodDelete {
+			deletedLost = true
+			return jsonResponse(200, `{}`), nil
+		}
+		if r.URL.Path == "/mgmt/openapi/5/slo/slos/v1/keep" {
+			t.Error("deleted an SLO that is not the probe")
+		}
+		return fixtureResponse(t, r)
+	})
+	if _, err := prepare(context.Background(), deps, "management-secret", "send-secret", "pd-secret", "actor@example.invalid", ""); err != nil || posts != 2 || !deletedLost {
+		t.Fatalf("lost create was not deleted before retry: posts=%d deleted=%t err=%v", posts, deletedLost, err)
 	}
 }
 

@@ -591,6 +591,9 @@ func hasAPMService(ctx context.Context, deps dependencies, managementKey string)
 }
 
 func hasSLOCatalog(ctx context.Context, deps dependencies, managementKey string) (bool, error) {
+	if err := deleteNamedSLOProbes(ctx, deps, managementKey); err != nil {
+		return false, err
+	}
 	payload, err := json.Marshal(map[string]any{
 		"name":                      sloProbeName,
 		"targetThresholdPercentage": 99,
@@ -612,15 +615,18 @@ func hasSLOCatalog(ctx context.Context, deps dependencies, managementKey string)
 	req.Header.Set("Content-Type", "application/json")
 	resp, err := deps.client.Do(req)
 	if err != nil {
-		return false, errors.New("create SLO catalog probe: request failed")
+		return false, cleanupSLOProbeAttempt(ctx, deps, managementKey, errors.New("create SLO catalog probe: request failed"))
 	}
 	defer resp.Body.Close()
 	body, err := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
 	if err != nil {
-		return false, errors.New("create SLO catalog probe: read failed")
+		return false, cleanupSLOProbeAttempt(ctx, deps, managementKey, errors.New("create SLO catalog probe: read failed"))
 	}
 	if resp.StatusCode == http.StatusBadRequest && bytes.Contains(body, []byte("not found in catalog")) {
 		return false, nil
+	}
+	if resp.StatusCode >= 500 {
+		return false, cleanupSLOProbeAttempt(ctx, deps, managementKey, statusError{operation: "create SLO catalog probe", status: resp.StatusCode})
 	}
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		return false, statusError{operation: "create SLO catalog probe", status: resp.StatusCode}
@@ -631,12 +637,63 @@ func hasSLOCatalog(ctx context.Context, deps dependencies, managementKey string)
 		} `json:"slo"`
 	}
 	if err := json.Unmarshal(body, &created); err != nil || created.Slo.ID == "" {
-		return false, stopError{message: "create SLO catalog probe omitted id"}
+		if err := deleteNamedSLOProbes(ctx, deps, managementKey); err != nil {
+			return false, err
+		}
+		return true, nil
 	}
 	if err := deleteSLOProbe(ctx, deps, managementKey, created.Slo.ID); err != nil {
 		return false, err
 	}
 	return true, nil
+}
+
+func cleanupSLOProbeAttempt(ctx context.Context, deps dependencies, managementKey string, cause error) error {
+	if err := deleteNamedSLOProbes(ctx, deps, managementKey); err != nil {
+		return err
+	}
+	return cause
+}
+
+func deleteNamedSLOProbes(ctx context.Context, deps dependencies, managementKey string) error {
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, deps.sloURL, nil)
+	if err != nil {
+		return errors.New("build SLO catalog probe list request")
+	}
+	req.Header.Set("Authorization", "Bearer "+managementKey)
+	resp, err := deps.client.Do(req)
+	if err != nil {
+		return errors.New("list SLO catalog probes: request failed")
+	}
+	defer resp.Body.Close()
+	body, err := io.ReadAll(io.LimitReader(resp.Body, 8<<20))
+	if err != nil {
+		return errors.New("list SLO catalog probes: read failed")
+	}
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return statusError{operation: "list SLO catalog probes", status: resp.StatusCode}
+	}
+	var listed struct {
+		SLOs []struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"slos"`
+	}
+	if err := json.Unmarshal(body, &listed); err != nil {
+		return errors.New("decode SLO catalog probes")
+	}
+	for _, slo := range listed.SLOs {
+		if slo.Name != sloProbeName {
+			continue
+		}
+		if slo.ID == "" {
+			return stopError{message: "list SLO catalog probes omitted id"}
+		}
+		if err := deleteSLOProbe(ctx, deps, managementKey, slo.ID); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func deleteSLOProbe(ctx context.Context, deps dependencies, managementKey, id string) error {

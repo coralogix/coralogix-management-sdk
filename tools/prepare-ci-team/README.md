@@ -153,9 +153,10 @@ The Collector must export compact Span Metrics for APM v2 discovery. The
 command checks the APM v2 entity list. After that service is present, each
 poll creates an APM error SLO named `ci-acceptance-apm-probe` for
 `ci-acceptance-apm`. A response that says the service is not in the catalog
-means the catalog is not ready. The command deletes that SLO after a
-successful create. Any other SLO error stops the command. The command does
-not inspect the S3 object or exported metric body.
+means the catalog is not ready. Before each create, and after a lost create
+response, the command deletes every SLO with that name. Any other SLO error
+stops the command. The command does not inspect the S3 object or exported
+metric body.
 Management reads use the EU2 `/mgmt/openapi/5` base path.
 
 ## Local checks
