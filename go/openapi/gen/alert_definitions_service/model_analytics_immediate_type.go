@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the AnalyticsImmediateType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AnalyticsImmediateType{}
 
-// AnalyticsImmediateType Configuration for analytics alerts that fire immediately when a DataPrime query returns a result
+// AnalyticsImmediateType Configuration for analytics alerts that fire immediately when the number of results a DataPrime query returns meets a condition, by default when it returns any result
 type AnalyticsImmediateType struct {
 	// The DataPrime query to evaluate
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
