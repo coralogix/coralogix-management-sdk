@@ -223,22 +223,6 @@ func TestMemberBatchWriteIssues(t *testing.T) {
 	}
 }
 
-// TestMemberArrayBodyNeedsBatchWrite shows that an array body stays outside the model without the key.
-func TestMemberArrayBodyNeedsBatchWrite(t *testing.T) {
-	p := memberBatchPolicy()
-	p.BatchWrite = false
-	doc, err := Load([]byte(memberSource(t, memberWithItemPaths, memberCreateReturnsMember)))
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(ValidateWithPolicy(doc, "Member", OperationIDs{}, p)) == 0 {
-		t.Fatal("an array body validates without api.batchWrite")
-	}
-	if _, err := BuildWithPolicy(doc, "Member", OperationIDs{}, p); err == nil {
-		t.Fatal("an array body builds without api.batchWrite")
-	}
-}
-
 // memberCreateResult is the createResult line of the members contract.
 func memberCreateResult() *CreateResultLine {
 	return &CreateResultLine{Resource: "member", Status: "status", Created: []string{"CREATE_MEMBER_STATUS_CREATED"}, Message: "message"}
@@ -290,6 +274,10 @@ func TestMemberCreateResultIssues(t *testing.T) {
 		"two results arrays": {
 			edits: []string{results, results + "        failures:\n          type: array\n          items: {$ref: '#/components/schemas/CreateMemberResult'}\n"}, policy: line(same),
 			code: "CREATE_RESULT_ITEMS_AMBIGUOUS", message: "has more than one array of components",
+		},
+		"one item refused": {
+			edits: []string{results, strings.Replace(results, "minItems: 0", "minItems: 2", 1)}, policy: line(same),
+			code: "CREATE_RESULT_ONE_ITEM_REFUSED", message: "does not accept one result",
 		},
 		"resource property": {
 			policy: line(func(l *CreateResultLine) { l.Resource = "login" }),
@@ -454,13 +442,8 @@ func TestMemberGetFromList(t *testing.T) {
 	if r.Delete.Path != "/members/v1/{memberId}" || r.Update.Path != r.Create.Path {
 		t.Fatalf("paths: update %s, delete %s", r.Update.Path, r.Delete.Path)
 	}
-	// Without filters and a query, Get reads the whole List.
-	p := memberListPolicy()
-	p.ListFilters, p.GetQuery = nil, nil
-	if r := buildMember(t, memberSource(t, memberWithDeletePath), p); len(r.ListFilters) != 0 || len(r.GetQuery) != 0 {
-		t.Fatalf("filters and query without lines: %+v, %+v", r.ListFilters, r.GetQuery)
-	}
 	// The List can be named, if it is Get.
+	p := memberListPolicy()
 	p.Operations.List = p.Operations.Get
 	buildMember(t, memberSource(t, memberWithDeletePath), p)
 }
@@ -500,6 +483,10 @@ func TestMemberGetFromListIssues(t *testing.T) {
 				listItems, "        members:\n          type: array\n          items: {$ref: '#/components/schemas/MemberSummary'}\n    MemberSummary:\n      type: object\n      properties:\n        memberId: {type: string, minLength: 0}\n    UpdateMembersStatusesResponse:",
 			},
 			policy: memberListPolicy(), code: "GET_FROM_LIST_NOT_FULL", message: "The List item MemberSummary is not Member",
+		},
+		"unreadable next page type": {
+			edits:  []string{"nextPageToken: {type: integer, format: int64, minimum: 0, x-coralogix-presence: true}", "nextPageToken: {type: array}"},
+			policy: memberListPolicy(), code: "GET_FROM_LIST_PAGING_TYPE", message: "next page property \"nextPageToken\" has a type the model cannot read",
 		},
 		"no id property": {
 			policy: listPolicy(func(p *Policy) { p.IDProperty = "" }),

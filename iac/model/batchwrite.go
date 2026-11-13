@@ -95,6 +95,11 @@ func (r *Resource) resultResponse(out Response, proxy *base.SchemaProxy) (Respon
 			"Return the results in the only array of components of the Create response.")
 	}
 	results := arrays[0]
+	array, err := schemaOf(propertyOf(s, results.field))
+	if err == nil && (array.MinItems != nil && *array.MinItems > 1 || array.MaxItems != nil && *array.MaxItems < 1) {
+		return fail("CREATE_RESULT_ONE_ITEM_REFUSED", fmt.Sprintf("The Create response %s has a results array that does not accept one result. A tool creates one resource at a time.", out.Schema),
+			"Accept one result in the results array.")
+	}
 	if resource, err := componentName(unwrapRef(propertyOf(results.schema, line.Resource))); err != nil || resource != r.Name {
 		return fail("CREATE_RESULT_RESOURCE_NOT_FOUND", fmt.Sprintf("The result %s has no property %q that holds %s.", results.component, line.Resource, r.Name),
 			"Name the result property that holds the created resource.")

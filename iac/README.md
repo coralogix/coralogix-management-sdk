@@ -289,6 +289,7 @@ id in its path.
 | `OVERRIDE_UNUSED` | `api.batchWrite` is set, and neither body is an array. |
 | `CREATE_RESULT_ITEMS_NOT_FOUND` | The Create response has no array of result components. |
 | `CREATE_RESULT_ITEMS_AMBIGUOUS` | The Create response has more than one array of components. |
+| `CREATE_RESULT_ONE_ITEM_REFUSED` | The results array of the Create response does not accept one result. |
 | `CREATE_RESULT_RESOURCE_NOT_FOUND` | The result has no `resource` property that holds the resource. |
 | `CREATE_RESULT_STATUS_NOT_ENUM` | The result has no enum `status` property. |
 | `CREATE_RESULT_STATUS_VALUE_INVALID` | `created` is empty, or has a value that is not a business value of the enum. |
@@ -299,6 +300,7 @@ id in its path.
 | `GET_FROM_LIST_NOT_LIST` | Get is not a List that the model can describe. The message has the List problem. |
 | `GET_FROM_LIST_NOT_FULL` | The List item is not the resource component. |
 | `GET_FROM_LIST_ID_PROPERTY_REQUIRED` | `api.idProperty` is not set. |
+| `GET_FROM_LIST_PAGING_TYPE` | The model cannot read the type of a paging parameter or the next page token. |
 | `LIST_FILTER_UNKNOWN` | The List has no such query parameter, or it is a paging parameter. |
 | `LIST_FILTER_FIELD_UNKNOWN` | The resource has no such field. |
 | `LIST_FILTER_TYPE_INCOMPATIBLE` | The parameter does not have the scalar type of the field. |

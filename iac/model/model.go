@@ -68,8 +68,7 @@ type Resource struct {
 	ListFilters []ListFilter
 	// PageParameters are the query parameters that page the Get of a GetFromList resource, in the
 	// order of the contract, and NextPage is the response property that holds the token of the next
-	// page, nil when the response has none. A parameter or property whose type the model cannot read,
-	// such as a pagination object, is left out.
+	// page, nil when the response has none. An unreadable paging type is a contract error.
 	PageParameters []Parameter
 	NextPage       *Parameter
 	// DeleteValues are the properties of the Delete body that a remove always sends beside the id

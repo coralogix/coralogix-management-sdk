@@ -178,7 +178,6 @@ components:
       type: object
       properties:
         nextPageToken: {type: integer, format: int64, minimum: 0, x-coralogix-presence: true}
-        totalCount: {type: integer, format: int64, minimum: 0}
         members:
           type: array
           minItems: 0

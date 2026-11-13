@@ -70,7 +70,9 @@ func (r *Resource) readListOperations(ops map[verb]foundOp) error {
 		return err
 	}
 	r.GetFromList, r.List = true, list
-	r.readPaging(get)
+	if err := r.readPaging(get); err != nil {
+		return err
+	}
 	return r.readListQuery(get)
 }
 
@@ -93,7 +95,7 @@ func (r *Resource) readListQuery(get foundOp) error {
 
 // readPaging records the query parameters that page Get, and the property of its response that holds
 // the next page token.
-func (r *Resource) readPaging(get foundOp) {
+func (r *Resource) readPaging(get foundOp) error {
 	overridden := map[string]bool{}
 	for _, p := range get.op.Parameters {
 		if p.In == "query" {
@@ -108,7 +110,11 @@ func (r *Resource) readPaging(get foundOp) {
 		if p.In != "query" || !pagingName(p.Name) {
 			continue
 		}
-		if t, err := typeOf(p.Schema, listLocation+"."+p.Name, walk{policy: &r.Policy}); err == nil {
+		if t, err := typeOf(p.Schema, listLocation+"."+p.Name, walk{policy: &r.Policy}); err != nil {
+			return &contractError{code: "GET_FROM_LIST_PAGING_TYPE", location: listLocation + "." + p.Name,
+				message:     fmt.Sprintf("The paging parameter %q has a type the model cannot read: %v", p.Name, err),
+				remediation: "Page the List with a scalar page token and page size, or a pagination object the model can read."}
+		} else {
 			r.PageParameters = append(r.PageParameters, Parameter{Name: p.Name, Type: t})
 		}
 	}
@@ -117,10 +123,15 @@ func (r *Resource) readPaging(get foundOp) {
 		if normalName(name) != "nextpagetoken" {
 			continue
 		}
-		if t, err := typeOf(propertyOf(response, name), listLocation+"."+name, walk{policy: &r.Policy}); err == nil {
+		if t, err := typeOf(propertyOf(response, name), listLocation+"."+name, walk{policy: &r.Policy}); err != nil {
+			return &contractError{code: "GET_FROM_LIST_PAGING_TYPE", location: listLocation + "." + name,
+				message:     fmt.Sprintf("The next page property %q has a type the model cannot read: %v", name, err),
+				remediation: "Page the List with a scalar page token and page size, or a pagination object the model can read."}
+		} else {
 			r.NextPage = &Parameter{Name: name, Type: t}
 		}
 	}
+	return nil
 }
 
 // mustProxy returns proxy, or nil when err is set.
