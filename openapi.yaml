@@ -22621,8 +22621,9 @@ components:
           type: boolean
           x-coralogix-presence: true
       description: >-
-        Configuration for analytics alerts that fire immediately when a
-        DataPrime query returns a result
+        Configuration for analytics alerts that fire immediately when the number
+        of results a DataPrime query returns meets a condition, by default when
+        it returns any result
     AnalyticsThresholdOperator:
       enum:
         - ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_UNSPECIFIED
