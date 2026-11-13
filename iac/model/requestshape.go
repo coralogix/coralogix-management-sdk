@@ -64,7 +64,7 @@ func (p Policy) withOutsideID(ops map[verb]foundOp, id string, update *base.Sche
 			Remediation: "Set requestWrapper and updateIDInBody, or delete updateIDOutsideWrapper.",
 		}}
 	}
-	outer, _, required := validationObject(bodySchemaOrNil(bodyProxy(ops[opUpdate].op)))
+	outer, _, required := validationObject(bodySchemaOrNil(p.bodyOf(ops[opUpdate].op)))
 	idProperty := propertyOf(outer, id)
 	switch {
 	case id == "":
@@ -354,7 +354,7 @@ func (r *Resource) readRequestComponents(ops map[verb]foundOp) {
 
 // wrapperComponent returns the component of the request wrapper property of op, or "".
 func (p Policy) wrapperComponent(op *v3.Operation) string {
-	body := bodyProxy(op)
+	body := p.bodyOf(op)
 	if body == nil {
 		return ""
 	}

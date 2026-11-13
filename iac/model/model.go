@@ -58,9 +58,28 @@ type Resource struct {
 	// (Policy.WriteReturnsResource): the response of Create and Update has every field of the
 	// resource under its name, with the same shape. A tool takes the state from it, with no Get.
 	WriteReturnsResource bool
+	// GetFromList is true when Get is the List (Policy.GetFromList): no operation reads one resource by
+	// its id. A tool pages List with GetQuery, optionally narrowed by ListFilters, and selects the
+	// item whose IDField is the id; no such item means that the resource is missing. Get.Response holds the
+	// items (Items) in List.ItemsField.
+	GetFromList bool
+	// ListFilters are the query parameters that narrow the List by a resource field, sorted by
+	// parameter (Policy.ListFilters). A filter can match more than the resource.
+	ListFilters []ListFilter
+	// PageParameters are the query parameters that page the Get of a GetFromList resource, in the
+	// order of the contract, and NextPage is the response property that holds the token of the next
+	// page, nil when the response has none. An unreadable paging type is a contract error.
+	PageParameters []Parameter
+	NextPage       *Parameter
+	// DeleteValues are the properties of the Delete body that a remove always sends beside the id
+	// array Policy.DeleteIDs, with their values, sorted by name (Policy.DeleteValues).
+	DeleteValues []QueryValue
 	// GetQuery are the query parameters that Get always sends, with their values, sorted by name
 	// (Policy.GetQuery). It is nil when Get sends none.
 	GetQuery []QueryValue
+	// CreateValues are the properties beside the request wrapper that Create always sends, with their
+	// values, sorted by name (Policy.CreateValues). They are not resource fields.
+	CreateValues []QueryValue
 	// Replace is true when Update is a full replace (PUT, E11): the body has
 	// every Update field, and the server clears a field that the body does
 	// not have. It has no update mask. False: PATCH with an update mask, or an Update by POST
@@ -126,6 +145,9 @@ type Operation struct {
 	Path        string
 	OperationID string
 	Body        string // "" (no body), "inline", or a component name
+	// BodyItems: the body is an array of the component Body (Policy.BatchWrite), and a tool sends one
+	// item, for example []CreateThingRequest.
+	BodyItems bool
 	// BodyTitle is the "title" of an inline body, "" when it has none.
 	// BodyTitleIsComponent: a component schema has the same name.
 	BodyTitle            string
@@ -142,11 +164,18 @@ type Operation struct {
 	Response         Response
 }
 
-// QueryValue is a query parameter that an operation always sends, and its value.
+// QueryValue is a query parameter or a body property that an operation always sends, and its value.
 type QueryValue struct {
-	Name  string // the parameter name, for example "source_type"
+	Name  string // the parameter or property name, for example "source_type"
 	Value string // the value as the query string holds it, for example "SOURCE_TYPE_LOGS"
 	Type  *Type  // the type of the parameter: an Enum names its component
+}
+
+// ListFilter is a query parameter of the List that narrows it by a resource field.
+type ListFilter struct {
+	Param string // the query parameter, for example "username"
+	Field string // the resource field that it matches
+	Type  *Type  // the type of the parameter, the scalar type of the field
 }
 
 // ListOperation is a GET that returns the resources in one array. The model records the facts
@@ -170,9 +199,16 @@ type ListOperation struct {
 	Paged bool
 }
 
+// Parameter is a query parameter or a response property, and its type.
+type Parameter struct {
+	Name string
+	Type *Type
+}
+
 // Response is the 200 response body.
 type Response struct {
-	// Items: Field holds an array of resources. GetByIDs reads one id through this batch API.
+	// Items: Field holds an array of resources. GetByIDs reads one id through this batch API, and the
+	// Update of a BatchWrite resource returns the item that it wrote.
 	Items  bool
 	Schema string // component name, "" for an inline empty object
 	// Field is the property that wraps the resource, for example "aiEvaluation".
@@ -192,6 +228,24 @@ type Response struct {
 	// Empty is true when the response schema has no fields, for example many
 	// Delete responses. The SDK then returns map[string]interface{}.
 	Empty bool
+	// Result is the answer of a batch Create that holds one result per request item
+	// (Policy.CreateResult), nil otherwise. Field is then "".
+	Result *WriteResult
+}
+
+// WriteResult is the answer of a batch Create: one result per request item, in request order. A tool
+// sends one item and reads the first result. The item is created only when Status holds one of
+// Created, and Resource then holds it. Otherwise Message, when the result has it, says why.
+type WriteResult struct {
+	Items     string // the response property that holds the results, for example "results"
+	Component string // the component of a result, for example "CreateThingResult"
+	Resource  string // the result property that holds the resource
+	Status    string // the enum property with the status of the item
+	// StatusType is the enum of Status. Created are its values that mean created, in the order of
+	// the line; none is the zero value.
+	StatusType *Type
+	Created    []string
+	Message    string // the string property with a message, "" when the line names none
 }
 
 // Behavior is how a top-level field is managed. See Classify.

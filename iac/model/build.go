@@ -103,6 +103,9 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 	// call has no update mask, and the tool decides which fields to send.
 	r = &Resource{Name: name, Replace: ops[opUpdate].method == "PUT" || policy.Overwrite, UpdateMethod: policy.UpdateMethod, Policy: policy, shapeUsed: map[string]bool{}, requestUnwrapUsed: map[string]bool{}}
 	r.UpdateIDOutsideWrapper = policy.updateIDOutsideWrapper()
+	if err := r.readCreateValues(ops[opCreate]); err != nil {
+		return nil, nil, err
+	}
 	if err := r.readOperations(ops); err != nil {
 		return nil, nil, err
 	}
@@ -154,7 +157,16 @@ func build(doc *v3.Document, name string, ids OperationIDs, policy Policy) (r *R
 			return nil, nil, err
 		}
 	}
+	if err := r.readListFilters(ops[opGet]); err != nil {
+		return nil, nil, err
+	}
 	r.zeroDefaults()
+	if r.GetFromList {
+		if ids.List != "" && ids.List != r.Get.OperationID {
+			return r, fmt.Errorf("api.getFromList reads the List with Get %s, and the List is %s", r.Get.OperationID, ids.List), nil
+		}
+		return r, nil, nil
+	}
 	return r, r.readList(doc, ops[opGet], ids.List), nil
 }
 
@@ -234,7 +246,7 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 		}
 	}
 	get, singleton := found[opGet]
-	singleton = singleton && len(pathParams(get)) == 0
+	singleton = singleton && len(pathParams(get)) == 0 && !p.GetFromList
 	for _, v := range verbs {
 		f, ok := found[v]
 		suffix := "_" + string(v) + name
@@ -296,6 +308,15 @@ func matchingOperations(doc *v3.Document, name string, role verb, explicit strin
 }
 
 func (r *Resource) readOperations(ops map[verb]foundOp) error {
+	if r.Policy.GetFromList {
+		return r.readListOperations(ops)
+	}
+	if len(r.Policy.GetQuery) != 0 && !r.Policy.Overwrite {
+		return errors.New("api.getFromList.query needs api.getFromList")
+	}
+	if r.Policy.DeleteIDs != "" {
+		return errors.New("api.delete.ids is for a resource that is read from its List (api.getFromList)")
+	}
 	if r.Policy.GetByIDs != "" {
 		return r.readBatchOperations(ops)
 	}
@@ -436,7 +457,12 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 		if o.Body, err = bodyName(f.op); err != nil {
 			return fmt.Errorf("%s: %w", v, err)
 		}
-		if o.Response, err = r.response(f.op, v); err != nil {
+	}
+	if err := r.readBatchBodies(ops); err != nil {
+		return err
+	}
+	for _, v := range verbs {
+		if targets[v].Response, err = r.response(ops[v].op, v); err != nil {
 			return fmt.Errorf("%s: %w", v, err)
 		}
 	}
@@ -445,7 +471,7 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 			return fmt.Errorf("%s: no request body", v)
 		}
 	}
-	if r.Policy.DeleteOperation != "" && ops[opDelete].op.RequestBody != nil {
+	if r.Policy.DeleteOperation != "" && r.Policy.DeleteIDs == "" && ops[opDelete].op.RequestBody != nil {
 		return fmt.Errorf("%s: %s has a request body, want none", opDelete, r.Delete.OperationID)
 	}
 	return nil
@@ -458,8 +484,8 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 func (r *Resource) readBodyTitles(doc *v3.Document, ops map[verb]foundOp) {
 	referenced := schemasReferencedByTags(doc, operationTags(ops))
 	targets := map[verb]*Operation{opCreate: &r.Create, opUpdate: &r.Update}
-	if r.Overwrite {
-		targets[opDelete] = &r.Delete // the Delete of an overwrite resource is the write
+	if r.Overwrite || r.Policy.DeleteIDs != "" {
+		targets[opDelete] = &r.Delete // the write of an overwrite resource, or a remove through a body
 	}
 	for v, o := range targets {
 		proxy := bodyProxy(ops[v].op)
@@ -469,7 +495,7 @@ func (r *Resource) readBodyTitles(doc *v3.Document, ops map[verb]foundOp) {
 		o.BodyTitle = proxy.Schema().Title
 		o.BodyTitleIsComponent = o.BodyTitle != "" && referenced[o.BodyTitle]
 	}
-	r.Update.BodyAsCreate = sameInlineBodies(bodyProxy(ops[opCreate].op), bodyProxy(ops[opUpdate].op))
+	r.Update.BodyAsCreate = sameInlineBodies(r.Policy.bodyOf(ops[opCreate].op), r.Policy.bodyOf(ops[opUpdate].op))
 }
 
 // sameInlineBodies reports whether two inline bodies without a title are the same schema.
@@ -673,6 +699,9 @@ func okSchema(op *v3.Operation) (*base.SchemaProxy, error) {
 // no fields: its Get needs no id. A tool then reads the resource with Get.
 func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	wrapped := v != opDelete
+	if v == opCreate && r.Policy.CreateResponseOnlyIDProperty != "" && r.Policy.CreateResult != nil {
+		return Response{}, errors.New("api.batchWrite.createResult and api.createResponseOnlyIDProperty both say what the Create response holds: keep one")
+	}
 	schema, err := okSchema(op)
 	if err != nil {
 		return Response{}, err
@@ -720,6 +749,9 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	if v == opCreate && r.Policy.CreateResponseOnlyIDProperty != "" {
 		return r.idResponse(out, proxy)
 	}
+	if v == opCreate && r.Policy.CreateResult != nil {
+		return r.resultResponse(out, proxy)
+	}
 	if !wrapped {
 		return emptyResponse(out, proxy)
 	}
@@ -736,18 +768,20 @@ func (r *Resource) response(op *v3.Operation, v verb) (Response, error) {
 	if err != nil {
 		return Response{}, err
 	}
-	keys := r.wrapperKeys(s)
+	arrays := r.Policy.itemsResponse(v)
+	keys := r.wrapperKeys(s, arrays)
 	if len(keys) != 1 {
 		return Response{}, fmt.Errorf("response %s has properties %v, want one that wraps %s", name, propertyNames(s), r.Name)
 	}
 	innerProxy := propertyOf(s, keys[0])
-	if v == opGet && r.Policy.GetByIDs != "" {
-		items, err := schemaOf(innerProxy)
-		if err != nil || !slices.Equal(items.Type, []string{"array"}) || items.Items == nil || items.Items.A == nil {
-			return Response{}, fmt.Errorf("api.getByIDs needs a response array of %s", r.Name)
+	if arrays {
+		items := arrayItems(innerProxy)
+		if items == nil && v == opGet {
+			return Response{}, fmt.Errorf("%s needs a response array of %s", r.Policy.readKey(), r.Name)
 		}
-		out.Items = true
-		innerProxy = items.Items.A
+		if items != nil {
+			out.Items, innerProxy = true, items
+		}
 	}
 	inner, err := componentName(unwrapRef(innerProxy))
 	if err != nil {
@@ -854,16 +888,39 @@ func sameIDWrapper(a, b *Type) bool {
 // wrapperKeys returns the properties of a response that wraps the resource. A released API can
 // return other values next to the resource, such as the ids of objects that the call also
 // changed, so existing mode keeps only the properties that hold the resource. The generated
-// code reads only the resource.
-func (r *Resource) wrapperKeys(s *base.Schema) []string {
+// code reads only the resource. With arrays, a property that holds an array of the resource holds it
+// too.
+func (r *Resource) wrapperKeys(s *base.Schema, arrays bool) []string {
 	keys := propertyNames(s)
 	if len(keys) == 1 || !r.Policy.Existing {
 		return keys
 	}
 	return slices.DeleteFunc(keys, func(key string) bool {
-		inner, err := componentName(unwrapRef(propertyOf(s, key)))
+		proxy := propertyOf(s, key)
+		if items := arrayItems(proxy); arrays && items != nil {
+			proxy = items
+		}
+		inner, err := componentName(unwrapRef(proxy))
 		return err != nil || inner != r.Name
 	})
+}
+
+// itemsResponse reports whether the response of the lifecycle step v can hold the resource in an
+// array: the batch Get of GetByIDs, and the Update of BatchWrite.
+func (p Policy) itemsResponse(v verb) bool {
+	return v == opGet && p.readsItems() || v == opUpdate && p.BatchWrite
+}
+
+// readsItems reports whether Get reads an array that holds the resource: a batch Get (GetByIDs), or
+// the List (GetFromList).
+func (p Policy) readsItems() bool { return p.GetByIDs != "" || p.GetFromList }
+
+// readKey is the overrides key that makes Get read an array.
+func (p Policy) readKey() string {
+	if p.GetFromList {
+		return "api.getFromList"
+	}
+	return "api.getByIDs"
 }
 
 // responseRef returns a 200 response schema that is "$ref: X", or the $ref
@@ -2007,6 +2064,13 @@ func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 			return err
 		}
 	}
+	return r.readGetQuery(get, "behavior-overrides.yaml:api.overwrite.getQuery")
+}
+
+// readGetQuery reads the query parameters that Get always sends (Policy.GetQuery). Each is a query
+// parameter of Get, and its value is one that the parameter accepts. key is the line of the
+// behavior-overrides file that states them.
+func (r *Resource) readGetQuery(get foundOp, key string) error {
 	if len(r.Policy.GetQuery) == 0 {
 		return nil
 	}
@@ -2018,7 +2082,7 @@ func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 	}
 	for _, name := range slices.Sorted(maps.Keys(r.Policy.GetQuery)) {
 		value := r.Policy.GetQuery[name]
-		location := "behavior-overrides.yaml:api.overwrite.getQuery." + name
+		location := key + "." + name
 		p := params[name]
 		if p == nil {
 			return &contractError{code: "GET_QUERY_UNKNOWN", location: location, message: fmt.Sprintf("Get %s has no query parameter %q.", get.op.OperationId, name), remediation: "Name a query parameter of Get, or delete the line."}
@@ -2029,6 +2093,9 @@ func (r *Resource) readOverwrite(doc *v3.Document, get foundOp) error {
 		t, err := typeOf(p.Schema, location, walk{policy: &r.Policy})
 		if err != nil {
 			return &contractError{code: "GET_QUERY_VALUE_INVALID", location: location, message: fmt.Sprintf("The query parameter %q has a type that the model cannot read: %s.", name, err), remediation: "Use a scalar or an enum query parameter."}
+		}
+		if !slices.Contains([]Kind{String, Bool, Integer, Number, Enum}, t.Kind) {
+			return &contractError{code: "GET_QUERY_VALUE_INVALID", location: location, message: fmt.Sprintf("The query parameter %q is a %s, not a scalar or an enum.", name, t.Kind), remediation: "Use a scalar or an enum query parameter."}
 		}
 		r.GetQuery = append(r.GetQuery, QueryValue{Name: name, Value: value, Type: t})
 	}
@@ -2161,6 +2228,15 @@ func queryValueProblem(proxy *base.SchemaProxy, value string) string {
 			return "is not an int32"
 		}
 		return numberRangeProblem(s, float64(n))
+	case slices.Contains(s.Type, "number"):
+		n, err := strconv.ParseFloat(value, 64)
+		if err != nil {
+			return "is not a number"
+		}
+		if math.IsNaN(n) || math.IsInf(n, 0) {
+			return "is not a finite number"
+		}
+		return numberRangeProblem(s, n)
 	}
 	return ""
 }

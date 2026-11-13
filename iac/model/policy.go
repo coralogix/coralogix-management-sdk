@@ -37,6 +37,23 @@ type Policy struct {
 	// GetByIDs names the string-array Get query parameter used to read one resource through a
 	// batch endpoint. Existing resources only; Delete supplies the id path parameter.
 	GetByIDs string
+	// GetFromList means that no operation reads one resource by its id: Get is the List, and a tool
+	// selects the item whose IDProperty is the id. Existing resources only.
+	GetFromList bool
+	// ListFilters maps a query parameter of the List to the resource field that it narrows the List
+	// by, for example {"username": "username"}. A filter is a hint: it can match more items, so a tool
+	// still selects the item by its id. Only a GetFromList resource has it.
+	ListFilters map[string]string
+	// BatchWrite means that the Create and Update bodies are arrays of one request component, and a
+	// tool sends one item. The model reads the item where it reads a body. Existing resources only.
+	BatchWrite bool
+	// CreateResult describes the Create response of a BatchWrite resource that answers with one
+	// result per request item. nil means that Create returns the resource.
+	CreateResult *CreateResultLine
+	// CreateValues are the properties of the Create body beside the RequestWrapper that Create always
+	// sends, with their values, for example {"onboardingMode": "ONBOARDING_MODE_NO_INVITE"}. They are
+	// not fields of the resource. Existing resources only.
+	CreateValues map[string]string
 	// Existing turns on the rules that are true for every released resource:
 	//   - a response may wrap the resource in one property;
 	//   - the request schema may be the resource schema (a shared payload), and
@@ -130,8 +147,10 @@ type Policy struct {
 	// Create and Update. The write path can differ from the Get path.
 	Overwrite bool
 	// GetQuery are the query parameters that Get always sends, with their values, for a Get that
-	// returns the items of several resources, such as one list per source type. The parameter is
-	// not a resource field. Only an Overwrite resource has it.
+	// returns the items of several resources, such as one list per source type, or for the List read
+	// of a GetFromList resource, such as the status of the resources that a remove has not
+	// deactivated. The parameter is not a resource field. Only an Overwrite or a GetFromList
+	// resource has it.
 	GetQuery map[string]string
 	// WriteReturnsResource means that the write of an Overwrite resource returns the resource: its
 	// response has every field of the Get response, with the same shape. A tool then takes the
@@ -143,6 +162,13 @@ type Policy struct {
 	// body, and a response that the generated code ignores. "" means a DELETE on
 	// the Get path.
 	DeleteOperation string
+	// DeleteIDs is the string-array property of the Delete body that carries the id, when the remove
+	// operation has no path parameter and takes a batch of ids, for example "userIds". The body
+	// accepts one id. Only a GetFromList resource has it.
+	DeleteIDs string
+	// DeleteValues are the other properties of the Delete body that a remove always sends, with
+	// their values, for example {"status": "USER_STATUS_INACTIVE"}.
+	DeleteValues map[string]string
 	// UpdateMaskInBody: PATCH updateMask is an optional property of the JSON
 	// body, not a query parameter. The generated update sets it to the same
 	// changed-field mask a query parameter would send. A full replace (PUT)
@@ -228,7 +254,7 @@ func (p Policy) unwrappedCreate(ops map[verb]foundOp) bool {
 		return false
 	}
 	has := func(v verb) bool {
-		s, err := schemaOf(bodyProxy(ops[v].op))
+		s, err := schemaOf(p.bodyOf(ops[v].op))
 		return err == nil && propertyOf(s, p.RequestWrapper) != nil
 	}
 	return !has(opCreate) && has(opUpdate)
@@ -237,7 +263,7 @@ func (p Policy) unwrappedCreate(ops map[verb]foundOp) bool {
 // requestBody returns the schema that holds the resource in a Create or Update
 // body. With a request wrapper it is the wrapper property.
 func (p Policy) requestBody(op *v3.Operation) *base.SchemaProxy {
-	proxy := bodyProxy(op)
+	proxy := p.bodyOf(op)
 	if p.RequestWrapper == "" || proxy == nil {
 		return referencedSchema(proxy)
 	}
@@ -249,6 +275,28 @@ func (p Policy) requestBody(op *v3.Operation) *base.SchemaProxy {
 		return referencedSchema(inner)
 	}
 	return proxy // a later check reports the missing wrapper property
+}
+
+// bodyOf returns the JSON body of op as it holds one resource: the item of an array body under
+// BatchWrite, or the body itself.
+func (p Policy) bodyOf(op *v3.Operation) *base.SchemaProxy {
+	proxy := bodyProxy(op)
+	if !p.BatchWrite {
+		return proxy
+	}
+	if items := arrayItems(proxy); items != nil {
+		return items
+	}
+	return proxy
+}
+
+// arrayItems returns the items of an array schema, or nil when proxy is no array.
+func arrayItems(proxy *base.SchemaProxy) *base.SchemaProxy {
+	s, err := schemaOf(proxy)
+	if err != nil || !slices.Equal(s.Type, []string{"array"}) || s.Items == nil || !s.Items.IsA() {
+		return nil
+	}
+	return s.Items.A
 }
 
 // referencedSchema returns the schema that allOf: [$ref] refers to, or proxy itself. The OpenAPI
@@ -314,6 +362,9 @@ func oneOperationID(v verb, fromFile, flag string) (string, error) {
 func (p Policy) methods(v verb) []string {
 	if p.Overwrite && v != opGet {
 		return []string{"PUT", "POST"}
+	}
+	if v == opDelete && p.DeleteIDs != "" {
+		return []string{"POST", "PUT", "PATCH"}
 	}
 	if v == opDelete && p.DeleteOperation != "" {
 		return []string{"POST"}
@@ -553,6 +604,14 @@ type KeyedLine struct {
 	Object     bool
 	Arms       map[string]string
 	KeyAs      string
+}
+
+// CreateResultLine names the properties of a result of a batch Create: the property that holds the
+// resource, the enum property with the status of the item, the status values that mean that the
+// item was created, and the string property with a message ("" for none).
+type CreateResultLine struct {
+	Resource, Status, Message string
+	Created                   []string
 }
 
 // EnumValue is an accepted API value of an enum and the name that the generated resource gives it.

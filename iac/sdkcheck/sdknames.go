@@ -175,6 +175,20 @@ func Names(r *model.Resource, tag, module string, zeroConstants func(component s
 // one field that holds it. The resource fields are then the fields of the resource type, which the
 // "fields" names cover.
 func (s *resolver) bodyFields(r *model.Resource, resource string) error {
+	for _, v := range r.CreateValues {
+		if err := s.fixedValue("create.body."+v.Name, s.bodies["create"], v); err != nil {
+			return err
+		}
+	}
+	if ids := r.Policy.DeleteIDs; ids != "" {
+		// A remove through a body sends the id in a string array, and the fixed values beside it.
+		s.add(Ref{Path: "delete.body." + ids, Kind: KindField, Owner: s.bodies["delete"], Name: goFieldName(ids), Want: "[]string", Rule: RuleProperty})
+		for _, v := range r.DeleteValues {
+			if err := s.fixedValue("delete.body."+v.Name, s.bodies["delete"], v); err != nil {
+				return err
+			}
+		}
+	}
 	if r.MaskInBody {
 		// The body property carries the same mask a query parameter would. It is
 		// *string, or a string when the SDK uses a value.
@@ -336,12 +350,14 @@ func (s *resolver) operations(r *model.Resource, client string) error {
 	}
 	for _, o := range ops {
 		// A singleton has no id in the path (D18).
-		withID := o.id && !r.Singleton && (o.name != "update" || !r.Policy.UpdateIDInBody) && (o.name != "get" || r.Policy.GetByIDs == "")
+		withID := o.id && !r.Singleton && (o.name != "update" || !r.Policy.UpdateIDInBody) &&
+			(o.name != "get" || r.Policy.GetByIDs == "" && !r.GetFromList) && (o.name != "delete" || r.Policy.DeleteIDs == "")
 		if err := s.operation(r, o.name, o.op, client, withID); err != nil {
 			return err
 		}
 	}
-	if r.List != nil {
+	if r.List != nil && !r.GetFromList {
+		// The Get of a GetFromList resource is the List call, which get names.
 		return s.list(r, client)
 	}
 	return nil
@@ -441,17 +457,24 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	}
 	if name == "get" {
 		for _, q := range r.GetQuery {
-			// The Go SDK sets a query parameter with a builder method named after it.
-			goType, err := ValueType(q.Type)
-			if err != nil {
-				return fmt.Errorf("%s.query.%s: %w", path, q.Name, err)
+			if err := s.querySetter(path+".query."+q.Name, builder, q.Name, q.Type); err != nil {
+				return err
 			}
-			s.add(Ref{Path: path + ".query." + q.Name, Kind: KindMethod, Owner: builder, Name: camelize(q.Name),
-				Want: "func(" + lowerFirst(camelize(q.Name)) + " " + goType + ") " + builder, Rule: RuleParameter})
 			if q.Type.Kind == model.Enum {
-				enum := goTypeName(q.Type.Schema)
-				s.addOnce(Ref{Path: path + ".query." + q.Name, Kind: KindType, Name: enum, Rule: RuleComponent, Schema: q.Type.Schema})
-				s.add(Ref{Path: path + ".query." + q.Name + "." + q.Value, Kind: KindConst, Name: enumConstName(enum, q.Value), Rule: RuleEnumValue})
+				s.add(Ref{Path: path + ".query." + q.Name + "." + q.Value, Kind: KindConst, Name: enumConstName(goTypeName(q.Type.Schema), q.Value), Rule: RuleEnumValue})
+			}
+		}
+	}
+	if name == "get" && r.GetFromList {
+		// A tool pages the List that Get reads, and can narrow it by the filters.
+		for _, p := range r.PageParameters {
+			if err := s.querySetter(path+".page."+p.Name, builder, p.Name, p.Type); err != nil {
+				return err
+			}
+		}
+		for _, f := range r.ListFilters {
+			if err := s.querySetter(path+".filter."+f.Param, builder, f.Param, f.Type); err != nil {
+				return err
 			}
 		}
 	}
@@ -460,9 +483,16 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 			Want: "func(" + lowerFirst(goFieldName(r.UpdateMask)) + " string) " + builder, Rule: RuleParameter})
 	}
 
-	switch op.Body {
-	case "":
-	case "inline":
+	switch {
+	case op.Body == "":
+	case op.BodyItems:
+		// openapi-generator names the setter of an array body after its item component.
+		body := goTypeName(op.Body)
+		s.bodies[name] = body
+		s.addOnce(Ref{Path: path + ".body", Kind: KindType, Name: body, Rule: RuleComponent, Schema: op.Body})
+		s.add(Ref{Path: path + ".body", Kind: KindMethod, Owner: builder, Name: body,
+			Want: "func(" + lowerFirst(body) + " []" + body + ") " + builder, Rule: RuleComponent})
+	case op.Body == "inline":
 		body := inlineBodyName(method, op)
 		if name == "update" && op.BodyAsCreate && s.bodies["create"] != "" {
 			// One type serves both bodies, with the name of the Create body.
@@ -486,6 +516,14 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 	s.add(Ref{Path: path + ".response", Kind: KindType, Name: resp, Rule: RuleComponent})
 	s.add(Ref{Path: path, Kind: KindMethod, Owner: builder, Name: "Execute",
 		Want: "func() (*" + resp + ", *http.Response, error)", Rule: RuleOperationID})
+	if err := s.writeResult(r, path, resp, op.Response.Result); err != nil {
+		return err
+	}
+	if next := r.NextPage; name == "get" && next != nil {
+		if err := s.field(path+".response."+next.Name, resp, next.Name, next.Type, true); err != nil {
+			return err
+		}
+	}
 	if op.Response.ID != "" {
 		want := "string"
 		if r.IDType != nil && len(r.IDType.Wrappers) == 1 {
@@ -522,6 +560,62 @@ func (s *resolver) operation(r *model.Resource, name string, op model.Operation,
 			Name: goFieldName(op.Response.Field), Want: want, WantValue: value, Rule: RuleProperty})
 	}
 	return nil
+}
+
+// querySetter adds the builder method that sets the query parameter name of an operation, and the
+// type of an enum parameter. The Go SDK names the method after the parameter.
+func (s *resolver) querySetter(path, builder, name string, t *model.Type) error {
+	goType, err := ValueType(t)
+	if err != nil {
+		return fmt.Errorf("%s: %w", path, err)
+	}
+	s.add(Ref{Path: path, Kind: KindMethod, Owner: builder, Name: camelize(name),
+		Want: "func(" + lowerFirst(camelize(name)) + " " + goType + ") " + builder, Rule: RuleParameter})
+	if t.Kind == model.Enum {
+		s.addOnce(Ref{Path: path, Kind: KindType, Name: goTypeName(t.Schema), Rule: RuleComponent, Schema: t.Schema})
+	}
+	return nil
+}
+
+// fixedValue adds the body field that a call always sends with a fixed value, and the constant of an
+// enum value.
+func (s *resolver) fixedValue(path, owner string, v model.QueryValue) error {
+	if err := s.field(path, owner, v.Name, v.Type, true); err != nil {
+		return err
+	}
+	if v.Type.Kind != model.Enum {
+		return nil
+	}
+	enum := goTypeName(v.Type.Schema)
+	s.addOnce(Ref{Path: path, Kind: KindType, Name: enum, Rule: RuleComponent, Schema: v.Type.Schema})
+	s.add(Ref{Path: path + "." + v.Value, Kind: KindConst, Name: enumConstName(enum, v.Value), Rule: RuleEnumValue})
+	return nil
+}
+
+// writeResult adds the names of a batch Create answer: the results array of the response, the result
+// type, its resource, status, and message fields, and the constant of each status value that means
+// created.
+func (s *resolver) writeResult(r *model.Resource, path, resp string, result *model.WriteResult) error {
+	if result == nil {
+		return nil
+	}
+	item, resource := goTypeName(result.Component), goTypeName(r.Name)
+	s.add(Ref{Path: path + ".response." + result.Items, Kind: KindField, Owner: resp, Name: goFieldName(result.Items), Want: "[]" + item, Rule: RuleProperty})
+	s.addOnce(Ref{Path: path + ".result", Kind: KindType, Name: item, Rule: RuleComponent, Schema: result.Component})
+	s.add(Ref{Path: path + ".result." + result.Resource, Kind: KindField, Owner: item, Name: goFieldName(result.Resource),
+		Want: "*" + resource, WantValue: resource, Rule: RuleProperty})
+	if err := s.field(path+".result."+result.Status, item, result.Status, result.StatusType, true); err != nil {
+		return err
+	}
+	status := goTypeName(result.StatusType.Schema)
+	s.addOnce(Ref{Path: path + ".result." + result.Status, Kind: KindType, Name: status, Rule: RuleComponent, Schema: result.StatusType.Schema})
+	for _, v := range result.Created {
+		s.add(Ref{Path: path + ".result." + result.Status + "." + v, Kind: KindConst, Name: enumConstName(status, v), Rule: RuleEnumValue})
+	}
+	if result.Message == "" {
+		return nil
+	}
+	return s.field(path+".result."+result.Message, item, result.Message, &model.Type{Kind: model.String}, true)
 }
 
 // inlineBodyName is the SDK type of an inline request body. openapi-generator

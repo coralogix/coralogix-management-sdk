@@ -212,7 +212,7 @@ types:
 | `OVERWRITE_SHAPE_UNSUPPORTED` | An operation has a path parameter, or Create, Update, and Delete are not one write. |
 | `OVERWRITE_FIELD_NOT_COLLECTION` | The write sends a field that is not a list or a map. |
 | `GET_QUERY_UNKNOWN` | Get has no query parameter of that name. |
-| `GET_QUERY_VALUE_INVALID` | The parameter does not accept the value. |
+| `GET_QUERY_VALUE_INVALID` | The parameter is not a scalar or an enum, or does not accept the value. |
 | `REQUEST_WRAPPER_NOT_FOUND` | The request object of the component has no object property of that name. |
 | `REQUEST_NAME_NOT_FOUND` | A nested `requestAs` path is not in the request object. |
 | `REQUEST_NAME_CONFLICT` | A field is both beside and inside the wrapper, or two lines map one field. |
@@ -234,6 +234,89 @@ one id and keeps its released selection behavior. New resources still require a 
 `Policy.ClientRequired` records fields that a released client always supplies, even when Create makes
 them optional. Such a field can be required in Update without losing the identity or value needed
 for later changes.
+
+## A resource read from its List and written in batches
+
+Some released APIs read and write a resource only in batches. Create and Update take an array of
+request items. Create answers with one result per item. No operation reads one resource by its id,
+and the remove takes a body of ids. Six keys describe it. Each applies only to an existing resource.
+
+| Key | Fact | Model |
+|---|---|---|
+| `api.batchWrite` | The Create and Update bodies are arrays of one request component that accept one item. A tool sends one item. The model reads the item wherever it reads a body, so `requestWrapper`, `updateIDInBody`, and `updateIDOutsideWrapper` apply to the item. The Update response can hold the written resource in an array beside other properties. | `Policy.BatchWrite`, `Operation.BodyItems` (`Body` names the item component), `Update.Response.Items` |
+| `api.batchWrite.createResult` | Create answers with one result per request item, in request order, instead of the resource. A result holds the resource in `resource`. Its enum `status` says whether the item was created: only the `created` values mean yes, so a 200 can still mean that the item was not created. `message`, when set, is the string that says why. A tool sends one item and reads the first result. It cannot go with `api.createResponseOnlyIDProperty`. | `Policy.CreateResult`, `Create.Response.Result` |
+| `api.createValues` | Properties of the Create body beside `requestWrapper` that Create always sends, with these values. They are not resource fields. Each is a scalar or an enum, and the value is not the zero value of the enum. | `Policy.CreateValues`, `Resource.CreateValues` (sorted `QueryValue`s) |
+| `api.getFromList` | No operation reads one resource by its id: Get is the List. A tool pages it with `query`, optionally narrowed by `filters`, and selects the item whose `idProperty` is the id. No such item means that the resource is missing. `api.idProperty` is required, Update sends the id in its body (`updateIDInBody`), and Delete takes the id in its path or through `api.delete.ids`. | `Policy.GetFromList`, `Resource.GetFromList`, `Resource.List` (Get itself), `Resource.PageParameters`, `Resource.NextPage`, `Get.Response.Items` |
+| `api.getFromList.filters` | A query parameter of the List that narrows it by a resource field of the same scalar type. A filter is a hint: it can match more items, such as a partial match on a name, so the id match stays authoritative, and a tool can read again without it. | `Policy.ListFilters`, `Resource.ListFilters` |
+| `api.getFromList.query` | Query parameters of the List that Get always sends, with these values, for a List that also has the resources that a remove deactivated, such as `{status: MEMBER_STATUS_ACTIVE}`. Only the items that the query selects exist. Each is a scalar or an enum parameter that accepts the value, and is neither a paging parameter nor a filter. | `Policy.GetQuery`, `Resource.GetQuery` (sorted `QueryValue`s) |
+| `api.delete.ids`, `api.delete.values` | The remove has no path parameter. Its body carries the id in a string array that accepts one id, and sends `values` beside it. The body requires nothing else, and the response is ignored. It can be a POST, PUT, or PATCH. `api.operations.delete` can name it instead of `api.delete.operation`. | `Policy.DeleteIDs`, `Policy.DeleteValues`, `Resource.DeleteValues` |
+
+```yaml
+api:
+  requestWrapper: template
+  updateIDInBody: true
+  updateIDOutsideWrapper: true   # Update is [{memberId, template}]
+  serverSetID: true
+  idProperty: memberId
+  batchWrite:
+    createResult: {resource: member, status: status, created: [CREATE_MEMBER_STATUS_CREATED], message: message}
+  createValues: {onboardingMode: ONBOARDING_MODE_NO_INVITE}
+  getFromList:
+    filters: {login: login}      # the List query parameter, and the field that it narrows by
+    query: {status: MEMBER_STATUS_ACTIVE}   # a removed member is inactive, and still listed
+  operations:
+    create: MembersService_CreateMembers
+    get: MembersService_SearchMembers
+    update: MembersService_UpdateMembers
+    delete: MembersService_UpdateMembersStatuses
+  delete:
+    ids: memberIds
+    values: {status: MEMBER_STATUS_INACTIVE}
+```
+
+`sdkcheck.Names` adds the builder method that takes the array body (`CreateMemberRequest([]CreateMemberRequest)`),
+the results field, the result type with its resource, status, and message fields, and the constant of
+each `created` value. For `createValues` and `delete.values` it adds the body field and the enum
+constant. For `getFromList` it adds the paging, filter, and `query` setters of Get, the constant of
+each enum `query` value, and the next page token. Get is the List call, so there is no separate List
+name. For `delete.ids` it adds the inline remove body and its string-array field. No call takes the
+id in its path.
+
+| Code | Problem |
+|---|---|
+| `BATCH_WRITE_BODY_NOT_ARRAY` | A write body is not an array of a component. |
+| `BATCH_WRITE_ONE_ITEM_REFUSED` | A write body does not accept an array of one item. |
+| `OVERRIDE_UNUSED` | `api.batchWrite` is set, and neither body is an array. |
+| `CREATE_RESULT_ITEMS_NOT_FOUND` | The Create response has no array of result components. |
+| `CREATE_RESULT_ITEMS_AMBIGUOUS` | The Create response has more than one array of components. |
+| `CREATE_RESULT_ONE_ITEM_REFUSED` | The results array of the Create response does not accept one result. |
+| `CREATE_RESULT_RESOURCE_NOT_FOUND` | The result has no `resource` property that holds the resource. |
+| `CREATE_RESULT_STATUS_NOT_ENUM` | The result has no enum `status` property. |
+| `CREATE_RESULT_STATUS_VALUE_INVALID` | `created` is empty, or has a value that is not a business value of the enum. |
+| `CREATE_RESULT_MESSAGE_NOT_STRING` | The result has no string `message` property. |
+| `CREATE_VALUE_UNKNOWN` | Create has no request wrapper, or no such property beside it. |
+| `CREATE_VALUE_INSIDE_WRAPPER` | The property is the wrapper, or a field inside it. |
+| `CREATE_VALUE_INVALID` | The property is not a scalar or an enum, or does not accept the value, or the value is the zero value. |
+| `GET_FROM_LIST_NOT_LIST` | Get is not a List that the model can describe. The message has the List problem. |
+| `GET_FROM_LIST_NOT_FULL` | The List item is not the resource component. |
+| `GET_FROM_LIST_ID_PROPERTY_REQUIRED` | `api.idProperty` is not set. |
+| `GET_FROM_LIST_PAGING_TYPE` | The model cannot read the type of a paging parameter or the next page token. |
+| `LIST_FILTER_UNKNOWN` | The List has no such query parameter, or it is a paging parameter. |
+| `LIST_FILTER_FIELD_UNKNOWN` | The resource has no such field. |
+| `LIST_FILTER_TYPE_INCOMPATIBLE` | The parameter does not have the scalar type of the field. |
+| `GET_QUERY_UNKNOWN` | The List has no such query parameter, or it is a paging parameter. |
+| `GET_QUERY_VALUE_INVALID` | The parameter is not a scalar or an enum, or does not accept the value. |
+| `DELETE_IDS_NOT_FOUND` | The remove body has no such property. |
+| `DELETE_IDS_NOT_STRING_ARRAY` | The property is not an array of strings. |
+| `DELETE_IDS_ONE_ITEM_REFUSED` | The array does not accept one id. |
+| `DELETE_VALUE_UNKNOWN` | The remove body has no such property beside the ids. |
+| `DELETE_VALUE_INVALID` | The property does not accept the value, or the value is the zero value. |
+| `DELETE_BODY_REQUIRED_PROPERTY` | The remove body requires a property that has no value. |
+
+How a tool keeps a value that Update must send back, such as a login mode that the user does not set,
+is not a key here. The existing `computed` and `keepState` field lines already state that fact.
+
+The golden contract is `model/testdata/memberthing.yaml`.
 
 ## Create and Update with one inline body
 

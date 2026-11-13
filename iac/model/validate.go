@@ -184,7 +184,7 @@ func validateRole(role verb, candidates []foundOp, explicit string, p Policy, fo
 	case 1:
 		candidate := candidates[0]
 		report := operationCandidateIssues(location, role, candidate, p)
-		if role == opDelete && p.DeleteOperation != "" && len(report) == 0 {
+		if role == opDelete && p.DeleteOperation != "" && p.DeleteIDs == "" && len(report) == 0 {
 			report = deleteActionIssues(location, candidate, found)
 		}
 		if len(report) == 0 {
@@ -533,7 +533,7 @@ func oneOfArmNames(t *Type) []string {
 // names, or the one named like the single path parameter of Get. It is "" when Get does not have
 // exactly one path parameter.
 func (p Policy) idProperty(ops map[verb]foundOp) string {
-	if p.GetByIDs != "" {
+	if p.readsItems() {
 		if p.IDProperty != "" {
 			return p.IDProperty
 		}
@@ -1709,7 +1709,7 @@ func (p Policy) responseResourceProxy(op *v3.Operation, name string) *base.Schem
 	}
 	for _, field := range propertyNames(s) {
 		proxy := propertyOf(s, field)
-		if p.GetByIDs != "" {
+		if p.readsItems() {
 			if ps, err := schemaOf(proxy); err == nil && slices.Equal(ps.Type, []string{"array"}) && ps.Items != nil && ps.Items.A != nil {
 				proxy = ps.Items.A
 			}
