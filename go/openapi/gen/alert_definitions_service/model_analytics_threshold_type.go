@@ -26,7 +26,7 @@ type AnalyticsThresholdType struct {
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
 	EvaluationDelayMs *int32 `json:"evaluationDelayMs,omitempty"`
-	// How often the alert is evaluated, in minutes. Optional: when omitted on create or replace, the value is min(10, timeframeMinutes). Must not exceed timeframeMinutes.
+	// How often the alert is evaluated, in minutes. Optional: when omitted on create or replace, the value is min(10, timeframeMinutes). May exceed timeframeMinutes, in which case data between evaluations is not covered by any evaluation.
 	EvaluationPeriodMinutes *int32 `json:"evaluationPeriodMinutes,omitempty"`
 	// Configuration for how to treat and what state to give to an alert with no data
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`

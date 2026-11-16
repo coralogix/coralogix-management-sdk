@@ -26,7 +26,7 @@ type TagRule struct {
 	RuleTypeId RuleTypeId `json:"ruleTypeId"`
 	// The tag name. Must start with \"tags.\".
 	TagName string `json:"tagName" validate:"regexp=^tags\\\\..*$"`
-	// The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values.
+	// The tag value(s) to match. For IS and IS_NOT rules, up to 50 comma-separated values. For START_WITH and INCLUDES rules, a single value: a comma is part of the value, not a separator.
 	TagValue string `json:"tagValue" validate:"regexp=^[\\s\\S]*$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
