@@ -496,9 +496,10 @@ func TestMemberGetFromListIssues(t *testing.T) {
 			policy: listPolicy(func(p *Policy) { p.Existing, p.CreateValues = false, nil }),
 			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList is only for existing resources",
 		},
-		"update id in path": {
+		// Without updateIDInBody, Update must take the id in its path. This Update has none.
+		"update has the id neither in the body nor in the path": {
 			policy: listPolicy(func(p *Policy) { p.UpdateIDInBody, p.UpdateIDOutsideWrapper = false, false }),
-			code:   "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.getFromList needs api.updateIDInBody",
+			code:   "UPDATE_ID_IN_BODY_UNSUPPORTED", message: "the id must be a required path parameter",
 		},
 		"with getByIDs": {
 			policy: listPolicy(func(p *Policy) { p.GetByIDs = "login" }),
