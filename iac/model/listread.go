@@ -28,9 +28,9 @@ import (
 const getFromListLocation = "behavior-overrides.yaml:api.getFromList"
 
 // readListOperations reads a resource that no operation reads by its id: Get is the List, and a tool
-// selects the item whose id is the resource id. Create and Get have no path parameters, Update sends
-// the id in its body on the Create path, and Delete takes the id in its path, or in the id array of
-// its body (Policy.DeleteIDs).
+// selects the item whose id is the resource id. Create and Get have no path parameters, and Delete
+// takes the id in its path, or in the id array of its body (Policy.DeleteIDs). Update sends the id
+// in its body on the Create path (Policy.UpdateIDInBody), or takes it in the item path of Delete.
 func (r *Resource) readListOperations(ops map[verb]foundOp) error {
 	switch {
 	case !r.Policy.Existing:
@@ -41,8 +41,6 @@ func (r *Resource) readListOperations(ops map[verb]foundOp) error {
 		return &contractError{code: "GET_FROM_LIST_ID_PROPERTY_REQUIRED", location: getFromListLocation,
 			message:     "No operation has the id in a path parameter of Get, so the overrides must name the id property.",
 			remediation: "Set api.idProperty to the property of the resource that holds its id."}
-	case !r.Policy.UpdateIDInBody:
-		return errors.New("api.getFromList needs api.updateIDInBody: Get has no id path parameter for Update to share")
 	}
 	if len(pathParams(ops[opCreate])) != 0 {
 		return errors.New("create must have no path parameters")
@@ -66,6 +64,9 @@ func (r *Resource) readListOperations(ops map[verb]foundOp) error {
 	if err := r.readDeleteOperation(ops); err != nil {
 		return err
 	}
+	if err := r.readUpdateItemPath(ops); err != nil {
+		return err
+	}
 	if err := r.readTargets(ops); err != nil {
 		return err
 	}
@@ -74,6 +75,30 @@ func (r *Resource) readListOperations(ops map[verb]foundOp) error {
 		return err
 	}
 	return r.readListQuery(get)
+}
+
+// readUpdateItemPath checks the Update of a GetFromList resource that has the id in its path
+// (no api.updateIDInBody): it takes the id parameter of Delete on the item path, the path of
+// Delete. Get has no id path parameter, so the id parameter is the one of Delete.
+func (r *Resource) readUpdateItemPath(ops map[verb]foundOp) error {
+	if r.Policy.UpdateIDInBody {
+		return nil
+	}
+	update := ops[opUpdate]
+	id, err := idParam(update)
+	if err != nil {
+		return fmt.Errorf("api.getFromList update: %w", err)
+	}
+	if r.Policy.DeleteIDs != "" {
+		return errors.New("api.getFromList with api.delete.ids needs api.updateIDInBody: Delete has no id path parameter for Update to share")
+	}
+	if id != r.IDParam {
+		return fmt.Errorf("api.getFromList update: id path parameter %q, want %q (as in delete)", id, r.IDParam)
+	}
+	if !r.Policy.CustomMethods && update.path != ops[opDelete].path {
+		return fmt.Errorf("api.getFromList update: path %s, want %s (as in delete)", update.path, ops[opDelete].path)
+	}
+	return nil
 }
 
 // readListQuery reads the query parameters that the List read of Get always sends (Policy.GetQuery),
