@@ -25,6 +25,8 @@ var _ MappedNullable = &AlertDefCaseDestination{}
 type AlertDefCaseDestination struct {
 	// Notification Center routing condition, rendered to true or false against the case notification context to decide whether this destination is notified. Use \"true\" to notify on every case notification; otherwise filter on caseMetadata.notificationReason (for example caseActivated, caseResolved, casePriorityChanged, caseUnacknowledged). The expression syntax is documented with Notification Center routing conditions.
 	Condition string `json:"condition" validate:"regexp=^[\\s\\S]*$"`
+	// Per-destination overrides of the connector configuration. Each item names one connector config field and a template that replaces the connector's value for this destination only. Only fields that the connector's schema marks as rendered (templated) can be overridden, for example Slack `channel`, email `emailAddresses`, PagerDuty `integrationKey`, and generic HTTPS `url`, `additionalHeaders`, and `additionalBodyFields`; any other field, an unknown field, a value of the wrong type, or a template that does not render is rejected with 400. Templates are rendered against the case notification context. Each `fieldName` must be non-empty and may appear at most once per destination; an omitted `template` is treated as an empty template. Overrides are not part of a destination's identity: two destinations with the same `connectorId`, `presetId`, and `condition` are rejected as duplicates even when their overrides differ. An empty or omitted list means no overrides: the connector's own configuration is used. Replace is a full overwrite: omitting the list removes any previously configured overrides. Order is not significant: reads return the overrides sorted by `fieldName`, each template exactly as sent, and return an empty list when the destination has no overrides.
+	ConnectorConfigOverrides []V3ConnectorConfigField `json:"connectorConfigOverrides,omitempty"`
 	// ID of the Notification Center connector to notify. The connector must support the CASES entity type; list compatible connectors with GET /notifications/notification-center/v1/connectors?supported_by_entity_type=CASES.
 	ConnectorId string `json:"connectorId" validate:"regexp=^[a-zA-Z0-9][a-zA-Z0-9_-]*$"`
 	// Optional Notification Center preset ID used to render the notification. The preset must be defined for the CASES entity type and for the selected connector's type; list compatible presets with GET /notifications/notification-center/v1/presets:summariesList?entity_type=CASES&connector_type=<type>. When omitted, the connector type's default preset is used.
@@ -76,6 +78,38 @@ func (o *AlertDefCaseDestination) GetConditionOk() (*string, bool) {
 // SetCondition sets field value
 func (o *AlertDefCaseDestination) SetCondition(v string) {
 	o.Condition = v
+}
+
+// GetConnectorConfigOverrides returns the ConnectorConfigOverrides field value if set, zero value otherwise.
+func (o *AlertDefCaseDestination) GetConnectorConfigOverrides() []V3ConnectorConfigField {
+	if o == nil || IsNil(o.ConnectorConfigOverrides) {
+		var ret []V3ConnectorConfigField
+		return ret
+	}
+	return o.ConnectorConfigOverrides
+}
+
+// GetConnectorConfigOverridesOk returns a tuple with the ConnectorConfigOverrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefCaseDestination) GetConnectorConfigOverridesOk() ([]V3ConnectorConfigField, bool) {
+	if o == nil || IsNil(o.ConnectorConfigOverrides) {
+		return nil, false
+	}
+	return o.ConnectorConfigOverrides, true
+}
+
+// HasConnectorConfigOverrides returns a boolean if a field has been set.
+func (o *AlertDefCaseDestination) HasConnectorConfigOverrides() bool {
+	if o != nil && !IsNil(o.ConnectorConfigOverrides) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectorConfigOverrides gets a reference to the given []V3ConnectorConfigField and assigns it to the ConnectorConfigOverrides field.
+func (o *AlertDefCaseDestination) SetConnectorConfigOverrides(v []V3ConnectorConfigField) {
+	o.ConnectorConfigOverrides = v
 }
 
 // GetConnectorId returns the ConnectorId field value
@@ -145,6 +179,9 @@ func (o AlertDefCaseDestination) MarshalJSON() ([]byte, error) {
 func (o AlertDefCaseDestination) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["condition"] = o.Condition
+	if !IsNil(o.ConnectorConfigOverrides) {
+		toSerialize["connectorConfigOverrides"] = o.ConnectorConfigOverrides
+	}
 	toSerialize["connectorId"] = o.ConnectorId
 	if !IsNil(o.PresetId) {
 		toSerialize["presetId"] = o.PresetId
@@ -195,6 +232,7 @@ func (o *AlertDefCaseDestination) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "condition")
+		delete(additionalProperties, "connectorConfigOverrides")
 		delete(additionalProperties, "connectorId")
 		delete(additionalProperties, "presetId")
 		o.AdditionalProperties = additionalProperties
