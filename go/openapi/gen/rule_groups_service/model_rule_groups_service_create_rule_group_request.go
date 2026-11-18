@@ -33,7 +33,7 @@ type RuleGroupsServiceCreateRuleGroupRequest struct {
 	Hidden *bool `json:"hidden,omitempty"`
 	// Display name. Must not be empty.
 	Name string `json:"name"`
-	// Position of the group among the rule groups of the company. Defaults to 1. 0 places the group last. Groups can share an order: the service does not shift the other groups.
+	// Rank of the group among the rule groups of the company. Defaults to 1 when a request omits it. A request with 0 places the group last. Creating or updating a group does not shift the other groups, and groups can share an order: concurrent create requests can receive the same order. The service renumbers the groups later: deleting a group lowers the order of every group with a higher order by 1, and reordering the groups in the Coralogix UI sets the order of every group to its position, 1 to N. Do not treat an order that a client sent as stable: read it from a get or list response.
 	Order *int64 `json:"order,omitempty"`
 	// The rule matchers.
 	RuleMatchers []RuleMatcher `json:"ruleMatchers,omitempty"`

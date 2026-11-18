@@ -20,7 +20,7 @@ var _ = bytes.MinRead
 // checks if the UserTemplate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UserTemplate{}
 
-// UserTemplate Template containing all user properties that can be set when creating or updating a user. Includes personal information, status, authentication methods, and access duration.
+// UserTemplate Template containing all user properties that can be set when creating or updating a user. Includes personal information, status, authentication methods, and access duration. The username is required on create and is at most 255 characters; the backend ignores it on update.
 type UserTemplate struct {
 	// Access type configuration - defines whether user access is permanent or temporary with expiration
 	AccessType *AccessType `json:"accessType,omitempty"`

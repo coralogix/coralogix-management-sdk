@@ -1019,7 +1019,7 @@
             "description": "Unique username for the user. Must be unique within the system. Updating username for existing users is not supported and ignored."
           }
         },
-        "description": "Template containing all user properties that can be set when creating or updating a user. Includes personal information, status, authentication methods, and access duration.",
+        "description": "Template containing all user properties that can be set when creating or updating a user. Includes personal information, status, authentication methods, and access duration. The username is required on create and is at most 255 characters; the backend ignores it on update.",
         "externalDocs": {
           "description": "Find out more about user management",
           "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
