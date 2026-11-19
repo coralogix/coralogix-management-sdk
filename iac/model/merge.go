@@ -191,6 +191,25 @@ func writeLimits(get, req *Type) *Type {
 	return &out
 }
 
+// withoutLimits returns t with the limit keywords dropped: a field whose line says
+// releasedLimits keeps its released behavior, and the released resource enforces no limit
+// itself — it sends what the configuration holds and stores what the response echoes. The
+// model then compares the request types with the response type without the limits.
+func withoutLimits(t *Type) {
+	if t == nil {
+		return
+	}
+	t.MinLength, t.MaxLength, t.Pattern = nil, nil, ""
+	t.Minimum, t.Maximum = nil, nil
+	t.MinItems, t.MaxItems = nil, nil
+	if t.Elem != nil {
+		withoutLimits(t.Elem)
+	}
+	for _, f := range t.Fields {
+		withoutLimits(f.Type)
+	}
+}
+
 func raisesMinItems(get, req *Type) bool {
 	return !get.requestMinItems && req.MinItems != nil && (get.MinItems == nil || *req.MinItems > *get.MinItems)
 }

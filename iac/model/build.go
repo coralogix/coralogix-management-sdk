@@ -1408,6 +1408,15 @@ func (r *Resource) resourceField(name string, createBody, updateBody, getSchema 
 	if err != nil {
 		return nil, err
 	}
+	if r.Policy.releasedLimits(r.Name, name) {
+		// The field keeps its released behavior: its schemas carry different limits, and the
+		// released resource enforces none — it sends what the configuration holds and stores
+		// what the response echoes. The merge then compares the types without the limits.
+		withoutLimits(f.Type)
+		for i := range requests {
+			withoutLimits(requests[i])
+		}
+	}
 	if err := mergeRequests(fieldLocation(r.Name, name), f.Type, requests[0], requests[1]); err != nil {
 		return nil, err
 	}

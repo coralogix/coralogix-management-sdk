@@ -203,6 +203,11 @@ type Policy struct {
 	// Skip lists "Component.field" of fields that the resource does not manage.
 	// The generator does not send them and does not store them.
 	Skip []string
+	// ReleasedLimits lists "Component.field" of fields whose Create, Update, and response
+	// schemas carry different limits, and whose released resource holds them all: it sends
+	// what the configuration holds and stores what the response echoes. The model drops the
+	// limits of such a field before it compares the request types with the response type.
+	ReleasedLimits []string
 	// FixedRequest lists "Component.field" that Create and Update always send as a
 	// fixed API value. A nested read-only field in this list is sent, so it is not
 	// a server-only field the renderer has to drop.
@@ -408,6 +413,13 @@ func (p Policy) WithDefaultArms(component string, groups []OneOfGroup) []OneOfGr
 
 func (p Policy) skips(component, field string) bool {
 	return component != "" && slices.Contains(p.Skip, component+"."+field)
+}
+
+// releasedLimits reports whether the field line says that the limits of the Create, Update, and
+// response schemas differ, and the released resource holds them all: the model then compares
+// the types without the limits.
+func (p Policy) releasedLimits(component, field string) bool {
+	return p.Existing && component != "" && slices.Contains(p.ReleasedLimits, component+"."+field)
 }
 
 func (p Policy) fixedRequest(component, field string) bool {

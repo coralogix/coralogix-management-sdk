@@ -1264,6 +1264,9 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 			return issue.Report{contract.issue()}
 		}
 	}
+	if p.releasedLimits(name, field) {
+		withoutLimits(get)
+	}
 	p.asSet(name, field, get)
 	if err != nil {
 		return nil
@@ -1285,6 +1288,9 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 			return issue.Report{contract.issue()}
 		}
 		requests[i] = shaped
+		if p.releasedLimits(name, field) {
+			withoutLimits(requests[i])
+		}
 	}
 	if p.Overwrite && requests[0] != nil {
 		// As in Build: Get lists the items of every resource that its query can select.
@@ -1293,6 +1299,14 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 	var contract *contractError
 	if _, _, err := p.collapseRequestWrappers(name, field, get, &requests); errors.As(err, &contract) {
 		return issue.Report{contract.issue()}
+	}
+	if p.releasedLimits(name, field) {
+		// The wrapper collapse rebuilt the request types from the schemas: drop the limits
+		// again, so the merge compares the types without them.
+		withoutLimits(get)
+		for i := range requests {
+			withoutLimits(requests[i])
+		}
 	}
 	if err := mergeRequests(location, get, requests[0], requests[1]); errors.As(err, &contract) {
 		return issue.Report{contract.issue()}
