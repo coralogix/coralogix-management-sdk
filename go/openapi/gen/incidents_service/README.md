@@ -179,7 +179,6 @@ Class | Method | HTTP request | Description
  - [ResolveIncidentByEventIdResponse](docs/ResolveIncidentByEventIdResponse.md)
  - [ResolveIncidentsRequest](docs/ResolveIncidentsRequest.md)
  - [ResolveIncidentsResponse](docs/ResolveIncidentsResponse.md)
- - [TimeRange](docs/TimeRange.md)
  - [UnassignIncidentsResponse](docs/UnassignIncidentsResponse.md)
  - [UpsertIncidentStatePayload](docs/UpsertIncidentStatePayload.md)
  - [UpsertIncidentStateType](docs/UpsertIncidentStateType.md)

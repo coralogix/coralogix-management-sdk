@@ -68,7 +68,7 @@ tags:
   - name: Dashboard folders service
     description: Manage your dashboard folders.
   - name: Dashboard service
-    description: Get information about the Coralogix Dashboard catalog.
+    description: Manage your dashboards.
   - name: Data Usage Query Service
     description: >-
       Query billable data usage through the public Coralogix API using daily or
@@ -13663,44 +13663,12 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  description: Represents contextual label values for filtering incidents
-                  properties:
-                    contextualLabelValues:
-                      description: The contextual label values.
-                      items:
-                        description: The contextual label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - contextualLabelValues
-                  title: Contextual label values
-                  type: object
+                  $ref: '#/components/schemas/ContextualLabelValues'
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  description: Represents display label values for filtering incidents
-                  properties:
-                    displayLabelValues:
-                      description: The display label values.
-                      items:
-                        description: The display label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - displayLabelValues
-                  title: Display label values
-                  type: object
+                  $ref: '#/components/schemas/DisplayLabelValues'
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -13733,25 +13701,9 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                description: Represents a time range with start and end timestamps
-                properties:
-                  endTime:
-                    description: End time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                  startTime:
-                    description: Start time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                required:
-                  - startTime
-                  - endTime
-                title: Time range
-                type: object
+                allOf:
+                  - $ref: '#/components/schemas/v1.TimeRange'
+                description: The time range of the incident
             title: Incident event query filter
             type: object
         - description: >-
@@ -13854,44 +13806,12 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  description: Represents contextual label values for filtering incidents
-                  properties:
-                    contextualLabelValues:
-                      description: The contextual label values.
-                      items:
-                        description: The contextual label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - contextualLabelValues
-                  title: Contextual label values
-                  type: object
+                  $ref: '#/components/schemas/ContextualLabelValues'
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  description: Represents display label values for filtering incidents
-                  properties:
-                    displayLabelValues:
-                      description: The display label values.
-                      items:
-                        description: The display label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - displayLabelValues
-                  title: Display label values
-                  type: object
+                  $ref: '#/components/schemas/DisplayLabelValues'
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -13924,25 +13844,9 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                description: Represents a time range with start and end timestamps
-                properties:
-                  endTime:
-                    description: End time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                  startTime:
-                    description: Start time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                required:
-                  - startTime
-                  - endTime
-                title: Time range
-                type: object
+                allOf:
+                  - $ref: '#/components/schemas/v1.TimeRange'
+                description: The time range of the incident
             title: Incident event query filter
             type: object
       responses:
@@ -14178,44 +14082,12 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  description: Represents contextual label values for filtering incidents
-                  properties:
-                    contextualLabelValues:
-                      description: The contextual label values.
-                      items:
-                        description: The contextual label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - contextualLabelValues
-                  title: Contextual label values
-                  type: object
+                  $ref: '#/components/schemas/ContextualLabelValues'
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  description: Represents display label values for filtering incidents
-                  properties:
-                    displayLabelValues:
-                      description: The display label values.
-                      items:
-                        description: The display label values.
-                        maxLength: 4096
-                        minLength: 0
-                        pattern: ^[\s\S]*$
-                        type: string
-                      maxItems: 1000
-                      minItems: 0
-                      type: array
-                  required:
-                    - displayLabelValues
-                  title: Display label values
-                  type: object
+                  $ref: '#/components/schemas/DisplayLabelValues'
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -14248,25 +14120,9 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                description: Represents a time range with start and end timestamps
-                properties:
-                  endTime:
-                    description: End time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                  startTime:
-                    description: Start time of the range
-                    format: date-time
-                    minLength: 0
-                    type: string
-                    x-coralogix-presence: true
-                required:
-                  - startTime
-                  - endTime
-                title: Time range
-                type: object
+                allOf:
+                  - $ref: '#/components/schemas/v1.TimeRange'
+                description: The time range of the incident
             title: Incident event query filter
             type: object
       responses:
