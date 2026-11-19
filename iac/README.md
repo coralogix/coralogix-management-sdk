@@ -330,7 +330,7 @@ whose types already agree is `OVERRIDE_UNUSED`. Only an existing resource can ca
 | Key / code | Meaning | Where |
 |---|---|---|
 | `releasedLimits` (field line) | The limits of the field differ between the requests and the response, and the released resource holds them all. A released API whose owner removed the request limits the backend never enforced (the response caps the list at two) needs the line. | `Policy.ReleasedLimits`, `withoutLimits` |
-| `OVERRIDE_UNUSED` | The request types already carry the same limits as the response: the line does nothing. | |
+| `OVERRIDE_UNUSED` | The request types already carry the same limits as the response: the line does nothing. | `fieldTypeIssues` |
 
 ## Create and Update with one inline body
 

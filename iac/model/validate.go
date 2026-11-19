@@ -1298,7 +1298,7 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 		// As in Build: the field keeps its released behavior, so the merge compares the types
 		// without the limits. When the types already agree, the line does nothing, and the
 		// overrides file must not keep it.
-		if p.mergeFieldLimits(location, get, requests) == nil {
+		if !limitsDiffer(location, get, requests) {
 			return issue.Report{{
 				Code:        "OVERRIDE_UNUSED",
 				Location:    "behavior-overrides.yaml:types." + name + ".fields." + field,

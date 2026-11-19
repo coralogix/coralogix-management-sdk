@@ -34,20 +34,49 @@ func (e *contractError) issue() issue.Issue {
 	return issue.Issue{Code: e.code, Location: e.location, Message: e.message, Remediation: e.remediation}
 }
 
-// mergeFieldLimits reports whether merging the request types of the field into its response
-// type fails. It merges copies, so the merge of the probe changes nothing that the caller
-// keeps.
-func (p Policy) mergeFieldLimits(location string, get *Type, requests [2]*Type) error {
-	getCopy, create, update := *get, requests[0], requests[1]
-	if create != nil {
-		c := *create
-		create = &c
+// limitsDiffer reports whether merging the request types of the field into its response type
+// fails. It merges clones: the merge writes into the nested types of its arguments, so the
+// probe must not touch the caller's Elem or Fields.
+func limitsDiffer(location string, get *Type, requests [2]*Type) bool {
+	getCopy, create, update := cloneType(get), cloneType(requests[0]), cloneType(requests[1])
+	return mergeRequests(location, getCopy, create, update) != nil
+}
+
+// cloneType returns a deep copy of t: the merge of the probe writes into the nested types of
+// its arguments.
+func cloneType(t *Type) *Type {
+	if t == nil {
+		return nil
 	}
-	if update != nil {
-		u := *update
-		update = &u
+	out := *t
+	if out.Elem != nil {
+		out.Elem = cloneType(out.Elem)
 	}
-	return mergeRequests(location, &getCopy, create, update)
+	if len(out.Fields) != 0 {
+		out.Fields = make([]*Field, len(out.Fields))
+		for i, f := range out.Fields {
+			field := *f
+			if f.Type != nil {
+				field.Type = cloneType(f.Type)
+			}
+			out.Fields[i] = &field
+		}
+	}
+	if out.Keyed != nil {
+		keyed := *out.Keyed
+		keyed.Item = cloneType(out.Keyed.Item)
+		out.Keyed = &keyed
+	}
+	if len(out.Wrappers) != 0 {
+		out.Wrappers = slices.Clone(out.Wrappers)
+	}
+	if len(out.Values) != 0 {
+		out.Values = slices.Clone(out.Values)
+	}
+	if len(out.Groups) != 0 {
+		out.Groups = slices.Clone(out.Groups)
+	}
+	return &out
 }
 
 // mergeRequests merges the Create and the Update types of a top-level field
