@@ -404,14 +404,54 @@
               "properties": {
                 "contextualLabels": {
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/ContextualLabelValues"
+                    "description": "Represents contextual label values for filtering incidents",
+                    "properties": {
+                      "contextualLabelValues": {
+                        "description": "The contextual label values.",
+                        "items": {
+                          "description": "The contextual label values.",
+                          "maxLength": 4096,
+                          "minLength": 0,
+                          "pattern": "^[\\s\\S]*$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 0,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "contextualLabelValues"
+                    ],
+                    "title": "Contextual label values",
+                    "type": "object"
                   },
                   "description": "The contextual labels of the incident",
                   "type": "object"
                 },
                 "displayLabels": {
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/DisplayLabelValues"
+                    "description": "Represents display label values for filtering incidents",
+                    "properties": {
+                      "displayLabelValues": {
+                        "description": "The display label values.",
+                        "items": {
+                          "description": "The display label values.",
+                          "maxLength": 4096,
+                          "minLength": 0,
+                          "pattern": "^[\\s\\S]*$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 0,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "displayLabelValues"
+                    ],
+                    "title": "Display label values",
+                    "type": "object"
                   },
                   "description": "The display labels of the incident",
                   "type": "object"
@@ -456,12 +496,29 @@
                   "type": "array"
                 },
                 "timestamp": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "Represents a time range with start and end timestamps",
+                  "properties": {
+                    "endTime": {
+                      "description": "End time of the range",
+                      "format": "date-time",
+                      "minLength": 0,
+                      "type": "string",
+                      "x-coralogix-presence": true
+                    },
+                    "startTime": {
+                      "description": "Start time of the range",
+                      "format": "date-time",
+                      "minLength": 0,
+                      "type": "string",
+                      "x-coralogix-presence": true
                     }
+                  },
+                  "required": [
+                    "startTime",
+                    "endTime"
                   ],
-                  "description": "The time range of the incident"
+                  "title": "Time range",
+                  "type": "object"
                 }
               },
               "title": "Incident event query filter",
@@ -607,14 +664,54 @@
               "properties": {
                 "contextualLabels": {
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/ContextualLabelValues"
+                    "description": "Represents contextual label values for filtering incidents",
+                    "properties": {
+                      "contextualLabelValues": {
+                        "description": "The contextual label values.",
+                        "items": {
+                          "description": "The contextual label values.",
+                          "maxLength": 4096,
+                          "minLength": 0,
+                          "pattern": "^[\\s\\S]*$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 0,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "contextualLabelValues"
+                    ],
+                    "title": "Contextual label values",
+                    "type": "object"
                   },
                   "description": "The contextual labels of the incident",
                   "type": "object"
                 },
                 "displayLabels": {
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/DisplayLabelValues"
+                    "description": "Represents display label values for filtering incidents",
+                    "properties": {
+                      "displayLabelValues": {
+                        "description": "The display label values.",
+                        "items": {
+                          "description": "The display label values.",
+                          "maxLength": 4096,
+                          "minLength": 0,
+                          "pattern": "^[\\s\\S]*$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 0,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "displayLabelValues"
+                    ],
+                    "title": "Display label values",
+                    "type": "object"
                   },
                   "description": "The display labels of the incident",
                   "type": "object"
@@ -659,12 +756,29 @@
                   "type": "array"
                 },
                 "timestamp": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "Represents a time range with start and end timestamps",
+                  "properties": {
+                    "endTime": {
+                      "description": "End time of the range",
+                      "format": "date-time",
+                      "minLength": 0,
+                      "type": "string",
+                      "x-coralogix-presence": true
+                    },
+                    "startTime": {
+                      "description": "Start time of the range",
+                      "format": "date-time",
+                      "minLength": 0,
+                      "type": "string",
+                      "x-coralogix-presence": true
                     }
+                  },
+                  "required": [
+                    "startTime",
+                    "endTime"
                   ],
-                  "description": "The time range of the incident"
+                  "title": "Time range",
+                  "type": "object"
                 }
               },
               "title": "Incident event query filter",
@@ -1008,14 +1122,54 @@
               "properties": {
                 "contextualLabels": {
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/ContextualLabelValues"
+                    "description": "Represents contextual label values for filtering incidents",
+                    "properties": {
+                      "contextualLabelValues": {
+                        "description": "The contextual label values.",
+                        "items": {
+                          "description": "The contextual label values.",
+                          "maxLength": 4096,
+                          "minLength": 0,
+                          "pattern": "^[\\s\\S]*$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 0,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "contextualLabelValues"
+                    ],
+                    "title": "Contextual label values",
+                    "type": "object"
                   },
                   "description": "The contextual labels of the incident",
                   "type": "object"
                 },
                 "displayLabels": {
                   "additionalProperties": {
-                    "$ref": "#/components/schemas/DisplayLabelValues"
+                    "description": "Represents display label values for filtering incidents",
+                    "properties": {
+                      "displayLabelValues": {
+                        "description": "The display label values.",
+                        "items": {
+                          "description": "The display label values.",
+                          "maxLength": 4096,
+                          "minLength": 0,
+                          "pattern": "^[\\s\\S]*$",
+                          "type": "string"
+                        },
+                        "maxItems": 1000,
+                        "minItems": 0,
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "displayLabelValues"
+                    ],
+                    "title": "Display label values",
+                    "type": "object"
                   },
                   "description": "The display labels of the incident",
                   "type": "object"
@@ -1060,12 +1214,29 @@
                   "type": "array"
                 },
                 "timestamp": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/v1.TimeRange"
+                  "description": "Represents a time range with start and end timestamps",
+                  "properties": {
+                    "endTime": {
+                      "description": "End time of the range",
+                      "format": "date-time",
+                      "minLength": 0,
+                      "type": "string",
+                      "x-coralogix-presence": true
+                    },
+                    "startTime": {
+                      "description": "Start time of the range",
+                      "format": "date-time",
+                      "minLength": 0,
+                      "type": "string",
+                      "x-coralogix-presence": true
                     }
+                  },
+                  "required": [
+                    "startTime",
+                    "endTime"
                   ],
-                  "description": "The time range of the incident"
+                  "title": "Time range",
+                  "type": "object"
                 }
               },
               "title": "Incident event query filter",

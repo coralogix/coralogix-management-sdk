@@ -68,7 +68,7 @@ tags:
   - name: Dashboard folders service
     description: Manage your dashboard folders.
   - name: Dashboard service
-    description: Manage your dashboards.
+    description: Get information about the Coralogix Dashboard catalog.
   - name: Data Usage Query Service
     description: >-
       Query billable data usage through the public Coralogix API using daily or
@@ -13663,12 +13663,44 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/ContextualLabelValues'
+                  description: Represents contextual label values for filtering incidents
+                  properties:
+                    contextualLabelValues:
+                      description: The contextual label values.
+                      items:
+                        description: The contextual label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/DisplayLabelValues'
+                  description: Represents display label values for filtering incidents
+                  properties:
+                    displayLabelValues:
+                      description: The display label values.
+                      items:
+                        description: The display label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -13701,9 +13733,25 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                allOf:
-                  - $ref: '#/components/schemas/v1.TimeRange'
-                description: The time range of the incident
+                description: Represents a time range with start and end timestamps
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                    x-coralogix-presence: true
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                    x-coralogix-presence: true
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
         - description: >-
@@ -13806,12 +13854,44 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/ContextualLabelValues'
+                  description: Represents contextual label values for filtering incidents
+                  properties:
+                    contextualLabelValues:
+                      description: The contextual label values.
+                      items:
+                        description: The contextual label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/DisplayLabelValues'
+                  description: Represents display label values for filtering incidents
+                  properties:
+                    displayLabelValues:
+                      description: The display label values.
+                      items:
+                        description: The display label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -13844,9 +13924,25 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                allOf:
-                  - $ref: '#/components/schemas/v1.TimeRange'
-                description: The time range of the incident
+                description: Represents a time range with start and end timestamps
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                    x-coralogix-presence: true
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                    x-coralogix-presence: true
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
       responses:
@@ -14082,12 +14178,44 @@ paths:
             properties:
               contextualLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/ContextualLabelValues'
+                  description: Represents contextual label values for filtering incidents
+                  properties:
+                    contextualLabelValues:
+                      description: The contextual label values.
+                      items:
+                        description: The contextual label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - contextualLabelValues
+                  title: Contextual label values
+                  type: object
                 description: The contextual labels of the incident
                 type: object
               displayLabels:
                 additionalProperties:
-                  $ref: '#/components/schemas/DisplayLabelValues'
+                  description: Represents display label values for filtering incidents
+                  properties:
+                    displayLabelValues:
+                      description: The display label values.
+                      items:
+                        description: The display label values.
+                        maxLength: 4096
+                        minLength: 0
+                        pattern: ^[\s\S]*$
+                        type: string
+                      maxItems: 1000
+                      minItems: 0
+                      type: array
+                  required:
+                    - displayLabelValues
+                  title: Display label values
+                  type: object
                 description: The display labels of the incident
                 type: object
               isMuted:
@@ -14120,9 +14248,25 @@ paths:
                 minItems: 0
                 type: array
               timestamp:
-                allOf:
-                  - $ref: '#/components/schemas/v1.TimeRange'
-                description: The time range of the incident
+                description: Represents a time range with start and end timestamps
+                properties:
+                  endTime:
+                    description: End time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                    x-coralogix-presence: true
+                  startTime:
+                    description: Start time of the range
+                    format: date-time
+                    minLength: 0
+                    type: string
+                    x-coralogix-presence: true
+                required:
+                  - startTime
+                  - endTime
+                title: Time range
+                type: object
             title: Incident event query filter
             type: object
       responses:
@@ -19415,13 +19559,28 @@ paths:
                   type: object
               properties:
                 apmSli:
-                  $ref: '#/components/schemas/ApmSli'
+                  allOf:
+                    - $ref: '#/components/schemas/ApmSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition` with an `apm` source
+                    instead. `services`, `filters` and `groupingKeys` move to
+                    the source's `selector`. `errorConfig` maps to
+                    `sliDefinition.requestBased.apm.availability`.
+                    `latencyConfig` maps to
+                    `sliDefinition.windowBased.apm.latency`:
+                    `latencyConfig.timeWindow` moves to
+                    `sliDefinition.windowBased.window`,
+                    `latencyConfig.threshold` becomes `thresholdMs`, and
+                    `quantile` and `average` keep their names.
                 apmSliMetadata:
                   allOf:
                     - $ref: '#/components/schemas/ApmSli'
+                  deprecated: true
                   description: >-
-                    Server copy of apmSli for APM SLOs. Set by the server;
-                    sending it instead of apmSli is rejected.
+                    Deprecated: use `sliDefinition` instead. Read-only copy of
+                    `apmSli`, returned whenever `apmSli` is. Set by the server;
+                    sending it instead of `apmSli` is rejected.
                   readOnly: true
                 createTime:
                   description: >-
@@ -19493,7 +19652,12 @@ paths:
                     - SLO_PRODUCT_TYPE_APM
                   x-coralogix-presence: true
                 requestBasedMetricSli:
-                  $ref: '#/components/schemas/RequestBasedMetricSli'
+                  allOf:
+                    - $ref: '#/components/schemas/RequestBasedMetricSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition.requestBased.custom` instead,
+                    which takes the same `goodEvents` and `totalEvents` queries.
                 revision:
                   allOf:
                     - $ref: '#/components/schemas/v1.Revision'
@@ -19501,10 +19665,33 @@ paths:
                     Revision of the SLO. Set by the server; a value sent by the
                     client is ignored.
                   readOnly: true
+                sliDefinition:
+                  allOf:
+                    - $ref: '#/components/schemas/Sli'
+                  description: >-
+                    Definition of the SLI: how it counts (request-based or
+                    window-based) and where its values come from (custom metric
+                    queries or APM). Replaces the deprecated
+                    `requestBasedMetricSli`, `windowBasedMetricSli` and
+                    `apmSli`. A request must set either `sliDefinition` or one
+                    of the deprecated fields. When `sliDefinition` is set, it
+                    takes precedence and the deprecated fields are ignored.
+                    Responses always include `sliDefinition`, and also include
+                    the matching deprecated field when the SLI can be expressed
+                    with it.
                 sloTimeFrame:
                   allOf:
                     - $ref: '#/components/schemas/SloTimeFrame'
-                  description: Rolling evaluation window (fixed-duration lookback).
+                  description: >-
+                    Time frame the SLO is evaluated over. The day-based values,
+                    `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are
+                    rolling windows that cover that many days up to the time of
+                    evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the
+                    current calendar month in UTC, from the start of the month
+                    up to the time of evaluation, and starts over at the
+                    beginning of each month. SLO results are calculated per
+                    whole minute in UTC, so the window used may differ from
+                    these bounds by up to one minute.
                 sloType:
                   allOf:
                     - $ref: '#/components/schemas/SloType'
@@ -19546,7 +19733,13 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 windowBasedMetricSli:
-                  $ref: '#/components/schemas/WindowBasedMetricSli'
+                  allOf:
+                    - $ref: '#/components/schemas/WindowBasedMetricSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition.windowBased` instead. Set
+                    `window` and `missingDataStrategy` there, and `query`,
+                    `comparisonOperator` and `threshold` in its `custom` source.
               required:
                 - name
                 - sloTimeFrame
@@ -19623,13 +19816,28 @@ paths:
                   type: object
               properties:
                 apmSli:
-                  $ref: '#/components/schemas/ApmSli'
+                  allOf:
+                    - $ref: '#/components/schemas/ApmSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition` with an `apm` source
+                    instead. `services`, `filters` and `groupingKeys` move to
+                    the source's `selector`. `errorConfig` maps to
+                    `sliDefinition.requestBased.apm.availability`.
+                    `latencyConfig` maps to
+                    `sliDefinition.windowBased.apm.latency`:
+                    `latencyConfig.timeWindow` moves to
+                    `sliDefinition.windowBased.window`,
+                    `latencyConfig.threshold` becomes `thresholdMs`, and
+                    `quantile` and `average` keep their names.
                 apmSliMetadata:
                   allOf:
                     - $ref: '#/components/schemas/ApmSli'
+                  deprecated: true
                   description: >-
-                    Server copy of apmSli for APM SLOs. Set by the server;
-                    sending it instead of apmSli is rejected.
+                    Deprecated: use `sliDefinition` instead. Read-only copy of
+                    `apmSli`, returned whenever `apmSli` is. Set by the server;
+                    sending it instead of `apmSli` is rejected.
                   readOnly: true
                 createTime:
                   description: >-
@@ -19701,7 +19909,12 @@ paths:
                     - SLO_PRODUCT_TYPE_APM
                   x-coralogix-presence: true
                 requestBasedMetricSli:
-                  $ref: '#/components/schemas/RequestBasedMetricSli'
+                  allOf:
+                    - $ref: '#/components/schemas/RequestBasedMetricSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition.requestBased.custom` instead,
+                    which takes the same `goodEvents` and `totalEvents` queries.
                 revision:
                   allOf:
                     - $ref: '#/components/schemas/v1.Revision'
@@ -19709,10 +19922,33 @@ paths:
                     Revision of the SLO. Set by the server; a value sent by the
                     client is ignored.
                   readOnly: true
+                sliDefinition:
+                  allOf:
+                    - $ref: '#/components/schemas/Sli'
+                  description: >-
+                    Definition of the SLI: how it counts (request-based or
+                    window-based) and where its values come from (custom metric
+                    queries or APM). Replaces the deprecated
+                    `requestBasedMetricSli`, `windowBasedMetricSli` and
+                    `apmSli`. A request must set either `sliDefinition` or one
+                    of the deprecated fields. When `sliDefinition` is set, it
+                    takes precedence and the deprecated fields are ignored.
+                    Responses always include `sliDefinition`, and also include
+                    the matching deprecated field when the SLI can be expressed
+                    with it.
                 sloTimeFrame:
                   allOf:
                     - $ref: '#/components/schemas/SloTimeFrame'
-                  description: Rolling evaluation window (fixed-duration lookback).
+                  description: >-
+                    Time frame the SLO is evaluated over. The day-based values,
+                    `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are
+                    rolling windows that cover that many days up to the time of
+                    evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the
+                    current calendar month in UTC, from the start of the month
+                    up to the time of evaluation, and starts over at the
+                    beginning of each month. SLO results are calculated per
+                    whole minute in UTC, so the window used may differ from
+                    these bounds by up to one minute.
                 sloType:
                   allOf:
                     - $ref: '#/components/schemas/SloType'
@@ -19754,7 +19990,13 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 windowBasedMetricSli:
-                  $ref: '#/components/schemas/WindowBasedMetricSli'
+                  allOf:
+                    - $ref: '#/components/schemas/WindowBasedMetricSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition.windowBased` instead. Set
+                    `window` and `missingDataStrategy` there, and `query`,
+                    `comparisonOperator` and `threshold` in its `custom` source.
               required:
                 - name
                 - sloTimeFrame
@@ -20190,13 +20432,28 @@ paths:
                   type: object
               properties:
                 apmSli:
-                  $ref: '#/components/schemas/ApmSli'
+                  allOf:
+                    - $ref: '#/components/schemas/ApmSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition` with an `apm` source
+                    instead. `services`, `filters` and `groupingKeys` move to
+                    the source's `selector`. `errorConfig` maps to
+                    `sliDefinition.requestBased.apm.availability`.
+                    `latencyConfig` maps to
+                    `sliDefinition.windowBased.apm.latency`:
+                    `latencyConfig.timeWindow` moves to
+                    `sliDefinition.windowBased.window`,
+                    `latencyConfig.threshold` becomes `thresholdMs`, and
+                    `quantile` and `average` keep their names.
                 apmSliMetadata:
                   allOf:
                     - $ref: '#/components/schemas/ApmSli'
+                  deprecated: true
                   description: >-
-                    Server copy of apmSli for APM SLOs. Set by the server;
-                    sending it instead of apmSli is rejected.
+                    Deprecated: use `sliDefinition` instead. Read-only copy of
+                    `apmSli`, returned whenever `apmSli` is. Set by the server;
+                    sending it instead of `apmSli` is rejected.
                   readOnly: true
                 createTime:
                   description: >-
@@ -20268,7 +20525,12 @@ paths:
                     - SLO_PRODUCT_TYPE_APM
                   x-coralogix-presence: true
                 requestBasedMetricSli:
-                  $ref: '#/components/schemas/RequestBasedMetricSli'
+                  allOf:
+                    - $ref: '#/components/schemas/RequestBasedMetricSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition.requestBased.custom` instead,
+                    which takes the same `goodEvents` and `totalEvents` queries.
                 revision:
                   allOf:
                     - $ref: '#/components/schemas/v1.Revision'
@@ -20276,10 +20538,33 @@ paths:
                     Revision of the SLO. Set by the server; a value sent by the
                     client is ignored.
                   readOnly: true
+                sliDefinition:
+                  allOf:
+                    - $ref: '#/components/schemas/Sli'
+                  description: >-
+                    Definition of the SLI: how it counts (request-based or
+                    window-based) and where its values come from (custom metric
+                    queries or APM). Replaces the deprecated
+                    `requestBasedMetricSli`, `windowBasedMetricSli` and
+                    `apmSli`. A request must set either `sliDefinition` or one
+                    of the deprecated fields. When `sliDefinition` is set, it
+                    takes precedence and the deprecated fields are ignored.
+                    Responses always include `sliDefinition`, and also include
+                    the matching deprecated field when the SLI can be expressed
+                    with it.
                 sloTimeFrame:
                   allOf:
                     - $ref: '#/components/schemas/SloTimeFrame'
-                  description: Rolling evaluation window (fixed-duration lookback).
+                  description: >-
+                    Time frame the SLO is evaluated over. The day-based values,
+                    `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are
+                    rolling windows that cover that many days up to the time of
+                    evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the
+                    current calendar month in UTC, from the start of the month
+                    up to the time of evaluation, and starts over at the
+                    beginning of each month. SLO results are calculated per
+                    whole minute in UTC, so the window used may differ from
+                    these bounds by up to one minute.
                 sloType:
                   allOf:
                     - $ref: '#/components/schemas/SloType'
@@ -20321,7 +20606,13 @@ paths:
                   type: string
                   x-coralogix-presence: true
                 windowBasedMetricSli:
-                  $ref: '#/components/schemas/WindowBasedMetricSli'
+                  allOf:
+                    - $ref: '#/components/schemas/WindowBasedMetricSli'
+                  deprecated: true
+                  description: >-
+                    Deprecated: use `sliDefinition.windowBased` instead. Set
+                    `window` and `missingDataStrategy` there, and `query`,
+                    `comparisonOperator` and `threshold` in its `custom` source.
               required:
                 - name
                 - sloTimeFrame
@@ -21635,7 +21926,7 @@ components:
             - sloThreshold
           type: object
         - required:
-            - analyticsImmediate
+            - analyticsResultCount
           type: object
         - required:
             - analyticsThreshold
@@ -21683,7 +21974,7 @@ components:
                   - sloThreshold
                 type: object
               - required:
-                  - analyticsImmediate
+                  - analyticsResultCount
                 type: object
               - required:
                   - analyticsThreshold
@@ -21693,10 +21984,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ActivitySchedule'
           description: The schedule defining when the alert should be active
-        analyticsImmediate:
+        analyticsResultCount:
           allOf:
-            - $ref: '#/components/schemas/AnalyticsImmediateType'
-          description: Configuration for analytics immediate alerts
+            - $ref: '#/components/schemas/AnalyticsResultCountType'
+          description: Configuration for analytics result count alerts
           x-stability: preview
         analyticsThreshold:
           allOf:
@@ -21976,12 +22267,12 @@ components:
         - ALERT_DEF_TYPE_TRACING_THRESHOLD
         - ALERT_DEF_TYPE_FLOW
         - ALERT_DEF_TYPE_SLO_THRESHOLD
-        - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE
+        - ALERT_DEF_TYPE_ANALYTICS_RESULT_COUNT
         - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD
       type: string
       description: |-
         Alert def type.
-        - ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE: preview
+        - ALERT_DEF_TYPE_ANALYTICS_RESULT_COUNT: preview
         - ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview
     AlertDefTypeFilter:
       title: AlertDef Type Filter
@@ -22610,8 +22901,8 @@ components:
       type: object
       additionalProperties: false
       description: Always.
-    AnalyticsImmediateType:
-      title: Analytics immediate alert type
+    AnalyticsResultCountType:
+      title: Analytics result count alert type
       type: object
       properties:
         dataprimeQuery:
@@ -22656,19 +22947,10 @@ components:
           minimum: 1
           type: integer
           x-coralogix-presence: true
-        useRowsAsPermutations:
-          description: >-
-            Whether each result row is treated as a separate permutation.
-            Defaults to false for immediate alerts to avoid high-cardinality
-            alerts by mistake.
-          examples:
-            - false
-          type: boolean
-          x-coralogix-presence: true
       description: >-
-        Configuration for analytics alerts that fire immediately when the number
-        of results a DataPrime query returns meets a condition, by default when
-        it returns any result
+        Configuration for analytics result count alerts that fire when the
+        number of results a DataPrime query returns meets a condition, by
+        default when it returns any result
     AnalyticsThresholdOperator:
       enum:
         - ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_UNSPECIFIED
@@ -23251,6 +23533,123 @@ components:
           examples:
             - WINDOW_SLO_WINDOW_5_MINUTES
       description: Configuration for latency-based APM SLI
+    ApmRequestBasedAvailability:
+      title: ApmRequestBasedAvailability
+      type: object
+      additionalProperties: false
+      description: >-
+        Request-based availability: the SLI is the ratio of spans without an
+        error to all spans.
+    ApmRequestBasedLatency:
+      title: ApmRequestBasedLatency
+      required:
+        - thresholdMs
+      type: object
+      properties:
+        thresholdMs:
+          description: >-
+            Latency threshold in milliseconds, greater than 0, with at most 3
+            decimal places (whole microseconds). A span is good when its
+            duration is <= this value. Required.
+          examples:
+            - 500
+          exclusiveMinimum: 0
+          format: double
+          multipleOf: 0.001
+          type: number
+          x-coralogix-presence: true
+      description: >-
+        Request-based latency: the SLI is the ratio of spans with a duration <=
+        `thresholdMs` to all spans.
+    ApmRequestBasedSource:
+      title: ApmRequestBasedSource
+      required:
+        - selector
+      type: object
+      oneOf:
+        - required:
+            - availability
+          type: object
+        - required:
+            - latency
+          type: object
+      properties:
+        availability:
+          allOf:
+            - $ref: '#/components/schemas/ApmRequestBasedAvailability'
+          description: A span is good when it has no error.
+        latency:
+          allOf:
+            - $ref: '#/components/schemas/ApmRequestBasedLatency'
+          description: >-
+            A span is good when its duration is <= `thresholdMs`. With the
+            `APM_SOURCE_E2M` metric source, any `thresholdMs` is accepted. With
+            `APM_SOURCE_SPAN_METRICS`, `thresholdMs` must be one of the bucket
+            bounds of the selected service's span duration histogram; rejected
+            otherwise.
+        selector:
+          allOf:
+            - $ref: '#/components/schemas/ApmSelector'
+          description: Services and filters to count spans of. Required.
+      description: >-
+        APM source of a request-based SLI: each span of the selected services is
+        an event, and whichever of `availability` or `latency` is set decides
+        which events are good. Exactly one of them must be set.
+    ApmSelector:
+      title: ApmSelector
+      required:
+        - services
+      type: object
+      properties:
+        filters:
+          maxItems: 20
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/ApmFilter'
+          description: >-
+            Filters on the labels of the APM metrics, narrowing the spans they
+            cover. At most 20, each with at most 50 values, and keys and values
+            of at most 256 characters. With the `APM_SOURCE_E2M` metric source,
+            keys must be labels of the account's service catalog span duration
+            metric; others are rejected.
+        groupingKeys:
+          maxItems: 6
+          minItems: 0
+          type: array
+          items:
+            maxLength: 256
+            minLength: 1
+            pattern: ^[\s\S]+$
+            type: string
+            description: >-
+              Labels to group SLO results by. At most 6. With the
+              `APM_SOURCE_E2M` metric source, each must be a label of the
+              account's service catalog span duration metric; others are
+              rejected.
+          description: >-
+            Labels to group SLO results by. At most 6. With the `APM_SOURCE_E2M`
+            metric source, each must be a label of the account's service catalog
+            span duration metric; others are rejected.
+          examples:
+            - - environment
+              - region
+        services:
+          maxItems: 1
+          minItems: 1
+          type: array
+          items:
+            maxLength: 256
+            minLength: 1
+            pattern: ^[\s\S]+$
+            type: string
+            description: Service names to monitor. Required. Exactly one service.
+          description: Service names to monitor. Required. Exactly one service.
+          examples:
+            - - checkout-api
+      description: >-
+        APM services and span filters an SLI is computed over, and the labels
+        its results are grouped by.
     ApmServiceEntity:
       title: APM service entity
       type: object
@@ -23350,6 +23749,102 @@ components:
           examples:
             - - ws-service-catalog
       description: Definition of an APM-based SLI with automatic query generation
+    ApmWindowBasedAvailability:
+      title: ApmWindowBasedAvailability
+      required:
+        - thresholdRatio
+      type: object
+      properties:
+        thresholdRatio:
+          description: >-
+            Availability threshold as a ratio from 0 to 1 (not a percentage). A
+            window is good when its value is >= this value. Required.
+          examples:
+            - 0.99
+          format: float
+          maximum: 1
+          minimum: 0
+          type: number
+          x-coralogix-presence: true
+      description: >-
+        Window-based availability: each window's value is the ratio of spans
+        without an error to all spans in it, from 0 to 1. A window is good when
+        its value is >= `thresholdRatio`.
+    ApmWindowBasedLatency:
+      title: ApmWindowBasedLatency
+      required:
+        - thresholdMs
+      type: object
+      oneOf:
+        - required:
+            - quantile
+          type: object
+        - required:
+            - average
+          type: object
+      properties:
+        average:
+          allOf:
+            - $ref: '#/components/schemas/ApmLatencyAverage'
+          description: Aggregate by the mean span duration.
+        quantile:
+          allOf:
+            - $ref: '#/components/schemas/ApmLatencyQuantile'
+          description: >-
+            Aggregate by a percentile of span durations. `percentile` is
+            required, greater than 0 and at most 1; omitting it is the same as
+            sending 0, which is rejected.
+        thresholdMs:
+          description: >-
+            Latency threshold in milliseconds, with at most 3 decimal places
+            (whole microseconds). A window is good when its aggregated duration
+            is <= this value. Required. Should be greater than 0; 0 is accepted
+            only for compatibility and is deprecated.
+          examples:
+            - 500
+          format: double
+          minimum: 0
+          multipleOf: 0.001
+          type: number
+          x-coralogix-presence: true
+      description: >-
+        Window-based latency: each window's value is the span duration
+        aggregated by whichever of `quantile` or `average` is set, in
+        milliseconds. A window is good when its value is <= `thresholdMs`.
+        Exactly one of them must be set.
+    ApmWindowBasedSource:
+      title: ApmWindowBasedSource
+      required:
+        - selector
+      type: object
+      oneOf:
+        - required:
+            - availability
+          type: object
+        - required:
+            - latency
+          type: object
+      properties:
+        availability:
+          allOf:
+            - $ref: '#/components/schemas/ApmWindowBasedAvailability'
+          description: >-
+            Each window's value is its ratio of spans without an error, from 0
+            to 1. A window is good when its value is >= `thresholdRatio`.
+        latency:
+          allOf:
+            - $ref: '#/components/schemas/ApmWindowBasedLatency'
+          description: >-
+            Each window's value is its aggregated span duration, in
+            milliseconds. A window is good when its value is <= `thresholdMs`.
+        selector:
+          allOf:
+            - $ref: '#/components/schemas/ApmSelector'
+          description: Services and filters to aggregate spans of. Required.
+      description: >-
+        APM source of a window-based SLI: whichever of `availability` or
+        `latency` is set decides the value computed per window from the spans of
+        the selected services. Exactly one of them must be set.
     ApplicationNameConstraint:
       type: object
       properties:
@@ -26628,7 +27123,6 @@ components:
         - versionId
         - version
         - overlayHash
-        - schedules
       type: object
       oneOf:
         - required:
@@ -26637,6 +27131,15 @@ components:
         - required:
             - preset
           type: object
+        - type: object
+          not:
+            anyOf:
+              - required:
+                  - custom
+                type: object
+              - required:
+                  - preset
+                type: object
       properties:
         active:
           default: false
@@ -26658,7 +27161,10 @@ components:
         custom:
           allOf:
             - $ref: '#/components/schemas/CustomConfigurationOverlay'
-          description: Custom overlay content of the latest version.
+          description: >-
+            Custom overlay content of the latest version. Exactly one of custom
+            or preset is set, except in a list response for a reduced view,
+            which omits both.
         description:
           description: Human-readable description.
           maxLength: 4096
@@ -26701,7 +27207,9 @@ components:
             - $ref: '#/components/schemas/PresetConfigurationOverlay'
           description: >-
             Preset overlay content of the latest version, for
-            ObservabilityFeatures overlays created outside this API.
+            ObservabilityFeatures overlays created outside this API. Exactly one
+            of custom or preset is set, except in a list response for a reduced
+            view, which omits both.
         priorityOrder:
           default: 0
           description: >-
@@ -26715,7 +27223,9 @@ components:
         schedules:
           description: >-
             Activation schedules of the latest version. With schedules, an
-            active overlay applies only during their windows.
+            active overlay applies only during their windows. Always returned,
+            possibly empty, except in a list response for a reduced view, which
+            omits it.
           items:
             $ref: '#/components/schemas/ConfigurationOverlaySchedule'
           maxItems: 10
@@ -26751,7 +27261,8 @@ components:
       description: >-
         Fleet-manager configuration overlay with the content of its latest
         version. The latest version is the newest unarchived one, or the newest
-        one for an archived overlay.
+        one for an archived overlay. Create, Get and Update always return custom
+        or preset, and schedules. A list request for a reduced view omits them.
     ConfigurationOverlaySchedule:
       required:
         - id
@@ -28871,6 +29382,35 @@ components:
           type: string
           x-coralogix-presence: true
       description: Custom time selection.
+    CustomWindowBasedSource:
+      title: CustomWindowBasedSource
+      required:
+        - query
+        - comparisonOperator
+        - threshold
+      type: object
+      properties:
+        comparisonOperator:
+          allOf:
+            - $ref: '#/components/schemas/ComparisonOperator'
+          description: How each window's value is compared to `threshold`. Required.
+        query:
+          allOf:
+            - $ref: '#/components/schemas/Metric'
+          description: Query yielding the value of each window. Required.
+        threshold:
+          description: >-
+            Value each window is compared to, in the unit of the query's result.
+            Required.
+          examples:
+            - 1
+          format: float
+          type: number
+          x-coralogix-presence: true
+      description: >-
+        Custom source of a window-based SLI: a metric query yielding one value
+        per window. A window is good when its value compared to `threshold` with
+        `comparisonOperator` holds.
     CxEvent:
       title: Event
       required:
@@ -47475,6 +48015,28 @@ components:
         totalEvents:
           $ref: '#/components/schemas/Metric'
       description: Definition of a request-based SLI based on metrics
+    RequestBasedSli:
+      title: RequestBasedSli
+      type: object
+      oneOf:
+        - required:
+            - custom
+          type: object
+        - required:
+            - apm
+          type: object
+      properties:
+        apm:
+          allOf:
+            - $ref: '#/components/schemas/ApmRequestBasedSource'
+          description: >-
+            Good and total events generated from APM span data for the selected
+            services.
+        custom:
+          allOf:
+            - $ref: '#/components/schemas/RequestBasedMetricSli'
+          description: Custom metric queries for the good and total events.
+      description: Request-based SLI. Exactly one of `custom` or `apm` must be set.
     ResolutionDetails:
       title: Resolution details
       type: object
@@ -49020,6 +49582,33 @@ components:
             Digests. The service keeps one item per type and does not preserve
             order. If omitted on update, this list is cleared.
       description: Slack config.
+    Sli:
+      title: Sli
+      type: object
+      oneOf:
+        - required:
+            - requestBased
+          type: object
+        - required:
+            - windowBased
+          type: object
+      properties:
+        requestBased:
+          allOf:
+            - $ref: '#/components/schemas/RequestBasedSli'
+          description: >-
+            Count per request: the SLI is the ratio of good events to total
+            events over the SLO time frame.
+        windowBased:
+          allOf:
+            - $ref: '#/components/schemas/WindowBasedSli'
+          description: >-
+            Count per time window: the SLI is the ratio of good windows to all
+            windows over the SLO time frame.
+      description: >-
+        Definition of an SLI: how it counts (per request or per time window) and
+        where its queries come from (custom metric queries or an APM service).
+        Exactly one of `requestBased` or `windowBased` must be set.
     Slo:
       title: Slo
       required:
@@ -49050,14 +49639,28 @@ components:
                 type: object
       properties:
         apmSli:
-          $ref: '#/components/schemas/ApmSli'
+          allOf:
+            - $ref: '#/components/schemas/ApmSli'
+          description: >-
+            Deprecated: use `sliDefinition` with an `apm` source instead.
+            `services`, `filters` and `groupingKeys` move to the source's
+            `selector`. `errorConfig` maps to
+            `sliDefinition.requestBased.apm.availability`. `latencyConfig` maps
+            to `sliDefinition.windowBased.apm.latency`:
+            `latencyConfig.timeWindow` moves to
+            `sliDefinition.windowBased.window`, `latencyConfig.threshold`
+            becomes `thresholdMs`, and `quantile` and `average` keep their
+            names.
+          deprecated: true
         apmSliMetadata:
           allOf:
             - $ref: '#/components/schemas/ApmSli'
           description: >-
-            Server copy of apmSli for APM SLOs. Set by the server; sending it
-            instead of apmSli is rejected.
+            Deprecated: use `sliDefinition` instead. Read-only copy of `apmSli`,
+            returned whenever `apmSli` is. Set by the server; sending it instead
+            of `apmSli` is rejected.
           readOnly: true
+          deprecated: true
         createTime:
           description: >-
             RFC3339 timestamp of when the SLO was created. Set by the server; a
@@ -49128,7 +49731,12 @@ components:
             - SLO_PRODUCT_TYPE_APM
           x-coralogix-presence: true
         requestBasedMetricSli:
-          $ref: '#/components/schemas/RequestBasedMetricSli'
+          allOf:
+            - $ref: '#/components/schemas/RequestBasedMetricSli'
+          description: >-
+            Deprecated: use `sliDefinition.requestBased.custom` instead, which
+            takes the same `goodEvents` and `totalEvents` queries.
+          deprecated: true
         revision:
           allOf:
             - $ref: '#/components/schemas/v1.Revision'
@@ -49136,10 +49744,31 @@ components:
             Revision of the SLO. Set by the server; a value sent by the client
             is ignored.
           readOnly: true
+        sliDefinition:
+          allOf:
+            - $ref: '#/components/schemas/Sli'
+          description: >-
+            Definition of the SLI: how it counts (request-based or window-based)
+            and where its values come from (custom metric queries or APM).
+            Replaces the deprecated `requestBasedMetricSli`,
+            `windowBasedMetricSli` and `apmSli`. A request must set either
+            `sliDefinition` or one of the deprecated fields. When
+            `sliDefinition` is set, it takes precedence and the deprecated
+            fields are ignored. Responses always include `sliDefinition`, and
+            also include the matching deprecated field when the SLI can be
+            expressed with it.
         sloTimeFrame:
           allOf:
             - $ref: '#/components/schemas/SloTimeFrame'
-          description: Rolling evaluation window (fixed-duration lookback).
+          description: >-
+            Time frame the SLO is evaluated over. The day-based values,
+            `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are rolling
+            windows that cover that many days up to the time of evaluation.
+            `SLO_TIME_FRAME_CALENDAR_MONTH` covers the current calendar month in
+            UTC, from the start of the month up to the time of evaluation, and
+            starts over at the beginning of each month. SLO results are
+            calculated per whole minute in UTC, so the window used may differ
+            from these bounds by up to one minute.
         sloType:
           allOf:
             - $ref: '#/components/schemas/SloType'
@@ -49180,7 +49809,13 @@ components:
           type: string
           x-coralogix-presence: true
         windowBasedMetricSli:
-          $ref: '#/components/schemas/WindowBasedMetricSli'
+          allOf:
+            - $ref: '#/components/schemas/WindowBasedMetricSli'
+          description: >-
+            Deprecated: use `sliDefinition.windowBased` instead. Set `window`
+            and `missingDataStrategy` there, and `query`, `comparisonOperator`
+            and `threshold` in its `custom` source.
+          deprecated: true
       description: Definition of an SLO
     SloAlertValidityResult:
       type: object
@@ -49421,6 +50056,7 @@ components:
         - SLO_TIME_FRAME_21_DAYS
         - SLO_TIME_FRAME_28_DAYS
         - SLO_TIME_FRAME_30_DAYS
+        - SLO_TIME_FRAME_CALENDAR_MONTH
       type: string
       description: Slo time frame.
     SloType:
@@ -54570,6 +55206,44 @@ components:
         window:
           $ref: '#/components/schemas/WindowSloWindow'
       description: Definition of a window-based SLI based on metrics
+    WindowBasedSli:
+      title: WindowBasedSli
+      required:
+        - window
+      type: object
+      oneOf:
+        - required:
+            - custom
+          type: object
+        - required:
+            - apm
+          type: object
+      properties:
+        apm:
+          allOf:
+            - $ref: '#/components/schemas/ApmWindowBasedSource'
+          description: Window value generated from APM span data for the selected services.
+        custom:
+          allOf:
+            - $ref: '#/components/schemas/CustomWindowBasedSource'
+          description: >-
+            Custom metric query yielding the value of each window, and how it is
+            compared to a threshold.
+        missingDataStrategy:
+          allOf:
+            - $ref: '#/components/schemas/MissingDataStrategy'
+          description: How a window without data is counted.
+          default: MISSING_DATA_STRATEGY_UNCOUNTED
+        window:
+          allOf:
+            - $ref: '#/components/schemas/WindowSloWindow'
+          description: Size of each evaluated time window. Required.
+          examples:
+            - WINDOW_SLO_WINDOW_5_MINUTES
+      description: >-
+        Window-based SLI. The source yields one value per `window` and decides
+        whether that window is good. Exactly one of `custom` or `apm` must be
+        set.
     WindowSloWindow:
       enum:
         - WINDOW_SLO_WINDOW_UNSPECIFIED

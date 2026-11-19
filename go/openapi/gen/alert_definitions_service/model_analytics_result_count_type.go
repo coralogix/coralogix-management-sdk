@@ -17,11 +17,11 @@ import (
 
 var _ = bytes.MinRead
 
-// checks if the AnalyticsImmediateType type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AnalyticsImmediateType{}
+// checks if the AnalyticsResultCountType type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AnalyticsResultCountType{}
 
-// AnalyticsImmediateType Configuration for analytics alerts that fire immediately when the number of results a DataPrime query returns meets a condition, by default when it returns any result
-type AnalyticsImmediateType struct {
+// AnalyticsResultCountType Configuration for analytics result count alerts that fire when the number of results a DataPrime query returns meets a condition, by default when it returns any result
+type AnalyticsResultCountType struct {
 	// The DataPrime query to evaluate
 	DataprimeQuery *DataprimeAlertQuery `json:"dataprimeQuery,omitempty"`
 	// The delay in milliseconds before evaluating the alert condition
@@ -32,33 +32,31 @@ type AnalyticsImmediateType struct {
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
 	// The evaluation window duration in minutes
 	TimeframeMinutes *int32 `json:"timeframeMinutes,omitempty"`
-	// Whether each result row is treated as a separate permutation. Defaults to false for immediate alerts to avoid high-cardinality alerts by mistake.
-	UseRowsAsPermutations *bool `json:"useRowsAsPermutations,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
 
-type _AnalyticsImmediateType AnalyticsImmediateType
+type _AnalyticsResultCountType AnalyticsResultCountType
 
-// NewAnalyticsImmediateType instantiates a new AnalyticsImmediateType object
+// NewAnalyticsResultCountType instantiates a new AnalyticsResultCountType object
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewAnalyticsImmediateType() *AnalyticsImmediateType {
-	this := AnalyticsImmediateType{}
+func NewAnalyticsResultCountType() *AnalyticsResultCountType {
+	this := AnalyticsResultCountType{}
 	return &this
 }
 
-// NewAnalyticsImmediateTypeWithDefaults instantiates a new AnalyticsImmediateType object
+// NewAnalyticsResultCountTypeWithDefaults instantiates a new AnalyticsResultCountType object
 // This constructor does not set properties that have a default: the server fills them in.
 // It doesn't guarantee that properties required by API are set
-func NewAnalyticsImmediateTypeWithDefaults() *AnalyticsImmediateType {
-	this := AnalyticsImmediateType{}
+func NewAnalyticsResultCountTypeWithDefaults() *AnalyticsResultCountType {
+	this := AnalyticsResultCountType{}
 	return &this
 }
 
 // GetDataprimeQuery returns the DataprimeQuery field value if set, zero value otherwise.
-func (o *AnalyticsImmediateType) GetDataprimeQuery() DataprimeAlertQuery {
+func (o *AnalyticsResultCountType) GetDataprimeQuery() DataprimeAlertQuery {
 	if o == nil || IsNil(o.DataprimeQuery) {
 		var ret DataprimeAlertQuery
 		return ret
@@ -68,7 +66,7 @@ func (o *AnalyticsImmediateType) GetDataprimeQuery() DataprimeAlertQuery {
 
 // GetDataprimeQueryOk returns a tuple with the DataprimeQuery field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AnalyticsImmediateType) GetDataprimeQueryOk() (*DataprimeAlertQuery, bool) {
+func (o *AnalyticsResultCountType) GetDataprimeQueryOk() (*DataprimeAlertQuery, bool) {
 	if o == nil || IsNil(o.DataprimeQuery) {
 		return nil, false
 	}
@@ -76,7 +74,7 @@ func (o *AnalyticsImmediateType) GetDataprimeQueryOk() (*DataprimeAlertQuery, bo
 }
 
 // HasDataprimeQuery returns a boolean if a field has been set.
-func (o *AnalyticsImmediateType) HasDataprimeQuery() bool {
+func (o *AnalyticsResultCountType) HasDataprimeQuery() bool {
 	if o != nil && !IsNil(o.DataprimeQuery) {
 		return true
 	}
@@ -85,12 +83,12 @@ func (o *AnalyticsImmediateType) HasDataprimeQuery() bool {
 }
 
 // SetDataprimeQuery gets a reference to the given DataprimeAlertQuery and assigns it to the DataprimeQuery field.
-func (o *AnalyticsImmediateType) SetDataprimeQuery(v DataprimeAlertQuery) {
+func (o *AnalyticsResultCountType) SetDataprimeQuery(v DataprimeAlertQuery) {
 	o.DataprimeQuery = &v
 }
 
 // GetEvaluationDelayMs returns the EvaluationDelayMs field value if set, zero value otherwise.
-func (o *AnalyticsImmediateType) GetEvaluationDelayMs() int32 {
+func (o *AnalyticsResultCountType) GetEvaluationDelayMs() int32 {
 	if o == nil || IsNil(o.EvaluationDelayMs) {
 		var ret int32
 		return ret
@@ -100,7 +98,7 @@ func (o *AnalyticsImmediateType) GetEvaluationDelayMs() int32 {
 
 // GetEvaluationDelayMsOk returns a tuple with the EvaluationDelayMs field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AnalyticsImmediateType) GetEvaluationDelayMsOk() (*int32, bool) {
+func (o *AnalyticsResultCountType) GetEvaluationDelayMsOk() (*int32, bool) {
 	if o == nil || IsNil(o.EvaluationDelayMs) {
 		return nil, false
 	}
@@ -108,7 +106,7 @@ func (o *AnalyticsImmediateType) GetEvaluationDelayMsOk() (*int32, bool) {
 }
 
 // HasEvaluationDelayMs returns a boolean if a field has been set.
-func (o *AnalyticsImmediateType) HasEvaluationDelayMs() bool {
+func (o *AnalyticsResultCountType) HasEvaluationDelayMs() bool {
 	if o != nil && !IsNil(o.EvaluationDelayMs) {
 		return true
 	}
@@ -117,12 +115,12 @@ func (o *AnalyticsImmediateType) HasEvaluationDelayMs() bool {
 }
 
 // SetEvaluationDelayMs gets a reference to the given int32 and assigns it to the EvaluationDelayMs field.
-func (o *AnalyticsImmediateType) SetEvaluationDelayMs(v int32) {
+func (o *AnalyticsResultCountType) SetEvaluationDelayMs(v int32) {
 	o.EvaluationDelayMs = &v
 }
 
 // GetEvaluationPeriodMinutes returns the EvaluationPeriodMinutes field value if set, zero value otherwise.
-func (o *AnalyticsImmediateType) GetEvaluationPeriodMinutes() int32 {
+func (o *AnalyticsResultCountType) GetEvaluationPeriodMinutes() int32 {
 	if o == nil || IsNil(o.EvaluationPeriodMinutes) {
 		var ret int32
 		return ret
@@ -132,7 +130,7 @@ func (o *AnalyticsImmediateType) GetEvaluationPeriodMinutes() int32 {
 
 // GetEvaluationPeriodMinutesOk returns a tuple with the EvaluationPeriodMinutes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AnalyticsImmediateType) GetEvaluationPeriodMinutesOk() (*int32, bool) {
+func (o *AnalyticsResultCountType) GetEvaluationPeriodMinutesOk() (*int32, bool) {
 	if o == nil || IsNil(o.EvaluationPeriodMinutes) {
 		return nil, false
 	}
@@ -140,7 +138,7 @@ func (o *AnalyticsImmediateType) GetEvaluationPeriodMinutesOk() (*int32, bool) {
 }
 
 // HasEvaluationPeriodMinutes returns a boolean if a field has been set.
-func (o *AnalyticsImmediateType) HasEvaluationPeriodMinutes() bool {
+func (o *AnalyticsResultCountType) HasEvaluationPeriodMinutes() bool {
 	if o != nil && !IsNil(o.EvaluationPeriodMinutes) {
 		return true
 	}
@@ -149,12 +147,12 @@ func (o *AnalyticsImmediateType) HasEvaluationPeriodMinutes() bool {
 }
 
 // SetEvaluationPeriodMinutes gets a reference to the given int32 and assigns it to the EvaluationPeriodMinutes field.
-func (o *AnalyticsImmediateType) SetEvaluationPeriodMinutes(v int32) {
+func (o *AnalyticsResultCountType) SetEvaluationPeriodMinutes(v int32) {
 	o.EvaluationPeriodMinutes = &v
 }
 
 // GetNoDataPolicy returns the NoDataPolicy field value if set, zero value otherwise.
-func (o *AnalyticsImmediateType) GetNoDataPolicy() NoDataPolicy {
+func (o *AnalyticsResultCountType) GetNoDataPolicy() NoDataPolicy {
 	if o == nil || IsNil(o.NoDataPolicy) {
 		var ret NoDataPolicy
 		return ret
@@ -164,7 +162,7 @@ func (o *AnalyticsImmediateType) GetNoDataPolicy() NoDataPolicy {
 
 // GetNoDataPolicyOk returns a tuple with the NoDataPolicy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AnalyticsImmediateType) GetNoDataPolicyOk() (*NoDataPolicy, bool) {
+func (o *AnalyticsResultCountType) GetNoDataPolicyOk() (*NoDataPolicy, bool) {
 	if o == nil || IsNil(o.NoDataPolicy) {
 		return nil, false
 	}
@@ -172,7 +170,7 @@ func (o *AnalyticsImmediateType) GetNoDataPolicyOk() (*NoDataPolicy, bool) {
 }
 
 // HasNoDataPolicy returns a boolean if a field has been set.
-func (o *AnalyticsImmediateType) HasNoDataPolicy() bool {
+func (o *AnalyticsResultCountType) HasNoDataPolicy() bool {
 	if o != nil && !IsNil(o.NoDataPolicy) {
 		return true
 	}
@@ -181,12 +179,12 @@ func (o *AnalyticsImmediateType) HasNoDataPolicy() bool {
 }
 
 // SetNoDataPolicy gets a reference to the given NoDataPolicy and assigns it to the NoDataPolicy field.
-func (o *AnalyticsImmediateType) SetNoDataPolicy(v NoDataPolicy) {
+func (o *AnalyticsResultCountType) SetNoDataPolicy(v NoDataPolicy) {
 	o.NoDataPolicy = &v
 }
 
 // GetTimeframeMinutes returns the TimeframeMinutes field value if set, zero value otherwise.
-func (o *AnalyticsImmediateType) GetTimeframeMinutes() int32 {
+func (o *AnalyticsResultCountType) GetTimeframeMinutes() int32 {
 	if o == nil || IsNil(o.TimeframeMinutes) {
 		var ret int32
 		return ret
@@ -196,7 +194,7 @@ func (o *AnalyticsImmediateType) GetTimeframeMinutes() int32 {
 
 // GetTimeframeMinutesOk returns a tuple with the TimeframeMinutes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AnalyticsImmediateType) GetTimeframeMinutesOk() (*int32, bool) {
+func (o *AnalyticsResultCountType) GetTimeframeMinutesOk() (*int32, bool) {
 	if o == nil || IsNil(o.TimeframeMinutes) {
 		return nil, false
 	}
@@ -204,7 +202,7 @@ func (o *AnalyticsImmediateType) GetTimeframeMinutesOk() (*int32, bool) {
 }
 
 // HasTimeframeMinutes returns a boolean if a field has been set.
-func (o *AnalyticsImmediateType) HasTimeframeMinutes() bool {
+func (o *AnalyticsResultCountType) HasTimeframeMinutes() bool {
 	if o != nil && !IsNil(o.TimeframeMinutes) {
 		return true
 	}
@@ -213,43 +211,11 @@ func (o *AnalyticsImmediateType) HasTimeframeMinutes() bool {
 }
 
 // SetTimeframeMinutes gets a reference to the given int32 and assigns it to the TimeframeMinutes field.
-func (o *AnalyticsImmediateType) SetTimeframeMinutes(v int32) {
+func (o *AnalyticsResultCountType) SetTimeframeMinutes(v int32) {
 	o.TimeframeMinutes = &v
 }
 
-// GetUseRowsAsPermutations returns the UseRowsAsPermutations field value if set, zero value otherwise.
-func (o *AnalyticsImmediateType) GetUseRowsAsPermutations() bool {
-	if o == nil || IsNil(o.UseRowsAsPermutations) {
-		var ret bool
-		return ret
-	}
-	return *o.UseRowsAsPermutations
-}
-
-// GetUseRowsAsPermutationsOk returns a tuple with the UseRowsAsPermutations field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AnalyticsImmediateType) GetUseRowsAsPermutationsOk() (*bool, bool) {
-	if o == nil || IsNil(o.UseRowsAsPermutations) {
-		return nil, false
-	}
-	return o.UseRowsAsPermutations, true
-}
-
-// HasUseRowsAsPermutations returns a boolean if a field has been set.
-func (o *AnalyticsImmediateType) HasUseRowsAsPermutations() bool {
-	if o != nil && !IsNil(o.UseRowsAsPermutations) {
-		return true
-	}
-
-	return false
-}
-
-// SetUseRowsAsPermutations gets a reference to the given bool and assigns it to the UseRowsAsPermutations field.
-func (o *AnalyticsImmediateType) SetUseRowsAsPermutations(v bool) {
-	o.UseRowsAsPermutations = &v
-}
-
-func (o AnalyticsImmediateType) MarshalJSON() ([]byte, error) {
+func (o AnalyticsResultCountType) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -257,7 +223,7 @@ func (o AnalyticsImmediateType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AnalyticsImmediateType) ToMap() (map[string]interface{}, error) {
+func (o AnalyticsResultCountType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.DataprimeQuery) {
 		toSerialize["dataprimeQuery"] = o.DataprimeQuery
@@ -274,9 +240,6 @@ func (o AnalyticsImmediateType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TimeframeMinutes) {
 		toSerialize["timeframeMinutes"] = o.TimeframeMinutes
 	}
-	if !IsNil(o.UseRowsAsPermutations) {
-		toSerialize["useRowsAsPermutations"] = o.UseRowsAsPermutations
-	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -285,17 +248,17 @@ func (o AnalyticsImmediateType) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *AnalyticsImmediateType) UnmarshalJSON(data []byte) (err error) {
-	varAnalyticsImmediateType := _AnalyticsImmediateType{}
+func (o *AnalyticsResultCountType) UnmarshalJSON(data []byte) (err error) {
+	varAnalyticsResultCountType := _AnalyticsResultCountType{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	err = decoder.Decode(&varAnalyticsImmediateType)
+	err = decoder.Decode(&varAnalyticsResultCountType)
 
 	if err != nil {
 		return err
 	}
 
-	*o = AnalyticsImmediateType(varAnalyticsImmediateType)
+	*o = AnalyticsResultCountType(varAnalyticsResultCountType)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -305,7 +268,6 @@ func (o *AnalyticsImmediateType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "evaluationPeriodMinutes")
 		delete(additionalProperties, "noDataPolicy")
 		delete(additionalProperties, "timeframeMinutes")
-		delete(additionalProperties, "useRowsAsPermutations")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}
@@ -313,38 +275,38 @@ func (o *AnalyticsImmediateType) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableAnalyticsImmediateType struct {
-	value *AnalyticsImmediateType
+type NullableAnalyticsResultCountType struct {
+	value *AnalyticsResultCountType
 	isSet bool
 }
 
-func (v NullableAnalyticsImmediateType) Get() *AnalyticsImmediateType {
+func (v NullableAnalyticsResultCountType) Get() *AnalyticsResultCountType {
 	return v.value
 }
 
-func (v *NullableAnalyticsImmediateType) Set(val *AnalyticsImmediateType) {
+func (v *NullableAnalyticsResultCountType) Set(val *AnalyticsResultCountType) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAnalyticsImmediateType) IsSet() bool {
+func (v NullableAnalyticsResultCountType) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAnalyticsImmediateType) Unset() {
+func (v *NullableAnalyticsResultCountType) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAnalyticsImmediateType(val *AnalyticsImmediateType) *NullableAnalyticsImmediateType {
-	return &NullableAnalyticsImmediateType{value: val, isSet: true}
+func NewNullableAnalyticsResultCountType(val *AnalyticsResultCountType) *NullableAnalyticsResultCountType {
+	return &NullableAnalyticsResultCountType{value: val, isSet: true}
 }
 
-func (v NullableAnalyticsImmediateType) MarshalJSON() ([]byte, error) {
+func (v NullableAnalyticsResultCountType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAnalyticsImmediateType) UnmarshalJSON(src []byte) error {
+func (v *NullableAnalyticsResultCountType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

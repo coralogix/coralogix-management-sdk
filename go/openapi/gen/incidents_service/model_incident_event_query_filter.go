@@ -36,8 +36,7 @@ type IncidentEventQueryFilter struct {
 	Severity []IncidentSeverity `json:"severity,omitempty"`
 	// The status of the incident
 	Status []IncidentStatus `json:"status,omitempty"`
-	// The time range of the incident
-	Timestamp *V1TimeRange `json:"timestamp,omitempty"`
+	Timestamp *TimeRange `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -286,9 +285,9 @@ func (o *IncidentEventQueryFilter) SetStatus(v []IncidentStatus) {
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *IncidentEventQueryFilter) GetTimestamp() V1TimeRange {
+func (o *IncidentEventQueryFilter) GetTimestamp() TimeRange {
 	if o == nil || IsNil(o.Timestamp) {
-		var ret V1TimeRange
+		var ret TimeRange
 		return ret
 	}
 	return *o.Timestamp
@@ -296,7 +295,7 @@ func (o *IncidentEventQueryFilter) GetTimestamp() V1TimeRange {
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IncidentEventQueryFilter) GetTimestampOk() (*V1TimeRange, bool) {
+func (o *IncidentEventQueryFilter) GetTimestampOk() (*TimeRange, bool) {
 	if o == nil || IsNil(o.Timestamp) {
 		return nil, false
 	}
@@ -312,8 +311,8 @@ func (o *IncidentEventQueryFilter) HasTimestamp() bool {
 	return false
 }
 
-// SetTimestamp gets a reference to the given V1TimeRange and assigns it to the Timestamp field.
-func (o *IncidentEventQueryFilter) SetTimestamp(v V1TimeRange) {
+// SetTimestamp gets a reference to the given TimeRange and assigns it to the Timestamp field.
+func (o *IncidentEventQueryFilter) SetTimestamp(v TimeRange) {
 	o.Timestamp = &v
 }
 

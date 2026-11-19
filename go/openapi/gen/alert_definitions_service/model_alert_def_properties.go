@@ -24,8 +24,8 @@ var _ MappedNullable = &AlertDefProperties{}
 type AlertDefProperties struct {
 	// The schedule defining when the alert should be active
 	ActiveOn *ActivitySchedule `json:"activeOn,omitempty"`
-	// Configuration for analytics immediate alerts
-	AnalyticsImmediate *AnalyticsImmediateType `json:"analyticsImmediate,omitempty"`
+	// Configuration for analytics result count alerts
+	AnalyticsResultCount *AnalyticsResultCountType `json:"analyticsResultCount,omitempty"`
 	// Configuration for analytics threshold alerts
 	AnalyticsThreshold *AnalyticsThresholdType `json:"analyticsThreshold,omitempty"`
 	// Settings controlling how the alert interacts with cases. When omitted on create, defaults apply (case auto-resolve enabled, no enrichment queries, no case destinations). Replace is a full overwrite: omitting this field on replace resets any previously configured case settings to those defaults. In read responses, this field is absent when no case settings were configured, meaning those same defaults are in effect.
@@ -137,36 +137,36 @@ func (o *AlertDefProperties) SetActiveOn(v ActivitySchedule) {
 	o.ActiveOn = &v
 }
 
-// GetAnalyticsImmediate returns the AnalyticsImmediate field value if set, zero value otherwise.
-func (o *AlertDefProperties) GetAnalyticsImmediate() AnalyticsImmediateType {
-	if o == nil || IsNil(o.AnalyticsImmediate) {
-		var ret AnalyticsImmediateType
+// GetAnalyticsResultCount returns the AnalyticsResultCount field value if set, zero value otherwise.
+func (o *AlertDefProperties) GetAnalyticsResultCount() AnalyticsResultCountType {
+	if o == nil || IsNil(o.AnalyticsResultCount) {
+		var ret AnalyticsResultCountType
 		return ret
 	}
-	return *o.AnalyticsImmediate
+	return *o.AnalyticsResultCount
 }
 
-// GetAnalyticsImmediateOk returns a tuple with the AnalyticsImmediate field value if set, nil otherwise
+// GetAnalyticsResultCountOk returns a tuple with the AnalyticsResultCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AlertDefProperties) GetAnalyticsImmediateOk() (*AnalyticsImmediateType, bool) {
-	if o == nil || IsNil(o.AnalyticsImmediate) {
+func (o *AlertDefProperties) GetAnalyticsResultCountOk() (*AnalyticsResultCountType, bool) {
+	if o == nil || IsNil(o.AnalyticsResultCount) {
 		return nil, false
 	}
-	return o.AnalyticsImmediate, true
+	return o.AnalyticsResultCount, true
 }
 
-// HasAnalyticsImmediate returns a boolean if a field has been set.
-func (o *AlertDefProperties) HasAnalyticsImmediate() bool {
-	if o != nil && !IsNil(o.AnalyticsImmediate) {
+// HasAnalyticsResultCount returns a boolean if a field has been set.
+func (o *AlertDefProperties) HasAnalyticsResultCount() bool {
+	if o != nil && !IsNil(o.AnalyticsResultCount) {
 		return true
 	}
 
 	return false
 }
 
-// SetAnalyticsImmediate gets a reference to the given AnalyticsImmediateType and assigns it to the AnalyticsImmediate field.
-func (o *AlertDefProperties) SetAnalyticsImmediate(v AnalyticsImmediateType) {
-	o.AnalyticsImmediate = &v
+// SetAnalyticsResultCount gets a reference to the given AnalyticsResultCountType and assigns it to the AnalyticsResultCount field.
+func (o *AlertDefProperties) SetAnalyticsResultCount(v AnalyticsResultCountType) {
+	o.AnalyticsResultCount = &v
 }
 
 // GetAnalyticsThreshold returns the AnalyticsThreshold field value if set, zero value otherwise.
@@ -1078,8 +1078,8 @@ func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ActiveOn) {
 		toSerialize["activeOn"] = o.ActiveOn
 	}
-	if !IsNil(o.AnalyticsImmediate) {
-		toSerialize["analyticsImmediate"] = o.AnalyticsImmediate
+	if !IsNil(o.AnalyticsResultCount) {
+		toSerialize["analyticsResultCount"] = o.AnalyticsResultCount
 	}
 	if !IsNil(o.AnalyticsThreshold) {
 		toSerialize["analyticsThreshold"] = o.AnalyticsThreshold
@@ -1205,14 +1205,14 @@ func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
 	if _, exists := toSerialize["sloThreshold"]; exists {
 		optionalOneOfGroup0Matches++
 	}
-	if _, exists := toSerialize["analyticsImmediate"]; exists {
+	if _, exists := toSerialize["analyticsResultCount"]; exists {
 		optionalOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["analyticsThreshold"]; exists {
 		optionalOneOfGroup0Matches++
 	}
 	if optionalOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsImmediate, analyticsThreshold] may be set"}
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsResultCount, analyticsThreshold] may be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["logsImmediate"]; exists {
@@ -1254,8 +1254,8 @@ func (o AlertDefProperties) ToMap() (map[string]interface{}, error) {
 	if _, exists := o.AdditionalProperties["sloThreshold"]; exists {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field sloThreshold must be set through the typed field, not AdditionalProperties"}
 	}
-	if _, exists := o.AdditionalProperties["analyticsImmediate"]; exists {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field analyticsImmediate must be set through the typed field, not AdditionalProperties"}
+	if _, exists := o.AdditionalProperties["analyticsResultCount"]; exists {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field analyticsResultCount must be set through the typed field, not AdditionalProperties"}
 	}
 	if _, exists := o.AdditionalProperties["analyticsThreshold"]; exists {
 		return map[string]interface{}{}, GenericOpenAPIError{error: "oneOf field analyticsThreshold must be set through the typed field, not AdditionalProperties"}
@@ -1323,18 +1323,18 @@ func (o *AlertDefProperties) UnmarshalJSON(data []byte) (err error) {
 		if _, exists := additionalProperties["sloThreshold"]; exists {
 			optionalOneOfGroup0MatchesInPayload++
 		}
-		if _, exists := additionalProperties["analyticsImmediate"]; exists {
+		if _, exists := additionalProperties["analyticsResultCount"]; exists {
 			optionalOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["analyticsThreshold"]; exists {
 			optionalOneOfGroup0MatchesInPayload++
 		}
 		if optionalOneOfGroup0MatchesInPayload > 1 {
-			return GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsImmediate, analyticsThreshold] may be set"}
+			return GenericOpenAPIError{error: "at most one of [logsImmediate, tracingImmediate, logsThreshold, logsRatioThreshold, logsTimeRelativeThreshold, metricThreshold, tracingThreshold, flow, logsAnomaly, metricAnomaly, logsNewValue, logsUniqueCount, sloThreshold, analyticsResultCount, analyticsThreshold] may be set"}
 		}
 
 		delete(additionalProperties, "activeOn")
-		delete(additionalProperties, "analyticsImmediate")
+		delete(additionalProperties, "analyticsResultCount")
 		delete(additionalProperties, "analyticsThreshold")
 		delete(additionalProperties, "caseSettings")
 		delete(additionalProperties, "dataSources")

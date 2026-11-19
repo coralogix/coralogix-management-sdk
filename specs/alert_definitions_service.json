@@ -1867,7 +1867,7 @@
           },
           {
             "required": [
-              "analyticsImmediate"
+              "analyticsResultCount"
             ],
             "type": "object"
           },
@@ -1961,7 +1961,7 @@
                 },
                 {
                   "required": [
-                    "analyticsImmediate"
+                    "analyticsResultCount"
                   ],
                   "type": "object"
                 },
@@ -1984,13 +1984,13 @@
             ],
             "description": "The schedule defining when the alert should be active"
           },
-          "analyticsImmediate": {
+          "analyticsResultCount": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AnalyticsImmediateType"
+                "$ref": "#/components/schemas/AnalyticsResultCountType"
               }
             ],
-            "description": "Configuration for analytics immediate alerts",
+            "description": "Configuration for analytics result count alerts",
             "x-stability": "preview"
           },
           "analyticsThreshold": {
@@ -2393,11 +2393,11 @@
           "ALERT_DEF_TYPE_TRACING_THRESHOLD",
           "ALERT_DEF_TYPE_FLOW",
           "ALERT_DEF_TYPE_SLO_THRESHOLD",
-          "ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE",
+          "ALERT_DEF_TYPE_ANALYTICS_RESULT_COUNT",
           "ALERT_DEF_TYPE_ANALYTICS_THRESHOLD"
         ],
         "type": "string",
-        "description": "Alert def type.\n- ALERT_DEF_TYPE_ANALYTICS_IMMEDIATE: preview\n- ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview"
+        "description": "Alert def type.\n- ALERT_DEF_TYPE_ANALYTICS_RESULT_COUNT: preview\n- ALERT_DEF_TYPE_ANALYTICS_THRESHOLD: preview"
       },
       "AlertDefTypeFilter": {
         "title": "AlertDef Type Filter",
@@ -2484,8 +2484,8 @@
         "type": "string",
         "description": "Alerts op."
       },
-      "AnalyticsImmediateType": {
-        "title": "Analytics immediate alert type",
+      "AnalyticsResultCountType": {
+        "title": "Analytics result count alert type",
         "type": "object",
         "properties": {
           "dataprimeQuery": {
@@ -2537,17 +2537,9 @@
             "minimum": 1,
             "type": "integer",
             "x-coralogix-presence": true
-          },
-          "useRowsAsPermutations": {
-            "description": "Whether each result row is treated as a separate permutation. Defaults to false for immediate alerts to avoid high-cardinality alerts by mistake.",
-            "examples": [
-              false
-            ],
-            "type": "boolean",
-            "x-coralogix-presence": true
           }
         },
-        "description": "Configuration for analytics alerts that fire immediately when the number of results a DataPrime query returns meets a condition, by default when it returns any result"
+        "description": "Configuration for analytics result count alerts that fire when the number of results a DataPrime query returns meets a condition, by default when it returns any result"
       },
       "AnalyticsThresholdOperator": {
         "enum": [
