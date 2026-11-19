@@ -24,14 +24,11 @@ import (
 // releasedLimits keeps its released behavior: the model compares the request types with the
 // response type without the limits.
 
-// memberLimitsLostEdits drop the request limits: the loginModes of the template lose the
-// maximum that the response keeps, and the response member id loses the length bounds that
-// the Update request keeps.
+// memberLimitsLostEdits drop the request limit that the response keeps: the loginModes of the
+// template lose the maximum of two that the response still declares.
 var memberLimitsLostEdits = []string{
 	"    MemberTemplate:\n      type: object\n      properties:\n        displayName: {type: string, minLength: 0}\n        login: {type: string, minLength: 0}\n        loginModes:\n          type: array\n          minItems: 0\n          maxItems: 2\n          items: {$ref: '#/components/schemas/LoginMode'}\n",
 	"    MemberTemplate:\n      type: object\n      properties:\n        displayName: {type: string, minLength: 0}\n        login: {type: string, minLength: 0}\n        loginModes:\n          type: array\n          minItems: 0\n          items: {$ref: '#/components/schemas/LoginMode'}\n",
-	"        memberId: {type: string, minLength: 0}\n",
-	"        memberId: {type: string}\n",
 }
 
 // The members contract without the releasedLimits lines refuses the fields whose limits the
@@ -47,22 +44,24 @@ func TestMemberLimitsDriftIsRefused(t *testing.T) {
 func TestMemberReleasedLimitsHold(t *testing.T) {
 	source := memberSource(t, memberLimitsLostEdits)
 	p := memberPolicy()
-	p.ReleasedLimits = []string{
-		"Member.loginModes",
-		"Member.memberId",
-	}
+	p.ReleasedLimits = []string{"Member.loginModes"}
 	buildMember(t, source, p)
 }
 
-// The line covers the whole field with its nested items: a limit inside the items of the list
-// is dropped with the limits of the field.
+// The line covers only the fields it names: the loginModes drift builds with the line, and the
+// same drift on login — a field the line does not name — still refuses. A second releasedLimits
+// line covers it, and the resource builds.
 func TestMemberReleasedLimitsCoverTheItems(t *testing.T) {
-	source := memberSource(t, memberLimitsLostEdits,
+	drifted := memberSource(t, memberLimitsLostEdits,
 		[]string{
 			"        login: {type: string, minLength: 0}\n        loginModes:",
 			"        login: {type: string, minLength: 0, maxLength: 100}\n        loginModes:",
 		})
 	p := memberPolicy()
-	p.ReleasedLimits = []string{"Member.loginModes", "Member.memberId", "Member.login"}
-	buildMember(t, source, p)
+	p.ReleasedLimits = []string{"Member.loginModes"}
+	// login is not in the line: its response-only limit keeps the strict comparison.
+	memberIssue(t, drifted, p, "FIELD_TYPE_INCONSISTENT", "different limits")
+	// The line names it too: the resource builds.
+	p.ReleasedLimits = append(p.ReleasedLimits, "Member.login")
+	buildMember(t, drifted, p)
 }

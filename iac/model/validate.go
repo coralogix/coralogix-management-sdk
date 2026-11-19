@@ -1264,9 +1264,6 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 			return issue.Report{contract.issue()}
 		}
 	}
-	if p.releasedLimits(name, field) {
-		withoutLimits(get)
-	}
 	p.asSet(name, field, get)
 	if err != nil {
 		return nil
@@ -1288,9 +1285,6 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 			return issue.Report{contract.issue()}
 		}
 		requests[i] = shaped
-		if p.releasedLimits(name, field) {
-			withoutLimits(requests[i])
-		}
 	}
 	if p.Overwrite && requests[0] != nil {
 		// As in Build: Get lists the items of every resource that its query can select.
@@ -1301,8 +1295,17 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 		return issue.Report{contract.issue()}
 	}
 	if p.releasedLimits(name, field) {
-		// The wrapper collapse rebuilt the request types from the schemas: drop the limits
-		// again, so the merge compares the types without them.
+		// As in Build: the field keeps its released behavior, so the merge compares the types
+		// without the limits. When the types already agree, the line does nothing, and the
+		// overrides file must not keep it.
+		if p.mergeFieldLimits(location, get, requests) == nil {
+			return issue.Report{{
+				Code:        "OVERRIDE_UNUSED",
+				Location:    "behavior-overrides.yaml:types." + name + ".fields." + field,
+				Message:     fmt.Sprintf("the Create, Update, and response schemas of %q already carry the same limits", field),
+				Remediation: "Delete only the key releasedLimits.",
+			}}
+		}
 		withoutLimits(get)
 		for i := range requests {
 			withoutLimits(requests[i])

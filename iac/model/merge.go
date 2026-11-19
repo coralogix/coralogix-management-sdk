@@ -34,6 +34,23 @@ func (e *contractError) issue() issue.Issue {
 	return issue.Issue{Code: e.code, Location: e.location, Message: e.message, Remediation: e.remediation}
 }
 
+// mergeFieldLimits reports whether the request types of the field carry limits that differ
+// from the response type. It merges copies, so the caller can strip the limits of a field
+// whose line says releasedLimits when the types do differ, and report the line as unused when
+// they already agree.
+func (p Policy) mergeFieldLimits(location string, get *Type, requests [2]*Type) error {
+	getCopy, create, update := *get, requests[0], requests[1]
+	if create != nil {
+		c := *create
+		create = &c
+	}
+	if update != nil {
+		u := *update
+		update = &u
+	}
+	return mergeRequests(location, &getCopy, create, update)
+}
+
 // mergeRequests merges the Create and the Update types of a top-level field
 // into get, its type in the resource response, and classifies the nested
 // fields. create or update is nil when that request does not have the field.
@@ -194,7 +211,12 @@ func writeLimits(get, req *Type) *Type {
 // withoutLimits returns t with the limit keywords dropped: a field whose line says
 // releasedLimits keeps its released behavior, and the released resource enforces no limit
 // itself — it sends what the configuration holds and stores what the response echoes. The
-// model then compares the request types with the response type without the limits.
+// model then compares the request types with the response type without the limits. The
+// response limits that the requests agree with leave the generated schema too: the released
+// resource carries no validators for them, and the schema of the migration must keep the
+// released look. ZeroValid and ReadZeroAsNull keep the values that the limits produced: a
+// field whose response required a non-empty string still reads a zero as absent, which is
+// what the released resource recorded.
 func withoutLimits(t *Type) {
 	if t == nil {
 		return
@@ -207,6 +229,9 @@ func withoutLimits(t *Type) {
 	}
 	for _, f := range t.Fields {
 		withoutLimits(f.Type)
+	}
+	if t.Keyed != nil {
+		withoutLimits(t.Keyed.Item)
 	}
 }
 
