@@ -379,8 +379,10 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 			continue // The mask stays in the JSON body and is not a resource field.
 		}
 		fieldReport := validateFieldContract(p, name, idParam, field, create, update, get)
-		if ops[opCreate].implied {
-			// An always-exists singleton holds a value before Create, and an omitted field keeps it.
+		if ops[opCreate].implied && ops[opUpdate].method == "PATCH" {
+			// An always-exists singleton holds a value before Create. A PATCH with a mask leaves an
+			// omitted field as it is. A PUT replaces the resource, so the server clears the field,
+			// and the default rule still applies.
 			fieldReport = slices.DeleteFunc(slices.Clone(fieldReport), func(i issue.Issue) bool { return i.Code == "FIELD_SERVER_DEFAULT_UNDECLARED" })
 		}
 		report = append(report, fieldReport...)

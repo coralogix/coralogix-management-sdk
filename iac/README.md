@@ -253,7 +253,7 @@ The model then sets `Resource.AlwaysExists`, and:
 | `Create` | The `Update` operation. The tool sets the resource with it. |
 | `Delete` | Empty. The API has no call. A tool removes the resource from its own state only. |
 
-Two checks change for this shape. An `Update` that is a `PATCH` has an update mask, and an omitted field keeps the value that the API holds, so a field that is optional in the request and required in `Get` needs no declared default (`FIELD_SERVER_DEFAULT_UNDECLARED` is not reported). The `Create` and `Update` requests are one request, so `REQUEST_SCHEMA_REUSED` is not reported for that pair.
+Two checks change for this shape. An `Update` that is a `PATCH` has an update mask, and an omitted field keeps the value that the API holds, so a field that is optional in the request and required in `Get` needs no declared default (`FIELD_SERVER_DEFAULT_UNDECLARED` is not reported). A `PUT` replaces the resource and clears an omitted field, so a `PUT` singleton keeps that rule. The `Create` and `Update` requests are one request, so `REQUEST_SCHEMA_REUSED` is not reported for that pair.
 
 ## A resource read from its List and written in batches
 

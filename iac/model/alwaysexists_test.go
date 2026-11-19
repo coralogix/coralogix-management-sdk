@@ -16,6 +16,7 @@ package model
 
 import (
 	"os"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -98,5 +99,26 @@ func TestAlwaysExistsKeepsUnresolvedExplicitIDs(t *testing.T) {
 		if report := ValidateWithPolicy(doc, "AlwaysThing", ids, Policy{}); len(report) == 0 {
 			t.Errorf("Validate with %+v found no issue", ids)
 		}
+	}
+}
+
+// A PUT replaces the resource, so an omitted field is cleared and not kept. A field that is optional
+// in the request and required in Get still needs a declared default.
+func TestAlwaysExistsPutKeepsTheDefaultRule(t *testing.T) {
+	put := func(s string) string {
+		s = strings.Replace(s, "    patch:", "    put:", 1)
+		return regexp.MustCompile(`(?s)      parameters:\n        - name: update_mask.*?x-coralogix-presence: true\}\n`).ReplaceAllString(s, "")
+	}
+	patch := Validate(loadAlwaysThing(t, nil), "AlwaysThing", OperationIDs{})
+	if len(patch) != 0 {
+		t.Fatalf("PATCH: %v", patch)
+	}
+	report := Validate(loadAlwaysThing(t, put), "AlwaysThing", OperationIDs{})
+	found := false
+	for _, i := range report {
+		found = found || i.Code == "FIELD_SERVER_DEFAULT_UNDECLARED"
+	}
+	if !found {
+		t.Fatalf("PUT: want FIELD_SERVER_DEFAULT_UNDECLARED, got %v", report)
 	}
 }
