@@ -327,6 +327,8 @@ stores what the response echoes, so it enforces no limit itself. The model then 
 types without the limits, and the response limits leave the generated schema with it. A line
 whose types already agree is `OVERRIDE_UNUSED`. Only an existing resource can carry the line.
 
+| Key / code | Meaning | Where |
+|---|---|---|
 | `releasedLimits` (field line) | The limits of the field differ between the requests and the response, and the released resource holds them all. A released API whose owner removed the request limits the backend never enforced (the response caps the list at two) needs the line. | `Policy.ReleasedLimits`, `withoutLimits` |
 | `OVERRIDE_UNUSED` | The request types already carry the same limits as the response: the line does nothing. | |
 

@@ -34,10 +34,9 @@ func (e *contractError) issue() issue.Issue {
 	return issue.Issue{Code: e.code, Location: e.location, Message: e.message, Remediation: e.remediation}
 }
 
-// mergeFieldLimits reports whether the request types of the field carry limits that differ
-// from the response type. It merges copies, so the caller can strip the limits of a field
-// whose line says releasedLimits when the types do differ, and report the line as unused when
-// they already agree.
+// mergeFieldLimits reports whether merging the request types of the field into its response
+// type fails. It merges copies, so the merge of the probe changes nothing that the caller
+// keeps.
 func (p Policy) mergeFieldLimits(location string, get *Type, requests [2]*Type) error {
 	getCopy, create, update := *get, requests[0], requests[1]
 	if create != nil {

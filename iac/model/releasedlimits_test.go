@@ -15,7 +15,11 @@
 package model
 
 import (
+	"slices"
+	"strings"
 	"testing"
+
+	"github.com/coralogix/coralogix-management-sdk/iac/issue"
 )
 
 // The released users contract carries limits the requests lost: an owner removed the request
@@ -51,7 +55,7 @@ func TestMemberReleasedLimitsHold(t *testing.T) {
 // The line covers only the fields it names: the loginModes drift builds with the line, and the
 // same drift on login — a field the line does not name — still refuses. A second releasedLimits
 // line covers it, and the resource builds.
-func TestMemberReleasedLimitsCoverTheItems(t *testing.T) {
+func TestMemberReleasedLimitsCoverOnlyNamedFields(t *testing.T) {
 	drifted := memberSource(t, memberLimitsLostEdits,
 		[]string{
 			"        login: {type: string, minLength: 0}\n        loginModes:",
@@ -64,4 +68,22 @@ func TestMemberReleasedLimitsCoverTheItems(t *testing.T) {
 	// The line names it too: the resource builds.
 	p.ReleasedLimits = append(p.ReleasedLimits, "Member.login")
 	buildMember(t, drifted, p)
+}
+
+// The line on a field whose schemas already carry the same limits does nothing: the overrides
+// check reports it unused, so the line cannot quietly outlive its reason.
+func TestMemberReleasedLimitsUnusedIsReported(t *testing.T) {
+	source := memberSource(t)
+	p := memberPolicy()
+	p.ReleasedLimits = []string{"Member.loginModes"}
+	doc, err := Load([]byte(source))
+	if err != nil {
+		t.Fatal(err)
+	}
+	issues := ValidateWithPolicy(doc, "Member", OperationIDs{}, p)
+	if !slices.ContainsFunc(issues, func(i issue.Issue) bool {
+		return i.Code == "OVERRIDE_UNUSED" && strings.Contains(i.Message, "loginModes")
+	}) {
+		t.Fatalf("unused releasedLimits = %v, want OVERRIDE_UNUSED for loginModes", issues)
+	}
 }
