@@ -101,7 +101,7 @@ func requestSchemaSeparationIssues(p Policy, name string, ops map[verb]foundOp) 
 	if update == resource {
 		report = append(report, reusedRequestSchemaIssue(updateLocation, "Update", "resource response"))
 	}
-	if create == update {
+	if create == update && !ops[opCreate].implied {
 		report = append(report, reusedRequestSchemaIssue(updateLocation, "Update", "Create"))
 	}
 	return report
@@ -157,9 +157,19 @@ func validateOperations(doc *v3.Document, name string, ids OperationIDs, p Polic
 	}
 	ids, _ = p.operationIDs(ids) // deleteOverrideConflictIssues reports the conflict.
 	explicit := map[verb]string{opCreate: ids.Create, opGet: ids.Get, opUpdate: ids.Update, opDelete: ids.Delete}
+	candidates := map[verb][]foundOp{}
 	for _, role := range verbs {
-		candidates := matchingOperations(doc, name, role, explicit[role])
-		report = append(report, validateRole(role, candidates, explicit[role], p, found)...)
+		candidates[role] = matchingOperations(doc, name, role, explicit[role])
+	}
+	implied := impliedCandidates(candidates, p)
+	for _, role := range verbs {
+		if implied && (role == opCreate || role == opDelete) {
+			continue
+		}
+		report = append(report, validateRole(role, candidates[role], explicit[role], p, found)...)
+	}
+	if implied {
+		impliedLifecycle(found, p)
 	}
 	if len(found) != len(verbs) {
 		report = append(report, issue.Issue{Code: "RESOURCE_LIFECYCLE_INCOMPLETE", Location: "paths", Message: "The resource does not have one eligible operation for every lifecycle step.", Remediation: "Provide one Create, Get, Update or Replace, and Delete operation."})
@@ -368,7 +378,12 @@ func validateFieldContracts(p Policy, name string, ops map[verb]foundOp) issue.R
 		if p.UpdateMaskInBody && isUpdateMaskName(field) {
 			continue // The mask stays in the JSON body and is not a resource field.
 		}
-		report = append(report, validateFieldContract(p, name, idParam, field, create, update, get)...)
+		fieldReport := validateFieldContract(p, name, idParam, field, create, update, get)
+		if ops[opCreate].implied {
+			// An always-exists singleton holds a value before Create, and an omitted field keeps it.
+			fieldReport = slices.DeleteFunc(slices.Clone(fieldReport), func(i issue.Issue) bool { return i.Code == "FIELD_SERVER_DEFAULT_UNDECLARED" })
+		}
+		report = append(report, fieldReport...)
 	}
 	report = append(report, resourceIDIssues(p, name, ops, get)...)
 	report = append(report, bodyIDIssues(p, ops, create, update)...)

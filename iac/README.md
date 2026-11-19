@@ -235,6 +235,26 @@ one id and keeps its released selection behavior. New resources still require a 
 them optional. Such a field can be required in Update without losing the identity or value needed
 for later changes.
 
+## A singleton that always exists
+
+Some APIs have one resource per team that always exists. The API cannot create or remove it: a `GET` with no path parameter reads it, and a `PATCH` or `PUT` on the same path changes it. The contract has no `POST` and no `DELETE`.
+
+The model reads this shape with no policy line. It needs all of this:
+
+- `Get` has no path parameter.
+- `Update` is on the same path as `Get`, with no path parameter.
+- No operation matches `Create`, and none matches `Delete`.
+- The policy does not read the resource from a List, a batch, or an overwrite write.
+
+The model then sets `Resource.AlwaysExists`, and:
+
+| Step | Value |
+|---|---|
+| `Create` | The `Update` operation. The tool sets the resource with it. |
+| `Delete` | Empty. The API has no call. A tool removes the resource from its own state only. |
+
+Two checks change for this shape. An `Update` that is a `PATCH` has an update mask, and an omitted field keeps the value that the API holds, so a field that is optional in the request and required in `Get` needs no declared default (`FIELD_SERVER_DEFAULT_UNDECLARED` is not reported). The `Create` and `Update` requests are one request, so `REQUEST_SCHEMA_REUSED` is not reported for that pair.
+
 ## A resource read from its List and written in batches
 
 Some released APIs read and write a resource only in batches. Create and Update take an array of

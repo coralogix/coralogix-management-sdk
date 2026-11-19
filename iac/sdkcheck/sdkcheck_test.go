@@ -895,3 +895,36 @@ func TestNamesForAnUpdateByPOSTHaveNoMask(t *testing.T) {
 		}
 	}
 }
+
+// A singleton that always exists has no Delete call, so its tag and SDK names come from Create
+// (the Update call), Get, and Update. No SDK method is wanted for Delete.
+func TestAlwaysExistsNamesHaveNoDelete(t *testing.T) {
+	data, err := os.ReadFile(filepath.Join("..", "model", "testdata", "alwaysthing.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := model.Load(data)
+	if err != nil {
+		t.Fatal(err)
+	}
+	r, err := model.Build(doc, "AlwaysThing")
+	if err != nil {
+		t.Fatal(err)
+	}
+	tag, err := ResourceTag(doc, r)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if tag != "Always Things Service" {
+		t.Fatalf("tag %q, want Always Things Service", tag)
+	}
+	refs, err := Names(r, tag, "example.com/sdk", func(string) bool { return false })
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, ref := range refs {
+		if strings.HasPrefix(ref.Path, "delete") {
+			t.Errorf("ref %q names a Delete call, but the API has none", ref.Path)
+		}
+	}
+}
