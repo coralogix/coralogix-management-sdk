@@ -20,12 +20,16 @@ package model
 // its default in Create, Update, and Get, and the generated resource handles it as a declared
 // server default. A field whose zero value is not valid reads zero as an omitted value. A field
 // with a line in the behavior-overrides file keeps its released behavior.
+//
+// A top-level field of a singleton that always exists gets no zero default: the singleton holds a
+// value before Create, and omitting the field keeps that value, so omission and zero do not store
+// the same value.
 func (r *Resource) zeroDefaults() {
 	seen := map[*Type]bool{}
 	for _, f := range r.Fields {
 		if !r.Policy.released(r.Name, f.Name) {
 			if get := f.Get; get != nil {
-				zeroDefault(f.Type, f.Create, f.Update, get)
+				zeroDefault(f.Type, f.Create, f.Update, get, r.AlwaysExists)
 			}
 		}
 		r.nestedZeroDefaults(f.Type, seen)
@@ -54,15 +58,16 @@ func (r *Resource) nestedZeroDefaults(t *Type, seen map[*Type]bool) {
 	for _, f := range t.Fields {
 		// A oneOf arm uses the presence of its union: a set arm is the selected one.
 		if t.Kind != OneOf && !arms[f.Name] && !r.Policy.released(t.Schema, f.Name) {
-			zeroDefault(f.Type, f.Create, f.Update, &f.Attrs)
+			zeroDefault(f.Type, f.Create, f.Update, &f.Attrs, false)
 		}
 		r.nestedZeroDefaults(f.Type, seen)
 	}
 }
 
 // zeroDefault applies zeroDefaults to one field: its type, and its attributes in Create, Update,
-// and Get. A nil request attribute means that the request does not have the field.
-func zeroDefault(t *Type, create, update, get *Attrs) {
+// and Get. A nil request attribute means that the request does not have the field. omitKeeps is
+// true when omitting the field keeps the value that the API holds, so zero is no default.
+func zeroDefault(t *Type, create, update, get *Attrs, omitKeeps bool) {
 	switch t.Kind {
 	case Bool, Integer, Number, String:
 	default:
@@ -81,6 +86,9 @@ func zeroDefault(t *Type, create, update, get *Attrs) {
 	}
 	if !t.ZeroValid {
 		t.ReadZeroAsNull = true
+		return
+	}
+	if omitKeeps {
 		return
 	}
 	zero := t.Zero

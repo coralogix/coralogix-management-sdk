@@ -122,3 +122,25 @@ func TestAlwaysExistsPutKeepsTheDefaultRule(t *testing.T) {
 		t.Fatalf("PUT: want FIELD_SERVER_DEFAULT_UNDECLARED, got %v", report)
 	}
 }
+
+// Omitting a top-level field of an always-exists singleton keeps the value that the API holds, so a
+// field without presence gets no zero default. Zero is then a value that the API can hold.
+func TestAlwaysExistsGetsNoZeroDefault(t *testing.T) {
+	noPresence := func(s string) string {
+		return strings.Replace(s, "enabled: {type: boolean, x-coralogix-presence: true}", "enabled: {type: boolean}", 1)
+	}
+	r, err := Build(loadAlwaysThing(t, noPresence), "AlwaysThing")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, f := range r.Fields {
+		if f.Name != "enabled" {
+			continue
+		}
+		if f.Create.Default != nil || f.Update.Default != nil || f.Get.Default != nil {
+			t.Errorf("defaults create=%v update=%v get=%v, want none", f.Create.Default, f.Update.Default, f.Get.Default)
+		}
+		return
+	}
+	t.Fatal("no field enabled")
+}
