@@ -34,6 +34,51 @@ func (e *contractError) issue() issue.Issue {
 	return issue.Issue{Code: e.code, Location: e.location, Message: e.message, Remediation: e.remediation}
 }
 
+// limitsDiffer reports whether merging the request types of the field into its response type
+// fails. It merges clones: the merge writes into the nested types of its arguments, so the
+// probe must not touch the caller's Elem or Fields.
+func limitsDiffer(location string, get *Type, requests [2]*Type) bool {
+	getCopy, create, update := cloneType(get), cloneType(requests[0]), cloneType(requests[1])
+	return mergeRequests(location, getCopy, create, update) != nil
+}
+
+// cloneType returns a deep copy of t: the merge of the probe writes into the nested types of
+// its arguments.
+func cloneType(t *Type) *Type {
+	if t == nil {
+		return nil
+	}
+	out := *t
+	if out.Elem != nil {
+		out.Elem = cloneType(out.Elem)
+	}
+	if len(out.Fields) != 0 {
+		out.Fields = make([]*Field, len(out.Fields))
+		for i, f := range out.Fields {
+			field := *f
+			if f.Type != nil {
+				field.Type = cloneType(f.Type)
+			}
+			out.Fields[i] = &field
+		}
+	}
+	if out.Keyed != nil {
+		keyed := *out.Keyed
+		keyed.Item = cloneType(out.Keyed.Item)
+		out.Keyed = &keyed
+	}
+	if len(out.Wrappers) != 0 {
+		out.Wrappers = slices.Clone(out.Wrappers)
+	}
+	if len(out.Values) != 0 {
+		out.Values = slices.Clone(out.Values)
+	}
+	if len(out.Groups) != 0 {
+		out.Groups = slices.Clone(out.Groups)
+	}
+	return &out
+}
+
 // mergeRequests merges the Create and the Update types of a top-level field
 // into get, its type in the resource response, and classifies the nested
 // fields. create or update is nil when that request does not have the field.
@@ -189,6 +234,33 @@ func writeLimits(get, req *Type) *Type {
 	out := *req
 	out.MinItems = get.MinItems
 	return &out
+}
+
+// withoutLimits returns t with the limit keywords dropped: a field whose line says
+// releasedLimits keeps its released behavior, and the released resource enforces no limit
+// itself — it sends what the configuration holds and stores what the response echoes. The
+// model then compares the request types with the response type without the limits. The
+// response limits that the requests agree with leave the generated schema too: the released
+// resource carries no validators for them, and the schema of the migration must keep the
+// released look. ZeroValid and ReadZeroAsNull keep the values that the limits produced: a
+// field whose response required a non-empty string still reads a zero as absent, which is
+// what the released resource recorded.
+func withoutLimits(t *Type) {
+	if t == nil {
+		return
+	}
+	t.MinLength, t.MaxLength, t.Pattern = nil, nil, ""
+	t.Minimum, t.Maximum = nil, nil
+	t.MinItems, t.MaxItems = nil, nil
+	if t.Elem != nil {
+		withoutLimits(t.Elem)
+	}
+	for _, f := range t.Fields {
+		withoutLimits(f.Type)
+	}
+	if t.Keyed != nil {
+		withoutLimits(t.Keyed.Item)
+	}
 }
 
 func raisesMinItems(get, req *Type) bool {

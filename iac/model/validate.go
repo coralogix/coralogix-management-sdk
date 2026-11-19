@@ -1294,6 +1294,23 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 	if _, _, err := p.collapseRequestWrappers(name, field, get, &requests); errors.As(err, &contract) {
 		return issue.Report{contract.issue()}
 	}
+	if p.releasedLimits(name, field) {
+		// As in Build: the field keeps its released behavior, so the merge compares the types
+		// without the limits. When the types already agree, the line does nothing, and the
+		// overrides file must not keep it.
+		if !limitsDiffer(location, get, requests) {
+			return issue.Report{{
+				Code:        "OVERRIDE_UNUSED",
+				Location:    "behavior-overrides.yaml:types." + name + ".fields." + field,
+				Message:     fmt.Sprintf("the Create, Update, and response schemas of %q already carry the same limits", field),
+				Remediation: "Delete only the key releasedLimits.",
+			}}
+		}
+		withoutLimits(get)
+		for i := range requests {
+			withoutLimits(requests[i])
+		}
+	}
 	if err := mergeRequests(location, get, requests[0], requests[1]); errors.As(err, &contract) {
 		return issue.Report{contract.issue()}
 	}

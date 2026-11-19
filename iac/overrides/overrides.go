@@ -180,6 +180,13 @@ type Field struct {
 	// contract cannot say so: the request shares the component with a response that always has
 	// the field.
 	Optional bool `yaml:"optional"`
+	// ReleasedLimits: true says that the Create, Update, and response schemas of the field carry
+	// different limits, and that the released resource holds them all. The released resource
+	// sends what the configuration holds and stores what the response echoes: it enforces no
+	// limit itself. A released API whose owner removed the request limits the backend never
+	// enforced (the response caps the list at two) needs the line; without it, the model
+	// refuses the field (FIELD_TYPE_INCONSISTENT).
+	ReleasedLimits bool `yaml:"releasedLimits"`
 	// CreateAs folds top-level Create fields into this object field: Create sends each
 	// property of the object as the top-level Create field it names, for example
 	// {limit: permutationsLimit}. Update and Get have the object itself.
@@ -495,6 +502,9 @@ func (e Exceptions) Policy() model.Policy {
 			}
 			if line.Optional {
 				p.Optional = append(p.Optional, name+"."+field)
+			}
+			if line.ReleasedLimits {
+				p.ReleasedLimits = append(p.ReleasedLimits, name+"."+field)
 			}
 			if line.Collection == "set" {
 				p.Sets = append(p.Sets, name+"."+field)
