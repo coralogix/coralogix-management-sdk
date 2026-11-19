@@ -16,8 +16,13 @@ package model
 
 // impliedCandidates reports whether the operations that match each step make an always-exists
 // singleton: one Get and one Update on one path with no path parameters, and no Create and no
-// Delete. A policy that changes how the resource is read or deleted turns the rule off.
-func impliedCandidates(candidates map[verb][]foundOp, p Policy) bool {
+// Delete. A policy that changes how the resource is read or deleted turns the rule off. So does an
+// explicit Create or Delete operation id: a missing step is then a lookup error, not a contract
+// that has no such step.
+func impliedCandidates(candidates map[verb][]foundOp, explicit map[verb]string, p Policy) bool {
+	if explicit[opCreate] != "" || explicit[opDelete] != "" {
+		return false
+	}
 	if p.GetFromList || p.Overwrite || p.GetByIDs != "" || p.DeleteOperation != "" || p.DeleteIDs != "" || p.UpdateIDInBody {
 		return false
 	}
@@ -34,12 +39,12 @@ func impliedCandidates(candidates map[verb][]foundOp, p Policy) bool {
 // impliedLifecycle adds the Create and the Delete of an always-exists singleton to found. The API
 // cannot create or remove such a resource, so Create is the Update call, and Delete is the Get
 // call, which no tool makes. found must hold Get and Update and no Create and no Delete.
-func impliedLifecycle(found map[verb]foundOp, p Policy) {
+func impliedLifecycle(found map[verb]foundOp, explicit map[verb]string, p Policy) {
 	candidates := map[verb][]foundOp{}
 	for v, f := range found {
 		candidates[v] = []foundOp{f}
 	}
-	if !impliedCandidates(candidates, p) {
+	if !impliedCandidates(candidates, explicit, p) {
 		return
 	}
 	create, del := found[opUpdate], found[opGet]

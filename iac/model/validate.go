@@ -161,7 +161,7 @@ func validateOperations(doc *v3.Document, name string, ids OperationIDs, p Polic
 	for _, role := range verbs {
 		candidates[role] = matchingOperations(doc, name, role, explicit[role])
 	}
-	implied := impliedCandidates(candidates, p)
+	implied := impliedCandidates(candidates, explicit, p)
 	for _, role := range verbs {
 		if implied && (role == opCreate || role == opDelete) {
 			continue
@@ -169,7 +169,7 @@ func validateOperations(doc *v3.Document, name string, ids OperationIDs, p Polic
 		report = append(report, validateRole(role, candidates[role], explicit[role], p, found)...)
 	}
 	if implied {
-		impliedLifecycle(found, p)
+		impliedLifecycle(found, explicit, p)
 	}
 	if len(found) != len(verbs) {
 		report = append(report, issue.Issue{Code: "RESOURCE_LIFECYCLE_INCOMPLETE", Location: "paths", Message: "The resource does not have one eligible operation for every lifecycle step.", Remediation: "Provide one Create, Get, Update or Replace, and Delete operation."})

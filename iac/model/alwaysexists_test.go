@@ -86,3 +86,17 @@ func TestAlwaysExistsNeedsASingleton(t *testing.T) {
 		t.Fatal("Build of a Get with a path parameter and no Create found no error")
 	}
 }
+
+// An explicit Create or Delete operation id that the contract does not have is a lookup error. It
+// must not read as a contract with no such step.
+func TestAlwaysExistsKeepsUnresolvedExplicitIDs(t *testing.T) {
+	doc := loadAlwaysThing(t, nil)
+	for _, ids := range []OperationIDs{{Delete: "DoesNotExist"}, {Create: "DoesNotExist"}} {
+		if _, err := BuildWithOperationIDs(doc, "AlwaysThing", ids); err == nil {
+			t.Errorf("Build with %+v found no error", ids)
+		}
+		if report := ValidateWithPolicy(doc, "AlwaysThing", ids, Policy{}); len(report) == 0 {
+			t.Errorf("Validate with %+v found no issue", ids)
+		}
+	}
+}

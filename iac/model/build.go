@@ -248,7 +248,7 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 			found[v] = matches[0]
 		}
 	}
-	impliedLifecycle(found, p)
+	impliedLifecycle(found, explicit, p)
 	get, singleton := found[opGet]
 	singleton = singleton && len(pathParams(get)) == 0 && !p.GetFromList
 	for _, v := range verbs {
