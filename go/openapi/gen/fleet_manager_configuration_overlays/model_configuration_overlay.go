@@ -21,7 +21,7 @@ var _ = bytes.MinRead
 // checks if the ConfigurationOverlay type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationOverlay{}
 
-// ConfigurationOverlay Fleet-manager configuration overlay with the content of its latest version. The latest version is the newest unarchived one, or the newest one for an archived overlay.
+// ConfigurationOverlay Fleet-manager configuration overlay with the content of its latest version. The latest version is the newest unarchived one, or the newest one for an archived overlay. Create, Get and Update always return custom or preset, and schedules. A list request for a reduced view omits them.
 type ConfigurationOverlay struct {
 	// Whether the latest version is active. With schedules, it applies only during their windows.
 	Active bool `json:"active"`
@@ -29,7 +29,7 @@ type ConfigurationOverlay struct {
 	Archived bool `json:"archived"`
 	// User that created the configuration overlay.
 	CreatedBy *string `json:"createdBy,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Custom overlay content of the latest version.
+	// Custom overlay content of the latest version. Exactly one of custom or preset is set, except in a list response for a reduced view, which omits both.
 	Custom *CustomConfigurationOverlay `json:"custom,omitempty"`
 	// Human-readable description.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
@@ -41,12 +41,12 @@ type ConfigurationOverlay struct {
 	OverlayHash string `json:"overlayHash" validate:"regexp=^[0-9a-f]{64}$"`
 	// UUID v7 of the version the latest version was created from.
 	ParentVersionId *string `json:"parentVersionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Preset overlay content of the latest version, for ObservabilityFeatures overlays created outside this API.
+	// Preset overlay content of the latest version, for ObservabilityFeatures overlays created outside this API. Exactly one of custom or preset is set, except in a list response for a reduced view, which omits both.
 	Preset *PresetConfigurationOverlay `json:"preset,omitempty"`
 	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.
 	PriorityOrder int32 `json:"priorityOrder"`
-	// Activation schedules of the latest version. With schedules, an active overlay applies only during their windows.
-	Schedules []ConfigurationOverlaySchedule `json:"schedules"`
+	// Activation schedules of the latest version. With schedules, an active overlay applies only during their windows. Always returned, possibly empty, except in a list response for a reduced view, which omits it.
+	Schedules []ConfigurationOverlaySchedule `json:"schedules,omitempty"`
 	// Tags attached to the configuration overlay.
 	Tags []string `json:"tags"`
 	// Monotonic number of the latest version.
@@ -55,7 +55,6 @@ type ConfigurationOverlay struct {
 	VersionId string `json:"versionId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
-	requiredOneOfGroup0FromUnmarshalWithoutKnownArm bool
 }
 
 type _ConfigurationOverlay ConfigurationOverlay
@@ -64,14 +63,13 @@ type _ConfigurationOverlay ConfigurationOverlay
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationOverlay(active bool, archived bool, id string, overlayHash string, priorityOrder int32, schedules []ConfigurationOverlaySchedule, tags []string, version string, versionId string) *ConfigurationOverlay {
+func NewConfigurationOverlay(active bool, archived bool, id string, overlayHash string, priorityOrder int32, tags []string, version string, versionId string) *ConfigurationOverlay {
 	this := ConfigurationOverlay{}
 	this.Active = active
 	this.Archived = archived
 	this.Id = id
 	this.OverlayHash = overlayHash
 	this.PriorityOrder = priorityOrder
-	this.Schedules = schedules
 	this.Tags = tags
 	this.Version = version
 	this.VersionId = versionId
@@ -398,26 +396,34 @@ func (o *ConfigurationOverlay) SetPriorityOrder(v int32) {
 	o.PriorityOrder = v
 }
 
-// GetSchedules returns the Schedules field value
+// GetSchedules returns the Schedules field value if set, zero value otherwise.
 func (o *ConfigurationOverlay) GetSchedules() []ConfigurationOverlaySchedule {
-	if o == nil {
+	if o == nil || IsNil(o.Schedules) {
 		var ret []ConfigurationOverlaySchedule
 		return ret
 	}
-
 	return o.Schedules
 }
 
-// GetSchedulesOk returns a tuple with the Schedules field value
+// GetSchedulesOk returns a tuple with the Schedules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConfigurationOverlay) GetSchedulesOk() ([]ConfigurationOverlaySchedule, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Schedules) {
 		return nil, false
 	}
 	return o.Schedules, true
 }
 
-// SetSchedules sets field value
+// HasSchedules returns a boolean if a field has been set.
+func (o *ConfigurationOverlay) HasSchedules() bool {
+	if o != nil && !IsNil(o.Schedules) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedules gets a reference to the given []ConfigurationOverlaySchedule and assigns it to the Schedules field.
 func (o *ConfigurationOverlay) SetSchedules(v []ConfigurationOverlaySchedule) {
 	o.Schedules = v
 }
@@ -527,24 +533,21 @@ func (o ConfigurationOverlay) ToMap() (map[string]interface{}, error) {
 		toSerialize["preset"] = o.Preset
 	}
 	toSerialize["priorityOrder"] = o.PriorityOrder
-	toSerialize["schedules"] = o.Schedules
+	if !IsNil(o.Schedules) {
+		toSerialize["schedules"] = o.Schedules
+	}
 	toSerialize["tags"] = o.Tags
 	toSerialize["version"] = o.Version
 	toSerialize["versionId"] = o.VersionId
-	requiredOneOfGroup0Matches := 0
+	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["custom"]; exists {
-		requiredOneOfGroup0Matches++
+		optionalOneOfGroup0Matches++
 	}
 	if _, exists := toSerialize["preset"]; exists {
-		requiredOneOfGroup0Matches++
+		optionalOneOfGroup0Matches++
 	}
-	if requiredOneOfGroup0Matches == 0 {
-		if !o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm || len(o.AdditionalProperties) == 0 {
-			return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [custom, preset] must be set"}
-		}
-	}
-	if requiredOneOfGroup0Matches > 1 {
-		return map[string]interface{}{}, GenericOpenAPIError{error: "exactly one of [custom, preset] must be set"}
+	if optionalOneOfGroup0Matches > 1 {
+		return map[string]interface{}{}, GenericOpenAPIError{error: "at most one of [custom, preset] may be set"}
 	}
 
 	if _, exists := o.AdditionalProperties["custom"]; exists {
@@ -571,7 +574,6 @@ func (o *ConfigurationOverlay) UnmarshalJSON(data []byte) (err error) {
 		"id",
 		"overlayHash",
 		"priorityOrder",
-		"schedules",
 		"tags",
 		"version",
 		"versionId",
@@ -591,14 +593,14 @@ func (o *ConfigurationOverlay) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	requiredOneOfGroup0Matches := 0
+	optionalOneOfGroup0Matches := 0
 	if _, exists := allProperties["custom"]; exists {
-		requiredOneOfGroup0Matches++
+		optionalOneOfGroup0Matches++
 	}
 	if _, exists := allProperties["preset"]; exists {
-		requiredOneOfGroup0Matches++
+		optionalOneOfGroup0Matches++
 	}
-	if requiredOneOfGroup0Matches > 1 {
+	if optionalOneOfGroup0Matches > 1 {
 		return GenericOpenAPIError{error: "at most one of [custom, preset] may be set"}
 	}
 
@@ -616,14 +618,14 @@ func (o *ConfigurationOverlay) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		requiredOneOfGroup0MatchesInPayload := 0
+		optionalOneOfGroup0MatchesInPayload := 0
 		if _, exists := additionalProperties["custom"]; exists {
-			requiredOneOfGroup0MatchesInPayload++
+			optionalOneOfGroup0MatchesInPayload++
 		}
 		if _, exists := additionalProperties["preset"]; exists {
-			requiredOneOfGroup0MatchesInPayload++
+			optionalOneOfGroup0MatchesInPayload++
 		}
-		if requiredOneOfGroup0MatchesInPayload > 1 {
+		if optionalOneOfGroup0MatchesInPayload > 1 {
 			return GenericOpenAPIError{error: "at most one of [custom, preset] may be set"}
 		}
 
@@ -644,7 +646,6 @@ func (o *ConfigurationOverlay) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "versionId")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
-		o.requiredOneOfGroup0FromUnmarshalWithoutKnownArm = requiredOneOfGroup0MatchesInPayload == 0 && len(additionalProperties) > 0
 	}
 
 	return err

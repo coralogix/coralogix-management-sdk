@@ -376,7 +376,13 @@
                 ],
                 "properties": {
                   "apmSli": {
-                    "$ref": "#/components/schemas/ApmSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ApmSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition` with an `apm` source instead. `services`, `filters` and `groupingKeys` move to the source's `selector`. `errorConfig` maps to `sliDefinition.requestBased.apm.availability`. `latencyConfig` maps to `sliDefinition.windowBased.apm.latency`: `latencyConfig.timeWindow` moves to `sliDefinition.windowBased.window`, `latencyConfig.threshold` becomes `thresholdMs`, and `quantile` and `average` keep their names."
                   },
                   "apmSliMetadata": {
                     "allOf": [
@@ -384,7 +390,8 @@
                         "$ref": "#/components/schemas/ApmSli"
                       }
                     ],
-                    "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition` instead. Read-only copy of `apmSli`, returned whenever `apmSli` is. Set by the server; sending it instead of `apmSli` is rejected.",
                     "readOnly": true
                   },
                   "createTime": {
@@ -469,7 +476,13 @@
                     "x-coralogix-presence": true
                   },
                   "requestBasedMetricSli": {
-                    "$ref": "#/components/schemas/RequestBasedMetricSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RequestBasedMetricSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition.requestBased.custom` instead, which takes the same `goodEvents` and `totalEvents` queries."
                   },
                   "revision": {
                     "allOf": [
@@ -480,13 +493,21 @@
                     "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
                     "readOnly": true
                   },
+                  "sliDefinition": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Sli"
+                      }
+                    ],
+                    "description": "Definition of the SLI: how it counts (request-based or window-based) and where its values come from (custom metric queries or APM). Replaces the deprecated `requestBasedMetricSli`, `windowBasedMetricSli` and `apmSli`. A request must set either `sliDefinition` or one of the deprecated fields. When `sliDefinition` is set, it takes precedence and the deprecated fields are ignored. Responses always include `sliDefinition`, and also include the matching deprecated field when the SLI can be expressed with it."
+                  },
                   "sloTimeFrame": {
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/SloTimeFrame"
                       }
                     ],
-                    "description": "Rolling evaluation window (fixed-duration lookback)."
+                    "description": "Time frame the SLO is evaluated over. The day-based values, `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are rolling windows that cover that many days up to the time of evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the current calendar month in UTC, from the start of the month up to the time of evaluation, and starts over at the beginning of each month. SLO results are calculated per whole minute in UTC, so the window used may differ from these bounds by up to one minute."
                   },
                   "sloType": {
                     "allOf": [
@@ -529,7 +550,13 @@
                     "x-coralogix-presence": true
                   },
                   "windowBasedMetricSli": {
-                    "$ref": "#/components/schemas/WindowBasedMetricSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WindowBasedMetricSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition.windowBased` instead. Set `window` and `missingDataStrategy` there, and `query`, `comparisonOperator` and `threshold` in its `custom` source."
                   }
                 },
                 "required": [
@@ -659,7 +686,13 @@
                 ],
                 "properties": {
                   "apmSli": {
-                    "$ref": "#/components/schemas/ApmSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ApmSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition` with an `apm` source instead. `services`, `filters` and `groupingKeys` move to the source's `selector`. `errorConfig` maps to `sliDefinition.requestBased.apm.availability`. `latencyConfig` maps to `sliDefinition.windowBased.apm.latency`: `latencyConfig.timeWindow` moves to `sliDefinition.windowBased.window`, `latencyConfig.threshold` becomes `thresholdMs`, and `quantile` and `average` keep their names."
                   },
                   "apmSliMetadata": {
                     "allOf": [
@@ -667,7 +700,8 @@
                         "$ref": "#/components/schemas/ApmSli"
                       }
                     ],
-                    "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition` instead. Read-only copy of `apmSli`, returned whenever `apmSli` is. Set by the server; sending it instead of `apmSli` is rejected.",
                     "readOnly": true
                   },
                   "createTime": {
@@ -752,7 +786,13 @@
                     "x-coralogix-presence": true
                   },
                   "requestBasedMetricSli": {
-                    "$ref": "#/components/schemas/RequestBasedMetricSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RequestBasedMetricSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition.requestBased.custom` instead, which takes the same `goodEvents` and `totalEvents` queries."
                   },
                   "revision": {
                     "allOf": [
@@ -763,13 +803,21 @@
                     "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
                     "readOnly": true
                   },
+                  "sliDefinition": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Sli"
+                      }
+                    ],
+                    "description": "Definition of the SLI: how it counts (request-based or window-based) and where its values come from (custom metric queries or APM). Replaces the deprecated `requestBasedMetricSli`, `windowBasedMetricSli` and `apmSli`. A request must set either `sliDefinition` or one of the deprecated fields. When `sliDefinition` is set, it takes precedence and the deprecated fields are ignored. Responses always include `sliDefinition`, and also include the matching deprecated field when the SLI can be expressed with it."
+                  },
                   "sloTimeFrame": {
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/SloTimeFrame"
                       }
                     ],
-                    "description": "Rolling evaluation window (fixed-duration lookback)."
+                    "description": "Time frame the SLO is evaluated over. The day-based values, `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are rolling windows that cover that many days up to the time of evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the current calendar month in UTC, from the start of the month up to the time of evaluation, and starts over at the beginning of each month. SLO results are calculated per whole minute in UTC, so the window used may differ from these bounds by up to one minute."
                   },
                   "sloType": {
                     "allOf": [
@@ -812,7 +860,13 @@
                     "x-coralogix-presence": true
                   },
                   "windowBasedMetricSli": {
-                    "$ref": "#/components/schemas/WindowBasedMetricSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WindowBasedMetricSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition.windowBased` instead. Set `window` and `missingDataStrategy` there, and `query`, `comparisonOperator` and `threshold` in its `custom` source."
                   }
                 },
                 "required": [
@@ -1340,7 +1394,13 @@
                 ],
                 "properties": {
                   "apmSli": {
-                    "$ref": "#/components/schemas/ApmSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ApmSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition` with an `apm` source instead. `services`, `filters` and `groupingKeys` move to the source's `selector`. `errorConfig` maps to `sliDefinition.requestBased.apm.availability`. `latencyConfig` maps to `sliDefinition.windowBased.apm.latency`: `latencyConfig.timeWindow` moves to `sliDefinition.windowBased.window`, `latencyConfig.threshold` becomes `thresholdMs`, and `quantile` and `average` keep their names."
                   },
                   "apmSliMetadata": {
                     "allOf": [
@@ -1348,7 +1408,8 @@
                         "$ref": "#/components/schemas/ApmSli"
                       }
                     ],
-                    "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition` instead. Read-only copy of `apmSli`, returned whenever `apmSli` is. Set by the server; sending it instead of `apmSli` is rejected.",
                     "readOnly": true
                   },
                   "createTime": {
@@ -1433,7 +1494,13 @@
                     "x-coralogix-presence": true
                   },
                   "requestBasedMetricSli": {
-                    "$ref": "#/components/schemas/RequestBasedMetricSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/RequestBasedMetricSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition.requestBased.custom` instead, which takes the same `goodEvents` and `totalEvents` queries."
                   },
                   "revision": {
                     "allOf": [
@@ -1444,13 +1511,21 @@
                     "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
                     "readOnly": true
                   },
+                  "sliDefinition": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Sli"
+                      }
+                    ],
+                    "description": "Definition of the SLI: how it counts (request-based or window-based) and where its values come from (custom metric queries or APM). Replaces the deprecated `requestBasedMetricSli`, `windowBasedMetricSli` and `apmSli`. A request must set either `sliDefinition` or one of the deprecated fields. When `sliDefinition` is set, it takes precedence and the deprecated fields are ignored. Responses always include `sliDefinition`, and also include the matching deprecated field when the SLI can be expressed with it."
+                  },
                   "sloTimeFrame": {
                     "allOf": [
                       {
                         "$ref": "#/components/schemas/SloTimeFrame"
                       }
                     ],
-                    "description": "Rolling evaluation window (fixed-duration lookback)."
+                    "description": "Time frame the SLO is evaluated over. The day-based values, `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are rolling windows that cover that many days up to the time of evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the current calendar month in UTC, from the start of the month up to the time of evaluation, and starts over at the beginning of each month. SLO results are calculated per whole minute in UTC, so the window used may differ from these bounds by up to one minute."
                   },
                   "sloType": {
                     "allOf": [
@@ -1493,7 +1568,13 @@
                     "x-coralogix-presence": true
                   },
                   "windowBasedMetricSli": {
-                    "$ref": "#/components/schemas/WindowBasedMetricSli"
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/WindowBasedMetricSli"
+                      }
+                    ],
+                    "deprecated": true,
+                    "description": "Deprecated: use `sliDefinition.windowBased` instead. Set `window` and `missingDataStrategy` there, and `query`, `comparisonOperator` and `threshold` in its `custom` source."
                   }
                 },
                 "required": [
@@ -1764,6 +1845,137 @@
         },
         "description": "Configuration for latency-based APM SLI"
       },
+      "ApmRequestBasedAvailability": {
+        "title": "ApmRequestBasedAvailability",
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Request-based availability: the SLI is the ratio of spans without an error to all spans."
+      },
+      "ApmRequestBasedLatency": {
+        "title": "ApmRequestBasedLatency",
+        "required": [
+          "thresholdMs"
+        ],
+        "type": "object",
+        "properties": {
+          "thresholdMs": {
+            "description": "Latency threshold in milliseconds, greater than 0, with at most 3 decimal places (whole microseconds). A span is good when its duration is <= this value. Required.",
+            "examples": [
+              500
+            ],
+            "exclusiveMinimum": 0,
+            "format": "double",
+            "multipleOf": 0.001,
+            "type": "number",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Request-based latency: the SLI is the ratio of spans with a duration <= `thresholdMs` to all spans."
+      },
+      "ApmRequestBasedSource": {
+        "title": "ApmRequestBasedSource",
+        "required": [
+          "selector"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "availability"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "latency"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "availability": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmRequestBasedAvailability"
+              }
+            ],
+            "description": "A span is good when it has no error."
+          },
+          "latency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmRequestBasedLatency"
+              }
+            ],
+            "description": "A span is good when its duration is <= `thresholdMs`. With the `APM_SOURCE_E2M` metric source, any `thresholdMs` is accepted. With `APM_SOURCE_SPAN_METRICS`, `thresholdMs` must be one of the bucket bounds of the selected service's span duration histogram; rejected otherwise."
+          },
+          "selector": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmSelector"
+              }
+            ],
+            "description": "Services and filters to count spans of. Required."
+          }
+        },
+        "description": "APM source of a request-based SLI: each span of the selected services is an event, and whichever of `availability` or `latency` is set decides which events are good. Exactly one of them must be set."
+      },
+      "ApmSelector": {
+        "title": "ApmSelector",
+        "required": [
+          "services"
+        ],
+        "type": "object",
+        "properties": {
+          "filters": {
+            "maxItems": 20,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApmFilter"
+            },
+            "description": "Filters on the labels of the APM metrics, narrowing the spans they cover. At most 20, each with at most 50 values, and keys and values of at most 256 characters. With the `APM_SOURCE_E2M` metric source, keys must be labels of the account's service catalog span duration metric; others are rejected."
+          },
+          "groupingKeys": {
+            "maxItems": 6,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]+$",
+              "type": "string",
+              "description": "Labels to group SLO results by. At most 6. With the `APM_SOURCE_E2M` metric source, each must be a label of the account's service catalog span duration metric; others are rejected."
+            },
+            "description": "Labels to group SLO results by. At most 6. With the `APM_SOURCE_E2M` metric source, each must be a label of the account's service catalog span duration metric; others are rejected.",
+            "examples": [
+              [
+                "environment",
+                "region"
+              ]
+            ]
+          },
+          "services": {
+            "maxItems": 1,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "maxLength": 256,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]+$",
+              "type": "string",
+              "description": "Service names to monitor. Required. Exactly one service."
+            },
+            "description": "Service names to monitor. Required. Exactly one service.",
+            "examples": [
+              [
+                "checkout-api"
+              ]
+            ]
+          }
+        },
+        "description": "APM services and span filters an SLI is computed over, and the labels its results are grouped by."
+      },
       "ApmSli": {
         "title": "ApmSli",
         "required": [
@@ -1851,6 +2063,126 @@
           }
         },
         "description": "Definition of an APM-based SLI with automatic query generation"
+      },
+      "ApmWindowBasedAvailability": {
+        "title": "ApmWindowBasedAvailability",
+        "required": [
+          "thresholdRatio"
+        ],
+        "type": "object",
+        "properties": {
+          "thresholdRatio": {
+            "description": "Availability threshold as a ratio from 0 to 1 (not a percentage). A window is good when its value is >= this value. Required.",
+            "examples": [
+              0.99
+            ],
+            "format": "float",
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Window-based availability: each window's value is the ratio of spans without an error to all spans in it, from 0 to 1. A window is good when its value is >= `thresholdRatio`."
+      },
+      "ApmWindowBasedLatency": {
+        "title": "ApmWindowBasedLatency",
+        "required": [
+          "thresholdMs"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "quantile"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "average"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "average": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmLatencyAverage"
+              }
+            ],
+            "description": "Aggregate by the mean span duration."
+          },
+          "quantile": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmLatencyQuantile"
+              }
+            ],
+            "description": "Aggregate by a percentile of span durations. `percentile` is required, greater than 0 and at most 1; omitting it is the same as sending 0, which is rejected."
+          },
+          "thresholdMs": {
+            "description": "Latency threshold in milliseconds, with at most 3 decimal places (whole microseconds). A window is good when its aggregated duration is <= this value. Required. Should be greater than 0; 0 is accepted only for compatibility and is deprecated.",
+            "examples": [
+              500
+            ],
+            "format": "double",
+            "minimum": 0,
+            "multipleOf": 0.001,
+            "type": "number",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Window-based latency: each window's value is the span duration aggregated by whichever of `quantile` or `average` is set, in milliseconds. A window is good when its value is <= `thresholdMs`. Exactly one of them must be set."
+      },
+      "ApmWindowBasedSource": {
+        "title": "ApmWindowBasedSource",
+        "required": [
+          "selector"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "availability"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "latency"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "availability": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmWindowBasedAvailability"
+              }
+            ],
+            "description": "Each window's value is its ratio of spans without an error, from 0 to 1. A window is good when its value is >= `thresholdRatio`."
+          },
+          "latency": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmWindowBasedLatency"
+              }
+            ],
+            "description": "Each window's value is its aggregated span duration, in milliseconds. A window is good when its value is <= `thresholdMs`."
+          },
+          "selector": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmSelector"
+              }
+            ],
+            "description": "Services and filters to aggregate spans of. Required."
+          }
+        },
+        "description": "APM source of a window-based SLI: whichever of `availability` or `latency` is set decides the value computed per window from the spans of the selected services. Exactly one of them must be set."
       },
       "BatchExecuteSloResponse": {
         "title": "BatchExecuteSloResponse",
@@ -1965,6 +2297,43 @@
           }
         },
         "description": "Response after creating a new SLO."
+      },
+      "CustomWindowBasedSource": {
+        "title": "CustomWindowBasedSource",
+        "required": [
+          "query",
+          "comparisonOperator",
+          "threshold"
+        ],
+        "type": "object",
+        "properties": {
+          "comparisonOperator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ComparisonOperator"
+              }
+            ],
+            "description": "How each window's value is compared to `threshold`. Required."
+          },
+          "query": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Metric"
+              }
+            ],
+            "description": "Query yielding the value of each window. Required."
+          },
+          "threshold": {
+            "description": "Value each window is compared to, in the unit of the query's result. Required.",
+            "examples": [
+              1
+            ],
+            "format": "float",
+            "type": "number",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Custom source of a window-based SLI: a metric query yielding one value per window. A window is good when its value compared to `threshold` with `comparisonOperator` holds."
       },
       "DeleteSloRequest": {
         "title": "DeleteSloRequest",
@@ -2327,6 +2696,43 @@
         },
         "description": "Definition of a request-based SLI based on metrics"
       },
+      "RequestBasedSli": {
+        "title": "RequestBasedSli",
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "custom"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "apm"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "apm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmRequestBasedSource"
+              }
+            ],
+            "description": "Good and total events generated from APM span data for the selected services."
+          },
+          "custom": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RequestBasedMetricSli"
+              }
+            ],
+            "description": "Custom metric queries for the good and total events."
+          }
+        },
+        "description": "Request-based SLI. Exactly one of `custom` or `apm` must be set."
+      },
       "ResponseStatus": {
         "title": "ResponseStatus",
         "required": [
@@ -2353,6 +2759,43 @@
           }
         },
         "description": "Status of the response, including error code and message."
+      },
+      "Sli": {
+        "title": "Sli",
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "requestBased"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "windowBased"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "requestBased": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RequestBasedSli"
+              }
+            ],
+            "description": "Count per request: the SLI is the ratio of good events to total events over the SLO time frame."
+          },
+          "windowBased": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WindowBasedSli"
+              }
+            ],
+            "description": "Count per time window: the SLI is the ratio of good windows to all windows over the SLO time frame."
+          }
+        },
+        "description": "Definition of an SLI: how it counts (per request or per time window) and where its queries come from (custom metric queries or an APM service). Exactly one of `requestBased` or `windowBased` must be set."
       },
       "Slo": {
         "title": "Slo",
@@ -2408,7 +2851,13 @@
         ],
         "properties": {
           "apmSli": {
-            "$ref": "#/components/schemas/ApmSli"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmSli"
+              }
+            ],
+            "description": "Deprecated: use `sliDefinition` with an `apm` source instead. `services`, `filters` and `groupingKeys` move to the source's `selector`. `errorConfig` maps to `sliDefinition.requestBased.apm.availability`. `latencyConfig` maps to `sliDefinition.windowBased.apm.latency`: `latencyConfig.timeWindow` moves to `sliDefinition.windowBased.window`, `latencyConfig.threshold` becomes `thresholdMs`, and `quantile` and `average` keep their names.",
+            "deprecated": true
           },
           "apmSliMetadata": {
             "allOf": [
@@ -2416,8 +2865,9 @@
                 "$ref": "#/components/schemas/ApmSli"
               }
             ],
-            "description": "Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.",
-            "readOnly": true
+            "description": "Deprecated: use `sliDefinition` instead. Read-only copy of `apmSli`, returned whenever `apmSli` is. Set by the server; sending it instead of `apmSli` is rejected.",
+            "readOnly": true,
+            "deprecated": true
           },
           "createTime": {
             "description": "RFC3339 timestamp of when the SLO was created. Set by the server; a value sent by the client is ignored.",
@@ -2501,7 +2951,13 @@
             "x-coralogix-presence": true
           },
           "requestBasedMetricSli": {
-            "$ref": "#/components/schemas/RequestBasedMetricSli"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RequestBasedMetricSli"
+              }
+            ],
+            "description": "Deprecated: use `sliDefinition.requestBased.custom` instead, which takes the same `goodEvents` and `totalEvents` queries.",
+            "deprecated": true
           },
           "revision": {
             "allOf": [
@@ -2512,13 +2968,21 @@
             "description": "Revision of the SLO. Set by the server; a value sent by the client is ignored.",
             "readOnly": true
           },
+          "sliDefinition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sli"
+              }
+            ],
+            "description": "Definition of the SLI: how it counts (request-based or window-based) and where its values come from (custom metric queries or APM). Replaces the deprecated `requestBasedMetricSli`, `windowBasedMetricSli` and `apmSli`. A request must set either `sliDefinition` or one of the deprecated fields. When `sliDefinition` is set, it takes precedence and the deprecated fields are ignored. Responses always include `sliDefinition`, and also include the matching deprecated field when the SLI can be expressed with it."
+          },
           "sloTimeFrame": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/SloTimeFrame"
               }
             ],
-            "description": "Rolling evaluation window (fixed-duration lookback)."
+            "description": "Time frame the SLO is evaluated over. The day-based values, `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are rolling windows that cover that many days up to the time of evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the current calendar month in UTC, from the start of the month up to the time of evaluation, and starts over at the beginning of each month. SLO results are calculated per whole minute in UTC, so the window used may differ from these bounds by up to one minute."
           },
           "sloType": {
             "allOf": [
@@ -2561,7 +3025,13 @@
             "x-coralogix-presence": true
           },
           "windowBasedMetricSli": {
-            "$ref": "#/components/schemas/WindowBasedMetricSli"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WindowBasedMetricSli"
+              }
+            ],
+            "description": "Deprecated: use `sliDefinition.windowBased` instead. Set `window` and `missingDataStrategy` there, and `query`, `comparisonOperator` and `threshold` in its `custom` source.",
+            "deprecated": true
           }
         },
         "description": "Definition of an SLO"
@@ -2787,7 +3257,8 @@
           "SLO_TIME_FRAME_14_DAYS",
           "SLO_TIME_FRAME_21_DAYS",
           "SLO_TIME_FRAME_28_DAYS",
-          "SLO_TIME_FRAME_30_DAYS"
+          "SLO_TIME_FRAME_30_DAYS",
+          "SLO_TIME_FRAME_CALENDAR_MONTH"
         ],
         "type": "string",
         "description": "Slo time frame."
@@ -2861,6 +3332,66 @@
           }
         },
         "description": "Definition of a window-based SLI based on metrics"
+      },
+      "WindowBasedSli": {
+        "title": "WindowBasedSli",
+        "required": [
+          "window"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "custom"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "apm"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "apm": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApmWindowBasedSource"
+              }
+            ],
+            "description": "Window value generated from APM span data for the selected services."
+          },
+          "custom": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CustomWindowBasedSource"
+              }
+            ],
+            "description": "Custom metric query yielding the value of each window, and how it is compared to a threshold."
+          },
+          "missingDataStrategy": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MissingDataStrategy"
+              }
+            ],
+            "description": "How a window without data is counted.",
+            "default": "MISSING_DATA_STRATEGY_UNCOUNTED"
+          },
+          "window": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/WindowSloWindow"
+              }
+            ],
+            "description": "Size of each evaluated time window. Required.",
+            "examples": [
+              "WINDOW_SLO_WINDOW_5_MINUTES"
+            ]
+          }
+        },
+        "description": "Window-based SLI. The source yields one value per `window` and decides whether that window is good. Exactly one of `custom` or `apm` must be set."
       },
       "WindowSloWindow": {
         "enum": [

@@ -24,8 +24,11 @@ var _ MappedNullable = &Slo1{}
 
 // Slo1 Definition of an SLO
 type Slo1 struct {
+	// Deprecated: use `sliDefinition` with an `apm` source instead. `services`, `filters` and `groupingKeys` move to the source's `selector`. `errorConfig` maps to `sliDefinition.requestBased.apm.availability`. `latencyConfig` maps to `sliDefinition.windowBased.apm.latency`: `latencyConfig.timeWindow` moves to `sliDefinition.windowBased.window`, `latencyConfig.threshold` becomes `thresholdMs`, and `quantile` and `average` keep their names.
+	// Deprecated
 	ApmSli *ApmSli `json:"apmSli,omitempty"`
-	// Server copy of apmSli for APM SLOs. Set by the server; sending it instead of apmSli is rejected.
+	// Deprecated: use `sliDefinition` instead. Read-only copy of `apmSli`, returned whenever `apmSli` is. Set by the server; sending it instead of `apmSli` is rejected.
+	// Deprecated
 	ApmSliMetadata *ApmSli `json:"apmSliMetadata,omitempty"`
 	// RFC3339 timestamp of when the SLO was created. Set by the server; a value sent by the client is ignored.
 	CreateTime *time.Time `json:"createTime,omitempty"`
@@ -45,10 +48,14 @@ type Slo1 struct {
 	OwnershipTags *SloOwnershipTags `json:"ownershipTags,omitempty"`
 	// Product type: APM for application performance monitoring SLOs, UNSPECIFIED for manual/custom SLOs
 	ProductType *SloProductType `json:"productType,omitempty"`
+	// Deprecated: use `sliDefinition.requestBased.custom` instead, which takes the same `goodEvents` and `totalEvents` queries.
+	// Deprecated
 	RequestBasedMetricSli *RequestBasedMetricSli `json:"requestBasedMetricSli,omitempty"`
 	// Revision of the SLO. Set by the server; a value sent by the client is ignored.
 	Revision *V1Revision `json:"revision,omitempty"`
-	// Rolling evaluation window (fixed-duration lookback).
+	// Definition of the SLI: how it counts (request-based or window-based) and where its values come from (custom metric queries or APM). Replaces the deprecated `requestBasedMetricSli`, `windowBasedMetricSli` and `apmSli`. A request must set either `sliDefinition` or one of the deprecated fields. When `sliDefinition` is set, it takes precedence and the deprecated fields are ignored. Responses always include `sliDefinition`, and also include the matching deprecated field when the SLI can be expressed with it.
+	SliDefinition *Sli `json:"sliDefinition,omitempty"`
+	// Time frame the SLO is evaluated over. The day-based values, `SLO_TIME_FRAME_1_DAY` through `SLO_TIME_FRAME_30_DAYS`, are rolling windows that cover that many days up to the time of evaluation. `SLO_TIME_FRAME_CALENDAR_MONTH` covers the current calendar month in UTC, from the start of the month up to the time of evaluation, and starts over at the beginning of each month. SLO results are calculated per whole minute in UTC, so the window used may differ from these bounds by up to one minute.
 	SloTimeFrame SloTimeFrame `json:"sloTimeFrame"`
 	// SLO type derived by the server from the SLI. A window-based metric SLI still reads SLO_TYPE_REQUEST. A value sent by the client must match the SLI type; a different value is rejected.
 	SloType *SloType `json:"sloType,omitempty"`
@@ -59,6 +66,8 @@ type Slo1 struct {
 	Type *string `json:"type,omitempty"`
 	// Timestamp of the last update. Set by the server; a value sent by the client is ignored.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	// Deprecated: use `sliDefinition.windowBased` instead. Set `window` and `missingDataStrategy` there, and `query`, `comparisonOperator` and `threshold` in its `custom` source.
+	// Deprecated
 	WindowBasedMetricSli *WindowBasedMetricSli `json:"windowBasedMetricSli,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
@@ -86,6 +95,7 @@ func NewSlo1WithDefaults() *Slo1 {
 }
 
 // GetApmSli returns the ApmSli field value if set, zero value otherwise.
+// Deprecated
 func (o *Slo1) GetApmSli() ApmSli {
 	if o == nil || IsNil(o.ApmSli) {
 		var ret ApmSli
@@ -96,6 +106,7 @@ func (o *Slo1) GetApmSli() ApmSli {
 
 // GetApmSliOk returns a tuple with the ApmSli field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Slo1) GetApmSliOk() (*ApmSli, bool) {
 	if o == nil || IsNil(o.ApmSli) {
 		return nil, false
@@ -113,11 +124,13 @@ func (o *Slo1) HasApmSli() bool {
 }
 
 // SetApmSli gets a reference to the given ApmSli and assigns it to the ApmSli field.
+// Deprecated
 func (o *Slo1) SetApmSli(v ApmSli) {
 	o.ApmSli = &v
 }
 
 // GetApmSliMetadata returns the ApmSliMetadata field value if set, zero value otherwise.
+// Deprecated
 func (o *Slo1) GetApmSliMetadata() ApmSli {
 	if o == nil || IsNil(o.ApmSliMetadata) {
 		var ret ApmSli
@@ -128,6 +141,7 @@ func (o *Slo1) GetApmSliMetadata() ApmSli {
 
 // GetApmSliMetadataOk returns a tuple with the ApmSliMetadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Slo1) GetApmSliMetadataOk() (*ApmSli, bool) {
 	if o == nil || IsNil(o.ApmSliMetadata) {
 		return nil, false
@@ -145,6 +159,7 @@ func (o *Slo1) HasApmSliMetadata() bool {
 }
 
 // SetApmSliMetadata gets a reference to the given ApmSli and assigns it to the ApmSliMetadata field.
+// Deprecated
 func (o *Slo1) SetApmSliMetadata(v ApmSli) {
 	o.ApmSliMetadata = &v
 }
@@ -430,6 +445,7 @@ func (o *Slo1) SetProductType(v SloProductType) {
 }
 
 // GetRequestBasedMetricSli returns the RequestBasedMetricSli field value if set, zero value otherwise.
+// Deprecated
 func (o *Slo1) GetRequestBasedMetricSli() RequestBasedMetricSli {
 	if o == nil || IsNil(o.RequestBasedMetricSli) {
 		var ret RequestBasedMetricSli
@@ -440,6 +456,7 @@ func (o *Slo1) GetRequestBasedMetricSli() RequestBasedMetricSli {
 
 // GetRequestBasedMetricSliOk returns a tuple with the RequestBasedMetricSli field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Slo1) GetRequestBasedMetricSliOk() (*RequestBasedMetricSli, bool) {
 	if o == nil || IsNil(o.RequestBasedMetricSli) {
 		return nil, false
@@ -457,6 +474,7 @@ func (o *Slo1) HasRequestBasedMetricSli() bool {
 }
 
 // SetRequestBasedMetricSli gets a reference to the given RequestBasedMetricSli and assigns it to the RequestBasedMetricSli field.
+// Deprecated
 func (o *Slo1) SetRequestBasedMetricSli(v RequestBasedMetricSli) {
 	o.RequestBasedMetricSli = &v
 }
@@ -491,6 +509,38 @@ func (o *Slo1) HasRevision() bool {
 // SetRevision gets a reference to the given V1Revision and assigns it to the Revision field.
 func (o *Slo1) SetRevision(v V1Revision) {
 	o.Revision = &v
+}
+
+// GetSliDefinition returns the SliDefinition field value if set, zero value otherwise.
+func (o *Slo1) GetSliDefinition() Sli {
+	if o == nil || IsNil(o.SliDefinition) {
+		var ret Sli
+		return ret
+	}
+	return *o.SliDefinition
+}
+
+// GetSliDefinitionOk returns a tuple with the SliDefinition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Slo1) GetSliDefinitionOk() (*Sli, bool) {
+	if o == nil || IsNil(o.SliDefinition) {
+		return nil, false
+	}
+	return o.SliDefinition, true
+}
+
+// HasSliDefinition returns a boolean if a field has been set.
+func (o *Slo1) HasSliDefinition() bool {
+	if o != nil && !IsNil(o.SliDefinition) {
+		return true
+	}
+
+	return false
+}
+
+// SetSliDefinition gets a reference to the given Sli and assigns it to the SliDefinition field.
+func (o *Slo1) SetSliDefinition(v Sli) {
+	o.SliDefinition = &v
 }
 
 // GetSloTimeFrame returns the SloTimeFrame field value
@@ -649,6 +699,7 @@ func (o *Slo1) SetUpdateTime(v time.Time) {
 }
 
 // GetWindowBasedMetricSli returns the WindowBasedMetricSli field value if set, zero value otherwise.
+// Deprecated
 func (o *Slo1) GetWindowBasedMetricSli() WindowBasedMetricSli {
 	if o == nil || IsNil(o.WindowBasedMetricSli) {
 		var ret WindowBasedMetricSli
@@ -659,6 +710,7 @@ func (o *Slo1) GetWindowBasedMetricSli() WindowBasedMetricSli {
 
 // GetWindowBasedMetricSliOk returns a tuple with the WindowBasedMetricSli field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Slo1) GetWindowBasedMetricSliOk() (*WindowBasedMetricSli, bool) {
 	if o == nil || IsNil(o.WindowBasedMetricSli) {
 		return nil, false
@@ -676,6 +728,7 @@ func (o *Slo1) HasWindowBasedMetricSli() bool {
 }
 
 // SetWindowBasedMetricSli gets a reference to the given WindowBasedMetricSli and assigns it to the WindowBasedMetricSli field.
+// Deprecated
 func (o *Slo1) SetWindowBasedMetricSli(v WindowBasedMetricSli) {
 	o.WindowBasedMetricSli = &v
 }
@@ -726,6 +779,9 @@ func (o Slo1) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Revision) {
 		toSerialize["revision"] = o.Revision
+	}
+	if !IsNil(o.SliDefinition) {
+		toSerialize["sliDefinition"] = o.SliDefinition
 	}
 	toSerialize["sloTimeFrame"] = o.SloTimeFrame
 	if !IsNil(o.SloType) {
@@ -852,6 +908,7 @@ func (o *Slo1) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "productType")
 		delete(additionalProperties, "requestBasedMetricSli")
 		delete(additionalProperties, "revision")
+		delete(additionalProperties, "sliDefinition")
 		delete(additionalProperties, "sloTimeFrame")
 		delete(additionalProperties, "sloType")
 		delete(additionalProperties, "targetThresholdPercentage")

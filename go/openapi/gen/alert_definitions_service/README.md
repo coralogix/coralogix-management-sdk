@@ -135,7 +135,7 @@ Class | Method | HTTP request | Description
  - [AlertsOp](docs/AlertsOp.md)
  - [AlertsV3FilterMatcher](docs/AlertsV3FilterMatcher.md)
  - [AlertsV3PaginationResponse](docs/AlertsV3PaginationResponse.md)
- - [AnalyticsImmediateType](docs/AnalyticsImmediateType.md)
+ - [AnalyticsResultCountType](docs/AnalyticsResultCountType.md)
  - [AnalyticsThresholdOperator](docs/AnalyticsThresholdOperator.md)
  - [AnalyticsThresholdRule](docs/AnalyticsThresholdRule.md)
  - [AnalyticsThresholdRuleCondition](docs/AnalyticsThresholdRuleCondition.md)

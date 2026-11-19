@@ -787,8 +787,7 @@
           "active",
           "versionId",
           "version",
-          "overlayHash",
-          "schedules"
+          "overlayHash"
         ],
         "type": "object",
         "oneOf": [
@@ -803,6 +802,25 @@
               "preset"
             ],
             "type": "object"
+          },
+          {
+            "type": "object",
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "custom"
+                  ],
+                  "type": "object"
+                },
+                {
+                  "required": [
+                    "preset"
+                  ],
+                  "type": "object"
+                }
+              ]
+            }
           }
         ],
         "properties": {
@@ -830,7 +848,7 @@
                 "$ref": "#/components/schemas/CustomConfigurationOverlay"
               }
             ],
-            "description": "Custom overlay content of the latest version."
+            "description": "Custom overlay content of the latest version. Exactly one of custom or preset is set, except in a list response for a reduced view, which omits both."
           },
           "description": {
             "description": "Human-readable description.",
@@ -876,7 +894,7 @@
                 "$ref": "#/components/schemas/PresetConfigurationOverlay"
               }
             ],
-            "description": "Preset overlay content of the latest version, for ObservabilityFeatures overlays created outside this API."
+            "description": "Preset overlay content of the latest version, for ObservabilityFeatures overlays created outside this API. Exactly one of custom or preset is set, except in a list response for a reduced view, which omits both."
           },
           "priorityOrder": {
             "default": 0,
@@ -888,7 +906,7 @@
             "x-coralogix-presence": true
           },
           "schedules": {
-            "description": "Activation schedules of the latest version. With schedules, an active overlay applies only during their windows.",
+            "description": "Activation schedules of the latest version. With schedules, an active overlay applies only during their windows. Always returned, possibly empty, except in a list response for a reduced view, which omits it.",
             "items": {
               "$ref": "#/components/schemas/ConfigurationOverlaySchedule"
             },
@@ -925,7 +943,7 @@
             "description": "UUID v7 of the latest version. Changes when an update creates a version."
           }
         },
-        "description": "Fleet-manager configuration overlay with the content of its latest version. The latest version is the newest unarchived one, or the newest one for an archived overlay."
+        "description": "Fleet-manager configuration overlay with the content of its latest version. The latest version is the newest unarchived one, or the newest one for an archived overlay. Create, Get and Update always return custom or preset, and schedules. A list request for a reduced view omits them."
       },
       "ConfigurationOverlaySchedule": {
         "required": [
