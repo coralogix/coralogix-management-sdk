@@ -135,6 +135,11 @@ type Resource struct {
 	ListProblem string
 }
 
+// OmitKeepsValue reports whether leaving a top-level field out of a write keeps the value that the
+// API holds: the resource always exists (AlwaysExists), and Update is a PATCH with a mask, not a
+// full replace.
+func (r *Resource) OmitKeepsValue() bool { return r.AlwaysExists && !r.Replace }
+
 // ID returns the resource field that holds the id: IDField, or IDParam for a resource that Build
 // did not make. It is "" for a singleton.
 func (r *Resource) ID() string {

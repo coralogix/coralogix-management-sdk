@@ -144,3 +144,29 @@ func TestAlwaysExistsGetsNoZeroDefault(t *testing.T) {
 	}
 	t.Fatal("no field enabled")
 }
+
+// A PUT replaces the resource, so omitting a field writes zero. A field without presence keeps the
+// zero default there.
+func TestAlwaysExistsPutKeepsTheZeroDefault(t *testing.T) {
+	put := func(s string) string {
+		s = strings.Replace(s, "enabled: {type: boolean, x-coralogix-presence: true}", "enabled: {type: boolean}", 1)
+		s = strings.Replace(s, "    patch:", "    put:", 1)
+		return regexp.MustCompile(`(?s)      parameters:\n        - name: update_mask.*?x-coralogix-presence: true\}\n`).ReplaceAllString(s, "")
+	}
+	r, err := Build(loadAlwaysThing(t, put), "AlwaysThing")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !r.Replace || r.OmitKeepsValue() {
+		t.Fatalf("Replace=%v OmitKeepsValue=%v, want a replace that does not keep omitted values", r.Replace, r.OmitKeepsValue())
+	}
+	for _, f := range r.Fields {
+		if f.Name == "enabled" {
+			if f.Create.Default == nil || f.Update.Default == nil {
+				t.Errorf("defaults create=%v update=%v, want the zero default", f.Create.Default, f.Update.Default)
+			}
+			return
+		}
+	}
+	t.Fatal("no field enabled")
+}

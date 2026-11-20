@@ -21,15 +21,16 @@ package model
 // server default. A field whose zero value is not valid reads zero as an omitted value. A field
 // with a line in the behavior-overrides file keeps its released behavior.
 //
-// A top-level field of a singleton that always exists gets no zero default: the singleton holds a
-// value before Create, and omitting the field keeps that value, so omission and zero do not store
-// the same value.
+// A top-level field of a singleton that always exists, with a PATCH Update, gets no zero default:
+// the singleton holds a value before Create, and omitting the field keeps that value, so omission
+// and zero do not store the same value (OmitKeepsValue). A PUT replaces the resource, so it keeps
+// the rule.
 func (r *Resource) zeroDefaults() {
 	seen := map[*Type]bool{}
 	for _, f := range r.Fields {
 		if !r.Policy.released(r.Name, f.Name) {
 			if get := f.Get; get != nil {
-				zeroDefault(f.Type, f.Create, f.Update, get, r.AlwaysExists)
+				zeroDefault(f.Type, f.Create, f.Update, get, r.OmitKeepsValue())
 			}
 		}
 		r.nestedZeroDefaults(f.Type, seen)
