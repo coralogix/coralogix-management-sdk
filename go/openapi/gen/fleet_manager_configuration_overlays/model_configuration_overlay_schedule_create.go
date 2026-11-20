@@ -24,7 +24,7 @@ var _ MappedNullable = &ConfigurationOverlayScheduleCreate{}
 
 // ConfigurationOverlayScheduleCreate Activation schedule to create with a configuration overlay.
 type ConfigurationOverlayScheduleCreate struct {
-	// Human-readable description.
+	// Description of the schedule.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Positive length of each window, such as \"7200s\". Must be shorter than the recurrence interval; for days, weeks, and months, shorter than the shortest interval in the schedule's time zone, such as a 23-hour daylight-saving day or the shortest month.
 	Duration string `json:"duration" validate:"regexp=^([1-9][0-9]{0,11}(\\\\.[0-9]{1,9})?|0\\\\.[0-9]{1,9})s$"`
