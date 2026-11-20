@@ -208,6 +208,9 @@ type Policy struct {
 	// what the configuration holds and stores what the response echoes. The model drops the
 	// limits of such a field before it compares the request types with the response type.
 	ReleasedLimits []string
+	// UpdateImmutable lists "Component.field" of fields that the API refuses to change on the
+	// Update: the generated Update reports a change of one as an error.
+	UpdateImmutable []string
 	// FixedRequest lists "Component.field" that Create and Update always send as a
 	// fixed API value. A nested read-only field in this list is sent, so it is not
 	// a server-only field the renderer has to drop.
@@ -413,6 +416,12 @@ func (p Policy) WithDefaultArms(component string, groups []OneOfGroup) []OneOfGr
 
 func (p Policy) skips(component, field string) bool {
 	return component != "" && slices.Contains(p.Skip, component+"."+field)
+}
+
+// updateImmutable reports whether the field line says that the API refuses a change of the
+// field on the Update.
+func (p Policy) updateImmutable(component, field string) bool {
+	return component != "" && slices.Contains(p.UpdateImmutable, component+"."+field)
 }
 
 // releasedLimits reports whether the field line says that the limits of the Create, Update, and

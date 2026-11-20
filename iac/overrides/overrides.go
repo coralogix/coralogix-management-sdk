@@ -180,6 +180,10 @@ type Field struct {
 	// contract cannot say so: the request shares the component with a response that always has
 	// the field.
 	Optional bool `yaml:"optional"`
+	// UpdateImmutable: true says that the API refuses a change of the field on the Update:
+	// the generated Update reports the change as an error instead of sending a body the API
+	// answers with an inconsistent result.
+	UpdateImmutable bool `yaml:"updateImmutable"`
 	// ReleasedLimits: true says that the Create, Update, and response schemas of the field carry
 	// different limits, and that the released resource holds them all. The released resource
 	// sends what the configuration holds and stores what the response echoes: it enforces no
@@ -505,6 +509,9 @@ func (e Exceptions) Policy() model.Policy {
 			}
 			if line.ReleasedLimits {
 				p.ReleasedLimits = append(p.ReleasedLimits, name+"."+field)
+			}
+			if line.UpdateImmutable {
+				p.UpdateImmutable = append(p.UpdateImmutable, name+"."+field)
 			}
 			if line.Collection == "set" {
 				p.Sets = append(p.Sets, name+"."+field)
