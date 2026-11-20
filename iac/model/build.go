@@ -192,6 +192,9 @@ type foundOp struct {
 	method string
 	item   *v3.PathItem
 	op     *v3.Operation
+	// implied is true for a lifecycle step that the contract does not have and that the model
+	// implies (see impliedLifecycle). Its other fields are those of the call that stands in for it.
+	implied bool
 }
 
 // Survey builds the type of the component schema name, as Build does for
@@ -245,6 +248,7 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 			found[v] = matches[0]
 		}
 	}
+	impliedLifecycle(found, explicit, p)
 	get, singleton := found[opGet]
 	singleton = singleton && len(pathParams(get)) == 0 && !p.GetFromList
 	for _, v := range verbs {
@@ -258,6 +262,9 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 		}
 		if !ok {
 			return nil, fmt.Errorf("%s: no operation with operationId suffix %s", v, suffix)
+		}
+		if f.implied {
+			continue // the call that stands in for this step was checked as its own step
 		}
 		if !slices.Contains(p.methods(v), f.method) {
 			return nil, fmt.Errorf("%s: %s is %s, want %s", v, f.op.OperationId, f.method, strings.Join(p.methods(v), " or "))
@@ -332,6 +339,7 @@ func (r *Resource) readOperations(ops map[verb]foundOp) error {
 			return err
 		}
 		r.Singleton = true
+		r.AlwaysExists = ops[opDelete].implied
 		return r.readTargets(ops)
 	}
 	id, err := idParam(ops[opGet])
@@ -452,6 +460,9 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 	targets := map[verb]*Operation{opCreate: &r.Create, opGet: &r.Get, opUpdate: &r.Update, opDelete: &r.Delete}
 	for _, v := range verbs {
 		f := ops[v]
+		if f.implied && v == opDelete {
+			continue // an always-exists singleton has no Delete call
+		}
 		o := targets[v]
 		o.Method, o.Path, o.OperationID = f.method, f.path, f.op.OperationId
 		if o.Body, err = bodyName(f.op); err != nil {
@@ -462,6 +473,9 @@ func (r *Resource) readTargets(ops map[verb]foundOp) error {
 		return err
 	}
 	for _, v := range verbs {
+		if ops[v].implied && v == opDelete {
+			continue
+		}
 		if targets[v].Response, err = r.response(ops[v].op, v); err != nil {
 			return fmt.Errorf("%s: %w", v, err)
 		}

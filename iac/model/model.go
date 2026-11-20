@@ -49,6 +49,11 @@ type Resource struct {
 	// resource per company (D18). Create, Get, Update, and Delete use one
 	// path, except for an Overwrite resource.
 	Singleton bool
+	// AlwaysExists is true for a singleton that the API cannot create or remove: Get has no path
+	// parameter, and its path has an Update and no Create and no Delete (impliedLifecycle). Create is
+	// the Update operation, and Delete is empty. A tool sets the resource with that call on Create and
+	// Update, and on Delete it only forgets the resource: the API keeps it.
+	AlwaysExists bool
 	// Overwrite is true when the resource is the whole list that one write operation replaces
 	// (Policy.Overwrite). Create, Update, and Delete are that write; Delete sends every field
 	// empty. The write response is not read: a tool reads the resource with Get after the write,
@@ -129,6 +134,11 @@ type Resource struct {
 	// has no problem: Build fails instead.
 	ListProblem string
 }
+
+// OmitKeepsValue reports whether leaving a top-level field out of a write keeps the value that the
+// API holds: the resource always exists (AlwaysExists), and Update is a PATCH with a mask, not a
+// full replace.
+func (r *Resource) OmitKeepsValue() bool { return r.AlwaysExists && !r.Replace }
 
 // ID returns the resource field that holds the id: IDField, or IDParam for a resource that Build
 // did not make. It is "" for a singleton.

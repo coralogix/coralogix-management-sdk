@@ -146,7 +146,7 @@ func TestScalarZero(t *testing.T) {
 func TestZeroDefaultOfADigitString(t *testing.T) {
 	typ := &Type{Kind: String, Zero: "0", ZeroValid: true}
 	create, update, get := &Attrs{}, &Attrs{}, &Attrs{}
-	zeroDefault(typ, create, update, get)
+	zeroDefault(typ, create, update, get, false)
 	for _, a := range []*Attrs{create, update, get} {
 		if a.Default == nil || *a.Default != "0" {
 			t.Fatalf("default = %v, want \"0\"", a.Default)

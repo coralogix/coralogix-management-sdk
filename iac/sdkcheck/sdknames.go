@@ -93,11 +93,20 @@ func (s Ref) SDKName() string {
 	return s.Owner + "." + s.Name
 }
 
+// lifecycleOperations are the operations of the resource that the contract has: the four of a
+// resource, and the Create (the Update call) and the Get of one that always exists.
+func lifecycleOperations(r *model.Resource) []model.Operation {
+	if r.AlwaysExists {
+		return []model.Operation{r.Create, r.Get, r.Update}
+	}
+	return []model.Operation{r.Create, r.Get, r.Update, r.Delete}
+}
+
 // ResourceTag returns the one tag that all four operations share. The SDK
 // makes one package per tag.
 func ResourceTag(doc *v3.Document, r *model.Resource) (string, error) {
 	tag := ""
-	for _, op := range []model.Operation{r.Create, r.Get, r.Update, r.Delete} {
+	for _, op := range lifecycleOperations(r) {
 		item, ok := doc.Paths.PathItems.Get(op.Path)
 		if !ok {
 			return "", fmt.Errorf("%s: path %s not in the spec", op.OperationID, op.Path)
@@ -349,6 +358,9 @@ func (s *resolver) operations(r *model.Resource, client string) error {
 		{"delete", r.Delete, true},
 	}
 	for _, o := range ops {
+		if o.name == "delete" && r.AlwaysExists {
+			continue // the API has no Delete call
+		}
 		// A singleton has no id in the path (D18).
 		withID := o.id && !r.Singleton && (o.name != "update" || !r.Policy.UpdateIDInBody) &&
 			(o.name != "get" || r.Policy.GetByIDs == "" && !r.GetFromList) && (o.name != "delete" || r.Policy.DeleteIDs == "")
