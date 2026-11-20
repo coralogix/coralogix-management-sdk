@@ -21,38 +21,38 @@ var _ = bytes.MinRead
 // checks if the ConfigurationOverlay type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationOverlay{}
 
-// ConfigurationOverlay Fleet-manager configuration overlay with the content of its latest version. The latest version is the newest unarchived one, or the newest one for an archived overlay. Create, Get and Update always return custom or preset, and schedules. A list request for a reduced view omits them.
+// ConfigurationOverlay Fleet-manager configuration overlay with the content of its latest version. The latest version is the newest unarchived one, or the newest one for an archived overlay. Create, Get and Update always return the version fields, custom or preset, and schedules. A list request for a reduced view omits them.
 type ConfigurationOverlay struct {
-	// Whether the latest version is active. With schedules, it applies only during their windows.
+	// Whether the latest version is eligible to apply to its targets. With schedules, it applies only during their windows. This is not confirmation that an agent has applied the merged configuration.
 	Active bool `json:"active"`
-	// Whether this configuration overlay is archived.
+	// Whether this configuration overlay is archived. Returned as true only for get and list requests with include_archived.
 	Archived bool `json:"archived"`
 	// User that created the configuration overlay.
 	CreatedBy *string `json:"createdBy,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Custom overlay content of the latest version. Exactly one of custom or preset is set, except in a list response for a reduced view, which omits both.
 	Custom *CustomConfigurationOverlay `json:"custom,omitempty"`
-	// Human-readable description.
+	// Description of the overlay's purpose.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Configuration overlay UUID v7.
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Display name.
+	// Display name, unique among unarchived overlays.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Lowercase hexadecimal SHA-256 hash of the normalized payload: the custom overlay YAML, or the preset JSON.
-	OverlayHash string `json:"overlayHash" validate:"regexp=^[0-9a-f]{64}$"`
+	OverlayHash *string `json:"overlayHash,omitempty" validate:"regexp=^[0-9a-f]{64}$"`
 	// UUID v7 of the version the latest version was created from.
 	ParentVersionId *string `json:"parentVersionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Preset overlay content of the latest version, for ObservabilityFeatures overlays created outside this API. Exactly one of custom or preset is set, except in a list response for a reduced view, which omits both.
 	Preset *PresetConfigurationOverlay `json:"preset,omitempty"`
-	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.
+	// Merge precedence when several active overlays target the same remote configuration. Overlays merge in ascending order, so higher values win on conflicting keys; on a tie, the newer overlay wins.
 	PriorityOrder int32 `json:"priorityOrder"`
 	// Activation schedules of the latest version. With schedules, an active overlay applies only during their windows. Always returned, possibly empty, except in a list response for a reduced view, which omits it.
 	Schedules []ConfigurationOverlaySchedule `json:"schedules,omitempty"`
-	// Tags attached to the configuration overlay.
+	// Tags for organizing the overlay. Tags do not select targets.
 	Tags []string `json:"tags"`
-	// Monotonic number of the latest version.
-	Version string `json:"version" validate:"regexp=^[1-9][0-9]*$"`
-	// UUID v7 of the latest version. Changes when an update creates a version.
-	VersionId string `json:"versionId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
+	// Increasing version number of the overlay, returned as a string. The initial version is \"1\"; a change to the configuration or targets creates a new version.
+	Version *string `json:"version,omitempty" validate:"regexp=^[1-9][0-9]*$"`
+	// UUID v7 of the latest version. Changes when an update to the configuration or targets creates a version.
+	VersionId *string `json:"versionId,omitempty" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -63,16 +63,13 @@ type _ConfigurationOverlay ConfigurationOverlay
 // This constructor makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed.
 // It does not set properties that have a default: the server fills them in.
-func NewConfigurationOverlay(active bool, archived bool, id string, overlayHash string, priorityOrder int32, tags []string, version string, versionId string) *ConfigurationOverlay {
+func NewConfigurationOverlay(active bool, archived bool, id string, priorityOrder int32, tags []string) *ConfigurationOverlay {
 	this := ConfigurationOverlay{}
 	this.Active = active
 	this.Archived = archived
 	this.Id = id
-	this.OverlayHash = overlayHash
 	this.PriorityOrder = priorityOrder
 	this.Tags = tags
-	this.Version = version
-	this.VersionId = versionId
 	return &this
 }
 
@@ -284,28 +281,36 @@ func (o *ConfigurationOverlay) SetName(v string) {
 	o.Name = &v
 }
 
-// GetOverlayHash returns the OverlayHash field value
+// GetOverlayHash returns the OverlayHash field value if set, zero value otherwise.
 func (o *ConfigurationOverlay) GetOverlayHash() string {
-	if o == nil {
+	if o == nil || IsNil(o.OverlayHash) {
 		var ret string
 		return ret
 	}
-
-	return o.OverlayHash
+	return *o.OverlayHash
 }
 
-// GetOverlayHashOk returns a tuple with the OverlayHash field value
+// GetOverlayHashOk returns a tuple with the OverlayHash field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConfigurationOverlay) GetOverlayHashOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OverlayHash) {
 		return nil, false
 	}
-	return &o.OverlayHash, true
+	return o.OverlayHash, true
 }
 
-// SetOverlayHash sets field value
+// HasOverlayHash returns a boolean if a field has been set.
+func (o *ConfigurationOverlay) HasOverlayHash() bool {
+	if o != nil && !IsNil(o.OverlayHash) {
+		return true
+	}
+
+	return false
+}
+
+// SetOverlayHash gets a reference to the given string and assigns it to the OverlayHash field.
 func (o *ConfigurationOverlay) SetOverlayHash(v string) {
-	o.OverlayHash = v
+	o.OverlayHash = &v
 }
 
 // GetParentVersionId returns the ParentVersionId field value if set, zero value otherwise.
@@ -452,52 +457,68 @@ func (o *ConfigurationOverlay) SetTags(v []string) {
 	o.Tags = v
 }
 
-// GetVersion returns the Version field value
+// GetVersion returns the Version field value if set, zero value otherwise.
 func (o *ConfigurationOverlay) GetVersion() string {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		var ret string
 		return ret
 	}
-
-	return o.Version
+	return *o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConfigurationOverlay) GetVersionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version, true
 }
 
-// SetVersion sets field value
+// HasVersion returns a boolean if a field has been set.
+func (o *ConfigurationOverlay) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given string and assigns it to the Version field.
 func (o *ConfigurationOverlay) SetVersion(v string) {
-	o.Version = v
+	o.Version = &v
 }
 
-// GetVersionId returns the VersionId field value
+// GetVersionId returns the VersionId field value if set, zero value otherwise.
 func (o *ConfigurationOverlay) GetVersionId() string {
-	if o == nil {
+	if o == nil || IsNil(o.VersionId) {
 		var ret string
 		return ret
 	}
-
-	return o.VersionId
+	return *o.VersionId
 }
 
-// GetVersionIdOk returns a tuple with the VersionId field value
+// GetVersionIdOk returns a tuple with the VersionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ConfigurationOverlay) GetVersionIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.VersionId) {
 		return nil, false
 	}
-	return &o.VersionId, true
+	return o.VersionId, true
 }
 
-// SetVersionId sets field value
+// HasVersionId returns a boolean if a field has been set.
+func (o *ConfigurationOverlay) HasVersionId() bool {
+	if o != nil && !IsNil(o.VersionId) {
+		return true
+	}
+
+	return false
+}
+
+// SetVersionId gets a reference to the given string and assigns it to the VersionId field.
 func (o *ConfigurationOverlay) SetVersionId(v string) {
-	o.VersionId = v
+	o.VersionId = &v
 }
 
 func (o ConfigurationOverlay) MarshalJSON() ([]byte, error) {
@@ -525,7 +546,9 @@ func (o ConfigurationOverlay) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["overlayHash"] = o.OverlayHash
+	if !IsNil(o.OverlayHash) {
+		toSerialize["overlayHash"] = o.OverlayHash
+	}
 	if !IsNil(o.ParentVersionId) {
 		toSerialize["parentVersionId"] = o.ParentVersionId
 	}
@@ -537,8 +560,12 @@ func (o ConfigurationOverlay) ToMap() (map[string]interface{}, error) {
 		toSerialize["schedules"] = o.Schedules
 	}
 	toSerialize["tags"] = o.Tags
-	toSerialize["version"] = o.Version
-	toSerialize["versionId"] = o.VersionId
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
+	}
+	if !IsNil(o.VersionId) {
+		toSerialize["versionId"] = o.VersionId
+	}
 	optionalOneOfGroup0Matches := 0
 	if _, exists := toSerialize["custom"]; exists {
 		optionalOneOfGroup0Matches++
@@ -572,11 +599,8 @@ func (o *ConfigurationOverlay) UnmarshalJSON(data []byte) (err error) {
 		"active",
 		"archived",
 		"id",
-		"overlayHash",
 		"priorityOrder",
 		"tags",
-		"version",
-		"versionId",
 	}
 
 	allProperties := make(map[string]interface{})

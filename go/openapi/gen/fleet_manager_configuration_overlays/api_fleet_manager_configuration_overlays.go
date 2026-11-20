@@ -36,7 +36,7 @@ func (r ApiConfigurationOverlayServiceArchiveConfigurationOverlayRequest) Execut
 /*
 ConfigurationOverlayServiceArchiveConfigurationOverlay Archive configuration overlay
 
-Archives a configuration overlay and all its versions. An active overlay must be deactivated before it is archived. Archiving an archived overlay succeeds.
+Archives a configuration overlay and all its versions. An active overlay must be deactivated first: send `{"active":false}` with `update_mask=active`; archiving an active overlay returns 400. Archiving an archived overlay succeeds. An archived overlay is returned only by get and list requests with `include_archived=true`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration overlay UUID v7.
@@ -193,7 +193,7 @@ func (r ApiConfigurationOverlayServiceCreateConfigurationOverlayRequest) Execute
 /*
 ConfigurationOverlayServiceCreateConfigurationOverlay Create configuration overlay
 
-Creates a custom configuration overlay (OpenTelemetry Collector YAML). It is inactive unless active is true, which needs at least one target.
+Creates a custom configuration overlay from a Collector YAML fragment and its target remote configurations. Each target must belong to an active configuration family. The overlay is inactive unless `active` is `true`; an active overlay needs at least one target. When `active` is `true` and `schedules` is empty, the overlay applies right away and stays applied until it is deactivated; with schedules, it applies only during their windows. A successful response confirms the overlay is saved; check Fleet Management for agent application status.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiConfigurationOverlayServiceCreateConfigurationOverlayRequest
@@ -348,7 +348,7 @@ func (r ApiConfigurationOverlayServiceGetConfigurationOverlayRequest) Execute() 
 /*
 ConfigurationOverlayServiceGetConfigurationOverlay Get configuration overlay
 
-Gets a fleet-manager configuration overlay by ID.
+Returns a configuration overlay with the content, targets, and schedules of its latest version. `active` indicates that the overlay is eligible to apply, not that an agent has applied the merged configuration. An archived overlay returns 404 unless `include_archived=true`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration overlay UUID v7.
@@ -500,7 +500,7 @@ type ApiConfigurationOverlayServiceListConfigurationOverlaysRequest struct {
 	pageToken *string
 }
 
-// When true, include archived overlays.
+// When true, include archived overlays, each with its latest version.
 func (r ApiConfigurationOverlayServiceListConfigurationOverlaysRequest) IncludeArchived(includeArchived bool) ApiConfigurationOverlayServiceListConfigurationOverlaysRequest {
 	r.includeArchived = &includeArchived
 	return r
@@ -512,7 +512,7 @@ func (r ApiConfigurationOverlayServiceListConfigurationOverlaysRequest) PageSize
 	return r
 }
 
-// Opaque token returned by a previous list response.
+// Opaque token returned by a previous list response. Send it with the same include_archived value as that request.
 func (r ApiConfigurationOverlayServiceListConfigurationOverlaysRequest) PageToken(pageToken string) ApiConfigurationOverlayServiceListConfigurationOverlaysRequest {
 	r.pageToken = &pageToken
 	return r
@@ -667,7 +667,7 @@ type ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
 	configurationOverlayServiceUpdateConfigurationOverlayRequest *ConfigurationOverlayServiceUpdateConfigurationOverlayRequest
 }
 
-// Comma-separated fields to update: name, description, tags, priorityOrder, active, custom, custom.configuration, custom.targets, schedules. A listed field that is omitted from the body is cleared (description, tags, custom.targets, schedules) or reset to its default (priorityOrder 0, active false); name, custom, and custom.configuration cannot be cleared. Unknown fields and * return 400.
+// Comma-separated fields to update: name, description, tags, priorityOrder, active, custom, custom.configuration, custom.targets, schedules. custom replaces the configuration and the targets together; custom.configuration or custom.targets changes only that field. A listed field that is omitted from the body is cleared (description, tags, custom.targets, schedules) or reset to its default (priorityOrder 0, active false); name, custom, and custom.configuration cannot be cleared. Custom fields are rejected for preset overlays. Unknown fields and * return 400.
 func (r ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest) UpdateMask(updateMask string) ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest {
 	r.updateMask = &updateMask
 	return r
@@ -685,7 +685,7 @@ func (r ApiConfigurationOverlayServiceUpdateConfigurationOverlayRequest) Execute
 /*
 ConfigurationOverlayServiceUpdateConfigurationOverlay Update configuration overlay
 
-Updates the fields listed in update_mask; a listed field that is omitted from the body is cleared or reset to its default. A change to the content of custom.configuration or custom.targets creates a new version that carries over the schedules. An archived overlay can't be updated. Activation needs a target, and every schedule needs a future window. A version-creating change is rejected while a scheduled window is applying.
+Updates the fields listed in `update_mask`; a listed field that is omitted from the body is cleared or reset to its default. A change to the content of `custom.configuration` or `custom.targets` creates a new version that carries over the schedules; other fields, including `schedules`, change without a new version. To activate the overlay, send `{"active":true}` with `update_mask=active`. An archived overlay can't be updated. Activation needs a target, and every schedule needs a future window. A version-creating change is rejected while a scheduled window is applying; edit the overlay after the window ends, or deactivate it first.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Configuration overlay UUID v7.
