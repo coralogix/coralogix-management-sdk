@@ -23,7 +23,7 @@ var _ MappedNullable = &CustomConfigurationOverlay{}
 
 // CustomConfigurationOverlay Custom overlay content of a version.
 type CustomConfigurationOverlay struct {
-	// OpenTelemetry Collector YAML fragment, re-emitted in normalized form (sorted keys, no comments).
+	// Collector YAML fragment merged into each target, re-emitted in normalized form (sorted keys, no comments).
 	Configuration string `json:"configuration" validate:"regexp=^[\\s\\S]*$"`
 	// Target snapshot of this version.
 	Targets []ConfigurationOverlayTarget `json:"targets"`

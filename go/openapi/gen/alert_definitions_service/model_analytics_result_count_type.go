@@ -30,6 +30,10 @@ type AnalyticsResultCountType struct {
 	EvaluationPeriodMinutes *int32 `json:"evaluationPeriodMinutes,omitempty"`
 	// Configuration for how to treat and what state to give to an alert with no data
 	NoDataPolicy *NoDataPolicy `json:"noDataPolicy,omitempty"`
+	// The comparison operator applied to the row count of every rule. With grouping, rows are counted per group.
+	Operator *AnalyticsThresholdOperator `json:"operator,omitempty"`
+	// The per-priority trigger rules. Each rule compares the number of result rows meeting its condition to its count threshold. When several rules hold for the same result, the highest priority wins. When omitted or empty, the alert has one rule at its own priority with a count threshold of 0.
+	Rules []AnalyticsResultCountRule `json:"rules,omitempty"`
 	// The evaluation window duration in minutes
 	TimeframeMinutes *int32 `json:"timeframeMinutes,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -183,6 +187,70 @@ func (o *AnalyticsResultCountType) SetNoDataPolicy(v NoDataPolicy) {
 	o.NoDataPolicy = &v
 }
 
+// GetOperator returns the Operator field value if set, zero value otherwise.
+func (o *AnalyticsResultCountType) GetOperator() AnalyticsThresholdOperator {
+	if o == nil || IsNil(o.Operator) {
+		var ret AnalyticsThresholdOperator
+		return ret
+	}
+	return *o.Operator
+}
+
+// GetOperatorOk returns a tuple with the Operator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalyticsResultCountType) GetOperatorOk() (*AnalyticsThresholdOperator, bool) {
+	if o == nil || IsNil(o.Operator) {
+		return nil, false
+	}
+	return o.Operator, true
+}
+
+// HasOperator returns a boolean if a field has been set.
+func (o *AnalyticsResultCountType) HasOperator() bool {
+	if o != nil && !IsNil(o.Operator) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperator gets a reference to the given AnalyticsThresholdOperator and assigns it to the Operator field.
+func (o *AnalyticsResultCountType) SetOperator(v AnalyticsThresholdOperator) {
+	o.Operator = &v
+}
+
+// GetRules returns the Rules field value if set, zero value otherwise.
+func (o *AnalyticsResultCountType) GetRules() []AnalyticsResultCountRule {
+	if o == nil || IsNil(o.Rules) {
+		var ret []AnalyticsResultCountRule
+		return ret
+	}
+	return o.Rules
+}
+
+// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AnalyticsResultCountType) GetRulesOk() ([]AnalyticsResultCountRule, bool) {
+	if o == nil || IsNil(o.Rules) {
+		return nil, false
+	}
+	return o.Rules, true
+}
+
+// HasRules returns a boolean if a field has been set.
+func (o *AnalyticsResultCountType) HasRules() bool {
+	if o != nil && !IsNil(o.Rules) {
+		return true
+	}
+
+	return false
+}
+
+// SetRules gets a reference to the given []AnalyticsResultCountRule and assigns it to the Rules field.
+func (o *AnalyticsResultCountType) SetRules(v []AnalyticsResultCountRule) {
+	o.Rules = v
+}
+
 // GetTimeframeMinutes returns the TimeframeMinutes field value if set, zero value otherwise.
 func (o *AnalyticsResultCountType) GetTimeframeMinutes() int32 {
 	if o == nil || IsNil(o.TimeframeMinutes) {
@@ -237,6 +305,12 @@ func (o AnalyticsResultCountType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NoDataPolicy) {
 		toSerialize["noDataPolicy"] = o.NoDataPolicy
 	}
+	if !IsNil(o.Operator) {
+		toSerialize["operator"] = o.Operator
+	}
+	if !IsNil(o.Rules) {
+		toSerialize["rules"] = o.Rules
+	}
 	if !IsNil(o.TimeframeMinutes) {
 		toSerialize["timeframeMinutes"] = o.TimeframeMinutes
 	}
@@ -267,6 +341,8 @@ func (o *AnalyticsResultCountType) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "evaluationDelayMs")
 		delete(additionalProperties, "evaluationPeriodMinutes")
 		delete(additionalProperties, "noDataPolicy")
+		delete(additionalProperties, "operator")
+		delete(additionalProperties, "rules")
 		delete(additionalProperties, "timeframeMinutes")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0

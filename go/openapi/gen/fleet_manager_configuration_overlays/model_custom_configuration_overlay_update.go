@@ -22,7 +22,7 @@ var _ MappedNullable = &CustomConfigurationOverlayUpdate{}
 
 // CustomConfigurationOverlayUpdate Custom overlay field values for an update. With custom in update_mask, configuration is required and the content replaces the stored one; omitted targets are cleared. With custom.configuration or custom.targets, only that field changes.
 type CustomConfigurationOverlayUpdate struct {
-	// Replacement OpenTelemetry Collector YAML fragment. Creates a new version when its normalized form changes. Must not configure the OpAMP extension.
+	// Replacement Collector YAML fragment, merged into each target the same way as on create. Creates a new version when its normalized form changes. Do not define the Supervisor-managed opamp extension.
 	Configuration *string `json:"configuration,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Replaces the targets, as a set: duplicates are rejected and reordering alone changes nothing. An empty list removes all targets, which is rejected on an active overlay.
 	Targets []ConfigurationOverlayTargetReplace `json:"targets,omitempty"`

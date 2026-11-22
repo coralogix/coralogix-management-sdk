@@ -23,9 +23,9 @@ var _ MappedNullable = &CustomConfigurationOverlayCreate{}
 
 // CustomConfigurationOverlayCreate Custom overlay to create: an OpenTelemetry Collector YAML fragment and its targets.
 type CustomConfigurationOverlayCreate struct {
-	// OpenTelemetry Collector YAML fragment merged into each targeted remote configuration. Stored in normalized form (sorted keys, no comments). Must not configure the OpAMP extension.
+	// Collector YAML fragment encoded as a JSON string, with newline escapes (\\n) between YAML lines. It is deep-merged into each target's Collector configuration: overlay values win on conflicting keys, and a list in the overlay replaces the target's list. Stored in normalized form (sorted keys, no comments). Do not define the Supervisor-managed opamp extension.
 	Configuration string `json:"configuration" validate:"regexp=^[\\s\\S]*$"`
-	// Remote configurations the overlay applies to, as a set: duplicates are rejected. An active overlay needs at least one target.
+	// Remote configurations the overlay is merged into, as a set: duplicates are rejected. Targets may belong to different configuration groups. An active overlay needs at least one target.
 	Targets []ConfigurationOverlayTargetCreate `json:"targets,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

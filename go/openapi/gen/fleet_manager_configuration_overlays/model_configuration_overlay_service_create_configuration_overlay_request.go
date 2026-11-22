@@ -23,19 +23,19 @@ var _ MappedNullable = &ConfigurationOverlayServiceCreateConfigurationOverlayReq
 
 // ConfigurationOverlayServiceCreateConfigurationOverlayRequest Payload used to create a custom configuration overlay.
 type ConfigurationOverlayServiceCreateConfigurationOverlayRequest struct {
-	// Set true to activate the overlay when it is created.
+	// Set true to apply the overlay to its targets when it is created. Needs at least one target. Defaults to false (inactive).
 	Active *bool `json:"active,omitempty"`
-	// Custom overlay: an OpenTelemetry Collector YAML fragment and its targets.
+	// Custom overlay: a Collector YAML fragment and the remote configurations it is merged into.
 	Custom CustomConfigurationOverlayCreate `json:"custom"`
-	// Human-readable description.
+	// Description of the overlay's purpose.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name, unique among unarchived overlays.
 	Name string `json:"name" validate:"regexp=^[\\s\\S]*$"`
-	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.
+	// Merge precedence when several active overlays target the same remote configuration. Overlays merge in ascending order, so higher values win on conflicting keys; on a tie, the newer overlay wins.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
 	// Activation schedules. Windows must not overlap; a window may start when another ends.
 	Schedules []ConfigurationOverlayScheduleCreate `json:"schedules,omitempty"`
-	// Tags attached to the configuration overlay.
+	// Tags for organizing the overlay. Tags do not select targets.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
