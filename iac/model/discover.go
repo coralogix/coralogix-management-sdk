@@ -30,7 +30,7 @@ import (
 // matches make an always-exists singleton. The fallback never runs for such a resource, so it
 // cannot change a result that the suffix search already gives.
 //
-// hints holds, for a step that stays unresolved, a sentence that tells what the fallback found.
+// hints holds, for a step that has no match, a sentence that tells the fallback found none.
 func discoverOperations(doc *v3.Document, name string, explicit map[verb]string, p Policy) (candidates map[verb][]foundOp, hints map[verb]string) {
 	candidates = map[verb][]foundOp{}
 	for _, role := range verbs {
@@ -45,11 +45,13 @@ func discoverOperations(doc *v3.Document, name string, explicit map[verb]string,
 			continue
 		}
 		matches := serviceOperations(doc, name, role, p)
-		if len(matches) == 1 {
-			candidates[role] = matches
+		if len(matches) == 0 {
+			hints[role] = fallbackHint(name, role)
 			continue
 		}
-		hints[role] = fallbackHint(name, role, matches)
+		// Several matches stay as candidates, so the step is ambiguous. An empty step could
+		// make an always-exists singleton (see impliedCandidates) and hide the ambiguity.
+		candidates[role] = matches
 	}
 	return candidates, hints
 }
@@ -91,17 +93,8 @@ func serviceOperations(doc *v3.Document, name string, role verb, p Policy) []fou
 	return matches
 }
 
-func fallbackHint(name string, role verb, matches []foundOp) string {
-	base := fmt.Sprintf("Discovery also looked for <Service>_%s<anything> operations that return %s", role, name)
-	if len(matches) == 0 {
-		return base + ", and found none."
-	}
-	var ids []string
-	for _, m := range matches {
-		ids = append(ids, m.op.OperationId)
-	}
-	slices.Sort(ids)
-	return fmt.Sprintf("%s, and found %d: %s. Select one exact operation ID.", base, len(ids), strings.Join(ids, ", "))
+func fallbackHint(name string, role verb) string {
+	return fmt.Sprintf("Discovery also looked for <Service>_%s<anything> operations that return %s, and found none.", role, name)
 }
 
 // hintSentence is the hint as a sentence to add after an error message, or "".

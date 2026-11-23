@@ -69,20 +69,40 @@ func TestServiceFallbackAmbiguousStaysAnError(t *testing.T) {
 	report := Validate(doc, "SettingsThing", OperationIDs{})
 	var found bool
 	for _, i := range report {
-		if i.Code == "OPERATION_NOT_FOUND" && i.Location == "paths.get" {
+		if i.Code == "OPERATION_AMBIGUOUS" && i.Location == "paths.get" {
 			found = true
 			for _, id := range []string{"SettingsService_GetSettings", "SettingsService_GetOtherSettings"} {
-				if !strings.Contains(i.Remediation, id) {
-					t.Errorf("hint %q does not name %s", i.Remediation, id)
+				if !strings.Contains(i.Message, id) {
+					t.Errorf("message %q does not name %s", i.Message, id)
 				}
 			}
 		}
 	}
 	if !found {
-		t.Fatalf("Validate: %v, want OPERATION_NOT_FOUND for Get", report)
+		t.Fatalf("Validate: %v, want OPERATION_AMBIGUOUS for Get", report)
 	}
 	if _, err := Build(doc, "SettingsThing"); err == nil {
 		t.Fatal("Build found operations for an ambiguous service")
+	}
+}
+
+// Two Delete operations that return the component do not leave an always-exists singleton.
+func TestServiceFallbackAmbiguousDeleteIsNotImplied(t *testing.T) {
+	doc := loadSettingsThing(t, func(s string) string {
+		deleteOp := func(id, path string) string {
+			return "  " + path + ":\n    delete:\n      operationId: " + id + "\n      tags: [Settings Service]\n      responses:\n        '200': {description: ok, content: {application/json: {schema: {allOf: [{$ref: '#/components/schemas/SettingsThing'}], description: The thing.}}}}\n"
+		}
+		return strings.Replace(s, "components:", deleteOp("SettingsService_DeleteSettings", "/v1/settings/a")+deleteOp("SettingsService_DeleteAllSettings", "/v1/settings/b")+"components:", 1)
+	})
+	var found bool
+	for _, i := range Validate(doc, "SettingsThing", OperationIDs{}) {
+		found = found || (i.Code == "OPERATION_AMBIGUOUS" && i.Location == "paths.delete")
+	}
+	if !found {
+		t.Fatal("Validate found no OPERATION_AMBIGUOUS for Delete")
+	}
+	if _, err := Build(doc, "SettingsThing"); err == nil {
+		t.Fatal("Build treated an ambiguous Delete as an always-exists singleton")
 	}
 }
 
