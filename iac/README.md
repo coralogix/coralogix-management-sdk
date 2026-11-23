@@ -54,7 +54,7 @@ report = sdkcheck.Issues(refs, loaded, func(sdkcheck.Ref) sdkcheck.Source {
 
 For each step (Create, Get, Update or Replace, Delete), the model looks for an operationId that ends in `_<Step><Component>`, for example `_GetThing`. An explicit operationId always wins.
 
-When that search does not resolve the resource, a fallback runs for each step that has no match. It takes the operations whose operationId is `<Service>_<Step><anything>` and whose 200 response is the component. The service is the operationId prefix before the first `_`. The model accepts the step only when exactly one operation matches. Zero matches stay `OPERATION_NOT_FOUND`, and the remediation says the fallback found none. Several matches are `OPERATION_AMBIGUOUS`.
+When that search does not resolve the resource, a fallback runs for each step that has no match. It takes the operations whose operationId is `<Service>_<Step><anything>` and whose 200 response is the component. A Create or Delete on the path of the Get also matches, because a Delete often returns an empty body. The service is the operationId prefix before the first `_`. The model accepts the step only when exactly one operation matches. Zero matches stay `OPERATION_NOT_FOUND`, and the remediation says the fallback found none. Several matches are `OPERATION_AMBIGUOUS`.
 
 ```text
 SettingsService_GetSettings     GET   /v1/settings   returns SettingsThing   -> Get

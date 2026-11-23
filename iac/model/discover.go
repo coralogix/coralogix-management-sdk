@@ -40,11 +40,16 @@ func discoverOperations(doc *v3.Document, name string, explicit map[verb]string,
 		return candidates, nil
 	}
 	hints = map[verb]string{}
-	for _, role := range verbs {
+	// Get comes first: Create and Delete also match on the path of Get.
+	for _, role := range []verb{opGet, opUpdate, opCreate, opDelete} {
 		if len(candidates[role]) != 0 || explicit[role] != "" {
 			continue
 		}
-		matches := serviceOperations(doc, name, role, p)
+		var getPath string
+		if len(candidates[opGet]) == 1 && (role == opCreate || role == opDelete) {
+			getPath = candidates[opGet][0].path
+		}
+		matches := serviceOperations(doc, name, role, getPath, p)
 		if len(matches) == 0 {
 			hints[role] = fallbackHint(name, role)
 			continue
@@ -72,7 +77,12 @@ func suffixResolved(candidates map[verb][]foundOp, explicit map[verb]string, p P
 // <Service>_<Role><anything> and whose success response is the component name. The service is the
 // operationId prefix before the first "_". Update also takes the prefix Replace, as the suffix
 // search does.
-func serviceOperations(doc *v3.Document, name string, role verb, p Policy) []foundOp {
+//
+// A Create or Delete does not always return the component: a Delete often returns an empty body.
+// So when getPath is not empty, an operation on that path matches without the response check.
+// Without it, a singleton with a Delete would look like one that has no Delete (see
+// impliedCandidates).
+func serviceOperations(doc *v3.Document, name string, role verb, getPath string, p Policy) []foundOp {
 	prefixes := []string{string(role)}
 	if role == opUpdate {
 		prefixes = append(prefixes, string(opReplace))
@@ -84,7 +94,7 @@ func serviceOperations(doc *v3.Document, name string, role verb, p Policy) []fou
 			if !ok || !slices.ContainsFunc(prefixes, func(prefix string) bool { return strings.HasPrefix(action, prefix) }) {
 				continue
 			}
-			if p.responseResourceProxy(operation, name) == nil {
+			if p.responseResourceProxy(operation, name) == nil && (getPath == "" || path != getPath) {
 				continue
 			}
 			matches = append(matches, foundOp{path: path, method: strings.ToUpper(method), item: item, op: operation})

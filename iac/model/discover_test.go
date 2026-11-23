@@ -156,3 +156,21 @@ func TestServiceFallbackKeepsSuffixResult(t *testing.T) {
 		t.Errorf("Get = %q AlwaysExists=%v, want the suffix match and an always-exists singleton", r.Get.OperationID, r.AlwaysExists)
 	}
 }
+
+// A Delete on the singleton path that returns an empty body is still a Delete. The singleton is not
+// an always-exists singleton, and Validate reports the missing Create.
+func TestServiceFallbackEmptyDeleteIsNotImplied(t *testing.T) {
+	doc := loadSettingsThing(t, func(s string) string {
+		return strings.Replace(s, "    patch:", "    delete:\n      operationId: SettingsService_DeleteSettings\n      tags: [Settings Service]\n      responses:\n        '200': {description: ok, content: {application/json: {schema: {type: object}}}}\n    patch:", 1)
+	})
+	var found bool
+	for _, i := range Validate(doc, "SettingsThing", OperationIDs{}) {
+		found = found || (i.Code == "OPERATION_NOT_FOUND" && i.Location == "paths.create")
+	}
+	if !found {
+		t.Fatal("Validate found no OPERATION_NOT_FOUND for Create")
+	}
+	if _, err := Build(doc, "SettingsThing"); err == nil {
+		t.Fatal("Build treated a singleton with a Delete as an always-exists singleton")
+	}
+}
