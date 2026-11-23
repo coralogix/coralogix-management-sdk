@@ -1,0 +1,1416 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/product-analytics/pathways/v1": {
+      "get": {
+        "description": "Lists saved pathways, one page at a time, ordered by updatedAt descending, then by id descending. totalSize is the exact number of pathways that match app_names. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Read`",
+        "operationId": "PathwaysService_ListSavedPathways",
+        "parameters": [
+          {
+            "description": "Maximum number of pathways to return. 0 uses the default of 20. A value above 500 is lowered to 500. A negative value returns 400.",
+            "in": "query",
+            "name": "page_size",
+            "required": false,
+            "schema": {
+              "description": "Maximum number of pathways to return. 0 uses the default of 20. A value above 500 is lowered to 500. A negative value returns 400.",
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The nextPageToken of the previous response. Empty for the first page. The token is opaque, valid for 15 minutes, and tied to the app_names of the request that returned it. A token that is expired, from another query, or malformed returns 400: \"pageToken belongs to a different query or has expired. Send the request again without pageToken.\"",
+            "in": "query",
+            "name": "page_token",
+            "required": false,
+            "schema": {
+              "description": "The nextPageToken of the previous response. Empty for the first page. The token is opaque, valid for 15 minutes, and tied to the app_names of the request that returned it. A token that is expired, from another query, or malformed returns 400: \"pageToken belongs to a different query or has expired. Send the request again without pageToken.\"",
+              "maxLength": 1024,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns only pathways of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return pathways of every application.",
+            "in": "query",
+            "name": "app_names",
+            "required": false,
+            "schema": {
+              "description": "Returns only pathways of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return pathways of every application.",
+              "items": {
+                "description": "Returns only pathways of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return pathways of every application.",
+                "maxLength": 1024,
+                "minLength": 1,
+                "pattern": "^[\\s\\S]*$",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 0,
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "nextPageToken": "",
+                  "pathways": [
+                    {
+                      "appName": "web-shop",
+                      "createdAt": "2026-11-16T10:00:00.000Z",
+                      "direction": "PATHWAY_DIRECTION_AFTER",
+                      "filters": [],
+                      "id": "44",
+                      "name": "After cart",
+                      "owner": "dana@example.com",
+                      "pagesCount": 5,
+                      "timeRange": {
+                        "fixed": {
+                          "fromTimestampMs": "1763251200000",
+                          "toTimestampMs": "1763337600000"
+                        }
+                      },
+                      "topN": 20,
+                      "updatedAt": "2026-11-16T10:00:00.000Z",
+                      "version": 1,
+                      "view": "/cart"
+                    }
+                  ],
+                  "totalSize": 1
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ListSavedPathwaysResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List pathways",
+        "tags": [
+          "Product Analytics Pathways Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Read"
+        ]
+      },
+      "post": {
+        "description": "Creates a saved pathway and returns the stored pathway, with version 1. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "PathwaysService_CreateSavedPathway",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Pathway field values for a create.",
+                "properties": {
+                  "appName": {
+                    "description": "RUM application the pathway belongs to. Cannot be changed after creation.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "direction": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PathwayDirection"
+                      }
+                    ],
+                    "default": "PATHWAY_DIRECTION_AFTER",
+                    "description": "Whether the paths show the pages after or before view. Omitted or PATHWAY_DIRECTION_UNSPECIFIED uses PATHWAY_DIRECTION_AFTER."
+                  },
+                  "filters": {
+                    "description": "Session filters of the pathway.",
+                    "items": {
+                      "$ref": "#/components/schemas/ViewFilter"
+                    },
+                    "maxItems": 100,
+                    "minItems": 0,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
+                  },
+                  "name": {
+                    "description": "Display name of the pathway. Must not be empty. Does not have to be unique.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "pagesCount": {
+                    "default": 5,
+                    "description": "Number of pages after or before view in each path. Omitted uses 5.",
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "timeRange": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ViewTimeRange"
+                      }
+                    ],
+                    "description": "Time range of the pathway."
+                  },
+                  "topN": {
+                    "default": 20,
+                    "description": "Number of paths shown, most common first. Omitted uses 20.",
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "view": {
+                    "description": "View (page) the paths are traced from.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "appName",
+                  "name",
+                  "view",
+                  "timeRange"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "direction": "PATHWAY_DIRECTION_AFTER",
+                  "filters": [],
+                  "id": "44",
+                  "name": "After cart",
+                  "owner": "dana@example.com",
+                  "pagesCount": 5,
+                  "timeRange": {
+                    "fixed": {
+                      "fromTimestampMs": "1763251200000",
+                      "toTimestampMs": "1763337600000"
+                    }
+                  },
+                  "topN": 20,
+                  "updatedAt": "2026-11-16T10:00:00.000Z",
+                  "version": 1,
+                  "view": "/cart"
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedPathway"
+                    }
+                  ],
+                  "description": "The created pathway."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create pathway",
+        "tags": [
+          "Product Analytics Pathways Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      }
+    },
+    "/product-analytics/pathways/v1/{id}": {
+      "get": {
+        "description": "Gets a saved pathway by ID. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Read`",
+        "operationId": "PathwaysService_GetSavedPathway",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "direction": "PATHWAY_DIRECTION_AFTER",
+                  "filters": [],
+                  "id": "44",
+                  "name": "After cart",
+                  "owner": "dana@example.com",
+                  "pagesCount": 5,
+                  "timeRange": {
+                    "fixed": {
+                      "fromTimestampMs": "1763251200000",
+                      "toTimestampMs": "1763337600000"
+                    }
+                  },
+                  "topN": 20,
+                  "updatedAt": "2026-11-16T10:00:00.000Z",
+                  "version": 1,
+                  "view": "/cart"
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedPathway"
+                    }
+                  ],
+                  "description": "The pathway."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Pathway not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get pathway",
+        "tags": [
+          "Product Analytics Pathways Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Read"
+        ]
+      },
+      "delete": {
+        "description": "Deletes a saved pathway by ID. Returns 404 when the pathway does not exist. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "PathwaysService_DeleteSavedPathway",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {},
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSavedPathwayResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Pathway not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete pathway",
+        "tags": [
+          "Product Analytics Pathways Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      },
+      "patch": {
+        "description": "Updates the fields listed in update_mask. Other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. The last write wins, and version increases by 1. Returns the stored pathway. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "PathwaysService_UpdateSavedPathway",
+        "parameters": [
+          {
+            "description": "Comma-separated JSON paths of the fields to update: name, view, direction, pagesCount, topN, timeRange, filters. snake_case names are also accepted. A listed field that is omitted from the body is cleared or reset to its default: direction resets to PATHWAY_DIRECTION_AFTER, pagesCount to 5, topN to 20, and filters becomes empty; name, view, and timeRange cannot be cleared: listing one without a value returns 400. Nested, unknown, immutable, and server-generated paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+            "in": "query",
+            "name": "update_mask",
+            "required": true,
+            "schema": {
+              "description": "Comma-separated JSON paths of the fields to update: name, view, direction, pagesCount, topN, timeRange, filters. snake_case names are also accepted. A listed field that is omitted from the body is cleared or reset to its default: direction resets to PATHWAY_DIRECTION_AFTER, pagesCount to 5, topN to 20, and filters becomes empty; name, view, and timeRange cannot be cleared: listing one without a value returns 400. Nested, unknown, immutable, and server-generated paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+              "maxLength": 512,
+              "minLength": 1,
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$",
+              "type": "string",
+              "x-coralogix-presence": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Pathway field values for an update. Only fields listed in update_mask are applied.",
+                "properties": {
+                  "direction": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PathwayDirection"
+                      }
+                    ],
+                    "default": "PATHWAY_DIRECTION_AFTER",
+                    "description": "Whether the paths show the pages after or before view. Clearing it or sending PATHWAY_DIRECTION_UNSPECIFIED resets it to PATHWAY_DIRECTION_AFTER."
+                  },
+                  "filters": {
+                    "description": "Session filters of the pathway. Replaces the whole list.",
+                    "items": {
+                      "$ref": "#/components/schemas/ViewFilter"
+                    },
+                    "maxItems": 100,
+                    "minItems": 0,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
+                  },
+                  "name": {
+                    "description": "Display name of the pathway. Must not be empty. Cannot be cleared.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "pagesCount": {
+                    "default": 5,
+                    "description": "Number of pages after or before view in each path. Clearing it resets it to 5.",
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "timeRange": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ViewTimeRange"
+                      }
+                    ],
+                    "description": "Time range of the pathway. Cannot be cleared."
+                  },
+                  "topN": {
+                    "default": 20,
+                    "description": "Number of paths shown, most common first. Clearing it resets it to 20.",
+                    "format": "int32",
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "view": {
+                    "description": "View (page) the paths are traced from. Cannot be cleared.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "direction": "PATHWAY_DIRECTION_AFTER",
+                  "filters": [],
+                  "id": "44",
+                  "name": "After cart",
+                  "owner": "dana@example.com",
+                  "pagesCount": 5,
+                  "timeRange": {
+                    "fixed": {
+                      "fromTimestampMs": "1763251200000",
+                      "toTimestampMs": "1763337600000"
+                    }
+                  },
+                  "topN": 20,
+                  "updatedAt": "2026-11-16T11:00:00.000Z",
+                  "version": 2,
+                  "view": "/cart"
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedPathway"
+                    }
+                  ],
+                  "description": "The updated pathway."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Pathway not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update pathway",
+        "tags": [
+          "Product Analytics Pathways Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Pathway ID, a decimal number.",
+          "required": true,
+          "schema": {
+            "maxLength": 19,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Pathway ID, a decimal number."
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "BoolFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BoolFilterField"
+              }
+            ],
+            "description": "Boolean field to filter on. BOOL_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "BOOL_FILTER_FIELD_HAS_SESSION_REPLAY"
+            ]
+          },
+          "value": {
+            "description": "Value the field must have.",
+            "type": "boolean",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Filter on a boolean field."
+      },
+      "BoolFilterField": {
+        "enum": [
+          "BOOL_FILTER_FIELD_UNSPECIFIED",
+          "BOOL_FILTER_FIELD_HAS_SESSION_REPLAY",
+          "BOOL_FILTER_FIELD_HAS_SCREENSHOT",
+          "BOOL_FILTER_FIELD_IS_RAGE_CLICK",
+          "BOOL_FILTER_FIELD_IS_DEAD_CLICK"
+        ],
+        "type": "string",
+        "description": "Session attribute with boolean values, for boolFilter."
+      },
+      "CalendarWindow": {
+        "enum": [
+          "CALENDAR_WINDOW_UNSPECIFIED",
+          "CALENDAR_WINDOW_TODAY",
+          "CALENDAR_WINDOW_YESTERDAY"
+        ],
+        "type": "string",
+        "description": "Named calendar window. TODAY runs from local midnight to now, YESTERDAY covers the whole previous local day."
+      },
+      "DeleteSavedPathwayResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Confirmation that the pathway was deleted."
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "maximum": 599,
+            "minimum": 100,
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
+          },
+          "message": {
+            "maxLength": 4096,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
+          }
+        },
+        "description": "Standard error response body returned for a failed request."
+      },
+      "FilterPathAndValues": {
+        "title": "FilterPathAndValues",
+        "required": [
+          "path"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ],
+            "description": "The filters."
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "examples": [
+              "test"
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "This data structure represents a filter path and values"
+      },
+      "Filters": {
+        "title": "Filters",
+        "required": [
+          "pathAndValues"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
+            ]
+          },
+          "pathAndValues": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "description": "This data structure represents a filter"
+      },
+      "FixedTimeRange": {
+        "required": [
+          "fromTimestampMs",
+          "toTimestampMs"
+        ],
+        "type": "object",
+        "properties": {
+          "fromTimestampMs": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Start of the range, in Unix milliseconds. Inclusive: events at exactly this time are in the range.",
+            "examples": [
+              "1763251200000"
+            ]
+          },
+          "toTimestampMs": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "End of the range, in Unix milliseconds. Exclusive: events at exactly this time are not in the range, so consecutive ranges can share a boundary.",
+            "examples": [
+              "1763337600000"
+            ]
+          }
+        },
+        "description": "Absolute time range, from inclusive to exclusive."
+      },
+      "ListSavedPathwaysResponse": {
+        "type": "object",
+        "properties": {
+          "nextPageToken": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Token for the next page, valid for 15 minutes. Empty on the last page."
+          },
+          "pathways": {
+            "maxItems": 500,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SavedPathway"
+            },
+            "description": "The pathways, ordered by updatedAt descending, then by id descending."
+          },
+          "totalSize": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Exact number of pathways that match app_names, across all pages.",
+            "format": "int32"
+          }
+        },
+        "description": "A page of saved pathways."
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        }
+      },
+      "NumericCondition": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "min"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "max"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "range"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "max": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Matches values less than or equal to max.",
+            "examples": [
+              "100"
+            ]
+          },
+          "min": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Matches values greater than or equal to min.",
+            "examples": [
+              "1"
+            ]
+          },
+          "range": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericRange"
+              }
+            ],
+            "description": "Matches values from lower to upper, both included."
+          }
+        },
+        "description": "Numeric matching condition. Exactly one of min, max, or range is set."
+      },
+      "NumericFilter": {
+        "required": [
+          "field",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericCondition"
+              }
+            ],
+            "description": "Condition the field must match."
+          },
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericFilterField"
+              }
+            ],
+            "description": "Numeric field to filter on. NUMERIC_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "NUMERIC_FILTER_FIELD_ERROR_COUNT"
+            ]
+          }
+        },
+        "description": "Filter on a numeric field."
+      },
+      "NumericFilterField": {
+        "enum": [
+          "NUMERIC_FILTER_FIELD_UNSPECIFIED",
+          "NUMERIC_FILTER_FIELD_ERROR_COUNT",
+          "NUMERIC_FILTER_FIELD_ACTION_COUNT",
+          "NUMERIC_FILTER_FIELD_LONG_TASK_COUNT",
+          "NUMERIC_FILTER_FIELD_CRASH_COUNT",
+          "NUMERIC_FILTER_FIELD_RESOURCE_COUNT",
+          "NUMERIC_FILTER_FIELD_SCROLL_DEPTH_PERCENTAGE",
+          "NUMERIC_FILTER_FIELD_VIEWPORT_WIDTH",
+          "NUMERIC_FILTER_FIELD_VIEWPORT_HEIGHT",
+          "NUMERIC_FILTER_FIELD_RAGE_CLICK_COUNT",
+          "NUMERIC_FILTER_FIELD_DEAD_CLICK_COUNT"
+        ],
+        "type": "string",
+        "description": "Session attribute with numeric values, for numericFilter."
+      },
+      "NumericRange": {
+        "required": [
+          "lower",
+          "upper"
+        ],
+        "type": "object",
+        "properties": {
+          "lower": {
+            "description": "Lowest matching value, included. Must not be greater than upper.",
+            "examples": [
+              "1"
+            ],
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "upper": {
+            "description": "Highest matching value, included.",
+            "examples": [
+              "100"
+            ],
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Inclusive numeric range."
+      },
+      "PathwayDirection": {
+        "enum": [
+          "PATHWAY_DIRECTION_UNSPECIFIED",
+          "PATHWAY_DIRECTION_AFTER",
+          "PATHWAY_DIRECTION_BEFORE"
+        ],
+        "type": "string",
+        "description": "Direction of a pathway. AFTER shows the pages visited after the view, where users go next. BEFORE shows the pages visited before it, where users came from."
+      },
+      "SavedPathway": {
+        "required": [
+          "id",
+          "appName",
+          "name",
+          "view",
+          "pagesCount",
+          "topN",
+          "direction",
+          "timeRange",
+          "createdAt",
+          "updatedAt",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "appName": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "RUM application the pathway belongs to."
+          },
+          "createdAt": {
+            "description": "When the pathway was created. Set by the server.",
+            "format": "date-time",
+            "maxLength": 64,
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "direction": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PathwayDirection"
+              }
+            ],
+            "description": "Whether the paths show the pages after or before view.",
+            "default": "PATHWAY_DIRECTION_AFTER"
+          },
+          "filters": {
+            "description": "Session filters of the pathway. Empty when not set.",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilter"
+            },
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          },
+          "id": {
+            "maxLength": 19,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Pathway ID, a decimal number. Set by the server.",
+            "readOnly": true
+          },
+          "name": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name of the pathway. Does not have to be unique."
+          },
+          "owner": {
+            "description": "User who created the pathway. Set by the server. Absent for pathways saved before owners were recorded.",
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "pagesCount": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Number of pages after or before view in each path.",
+            "format": "int32",
+            "default": 5
+          },
+          "timeRange": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ViewTimeRange"
+              }
+            ],
+            "description": "Time range of the pathway."
+          },
+          "topN": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Number of paths shown, most common first.",
+            "format": "int32",
+            "default": 20
+          },
+          "updatedAt": {
+            "description": "When the pathway was last updated, from the API or the Coralogix UI. Set by the server.",
+            "format": "date-time",
+            "maxLength": 64,
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "version": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Version of the pathway. Set by the server: 1 on create, increased by 1 on every update, including updates made in the Coralogix UI.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "view": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "View (page) the paths are traced from."
+          }
+        },
+        "description": "A saved pathway of a RUM application: the paths sessions take to or from a page."
+      },
+      "StringCondition": {
+        "required": [
+          "values",
+          "operator"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringConditionOperator"
+              }
+            ],
+            "description": "Matching operator. STRING_CONDITION_OPERATOR_UNSPECIFIED is rejected."
+          },
+          "values": {
+            "description": "Values to match. At least one is required.",
+            "items": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Values to match. At least one is required."
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          }
+        },
+        "description": "String matching condition."
+      },
+      "StringConditionOperator": {
+        "enum": [
+          "STRING_CONDITION_OPERATOR_UNSPECIFIED",
+          "STRING_CONDITION_OPERATOR_EQUAL",
+          "STRING_CONDITION_OPERATOR_NOT_EQUAL",
+          "STRING_CONDITION_OPERATOR_CONTAINS",
+          "STRING_CONDITION_OPERATOR_NOT_CONTAINS",
+          "STRING_CONDITION_OPERATOR_START_WITH",
+          "STRING_CONDITION_OPERATOR_NOT_START_WITH",
+          "STRING_CONDITION_OPERATOR_END_WITH",
+          "STRING_CONDITION_OPERATOR_NOT_END_WITH"
+        ],
+        "type": "string",
+        "description": "Operator of a string condition."
+      },
+      "StringFilter": {
+        "required": [
+          "field",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringCondition"
+              }
+            ],
+            "description": "Condition the field must match."
+          },
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterField"
+              }
+            ],
+            "description": "String field to filter on. STRING_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "STRING_FILTER_FIELD_PLATFORM"
+            ]
+          }
+        },
+        "description": "Filter on a string field."
+      },
+      "StringFilterField": {
+        "enum": [
+          "STRING_FILTER_FIELD_UNSPECIFIED",
+          "STRING_FILTER_FIELD_URL_SCHEMA",
+          "STRING_FILTER_FIELD_URL_SUBDOMAIN",
+          "STRING_FILTER_FIELD_URL_DOMAIN",
+          "STRING_FILTER_FIELD_URL_HOST",
+          "STRING_FILTER_FIELD_URL_PATH",
+          "STRING_FILTER_FIELD_URL_TEMPLATE",
+          "STRING_FILTER_FIELD_REFERRER_SCHEMA",
+          "STRING_FILTER_FIELD_REFERRER_SUBDOMAIN",
+          "STRING_FILTER_FIELD_REFERRER_DOMAIN",
+          "STRING_FILTER_FIELD_REFERRER_HOST",
+          "STRING_FILTER_FIELD_REFERRER_PATH",
+          "STRING_FILTER_FIELD_REFERRER_URL",
+          "STRING_FILTER_FIELD_SESSION_ID",
+          "STRING_FILTER_FIELD_USER_ID",
+          "STRING_FILTER_FIELD_USER_EMAIL",
+          "STRING_FILTER_FIELD_USER_NAME",
+          "STRING_FILTER_FIELD_CX_USER_ID",
+          "STRING_FILTER_FIELD_ACCOUNT_ID",
+          "STRING_FILTER_FIELD_ACCOUNT_NAME",
+          "STRING_FILTER_FIELD_VIEW_ID",
+          "STRING_FILTER_FIELD_PLATFORM",
+          "STRING_FILTER_FIELD_ENVIRONMENT",
+          "STRING_FILTER_FIELD_APP_VERSION",
+          "STRING_FILTER_FIELD_CX_SDK_VERSION",
+          "STRING_FILTER_FIELD_BROWSER_NAME",
+          "STRING_FILTER_FIELD_BROWSER_VERSION",
+          "STRING_FILTER_FIELD_BROWSER_MAJOR_VERSION",
+          "STRING_FILTER_FIELD_OS",
+          "STRING_FILTER_FIELD_OS_MAJOR_VERSION",
+          "STRING_FILTER_FIELD_OS_VERSION",
+          "STRING_FILTER_FIELD_DEVICE_TYPE",
+          "STRING_FILTER_FIELD_DEVICE_NAME",
+          "STRING_FILTER_FIELD_DEVICE_BRAND",
+          "STRING_FILTER_FIELD_DEVICE_MODEL",
+          "STRING_FILTER_FIELD_DEVICE_ARCHITECTURE",
+          "STRING_FILTER_FIELD_COUNTRY_NAME",
+          "STRING_FILTER_FIELD_CITY_NAME",
+          "STRING_FILTER_FIELD_CONTINENT_NAME",
+          "STRING_FILTER_FIELD_IP",
+          "STRING_FILTER_FIELD_USER_AGENT",
+          "STRING_FILTER_FIELD_APP_NAME",
+          "STRING_FILTER_FIELD_CLICKS_ELEMENT_FINGERPRINT"
+        ],
+        "type": "string",
+        "description": "Session attribute with string values, for stringFilter."
+      },
+      "ViewFilter": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "stringFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "numericFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "boolFilter"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "boolFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BoolFilter"
+              }
+            ],
+            "description": "A boolean field with the value it must have."
+          },
+          "numericFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericFilter"
+              }
+            ],
+            "description": "A numeric field with the condition it must match."
+          },
+          "stringFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilter"
+              }
+            ],
+            "description": "A string field with the condition it must match."
+          }
+        },
+        "description": "A session filter. Each kind takes only the fields of its type: string fields in stringFilter, numeric fields in numericFilter, boolean fields in boolFilter."
+      },
+      "ViewTimeRange": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "fixed"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "relativeMinutes"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "calendar"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "calendar": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CalendarWindow"
+              }
+            ],
+            "description": "Named calendar window, resolved in the viewer's timezone. CALENDAR_WINDOW_UNSPECIFIED is rejected."
+          },
+          "fixed": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FixedTimeRange"
+              }
+            ],
+            "description": "Absolute time range between two timestamps."
+          },
+          "relativeMinutes": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Number of minutes back from now."
+          }
+        },
+        "description": "Time range of a saved view. Exactly one of fixed, relative_minutes, or calendar is set."
+      },
+      "events.v3.FilterMatcher": {
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ],
+        "type": "string"
+      },
+      "v3.FilterOperator": {
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ],
+        "type": "string",
+        "description": "Filter operator."
+      }
+    }
+  }
+}
