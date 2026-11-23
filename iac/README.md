@@ -50,6 +50,19 @@ report = sdkcheck.Issues(refs, loaded, func(sdkcheck.Ref) sdkcheck.Source {
 })
 ```
 
+## How the model finds the operations
+
+For each step (Create, Get, Update or Replace, Delete), the model looks for an operationId that ends in `_<Step><Component>`, for example `_GetThing`. An explicit operationId always wins.
+
+When that search does not resolve the resource, a fallback runs for each step that has no match. It takes the operations whose operationId is `<Service>_<Step><anything>` and whose 200 response is the component. The service is the operationId prefix before the first `_`. The model accepts the step only when exactly one operation matches. Zero or several matches stay `OPERATION_NOT_FOUND`, and the remediation names what the fallback found.
+
+```text
+SettingsService_GetSettings     GET   /v1/settings   returns SettingsThing   -> Get
+SettingsService_UpdateSettings  PATCH /v1/settings   returns SettingsThing   -> Update
+```
+
+The fallback never runs for a resource that the suffix search already resolves.
+
 ## List
 
 `Resource.List` describes the operation that lists the resources. The model records facts. The tool decides what to generate from them.

@@ -157,16 +157,13 @@ func validateOperations(doc *v3.Document, name string, ids OperationIDs, p Polic
 	}
 	ids, _ = p.operationIDs(ids) // deleteOverrideConflictIssues reports the conflict.
 	explicit := map[verb]string{opCreate: ids.Create, opGet: ids.Get, opUpdate: ids.Update, opDelete: ids.Delete}
-	candidates := map[verb][]foundOp{}
-	for _, role := range verbs {
-		candidates[role] = matchingOperations(doc, name, role, explicit[role])
-	}
+	candidates, hints := discoverOperations(doc, name, explicit, p)
 	implied := impliedCandidates(candidates, explicit, p)
 	for _, role := range verbs {
 		if implied && (role == opCreate || role == opDelete) {
 			continue
 		}
-		report = append(report, validateRole(role, candidates[role], explicit[role], p, found)...)
+		report = append(report, validateRole(role, candidates[role], explicit[role], hints[role], p, found)...)
 	}
 	if implied {
 		impliedLifecycle(found, explicit, p)
@@ -179,7 +176,7 @@ func validateOperations(doc *v3.Document, name string, ids OperationIDs, p Polic
 
 // validateRole checks the operations that match one lifecycle step. It adds the one eligible
 // operation to found.
-func validateRole(role verb, candidates []foundOp, explicit string, p Policy, found map[verb]foundOp) issue.Report {
+func validateRole(role verb, candidates []foundOp, explicit, hint string, p Policy, found map[verb]foundOp) issue.Report {
 	location := "paths." + strings.ToLower(string(role))
 	switch len(candidates) {
 	case 0:
@@ -190,7 +187,7 @@ func validateRole(role verb, candidates []foundOp, explicit string, p Policy, fo
 		if explicit != "" {
 			wanted = fmt.Sprintf("operationId %q", explicit)
 		}
-		return issue.Report{{Code: "OPERATION_NOT_FOUND", Location: location, Message: fmt.Sprintf("No %s operation matches %s.", role, wanted), Remediation: "Fix the source API contract or select the exact operation ID."}}
+		return issue.Report{{Code: "OPERATION_NOT_FOUND", Location: location, Message: fmt.Sprintf("No %s operation matches %s.", role, wanted), Remediation: strings.TrimSpace("Fix the source API contract or select the exact operation ID. " + hint)}}
 	case 1:
 		candidate := candidates[0]
 		report := operationCandidateIssues(location, role, candidate, p)

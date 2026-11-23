@@ -234,8 +234,9 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 		return nil, err
 	}
 	explicit := map[verb]string{opCreate: ids.Create, opGet: ids.Get, opUpdate: ids.Update, opDelete: ids.Delete}
+	candidates, hints := discoverOperations(doc, name, explicit, p)
 	for _, v := range verbs {
-		matches := matchingOperations(doc, name, v, explicit[v])
+		matches := candidates[v]
 		if len(matches) > 1 {
 			var names []string
 			for _, match := range matches {
@@ -258,10 +259,10 @@ func findOperations(doc *v3.Document, name string, ids OperationIDs, p Policy) (
 			suffix += " or _" + string(opReplace) + name
 		}
 		if !ok && singleton {
-			return nil, fmt.Errorf("%s: a singleton (Get has no path parameter) needs Create, Get, Update, and Delete on one path; no operation with operationId suffix %s", v, suffix)
+			return nil, fmt.Errorf("%s: a singleton (Get has no path parameter) needs Create, Get, Update, and Delete on one path; no operation with operationId suffix %s%s", v, suffix, hintSentence(hints[v]))
 		}
 		if !ok {
-			return nil, fmt.Errorf("%s: no operation with operationId suffix %s", v, suffix)
+			return nil, fmt.Errorf("%s: no operation with operationId suffix %s%s", v, suffix, hintSentence(hints[v]))
 		}
 		if f.implied {
 			continue // the call that stands in for this step was checked as its own step
