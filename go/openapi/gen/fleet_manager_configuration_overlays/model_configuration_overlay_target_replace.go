@@ -23,7 +23,7 @@ var _ MappedNullable = &ConfigurationOverlayTargetReplace{}
 
 // ConfigurationOverlayTargetReplace Remote-configuration target input used when replacing configuration overlay targets.
 type ConfigurationOverlayTargetReplace struct {
-	// Remote configuration ID (families[].remoteConfigurations[].id in a configuration group, not the group ID). Its family must be active.
+	// Remote configuration ID: family.raw.remoteConfigurations[].id in a configuration group response, not the group or family ID. Its configuration family must be active, and its group must not be archived.
 	RemoteConfigurationId string `json:"remoteConfigurationId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

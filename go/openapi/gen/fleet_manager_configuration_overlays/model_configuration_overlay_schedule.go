@@ -26,7 +26,7 @@ var _ MappedNullable = &ConfigurationOverlaySchedule{}
 type ConfigurationOverlaySchedule struct {
 	// Time when this schedule was created.
 	CreatedAt time.Time `json:"createdAt"`
-	// Human-readable description.
+	// Description of the schedule.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Length of each window.
 	Duration string `json:"duration" validate:"regexp=^([1-9][0-9]{0,11}(\\\\.[0-9]{1,9})?|0\\\\.[0-9]{1,9})s$"`

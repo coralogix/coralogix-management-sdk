@@ -22,19 +22,19 @@ var _ = bytes.MinRead
 // checks if the ConfigurationOverlayTarget type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ConfigurationOverlayTarget{}
 
-// ConfigurationOverlayTarget Target snapshot entry for a configuration overlay version.
+// ConfigurationOverlayTarget A target of an overlay version: the source remote configuration and the generated remote configuration that holds the merged result.
 type ConfigurationOverlayTarget struct {
 	// Time when this overlay target was created.
 	CreatedAt time.Time `json:"createdAt"`
 	// Overlay target UUID v7.
 	Id string `json:"id" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Generated overlay configuration family UUID v7.
+	// UUID v7 of the configuration family Fleet Management generated with the merged configuration.
 	OverlayConfigurationFamilyId string `json:"overlayConfigurationFamilyId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Generated overlay remote configuration UUID v7.
+	// UUID v7 of the generated remote configuration that holds the merged configuration.
 	OverlayRemoteConfigurationId string `json:"overlayRemoteConfigurationId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Source configuration family UUID v7.
+	// UUID v7 of the configuration family that holds the source remote configuration.
 	SourceConfigurationFamilyId string `json:"sourceConfigurationFamilyId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
-	// Source remote configuration UUID v7.
+	// UUID v7 of the remote configuration the overlay is merged into.
 	SourceRemoteConfigurationId string `json:"sourceRemoteConfigurationId" validate:"regexp=^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"`
 	// Time when this overlay target was last updated.
 	UpdatedAt time.Time `json:"updatedAt"`

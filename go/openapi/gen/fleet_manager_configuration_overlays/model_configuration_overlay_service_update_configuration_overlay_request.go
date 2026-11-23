@@ -22,19 +22,19 @@ var _ MappedNullable = &ConfigurationOverlayServiceUpdateConfigurationOverlayReq
 
 // ConfigurationOverlayServiceUpdateConfigurationOverlayRequest Configuration overlay field values for an update. Only fields listed in update_mask are applied.
 type ConfigurationOverlayServiceUpdateConfigurationOverlayRequest struct {
-	// Set true to activate or false to deactivate the overlay. With schedules, activation enables them, and deactivation pauses them and ends a running window.
+	// Set true to activate or false to deactivate the overlay. Include active in update_mask to apply this value; omitting its value when listed resets it to false. With schedules, activation enables them, and deactivation pauses them and ends a running window.
 	Active *bool `json:"active,omitempty"`
 	// Custom overlay fields to update. Rejected for preset overlays.
 	Custom *CustomConfigurationOverlayUpdate `json:"custom,omitempty"`
-	// Human-readable description.
+	// Description of the overlay's purpose.
 	Description *string `json:"description,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// Display name, unique among unarchived overlays.
 	Name *string `json:"name,omitempty" validate:"regexp=^[\\s\\S]*$"`
-	// Merge precedence on a shared remote configuration: higher values win, and the newer overlay wins a tie.
+	// Merge precedence when several active overlays target the same remote configuration. Overlays merge in ascending order, so higher values win on conflicting keys; on a tie, the newer overlay wins.
 	PriorityOrder *int32 `json:"priorityOrder,omitempty"`
 	// Replaces the schedules of the latest version without creating a version. When the same request changes custom content, the list moves to the new version with new ids. Windows must not overlap; a window may start when another ends. Schedules are matched by startAt, duration, recurrence, and timeZone: a match keeps its id, and other schedules are removed. An empty list on an active overlay applies it continuously, right away.
 	Schedules []ConfigurationOverlayScheduleReplace `json:"schedules,omitempty"`
-	// Tags attached to the configuration overlay. Replaces all tags.
+	// Tags for organizing the overlay. Tags do not select targets. Replaces all tags.
 	Tags []string `json:"tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool

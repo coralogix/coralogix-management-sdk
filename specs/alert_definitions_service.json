@@ -2484,6 +2484,61 @@
         "type": "string",
         "description": "Alerts op."
       },
+      "AnalyticsResultCountRule": {
+        "title": "Analytics result count rule",
+        "required": [
+          "override"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalyticsResultCountRuleCondition"
+              }
+            ],
+            "description": "Which result rows the rule counts and the count it is compared against. When omitted, every result row counts and the count threshold is 0."
+          },
+          "override": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AlertDefOverride"
+              }
+            ],
+            "description": "The priority the alert triggers at when the rule holds. A rule that sets no priority triggers at P5, the lowest."
+          }
+        },
+        "description": "A rule that triggers the alert at its own priority when the number of query result rows meeting its condition compares to its count threshold as the alert's operator says"
+      },
+      "AnalyticsResultCountRuleCondition": {
+        "title": "Analytics result count rule condition",
+        "type": "object",
+        "properties": {
+          "countThreshold": {
+            "description": "The number of result rows meeting the rule that the alert's operator compares against. With the default operator the rule triggers when more rows than this meet it. When omitted, 0.",
+            "examples": [
+              10
+            ],
+            "format": "int64",
+            "maximum": 4294967295,
+            "minimum": 0,
+            "type": "integer",
+            "x-coralogix-presence": true
+          },
+          "expression": {
+            "description": "A DataPrime boolean expression over the columns of the query result. Only rows it holds for are counted. When omitted or empty, every result row counts.",
+            "examples": [
+              "error_rate > 20 && requests_per_minute > 100"
+            ],
+            "maxLength": 4096,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Defines which rows of the query result the rule counts and the count threshold they are compared against"
+      },
       "AnalyticsResultCountType": {
         "title": "Analytics result count alert type",
         "type": "object",
@@ -2526,6 +2581,28 @@
               }
             ],
             "description": "Configuration for how to treat and what state to give to an alert with no data"
+          },
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalyticsThresholdOperator"
+              }
+            ],
+            "description": "The comparison operator applied to the row count of every rule. With grouping, rows are counted per group.",
+            "examples": [
+              "ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_UNSPECIFIED"
+            ],
+            "x-stability": "preview"
+          },
+          "rules": {
+            "description": "The per-priority trigger rules. Each rule compares the number of result rows meeting its condition to its count threshold. When several rules hold for the same result, the highest priority wins. When omitted or empty, the alert has one rule at its own priority with a count threshold of 0.",
+            "items": {
+              "$ref": "#/components/schemas/AnalyticsResultCountRule"
+            },
+            "maxItems": 5,
+            "minItems": 0,
+            "type": "array",
+            "x-stability": "preview"
           },
           "timeframeMinutes": {
             "description": "The evaluation window duration in minutes",

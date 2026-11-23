@@ -104,7 +104,14 @@ tags:
       contains Collector YAML and selectors that match agent attributes.
       Activate a family to make its configurations available to matching agents.
   - name: Fleet Manager Configuration Overlays
-    description: Create, read, update, and archive fleet-manager configuration overlays.
+    description: >-
+      Change the Collector configuration of selected remote configurations
+      without editing their configuration groups. An overlay holds a Collector
+      YAML fragment and a list of target remote configurations. While an overlay
+      is active, Fleet Management merges the fragment into each target and
+      delivers the result to the matching agents as a new configuration family
+      version of the target's group. Schedules limit an active overlay to
+      recurring or one-off time windows.
   - name: Folders for views service
     description: Create and manage view folders.
   - name: Global routers service
@@ -12764,12 +12771,14 @@ paths:
         excluded unless include_archived is true.
       operationId: ConfigurationOverlayService_ListConfigurationOverlays
       parameters:
-        - description: When true, include archived overlays.
+        - description: When true, include archived overlays, each with its latest version.
           in: query
           name: include_archived
           required: false
           schema:
-            description: When true, include archived overlays.
+            description: >-
+              When true, include archived overlays, each with its latest
+              version.
             type: boolean
             x-coralogix-presence: true
         - description: >-
@@ -12782,17 +12791,25 @@ paths:
             description: >-
               Maximum number of overlays to return. Defaults to 100 and cannot
               exceed 256.
+            examples:
+              - 100
             format: int32
             maximum: 256
             minimum: 1
             type: integer
             x-coralogix-presence: true
-        - description: Opaque token returned by a previous list response.
+        - description: >-
+            Opaque token returned by a previous list response. Send it with the
+            same include_archived value as that request.
           in: query
           name: page_token
           required: false
           schema:
-            description: Opaque token returned by a previous list response.
+            description: >-
+              Opaque token returned by a previous list response. Send it with
+              the same include_archived value as that request.
+            examples:
+              - AZdtCKSZq3sAAAAAAAAAAQ
             maxLength: 64
             minLength: 1
             pattern: ^[A-Za-z0-9_-]+$
@@ -12873,8 +12890,14 @@ paths:
       x-stability: preview
     post:
       description: >-
-        Creates a custom configuration overlay (OpenTelemetry Collector YAML).
-        It is inactive unless active is true, which needs at least one target.
+        Creates a custom configuration overlay from a Collector YAML fragment
+        and its target remote configurations. Each target must belong to an
+        active configuration family. The overlay is inactive unless `active` is
+        `true`; an active overlay needs at least one target. When `active` is
+        `true` and `schedules` is empty, the overlay applies right away and
+        stays applied until it is deactivated; with schedules, it applies only
+        during their windows. A successful response confirms the overlay is
+        saved; check Fleet Management for agent application status.
       operationId: ConfigurationOverlayService_CreateConfigurationOverlay
       requestBody:
         content:
@@ -12884,17 +12907,24 @@ paths:
               properties:
                 active:
                   default: false
-                  description: Set true to activate the overlay when it is created.
+                  description: >-
+                    Set true to apply the overlay to its targets when it is
+                    created. Needs at least one target. Defaults to false
+                    (inactive).
                   type: boolean
                   x-coralogix-presence: true
                 custom:
                   allOf:
                     - $ref: '#/components/schemas/CustomConfigurationOverlayCreate'
                   description: >-
-                    Custom overlay: an OpenTelemetry Collector YAML fragment and
-                    its targets.
+                    Custom overlay: a Collector YAML fragment and the remote
+                    configurations it is merged into.
                 description:
-                  description: Human-readable description.
+                  description: Description of the overlay's purpose.
+                  examples:
+                    - >-
+                      Raises the Collector log level for selected remote
+                      configurations.
                   maxLength: 4096
                   minLength: 0
                   pattern: ^[\s\S]*$
@@ -12902,6 +12932,8 @@ paths:
                   x-coralogix-presence: true
                 name:
                   description: Display name, unique among unarchived overlays.
+                  examples:
+                    - Debug logging overlay
                   maxLength: 256
                   minLength: 1
                   pattern: ^[\s\S]*$
@@ -12910,8 +12942,12 @@ paths:
                 priorityOrder:
                   default: 0
                   description: >-
-                    Merge precedence on a shared remote configuration: higher
-                    values win, and the newer overlay wins a tie.
+                    Merge precedence when several active overlays target the
+                    same remote configuration. Overlays merge in ascending
+                    order, so higher values win on conflicting keys; on a tie,
+                    the newer overlay wins.
+                  examples:
+                    - 100
                   format: int32
                   maximum: 2147483647
                   minimum: -2147483648
@@ -12929,9 +12965,13 @@ paths:
                   uniqueItems: true
                   x-coralogix-collection: set
                 tags:
-                  description: Tags attached to the configuration overlay.
+                  description: Tags for organizing the overlay. Tags do not select targets.
+                  examples:
+                    - - production
                   items:
-                    description: Tags attached to the configuration overlay.
+                    description: >-
+                      Tags for organizing the overlay. Tags do not select
+                      targets.
                     maxLength: 256
                     minLength: 0
                     pattern: ^[\s\S]*$
@@ -13017,7 +13057,11 @@ paths:
       x-stability: preview
   /fleet-management/configuration-overlays/v1/{id}:
     get:
-      description: Gets a fleet-manager configuration overlay by ID.
+      description: >-
+        Returns a configuration overlay with the content, targets, and schedules
+        of its latest version. `active` indicates that the overlay is eligible
+        to apply, not that an agent has applied the merged configuration. An
+        archived overlay returns 404 unless `include_archived=true`.
       operationId: ConfigurationOverlayService_GetConfigurationOverlay
       parameters:
         - description: >-
@@ -13114,23 +13158,28 @@ paths:
       x-stability: preview
     patch:
       description: >-
-        Updates the fields listed in update_mask; a listed field that is omitted
-        from the body is cleared or reset to its default. A change to the
-        content of custom.configuration or custom.targets creates a new version
-        that carries over the schedules. An archived overlay can't be updated.
-        Activation needs a target, and every schedule needs a future window. A
-        version-creating change is rejected while a scheduled window is
-        applying.
+        Updates the fields listed in `update_mask`; a listed field that is
+        omitted from the body is cleared or reset to its default. A change to
+        the content of `custom.configuration` or `custom.targets` creates a new
+        version that carries over the schedules; other fields, including
+        `schedules`, change without a new version. To activate the overlay, send
+        `{"active":true}` with `update_mask=active`. An archived overlay can't
+        be updated. Activation needs a target, and every schedule needs a future
+        window. A version-creating change is rejected while a scheduled window
+        is applying; edit the overlay after the window ends, or deactivate it
+        first.
       operationId: ConfigurationOverlayService_UpdateConfigurationOverlay
       parameters:
         - description: >-
             Comma-separated fields to update: name, description, tags,
             priorityOrder, active, custom, custom.configuration, custom.targets,
-            schedules. A listed field that is omitted from the body is cleared
+            schedules. custom replaces the configuration and the targets
+            together; custom.configuration or custom.targets changes only that
+            field. A listed field that is omitted from the body is cleared
             (description, tags, custom.targets, schedules) or reset to its
             default (priorityOrder 0, active false); name, custom, and
-            custom.configuration cannot be cleared. Unknown fields and * return
-            400.
+            custom.configuration cannot be cleared. Custom fields are rejected
+            for preset overlays. Unknown fields and * return 400.
           in: query
           name: update_mask
           required: true
@@ -13138,11 +13187,15 @@ paths:
             description: >-
               Comma-separated fields to update: name, description, tags,
               priorityOrder, active, custom, custom.configuration,
-              custom.targets, schedules. A listed field that is omitted from the
+              custom.targets, schedules. custom replaces the configuration and
+              the targets together; custom.configuration or custom.targets
+              changes only that field. A listed field that is omitted from the
               body is cleared (description, tags, custom.targets, schedules) or
               reset to its default (priorityOrder 0, active false); name,
-              custom, and custom.configuration cannot be cleared. Unknown fields
-              and * return 400.
+              custom, and custom.configuration cannot be cleared. Custom fields
+              are rejected for preset overlays. Unknown fields and * return 400.
+            examples:
+              - active
             maxLength: 512
             minLength: 1
             pattern: ^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$
@@ -13160,8 +13213,10 @@ paths:
                   default: false
                   description: >-
                     Set true to activate or false to deactivate the overlay.
-                    With schedules, activation enables them, and deactivation
-                    pauses them and ends a running window.
+                    Include active in update_mask to apply this value; omitting
+                    its value when listed resets it to false. With schedules,
+                    activation enables them, and deactivation pauses them and
+                    ends a running window.
                   type: boolean
                   x-coralogix-presence: true
                 custom:
@@ -13171,7 +13226,11 @@ paths:
                     Custom overlay fields to update. Rejected for preset
                     overlays.
                 description:
-                  description: Human-readable description.
+                  description: Description of the overlay's purpose.
+                  examples:
+                    - >-
+                      Raises the Collector log level for selected remote
+                      configurations.
                   maxLength: 4096
                   minLength: 0
                   pattern: ^[\s\S]*$
@@ -13179,6 +13238,8 @@ paths:
                   x-coralogix-presence: true
                 name:
                   description: Display name, unique among unarchived overlays.
+                  examples:
+                    - Debug logging overlay
                   maxLength: 256
                   minLength: 1
                   pattern: ^[\s\S]*$
@@ -13187,8 +13248,12 @@ paths:
                 priorityOrder:
                   default: 0
                   description: >-
-                    Merge precedence on a shared remote configuration: higher
-                    values win, and the newer overlay wins a tie.
+                    Merge precedence when several active overlays target the
+                    same remote configuration. Overlays merge in ascending
+                    order, so higher values win on conflicting keys; on a tie,
+                    the newer overlay wins.
+                  examples:
+                    - 100
                   format: int32
                   maximum: 2147483647
                   minimum: -2147483648
@@ -13213,12 +13278,14 @@ paths:
                   x-coralogix-collection: set
                 tags:
                   description: >-
-                    Tags attached to the configuration overlay. Replaces all
-                    tags.
+                    Tags for organizing the overlay. Tags do not select targets.
+                    Replaces all tags.
+                  examples:
+                    - - production
                   items:
                     description: >-
-                      Tags attached to the configuration overlay. Replaces all
-                      tags.
+                      Tags for organizing the overlay. Tags do not select
+                      targets. Replaces all tags.
                     maxLength: 256
                     minLength: 0
                     pattern: ^[\s\S]*$
@@ -13317,8 +13384,10 @@ paths:
     post:
       description: >-
         Archives a configuration overlay and all its versions. An active overlay
-        must be deactivated before it is archived. Archiving an archived overlay
-        succeeds.
+        must be deactivated first: send `{"active":false}` with
+        `update_mask=active`; archiving an active overlay returns 400. Archiving
+        an archived overlay succeeds. An archived overlay is returned only by
+        get and list requests with `include_archived=true`.
       operationId: ConfigurationOverlayService_ArchiveConfigurationOverlay
       parameters:
         - $ref: '#/components/parameters/id_2'
@@ -22901,6 +22970,60 @@ components:
       type: object
       additionalProperties: false
       description: Always.
+    AnalyticsResultCountRule:
+      title: Analytics result count rule
+      required:
+        - override
+      type: object
+      properties:
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsResultCountRuleCondition'
+          description: >-
+            Which result rows the rule counts and the count it is compared
+            against. When omitted, every result row counts and the count
+            threshold is 0.
+        override:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefOverride'
+          description: >-
+            The priority the alert triggers at when the rule holds. A rule that
+            sets no priority triggers at P5, the lowest.
+      description: >-
+        A rule that triggers the alert at its own priority when the number of
+        query result rows meeting its condition compares to its count threshold
+        as the alert's operator says
+    AnalyticsResultCountRuleCondition:
+      title: Analytics result count rule condition
+      type: object
+      properties:
+        countThreshold:
+          description: >-
+            The number of result rows meeting the rule that the alert's operator
+            compares against. With the default operator the rule triggers when
+            more rows than this meet it. When omitted, 0.
+          examples:
+            - 10
+          format: int64
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+          x-coralogix-presence: true
+        expression:
+          description: >-
+            A DataPrime boolean expression over the columns of the query result.
+            Only rows it holds for are counted. When omitted or empty, every
+            result row counts.
+          examples:
+            - error_rate > 20 && requests_per_minute > 100
+          maxLength: 4096
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+      description: >-
+        Defines which rows of the query result the rule counts and the count
+        threshold they are compared against
     AnalyticsResultCountType:
       title: Analytics result count alert type
       type: object
@@ -22938,6 +23061,28 @@ components:
           description: >-
             Configuration for how to treat and what state to give to an alert
             with no data
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsThresholdOperator'
+          description: >-
+            The comparison operator applied to the row count of every rule. With
+            grouping, rows are counted per group.
+          examples:
+            - ANALYTICS_THRESHOLD_OPERATOR_MORE_THAN_OR_UNSPECIFIED
+          x-stability: preview
+        rules:
+          description: >-
+            The per-priority trigger rules. Each rule compares the number of
+            result rows meeting its condition to its count threshold. When
+            several rules hold for the same result, the highest priority wins.
+            When omitted or empty, the alert has one rule at its own priority
+            with a count threshold of 0.
+          items:
+            $ref: '#/components/schemas/AnalyticsResultCountRule'
+          maxItems: 5
+          minItems: 0
+          type: array
+          x-stability: preview
         timeframeMinutes:
           description: The evaluation window duration in minutes
           examples:
@@ -23897,6 +24042,8 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Archived configuration overlay UUID v7.
+          examples:
+            - 01975ed4-9c1a-7b3f-8d4e-426614174000
       description: Response containing the archived configuration overlay ID.
     ArchiveRetention:
       type: object
@@ -27120,9 +27267,6 @@ components:
         - archived
         - priorityOrder
         - active
-        - versionId
-        - version
-        - overlayHash
       type: object
       oneOf:
         - required:
@@ -27144,12 +27288,15 @@ components:
         active:
           default: false
           description: >-
-            Whether the latest version is active. With schedules, it applies
-            only during their windows.
+            Whether the latest version is eligible to apply to its targets. With
+            schedules, it applies only during their windows. This is not
+            confirmation that an agent has applied the merged configuration.
           type: boolean
           x-coralogix-presence: true
         archived:
-          description: Whether this configuration overlay is archived.
+          description: >-
+            Whether this configuration overlay is archived. Returned as true
+            only for get and list requests with include_archived.
           type: boolean
           x-coralogix-presence: true
         createdBy:
@@ -27166,7 +27313,9 @@ components:
             or preset is set, except in a list response for a reduced view,
             which omits both.
         description:
-          description: Human-readable description.
+          description: Description of the overlay's purpose.
+          examples:
+            - Raises the Collector log level for selected remote configurations.
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -27179,8 +27328,12 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Configuration overlay UUID v7.
+          examples:
+            - 01975ed4-9c1a-7b3f-8d4e-426614174000
         name:
-          description: Display name.
+          description: Display name, unique among unarchived overlays.
+          examples:
+            - Debug logging overlay
           maxLength: 256
           minLength: 1
           pattern: ^[\s\S]*$
@@ -27194,8 +27347,12 @@ components:
           description: >-
             Lowercase hexadecimal SHA-256 hash of the normalized payload: the
             custom overlay YAML, or the preset JSON.
+          examples:
+            - b5f7c570911aabc9ec165e379267fdaedf4426d9ca22d27773ce01b8be91fb4b
         parentVersionId:
           description: UUID v7 of the version the latest version was created from.
+          examples:
+            - 01975ed4-9c1a-7b3f-8d4e-426614174001
           maxLength: 36
           minLength: 36
           pattern: >-
@@ -27213,8 +27370,11 @@ components:
         priorityOrder:
           default: 0
           description: >-
-            Merge precedence on a shared remote configuration: higher values
-            win, and the newer overlay wins a tie.
+            Merge precedence when several active overlays target the same remote
+            configuration. Overlays merge in ascending order, so higher values
+            win on conflicting keys; on a tie, the newer overlay wins.
+          examples:
+            - 100
           format: int32
           maximum: 2147483647
           minimum: -2147483648
@@ -27241,14 +27401,21 @@ components:
             minLength: 0
             pattern: ^[\s\S]*$
             type: string
-            description: Tags attached to the configuration overlay.
-          description: Tags attached to the configuration overlay.
+            description: Tags for organizing the overlay. Tags do not select targets.
+          description: Tags for organizing the overlay. Tags do not select targets.
+          examples:
+            - - production
         version:
           maxLength: 10
           minLength: 1
           pattern: ^[1-9][0-9]*$
           type: string
-          description: Monotonic number of the latest version.
+          description: >-
+            Increasing version number of the overlay, returned as a string. The
+            initial version is "1"; a change to the configuration or targets
+            creates a new version.
+          examples:
+            - '2'
         versionId:
           maxLength: 36
           minLength: 36
@@ -27256,13 +27423,16 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: >-
-            UUID v7 of the latest version. Changes when an update creates a
-            version.
+            UUID v7 of the latest version. Changes when an update to the
+            configuration or targets creates a version.
+          examples:
+            - 01975ed5-2a10-7c44-9b1e-5d2c8a7f3002
       description: >-
         Fleet-manager configuration overlay with the content of its latest
         version. The latest version is the newest unarchived one, or the newest
-        one for an archived overlay. Create, Get and Update always return custom
-        or preset, and schedules. A list request for a reduced view omits them.
+        one for an archived overlay. Create, Get and Update always return the
+        version fields, custom or preset, and schedules. A list request for a
+        reduced view omits them.
     ConfigurationOverlaySchedule:
       required:
         - id
@@ -27276,13 +27446,17 @@ components:
       properties:
         createdAt:
           description: Time when this schedule was created.
+          examples:
+            - '2026-09-28T10:05:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
           type: string
           x-coralogix-presence: true
         description:
-          description: Human-readable description.
+          description: Description of the schedule.
+          examples:
+            - Weekend debug logging
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -27290,6 +27464,8 @@ components:
           x-coralogix-presence: true
         duration:
           description: Length of each window.
+          examples:
+            - 7200s
           maxLength: 23
           minLength: 2
           pattern: ^([1-9][0-9]{0,11}(\.[0-9]{1,9})?|0\.[0-9]{1,9})s$
@@ -27304,10 +27480,14 @@ components:
           description: >-
             Schedule UUID v7. Changes when startAt, duration, recurrence, or
             timeZone changes, or when a new version is created.
+          examples:
+            - 01975ed5-2a12-7b03-8c04-0d0e0f101213
         nextActivation:
           description: >-
             Start of the next window. Set only while the schedule is enabled and
             has a window left.
+          examples:
+            - '2026-10-31T22:00:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27319,6 +27499,8 @@ components:
           description: Repeats the window. Absent for a one-off schedule.
         startAt:
           description: Start of the first window.
+          examples:
+            - '2026-10-31T22:00:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27332,6 +27514,8 @@ components:
           description: >-
             End of a recurring schedule: no window starts at or after it, and a
             running window ends at it.
+          examples:
+            - '2026-12-31T23:00:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27344,8 +27528,12 @@ components:
           type: string
           description: IANA time zone for daily, weekly, and monthly recurrence.
           default: UTC
+          examples:
+            - Europe/Berlin
         updatedAt:
           description: Time when this schedule was last updated.
+          examples:
+            - '2026-09-28T10:05:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27359,7 +27547,9 @@ components:
       type: object
       properties:
         description:
-          description: Human-readable description.
+          description: Description of the schedule.
+          examples:
+            - Weekend debug logging
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -27371,6 +27561,8 @@ components:
             than the recurrence interval; for days, weeks, and months, shorter
             than the shortest interval in the schedule's time zone, such as a
             23-hour daylight-saving day or the shortest month.
+          examples:
+            - 7200s
           maxLength: 23
           minLength: 2
           pattern: ^([1-9][0-9]{0,11}(\.[0-9]{1,9})?|0\.[0-9]{1,9})s$
@@ -27384,6 +27576,8 @@ components:
           description: >-
             Start of the first window. A new schedule needs a window that starts
             in the future and before terminationDate.
+          examples:
+            - '2027-01-02T22:00:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27394,6 +27588,8 @@ components:
             End of a recurring schedule: no window starts at or after it, and a
             running window ends at it. Must be in the future when set or
             changed. Rejected for a one-off schedule.
+          examples:
+            - '2027-06-30T23:00:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27402,6 +27598,8 @@ components:
         timeZone:
           default: UTC
           description: IANA time zone for daily, weekly, and monthly recurrence.
+          examples:
+            - Europe/Berlin
           maxLength: 64
           minLength: 1
           pattern: ^[A-Za-z0-9_+\-/]+$
@@ -27420,6 +27618,8 @@ components:
           type: integer
           description: Number of units between window starts.
           format: int32
+          examples:
+            - 1
         unit:
           allOf:
             - $ref: '#/components/schemas/ConfigurationOverlayScheduleRecurrenceUnit'
@@ -27447,7 +27647,9 @@ components:
       type: object
       properties:
         description:
-          description: Human-readable description.
+          description: Description of the schedule.
+          examples:
+            - Weekend debug logging
           maxLength: 4096
           minLength: 0
           pattern: ^[\s\S]*$
@@ -27459,6 +27661,8 @@ components:
             than the recurrence interval; for days, weeks, and months, shorter
             than the shortest interval in the schedule's time zone, such as a
             23-hour daylight-saving day or the shortest month.
+          examples:
+            - 7200s
           maxLength: 23
           minLength: 2
           pattern: ^([1-9][0-9]{0,11}(\.[0-9]{1,9})?|0\.[0-9]{1,9})s$
@@ -27472,6 +27676,8 @@ components:
           description: >-
             Start of the first window. A new schedule needs a window that starts
             in the future and before terminationDate.
+          examples:
+            - '2027-01-02T22:00:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27482,6 +27688,8 @@ components:
             End of a recurring schedule: no window starts at or after it, and a
             running window ends at it. Must be in the future when set or
             changed. Rejected for a one-off schedule.
+          examples:
+            - '2027-06-30T23:00:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27490,6 +27698,8 @@ components:
         timeZone:
           default: UTC
           description: IANA time zone for daily, weekly, and monthly recurrence.
+          examples:
+            - Europe/Berlin
           maxLength: 64
           minLength: 1
           pattern: ^[A-Za-z0-9_+\-/]+$
@@ -27554,6 +27764,8 @@ components:
       properties:
         createdAt:
           description: Time when this overlay target was created.
+          examples:
+            - '2026-09-28T10:05:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
@@ -27566,42 +27778,60 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: Overlay target UUID v7.
+          examples:
+            - 01975ed5-2a10-7c44-9b1e-5d2c8a7f3003
         overlayConfigurationFamilyId:
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
-          description: Generated overlay configuration family UUID v7.
+          description: >-
+            UUID v7 of the configuration family Fleet Management generated with
+            the merged configuration.
         overlayRemoteConfigurationId:
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
-          description: Generated overlay remote configuration UUID v7.
+          description: >-
+            UUID v7 of the generated remote configuration that holds the merged
+            configuration.
+          examples:
+            - 01975ed5-2a11-7a01-8b02-0c0d0e0f1012
         sourceConfigurationFamilyId:
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
-          description: Source configuration family UUID v7.
+          description: >-
+            UUID v7 of the configuration family that holds the source remote
+            configuration.
+          examples:
+            - 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e60
         sourceRemoteConfigurationId:
           maxLength: 36
           minLength: 36
           pattern: >-
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
-          description: Source remote configuration UUID v7.
+          description: UUID v7 of the remote configuration the overlay is merged into.
+          examples:
+            - 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61
         updatedAt:
           description: Time when this overlay target was last updated.
+          examples:
+            - '2026-09-28T10:05:00.000Z'
           format: date-time
           maxLength: 64
           minLength: 0
           type: string
           x-coralogix-presence: true
-      description: Target snapshot entry for a configuration overlay version.
+      description: >-
+        A target of an overlay version: the source remote configuration and the
+        generated remote configuration that holds the merged result.
     ConfigurationOverlayTargetCreate:
       required:
         - remoteConfigurationId
@@ -27614,8 +27844,12 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: >-
-            Remote configuration ID (families[].remoteConfigurations[].id in a
-            configuration group, not the group ID). Its family must be active.
+            Remote configuration ID: family.raw.remoteConfigurations[].id in a
+            configuration group response, not the group or family ID. Its
+            configuration family must be active, and its group must not be
+            archived.
+          examples:
+            - 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61
       description: >-
         Remote-configuration target input used when creating a configuration
         overlay.
@@ -27631,8 +27865,12 @@ components:
             ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
           type: string
           description: >-
-            Remote configuration ID (families[].remoteConfigurations[].id in a
-            configuration group, not the group ID). Its family must be active.
+            Remote configuration ID: family.raw.remoteConfigurations[].id in a
+            configuration group response, not the group or family ID. Its
+            configuration family must be active, and its group must not be
+            archived.
+          examples:
+            - 01975e90-1b2c-7d3e-8f40-1a2b3c4d5e61
       description: >-
         Remote-configuration target input used when replacing configuration
         overlay targets.
@@ -28960,8 +29198,14 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: >-
-            OpenTelemetry Collector YAML fragment, re-emitted in normalized form
-            (sorted keys, no comments).
+            Collector YAML fragment merged into each target, re-emitted in
+            normalized form (sorted keys, no comments).
+          examples:
+            - |
+              service:
+                telemetry:
+                  logs:
+                    level: debug
         targets:
           description: Target snapshot of this version.
           items:
@@ -28982,13 +29226,23 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: >-
-            OpenTelemetry Collector YAML fragment merged into each targeted
-            remote configuration. Stored in normalized form (sorted keys, no
-            comments). Must not configure the OpAMP extension.
+            Collector YAML fragment encoded as a JSON string, with newline
+            escapes (\n) between YAML lines. It is deep-merged into each
+            target's Collector configuration: overlay values win on conflicting
+            keys, and a list in the overlay replaces the target's list. Stored
+            in normalized form (sorted keys, no comments). Do not define the
+            Supervisor-managed opamp extension.
+          examples:
+            - |
+              service:
+                telemetry:
+                  logs:
+                    level: debug
         targets:
           description: >-
-            Remote configurations the overlay applies to, as a set: duplicates
-            are rejected. An active overlay needs at least one target.
+            Remote configurations the overlay is merged into, as a set:
+            duplicates are rejected. Targets may belong to different
+            configuration groups. An active overlay needs at least one target.
           items:
             $ref: '#/components/schemas/ConfigurationOverlayTargetCreate'
           maxItems: 256
@@ -29004,9 +29258,15 @@ components:
       properties:
         configuration:
           description: >-
-            Replacement OpenTelemetry Collector YAML fragment. Creates a new
-            version when its normalized form changes. Must not configure the
-            OpAMP extension.
+            Replacement Collector YAML fragment, merged into each target the
+            same way as on create. Creates a new version when its normalized
+            form changes. Do not define the Supervisor-managed opamp extension.
+          examples:
+            - |
+              service:
+                telemetry:
+                  logs:
+                    level: debug
           maxLength: 1048576
           minLength: 1
           pattern: ^[\s\S]*$
@@ -40522,6 +40782,8 @@ components:
       properties:
         nextPageToken:
           description: Token for the next page. Omitted when there are no further results.
+          examples:
+            - AZdtCKSZq3sAAAAAAAAAAQ
           maxLength: 64
           minLength: 1
           pattern: ^[A-Za-z0-9_-]+$
@@ -45599,6 +45861,8 @@ components:
           pattern: ^[\s\S]*$
           type: string
           description: Normalized ObservabilityFeatures JSON.
+          examples:
+            - '{"logs":{"enabled":true}}'
         targets:
           description: Target snapshot of this version.
           items:
@@ -57645,6 +57909,8 @@ components:
           ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
         type: string
         description: Configuration overlay UUID v7.
+        examples:
+          - 01975ed4-9c1a-7b3f-8d4e-426614174000
     id_3:
       name: id
       in: path
