@@ -39,6 +39,10 @@ import (
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/outgoing_webhooks_service"
 	tcopolicies "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/policies_service"
 	presets "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/presets_service"
+	pafunnels "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/product_analytics_funnels_service"
+	paheatmaps "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/product_analytics_heatmaps_service"
+	papathways "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/product_analytics_pathways_service"
+	pasettings "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/product_analytics_settings_service"
 	quotas "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/quota_allocation_rule_set_service"
 	archiveretention "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/retentions_service"
 	customroles "github.com/coralogix/coralogix-management-sdk/go/openapi/gen/role_management_service"
@@ -57,42 +61,46 @@ import (
 
 // ClientSet provides access to all API clients.
 type ClientSet struct {
-	actions              *actions.ActionsServiceAPIService
-	aiApplications       *aiapplications.AIApplicationsServiceAPIService
-	aiEvaluations        *aievaluations.AIEvaluationsServiceAPIService
-	alerts               *alerts.AlertDefinitionsServiceAPIService
-	alertScheduler       *alertscheduler.AlertSchedulerRuleServiceAPIService
-	apiKeys              *apikeys.APIKeysServiceAPIService
-	archiveLogs          *targets.TargetServiceAPIService
-	archiveMetrics       *archivemetrics.MetricsDataArchiveServiceAPIService
-	archiveRetentions    *archiveretention.RetentionsServiceAPIService
-	connectors           *connectors.ConnectorsServiceAPIService
-	configGroups         *configgroups.FleetManagerConfigurationGroupsAPIService
-	ipAccess             *ipaccess.IPAccessServiceAPIService
-	customRoles          *customroles.RoleManagementServiceAPIService
-	dashboards           *dashboards.DashboardServiceAPIService
-	dashboardFolders     *dashboardfolders.DashboardFoldersServiceAPIService
-	enrichments          *enrichments.EnrichmentsServiceAPIService
-	groups               *groups.TeamGroupsManagementServiceAPIService
-	customEnrichments    *customEnrichments.CustomEnrichmentsServiceAPIService
-	extensions           *extensions.ExtensionServiceAPIService
-	events2metrics       *events2metrics.Events2MetricsServiceAPIService
-	extensionDeployments *extensiondeployments.ExtensionDeploymentServiceAPIService
-	integrations         *integrations.IntegrationServiceAPIService
-	globalRouters        *globalrouters.GlobalRoutersServiceAPIService
-	identity             *identity.IdentityServiceAPIService
-	presets              *presets.PresetsServiceAPIService
-	quotas               *quotas.QuotaAllocationRuleSetServiceAPIService
-	scopes               *scopes.ScopesServiceAPIService
-	slos                 *slos.SlosServiceAPIService
-	recordingRules       *recordingrules.RecordingRulesServiceAPIService
-	ruleGroups           *rulegroups.RuleGroupsServiceAPIService
-	tcoPolicies          *tcopolicies.PoliciesServiceAPIService
-	webhooks             *webhooks.OutgoingWebhooksServiceAPIService
-	views                *views.ViewsServiceAPIService
-	viewsFolders         *viewsfolders.FoldersForViewsServiceAPIService
-	teams                *teams.TeamsServiceAPIService
-	users                *users.UsersManagementServiceAPIService
+	actions                  *actions.ActionsServiceAPIService
+	aiApplications           *aiapplications.AIApplicationsServiceAPIService
+	aiEvaluations            *aievaluations.AIEvaluationsServiceAPIService
+	alerts                   *alerts.AlertDefinitionsServiceAPIService
+	alertScheduler           *alertscheduler.AlertSchedulerRuleServiceAPIService
+	apiKeys                  *apikeys.APIKeysServiceAPIService
+	archiveLogs              *targets.TargetServiceAPIService
+	archiveMetrics           *archivemetrics.MetricsDataArchiveServiceAPIService
+	archiveRetentions        *archiveretention.RetentionsServiceAPIService
+	connectors               *connectors.ConnectorsServiceAPIService
+	configGroups             *configgroups.FleetManagerConfigurationGroupsAPIService
+	ipAccess                 *ipaccess.IPAccessServiceAPIService
+	customRoles              *customroles.RoleManagementServiceAPIService
+	dashboards               *dashboards.DashboardServiceAPIService
+	dashboardFolders         *dashboardfolders.DashboardFoldersServiceAPIService
+	enrichments              *enrichments.EnrichmentsServiceAPIService
+	groups                   *groups.TeamGroupsManagementServiceAPIService
+	customEnrichments        *customEnrichments.CustomEnrichmentsServiceAPIService
+	extensions               *extensions.ExtensionServiceAPIService
+	events2metrics           *events2metrics.Events2MetricsServiceAPIService
+	extensionDeployments     *extensiondeployments.ExtensionDeploymentServiceAPIService
+	integrations             *integrations.IntegrationServiceAPIService
+	globalRouters            *globalrouters.GlobalRoutersServiceAPIService
+	identity                 *identity.IdentityServiceAPIService
+	presets                  *presets.PresetsServiceAPIService
+	productAnalyticsFunnels  *pafunnels.ProductAnalyticsFunnelsServiceAPIService
+	productAnalyticsHeatmaps *paheatmaps.ProductAnalyticsHeatmapsServiceAPIService
+	productAnalyticsPathways *papathways.ProductAnalyticsPathwaysServiceAPIService
+	productAnalyticsSettings *pasettings.ProductAnalyticsSettingsServiceAPIService
+	quotas                   *quotas.QuotaAllocationRuleSetServiceAPIService
+	scopes                   *scopes.ScopesServiceAPIService
+	slos                     *slos.SlosServiceAPIService
+	recordingRules           *recordingrules.RecordingRulesServiceAPIService
+	ruleGroups               *rulegroups.RuleGroupsServiceAPIService
+	tcoPolicies              *tcopolicies.PoliciesServiceAPIService
+	webhooks                 *webhooks.OutgoingWebhooksServiceAPIService
+	views                    *views.ViewsServiceAPIService
+	viewsFolders             *viewsfolders.FoldersForViewsServiceAPIService
+	teams                    *teams.TeamsServiceAPIService
+	users                    *users.UsersManagementServiceAPIService
 }
 
 // Actions returns the ActionsServiceAPIService client.
@@ -220,6 +228,26 @@ func (c *ClientSet) Presets() *presets.PresetsServiceAPIService {
 	return c.presets
 }
 
+// ProductAnalyticsFunnels returns the ProductAnalyticsFunnelsServiceAPIService client.
+func (c *ClientSet) ProductAnalyticsFunnels() *pafunnels.ProductAnalyticsFunnelsServiceAPIService {
+	return c.productAnalyticsFunnels
+}
+
+// ProductAnalyticsHeatmaps returns the ProductAnalyticsHeatmapsServiceAPIService client.
+func (c *ClientSet) ProductAnalyticsHeatmaps() *paheatmaps.ProductAnalyticsHeatmapsServiceAPIService {
+	return c.productAnalyticsHeatmaps
+}
+
+// ProductAnalyticsPathways returns the ProductAnalyticsPathwaysServiceAPIService client.
+func (c *ClientSet) ProductAnalyticsPathways() *papathways.ProductAnalyticsPathwaysServiceAPIService {
+	return c.productAnalyticsPathways
+}
+
+// ProductAnalyticsSettings returns the ProductAnalyticsSettingsServiceAPIService client.
+func (c *ClientSet) ProductAnalyticsSettings() *pasettings.ProductAnalyticsSettingsServiceAPIService {
+	return c.productAnalyticsSettings
+}
+
 // Quotas returns the QuotaAllocationRuleSetServiceAPIService client.
 func (c *ClientSet) Quotas() *quotas.QuotaAllocationRuleSetServiceAPIService {
 	return c.quotas
@@ -278,42 +306,46 @@ func (c *ClientSet) Users() *users.UsersManagementServiceAPIService {
 // NewClientSet builds a ClientSet from CallPropertiesCreator.
 func NewClientSet(c *Config) *ClientSet {
 	return &ClientSet{
-		actions:              NewActionsClient(c),
-		aiApplications:       NewAIApplicationsClient(c),
-		aiEvaluations:        NewAIEvaluationsClient(c),
-		alerts:               NewAlertsClient(c),
-		alertScheduler:       NewAlertSchedulerClient(c),
-		apiKeys:              NewAPIKeysClient(c),
-		archiveMetrics:       NewArchiveMetricsClient(c),
-		archiveLogs:          NewArchiveLogsClient(c),
-		archiveRetentions:    NewArchiveRetentionsClient(c),
-		ipAccess:             NewIPAccessClient(c),
-		connectors:           NewConnectorsClient(c),
-		configGroups:         NewConfigGroupsClient(c),
-		customRoles:          NewCustomRolesClient(c),
-		dashboards:           NewDashboardClient(c),
-		dashboardFolders:     NewDashboardFoldersClient(c),
-		enrichments:          NewEnrichmentsClient(c),
-		groups:               NewGroupsClient(c),
-		customEnrichments:    NewCustomEnrichmentsClient(c),
-		events2metrics:       NewEvents2MetricsClient(c),
-		extensions:           NewExtensionsClient(c),
-		extensionDeployments: NewExtensionDeploymentsClient(c),
-		integrations:         NewIntegrationsClient(c),
-		globalRouters:        NewGlobalRoutersClient(c),
-		identity:             NewIdentityClient(c),
-		presets:              NewPresetsClient(c),
-		quotas:               NewQuotasClient(c),
-		scopes:               NewScopesClient(c),
-		slos:                 NewSLOsClient(c),
-		recordingRules:       NewRecordingRulesClient(c),
-		ruleGroups:           NewRuleGroupsClient(c),
-		tcoPolicies:          NewTCOPoliciesClient(c),
-		webhooks:             NewWebhooksClient(c),
-		views:                NewViewsClient(c),
-		viewsFolders:         NewViewsFoldersClient(c),
-		teams:                NewTeamsClient(c),
-		users:                NewUsersClient(c),
+		actions:                  NewActionsClient(c),
+		aiApplications:           NewAIApplicationsClient(c),
+		aiEvaluations:            NewAIEvaluationsClient(c),
+		alerts:                   NewAlertsClient(c),
+		alertScheduler:           NewAlertSchedulerClient(c),
+		apiKeys:                  NewAPIKeysClient(c),
+		archiveMetrics:           NewArchiveMetricsClient(c),
+		archiveLogs:              NewArchiveLogsClient(c),
+		archiveRetentions:        NewArchiveRetentionsClient(c),
+		ipAccess:                 NewIPAccessClient(c),
+		connectors:               NewConnectorsClient(c),
+		configGroups:             NewConfigGroupsClient(c),
+		customRoles:              NewCustomRolesClient(c),
+		dashboards:               NewDashboardClient(c),
+		dashboardFolders:         NewDashboardFoldersClient(c),
+		enrichments:              NewEnrichmentsClient(c),
+		groups:                   NewGroupsClient(c),
+		customEnrichments:        NewCustomEnrichmentsClient(c),
+		events2metrics:           NewEvents2MetricsClient(c),
+		extensions:               NewExtensionsClient(c),
+		extensionDeployments:     NewExtensionDeploymentsClient(c),
+		integrations:             NewIntegrationsClient(c),
+		globalRouters:            NewGlobalRoutersClient(c),
+		identity:                 NewIdentityClient(c),
+		presets:                  NewPresetsClient(c),
+		productAnalyticsFunnels:  NewProductAnalyticsFunnelsClient(c),
+		productAnalyticsHeatmaps: NewProductAnalyticsHeatmapsClient(c),
+		productAnalyticsPathways: NewProductAnalyticsPathwaysClient(c),
+		productAnalyticsSettings: NewProductAnalyticsSettingsClient(c),
+		quotas:                   NewQuotasClient(c),
+		scopes:                   NewScopesClient(c),
+		slos:                     NewSLOsClient(c),
+		recordingRules:           NewRecordingRulesClient(c),
+		ruleGroups:               NewRuleGroupsClient(c),
+		tcoPolicies:              NewTCOPoliciesClient(c),
+		webhooks:                 NewWebhooksClient(c),
+		views:                    NewViewsClient(c),
+		viewsFolders:             NewViewsFoldersClient(c),
+		teams:                    NewTeamsClient(c),
+		users:                    NewUsersClient(c),
 	}
 }
 
@@ -615,6 +647,58 @@ func NewPresetsClient(c *Config) *presets.PresetsServiceAPIService {
 		cfg.AddDefaultHeader(k, v)
 	}
 	return presets.NewAPIClient(cfg).PresetsServiceAPI
+}
+
+// NewProductAnalyticsFunnelsClient builds a new ProductAnalyticsFunnelsServiceAPIService from CallPropertiesCreator.
+func NewProductAnalyticsFunnelsClient(c *Config) *pafunnels.ProductAnalyticsFunnelsServiceAPIService {
+	cfg := pafunnels.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = pafunnels.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return pafunnels.NewAPIClient(cfg).ProductAnalyticsFunnelsServiceAPI
+}
+
+// NewProductAnalyticsHeatmapsClient builds a new ProductAnalyticsHeatmapsServiceAPIService from CallPropertiesCreator.
+func NewProductAnalyticsHeatmapsClient(c *Config) *paheatmaps.ProductAnalyticsHeatmapsServiceAPIService {
+	cfg := paheatmaps.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = paheatmaps.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return paheatmaps.NewAPIClient(cfg).ProductAnalyticsHeatmapsServiceAPI
+}
+
+// NewProductAnalyticsPathwaysClient builds a new ProductAnalyticsPathwaysServiceAPIService from CallPropertiesCreator.
+func NewProductAnalyticsPathwaysClient(c *Config) *papathways.ProductAnalyticsPathwaysServiceAPIService {
+	cfg := papathways.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = papathways.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return papathways.NewAPIClient(cfg).ProductAnalyticsPathwaysServiceAPI
+}
+
+// NewProductAnalyticsSettingsClient builds a new ProductAnalyticsSettingsServiceAPIService from CallPropertiesCreator.
+func NewProductAnalyticsSettingsClient(c *Config) *pasettings.ProductAnalyticsSettingsServiceAPIService {
+	cfg := pasettings.NewConfiguration()
+	if c.httpClient != nil {
+		cfg.HTTPClient = c.httpClient
+	}
+	cfg.Servers = pasettings.ServerConfigurations{{URL: c.url}}
+	for k, v := range c.headers {
+		cfg.AddDefaultHeader(k, v)
+	}
+	return pasettings.NewAPIClient(cfg).ProductAnalyticsSettingsServiceAPI
 }
 
 // NewQuotasClient builds a new QuotaAllocationRuleSetServiceAPIService from CallPropertiesCreator.
