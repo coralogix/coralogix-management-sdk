@@ -1,0 +1,304 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/product-analytics/settings/v1": {
+      "get": {
+        "description": "Gets the Product Analytics settings of the team. A team that never enabled Product Analytics reads enabled false. Works when Product Analytics is off.\n\nRequires the following permissions:\n- `product-analytics:Read`",
+        "operationId": "SettingsService_GetSettings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "enabled": true
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ProductAnalyticsSettings"
+                    }
+                  ],
+                  "description": "The settings."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get product analytics settings",
+        "tags": [
+          "Product Analytics Settings Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Read"
+        ]
+      },
+      "patch": {
+        "description": "Updates the fields listed in update_mask. Other fields are unchanged. A listed field must be in the body. Sending the value the team already has succeeds and changes nothing. Works when Product Analytics is off. Returns the stored settings.\n\nRequires the following permissions:\n- `product-analytics:Enable`",
+        "operationId": "SettingsService_UpdateSettings",
+        "parameters": [
+          {
+            "description": "Comma-separated JSON paths of the fields to update: enabled. A listed field must be in the body: listing enabled without a value returns 400. Unknown and nested paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+            "in": "query",
+            "name": "update_mask",
+            "required": true,
+            "schema": {
+              "description": "Comma-separated JSON paths of the fields to update: enabled. A listed field must be in the body: listing enabled without a value returns 400. Unknown and nested paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+              "maxLength": 512,
+              "minLength": 1,
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$",
+              "type": "string",
+              "x-coralogix-presence": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Settings field values for an update. Only fields listed in update_mask are applied.",
+                "properties": {
+                  "enabled": {
+                    "description": "Whether Product Analytics is enabled for the team. Required when update_mask lists enabled: a listed but missing enabled returns 400.",
+                    "type": "boolean",
+                    "x-coralogix-presence": true
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "enabled": true
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ProductAnalyticsSettings"
+                    }
+                  ],
+                  "description": "The updated settings."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update product analytics settings",
+        "tags": [
+          "Product Analytics Settings Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Enable"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "maximum": 599,
+            "minimum": 100,
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
+          },
+          "message": {
+            "maxLength": 4096,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
+          }
+        },
+        "description": "Standard error response body returned for a failed request."
+      },
+      "FilterPathAndValues": {
+        "title": "FilterPathAndValues",
+        "required": [
+          "path"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ],
+            "description": "The filters."
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "examples": [
+              "test"
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "This data structure represents a filter path and values"
+      },
+      "Filters": {
+        "title": "Filters",
+        "required": [
+          "pathAndValues"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
+            ]
+          },
+          "pathAndValues": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "description": "This data structure represents a filter"
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ProductAnalyticsSettings": {
+        "required": [
+          "enabled"
+        ],
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether Product Analytics is enabled for the team."
+          }
+        },
+        "description": "Product Analytics settings of the team."
+      },
+      "events.v3.FilterMatcher": {
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ],
+        "type": "string"
+      },
+      "v3.FilterOperator": {
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ],
+        "type": "string",
+        "description": "Filter operator."
+      }
+    }
+  }
+}

@@ -1,0 +1,1823 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/product-analytics/funnels/v1": {
+      "get": {
+        "description": "Lists saved funnels, one page at a time, ordered by updatedAt descending, then by id descending. totalSize is the exact number of funnels that match app_names. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Read`",
+        "operationId": "FunnelsService_ListSavedFunnels",
+        "parameters": [
+          {
+            "description": "Maximum number of funnels to return. 0 uses the default of 20. A value above 500 is lowered to 500. A negative value returns 400.",
+            "in": "query",
+            "name": "page_size",
+            "required": false,
+            "schema": {
+              "description": "Maximum number of funnels to return. 0 uses the default of 20. A value above 500 is lowered to 500. A negative value returns 400.",
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The nextPageToken of the previous response. Empty for the first page. The token is opaque, valid for 15 minutes, and tied to the app_names of the request that returned it. A token that is expired, from another query, or malformed returns 400: \"pageToken belongs to a different query or has expired. Send the request again without pageToken.\"",
+            "in": "query",
+            "name": "page_token",
+            "required": false,
+            "schema": {
+              "description": "The nextPageToken of the previous response. Empty for the first page. The token is opaque, valid for 15 minutes, and tied to the app_names of the request that returned it. A token that is expired, from another query, or malformed returns 400: \"pageToken belongs to a different query or has expired. Send the request again without pageToken.\"",
+              "maxLength": 1024,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns only funnels of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return funnels of every application.",
+            "in": "query",
+            "name": "app_names",
+            "required": false,
+            "schema": {
+              "description": "Returns only funnels of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return funnels of every application.",
+              "items": {
+                "description": "Returns only funnels of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return funnels of every application.",
+                "maxLength": 1024,
+                "minLength": 1,
+                "pattern": "^[\\s\\S]*$",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 0,
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "funnels": [
+                    {
+                      "appName": "web-shop",
+                      "createdAt": "2026-11-16T10:00:00.000Z",
+                      "definition": {
+                        "conversionWindow": "3600s",
+                        "mode": "FUNNEL_MODE_USERS",
+                        "steps": [
+                          {
+                            "conditions": [
+                              {
+                                "view": {
+                                  "filters": [],
+                                  "name": {
+                                    "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                    "values": [
+                                      "/cart"
+                                    ]
+                                  }
+                                }
+                              }
+                            ],
+                            "label": "Viewed cart",
+                            "stepId": "s1"
+                          },
+                          {
+                            "conditions": [
+                              {
+                                "action": {
+                                  "element": {
+                                    "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                    "values": [
+                                      "pay-now-button"
+                                    ]
+                                  },
+                                  "event": {
+                                    "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                    "values": [
+                                      "click"
+                                    ]
+                                  },
+                                  "filters": []
+                                }
+                              }
+                            ],
+                            "label": "Clicked pay",
+                            "stepId": "s2"
+                          }
+                        ]
+                      },
+                      "filters": [],
+                      "id": "42",
+                      "name": "Checkout funnel",
+                      "owner": "dana@example.com",
+                      "timeRange": {
+                        "relativeMinutes": "1440"
+                      },
+                      "updatedAt": "2026-11-16T10:00:00.000Z",
+                      "version": 1
+                    }
+                  ],
+                  "nextPageToken": "",
+                  "totalSize": 1
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ListSavedFunnelsResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List funnels",
+        "tags": [
+          "Product Analytics Funnels Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Read"
+        ]
+      },
+      "post": {
+        "description": "Creates a saved funnel and returns the stored funnel, with version 1. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "FunnelsService_CreateSavedFunnel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Funnel field values for a create.",
+                "properties": {
+                  "appName": {
+                    "description": "RUM application the funnel belongs to. Cannot be changed after creation.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "breakdown": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FunnelBreakdown"
+                      }
+                    ],
+                    "description": "Breakdown of the funnel by a session dimension. Omit for no breakdown."
+                  },
+                  "definition": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FunnelDefinition"
+                      }
+                    ],
+                    "description": "Mode, conversion window, and steps of the funnel. Omit conversionWindow for no window."
+                  },
+                  "filters": {
+                    "description": "Session filters applied to every step.",
+                    "items": {
+                      "$ref": "#/components/schemas/ViewFilter"
+                    },
+                    "maxItems": 100,
+                    "minItems": 0,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
+                  },
+                  "name": {
+                    "description": "Display name of the funnel. Must not be empty. Does not have to be unique.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "timeRange": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ViewTimeRange"
+                      }
+                    ],
+                    "description": "Time range of the funnel."
+                  }
+                },
+                "required": [
+                  "appName",
+                  "name",
+                  "definition",
+                  "timeRange"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "definition": {
+                    "conversionWindow": "3600s",
+                    "mode": "FUNNEL_MODE_USERS",
+                    "steps": [
+                      {
+                        "conditions": [
+                          {
+                            "view": {
+                              "filters": [],
+                              "name": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "/cart"
+                                ]
+                              }
+                            }
+                          }
+                        ],
+                        "label": "Viewed cart",
+                        "stepId": "s1"
+                      },
+                      {
+                        "conditions": [
+                          {
+                            "action": {
+                              "element": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "pay-now-button"
+                                ]
+                              },
+                              "event": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "click"
+                                ]
+                              },
+                              "filters": []
+                            }
+                          }
+                        ],
+                        "label": "Clicked pay",
+                        "stepId": "s2"
+                      }
+                    ]
+                  },
+                  "filters": [],
+                  "id": "42",
+                  "name": "Checkout funnel",
+                  "owner": "dana@example.com",
+                  "timeRange": {
+                    "relativeMinutes": "1440"
+                  },
+                  "updatedAt": "2026-11-16T10:00:00.000Z",
+                  "version": 1
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedFunnel"
+                    }
+                  ],
+                  "description": "The created funnel."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create funnel",
+        "tags": [
+          "Product Analytics Funnels Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      }
+    },
+    "/product-analytics/funnels/v1/{id}": {
+      "get": {
+        "description": "Gets a saved funnel by ID. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Read`",
+        "operationId": "FunnelsService_GetSavedFunnel",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "definition": {
+                    "conversionWindow": "3600s",
+                    "mode": "FUNNEL_MODE_USERS",
+                    "steps": [
+                      {
+                        "conditions": [
+                          {
+                            "view": {
+                              "filters": [],
+                              "name": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "/cart"
+                                ]
+                              }
+                            }
+                          }
+                        ],
+                        "label": "Viewed cart",
+                        "stepId": "s1"
+                      },
+                      {
+                        "conditions": [
+                          {
+                            "action": {
+                              "element": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "pay-now-button"
+                                ]
+                              },
+                              "event": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "click"
+                                ]
+                              },
+                              "filters": []
+                            }
+                          }
+                        ],
+                        "label": "Clicked pay",
+                        "stepId": "s2"
+                      }
+                    ]
+                  },
+                  "filters": [],
+                  "id": "42",
+                  "name": "Checkout funnel",
+                  "owner": "dana@example.com",
+                  "timeRange": {
+                    "relativeMinutes": "1440"
+                  },
+                  "updatedAt": "2026-11-16T10:00:00.000Z",
+                  "version": 1
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedFunnel"
+                    }
+                  ],
+                  "description": "The funnel."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Funnel not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get funnel",
+        "tags": [
+          "Product Analytics Funnels Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Read"
+        ]
+      },
+      "delete": {
+        "description": "Deletes a saved funnel by ID. Returns 404 when the funnel does not exist. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "FunnelsService_DeleteSavedFunnel",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {},
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSavedFunnelResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Funnel not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete funnel",
+        "tags": [
+          "Product Analytics Funnels Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      },
+      "patch": {
+        "description": "Updates the fields listed in update_mask. Other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. The last write wins, and version increases by 1. Returns the stored funnel. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "FunnelsService_UpdateSavedFunnel",
+        "parameters": [
+          {
+            "description": "Comma-separated JSON paths of the fields to update: name, definition, filters, timeRange, breakdown. snake_case names are also accepted. definition is replaced as a whole. A listed field that is omitted from the body is cleared: breakdown is removed and filters becomes empty; name, definition, and timeRange cannot be cleared: listing one without a value returns 400. Nested paths such as definition.steps, unknown, immutable, and server-generated paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+            "in": "query",
+            "name": "update_mask",
+            "required": true,
+            "schema": {
+              "description": "Comma-separated JSON paths of the fields to update: name, definition, filters, timeRange, breakdown. snake_case names are also accepted. definition is replaced as a whole. A listed field that is omitted from the body is cleared: breakdown is removed and filters becomes empty; name, definition, and timeRange cannot be cleared: listing one without a value returns 400. Nested paths such as definition.steps, unknown, immutable, and server-generated paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+              "maxLength": 512,
+              "minLength": 1,
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$",
+              "type": "string",
+              "x-coralogix-presence": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Funnel field values for an update. Only fields listed in update_mask are applied.",
+                "properties": {
+                  "breakdown": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FunnelBreakdown"
+                      }
+                    ],
+                    "description": "Breakdown of the funnel by a session dimension. Clearing it removes the breakdown."
+                  },
+                  "definition": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/FunnelDefinition"
+                      }
+                    ],
+                    "description": "Mode, conversion window, and steps of the funnel. Replaces the whole definition: an omitted conversionWindow removes the window. Cannot be cleared."
+                  },
+                  "filters": {
+                    "description": "Session filters applied to every step. Replaces the whole list.",
+                    "items": {
+                      "$ref": "#/components/schemas/ViewFilter"
+                    },
+                    "maxItems": 100,
+                    "minItems": 0,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
+                  },
+                  "name": {
+                    "description": "Display name of the funnel. Must not be empty. Cannot be cleared.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "timeRange": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ViewTimeRange"
+                      }
+                    ],
+                    "description": "Time range of the funnel. Cannot be cleared."
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "definition": {
+                    "conversionWindow": "3600s",
+                    "mode": "FUNNEL_MODE_USERS",
+                    "steps": [
+                      {
+                        "conditions": [
+                          {
+                            "view": {
+                              "filters": [],
+                              "name": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "/cart"
+                                ]
+                              }
+                            }
+                          }
+                        ],
+                        "label": "Viewed cart",
+                        "stepId": "s1"
+                      },
+                      {
+                        "conditions": [
+                          {
+                            "action": {
+                              "element": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "pay-now-button"
+                                ]
+                              },
+                              "event": {
+                                "operator": "STRING_CONDITION_OPERATOR_EQUAL",
+                                "values": [
+                                  "click"
+                                ]
+                              },
+                              "filters": []
+                            }
+                          }
+                        ],
+                        "label": "Clicked pay",
+                        "stepId": "s2"
+                      }
+                    ]
+                  },
+                  "filters": [],
+                  "id": "42",
+                  "name": "Checkout funnel",
+                  "owner": "dana@example.com",
+                  "timeRange": {
+                    "relativeMinutes": "1440"
+                  },
+                  "updatedAt": "2026-11-16T11:00:00.000Z",
+                  "version": 2
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedFunnel"
+                    }
+                  ],
+                  "description": "The updated funnel."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Funnel not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update funnel",
+        "tags": [
+          "Product Analytics Funnels Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Funnel ID, a decimal number.",
+          "required": true,
+          "schema": {
+            "maxLength": 19,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Funnel ID, a decimal number."
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActionCondition": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringCondition"
+              }
+            ],
+            "description": "Condition on the target element. Requires event: element without event returns 400."
+          },
+          "event": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringCondition"
+              }
+            ],
+            "description": "Condition on the event name. Absent matches any event."
+          },
+          "filters": {
+            "description": "Filters that narrow this action condition only. Empty when not set.",
+            "items": {
+              "$ref": "#/components/schemas/ActionFilter"
+            },
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          }
+        },
+        "description": "User action matcher of a funnel step, such as a click. With neither event nor element it matches any action, with event only a specific event, and with both that event on that element."
+      },
+      "ActionFilter": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "stringFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "numericFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "boolFilter"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "boolFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BoolFilter"
+              }
+            ],
+            "description": "A boolean field with the value the action must have."
+          },
+          "numericFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActionNumericFilter"
+              }
+            ],
+            "description": "A numeric field with the condition the action must match."
+          },
+          "stringFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilter"
+              }
+            ],
+            "description": "A string field with the condition the action must match."
+          }
+        },
+        "description": "A session filter of an action condition. Same as a view filter, except that per-page numeric fields are not available."
+      },
+      "ActionNumericFilter": {
+        "required": [
+          "field",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericCondition"
+              }
+            ],
+            "description": "Condition the numeric field must match."
+          },
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActionNumericFilterField"
+              }
+            ],
+            "description": "Numeric field to filter on. ACTION_NUMERIC_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "ACTION_NUMERIC_FILTER_FIELD_ERROR_COUNT"
+            ]
+          }
+        },
+        "description": "Filter on a numeric field of an action condition."
+      },
+      "ActionNumericFilterField": {
+        "enum": [
+          "ACTION_NUMERIC_FILTER_FIELD_UNSPECIFIED",
+          "ACTION_NUMERIC_FILTER_FIELD_ERROR_COUNT",
+          "ACTION_NUMERIC_FILTER_FIELD_LONG_TASK_COUNT",
+          "ACTION_NUMERIC_FILTER_FIELD_CRASH_COUNT",
+          "ACTION_NUMERIC_FILTER_FIELD_RESOURCE_COUNT",
+          "ACTION_NUMERIC_FILTER_FIELD_RAGE_CLICK_COUNT",
+          "ACTION_NUMERIC_FILTER_FIELD_DEAD_CLICK_COUNT"
+        ],
+        "type": "string",
+        "description": "Session attribute with numeric values, for numericFilter of an action condition. Per-page values (action count, scroll depth, viewport size) are available on view conditions only."
+      },
+      "BoolFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BoolFilterField"
+              }
+            ],
+            "description": "Boolean field to filter on. BOOL_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "BOOL_FILTER_FIELD_HAS_SESSION_REPLAY"
+            ]
+          },
+          "value": {
+            "description": "Value the field must have.",
+            "type": "boolean",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Filter on a boolean field."
+      },
+      "BoolFilterField": {
+        "enum": [
+          "BOOL_FILTER_FIELD_UNSPECIFIED",
+          "BOOL_FILTER_FIELD_HAS_SESSION_REPLAY",
+          "BOOL_FILTER_FIELD_HAS_SCREENSHOT",
+          "BOOL_FILTER_FIELD_IS_RAGE_CLICK",
+          "BOOL_FILTER_FIELD_IS_DEAD_CLICK"
+        ],
+        "type": "string",
+        "description": "Session attribute with boolean values, for boolFilter."
+      },
+      "BreakdownField": {
+        "enum": [
+          "BREAKDOWN_FIELD_UNSPECIFIED",
+          "BREAKDOWN_FIELD_ACCOUNT_ID",
+          "BREAKDOWN_FIELD_ACCOUNT_NAME",
+          "BREAKDOWN_FIELD_PLATFORM",
+          "BREAKDOWN_FIELD_ENVIRONMENT",
+          "BREAKDOWN_FIELD_APP_VERSION",
+          "BREAKDOWN_FIELD_CX_SDK_VERSION",
+          "BREAKDOWN_FIELD_BROWSER_NAME",
+          "BREAKDOWN_FIELD_OS",
+          "BREAKDOWN_FIELD_OS_VERSION",
+          "BREAKDOWN_FIELD_DEVICE_TYPE",
+          "BREAKDOWN_FIELD_COUNTRY_NAME",
+          "BREAKDOWN_FIELD_CITY_NAME",
+          "BREAKDOWN_FIELD_CONTINENT_NAME"
+        ],
+        "type": "string",
+        "description": "Session attribute a funnel can be broken down by."
+      },
+      "CalendarWindow": {
+        "enum": [
+          "CALENDAR_WINDOW_UNSPECIFIED",
+          "CALENDAR_WINDOW_TODAY",
+          "CALENDAR_WINDOW_YESTERDAY"
+        ],
+        "type": "string",
+        "description": "Named calendar window. TODAY runs from local midnight to now, YESTERDAY covers the whole previous local day."
+      },
+      "DeleteSavedFunnelResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Confirmation that the funnel was deleted."
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "maximum": 599,
+            "minimum": 100,
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
+          },
+          "message": {
+            "maxLength": 4096,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
+          }
+        },
+        "description": "Standard error response body returned for a failed request."
+      },
+      "FilterPathAndValues": {
+        "title": "FilterPathAndValues",
+        "required": [
+          "path"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ],
+            "description": "The filters."
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "examples": [
+              "test"
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "This data structure represents a filter path and values"
+      },
+      "Filters": {
+        "title": "Filters",
+        "required": [
+          "pathAndValues"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
+            ]
+          },
+          "pathAndValues": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "description": "This data structure represents a filter"
+      },
+      "FixedTimeRange": {
+        "required": [
+          "fromTimestampMs",
+          "toTimestampMs"
+        ],
+        "type": "object",
+        "properties": {
+          "fromTimestampMs": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Start of the range, in Unix milliseconds. Inclusive: events at exactly this time are in the range.",
+            "examples": [
+              "1763251200000"
+            ]
+          },
+          "toTimestampMs": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "End of the range, in Unix milliseconds. Exclusive: events at exactly this time are not in the range, so consecutive ranges can share a boundary.",
+            "examples": [
+              "1763337600000"
+            ]
+          }
+        },
+        "description": "Absolute time range, from inclusive to exclusive."
+      },
+      "FunnelBreakdown": {
+        "required": [
+          "field",
+          "limit"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BreakdownField"
+              }
+            ],
+            "description": "Session dimension to split by. BREAKDOWN_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "BREAKDOWN_FIELD_PLATFORM"
+            ]
+          },
+          "limit": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Maximum number of groups to return, top groups by first step count.",
+            "format": "int64"
+          }
+        },
+        "description": "Splits the funnel by the values of one session dimension."
+      },
+      "FunnelDefinition": {
+        "required": [
+          "mode",
+          "steps"
+        ],
+        "type": "object",
+        "properties": {
+          "conversionWindow": {
+            "description": "Maximum time from the first step to the last step, in whole seconds, such as \"3600s\". A fraction of a second returns 400. Absent means no window.",
+            "maxLength": 13,
+            "minLength": 2,
+            "pattern": "^[1-9][0-9]{0,11}s$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FunnelMode"
+              }
+            ],
+            "description": "What the funnel counts: users, sessions, or accounts. FUNNEL_MODE_UNSPECIFIED returns 400."
+          },
+          "steps": {
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FunnelStep"
+            },
+            "description": "Steps of the funnel, in funnel order. Steps must happen in this order, and other views and actions may happen in between. The same view or action may appear in two steps. At least one is required."
+          }
+        },
+        "description": "What a funnel counts and the steps it is made of."
+      },
+      "FunnelMode": {
+        "enum": [
+          "FUNNEL_MODE_UNSPECIFIED",
+          "FUNNEL_MODE_USERS",
+          "FUNNEL_MODE_SESSIONS",
+          "FUNNEL_MODE_ACCOUNTS"
+        ],
+        "type": "string",
+        "description": "What a funnel counts. USERS counts unique users, whose steps may span sessions. SESSIONS counts sessions, and every step must happen in the same session. ACCOUNTS counts unique accounts."
+      },
+      "FunnelStep": {
+        "required": [
+          "stepId",
+          "conditions"
+        ],
+        "type": "object",
+        "properties": {
+          "conditions": {
+            "description": "Conditions of the step, combined with OR. Their order has no meaning. At least one is required.",
+            "items": {
+              "$ref": "#/components/schemas/StepCondition"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          },
+          "label": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display label of the step. Empty when not set."
+          },
+          "stepId": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*\\S[\\s\\S]*$",
+            "type": "string",
+            "description": "ID of the step, unique within the funnel. A duplicate returns 400. Steps saved in the Coralogix UI read as s1, s2, and so on, by position."
+          }
+        },
+        "description": "A funnel step. It is reached when any of its conditions matches."
+      },
+      "ListSavedFunnelsResponse": {
+        "type": "object",
+        "properties": {
+          "funnels": {
+            "maxItems": 500,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SavedFunnel"
+            },
+            "description": "The funnels, ordered by updatedAt descending, then by id descending."
+          },
+          "nextPageToken": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Token for the next page, valid for 15 minutes. Empty on the last page."
+          },
+          "totalSize": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Exact number of funnels that match app_names, across all pages.",
+            "format": "int32"
+          }
+        },
+        "description": "A page of saved funnels."
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        }
+      },
+      "NumericCondition": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "min"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "max"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "range"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "max": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Matches values less than or equal to max.",
+            "examples": [
+              "100"
+            ]
+          },
+          "min": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Matches values greater than or equal to min.",
+            "examples": [
+              "1"
+            ]
+          },
+          "range": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericRange"
+              }
+            ],
+            "description": "Matches values from lower to upper, both included."
+          }
+        },
+        "description": "Numeric matching condition. Exactly one of min, max, or range is set."
+      },
+      "NumericFilter": {
+        "required": [
+          "field",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericCondition"
+              }
+            ],
+            "description": "Condition the field must match."
+          },
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericFilterField"
+              }
+            ],
+            "description": "Numeric field to filter on. NUMERIC_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "NUMERIC_FILTER_FIELD_ERROR_COUNT"
+            ]
+          }
+        },
+        "description": "Filter on a numeric field."
+      },
+      "NumericFilterField": {
+        "enum": [
+          "NUMERIC_FILTER_FIELD_UNSPECIFIED",
+          "NUMERIC_FILTER_FIELD_ERROR_COUNT",
+          "NUMERIC_FILTER_FIELD_ACTION_COUNT",
+          "NUMERIC_FILTER_FIELD_LONG_TASK_COUNT",
+          "NUMERIC_FILTER_FIELD_CRASH_COUNT",
+          "NUMERIC_FILTER_FIELD_RESOURCE_COUNT",
+          "NUMERIC_FILTER_FIELD_SCROLL_DEPTH_PERCENTAGE",
+          "NUMERIC_FILTER_FIELD_VIEWPORT_WIDTH",
+          "NUMERIC_FILTER_FIELD_VIEWPORT_HEIGHT",
+          "NUMERIC_FILTER_FIELD_RAGE_CLICK_COUNT",
+          "NUMERIC_FILTER_FIELD_DEAD_CLICK_COUNT"
+        ],
+        "type": "string",
+        "description": "Session attribute with numeric values, for numericFilter."
+      },
+      "NumericRange": {
+        "required": [
+          "lower",
+          "upper"
+        ],
+        "type": "object",
+        "properties": {
+          "lower": {
+            "description": "Lowest matching value, included. Must not be greater than upper.",
+            "examples": [
+              "1"
+            ],
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "upper": {
+            "description": "Highest matching value, included.",
+            "examples": [
+              "100"
+            ],
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Inclusive numeric range."
+      },
+      "SavedFunnel": {
+        "required": [
+          "id",
+          "appName",
+          "name",
+          "definition",
+          "timeRange",
+          "createdAt",
+          "updatedAt",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "appName": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "RUM application the funnel belongs to."
+          },
+          "breakdown": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FunnelBreakdown"
+              }
+            ],
+            "description": "Breakdown of the funnel by a session dimension. Absent when not set."
+          },
+          "createdAt": {
+            "description": "When the funnel was created. Set by the server.",
+            "format": "date-time",
+            "maxLength": 64,
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "definition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FunnelDefinition"
+              }
+            ],
+            "description": "Mode, conversion window, and steps of the funnel."
+          },
+          "filters": {
+            "description": "Session filters applied to every step. Empty when not set.",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilter"
+            },
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          },
+          "id": {
+            "maxLength": 19,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Funnel ID, a decimal number. Set by the server.",
+            "readOnly": true
+          },
+          "name": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name of the funnel. Does not have to be unique."
+          },
+          "owner": {
+            "description": "User who created the funnel. Set by the server. Absent for funnels saved before owners were recorded.",
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "timeRange": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ViewTimeRange"
+              }
+            ],
+            "description": "Time range of the funnel."
+          },
+          "updatedAt": {
+            "description": "When the funnel was last updated, from the API or the Coralogix UI. Set by the server.",
+            "format": "date-time",
+            "maxLength": 64,
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "version": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Version of the funnel. Set by the server: 1 on create, increased by 1 on every update, including updates made in the Coralogix UI.",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "description": "A saved funnel of a RUM application."
+      },
+      "StepCondition": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "view"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "action"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActionCondition"
+              }
+            ],
+            "description": "Matches a user action on an element."
+          },
+          "view": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ViewCondition"
+              }
+            ],
+            "description": "Matches a visit to a page."
+          }
+        },
+        "description": "A condition of a funnel step. Exactly one of view or action is set."
+      },
+      "StringCondition": {
+        "required": [
+          "values",
+          "operator"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringConditionOperator"
+              }
+            ],
+            "description": "Matching operator. STRING_CONDITION_OPERATOR_UNSPECIFIED is rejected."
+          },
+          "values": {
+            "description": "Values to match. At least one is required.",
+            "items": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Values to match. At least one is required."
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          }
+        },
+        "description": "String matching condition."
+      },
+      "StringConditionOperator": {
+        "enum": [
+          "STRING_CONDITION_OPERATOR_UNSPECIFIED",
+          "STRING_CONDITION_OPERATOR_EQUAL",
+          "STRING_CONDITION_OPERATOR_NOT_EQUAL",
+          "STRING_CONDITION_OPERATOR_CONTAINS",
+          "STRING_CONDITION_OPERATOR_NOT_CONTAINS",
+          "STRING_CONDITION_OPERATOR_START_WITH",
+          "STRING_CONDITION_OPERATOR_NOT_START_WITH",
+          "STRING_CONDITION_OPERATOR_END_WITH",
+          "STRING_CONDITION_OPERATOR_NOT_END_WITH"
+        ],
+        "type": "string",
+        "description": "Operator of a string condition."
+      },
+      "StringFilter": {
+        "required": [
+          "field",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringCondition"
+              }
+            ],
+            "description": "Condition the field must match."
+          },
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterField"
+              }
+            ],
+            "description": "String field to filter on. STRING_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "STRING_FILTER_FIELD_PLATFORM"
+            ]
+          }
+        },
+        "description": "Filter on a string field."
+      },
+      "StringFilterField": {
+        "enum": [
+          "STRING_FILTER_FIELD_UNSPECIFIED",
+          "STRING_FILTER_FIELD_URL_SCHEMA",
+          "STRING_FILTER_FIELD_URL_SUBDOMAIN",
+          "STRING_FILTER_FIELD_URL_DOMAIN",
+          "STRING_FILTER_FIELD_URL_HOST",
+          "STRING_FILTER_FIELD_URL_PATH",
+          "STRING_FILTER_FIELD_URL_TEMPLATE",
+          "STRING_FILTER_FIELD_REFERRER_SCHEMA",
+          "STRING_FILTER_FIELD_REFERRER_SUBDOMAIN",
+          "STRING_FILTER_FIELD_REFERRER_DOMAIN",
+          "STRING_FILTER_FIELD_REFERRER_HOST",
+          "STRING_FILTER_FIELD_REFERRER_PATH",
+          "STRING_FILTER_FIELD_REFERRER_URL",
+          "STRING_FILTER_FIELD_SESSION_ID",
+          "STRING_FILTER_FIELD_USER_ID",
+          "STRING_FILTER_FIELD_USER_EMAIL",
+          "STRING_FILTER_FIELD_USER_NAME",
+          "STRING_FILTER_FIELD_CX_USER_ID",
+          "STRING_FILTER_FIELD_ACCOUNT_ID",
+          "STRING_FILTER_FIELD_ACCOUNT_NAME",
+          "STRING_FILTER_FIELD_VIEW_ID",
+          "STRING_FILTER_FIELD_PLATFORM",
+          "STRING_FILTER_FIELD_ENVIRONMENT",
+          "STRING_FILTER_FIELD_APP_VERSION",
+          "STRING_FILTER_FIELD_CX_SDK_VERSION",
+          "STRING_FILTER_FIELD_BROWSER_NAME",
+          "STRING_FILTER_FIELD_BROWSER_VERSION",
+          "STRING_FILTER_FIELD_BROWSER_MAJOR_VERSION",
+          "STRING_FILTER_FIELD_OS",
+          "STRING_FILTER_FIELD_OS_MAJOR_VERSION",
+          "STRING_FILTER_FIELD_OS_VERSION",
+          "STRING_FILTER_FIELD_DEVICE_TYPE",
+          "STRING_FILTER_FIELD_DEVICE_NAME",
+          "STRING_FILTER_FIELD_DEVICE_BRAND",
+          "STRING_FILTER_FIELD_DEVICE_MODEL",
+          "STRING_FILTER_FIELD_DEVICE_ARCHITECTURE",
+          "STRING_FILTER_FIELD_COUNTRY_NAME",
+          "STRING_FILTER_FIELD_CITY_NAME",
+          "STRING_FILTER_FIELD_CONTINENT_NAME",
+          "STRING_FILTER_FIELD_IP",
+          "STRING_FILTER_FIELD_USER_AGENT",
+          "STRING_FILTER_FIELD_APP_NAME",
+          "STRING_FILTER_FIELD_CLICKS_ELEMENT_FINGERPRINT"
+        ],
+        "type": "string",
+        "description": "Session attribute with string values, for stringFilter."
+      },
+      "ViewCondition": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "description": "Filters that narrow this page view condition only. Empty when not set.",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilter"
+            },
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          },
+          "name": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringCondition"
+              }
+            ],
+            "description": "Condition on the page name. Absent matches any page view."
+          }
+        },
+        "description": "Page view matcher of a funnel step."
+      },
+      "ViewFilter": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "stringFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "numericFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "boolFilter"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "boolFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BoolFilter"
+              }
+            ],
+            "description": "A boolean field with the value it must have."
+          },
+          "numericFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericFilter"
+              }
+            ],
+            "description": "A numeric field with the condition it must match."
+          },
+          "stringFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilter"
+              }
+            ],
+            "description": "A string field with the condition it must match."
+          }
+        },
+        "description": "A session filter. Each kind takes only the fields of its type: string fields in stringFilter, numeric fields in numericFilter, boolean fields in boolFilter."
+      },
+      "ViewTimeRange": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "fixed"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "relativeMinutes"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "calendar"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "calendar": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CalendarWindow"
+              }
+            ],
+            "description": "Named calendar window, resolved in the viewer's timezone. CALENDAR_WINDOW_UNSPECIFIED is rejected."
+          },
+          "fixed": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FixedTimeRange"
+              }
+            ],
+            "description": "Absolute time range between two timestamps."
+          },
+          "relativeMinutes": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Number of minutes back from now."
+          }
+        },
+        "description": "Time range of a saved view. Exactly one of fixed, relative_minutes, or calendar is set."
+      },
+      "events.v3.FilterMatcher": {
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ],
+        "type": "string"
+      },
+      "v3.FilterOperator": {
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ],
+        "type": "string",
+        "description": "Filter operator."
+      }
+    }
+  }
+}

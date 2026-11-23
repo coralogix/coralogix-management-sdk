@@ -28,6 +28,8 @@ type AlertDefCaseSettings struct {
 	Destinations []AlertDefCaseDestination `json:"destinations,omitempty"`
 	// Queries used to enrich the case created by this alert
 	EnrichmentQueries []AlertDefCaseEnrichmentQuery `json:"enrichmentQueries,omitempty"`
+	// Case settings that this alert sets for the cases that it creates. When omitted, the company case settings apply. Replace is a full overwrite: omitting overrides removes the overrides.
+	Overrides *AlertDefCaseSettingsOverrides `json:"overrides,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
 }
@@ -147,6 +149,38 @@ func (o *AlertDefCaseSettings) SetEnrichmentQueries(v []AlertDefCaseEnrichmentQu
 	o.EnrichmentQueries = v
 }
 
+// GetOverrides returns the Overrides field value if set, zero value otherwise.
+func (o *AlertDefCaseSettings) GetOverrides() AlertDefCaseSettingsOverrides {
+	if o == nil || IsNil(o.Overrides) {
+		var ret AlertDefCaseSettingsOverrides
+		return ret
+	}
+	return *o.Overrides
+}
+
+// GetOverridesOk returns a tuple with the Overrides field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AlertDefCaseSettings) GetOverridesOk() (*AlertDefCaseSettingsOverrides, bool) {
+	if o == nil || IsNil(o.Overrides) {
+		return nil, false
+	}
+	return o.Overrides, true
+}
+
+// HasOverrides returns a boolean if a field has been set.
+func (o *AlertDefCaseSettings) HasOverrides() bool {
+	if o != nil && !IsNil(o.Overrides) {
+		return true
+	}
+
+	return false
+}
+
+// SetOverrides gets a reference to the given AlertDefCaseSettingsOverrides and assigns it to the Overrides field.
+func (o *AlertDefCaseSettings) SetOverrides(v AlertDefCaseSettingsOverrides) {
+	o.Overrides = &v
+}
+
 func (o AlertDefCaseSettings) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -165,6 +199,9 @@ func (o AlertDefCaseSettings) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EnrichmentQueries) {
 		toSerialize["enrichmentQueries"] = o.EnrichmentQueries
+	}
+	if !IsNil(o.Overrides) {
+		toSerialize["overrides"] = o.Overrides
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -192,6 +229,7 @@ func (o *AlertDefCaseSettings) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "autoResolveMode")
 		delete(additionalProperties, "destinations")
 		delete(additionalProperties, "enrichmentQueries")
+		delete(additionalProperties, "overrides")
 		o.AdditionalProperties = additionalProperties
 		o.additionalPropertiesFromUnmarshal = len(additionalProperties) > 0
 	}

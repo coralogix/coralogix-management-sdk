@@ -169,6 +169,22 @@ tags:
       description: Lean more about presets in our documentation
       url: >-
         https://coralogix.com/docs/user-guides/notification-center/presets/introduction/
+  - name: Product Analytics Funnels Service
+    description: >-
+      Create, read, update, and delete saved Product Analytics funnels of RUM
+      applications.
+  - name: Product Analytics Heatmaps Service
+    description: >-
+      Create, read, update, and delete saved Product Analytics heatmaps of RUM
+      applications.
+  - name: Product Analytics Pathways Service
+    description: >-
+      Create, read, update, and delete saved Product Analytics pathways of RUM
+      applications.
+  - name: Product Analytics Settings Service
+    description: >-
+      Read the Product Analytics settings of the team, and turn Product
+      Analytics on or off.
   - name: Quota Allocation Rule Set service
     description: Manage quota allocation rules for different entity types.
   - name: Recording Rules Service
@@ -19131,6 +19147,1899 @@ paths:
       summary: Delete Rule Group
       tags:
         - Rule Groups Service
+  /product-analytics/funnels/v1:
+    get:
+      description: >-
+        Lists saved funnels, one page at a time, ordered by updatedAt
+        descending, then by id descending. totalSize is the exact number of
+        funnels that match app_names. Returns 412 (FAILED_PRECONDITION) with
+        "Product Analytics is not enabled for this team. A team admin can enable
+        it in Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Read`
+      operationId: FunnelsService_ListSavedFunnels
+      parameters:
+        - description: >-
+            Maximum number of funnels to return. 0 uses the default of 20. A
+            value above 500 is lowered to 500. A negative value returns 400.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            description: >-
+              Maximum number of funnels to return. 0 uses the default of 20. A
+              value above 500 is lowered to 500. A negative value returns 400.
+            format: int32
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+        - description: >-
+            The nextPageToken of the previous response. Empty for the first
+            page. The token is opaque, valid for 15 minutes, and tied to the
+            app_names of the request that returned it. A token that is expired,
+            from another query, or malformed returns 400: "pageToken belongs to
+            a different query or has expired. Send the request again without
+            pageToken."
+          in: query
+          name: page_token
+          required: false
+          schema:
+            description: >-
+              The nextPageToken of the previous response. Empty for the first
+              page. The token is opaque, valid for 15 minutes, and tied to the
+              app_names of the request that returned it. A token that is
+              expired, from another query, or malformed returns 400: "pageToken
+              belongs to a different query or has expired. Send the request
+              again without pageToken."
+            maxLength: 1024
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+        - description: >-
+            Returns only funnels of these RUM applications. Repeat the parameter
+            for each application, for example app_names=web-shop&app_names=docs.
+            Omit to return funnels of every application.
+          in: query
+          name: app_names
+          required: false
+          schema:
+            description: >-
+              Returns only funnels of these RUM applications. Repeat the
+              parameter for each application, for example
+              app_names=web-shop&app_names=docs. Omit to return funnels of every
+              application.
+            items:
+              description: >-
+                Returns only funnels of these RUM applications. Repeat the
+                parameter for each application, for example
+                app_names=web-shop&app_names=docs. Omit to return funnels of
+                every application.
+              maxLength: 1024
+              minLength: 1
+              pattern: ^[\s\S]*$
+              type: string
+            maxItems: 100
+            minItems: 0
+            type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                funnels:
+                  - appName: web-shop
+                    createdAt: '2026-11-16T10:00:00.000Z'
+                    definition:
+                      conversionWindow: 3600s
+                      mode: FUNNEL_MODE_USERS
+                      steps:
+                        - conditions:
+                            - view:
+                                filters: []
+                                name:
+                                  operator: STRING_CONDITION_OPERATOR_EQUAL
+                                  values:
+                                    - /cart
+                          label: Viewed cart
+                          stepId: s1
+                        - conditions:
+                            - action:
+                                element:
+                                  operator: STRING_CONDITION_OPERATOR_EQUAL
+                                  values:
+                                    - pay-now-button
+                                event:
+                                  operator: STRING_CONDITION_OPERATOR_EQUAL
+                                  values:
+                                    - click
+                                filters: []
+                          label: Clicked pay
+                          stepId: s2
+                    filters: []
+                    id: '42'
+                    name: Checkout funnel
+                    owner: dana@example.com
+                    timeRange:
+                      relativeMinutes: '1440'
+                    updatedAt: '2026-11-16T10:00:00.000Z'
+                    version: 1
+                nextPageToken: ''
+                totalSize: 1
+              schema:
+                $ref: '#/components/schemas/ListSavedFunnelsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: List funnels
+      tags:
+        - Product Analytics Funnels Service
+      x-coralogixPermissions:
+        - product-analytics:Read
+    post:
+      description: >-
+        Creates a saved funnel and returns the stored funnel, with version 1.
+        Returns 412 (FAILED_PRECONDITION) with "Product Analytics is not enabled
+        for this team. A team admin can enable it in Coralogix." when Product
+        Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: FunnelsService_CreateSavedFunnel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Funnel field values for a create.
+              properties:
+                appName:
+                  description: >-
+                    RUM application the funnel belongs to. Cannot be changed
+                    after creation.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                breakdown:
+                  allOf:
+                    - $ref: '#/components/schemas/FunnelBreakdown'
+                  description: >-
+                    Breakdown of the funnel by a session dimension. Omit for no
+                    breakdown.
+                definition:
+                  allOf:
+                    - $ref: '#/components/schemas/FunnelDefinition'
+                  description: >-
+                    Mode, conversion window, and steps of the funnel. Omit
+                    conversionWindow for no window.
+                filters:
+                  description: Session filters applied to every step.
+                  items:
+                    $ref: '#/components/schemas/ViewFilter'
+                  maxItems: 100
+                  minItems: 0
+                  type: array
+                  x-coralogix-collection: set
+                name:
+                  description: >-
+                    Display name of the funnel. Must not be empty. Does not have
+                    to be unique.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                timeRange:
+                  allOf:
+                    - $ref: '#/components/schemas/ViewTimeRange'
+                  description: Time range of the funnel.
+              required:
+                - appName
+                - name
+                - definition
+                - timeRange
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                definition:
+                  conversionWindow: 3600s
+                  mode: FUNNEL_MODE_USERS
+                  steps:
+                    - conditions:
+                        - view:
+                            filters: []
+                            name:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - /cart
+                      label: Viewed cart
+                      stepId: s1
+                    - conditions:
+                        - action:
+                            element:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - pay-now-button
+                            event:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - click
+                            filters: []
+                      label: Clicked pay
+                      stepId: s2
+                filters: []
+                id: '42'
+                name: Checkout funnel
+                owner: dana@example.com
+                timeRange:
+                  relativeMinutes: '1440'
+                updatedAt: '2026-11-16T10:00:00.000Z'
+                version: 1
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedFunnel'
+                description: The created funnel.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Create funnel
+      tags:
+        - Product Analytics Funnels Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+  /product-analytics/funnels/v1/{id}:
+    get:
+      description: >-
+        Gets a saved funnel by ID. Returns 412 (FAILED_PRECONDITION) with
+        "Product Analytics is not enabled for this team. A team admin can enable
+        it in Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Read`
+      operationId: FunnelsService_GetSavedFunnel
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                definition:
+                  conversionWindow: 3600s
+                  mode: FUNNEL_MODE_USERS
+                  steps:
+                    - conditions:
+                        - view:
+                            filters: []
+                            name:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - /cart
+                      label: Viewed cart
+                      stepId: s1
+                    - conditions:
+                        - action:
+                            element:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - pay-now-button
+                            event:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - click
+                            filters: []
+                      label: Clicked pay
+                      stepId: s2
+                filters: []
+                id: '42'
+                name: Checkout funnel
+                owner: dana@example.com
+                timeRange:
+                  relativeMinutes: '1440'
+                updatedAt: '2026-11-16T10:00:00.000Z'
+                version: 1
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedFunnel'
+                description: The funnel.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Funnel not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get funnel
+      tags:
+        - Product Analytics Funnels Service
+      x-coralogixPermissions:
+        - product-analytics:Read
+    delete:
+      description: >-
+        Deletes a saved funnel by ID. Returns 404 when the funnel does not
+        exist. Returns 412 (FAILED_PRECONDITION) with "Product Analytics is not
+        enabled for this team. A team admin can enable it in Coralogix." when
+        Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: FunnelsService_DeleteSavedFunnel
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+              schema:
+                $ref: '#/components/schemas/DeleteSavedFunnelResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Funnel not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete funnel
+      tags:
+        - Product Analytics Funnels Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+    patch:
+      description: >-
+        Updates the fields listed in update_mask. Other fields are unchanged. A
+        listed field that is omitted from the body is cleared or reset to its
+        default. The last write wins, and version increases by 1. Returns the
+        stored funnel. Returns 412 (FAILED_PRECONDITION) with "Product Analytics
+        is not enabled for this team. A team admin can enable it in Coralogix."
+        when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: FunnelsService_UpdateSavedFunnel
+      parameters:
+        - description: >-
+            Comma-separated JSON paths of the fields to update: name,
+            definition, filters, timeRange, breakdown. snake_case names are also
+            accepted. definition is replaced as a whole. A listed field that is
+            omitted from the body is cleared: breakdown is removed and filters
+            becomes empty; name, definition, and timeRange cannot be cleared:
+            listing one without a value returns 400. Nested paths such as
+            definition.steps, unknown, immutable, and server-generated paths,
+            and *, return 400. A listed field is replaced as a whole, a oneOf
+            arm included.
+          in: query
+          name: update_mask
+          required: true
+          schema:
+            description: >-
+              Comma-separated JSON paths of the fields to update: name,
+              definition, filters, timeRange, breakdown. snake_case names are
+              also accepted. definition is replaced as a whole. A listed field
+              that is omitted from the body is cleared: breakdown is removed and
+              filters becomes empty; name, definition, and timeRange cannot be
+              cleared: listing one without a value returns 400. Nested paths
+              such as definition.steps, unknown, immutable, and server-generated
+              paths, and *, return 400. A listed field is replaced as a whole, a
+              oneOf arm included.
+            maxLength: 512
+            minLength: 1
+            pattern: ^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$
+            type: string
+            x-coralogix-presence: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Funnel field values for an update. Only fields listed in
+                update_mask are applied.
+              properties:
+                breakdown:
+                  allOf:
+                    - $ref: '#/components/schemas/FunnelBreakdown'
+                  description: >-
+                    Breakdown of the funnel by a session dimension. Clearing it
+                    removes the breakdown.
+                definition:
+                  allOf:
+                    - $ref: '#/components/schemas/FunnelDefinition'
+                  description: >-
+                    Mode, conversion window, and steps of the funnel. Replaces
+                    the whole definition: an omitted conversionWindow removes
+                    the window. Cannot be cleared.
+                filters:
+                  description: >-
+                    Session filters applied to every step. Replaces the whole
+                    list.
+                  items:
+                    $ref: '#/components/schemas/ViewFilter'
+                  maxItems: 100
+                  minItems: 0
+                  type: array
+                  x-coralogix-collection: set
+                name:
+                  description: >-
+                    Display name of the funnel. Must not be empty. Cannot be
+                    cleared.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                timeRange:
+                  allOf:
+                    - $ref: '#/components/schemas/ViewTimeRange'
+                  description: Time range of the funnel. Cannot be cleared.
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                definition:
+                  conversionWindow: 3600s
+                  mode: FUNNEL_MODE_USERS
+                  steps:
+                    - conditions:
+                        - view:
+                            filters: []
+                            name:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - /cart
+                      label: Viewed cart
+                      stepId: s1
+                    - conditions:
+                        - action:
+                            element:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - pay-now-button
+                            event:
+                              operator: STRING_CONDITION_OPERATOR_EQUAL
+                              values:
+                                - click
+                            filters: []
+                      label: Clicked pay
+                      stepId: s2
+                filters: []
+                id: '42'
+                name: Checkout funnel
+                owner: dana@example.com
+                timeRange:
+                  relativeMinutes: '1440'
+                updatedAt: '2026-11-16T11:00:00.000Z'
+                version: 2
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedFunnel'
+                description: The updated funnel.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Funnel not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update funnel
+      tags:
+        - Product Analytics Funnels Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+    parameters:
+      - name: id
+        in: path
+        description: Funnel ID, a decimal number.
+        required: true
+        schema:
+          maxLength: 19
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: Funnel ID, a decimal number.
+  /product-analytics/heatmaps/v1:
+    get:
+      description: >-
+        Lists saved heatmaps, one page at a time, ordered by updatedAt
+        descending, then by id descending. totalSize is the exact number of
+        heatmaps that match app_names. Returns 412 (FAILED_PRECONDITION) with
+        "Product Analytics is not enabled for this team. A team admin can enable
+        it in Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Read`
+      operationId: HeatmapsService_ListSavedHeatmaps
+      parameters:
+        - description: >-
+            Maximum number of heatmaps to return. 0 uses the default of 20. A
+            value above 500 is lowered to 500. A negative value returns 400.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            description: >-
+              Maximum number of heatmaps to return. 0 uses the default of 20. A
+              value above 500 is lowered to 500. A negative value returns 400.
+            format: int32
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+        - description: >-
+            The nextPageToken of the previous response. Empty for the first
+            page. The token is opaque, valid for 15 minutes, and tied to the
+            app_names of the request that returned it. A token that is expired,
+            from another query, or malformed returns 400: "pageToken belongs to
+            a different query or has expired. Send the request again without
+            pageToken."
+          in: query
+          name: page_token
+          required: false
+          schema:
+            description: >-
+              The nextPageToken of the previous response. Empty for the first
+              page. The token is opaque, valid for 15 minutes, and tied to the
+              app_names of the request that returned it. A token that is
+              expired, from another query, or malformed returns 400: "pageToken
+              belongs to a different query or has expired. Send the request
+              again without pageToken."
+            maxLength: 1024
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+        - description: >-
+            Returns only heatmaps of these RUM applications. Repeat the
+            parameter for each application, for example
+            app_names=web-shop&app_names=docs. Omit to return heatmaps of every
+            application.
+          in: query
+          name: app_names
+          required: false
+          schema:
+            description: >-
+              Returns only heatmaps of these RUM applications. Repeat the
+              parameter for each application, for example
+              app_names=web-shop&app_names=docs. Omit to return heatmaps of
+              every application.
+            items:
+              description: >-
+                Returns only heatmaps of these RUM applications. Repeat the
+                parameter for each application, for example
+                app_names=web-shop&app_names=docs. Omit to return heatmaps of
+                every application.
+              maxLength: 1024
+              minLength: 1
+              pattern: ^[\s\S]*$
+              type: string
+            maxItems: 100
+            minItems: 0
+            type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                heatmaps:
+                  - actionNameFilter: ACTION_NAME_FILTER_ALL_CLICKS
+                    appName: web-shop
+                    createdAt: '2026-11-16T10:00:00.000Z'
+                    filters: []
+                    id: '43'
+                    mode: HEATMAP_MODE_CLICK_MAP
+                    name: Checkout clicks
+                    owner: dana@example.com
+                    snapshotId: 5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f
+                    timeRange:
+                      calendar: CALENDAR_WINDOW_TODAY
+                    updatedAt: '2026-11-16T10:00:00.000Z'
+                    version: 1
+                    viewName: /checkout
+                nextPageToken: ''
+                totalSize: 1
+              schema:
+                $ref: '#/components/schemas/ListSavedHeatmapsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: List heatmaps
+      tags:
+        - Product Analytics Heatmaps Service
+      x-coralogixPermissions:
+        - product-analytics:Read
+    post:
+      description: >-
+        Creates a saved heatmap and returns the stored heatmap, with version 1.
+        Returns 412 (FAILED_PRECONDITION) with "Product Analytics is not enabled
+        for this team. A team admin can enable it in Coralogix." when Product
+        Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: HeatmapsService_CreateSavedHeatmap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Heatmap field values for a create.
+              properties:
+                actionNameFilter:
+                  allOf:
+                    - $ref: '#/components/schemas/ActionNameFilter'
+                  default: ACTION_NAME_FILTER_ALL_CLICKS
+                  description: >-
+                    Which clicks the heatmap includes. Omitted or
+                    ACTION_NAME_FILTER_UNSPECIFIED uses
+                    ACTION_NAME_FILTER_ALL_CLICKS.
+                appName:
+                  description: >-
+                    RUM application the heatmap belongs to. Cannot be changed
+                    after creation.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                filters:
+                  description: Session filters of the heatmap.
+                  items:
+                    $ref: '#/components/schemas/ViewFilter'
+                  maxItems: 100
+                  minItems: 0
+                  type: array
+                  x-coralogix-collection: set
+                mode:
+                  allOf:
+                    - $ref: '#/components/schemas/HeatmapMode'
+                  description: >-
+                    Kind of heatmap visualization shown for the page view.
+                    HEATMAP_MODE_UNSPECIFIED is rejected.
+                name:
+                  description: >-
+                    Display name of the heatmap. Must not be empty. Does not
+                    have to be unique.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                snapshotId:
+                  description: >-
+                    ID of the page snapshot the heatmap is drawn on. Omit it for
+                    a heatmap without a snapshot.
+                  maxLength: 256
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                timeRange:
+                  allOf:
+                    - $ref: '#/components/schemas/ViewTimeRange'
+                  description: Time range of the heatmap.
+                viewName:
+                  description: Name of the page view the heatmap covers.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+              required:
+                - appName
+                - name
+                - viewName
+                - timeRange
+                - mode
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                actionNameFilter: ACTION_NAME_FILTER_ALL_CLICKS
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                filters: []
+                id: '43'
+                mode: HEATMAP_MODE_CLICK_MAP
+                name: Checkout clicks
+                owner: dana@example.com
+                snapshotId: 5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f
+                timeRange:
+                  calendar: CALENDAR_WINDOW_TODAY
+                updatedAt: '2026-11-16T10:00:00.000Z'
+                version: 1
+                viewName: /checkout
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedHeatmap'
+                description: The created heatmap.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Create heatmap
+      tags:
+        - Product Analytics Heatmaps Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+  /product-analytics/heatmaps/v1/{id}:
+    get:
+      description: >-
+        Gets a saved heatmap by ID. Returns 412 (FAILED_PRECONDITION) with
+        "Product Analytics is not enabled for this team. A team admin can enable
+        it in Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Read`
+      operationId: HeatmapsService_GetSavedHeatmap
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                actionNameFilter: ACTION_NAME_FILTER_ALL_CLICKS
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                filters: []
+                id: '43'
+                mode: HEATMAP_MODE_CLICK_MAP
+                name: Checkout clicks
+                owner: dana@example.com
+                snapshotId: 5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f
+                timeRange:
+                  calendar: CALENDAR_WINDOW_TODAY
+                updatedAt: '2026-11-16T10:00:00.000Z'
+                version: 1
+                viewName: /checkout
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedHeatmap'
+                description: The heatmap.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Heatmap not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get heatmap
+      tags:
+        - Product Analytics Heatmaps Service
+      x-coralogixPermissions:
+        - product-analytics:Read
+    delete:
+      description: >-
+        Deletes a saved heatmap by ID. Returns 404 when the heatmap does not
+        exist. Returns 412 (FAILED_PRECONDITION) with "Product Analytics is not
+        enabled for this team. A team admin can enable it in Coralogix." when
+        Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: HeatmapsService_DeleteSavedHeatmap
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+              schema:
+                $ref: '#/components/schemas/DeleteSavedHeatmapResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Heatmap not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete heatmap
+      tags:
+        - Product Analytics Heatmaps Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+    patch:
+      description: >-
+        Updates the fields listed in update_mask. Other fields are unchanged. A
+        listed field that is omitted from the body is cleared or reset to its
+        default. The last write wins, and version increases by 1. Returns the
+        stored heatmap. Returns 412 (FAILED_PRECONDITION) with "Product
+        Analytics is not enabled for this team. A team admin can enable it in
+        Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: HeatmapsService_UpdateSavedHeatmap
+      parameters:
+        - description: >-
+            Comma-separated JSON paths of the fields to update: viewName, name,
+            filters, snapshotId, timeRange, mode, actionNameFilter. snake_case
+            names are also accepted. A listed field that is omitted from the
+            body is cleared or reset to its default: filters becomes empty,
+            snapshotId is removed, and actionNameFilter resets to
+            ACTION_NAME_FILTER_ALL_CLICKS; name, viewName, timeRange, and mode
+            cannot be cleared: listing one without a value returns 400. Nested,
+            unknown, immutable, and server-generated paths, and *, return 400. A
+            listed field is replaced as a whole, a oneOf arm included.
+          in: query
+          name: update_mask
+          required: true
+          schema:
+            description: >-
+              Comma-separated JSON paths of the fields to update: viewName,
+              name, filters, snapshotId, timeRange, mode, actionNameFilter.
+              snake_case names are also accepted. A listed field that is omitted
+              from the body is cleared or reset to its default: filters becomes
+              empty, snapshotId is removed, and actionNameFilter resets to
+              ACTION_NAME_FILTER_ALL_CLICKS; name, viewName, timeRange, and mode
+              cannot be cleared: listing one without a value returns 400.
+              Nested, unknown, immutable, and server-generated paths, and *,
+              return 400. A listed field is replaced as a whole, a oneOf arm
+              included.
+            maxLength: 512
+            minLength: 1
+            pattern: ^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$
+            type: string
+            x-coralogix-presence: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Heatmap field values for an update. Only fields listed in
+                update_mask are applied.
+              properties:
+                actionNameFilter:
+                  allOf:
+                    - $ref: '#/components/schemas/ActionNameFilter'
+                  default: ACTION_NAME_FILTER_ALL_CLICKS
+                  description: >-
+                    Which clicks the heatmap includes. Clearing it or sending
+                    ACTION_NAME_FILTER_UNSPECIFIED resets it to
+                    ACTION_NAME_FILTER_ALL_CLICKS.
+                filters:
+                  description: Session filters of the heatmap. Replaces the whole list.
+                  items:
+                    $ref: '#/components/schemas/ViewFilter'
+                  maxItems: 100
+                  minItems: 0
+                  type: array
+                  x-coralogix-collection: set
+                mode:
+                  allOf:
+                    - $ref: '#/components/schemas/HeatmapMode'
+                  description: >-
+                    Kind of heatmap visualization shown for the page view.
+                    Cannot be cleared. HEATMAP_MODE_UNSPECIFIED is rejected.
+                name:
+                  description: >-
+                    Display name of the heatmap. Must not be empty. Cannot be
+                    cleared.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                snapshotId:
+                  description: >-
+                    ID of the page snapshot the heatmap is drawn on. Clearing it
+                    removes the snapshot.
+                  maxLength: 256
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                  x-coralogix-presence: true
+                timeRange:
+                  allOf:
+                    - $ref: '#/components/schemas/ViewTimeRange'
+                  description: Time range of the heatmap. Cannot be cleared.
+                viewName:
+                  description: Name of the page view the heatmap covers. Cannot be cleared.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                actionNameFilter: ACTION_NAME_FILTER_ALL_CLICKS
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                filters: []
+                id: '43'
+                mode: HEATMAP_MODE_CLICK_MAP
+                name: Checkout clicks
+                owner: dana@example.com
+                snapshotId: 5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f
+                timeRange:
+                  calendar: CALENDAR_WINDOW_TODAY
+                updatedAt: '2026-11-16T11:00:00.000Z'
+                version: 2
+                viewName: /checkout
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedHeatmap'
+                description: The updated heatmap.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Heatmap not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update heatmap
+      tags:
+        - Product Analytics Heatmaps Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+    parameters:
+      - name: id
+        in: path
+        description: Heatmap ID, a decimal number.
+        required: true
+        schema:
+          maxLength: 19
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: Heatmap ID, a decimal number.
+  /product-analytics/pathways/v1:
+    get:
+      description: >-
+        Lists saved pathways, one page at a time, ordered by updatedAt
+        descending, then by id descending. totalSize is the exact number of
+        pathways that match app_names. Returns 412 (FAILED_PRECONDITION) with
+        "Product Analytics is not enabled for this team. A team admin can enable
+        it in Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Read`
+      operationId: PathwaysService_ListSavedPathways
+      parameters:
+        - description: >-
+            Maximum number of pathways to return. 0 uses the default of 20. A
+            value above 500 is lowered to 500. A negative value returns 400.
+          in: query
+          name: page_size
+          required: false
+          schema:
+            description: >-
+              Maximum number of pathways to return. 0 uses the default of 20. A
+              value above 500 is lowered to 500. A negative value returns 400.
+            format: int32
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+        - description: >-
+            The nextPageToken of the previous response. Empty for the first
+            page. The token is opaque, valid for 15 minutes, and tied to the
+            app_names of the request that returned it. A token that is expired,
+            from another query, or malformed returns 400: "pageToken belongs to
+            a different query or has expired. Send the request again without
+            pageToken."
+          in: query
+          name: page_token
+          required: false
+          schema:
+            description: >-
+              The nextPageToken of the previous response. Empty for the first
+              page. The token is opaque, valid for 15 minutes, and tied to the
+              app_names of the request that returned it. A token that is
+              expired, from another query, or malformed returns 400: "pageToken
+              belongs to a different query or has expired. Send the request
+              again without pageToken."
+            maxLength: 1024
+            minLength: 0
+            pattern: ^[\s\S]*$
+            type: string
+        - description: >-
+            Returns only pathways of these RUM applications. Repeat the
+            parameter for each application, for example
+            app_names=web-shop&app_names=docs. Omit to return pathways of every
+            application.
+          in: query
+          name: app_names
+          required: false
+          schema:
+            description: >-
+              Returns only pathways of these RUM applications. Repeat the
+              parameter for each application, for example
+              app_names=web-shop&app_names=docs. Omit to return pathways of
+              every application.
+            items:
+              description: >-
+                Returns only pathways of these RUM applications. Repeat the
+                parameter for each application, for example
+                app_names=web-shop&app_names=docs. Omit to return pathways of
+                every application.
+              maxLength: 1024
+              minLength: 1
+              pattern: ^[\s\S]*$
+              type: string
+            maxItems: 100
+            minItems: 0
+            type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                nextPageToken: ''
+                pathways:
+                  - appName: web-shop
+                    createdAt: '2026-11-16T10:00:00.000Z'
+                    direction: PATHWAY_DIRECTION_AFTER
+                    filters: []
+                    id: '44'
+                    name: After cart
+                    owner: dana@example.com
+                    pagesCount: 5
+                    timeRange:
+                      fixed:
+                        fromTimestampMs: '1763251200000'
+                        toTimestampMs: '1763337600000'
+                    topN: 20
+                    updatedAt: '2026-11-16T10:00:00.000Z'
+                    version: 1
+                    view: /cart
+                totalSize: 1
+              schema:
+                $ref: '#/components/schemas/ListSavedPathwaysResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: List pathways
+      tags:
+        - Product Analytics Pathways Service
+      x-coralogixPermissions:
+        - product-analytics:Read
+    post:
+      description: >-
+        Creates a saved pathway and returns the stored pathway, with version 1.
+        Returns 412 (FAILED_PRECONDITION) with "Product Analytics is not enabled
+        for this team. A team admin can enable it in Coralogix." when Product
+        Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: PathwaysService_CreateSavedPathway
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Pathway field values for a create.
+              properties:
+                appName:
+                  description: >-
+                    RUM application the pathway belongs to. Cannot be changed
+                    after creation.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                direction:
+                  allOf:
+                    - $ref: '#/components/schemas/PathwayDirection'
+                  default: PATHWAY_DIRECTION_AFTER
+                  description: >-
+                    Whether the paths show the pages after or before view.
+                    Omitted or PATHWAY_DIRECTION_UNSPECIFIED uses
+                    PATHWAY_DIRECTION_AFTER.
+                filters:
+                  description: Session filters of the pathway.
+                  items:
+                    $ref: '#/components/schemas/ViewFilter'
+                  maxItems: 100
+                  minItems: 0
+                  type: array
+                  x-coralogix-collection: set
+                name:
+                  description: >-
+                    Display name of the pathway. Must not be empty. Does not
+                    have to be unique.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                pagesCount:
+                  default: 5
+                  description: >-
+                    Number of pages after or before view in each path. Omitted
+                    uses 5.
+                  format: int32
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                timeRange:
+                  allOf:
+                    - $ref: '#/components/schemas/ViewTimeRange'
+                  description: Time range of the pathway.
+                topN:
+                  default: 20
+                  description: Number of paths shown, most common first. Omitted uses 20.
+                  format: int32
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                view:
+                  description: View (page) the paths are traced from.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+              required:
+                - appName
+                - name
+                - view
+                - timeRange
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                direction: PATHWAY_DIRECTION_AFTER
+                filters: []
+                id: '44'
+                name: After cart
+                owner: dana@example.com
+                pagesCount: 5
+                timeRange:
+                  fixed:
+                    fromTimestampMs: '1763251200000'
+                    toTimestampMs: '1763337600000'
+                topN: 20
+                updatedAt: '2026-11-16T10:00:00.000Z'
+                version: 1
+                view: /cart
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedPathway'
+                description: The created pathway.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Create pathway
+      tags:
+        - Product Analytics Pathways Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+  /product-analytics/pathways/v1/{id}:
+    get:
+      description: >-
+        Gets a saved pathway by ID. Returns 412 (FAILED_PRECONDITION) with
+        "Product Analytics is not enabled for this team. A team admin can enable
+        it in Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Read`
+      operationId: PathwaysService_GetSavedPathway
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                direction: PATHWAY_DIRECTION_AFTER
+                filters: []
+                id: '44'
+                name: After cart
+                owner: dana@example.com
+                pagesCount: 5
+                timeRange:
+                  fixed:
+                    fromTimestampMs: '1763251200000'
+                    toTimestampMs: '1763337600000'
+                topN: 20
+                updatedAt: '2026-11-16T10:00:00.000Z'
+                version: 1
+                view: /cart
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedPathway'
+                description: The pathway.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Pathway not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get pathway
+      tags:
+        - Product Analytics Pathways Service
+      x-coralogixPermissions:
+        - product-analytics:Read
+    delete:
+      description: >-
+        Deletes a saved pathway by ID. Returns 404 when the pathway does not
+        exist. Returns 412 (FAILED_PRECONDITION) with "Product Analytics is not
+        enabled for this team. A team admin can enable it in Coralogix." when
+        Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: PathwaysService_DeleteSavedPathway
+      responses:
+        '200':
+          content:
+            application/json:
+              example: {}
+              schema:
+                $ref: '#/components/schemas/DeleteSavedPathwayResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Pathway not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete pathway
+      tags:
+        - Product Analytics Pathways Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+    patch:
+      description: >-
+        Updates the fields listed in update_mask. Other fields are unchanged. A
+        listed field that is omitted from the body is cleared or reset to its
+        default. The last write wins, and version increases by 1. Returns the
+        stored pathway. Returns 412 (FAILED_PRECONDITION) with "Product
+        Analytics is not enabled for this team. A team admin can enable it in
+        Coralogix." when Product Analytics is off for the team.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Manage`
+      operationId: PathwaysService_UpdateSavedPathway
+      parameters:
+        - description: >-
+            Comma-separated JSON paths of the fields to update: name, view,
+            direction, pagesCount, topN, timeRange, filters. snake_case names
+            are also accepted. A listed field that is omitted from the body is
+            cleared or reset to its default: direction resets to
+            PATHWAY_DIRECTION_AFTER, pagesCount to 5, topN to 20, and filters
+            becomes empty; name, view, and timeRange cannot be cleared: listing
+            one without a value returns 400. Nested, unknown, immutable, and
+            server-generated paths, and *, return 400. A listed field is
+            replaced as a whole, a oneOf arm included.
+          in: query
+          name: update_mask
+          required: true
+          schema:
+            description: >-
+              Comma-separated JSON paths of the fields to update: name, view,
+              direction, pagesCount, topN, timeRange, filters. snake_case names
+              are also accepted. A listed field that is omitted from the body is
+              cleared or reset to its default: direction resets to
+              PATHWAY_DIRECTION_AFTER, pagesCount to 5, topN to 20, and filters
+              becomes empty; name, view, and timeRange cannot be cleared:
+              listing one without a value returns 400. Nested, unknown,
+              immutable, and server-generated paths, and *, return 400. A listed
+              field is replaced as a whole, a oneOf arm included.
+            maxLength: 512
+            minLength: 1
+            pattern: ^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$
+            type: string
+            x-coralogix-presence: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Pathway field values for an update. Only fields listed in
+                update_mask are applied.
+              properties:
+                direction:
+                  allOf:
+                    - $ref: '#/components/schemas/PathwayDirection'
+                  default: PATHWAY_DIRECTION_AFTER
+                  description: >-
+                    Whether the paths show the pages after or before view.
+                    Clearing it or sending PATHWAY_DIRECTION_UNSPECIFIED resets
+                    it to PATHWAY_DIRECTION_AFTER.
+                filters:
+                  description: Session filters of the pathway. Replaces the whole list.
+                  items:
+                    $ref: '#/components/schemas/ViewFilter'
+                  maxItems: 100
+                  minItems: 0
+                  type: array
+                  x-coralogix-collection: set
+                name:
+                  description: >-
+                    Display name of the pathway. Must not be empty. Cannot be
+                    cleared.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+                pagesCount:
+                  default: 5
+                  description: >-
+                    Number of pages after or before view in each path. Clearing
+                    it resets it to 5.
+                  format: int32
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                timeRange:
+                  allOf:
+                    - $ref: '#/components/schemas/ViewTimeRange'
+                  description: Time range of the pathway. Cannot be cleared.
+                topN:
+                  default: 20
+                  description: >-
+                    Number of paths shown, most common first. Clearing it resets
+                    it to 20.
+                  format: int32
+                  maximum: 2147483647
+                  minimum: 1
+                  type: integer
+                view:
+                  description: View (page) the paths are traced from. Cannot be cleared.
+                  maxLength: 1024
+                  minLength: 1
+                  pattern: ^[\s\S]*$
+                  type: string
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                appName: web-shop
+                createdAt: '2026-11-16T10:00:00.000Z'
+                direction: PATHWAY_DIRECTION_AFTER
+                filters: []
+                id: '44'
+                name: After cart
+                owner: dana@example.com
+                pagesCount: 5
+                timeRange:
+                  fixed:
+                    fromTimestampMs: '1763251200000'
+                    toTimestampMs: '1763337600000'
+                topN: 20
+                updatedAt: '2026-11-16T11:00:00.000Z'
+                version: 2
+                view: /cart
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SavedPathway'
+                description: The updated pathway.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Pathway not found
+        '412':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Product Analytics is not enabled for this team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update pathway
+      tags:
+        - Product Analytics Pathways Service
+      x-coralogixPermissions:
+        - product-analytics:Manage
+    parameters:
+      - name: id
+        in: path
+        description: Pathway ID, a decimal number.
+        required: true
+        schema:
+          maxLength: 19
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: Pathway ID, a decimal number.
+  /product-analytics/settings/v1:
+    get:
+      description: >-
+        Gets the Product Analytics settings of the team. A team that never
+        enabled Product Analytics reads enabled false. Works when Product
+        Analytics is off.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Read`
+      operationId: SettingsService_GetSettings
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                enabled: true
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ProductAnalyticsSettings'
+                description: The settings.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get product analytics settings
+      tags:
+        - Product Analytics Settings Service
+      x-coralogixPermissions:
+        - product-analytics:Read
+    patch:
+      description: >-
+        Updates the fields listed in update_mask. Other fields are unchanged. A
+        listed field must be in the body. Sending the value the team already has
+        succeeds and changes nothing. Works when Product Analytics is off.
+        Returns the stored settings.
+
+
+        Requires the following permissions:
+
+        - `product-analytics:Enable`
+      operationId: SettingsService_UpdateSettings
+      parameters:
+        - description: >-
+            Comma-separated JSON paths of the fields to update: enabled. A
+            listed field must be in the body: listing enabled without a value
+            returns 400. Unknown and nested paths, and *, return 400. A listed
+            field is replaced as a whole, a oneOf arm included.
+          in: query
+          name: update_mask
+          required: true
+          schema:
+            description: >-
+              Comma-separated JSON paths of the fields to update: enabled. A
+              listed field must be in the body: listing enabled without a value
+              returns 400. Unknown and nested paths, and *, return 400. A listed
+              field is replaced as a whole, a oneOf arm included.
+            maxLength: 512
+            minLength: 1
+            pattern: ^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$
+            type: string
+            x-coralogix-presence: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Settings field values for an update. Only fields listed in
+                update_mask are applied.
+              properties:
+                enabled:
+                  description: >-
+                    Whether Product Analytics is enabled for the team. Required
+                    when update_mask lists enabled: a listed but missing enabled
+                    returns 400.
+                  type: boolean
+                  x-coralogix-presence: true
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                enabled: true
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/ProductAnalyticsSettings'
+                description: The updated settings.
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update product analytics settings
+      tags:
+        - Product Analytics Settings Service
+      x-coralogixPermissions:
+        - product-analytics:Enable
   /recording-rules/recording-rules/v1:
     get:
       description: Returns all recording rule groups for the team.
@@ -21047,6 +22956,31 @@ components:
             $ref: '#/components/schemas/Incident'
           description: List of incidents after acknowledgment
       description: Response containing the updated incidents after acknowledgment
+    ActionCondition:
+      type: object
+      properties:
+        element:
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+          description: >-
+            Condition on the target element. Requires event: element without
+            event returns 400.
+        event:
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+          description: Condition on the event name. Absent matches any event.
+        filters:
+          description: Filters that narrow this action condition only. Empty when not set.
+          items:
+            $ref: '#/components/schemas/ActionFilter'
+          maxItems: 100
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+      description: >-
+        User action matcher of a funnel step, such as a click. With neither
+        event nor element it matches any action, with event only a specific
+        event, and with both that event on that element.
     ActionDataSourceType:
       enum:
         - ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
@@ -21154,6 +23088,77 @@ components:
       description: >-
         This data structure represents a response to an Action execution
         request.
+    ActionFilter:
+      type: object
+      oneOf:
+        - required:
+            - stringFilter
+          type: object
+        - required:
+            - numericFilter
+          type: object
+        - required:
+            - boolFilter
+          type: object
+      properties:
+        boolFilter:
+          allOf:
+            - $ref: '#/components/schemas/BoolFilter'
+          description: A boolean field with the value the action must have.
+        numericFilter:
+          allOf:
+            - $ref: '#/components/schemas/ActionNumericFilter'
+          description: A numeric field with the condition the action must match.
+        stringFilter:
+          allOf:
+            - $ref: '#/components/schemas/StringFilter'
+          description: A string field with the condition the action must match.
+      description: >-
+        A session filter of an action condition. Same as a view filter, except
+        that per-page numeric fields are not available.
+    ActionNameFilter:
+      enum:
+        - ACTION_NAME_FILTER_UNSPECIFIED
+        - ACTION_NAME_FILTER_ALL_CLICKS
+        - ACTION_NAME_FILTER_NAMED_ONLY
+        - ACTION_NAME_FILTER_UNNAMED_ONLY
+      type: string
+      description: >-
+        Which clicks a heatmap includes. ALL_CLICKS includes every click,
+        NAMED_ONLY only named actions, UNNAMED_ONLY only unnamed ones.
+    ActionNumericFilter:
+      required:
+        - field
+        - condition
+      type: object
+      properties:
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/NumericCondition'
+          description: Condition the numeric field must match.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/ActionNumericFilterField'
+          description: >-
+            Numeric field to filter on. ACTION_NUMERIC_FILTER_FIELD_UNSPECIFIED
+            is rejected.
+          examples:
+            - ACTION_NUMERIC_FILTER_FIELD_ERROR_COUNT
+      description: Filter on a numeric field of an action condition.
+    ActionNumericFilterField:
+      enum:
+        - ACTION_NUMERIC_FILTER_FIELD_UNSPECIFIED
+        - ACTION_NUMERIC_FILTER_FIELD_ERROR_COUNT
+        - ACTION_NUMERIC_FILTER_FIELD_LONG_TASK_COUNT
+        - ACTION_NUMERIC_FILTER_FIELD_CRASH_COUNT
+        - ACTION_NUMERIC_FILTER_FIELD_RESOURCE_COUNT
+        - ACTION_NUMERIC_FILTER_FIELD_RAGE_CLICK_COUNT
+        - ACTION_NUMERIC_FILTER_FIELD_DEAD_CLICK_COUNT
+      type: string
+      description: >-
+        Session attribute with numeric values, for numericFilter of an action
+        condition. Per-page values (action count, scroll depth, viewport size)
+        are available on view conditions only.
     ActivateRetentionsResponse:
       title: Activate Retentions Response
       type: object
@@ -21671,6 +23676,155 @@ components:
         - ALERT_DEF_CASE_ENRICHMENT_QUERY_TYPE_DATAPRIME
       type: string
       description: Enrichment query type.
+    AlertDefCaseKpiThreshold:
+      title: Alert definition case KPI threshold
+      required:
+        - priority
+        - type
+        - threshold
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: >-
+            When false, this KPI timer does not run for cases of this priority.
+            Defaults to false when omitted.
+          examples:
+            - true
+        priority:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCasePriority'
+          description: >-
+            Case priority to which this threshold applies.
+            ALERT_DEF_CASE_PRIORITY_UNSPECIFIED is not accepted.
+          examples:
+            - ALERT_DEF_CASE_PRIORITY_P1
+        threshold:
+          description: >-
+            Time after which the KPI is breached. Whole number of seconds
+            greater than zero, for example 300s is 5 minutes.
+          examples:
+            - 300s
+          maxLength: 12
+          minLength: 2
+          pattern: ^[1-9][0-9]{0,10}s$
+          type: string
+          x-coralogix-presence: true
+        type:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCaseKpiType'
+          description: >-
+            KPI type to which this threshold applies.
+            ALERT_DEF_CASE_KPI_TYPE_UNSPECIFIED is not accepted.
+          examples:
+            - ALERT_DEF_CASE_KPI_TYPE_TIME_TO_ACKNOWLEDGE
+      description: One KPI threshold for one KPI type and one case priority.
+    AlertDefCaseKpiType:
+      enum:
+        - ALERT_DEF_CASE_KPI_TYPE_UNSPECIFIED
+        - ALERT_DEF_CASE_KPI_TYPE_TIME_TO_ACKNOWLEDGE
+        - ALERT_DEF_CASE_KPI_TYPE_TIME_TO_RESOLVE
+        - ALERT_DEF_CASE_KPI_TYPE_TIME_TO_UPDATE
+      type: string
+      description: Case KPI type.
+    AlertDefCaseKpis:
+      title: Alert definition case KPIs
+      type: object
+      properties:
+        thresholds:
+          maxItems: 15
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertDefCaseKpiThreshold'
+          description: >-
+            KPI thresholds. At most one entry for each type and priority. For
+            each priority, the time to acknowledge must be less than or equal to
+            the time to resolve. An empty or omitted list turns off all KPI
+            timers of these cases.
+      description: >-
+        KPI thresholds for the cases that the alert creates, one entry for each
+        KPI type and case priority.
+    AlertDefCasePriority:
+      enum:
+        - ALERT_DEF_CASE_PRIORITY_UNSPECIFIED
+        - ALERT_DEF_CASE_PRIORITY_P1
+        - ALERT_DEF_CASE_PRIORITY_P2
+        - ALERT_DEF_CASE_PRIORITY_P3
+        - ALERT_DEF_CASE_PRIORITY_P4
+        - ALERT_DEF_CASE_PRIORITY_P5
+      type: string
+      description: Case priority. P1 is the most severe.
+    AlertDefCasePriorityEscalation:
+      title: Alert definition case priority escalation
+      required:
+        - enabled
+      type: object
+      properties:
+        enabled:
+          description: >-
+            Enable or disable priority escalation for these cases. When false,
+            no rule is applied.
+          examples:
+            - true
+          type: boolean
+          x-coralogix-presence: true
+        rules:
+          maxItems: 4
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/AlertDefCasePriorityEscalationRule'
+          description: >-
+            Escalation rules. Each rule applies to cases at its fromPriority. At
+            most one rule for each fromPriority. P1 cannot be a fromPriority, so
+            the list has at most 4 rules. An empty or omitted list means that no
+            rule applies, also when enabled is true.
+      description: >-
+        Rules that raise the priority of unacknowledged cases that the alert
+        creates after a period of time.
+    AlertDefCasePriorityEscalationRule:
+      title: Alert definition case priority escalation rule
+      required:
+        - fromPriority
+        - toPriority
+        - period
+      type: object
+      properties:
+        fromPriority:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCasePriority'
+          description: >-
+            Priority that the case must have for this rule to apply.
+            ALERT_DEF_CASE_PRIORITY_P1 is not accepted, because no priority is
+            more severe. ALERT_DEF_CASE_PRIORITY_UNSPECIFIED is not accepted.
+          examples:
+            - ALERT_DEF_CASE_PRIORITY_P3
+        period:
+          description: >-
+            Time that a case can stay unacknowledged at fromPriority before it
+            is escalated. Whole number of seconds greater than zero, for example
+            36000s is 10 hours.
+          examples:
+            - 36000s
+          maxLength: 12
+          minLength: 2
+          pattern: ^[1-9][0-9]{0,10}s$
+          type: string
+          x-coralogix-presence: true
+        toPriority:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCasePriority'
+          description: >-
+            Priority to which the case is raised. Must be more severe than
+            fromPriority, for example ALERT_DEF_CASE_PRIORITY_P2 when
+            fromPriority is ALERT_DEF_CASE_PRIORITY_P3.
+            ALERT_DEF_CASE_PRIORITY_UNSPECIFIED is not accepted.
+          examples:
+            - ALERT_DEF_CASE_PRIORITY_P2
+      description: >-
+        A case at fromPriority that stays unacknowledged for at least period is
+        raised to toPriority.
     AlertDefCaseSettings:
       title: Alert definition case settings
       type: object
@@ -21701,7 +23855,40 @@ components:
           items:
             $ref: '#/components/schemas/AlertDefCaseEnrichmentQuery'
           description: Queries used to enrich the case created by this alert
+        overrides:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCaseSettingsOverrides'
+          description: >-
+            Case settings that this alert sets for the cases that it creates.
+            When omitted, the company case settings apply. Replace is a full
+            overwrite: omitting overrides removes the overrides.
+          x-stability: preview
       description: Settings controlling how the alert interacts with cases.
+    AlertDefCaseSettingsOverrides:
+      title: Alert definition case settings overrides
+      type: object
+      properties:
+        kpi:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCaseKpis'
+          description: >-
+            KPI thresholds for the cases that this alert creates. When omitted,
+            the company KPI settings apply. When present, the value replaces the
+            company KPI settings as a whole for these cases. An empty thresholds
+            list turns off all KPI timers of these cases.
+        priorityEscalation:
+          allOf:
+            - $ref: '#/components/schemas/AlertDefCasePriorityEscalation'
+          description: >-
+            Priority escalation settings for the cases that this alert creates.
+            When omitted, the company priority escalation settings apply. When
+            present, the value replaces the company settings as a whole for
+            these cases. enabled set to false turns off escalation for these
+            cases.
+      description: >-
+        Case settings that replace the company case settings for the cases that
+        the alert creates. Each omitted part keeps the company settings for that
+        part.
     AlertDefDataSource:
       type: object
       properties:
@@ -25155,6 +27342,34 @@ components:
           type: string
           x-coralogix-presence: true
       description: Block parameters. Blocks every log that matches the regular expression.
+    BoolFilter:
+      required:
+        - field
+        - value
+      type: object
+      properties:
+        field:
+          allOf:
+            - $ref: '#/components/schemas/BoolFilterField'
+          description: >-
+            Boolean field to filter on. BOOL_FILTER_FIELD_UNSPECIFIED is
+            rejected.
+          examples:
+            - BOOL_FILTER_FIELD_HAS_SESSION_REPLAY
+        value:
+          description: Value the field must have.
+          type: boolean
+          x-coralogix-presence: true
+      description: Filter on a boolean field.
+    BoolFilterField:
+      enum:
+        - BOOL_FILTER_FIELD_UNSPECIFIED
+        - BOOL_FILTER_FIELD_HAS_SESSION_REPLAY
+        - BOOL_FILTER_FIELD_HAS_SCREENSHOT
+        - BOOL_FILTER_FIELD_IS_RAGE_CLICK
+        - BOOL_FILTER_FIELD_IS_DEAD_CLICK
+      type: string
+      description: Session attribute with boolean values, for boolFilter.
     BreachStatus:
       title: Breach status
       enum:
@@ -25223,6 +27438,24 @@ components:
         the time of breach, and when the breach occurred together with current
         status. This information helps understand which KPIs were not met for a
         case and when.
+    BreakdownField:
+      enum:
+        - BREAKDOWN_FIELD_UNSPECIFIED
+        - BREAKDOWN_FIELD_ACCOUNT_ID
+        - BREAKDOWN_FIELD_ACCOUNT_NAME
+        - BREAKDOWN_FIELD_PLATFORM
+        - BREAKDOWN_FIELD_ENVIRONMENT
+        - BREAKDOWN_FIELD_APP_VERSION
+        - BREAKDOWN_FIELD_CX_SDK_VERSION
+        - BREAKDOWN_FIELD_BROWSER_NAME
+        - BREAKDOWN_FIELD_OS
+        - BREAKDOWN_FIELD_OS_VERSION
+        - BREAKDOWN_FIELD_DEVICE_TYPE
+        - BREAKDOWN_FIELD_COUNTRY_NAME
+        - BREAKDOWN_FIELD_CITY_NAME
+        - BREAKDOWN_FIELD_CONTINENT_NAME
+      type: string
+      description: Session attribute a funnel can be broken down by.
     Bucket:
       type: object
       properties:
@@ -25519,6 +27752,15 @@ components:
         timeDuration:
           $ref: '#/components/schemas/TimeDuration'
       description: Burn rate type single definition
+    CalendarWindow:
+      enum:
+        - CALENDAR_WINDOW_UNSPECIFIED
+        - CALENDAR_WINDOW_TODAY
+        - CALENDAR_WINDOW_YESTERDAY
+      type: string
+      description: >-
+        Named calendar window. TODAY runs from local midnight to now, YESTERDAY
+        covers the whole previous local day.
     Case:
       title: Case
       required:
@@ -30903,6 +33145,18 @@ components:
       type: object
       additionalProperties: false
       description: Response returned after successfully deleting a parsing rule group.
+    DeleteSavedFunnelResponse:
+      type: object
+      additionalProperties: false
+      description: Confirmation that the funnel was deleted.
+    DeleteSavedHeatmapResponse:
+      type: object
+      additionalProperties: false
+      description: Confirmation that the heatmap was deleted.
+    DeleteSavedPathwayResponse:
+      type: object
+      additionalProperties: false
+      description: Confirmation that the pathway was deleted.
     DeleteScopeResponse:
       type: object
       additionalProperties: false
@@ -33699,6 +35953,34 @@ components:
       type: object
       additionalProperties: false
       description: First.
+    FixedTimeRange:
+      required:
+        - fromTimestampMs
+        - toTimestampMs
+      type: object
+      properties:
+        fromTimestampMs:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: >-
+            Start of the range, in Unix milliseconds. Inclusive: events at
+            exactly this time are in the range.
+          examples:
+            - '1763251200000'
+        toTimestampMs:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: >-
+            End of the range, in Unix milliseconds. Exclusive: events at exactly
+            this time are not in the range, so consecutive ranges can share a
+            boundary.
+          examples:
+            - '1763337600000'
+      description: Absolute time range, from inclusive to exclusive.
     FlowStages:
       title: Flow stages
       type: object
@@ -33857,6 +36139,103 @@ components:
       description: >-
         Format standard. The zero value
         `FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED` means strftime.
+    FunnelBreakdown:
+      required:
+        - field
+        - limit
+      type: object
+      properties:
+        field:
+          allOf:
+            - $ref: '#/components/schemas/BreakdownField'
+          description: >-
+            Session dimension to split by. BREAKDOWN_FIELD_UNSPECIFIED is
+            rejected.
+          examples:
+            - BREAKDOWN_FIELD_PLATFORM
+        limit:
+          maximum: 1000
+          minimum: 1
+          type: integer
+          description: Maximum number of groups to return, top groups by first step count.
+          format: int64
+      description: Splits the funnel by the values of one session dimension.
+    FunnelDefinition:
+      required:
+        - mode
+        - steps
+      type: object
+      properties:
+        conversionWindow:
+          description: >-
+            Maximum time from the first step to the last step, in whole seconds,
+            such as "3600s". A fraction of a second returns 400. Absent means no
+            window.
+          maxLength: 13
+          minLength: 2
+          pattern: ^[1-9][0-9]{0,11}s$
+          type: string
+          x-coralogix-presence: true
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/FunnelMode'
+          description: >-
+            What the funnel counts: users, sessions, or accounts.
+            FUNNEL_MODE_UNSPECIFIED returns 400.
+        steps:
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/FunnelStep'
+          description: >-
+            Steps of the funnel, in funnel order. Steps must happen in this
+            order, and other views and actions may happen in between. The same
+            view or action may appear in two steps. At least one is required.
+      description: What a funnel counts and the steps it is made of.
+    FunnelMode:
+      enum:
+        - FUNNEL_MODE_UNSPECIFIED
+        - FUNNEL_MODE_USERS
+        - FUNNEL_MODE_SESSIONS
+        - FUNNEL_MODE_ACCOUNTS
+      type: string
+      description: >-
+        What a funnel counts. USERS counts unique users, whose steps may span
+        sessions. SESSIONS counts sessions, and every step must happen in the
+        same session. ACCOUNTS counts unique accounts.
+    FunnelStep:
+      required:
+        - stepId
+        - conditions
+      type: object
+      properties:
+        conditions:
+          description: >-
+            Conditions of the step, combined with OR. Their order has no
+            meaning. At least one is required.
+          items:
+            $ref: '#/components/schemas/StepCondition'
+          maxItems: 100
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
+        label:
+          maxLength: 1024
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display label of the step. Empty when not set.
+        stepId:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*\S[\s\S]*$
+          type: string
+          description: >-
+            ID of the step, unique within the funnel. A duplicate returns 400.
+            Steps saved in the Coralogix UI read as s1, s2, and so on, by
+            position.
+      description: A funnel step. It is reached when any of its conditions matches.
     Gauge.Aggregation:
       enum:
         - AGGREGATION_UNSPECIFIED
@@ -36554,6 +38933,14 @@ components:
         - HEATMAP_HISTOGRAM_BUCKET_UNIT_GBYTES
       type: string
       description: Heatmap histogram bucket unit.
+    HeatmapMode:
+      enum:
+        - HEATMAP_MODE_UNSPECIFIED
+        - HEATMAP_MODE_TOP_ELEMENTS
+        - HEATMAP_MODE_CLICK_MAP
+        - HEATMAP_MODE_SCROLL_MAP
+      type: string
+      description: Kind of heatmap visualization.
     HeatmapTooltip:
       type: object
       properties:
@@ -41140,6 +43527,85 @@ components:
             $ref: '#/components/schemas/RuleGroup'
           description: The rule groups.
       description: Response containing a list of parsing rule groups.
+    ListSavedFunnelsResponse:
+      type: object
+      properties:
+        funnels:
+          maxItems: 500
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SavedFunnel'
+          description: The funnels, ordered by updatedAt descending, then by id descending.
+        nextPageToken:
+          maxLength: 1024
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Token for the next page, valid for 15 minutes. Empty on the last
+            page.
+        totalSize:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Exact number of funnels that match app_names, across all pages.
+          format: int32
+      description: A page of saved funnels.
+    ListSavedHeatmapsResponse:
+      type: object
+      properties:
+        heatmaps:
+          maxItems: 500
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SavedHeatmap'
+          description: >-
+            The heatmaps, ordered by updatedAt descending, then by id
+            descending.
+        nextPageToken:
+          maxLength: 1024
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Token for the next page, valid for 15 minutes. Empty on the last
+            page.
+        totalSize:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Exact number of heatmaps that match app_names, across all pages.
+          format: int32
+      description: A page of saved heatmaps.
+    ListSavedPathwaysResponse:
+      type: object
+      properties:
+        nextPageToken:
+          maxLength: 1024
+          minLength: 0
+          pattern: ^[\s\S]*$
+          type: string
+          description: >-
+            Token for the next page, valid for 15 minutes. Empty on the last
+            page.
+        pathways:
+          maxItems: 500
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/SavedPathway'
+          description: >-
+            The pathways, ordered by updatedAt descending, then by id
+            descending.
+        totalSize:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Exact number of pathways that match app_names, across all pages.
+          format: int32
+      description: A page of saved pathways.
     ListSlosResponse:
       title: ListSlosResponse
       required:
@@ -44001,6 +46467,99 @@ components:
         - NOTIFY_ON_TRIGGERED_AND_RESOLVED
       type: string
       description: Notify on.
+    NumericCondition:
+      type: object
+      oneOf:
+        - required:
+            - min
+          type: object
+        - required:
+            - max
+          type: object
+        - required:
+            - range
+          type: object
+      properties:
+        max:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: Matches values less than or equal to max.
+          examples:
+            - '100'
+        min:
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          description: Matches values greater than or equal to min.
+          examples:
+            - '1'
+        range:
+          allOf:
+            - $ref: '#/components/schemas/NumericRange'
+          description: Matches values from lower to upper, both included.
+      description: Numeric matching condition. Exactly one of min, max, or range is set.
+    NumericFilter:
+      required:
+        - field
+        - condition
+      type: object
+      properties:
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/NumericCondition'
+          description: Condition the field must match.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/NumericFilterField'
+          description: >-
+            Numeric field to filter on. NUMERIC_FILTER_FIELD_UNSPECIFIED is
+            rejected.
+          examples:
+            - NUMERIC_FILTER_FIELD_ERROR_COUNT
+      description: Filter on a numeric field.
+    NumericFilterField:
+      enum:
+        - NUMERIC_FILTER_FIELD_UNSPECIFIED
+        - NUMERIC_FILTER_FIELD_ERROR_COUNT
+        - NUMERIC_FILTER_FIELD_ACTION_COUNT
+        - NUMERIC_FILTER_FIELD_LONG_TASK_COUNT
+        - NUMERIC_FILTER_FIELD_CRASH_COUNT
+        - NUMERIC_FILTER_FIELD_RESOURCE_COUNT
+        - NUMERIC_FILTER_FIELD_SCROLL_DEPTH_PERCENTAGE
+        - NUMERIC_FILTER_FIELD_VIEWPORT_WIDTH
+        - NUMERIC_FILTER_FIELD_VIEWPORT_HEIGHT
+        - NUMERIC_FILTER_FIELD_RAGE_CLICK_COUNT
+        - NUMERIC_FILTER_FIELD_DEAD_CLICK_COUNT
+      type: string
+      description: Session attribute with numeric values, for numericFilter.
+    NumericRange:
+      required:
+        - lower
+        - upper
+      type: object
+      properties:
+        lower:
+          description: Lowest matching value, included. Must not be greater than upper.
+          examples:
+            - '1'
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          x-coralogix-presence: true
+        upper:
+          description: Highest matching value, included.
+          examples:
+            - '100'
+          maxLength: 20
+          minLength: 1
+          pattern: ^-?[0-9]+$
+          type: string
+          x-coralogix-presence: true
+      description: Inclusive numeric range.
     NumericValueLabel:
       type: object
       properties:
@@ -44950,6 +47509,16 @@ components:
       description: >-
         Parse parameters. Parses the source field with a regular expression and
         writes the named capture groups to the destination field.
+    PathwayDirection:
+      enum:
+        - PATHWAY_DIRECTION_UNSPECIFIED
+        - PATHWAY_DIRECTION_AFTER
+        - PATHWAY_DIRECTION_BEFORE
+      type: string
+      description: >-
+        Direction of a pathway. AFTER shows the pages visited after the view,
+        where users go next. BEFORE shows the pages visited before it, where
+        users came from.
     Percentile:
       type: object
       properties:
@@ -46069,6 +48638,15 @@ components:
         quotaBased:
           $ref: '#/components/schemas/QuotaBasedStatus'
       description: Priority override status.
+    ProductAnalyticsSettings:
+      required:
+        - enabled
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether Product Analytics is enabled for the team.
+      description: Product Analytics settings of the team.
     ProductTypeValues:
       type: object
       properties:
@@ -49302,6 +51880,313 @@ components:
           type: string
           x-coralogix-presence: true
       description: Response returned after successfully saving an integration deployment.
+    SavedFunnel:
+      required:
+        - id
+        - appName
+        - name
+        - definition
+        - timeRange
+        - createdAt
+        - updatedAt
+        - version
+      type: object
+      properties:
+        appName:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: RUM application the funnel belongs to.
+        breakdown:
+          allOf:
+            - $ref: '#/components/schemas/FunnelBreakdown'
+          description: Breakdown of the funnel by a session dimension. Absent when not set.
+        createdAt:
+          description: When the funnel was created. Set by the server.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/FunnelDefinition'
+          description: Mode, conversion window, and steps of the funnel.
+        filters:
+          description: Session filters applied to every step. Empty when not set.
+          items:
+            $ref: '#/components/schemas/ViewFilter'
+          maxItems: 100
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+        id:
+          maxLength: 19
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: Funnel ID, a decimal number. Set by the server.
+          readOnly: true
+        name:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display name of the funnel. Does not have to be unique.
+        owner:
+          description: >-
+            User who created the funnel. Set by the server. Absent for funnels
+            saved before owners were recorded.
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        timeRange:
+          allOf:
+            - $ref: '#/components/schemas/ViewTimeRange'
+          description: Time range of the funnel.
+        updatedAt:
+          description: >-
+            When the funnel was last updated, from the API or the Coralogix UI.
+            Set by the server.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        version:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: >-
+            Version of the funnel. Set by the server: 1 on create, increased by
+            1 on every update, including updates made in the Coralogix UI.
+          format: int32
+          readOnly: true
+      description: A saved funnel of a RUM application.
+    SavedHeatmap:
+      required:
+        - id
+        - appName
+        - name
+        - viewName
+        - timeRange
+        - mode
+        - actionNameFilter
+        - createdAt
+        - updatedAt
+        - version
+      type: object
+      properties:
+        actionNameFilter:
+          allOf:
+            - $ref: '#/components/schemas/ActionNameFilter'
+          description: Which clicks the heatmap includes.
+          default: ACTION_NAME_FILTER_ALL_CLICKS
+        appName:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: RUM application the heatmap belongs to.
+        createdAt:
+          description: When the heatmap was created. Set by the server.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        filters:
+          description: Session filters of the heatmap. Empty when not set.
+          items:
+            $ref: '#/components/schemas/ViewFilter'
+          maxItems: 100
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+        id:
+          maxLength: 19
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: Heatmap ID, a decimal number. Set by the server.
+          readOnly: true
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/HeatmapMode'
+          description: Kind of heatmap visualization shown for the page view.
+        name:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display name of the heatmap. Does not have to be unique.
+        owner:
+          description: >-
+            User who created the heatmap. Set by the server. Absent for heatmaps
+            saved before owners were recorded.
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        snapshotId:
+          description: >-
+            ID of the page snapshot the heatmap is drawn on. Absent when the
+            heatmap has no snapshot.
+          maxLength: 256
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          x-coralogix-presence: true
+        timeRange:
+          allOf:
+            - $ref: '#/components/schemas/ViewTimeRange'
+          description: Time range of the heatmap.
+        updatedAt:
+          description: >-
+            When the heatmap was last updated, from the API or the Coralogix UI.
+            Set by the server.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        version:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: >-
+            Version of the heatmap. Set by the server: 1 on create, increased by
+            1 on every update, including updates made in the Coralogix UI.
+          format: int32
+          readOnly: true
+        viewName:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Name of the page view the heatmap covers.
+      description: A saved heatmap of a RUM application page.
+    SavedPathway:
+      required:
+        - id
+        - appName
+        - name
+        - view
+        - pagesCount
+        - topN
+        - direction
+        - timeRange
+        - createdAt
+        - updatedAt
+        - version
+      type: object
+      properties:
+        appName:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: RUM application the pathway belongs to.
+        createdAt:
+          description: When the pathway was created. Set by the server.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        direction:
+          allOf:
+            - $ref: '#/components/schemas/PathwayDirection'
+          description: Whether the paths show the pages after or before view.
+          default: PATHWAY_DIRECTION_AFTER
+        filters:
+          description: Session filters of the pathway. Empty when not set.
+          items:
+            $ref: '#/components/schemas/ViewFilter'
+          maxItems: 100
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+        id:
+          maxLength: 19
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: Pathway ID, a decimal number. Set by the server.
+          readOnly: true
+        name:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: Display name of the pathway. Does not have to be unique.
+        owner:
+          description: >-
+            User who created the pathway. Set by the server. Absent for pathways
+            saved before owners were recorded.
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        pagesCount:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: Number of pages after or before view in each path.
+          format: int32
+          default: 5
+        timeRange:
+          allOf:
+            - $ref: '#/components/schemas/ViewTimeRange'
+          description: Time range of the pathway.
+        topN:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: Number of paths shown, most common first.
+          format: int32
+          default: 20
+        updatedAt:
+          description: >-
+            When the pathway was last updated, from the API or the Coralogix UI.
+            Set by the server.
+          format: date-time
+          maxLength: 64
+          minLength: 0
+          readOnly: true
+          type: string
+          x-coralogix-presence: true
+        version:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: >-
+            Version of the pathway. Set by the server: 1 on create, increased by
+            1 on every update, including updates made in the Coralogix UI.
+          format: int32
+          readOnly: true
+        view:
+          maxLength: 1024
+          minLength: 1
+          pattern: ^[\s\S]*$
+          type: string
+          description: View (page) the paths are traced from.
+      description: >-
+        A saved pathway of a RUM application: the paths sessions take to or from
+        a page.
     ScaleType:
       enum:
         - SCALE_TYPE_UNSPECIFIED
@@ -51121,6 +54006,129 @@ components:
           examples:
             - ALERT_DEF_STATUS_ALERTING
       description: Count for a specific alert status
+    StepCondition:
+      type: object
+      oneOf:
+        - required:
+            - view
+          type: object
+        - required:
+            - action
+          type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ActionCondition'
+          description: Matches a user action on an element.
+        view:
+          allOf:
+            - $ref: '#/components/schemas/ViewCondition'
+          description: Matches a visit to a page.
+      description: A condition of a funnel step. Exactly one of view or action is set.
+    StringCondition:
+      required:
+        - values
+        - operator
+      type: object
+      properties:
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/StringConditionOperator'
+          description: >-
+            Matching operator. STRING_CONDITION_OPERATOR_UNSPECIFIED is
+            rejected.
+        values:
+          description: Values to match. At least one is required.
+          items:
+            maxLength: 1024
+            minLength: 1
+            pattern: ^[\s\S]*$
+            type: string
+            description: Values to match. At least one is required.
+          maxItems: 100
+          minItems: 1
+          type: array
+          x-coralogix-collection: set
+      description: String matching condition.
+    StringConditionOperator:
+      enum:
+        - STRING_CONDITION_OPERATOR_UNSPECIFIED
+        - STRING_CONDITION_OPERATOR_EQUAL
+        - STRING_CONDITION_OPERATOR_NOT_EQUAL
+        - STRING_CONDITION_OPERATOR_CONTAINS
+        - STRING_CONDITION_OPERATOR_NOT_CONTAINS
+        - STRING_CONDITION_OPERATOR_START_WITH
+        - STRING_CONDITION_OPERATOR_NOT_START_WITH
+        - STRING_CONDITION_OPERATOR_END_WITH
+        - STRING_CONDITION_OPERATOR_NOT_END_WITH
+      type: string
+      description: Operator of a string condition.
+    StringFilter:
+      required:
+        - field
+        - condition
+      type: object
+      properties:
+        condition:
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+          description: Condition the field must match.
+        field:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterField'
+          description: >-
+            String field to filter on. STRING_FILTER_FIELD_UNSPECIFIED is
+            rejected.
+          examples:
+            - STRING_FILTER_FIELD_PLATFORM
+      description: Filter on a string field.
+    StringFilterField:
+      enum:
+        - STRING_FILTER_FIELD_UNSPECIFIED
+        - STRING_FILTER_FIELD_URL_SCHEMA
+        - STRING_FILTER_FIELD_URL_SUBDOMAIN
+        - STRING_FILTER_FIELD_URL_DOMAIN
+        - STRING_FILTER_FIELD_URL_HOST
+        - STRING_FILTER_FIELD_URL_PATH
+        - STRING_FILTER_FIELD_URL_TEMPLATE
+        - STRING_FILTER_FIELD_REFERRER_SCHEMA
+        - STRING_FILTER_FIELD_REFERRER_SUBDOMAIN
+        - STRING_FILTER_FIELD_REFERRER_DOMAIN
+        - STRING_FILTER_FIELD_REFERRER_HOST
+        - STRING_FILTER_FIELD_REFERRER_PATH
+        - STRING_FILTER_FIELD_REFERRER_URL
+        - STRING_FILTER_FIELD_SESSION_ID
+        - STRING_FILTER_FIELD_USER_ID
+        - STRING_FILTER_FIELD_USER_EMAIL
+        - STRING_FILTER_FIELD_USER_NAME
+        - STRING_FILTER_FIELD_CX_USER_ID
+        - STRING_FILTER_FIELD_ACCOUNT_ID
+        - STRING_FILTER_FIELD_ACCOUNT_NAME
+        - STRING_FILTER_FIELD_VIEW_ID
+        - STRING_FILTER_FIELD_PLATFORM
+        - STRING_FILTER_FIELD_ENVIRONMENT
+        - STRING_FILTER_FIELD_APP_VERSION
+        - STRING_FILTER_FIELD_CX_SDK_VERSION
+        - STRING_FILTER_FIELD_BROWSER_NAME
+        - STRING_FILTER_FIELD_BROWSER_VERSION
+        - STRING_FILTER_FIELD_BROWSER_MAJOR_VERSION
+        - STRING_FILTER_FIELD_OS
+        - STRING_FILTER_FIELD_OS_MAJOR_VERSION
+        - STRING_FILTER_FIELD_OS_VERSION
+        - STRING_FILTER_FIELD_DEVICE_TYPE
+        - STRING_FILTER_FIELD_DEVICE_NAME
+        - STRING_FILTER_FIELD_DEVICE_BRAND
+        - STRING_FILTER_FIELD_DEVICE_MODEL
+        - STRING_FILTER_FIELD_DEVICE_ARCHITECTURE
+        - STRING_FILTER_FIELD_COUNTRY_NAME
+        - STRING_FILTER_FIELD_CITY_NAME
+        - STRING_FILTER_FIELD_CONTINENT_NAME
+        - STRING_FILTER_FIELD_IP
+        - STRING_FILTER_FIELD_USER_AGENT
+        - STRING_FILTER_FIELD_APP_NAME
+        - STRING_FILTER_FIELD_CLICKS_ELEMENT_FINGERPRINT
+      type: string
+      description: Session attribute with string values, for stringFilter.
     StringList:
       title: String list
       type: object
@@ -54670,6 +57678,53 @@ components:
         viewType:
           $ref: '#/components/schemas/ViewType'
       description: Response for views.
+    ViewCondition:
+      type: object
+      properties:
+        filters:
+          description: >-
+            Filters that narrow this page view condition only. Empty when not
+            set.
+          items:
+            $ref: '#/components/schemas/ViewFilter'
+          maxItems: 100
+          minItems: 0
+          type: array
+          x-coralogix-collection: set
+        name:
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+          description: Condition on the page name. Absent matches any page view.
+      description: Page view matcher of a funnel step.
+    ViewFilter:
+      type: object
+      oneOf:
+        - required:
+            - stringFilter
+          type: object
+        - required:
+            - numericFilter
+          type: object
+        - required:
+            - boolFilter
+          type: object
+      properties:
+        boolFilter:
+          allOf:
+            - $ref: '#/components/schemas/BoolFilter'
+          description: A boolean field with the value it must have.
+        numericFilter:
+          allOf:
+            - $ref: '#/components/schemas/NumericFilter'
+          description: A numeric field with the condition it must match.
+        stringFilter:
+          allOf:
+            - $ref: '#/components/schemas/StringFilter'
+          description: A string field with the condition it must match.
+      description: >-
+        A session filter. Each kind takes only the fields of its type: string
+        fields in stringFilter, numeric fields in numericFilter, boolean fields
+        in boolFilter.
     ViewFolder:
       title: ViewFolder
       required:
@@ -54696,6 +57751,38 @@ components:
           type: string
           x-coralogix-presence: true
       description: View folder.
+    ViewTimeRange:
+      type: object
+      oneOf:
+        - required:
+            - fixed
+          type: object
+        - required:
+            - relativeMinutes
+          type: object
+        - required:
+            - calendar
+          type: object
+      properties:
+        calendar:
+          allOf:
+            - $ref: '#/components/schemas/CalendarWindow'
+          description: >-
+            Named calendar window, resolved in the viewer's timezone.
+            CALENDAR_WINDOW_UNSPECIFIED is rejected.
+        fixed:
+          allOf:
+            - $ref: '#/components/schemas/FixedTimeRange'
+          description: Absolute time range between two timestamps.
+        relativeMinutes:
+          maxLength: 20
+          minLength: 1
+          pattern: ^[1-9][0-9]{0,18}$
+          type: string
+          description: Number of minutes back from now.
+      description: >-
+        Time range of a saved view. Exactly one of fixed, relative_minutes, or
+        calendar is set.
     ViewType:
       enum:
         - VIEW_TYPE_UNSPECIFIED

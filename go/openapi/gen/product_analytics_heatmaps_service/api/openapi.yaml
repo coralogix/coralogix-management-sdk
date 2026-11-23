@@ -1,0 +1,1415 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/product-analytics/heatmaps/v1": {
+      "get": {
+        "description": "Lists saved heatmaps, one page at a time, ordered by updatedAt descending, then by id descending. totalSize is the exact number of heatmaps that match app_names. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Read`",
+        "operationId": "HeatmapsService_ListSavedHeatmaps",
+        "parameters": [
+          {
+            "description": "Maximum number of heatmaps to return. 0 uses the default of 20. A value above 500 is lowered to 500. A negative value returns 400.",
+            "in": "query",
+            "name": "page_size",
+            "required": false,
+            "schema": {
+              "description": "Maximum number of heatmaps to return. 0 uses the default of 20. A value above 500 is lowered to 500. A negative value returns 400.",
+              "format": "int32",
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "The nextPageToken of the previous response. Empty for the first page. The token is opaque, valid for 15 minutes, and tied to the app_names of the request that returned it. A token that is expired, from another query, or malformed returns 400: \"pageToken belongs to a different query or has expired. Send the request again without pageToken.\"",
+            "in": "query",
+            "name": "page_token",
+            "required": false,
+            "schema": {
+              "description": "The nextPageToken of the previous response. Empty for the first page. The token is opaque, valid for 15 minutes, and tied to the app_names of the request that returned it. A token that is expired, from another query, or malformed returns 400: \"pageToken belongs to a different query or has expired. Send the request again without pageToken.\"",
+              "maxLength": 1024,
+              "minLength": 0,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Returns only heatmaps of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return heatmaps of every application.",
+            "in": "query",
+            "name": "app_names",
+            "required": false,
+            "schema": {
+              "description": "Returns only heatmaps of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return heatmaps of every application.",
+              "items": {
+                "description": "Returns only heatmaps of these RUM applications. Repeat the parameter for each application, for example app_names=web-shop&app_names=docs. Omit to return heatmaps of every application.",
+                "maxLength": 1024,
+                "minLength": 1,
+                "pattern": "^[\\s\\S]*$",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 0,
+              "type": "array"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "heatmaps": [
+                    {
+                      "actionNameFilter": "ACTION_NAME_FILTER_ALL_CLICKS",
+                      "appName": "web-shop",
+                      "createdAt": "2026-11-16T10:00:00.000Z",
+                      "filters": [],
+                      "id": "43",
+                      "mode": "HEATMAP_MODE_CLICK_MAP",
+                      "name": "Checkout clicks",
+                      "owner": "dana@example.com",
+                      "snapshotId": "5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f",
+                      "timeRange": {
+                        "calendar": "CALENDAR_WINDOW_TODAY"
+                      },
+                      "updatedAt": "2026-11-16T10:00:00.000Z",
+                      "version": 1,
+                      "viewName": "/checkout"
+                    }
+                  ],
+                  "nextPageToken": "",
+                  "totalSize": 1
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ListSavedHeatmapsResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List heatmaps",
+        "tags": [
+          "Product Analytics Heatmaps Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Read"
+        ]
+      },
+      "post": {
+        "description": "Creates a saved heatmap and returns the stored heatmap, with version 1. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "HeatmapsService_CreateSavedHeatmap",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Heatmap field values for a create.",
+                "properties": {
+                  "actionNameFilter": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ActionNameFilter"
+                      }
+                    ],
+                    "default": "ACTION_NAME_FILTER_ALL_CLICKS",
+                    "description": "Which clicks the heatmap includes. Omitted or ACTION_NAME_FILTER_UNSPECIFIED uses ACTION_NAME_FILTER_ALL_CLICKS."
+                  },
+                  "appName": {
+                    "description": "RUM application the heatmap belongs to. Cannot be changed after creation.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "filters": {
+                    "description": "Session filters of the heatmap.",
+                    "items": {
+                      "$ref": "#/components/schemas/ViewFilter"
+                    },
+                    "maxItems": 100,
+                    "minItems": 0,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
+                  },
+                  "mode": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/HeatmapMode"
+                      }
+                    ],
+                    "description": "Kind of heatmap visualization shown for the page view. HEATMAP_MODE_UNSPECIFIED is rejected."
+                  },
+                  "name": {
+                    "description": "Display name of the heatmap. Must not be empty. Does not have to be unique.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "snapshotId": {
+                    "description": "ID of the page snapshot the heatmap is drawn on. Omit it for a heatmap without a snapshot.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
+                  },
+                  "timeRange": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ViewTimeRange"
+                      }
+                    ],
+                    "description": "Time range of the heatmap."
+                  },
+                  "viewName": {
+                    "description": "Name of the page view the heatmap covers.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "appName",
+                  "name",
+                  "viewName",
+                  "timeRange",
+                  "mode"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "actionNameFilter": "ACTION_NAME_FILTER_ALL_CLICKS",
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "filters": [],
+                  "id": "43",
+                  "mode": "HEATMAP_MODE_CLICK_MAP",
+                  "name": "Checkout clicks",
+                  "owner": "dana@example.com",
+                  "snapshotId": "5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f",
+                  "timeRange": {
+                    "calendar": "CALENDAR_WINDOW_TODAY"
+                  },
+                  "updatedAt": "2026-11-16T10:00:00.000Z",
+                  "version": 1,
+                  "viewName": "/checkout"
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedHeatmap"
+                    }
+                  ],
+                  "description": "The created heatmap."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create heatmap",
+        "tags": [
+          "Product Analytics Heatmaps Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      }
+    },
+    "/product-analytics/heatmaps/v1/{id}": {
+      "get": {
+        "description": "Gets a saved heatmap by ID. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Read`",
+        "operationId": "HeatmapsService_GetSavedHeatmap",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "actionNameFilter": "ACTION_NAME_FILTER_ALL_CLICKS",
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "filters": [],
+                  "id": "43",
+                  "mode": "HEATMAP_MODE_CLICK_MAP",
+                  "name": "Checkout clicks",
+                  "owner": "dana@example.com",
+                  "snapshotId": "5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f",
+                  "timeRange": {
+                    "calendar": "CALENDAR_WINDOW_TODAY"
+                  },
+                  "updatedAt": "2026-11-16T10:00:00.000Z",
+                  "version": 1,
+                  "viewName": "/checkout"
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedHeatmap"
+                    }
+                  ],
+                  "description": "The heatmap."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Heatmap not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get heatmap",
+        "tags": [
+          "Product Analytics Heatmaps Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Read"
+        ]
+      },
+      "delete": {
+        "description": "Deletes a saved heatmap by ID. Returns 404 when the heatmap does not exist. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "HeatmapsService_DeleteSavedHeatmap",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {},
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSavedHeatmapResponse"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Heatmap not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete heatmap",
+        "tags": [
+          "Product Analytics Heatmaps Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      },
+      "patch": {
+        "description": "Updates the fields listed in update_mask. Other fields are unchanged. A listed field that is omitted from the body is cleared or reset to its default. The last write wins, and version increases by 1. Returns the stored heatmap. Returns 412 (FAILED_PRECONDITION) with \"Product Analytics is not enabled for this team. A team admin can enable it in Coralogix.\" when Product Analytics is off for the team.\n\nRequires the following permissions:\n- `product-analytics:Manage`",
+        "operationId": "HeatmapsService_UpdateSavedHeatmap",
+        "parameters": [
+          {
+            "description": "Comma-separated JSON paths of the fields to update: viewName, name, filters, snapshotId, timeRange, mode, actionNameFilter. snake_case names are also accepted. A listed field that is omitted from the body is cleared or reset to its default: filters becomes empty, snapshotId is removed, and actionNameFilter resets to ACTION_NAME_FILTER_ALL_CLICKS; name, viewName, timeRange, and mode cannot be cleared: listing one without a value returns 400. Nested, unknown, immutable, and server-generated paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+            "in": "query",
+            "name": "update_mask",
+            "required": true,
+            "schema": {
+              "description": "Comma-separated JSON paths of the fields to update: viewName, name, filters, snapshotId, timeRange, mode, actionNameFilter. snake_case names are also accepted. A listed field that is omitted from the body is cleared or reset to its default: filters becomes empty, snapshotId is removed, and actionNameFilter resets to ACTION_NAME_FILTER_ALL_CLICKS; name, viewName, timeRange, and mode cannot be cleared: listing one without a value returns 400. Nested, unknown, immutable, and server-generated paths, and *, return 400. A listed field is replaced as a whole, a oneOf arm included.",
+              "maxLength": 512,
+              "minLength": 1,
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]*(,[A-Za-z_][A-Za-z0-9_]*)*$",
+              "type": "string",
+              "x-coralogix-presence": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Heatmap field values for an update. Only fields listed in update_mask are applied.",
+                "properties": {
+                  "actionNameFilter": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ActionNameFilter"
+                      }
+                    ],
+                    "default": "ACTION_NAME_FILTER_ALL_CLICKS",
+                    "description": "Which clicks the heatmap includes. Clearing it or sending ACTION_NAME_FILTER_UNSPECIFIED resets it to ACTION_NAME_FILTER_ALL_CLICKS."
+                  },
+                  "filters": {
+                    "description": "Session filters of the heatmap. Replaces the whole list.",
+                    "items": {
+                      "$ref": "#/components/schemas/ViewFilter"
+                    },
+                    "maxItems": 100,
+                    "minItems": 0,
+                    "type": "array",
+                    "x-coralogix-collection": "set"
+                  },
+                  "mode": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/HeatmapMode"
+                      }
+                    ],
+                    "description": "Kind of heatmap visualization shown for the page view. Cannot be cleared. HEATMAP_MODE_UNSPECIFIED is rejected."
+                  },
+                  "name": {
+                    "description": "Display name of the heatmap. Must not be empty. Cannot be cleared.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  },
+                  "snapshotId": {
+                    "description": "ID of the page snapshot the heatmap is drawn on. Clearing it removes the snapshot.",
+                    "maxLength": 256,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string",
+                    "x-coralogix-presence": true
+                  },
+                  "timeRange": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/ViewTimeRange"
+                      }
+                    ],
+                    "description": "Time range of the heatmap. Cannot be cleared."
+                  },
+                  "viewName": {
+                    "description": "Name of the page view the heatmap covers. Cannot be cleared.",
+                    "maxLength": 1024,
+                    "minLength": 1,
+                    "pattern": "^[\\s\\S]*$",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "actionNameFilter": "ACTION_NAME_FILTER_ALL_CLICKS",
+                  "appName": "web-shop",
+                  "createdAt": "2026-11-16T10:00:00.000Z",
+                  "filters": [],
+                  "id": "43",
+                  "mode": "HEATMAP_MODE_CLICK_MAP",
+                  "name": "Checkout clicks",
+                  "owner": "dana@example.com",
+                  "snapshotId": "5f0c6a2e-1b7d-4c3a-9e8f-2a1b3c4d5e6f",
+                  "timeRange": {
+                    "calendar": "CALENDAR_WINDOW_TODAY"
+                  },
+                  "updatedAt": "2026-11-16T11:00:00.000Z",
+                  "version": 2,
+                  "viewName": "/checkout"
+                },
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/SavedHeatmap"
+                    }
+                  ],
+                  "description": "The updated heatmap."
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Heatmap not found"
+          },
+          "412": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Product Analytics is not enabled for this team"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update heatmap",
+        "tags": [
+          "Product Analytics Heatmaps Service"
+        ],
+        "x-coralogixPermissions": [
+          "product-analytics:Manage"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Heatmap ID, a decimal number.",
+          "required": true,
+          "schema": {
+            "maxLength": 19,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Heatmap ID, a decimal number."
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActionNameFilter": {
+        "enum": [
+          "ACTION_NAME_FILTER_UNSPECIFIED",
+          "ACTION_NAME_FILTER_ALL_CLICKS",
+          "ACTION_NAME_FILTER_NAMED_ONLY",
+          "ACTION_NAME_FILTER_UNNAMED_ONLY"
+        ],
+        "type": "string",
+        "description": "Which clicks a heatmap includes. ALL_CLICKS includes every click, NAMED_ONLY only named actions, UNNAMED_ONLY only unnamed ones."
+      },
+      "BoolFilter": {
+        "required": [
+          "field",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BoolFilterField"
+              }
+            ],
+            "description": "Boolean field to filter on. BOOL_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "BOOL_FILTER_FIELD_HAS_SESSION_REPLAY"
+            ]
+          },
+          "value": {
+            "description": "Value the field must have.",
+            "type": "boolean",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Filter on a boolean field."
+      },
+      "BoolFilterField": {
+        "enum": [
+          "BOOL_FILTER_FIELD_UNSPECIFIED",
+          "BOOL_FILTER_FIELD_HAS_SESSION_REPLAY",
+          "BOOL_FILTER_FIELD_HAS_SCREENSHOT",
+          "BOOL_FILTER_FIELD_IS_RAGE_CLICK",
+          "BOOL_FILTER_FIELD_IS_DEAD_CLICK"
+        ],
+        "type": "string",
+        "description": "Session attribute with boolean values, for boolFilter."
+      },
+      "CalendarWindow": {
+        "enum": [
+          "CALENDAR_WINDOW_UNSPECIFIED",
+          "CALENDAR_WINDOW_TODAY",
+          "CALENDAR_WINDOW_YESTERDAY"
+        ],
+        "type": "string",
+        "description": "Named calendar window. TODAY runs from local midnight to now, YESTERDAY covers the whole previous local day."
+      },
+      "DeleteSavedHeatmapResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "Confirmation that the heatmap was deleted."
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "maximum": 599,
+            "minimum": 100,
+            "type": "integer",
+            "description": "HTTP status code of the error (for example 400, 404, 500).",
+            "format": "int32"
+          },
+          "message": {
+            "maxLength": 4096,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Human-readable description of the error."
+          }
+        },
+        "description": "Standard error response body returned for a failed request."
+      },
+      "FilterPathAndValues": {
+        "title": "FilterPathAndValues",
+        "required": [
+          "path"
+        ],
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "multipleValues"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "filters"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "filters": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Filters"
+              }
+            ],
+            "description": "The filters."
+          },
+          "multipleValues": {
+            "$ref": "#/components/schemas/MultipleValues"
+          },
+          "path": {
+            "examples": [
+              "test"
+            ],
+            "minLength": 0,
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "This data structure represents a filter path and values"
+      },
+      "Filters": {
+        "title": "Filters",
+        "required": [
+          "pathAndValues"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/v3.FilterOperator"
+              }
+            ],
+            "examples": [
+              "FILTER_OPERATOR_OR"
+            ]
+          },
+          "pathAndValues": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "description": "This data structure represents a filter"
+      },
+      "FixedTimeRange": {
+        "required": [
+          "fromTimestampMs",
+          "toTimestampMs"
+        ],
+        "type": "object",
+        "properties": {
+          "fromTimestampMs": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Start of the range, in Unix milliseconds. Inclusive: events at exactly this time are in the range.",
+            "examples": [
+              "1763251200000"
+            ]
+          },
+          "toTimestampMs": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "End of the range, in Unix milliseconds. Exclusive: events at exactly this time are not in the range, so consecutive ranges can share a boundary.",
+            "examples": [
+              "1763337600000"
+            ]
+          }
+        },
+        "description": "Absolute time range, from inclusive to exclusive."
+      },
+      "HeatmapMode": {
+        "enum": [
+          "HEATMAP_MODE_UNSPECIFIED",
+          "HEATMAP_MODE_TOP_ELEMENTS",
+          "HEATMAP_MODE_CLICK_MAP",
+          "HEATMAP_MODE_SCROLL_MAP"
+        ],
+        "type": "string",
+        "description": "Kind of heatmap visualization."
+      },
+      "ListSavedHeatmapsResponse": {
+        "type": "object",
+        "properties": {
+          "heatmaps": {
+            "maxItems": 500,
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SavedHeatmap"
+            },
+            "description": "The heatmaps, ordered by updatedAt descending, then by id descending."
+          },
+          "nextPageToken": {
+            "maxLength": 1024,
+            "minLength": 0,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Token for the next page, valid for 15 minutes. Empty on the last page."
+          },
+          "totalSize": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "description": "Exact number of heatmaps that match app_names, across all pages.",
+            "format": "int32"
+          }
+        },
+        "description": "A page of saved heatmaps."
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "minItems": 0,
+            "type": "array",
+            "items": {
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        }
+      },
+      "NumericCondition": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "min"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "max"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "range"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "max": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Matches values less than or equal to max.",
+            "examples": [
+              "100"
+            ]
+          },
+          "min": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "description": "Matches values greater than or equal to min.",
+            "examples": [
+              "1"
+            ]
+          },
+          "range": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericRange"
+              }
+            ],
+            "description": "Matches values from lower to upper, both included."
+          }
+        },
+        "description": "Numeric matching condition. Exactly one of min, max, or range is set."
+      },
+      "NumericFilter": {
+        "required": [
+          "field",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericCondition"
+              }
+            ],
+            "description": "Condition the field must match."
+          },
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericFilterField"
+              }
+            ],
+            "description": "Numeric field to filter on. NUMERIC_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "NUMERIC_FILTER_FIELD_ERROR_COUNT"
+            ]
+          }
+        },
+        "description": "Filter on a numeric field."
+      },
+      "NumericFilterField": {
+        "enum": [
+          "NUMERIC_FILTER_FIELD_UNSPECIFIED",
+          "NUMERIC_FILTER_FIELD_ERROR_COUNT",
+          "NUMERIC_FILTER_FIELD_ACTION_COUNT",
+          "NUMERIC_FILTER_FIELD_LONG_TASK_COUNT",
+          "NUMERIC_FILTER_FIELD_CRASH_COUNT",
+          "NUMERIC_FILTER_FIELD_RESOURCE_COUNT",
+          "NUMERIC_FILTER_FIELD_SCROLL_DEPTH_PERCENTAGE",
+          "NUMERIC_FILTER_FIELD_VIEWPORT_WIDTH",
+          "NUMERIC_FILTER_FIELD_VIEWPORT_HEIGHT",
+          "NUMERIC_FILTER_FIELD_RAGE_CLICK_COUNT",
+          "NUMERIC_FILTER_FIELD_DEAD_CLICK_COUNT"
+        ],
+        "type": "string",
+        "description": "Session attribute with numeric values, for numericFilter."
+      },
+      "NumericRange": {
+        "required": [
+          "lower",
+          "upper"
+        ],
+        "type": "object",
+        "properties": {
+          "lower": {
+            "description": "Lowest matching value, included. Must not be greater than upper.",
+            "examples": [
+              "1"
+            ],
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "upper": {
+            "description": "Highest matching value, included.",
+            "examples": [
+              "100"
+            ],
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^-?[0-9]+$",
+            "type": "string",
+            "x-coralogix-presence": true
+          }
+        },
+        "description": "Inclusive numeric range."
+      },
+      "SavedHeatmap": {
+        "required": [
+          "id",
+          "appName",
+          "name",
+          "viewName",
+          "timeRange",
+          "mode",
+          "actionNameFilter",
+          "createdAt",
+          "updatedAt",
+          "version"
+        ],
+        "type": "object",
+        "properties": {
+          "actionNameFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ActionNameFilter"
+              }
+            ],
+            "description": "Which clicks the heatmap includes.",
+            "default": "ACTION_NAME_FILTER_ALL_CLICKS"
+          },
+          "appName": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "RUM application the heatmap belongs to."
+          },
+          "createdAt": {
+            "description": "When the heatmap was created. Set by the server.",
+            "format": "date-time",
+            "maxLength": 64,
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "filters": {
+            "description": "Session filters of the heatmap. Empty when not set.",
+            "items": {
+              "$ref": "#/components/schemas/ViewFilter"
+            },
+            "maxItems": 100,
+            "minItems": 0,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          },
+          "id": {
+            "maxLength": 19,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Heatmap ID, a decimal number. Set by the server.",
+            "readOnly": true
+          },
+          "mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/HeatmapMode"
+              }
+            ],
+            "description": "Kind of heatmap visualization shown for the page view."
+          },
+          "name": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Display name of the heatmap. Does not have to be unique."
+          },
+          "owner": {
+            "description": "User who created the heatmap. Set by the server. Absent for heatmaps saved before owners were recorded.",
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "snapshotId": {
+            "description": "ID of the page snapshot the heatmap is drawn on. Absent when the heatmap has no snapshot.",
+            "maxLength": 256,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "timeRange": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ViewTimeRange"
+              }
+            ],
+            "description": "Time range of the heatmap."
+          },
+          "updatedAt": {
+            "description": "When the heatmap was last updated, from the API or the Coralogix UI. Set by the server.",
+            "format": "date-time",
+            "maxLength": 64,
+            "minLength": 0,
+            "readOnly": true,
+            "type": "string",
+            "x-coralogix-presence": true
+          },
+          "version": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "description": "Version of the heatmap. Set by the server: 1 on create, increased by 1 on every update, including updates made in the Coralogix UI.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "viewName": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[\\s\\S]*$",
+            "type": "string",
+            "description": "Name of the page view the heatmap covers."
+          }
+        },
+        "description": "A saved heatmap of a RUM application page."
+      },
+      "StringCondition": {
+        "required": [
+          "values",
+          "operator"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringConditionOperator"
+              }
+            ],
+            "description": "Matching operator. STRING_CONDITION_OPERATOR_UNSPECIFIED is rejected."
+          },
+          "values": {
+            "description": "Values to match. At least one is required.",
+            "items": {
+              "maxLength": 1024,
+              "minLength": 1,
+              "pattern": "^[\\s\\S]*$",
+              "type": "string",
+              "description": "Values to match. At least one is required."
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "type": "array",
+            "x-coralogix-collection": "set"
+          }
+        },
+        "description": "String matching condition."
+      },
+      "StringConditionOperator": {
+        "enum": [
+          "STRING_CONDITION_OPERATOR_UNSPECIFIED",
+          "STRING_CONDITION_OPERATOR_EQUAL",
+          "STRING_CONDITION_OPERATOR_NOT_EQUAL",
+          "STRING_CONDITION_OPERATOR_CONTAINS",
+          "STRING_CONDITION_OPERATOR_NOT_CONTAINS",
+          "STRING_CONDITION_OPERATOR_START_WITH",
+          "STRING_CONDITION_OPERATOR_NOT_START_WITH",
+          "STRING_CONDITION_OPERATOR_END_WITH",
+          "STRING_CONDITION_OPERATOR_NOT_END_WITH"
+        ],
+        "type": "string",
+        "description": "Operator of a string condition."
+      },
+      "StringFilter": {
+        "required": [
+          "field",
+          "condition"
+        ],
+        "type": "object",
+        "properties": {
+          "condition": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringCondition"
+              }
+            ],
+            "description": "Condition the field must match."
+          },
+          "field": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilterField"
+              }
+            ],
+            "description": "String field to filter on. STRING_FILTER_FIELD_UNSPECIFIED is rejected.",
+            "examples": [
+              "STRING_FILTER_FIELD_PLATFORM"
+            ]
+          }
+        },
+        "description": "Filter on a string field."
+      },
+      "StringFilterField": {
+        "enum": [
+          "STRING_FILTER_FIELD_UNSPECIFIED",
+          "STRING_FILTER_FIELD_URL_SCHEMA",
+          "STRING_FILTER_FIELD_URL_SUBDOMAIN",
+          "STRING_FILTER_FIELD_URL_DOMAIN",
+          "STRING_FILTER_FIELD_URL_HOST",
+          "STRING_FILTER_FIELD_URL_PATH",
+          "STRING_FILTER_FIELD_URL_TEMPLATE",
+          "STRING_FILTER_FIELD_REFERRER_SCHEMA",
+          "STRING_FILTER_FIELD_REFERRER_SUBDOMAIN",
+          "STRING_FILTER_FIELD_REFERRER_DOMAIN",
+          "STRING_FILTER_FIELD_REFERRER_HOST",
+          "STRING_FILTER_FIELD_REFERRER_PATH",
+          "STRING_FILTER_FIELD_REFERRER_URL",
+          "STRING_FILTER_FIELD_SESSION_ID",
+          "STRING_FILTER_FIELD_USER_ID",
+          "STRING_FILTER_FIELD_USER_EMAIL",
+          "STRING_FILTER_FIELD_USER_NAME",
+          "STRING_FILTER_FIELD_CX_USER_ID",
+          "STRING_FILTER_FIELD_ACCOUNT_ID",
+          "STRING_FILTER_FIELD_ACCOUNT_NAME",
+          "STRING_FILTER_FIELD_VIEW_ID",
+          "STRING_FILTER_FIELD_PLATFORM",
+          "STRING_FILTER_FIELD_ENVIRONMENT",
+          "STRING_FILTER_FIELD_APP_VERSION",
+          "STRING_FILTER_FIELD_CX_SDK_VERSION",
+          "STRING_FILTER_FIELD_BROWSER_NAME",
+          "STRING_FILTER_FIELD_BROWSER_VERSION",
+          "STRING_FILTER_FIELD_BROWSER_MAJOR_VERSION",
+          "STRING_FILTER_FIELD_OS",
+          "STRING_FILTER_FIELD_OS_MAJOR_VERSION",
+          "STRING_FILTER_FIELD_OS_VERSION",
+          "STRING_FILTER_FIELD_DEVICE_TYPE",
+          "STRING_FILTER_FIELD_DEVICE_NAME",
+          "STRING_FILTER_FIELD_DEVICE_BRAND",
+          "STRING_FILTER_FIELD_DEVICE_MODEL",
+          "STRING_FILTER_FIELD_DEVICE_ARCHITECTURE",
+          "STRING_FILTER_FIELD_COUNTRY_NAME",
+          "STRING_FILTER_FIELD_CITY_NAME",
+          "STRING_FILTER_FIELD_CONTINENT_NAME",
+          "STRING_FILTER_FIELD_IP",
+          "STRING_FILTER_FIELD_USER_AGENT",
+          "STRING_FILTER_FIELD_APP_NAME",
+          "STRING_FILTER_FIELD_CLICKS_ELEMENT_FINGERPRINT"
+        ],
+        "type": "string",
+        "description": "Session attribute with string values, for stringFilter."
+      },
+      "ViewFilter": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "stringFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "numericFilter"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "boolFilter"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "boolFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BoolFilter"
+              }
+            ],
+            "description": "A boolean field with the value it must have."
+          },
+          "numericFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/NumericFilter"
+              }
+            ],
+            "description": "A numeric field with the condition it must match."
+          },
+          "stringFilter": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/StringFilter"
+              }
+            ],
+            "description": "A string field with the condition it must match."
+          }
+        },
+        "description": "A session filter. Each kind takes only the fields of its type: string fields in stringFilter, numeric fields in numericFilter, boolean fields in boolFilter."
+      },
+      "ViewTimeRange": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": [
+              "fixed"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "relativeMinutes"
+            ],
+            "type": "object"
+          },
+          {
+            "required": [
+              "calendar"
+            ],
+            "type": "object"
+          }
+        ],
+        "properties": {
+          "calendar": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/CalendarWindow"
+              }
+            ],
+            "description": "Named calendar window, resolved in the viewer's timezone. CALENDAR_WINDOW_UNSPECIFIED is rejected."
+          },
+          "fixed": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/FixedTimeRange"
+              }
+            ],
+            "description": "Absolute time range between two timestamps."
+          },
+          "relativeMinutes": {
+            "maxLength": 20,
+            "minLength": 1,
+            "pattern": "^[1-9][0-9]{0,18}$",
+            "type": "string",
+            "description": "Number of minutes back from now."
+          }
+        },
+        "description": "Time range of a saved view. Exactly one of fixed, relative_minutes, or calendar is set."
+      },
+      "events.v3.FilterMatcher": {
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ],
+        "type": "string"
+      },
+      "v3.FilterOperator": {
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ],
+        "type": "string",
+        "description": "Filter operator."
+      }
+    }
+  }
+}
