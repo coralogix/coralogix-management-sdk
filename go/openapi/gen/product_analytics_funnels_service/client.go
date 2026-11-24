@@ -249,7 +249,7 @@ func parameterToJson(obj interface{}) (string, error) {
 // callAPI do the request.
 func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	if c.cfg.Debug {
-		log.Printf("HTTP request: method=%s path=%s", request.Method, request.URL.Path)
+		log.Printf("SDK HTTP request: method=%s", request.Method)
 	}
 
 	resp, err := c.cfg.HTTPClient.Do(request)
@@ -258,7 +258,7 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	}
 
 	if c.cfg.Debug {
-		log.Printf("HTTP response: status=%d contentLength=%d", resp.StatusCode, resp.ContentLength)
+		log.Printf("SDK HTTP response: method=%s status=%d", request.Method, resp.StatusCode)
 	}
 	return resp, err
 }

@@ -39,6 +39,8 @@ jobs:
           make build
         env:
           GOPRIVATE: ${{ secrets.GOPRIVATE }}
+      - name: Run SDK security tests
+        run: go test ./go ./go/openapi/cxsdk
       - uses: golangci/golangci-lint-action@v7
         with:
           version: v2.12.2
