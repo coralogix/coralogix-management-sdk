@@ -1,0 +1,36 @@
+# A settings singleton whose operationIds do not end in the component name: SettingsService_GetSettings
+# and SettingsService_UpdateSettings return the component SettingsThing. The contract has no POST and
+# no DELETE. Discovery finds the two operations from the service and the response component.
+openapi: 3.1.0
+info: {title: settings things, version: 1.0.0}
+paths:
+  /v1/settings:
+    get:
+      operationId: SettingsService_GetSettings
+      tags: [Settings Service]
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {allOf: [{$ref: '#/components/schemas/SettingsThing'}], description: The thing.}}}}
+    patch:
+      operationId: SettingsService_UpdateSettings
+      tags: [Settings Service]
+      parameters:
+        - name: update_mask
+          in: query
+          required: true
+          schema: {type: string, minLength: 1, maxLength: 512, pattern: '^[A-Za-z_][A-Za-z0-9_.]*(,[A-Za-z_][A-Za-z0-9_.]*)*$', x-coralogix-presence: true}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled: {type: boolean, x-coralogix-presence: true}
+      responses:
+        '200': {description: ok, content: {application/json: {schema: {allOf: [{$ref: '#/components/schemas/SettingsThing'}], description: The updated thing.}}}}
+components:
+  schemas:
+    SettingsThing:
+      type: object
+      required: [enabled]
+      properties:
+        enabled: {type: boolean}
