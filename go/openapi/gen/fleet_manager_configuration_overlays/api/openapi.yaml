@@ -39,12 +39,12 @@
             }
           },
           {
-            "description": "Opaque token returned by a previous list response. Send it with the same include_archived value as that request.",
+            "description": "Opaque token returned by a previous list response. Send it with the same include_archived and view values as that request.",
             "in": "query",
             "name": "page_token",
             "required": false,
             "schema": {
-              "description": "Opaque token returned by a previous list response. Send it with the same include_archived value as that request.",
+              "description": "Opaque token returned by a previous list response. Send it with the same include_archived and view values as that request.",
               "examples": [
                 "AZdtCKSZq3sAAAAAAAAAAQ"
               ],
@@ -53,6 +53,16 @@
               "pattern": "^[A-Za-z0-9_-]+$",
               "type": "string",
               "x-coralogix-presence": true
+            }
+          },
+          {
+            "description": "Response view. BASIC returns overlay metadata and active status without version fields, payload, targets, or schedules. FULL returns the complete overlay. Omitted or unspecified keeps the full response.",
+            "in": "query",
+            "name": "view",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ConfigurationOverlayView",
+              "description": "Response view. BASIC returns overlay metadata and active status without version fields, payload, targets, or schedules. FULL returns the complete overlay. Omitted or unspecified keeps the full response."
             }
           }
         ],
@@ -1737,6 +1747,14 @@
         ],
         "type": "string",
         "description": "Filter operator."
+      },
+      "ConfigurationOverlayView": {
+        "enum": [
+          "CONFIGURATION_OVERLAY_VIEW_UNSPECIFIED",
+          "CONFIGURATION_OVERLAY_VIEW_BASIC",
+          "CONFIGURATION_OVERLAY_VIEW_FULL"
+        ],
+        "type": "string"
       }
     },
     "parameters": {

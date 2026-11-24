@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
  - [ArchiveConfigurationOverlayResponse](docs/ArchiveConfigurationOverlayResponse.md)
  - [ChartName](docs/ChartName.md)
  - [ConfigurationOverlay](docs/ConfigurationOverlay.md)
+ - [ConfigurationOverlayView](docs/ConfigurationOverlayView.md)
  - [ConfigurationOverlaySchedule](docs/ConfigurationOverlaySchedule.md)
  - [ConfigurationOverlayScheduleCreate](docs/ConfigurationOverlayScheduleCreate.md)
  - [ConfigurationOverlayScheduleRecurrence](docs/ConfigurationOverlayScheduleRecurrence.md)
