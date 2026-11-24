@@ -15,9 +15,6 @@
 package cxsdk
 
 import (
-	"bytes"
-	"encoding/json"
-	"io"
 	"log/slog"
 	"net/http"
 )
@@ -34,50 +31,17 @@ func NewLoggingTransport(logger *slog.Logger) *LoggingTransport {
 
 // RoundTrip implements the http.RoundTripper interface.
 func (t *LoggingTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	var reqBody []byte
-	if req.Body != nil {
-		reqBody, _ = io.ReadAll(req.Body)
-		req.Body = io.NopCloser(bytes.NewReader(reqBody))
-	}
-
-	t.logger.Debug("SDK HTTP request",
-		slog.String("method", req.Method),
-		slog.String("url", req.URL.String()),
-		slog.Any("body", parseJSON(reqBody)),
-	)
+	t.logger.Debug("SDK HTTP request", slog.String("method", req.Method))
 
 	resp, err := http.DefaultTransport.RoundTrip(req)
 	if err != nil {
-		t.logger.Error("SDK HTTP error",
-			slog.String("method", req.Method),
-			slog.String("url", req.URL.String()),
-			slog.String("error", err.Error()),
-		)
+		t.logger.Error("SDK HTTP error", slog.String("method", req.Method))
 		return nil, err
-	}
-
-	var respBody []byte
-	if resp.Body != nil {
-		respBody, _ = io.ReadAll(resp.Body)
-		resp.Body = io.NopCloser(bytes.NewReader(respBody))
 	}
 
 	t.logger.Debug("SDK HTTP response",
 		slog.String("method", req.Method),
-		slog.String("url", req.URL.String()),
-		slog.Any("body", parseJSON(respBody)),
+		slog.Int("status_code", resp.StatusCode),
 	)
-
 	return resp, nil
-}
-
-func parseJSON(raw []byte) any {
-	if len(raw) == 0 {
-		return ""
-	}
-	var parsed any
-	if json.Unmarshal(raw, &parsed) == nil {
-		return parsed
-	}
-	return string(raw)
 }

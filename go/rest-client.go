@@ -19,7 +19,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/http/httputil"
 	"runtime"
 
 	"github.com/google/uuid"
@@ -91,12 +90,7 @@ func (c *RestClient) Request(ctx context.Context, method, path, contentType stri
 		return "", status.Error(codes.NotFound, "Not found")
 	}
 
-	responseBody, err := httputil.DumpResponse(response, true)
-	if err != nil {
-		return "", status.Convert(err).Err()
-	}
-
-	return "", fmt.Errorf("API Error: %s. Status code: %s", string(responseBody), response.Status)
+	return "", fmt.Errorf("API Error: status code: %d", response.StatusCode)
 }
 
 // Get executes GET request to Coralogix API
