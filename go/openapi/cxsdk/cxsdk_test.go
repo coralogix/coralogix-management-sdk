@@ -77,6 +77,23 @@ func TestClientSetIdentityAndUsers(t *testing.T) {
 	}
 }
 
+func TestClientSetProductAnalytics(t *testing.T) {
+	clientSet := NewClientSet(NewConfigBuilder().WithURL("https://example.test").Build())
+
+	if clientSet.ProductAnalyticsFunnels() == nil {
+		t.Error("ProductAnalyticsFunnels() returned nil")
+	}
+	if clientSet.ProductAnalyticsHeatmaps() == nil {
+		t.Error("ProductAnalyticsHeatmaps() returned nil")
+	}
+	if clientSet.ProductAnalyticsPathways() == nil {
+		t.Error("ProductAnalyticsPathways() returned nil")
+	}
+	if clientSet.ProductAnalyticsSettings() == nil {
+		t.Error("ProductAnalyticsSettings() returned nil")
+	}
+}
+
 type roundTripFunc func(*http.Request) (*http.Response, error)
 
 func (f roundTripFunc) RoundTrip(request *http.Request) (*http.Response, error) {
