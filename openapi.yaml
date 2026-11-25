@@ -12816,14 +12816,14 @@ paths:
             x-coralogix-presence: true
         - description: >-
             Opaque token returned by a previous list response. Send it with the
-            same include_archived value as that request.
+            same include_archived and view values as that request.
           in: query
           name: page_token
           required: false
           schema:
             description: >-
               Opaque token returned by a previous list response. Send it with
-              the same include_archived value as that request.
+              the same include_archived and view values as that request.
             examples:
               - AZdtCKSZq3sAAAAAAAAAAQ
             maxLength: 64
@@ -12831,6 +12831,22 @@ paths:
             pattern: ^[A-Za-z0-9_-]+$
             type: string
             x-coralogix-presence: true
+        - description: >-
+            Response view. BASIC returns overlay metadata and active status
+            without version fields, payload, targets, or schedules. FULL returns
+            the complete overlay. Omitted or unspecified keeps the full
+            response.
+          in: query
+          name: view
+          required: false
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/ConfigurationOverlayView'
+            description: >-
+              Response view. BASIC returns overlay metadata and active status
+              without version fields, payload, targets, or schedules. FULL
+              returns the complete overlay. Omitted or unspecified keeps the
+              full response.
       responses:
         '200':
           content:
@@ -17007,7 +17023,7 @@ paths:
         - `outbound-webhooks:UpdateConfig`
       operationId: OutgoingWebhooksService_DeleteOutgoingWebhook
       parameters:
-        - $ref: '#/components/parameters/id_4'
+        - $ref: '#/components/parameters/id_5'
       responses:
         '200':
           content:
@@ -17047,7 +17063,7 @@ paths:
         - `outbound-webhooks:ReadConfig`
       operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
       parameters:
-        - $ref: '#/components/parameters/id_4'
+        - $ref: '#/components/parameters/id_5'
       responses:
         '200':
           content:
@@ -17726,16 +17742,7 @@ paths:
       description: Returns the details of the specified notification connector.
       operationId: ConnectorsService_GetConnector
       parameters:
-        - description: The unique identifier of the connector.
-          in: path
-          name: id
-          required: true
-          schema:
-            description: The unique identifier of the connector.
-            maxLength: 128
-            minLength: 1
-            pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
-            type: string
+        - $ref: '#/components/parameters/id_4'
       responses:
         '200':
           content:
@@ -17750,7 +17757,7 @@ paths:
       description: Deletes the notification connector with the specified ID.
       operationId: ConnectorsService_DeleteConnector
       parameters:
-        - $ref: '#/components/parameters/id_5'
+        - $ref: '#/components/parameters/id_6'
       responses:
         '200':
           content:
@@ -17759,6 +17766,229 @@ paths:
                 $ref: '#/components/schemas/DeleteConnectorResponse'
           description: ''
       summary: Delete a Connector
+      tags:
+        - Connectors service
+  /notifications/notification-center/v1/connectors/{id}/edit-link:
+    get:
+      description: >-
+        Returns a link to the connector's edit page in the Coralogix UI, where
+        the user can enter or rotate credentials. Makes no change to the
+        connector; secret values never pass through this API.
+      operationId: ConnectorsService_GetConnectorEditLink
+      parameters:
+        - $ref: '#/components/parameters/id_4'
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                link: >-
+                  https://my-team.coralogix.com/notification-center/connectors?id=a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+              schema:
+                $ref: '#/components/schemas/GetConnectorEditLinkResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Connector not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get a Connector Edit Link
+      tags:
+        - Connectors service
+  /notifications/notification-center/v1/connectors/{id}/summary:
+    get:
+      description: Returns a secret-free summary of a single connector.
+      operationId: ConnectorsService_GetConnectorSummary
+      parameters:
+        - $ref: '#/components/parameters/id_4'
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                connectorSummary:
+                  connectorConfig:
+                    fields:
+                      - fieldName: integrationId
+                        value: slack-prod
+                      - fieldName: channel
+                        value: prod-alerts
+                  createTime: '2025-09-22T10:30:00.000Z'
+                  description: Connector for team notifications
+                  id: a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+                  name: My Slack Connector
+                  teamId: 12345
+                  type: SLACK
+                  updateTime: '2025-09-22T10:30:00.000Z'
+              schema:
+                $ref: '#/components/schemas/GetConnectorSummaryResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Connector not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Get a Connector Summary
+      tags:
+        - Connectors service
+  /notifications/notification-center/v1/connectors:initialize:
+    post:
+      description: >-
+        MCP-safe connector creation: creates the connector when no secret is
+        required, otherwise returns a pre-fill deep link to the UI. Never
+        accepts secrets.
+      operationId: ConnectorsService_InitializeConnector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Request to initialize a new connector. Never accepts secret
+                values: creates the connector when no secret is required,
+                otherwise returns a pre-fill link to finish setup in the
+                Coralogix UI.
+              properties:
+                connector:
+                  $ref: '#/components/schemas/Connector'
+              title: Initialize Connector Request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                isCreated: false
+                link: >-
+                  https://my-team.coralogix.com/notification-center/connectors/create?type=service_now&name=Prod&config.serviceUrl=https://acme.service-now.com
+                reason: INITIALIZE_CONNECTOR_REDIRECT_REASON_SECRETS_NOT_ACCEPTED
+              schema:
+                $ref: '#/components/schemas/InitializeConnectorResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Initialize a Connector
+      tags:
+        - Connectors service
+  /notifications/notification-center/v1/connectors:initializeUpdate:
+    post:
+      description: >-
+        MCP-safe partial connector update: applies non-sensitive changes and
+        retains stored secrets, otherwise returns a pre-fill link. Never accepts
+        secrets; response contains no config.
+      operationId: ConnectorsService_InitializeConnectorUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: >-
+                Request to update an existing connector, identified by
+                `connector.id`, without sending secret values. `connector.type`
+                is required and must match the stored type. Secret values are
+                never accepted: if the request contains one, nothing is applied
+                and the response carries a link to finish the update in the
+                Coralogix UI. Stored secrets are always kept. An empty `name` or
+                `description` keeps the stored value. `connectorConfig` fields
+                are merged, so fields you leave out keep their stored values.
+                `configOverrides` replaces the stored overrides: an override you
+                leave out, and any non-secret field you leave out of an override
+                you send, is removed. To keep the current overrides, send back
+                the `configOverrides` returned by `GetConnectorSummary`.
+              properties:
+                connector:
+                  $ref: '#/components/schemas/Connector'
+              title: Initialize Connector Update Request
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                isUpdated: false
+                link: >-
+                  https://my-team.coralogix.com/notification-center/connectors?id=a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9
+                reason: INITIALIZE_CONNECTOR_REDIRECT_REASON_SECRETS_NOT_ACCEPTED
+              schema:
+                $ref: '#/components/schemas/InitializeConnectorUpdateResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unauthorized request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Connector not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Initialize a Connector Update
       tags:
         - Connectors service
   /notifications/notification-center/v1/connectors:test:
@@ -18011,7 +18241,7 @@ paths:
       description: Deletes the custom notification preset with the specified ID.
       operationId: PresetsService_DeleteCustomPreset
       parameters:
-        - $ref: '#/components/parameters/id_5'
+        - $ref: '#/components/parameters/id_6'
       responses:
         '200':
           content:
@@ -18545,7 +18775,7 @@ paths:
       description: Deletes the notification router with the specified ID.
       operationId: GlobalRoutersService_DeleteGlobalRouter
       parameters:
-        - $ref: '#/components/parameters/id_5'
+        - $ref: '#/components/parameters/id_6'
       responses:
         '200':
           content:
@@ -23862,7 +24092,6 @@ components:
             Case settings that this alert sets for the cases that it creates.
             When omitted, the company case settings apply. Replace is a full
             overwrite: omitting overrides removes the overrides.
-          x-stability: preview
       description: Settings controlling how the alert interacts with cases.
     AlertDefCaseSettingsOverrides:
       title: Alert definition case settings overrides
@@ -24261,7 +24490,6 @@ components:
             configured case settings to those defaults. In read responses, this
             field is absent when no case settings were configured, meaning those
             same defaults are in effect.
-          x-stability: preview
         dataSources:
           maxItems: 1
           minItems: 0
@@ -30116,6 +30344,12 @@ components:
       description: >-
         Remote-configuration target input used when replacing configuration
         overlay targets.
+    ConfigurationOverlayView:
+      enum:
+        - CONFIGURATION_OVERLAY_VIEW_UNSPECIFIED
+        - CONFIGURATION_OVERLAY_VIEW_BASIC
+        - CONFIGURATION_OVERLAY_VIEW_FULL
+      type: string
     ConnectionStatus:
       enum:
         - PENDING
@@ -37393,6 +37627,21 @@ components:
         description: Find out more about enrichments
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+    GetConnectorEditLinkResponse:
+      title: Get Connector Edit Link Response
+      type: object
+      properties:
+        link:
+          maxLength: 2000
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          description: A link to the connector's edit page in the Coralogix UI.
+      description: Response containing a link to the connector's edit page in the UI
+      externalDocs:
+        description: Find out more about notification center
+        url: >-
+          https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
     GetConnectorResponse:
       title: Get Connector Response
       type: object
@@ -37412,6 +37661,19 @@ components:
       description: >-
         Response containing the schema definition for a notification connector
         type.
+    GetConnectorSummaryResponse:
+      title: Get Connector Summary Response
+      type: object
+      properties:
+        connectorSummary:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorSummary'
+          description: The requested connector summary.
+      description: Response containing the requested connector summary
+      externalDocs:
+        description: Find out more about notification center
+        url: >-
+          https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
     GetConnectorTypeSummariesResponse:
       title: Get Connector Type Summaries Response
       type: object
@@ -41487,6 +41749,82 @@ components:
         - INDICATOR_TYPE_PROMETHEUS_ALERTMANAGER
         - INDICATOR_TYPE_ERROR_TRACKING
       type: string
+    InitializeConnectorRedirectReason:
+      enum:
+        - INITIALIZE_CONNECTOR_REDIRECT_REASON_UNSPECIFIED
+        - INITIALIZE_CONNECTOR_REDIRECT_REASON_MISSING_REQUIRED_FIELDS
+        - INITIALIZE_CONNECTOR_REDIRECT_REASON_SECRETS_NOT_ACCEPTED
+      type: string
+      description: The reason a connector could not be initialized or updated directly.
+    InitializeConnectorResponse:
+      title: Initialize Connector Response
+      type: object
+      properties:
+        connectorId:
+          description: The identifier of the created connector. Set when isCreated is true.
+          maxLength: 128
+          minLength: 1
+          pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
+          type: string
+          x-coralogix-presence: true
+        isCreated:
+          type: boolean
+          description: >-
+            True only when the connector was created without requiring any
+            secret.
+        link:
+          description: >-
+            A pre-filled UI link to finish creating the connector. Set when
+            isCreated is false.
+          maxLength: 50000
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          x-coralogix-presence: true
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/InitializeConnectorRedirectReason'
+          description: >-
+            The reason the connector could not be created directly. Set when
+            isCreated is false.
+          x-coralogix-presence: true
+      description: >-
+        Response describing whether the connector was created, or a link to
+        finish setup in the UI
+      externalDocs:
+        description: Find out more about notification center
+        url: >-
+          https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+    InitializeConnectorUpdateResponse:
+      title: Initialize Connector Update Response
+      type: object
+      properties:
+        isUpdated:
+          type: boolean
+          description: True only when the update was applied without requiring any secret.
+        link:
+          description: >-
+            A pre-filled UI link to finish updating the connector. Set when
+            isUpdated is false.
+          maxLength: 2000
+          minLength: 1
+          pattern: ^[\s\S]+$
+          type: string
+          x-coralogix-presence: true
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/InitializeConnectorRedirectReason'
+          description: >-
+            The reason the connector could not be updated directly. Set when
+            isUpdated is false.
+          x-coralogix-presence: true
+      description: >-
+        Response describing whether the connector was updated, or a link to
+        finish the update in the UI
+      externalDocs:
+        description: Find out more about notification center
+        url: >-
+          https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
     InputType:
       enum:
         - API_KEY
@@ -61020,6 +61358,17 @@ components:
     id_4:
       name: id
       in: path
+      description: The unique identifier of the connector.
+      required: true
+      schema:
+        maxLength: 128
+        minLength: 1
+        pattern: ^[a-zA-Z0-9][a-zA-Z0-9_-]*$
+        type: string
+        description: The unique identifier of the connector.
+    id_5:
+      name: id
+      in: path
       description: Unique identifier.
       required: true
       schema:
@@ -61029,7 +61378,7 @@ components:
         minLength: 0
         type: string
         x-coralogix-presence: true
-    id_5:
+    id_6:
       name: id
       in: path
       description: Unique identifier.

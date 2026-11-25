@@ -101,6 +101,7 @@ Class | Method | HTTP request | Description
  - [ConfigurationOverlayTarget](docs/ConfigurationOverlayTarget.md)
  - [ConfigurationOverlayTargetCreate](docs/ConfigurationOverlayTargetCreate.md)
  - [ConfigurationOverlayTargetReplace](docs/ConfigurationOverlayTargetReplace.md)
+ - [ConfigurationOverlayView](docs/ConfigurationOverlayView.md)
  - [CustomConfigurationOverlay](docs/CustomConfigurationOverlay.md)
  - [CustomConfigurationOverlayCreate](docs/CustomConfigurationOverlayCreate.md)
  - [CustomConfigurationOverlayUpdate](docs/CustomConfigurationOverlayUpdate.md)

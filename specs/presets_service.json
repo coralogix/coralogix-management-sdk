@@ -52,7 +52,7 @@
         "operationId": "PresetsService_DeleteCustomPreset",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_5"
+            "$ref": "#/components/parameters/id_6"
           }
         ],
         "responses": {
@@ -1033,7 +1033,7 @@
       }
     },
     "parameters": {
-      "id_5": {
+      "id_6": {
         "name": "id",
         "in": "path",
         "description": "Unique identifier.",
