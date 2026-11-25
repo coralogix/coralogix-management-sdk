@@ -498,6 +498,7 @@ type ApiConfigurationOverlayServiceListConfigurationOverlaysRequest struct {
 	includeArchived *bool
 	pageSize *int32
 	pageToken *string
+	view *ConfigurationOverlayView
 }
 
 // When true, include archived overlays, each with its latest version.
@@ -512,9 +513,15 @@ func (r ApiConfigurationOverlayServiceListConfigurationOverlaysRequest) PageSize
 	return r
 }
 
-// Opaque token returned by a previous list response. Send it with the same include_archived value as that request.
+// Opaque token returned by a previous list response. Send it with the same include_archived and view values as that request.
 func (r ApiConfigurationOverlayServiceListConfigurationOverlaysRequest) PageToken(pageToken string) ApiConfigurationOverlayServiceListConfigurationOverlaysRequest {
 	r.pageToken = &pageToken
+	return r
+}
+
+// Response view. BASIC returns overlay metadata and active status without version fields, payload, targets, or schedules. FULL returns the complete overlay. Omitted or unspecified keeps the full response.
+func (r ApiConfigurationOverlayServiceListConfigurationOverlaysRequest) View(view ConfigurationOverlayView) ApiConfigurationOverlayServiceListConfigurationOverlaysRequest {
+	r.view = &view
 	return r
 }
 
@@ -570,6 +577,11 @@ func (a *FleetManagerConfigurationOverlaysAPIService) ConfigurationOverlayServic
 	}
 	if r.pageToken != nil {
 		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", ""); err != nil {
+			return localVarReturnValue, nil, err
+		}
+	}
+	if r.view != nil {
+		if err := parameterAddToHeaderOrQuery(localVarQueryParams, "view", r.view, "form", ""); err != nil {
 			return localVarReturnValue, nil, err
 		}
 	}

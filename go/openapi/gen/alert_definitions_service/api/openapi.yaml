@@ -1627,8 +1627,7 @@
                 "$ref": "#/components/schemas/AlertDefCaseSettingsOverrides"
               }
             ],
-            "description": "Case settings that this alert sets for the cases that it creates. When omitted, the company case settings apply. Replace is a full overwrite: omitting overrides removes the overrides.",
-            "x-stability": "preview"
+            "description": "Case settings that this alert sets for the cases that it creates. When omitted, the company case settings apply. Replace is a full overwrite: omitting overrides removes the overrides."
           }
         },
         "description": "Settings controlling how the alert interacts with cases."
@@ -2202,8 +2201,7 @@
                 "$ref": "#/components/schemas/AlertDefCaseSettings"
               }
             ],
-            "description": "Settings controlling how the alert interacts with cases. When omitted on create, defaults apply (case auto-resolve enabled, no enrichment queries, no case destinations). Replace is a full overwrite: omitting this field on replace resets any previously configured case settings to those defaults. In read responses, this field is absent when no case settings were configured, meaning those same defaults are in effect.",
-            "x-stability": "preview"
+            "description": "Settings controlling how the alert interacts with cases. When omitted on create, defaults apply (case auto-resolve enabled, no enrichment queries, no case destinations). Replace is a full overwrite: omitting this field on replace resets any previously configured case settings to those defaults. In read responses, this field is absent when no case settings were configured, meaning those same defaults are in effect."
           },
           "dataSources": {
             "maxItems": 1,

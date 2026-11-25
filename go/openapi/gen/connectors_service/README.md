@@ -83,7 +83,11 @@ Class | Method | HTTP request | Description
 *ConnectorsServiceAPI* | [**ConnectorsServiceCreateConnector**](docs/ConnectorsServiceAPI.md#connectorsservicecreateconnector) | **Post** /notifications/notification-center/v1/connectors | Create a Connector
 *ConnectorsServiceAPI* | [**ConnectorsServiceDeleteConnector**](docs/ConnectorsServiceAPI.md#connectorsservicedeleteconnector) | **Delete** /notifications/notification-center/v1/connectors/{id} | Delete a Connector
 *ConnectorsServiceAPI* | [**ConnectorsServiceGetConnector**](docs/ConnectorsServiceAPI.md#connectorsservicegetconnector) | **Get** /notifications/notification-center/v1/connectors/{id} | Get a Connector
+*ConnectorsServiceAPI* | [**ConnectorsServiceGetConnectorEditLink**](docs/ConnectorsServiceAPI.md#connectorsservicegetconnectoreditlink) | **Get** /notifications/notification-center/v1/connectors/{id}/edit-link | Get a Connector Edit Link
+*ConnectorsServiceAPI* | [**ConnectorsServiceGetConnectorSummary**](docs/ConnectorsServiceAPI.md#connectorsservicegetconnectorsummary) | **Get** /notifications/notification-center/v1/connectors/{id}/summary | Get a Connector Summary
 *ConnectorsServiceAPI* | [**ConnectorsServiceGetConnectorTypeSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicegetconnectortypesummaries) | **Get** /notifications/notification-center/v1/connectors/types/summaries | Get Connector Type Summaries
+*ConnectorsServiceAPI* | [**ConnectorsServiceInitializeConnector**](docs/ConnectorsServiceAPI.md#connectorsserviceinitializeconnector) | **Post** /notifications/notification-center/v1/connectors:initialize | Initialize a Connector
+*ConnectorsServiceAPI* | [**ConnectorsServiceInitializeConnectorUpdate**](docs/ConnectorsServiceAPI.md#connectorsserviceinitializeconnectorupdate) | **Post** /notifications/notification-center/v1/connectors:initializeUpdate | Initialize a Connector Update
 *ConnectorsServiceAPI* | [**ConnectorsServiceListConnectorSummaries**](docs/ConnectorsServiceAPI.md#connectorsservicelistconnectorsummaries) | **Get** /notifications/notification-center/v1/connectors/list/summaries | List Connector Summaries
 *ConnectorsServiceAPI* | [**ConnectorsServiceListConnectors**](docs/ConnectorsServiceAPI.md#connectorsservicelistconnectors) | **Get** /notifications/notification-center/v1/connectors | List Connectors
 *ConnectorsServiceAPI* | [**ConnectorsServiceReplaceConnector**](docs/ConnectorsServiceAPI.md#connectorsservicereplaceconnector) | **Put** /notifications/notification-center/v1/connectors | Replace a Connector
@@ -102,11 +106,19 @@ Class | Method | HTTP request | Description
  - [Delivery](docs/Delivery.md)
  - [Diagnostics](docs/Diagnostics.md)
  - [EntityTypeConfigOverrides](docs/EntityTypeConfigOverrides.md)
+ - [Error](docs/Error.md)
  - [EventsV3FilterMatcher](docs/EventsV3FilterMatcher.md)
  - [FilterPathAndValues](docs/FilterPathAndValues.md)
  - [Filters](docs/Filters.md)
+ - [GetConnectorEditLinkResponse](docs/GetConnectorEditLinkResponse.md)
  - [GetConnectorResponse](docs/GetConnectorResponse.md)
+ - [GetConnectorSummaryResponse](docs/GetConnectorSummaryResponse.md)
  - [GetConnectorTypeSummariesResponse](docs/GetConnectorTypeSummariesResponse.md)
+ - [InitializeConnectorRedirectReason](docs/InitializeConnectorRedirectReason.md)
+ - [InitializeConnectorRequest](docs/InitializeConnectorRequest.md)
+ - [InitializeConnectorResponse](docs/InitializeConnectorResponse.md)
+ - [InitializeConnectorUpdateRequest](docs/InitializeConnectorUpdateRequest.md)
+ - [InitializeConnectorUpdateResponse](docs/InitializeConnectorUpdateResponse.md)
  - [ListConnectorSummariesResponse](docs/ListConnectorSummariesResponse.md)
  - [ListConnectorsResponse](docs/ListConnectorsResponse.md)
  - [MultipleValues](docs/MultipleValues.md)

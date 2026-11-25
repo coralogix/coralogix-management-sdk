@@ -615,7 +615,7 @@
         "operationId": "OutgoingWebhooksService_DeleteOutgoingWebhook",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_4"
+            "$ref": "#/components/parameters/id_5"
           }
         ],
         "responses": {
@@ -675,7 +675,7 @@
         "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
         "parameters": [
           {
-            "$ref": "#/components/parameters/id_4"
+            "$ref": "#/components/parameters/id_5"
           }
         ],
         "responses": {
@@ -2033,7 +2033,7 @@
       }
     },
     "parameters": {
-      "id_4": {
+      "id_5": {
         "name": "id",
         "in": "path",
         "description": "Unique identifier.",
