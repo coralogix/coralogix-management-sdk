@@ -123,6 +123,8 @@ func mergeRequest(location string, get, req *Type, op verb) error {
 	}
 	if op == opCreate {
 		adoptCreateRule(get, req)
+	} else {
+		recordUpdateRule(get, req)
 	}
 	if raisesMinItems(get, req) {
 		// The resource that a user writes holds the items of the request.
@@ -359,6 +361,15 @@ func adoptCreateRule(get, create *Type) {
 	get.AllowNone = create.AllowNone
 	for i, g := range get.Groups {
 		get.Groups[i].AllowNone = matchingGroup(create.Groups, g).AllowNone
+	}
+}
+
+// recordUpdateRule keeps the "no arm" rule of the Update request next to the Create rule that get
+// holds. A test hint for the update value follows it.
+func recordUpdateRule(get, update *Type) {
+	get.UpdateRule, get.UpdateAllowNone = true, update.AllowNone
+	for i, g := range get.Groups {
+		get.Groups[i].UpdateRule, get.Groups[i].UpdateAllowNone = true, matchingGroup(update.Groups, g).AllowNone
 	}
 }
 

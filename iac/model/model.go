@@ -380,6 +380,10 @@ type OneOfGroup struct {
 	// AllowNone: the value can have no arm set. When Create sends the value,
 	// it is the Create rule, which the client configuration follows.
 	AllowNone bool
+	// UpdateRule: UpdateAllowNone is the "no arm" rule of the Update request. AllowNone is the Create
+	// rule after the merge (the client follows Create), and Update can allow no arm where Create
+	// requires one. Only the test hints read it: it does not change AllowNone or any request type.
+	UpdateRule, UpdateAllowNone bool
 }
 
 // Type is the type of a field.
@@ -417,6 +421,8 @@ type Type struct {
 	Elem        *Type    // List, Set, Map
 	Fields      []*Field // Object: the properties; OneOf: the arms
 	AllowNone   bool     // OneOf: the value can have no arm set, as in OneOfGroup
+	// UpdateRule and UpdateAllowNone are the Update rule of a OneOf, as in OneOfGroup.
+	UpdateRule, UpdateAllowNone bool
 	// Groups are the oneOf groups of an Object that also has normal fields,
 	// or has more than one group. Each arm is one of Fields.
 	Groups []OneOfGroup

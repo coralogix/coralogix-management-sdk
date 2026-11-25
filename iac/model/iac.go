@@ -191,9 +191,9 @@ func iacHintIssues(r *Resource) issue.Report {
 
 func iacFieldIssues(location string, subjects []iacSubject, arms []string) issue.Report {
 	var report issue.Report
-	byName := make(map[string]*Type, len(subjects))
+	byName := make(map[string]iacSubject, len(subjects))
 	for _, s := range subjects {
-		byName[s.name] = s.typ
+		byName[s.name] = s
 	}
 	for _, s := range subjects {
 		at := location + "." + s.name
@@ -234,7 +234,7 @@ func armNames(groups []OneOfGroup, all bool, fields ...*Field) []string {
 	return out
 }
 
-func iacOwnIssues(location string, s iacSubject, siblings map[string]*Type, isArm bool) issue.Report {
+func iacOwnIssues(location string, s iacSubject, siblings map[string]iacSubject, isArm bool) issue.Report {
 	var found []*IaCHints
 	for _, a := range s.attrs {
 		if a != nil && a.IaC != nil {
@@ -272,23 +272,34 @@ func iacOwnIssues(location string, s iacSubject, siblings map[string]*Type, isAr
 	return report
 }
 
-func iacValueProblems(h *IaCHints, s iacSubject, siblings map[string]*Type, isArm bool) []iacProblem {
+func iacValueProblems(h *IaCHints, s iacSubject, siblings map[string]iacSubject, isArm bool) []iacProblem {
 	var out []iacProblem
 	for i, example := range h.Examples {
+		if i < 2 && s.attrs[1+i] == nil && s.attrs[2-i] != nil {
+			out = append(out, iacProblem{
+				fmt.Sprintf("examples[%d] is for the %s request, which does not have this field.", i, iacOpName(i == 1)),
+				"Remove the example, or add the field to the request.",
+			})
+			continue
+		}
 		for _, message := range iacValueProblemsOf(s.typ, example, fmt.Sprintf("examples[%d]", i), i == 1) {
 			out = append(out, iacProblem{message, "Change the example to a value that the API accepts for this field, written as JSON."})
 		}
 	}
 	sibling := func(key, name string) (*Type, bool) {
-		t, ok := siblings[name]
+		other, ok := siblings[name]
 		switch {
 		case name == s.name:
 			out = append(out, iacProblem{fmt.Sprintf("%s names the field itself.", key), "Name another field of the same message."})
 		case !ok:
 			out = append(out, iacProblem{fmt.Sprintf("%s: %q is not a sibling field.", key, name),
 				"Use the proto name (snake_case) of a field in the same message. The JSON names of the siblings are: " + strings.Join(sortedNames(siblings), ", ") + "."})
+		case other.attrs[1] == nil && other.attrs[2] == nil:
+			// A test cannot set a field that no request sends, so the knob would never apply.
+			out = append(out, iacProblem{fmt.Sprintf("%s: %q is not sent by any request.", key, name),
+				"Name a sibling field that the Create or Update request has."})
 		}
-		return t, ok && name != s.name
+		return other.typ, ok && name != s.name
 	}
 	for i, name := range h.ConflictsWith {
 		sibling(fmt.Sprintf("conflicts_with[%d]", i), name)
@@ -309,7 +320,7 @@ func iacValueProblems(h *IaCHints, s iacSubject, siblings map[string]*Type, isAr
 	return out
 }
 
-func sortedNames(siblings map[string]*Type) []string {
+func sortedNames(siblings map[string]iacSubject) []string {
 	names := make([]string, 0, len(siblings))
 	for name := range siblings {
 		names = append(names, name)
@@ -325,6 +336,9 @@ func sortedNames(siblings map[string]*Type) []string {
 // is not checked: its JSON shape is not the one of the model.
 func iacValueProblemsOf(t *Type, v any, at string, update bool) []string {
 	if t == nil || len(t.Wrappers) != 0 || t.Projected != nil || t.Keyed != nil || t.RequestWrapper != nil {
+		return nil
+	}
+	if iacOtherWireShape(t, update) {
 		return nil
 	}
 	if v == nil {
@@ -351,12 +365,31 @@ func iacValueProblemsOf(t *Type, v any, at string, update bool) []string {
 	return nil
 }
 
+// iacOtherWireShape reports whether the request holds a collection as a map where the model has a
+// list or a set, or the other way round (a keyed collection). The example is in the wire shape.
+func iacOtherWireShape(t *Type, update bool) bool {
+	if t.Kind != List && t.Kind != Set && t.Kind != Map {
+		return false
+	}
+	wire := t.WireKind
+	switch {
+	case update && t.UpdateWireKind != "":
+		wire = t.UpdateWireKind
+	case !update && t.CreateWireKind != "":
+		wire = t.CreateWireKind
+	}
+	return wire != "" && (wire == Map) != (t.Kind == Map)
+}
+
 func iacStringProblems(t *Type, v any, at string) []string {
 	s, ok := v.(string)
 	if !ok {
 		return []string{fmt.Sprintf("%s is %s, want a string.", at, jsonKind(v))}
 	}
 	var out []string
+	if t.DigitString != "" {
+		out = append(out, iacDigitStringProblems(t, s, at)...)
+	}
 	n := int64(utf8.RuneCountInString(s))
 	if t.MinLength != nil && n < *t.MinLength {
 		out = append(out, fmt.Sprintf("%s has %d characters, the minimum is %d.", at, n, *t.MinLength))
@@ -370,6 +403,22 @@ func iacStringProblems(t *Type, v any, at string) []string {
 		}
 	}
 	return append(out, iacFormatProblems(t.Format, s, at)...)
+}
+
+// iacDigitStringProblems checks a 64-bit number that the API writes as a string of digits. The
+// pattern may be absent (an existing resource), so the range is checked here too.
+func iacDigitStringProblems(t *Type, s, at string) []string {
+	n, ok := integerOf(s, true)
+	if !ok {
+		if t.Pattern == "" {
+			return []string{fmt.Sprintf("%s is not a number written as digits.", at)}
+		}
+		return nil // the pattern reports it
+	}
+	if r := integerRanges[t.DigitString]; n.Cmp(r[0]) < 0 || n.Cmp(r[1]) > 0 {
+		return []string{fmt.Sprintf("%s is %s, which is out of range for %s (%s to %s).", at, n, t.DigitString, r[0], r[1])}
+	}
+	return nil
 }
 
 // iacFormatProblems checks the string formats that have one exact meaning. Another format is not checked.
@@ -527,8 +576,14 @@ func iacObjectProblems(t *Type, v any, at string, update bool) []string {
 		return []string{fmt.Sprintf("%s is %s, want an object.", at, jsonKind(v))}
 	}
 	var out []string
+	// A request can hold a field under another name (requestAs, a request wrapper). The model does
+	// not tell which key of the example that is, so such an object gets no key check.
+	renamed := slices.ContainsFunc(t.Fields, func(f *Field) bool { return f.RequestPath != nil })
 	for _, key := range sortedKeys(object) {
 		f := fieldNamed(t.Fields, key)
+		if f == nil && renamed {
+			continue
+		}
 		if f == nil {
 			names := make([]string, 0, len(t.Fields))
 			for _, f := range t.Fields {
@@ -541,25 +596,46 @@ func iacObjectProblems(t *Type, v any, at string, update bool) []string {
 			out = append(out, fmt.Sprintf("%s.%s is read only: the server sets it.", at, key))
 			continue
 		}
+		if attrs := iacRequestAttrs(f, update); attrs == nil {
+			out = append(out, fmt.Sprintf("%s.%s is not in the %s request, so the example cannot set it.", at, key, iacOpName(update)))
+			continue
+		}
 		out = append(out, iacValueProblemsOf(f.Type, object[key], at+"."+key, update)...)
 	}
 	for _, f := range t.Fields {
-		attrs := f.Create
-		if update {
-			attrs = f.Update
+		attrs := iacRequestAttrs(f, update)
+		if f.RequestPath != nil {
+			continue
 		}
 		if _, set := object[f.Name]; !set && attrs != nil && attrs.Required && t.Kind == Object && !slices.Contains(armNames(t.Groups, false), f.Name) {
 			out = append(out, fmt.Sprintf("%s does not set the required field %q.", at, f.Name))
 		}
 	}
-	return append(out, iacArmProblems(t, object, at)...)
+	return append(out, iacArmProblems(t, object, at, update)...)
 }
 
-// iacArmProblems checks that an example sets one arm of each oneOf group, not several.
-func iacArmProblems(t *Type, object map[string]any, at string) []string {
+// iacRequestAttrs returns the attributes of a nested field in the Update request (update) or in the
+// Create request. nil means that the request does not have the field.
+func iacRequestAttrs(f *Field, update bool) *Attrs {
+	if update {
+		return f.Update
+	}
+	return f.Create
+}
+
+func iacOpName(update bool) string {
+	if update {
+		return "Update"
+	}
+	return "Create"
+}
+
+// iacArmProblems checks that an example sets one arm of each oneOf group, not several. A group
+// that can have no arm follows the rule of the request that the example is for.
+func iacArmProblems(t *Type, object map[string]any, at string, update bool) []string {
 	groups := t.Groups
 	if t.Kind == OneOf {
-		g := OneOfGroup{AllowNone: t.AllowNone}
+		g := OneOfGroup{AllowNone: t.AllowNone, UpdateRule: t.UpdateRule, UpdateAllowNone: t.UpdateAllowNone}
 		for _, f := range t.Fields {
 			g.Arms = append(g.Arms, f.Name)
 		}
@@ -573,10 +649,14 @@ func iacArmProblems(t *Type, object map[string]any, at string) []string {
 				set = append(set, arm)
 			}
 		}
+		allowNone := g.AllowNone
+		if update && g.UpdateRule {
+			allowNone = g.UpdateAllowNone
+		}
 		switch {
 		case len(set) > 1:
 			out = append(out, fmt.Sprintf("%s sets %s, but at most one of %s can be set.", at, strings.Join(set, " and "), strings.Join(g.Arms, ", ")))
-		case len(set) == 0 && !g.AllowNone:
+		case len(set) == 0 && !allowNone:
 			out = append(out, fmt.Sprintf("%s sets none of %s, but one must be set.", at, strings.Join(g.Arms, ", ")))
 		}
 	}

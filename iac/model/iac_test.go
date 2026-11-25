@@ -205,6 +205,8 @@ func TestIaCHintMistakesAreReported(t *testing.T) {
           x-coralogix-presence: true
           x-coralogix-iac: {requiredByApi: true}
         name:`, "No request sends this field", "IacThing.stamp"},
+		{"uint64 digit string is over the range", `examples: ["7"]`, `examples: ["18446744073709551616"]`, "out of range for uint64", "IacThing.search.serial"},
+		{"conflicts_with names a field that no request sends", `conflictsWith: [note]`, `conflictsWith: [id]`, `"id" is not sent by any request`, "IacThing.priority"},
 		{"map example is a list", `{"cpu": {"color": "#ff0000"}}`, `["cpu"]`, "want an object that maps", "IacThing.colors"},
 		{"map value has an unknown key", `{"cpu": {"color": "#ff0000"}}`, `{"cpu": {"colour": "#ff0000"}}`, `the key "colour", which is not a field`, "IacThing.colors"},
 		{"map value is not an object", `{"cpu": {"color": "#ff0000"}}`, `{"cpu": "red"}`, "want an object", "IacThing.colors"},
@@ -319,5 +321,128 @@ func TestIaCUpdateExampleFollowsUpdateRequiredness(t *testing.T) {
 		return strings.Contains(item.Message, `examples[0].cpu does not set the required field "color"`)
 	}); i < 0 {
 		t.Fatalf("report = %v, want the create example to need color", report)
+	}
+}
+
+// replaceTail is the end of the Replace request in the test spec. The text before it is the last
+// property of the Replace body, so a test can give that request its own component.
+const replaceTail = `
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/IacThing'}
+    delete:`
+
+// A oneOf that Create requires and Update does not: the update example may set no arm, and the
+// create example may not. It holds for a oneOf alone and for a oneOf group inside an object
+// that has other fields.
+func TestIaCUpdateExampleFollowsUpdateNoArmRule(t *testing.T) {
+	for _, withField := range []bool{false, true} {
+		extra := ""
+		if withField {
+			extra = "        label: {type: string, x-coralogix-presence: true}\n"
+		}
+		spec := func(examples string) []byte {
+			return iacSpec(t,
+				"source: {$ref: '#/components/schemas/IacSource'}"+replaceTail, "source: {$ref: '#/components/schemas/IacSourceUpdate'}"+replaceTail,
+				"    IacLogs:\n", `    IacSourceUpdate:
+      type: object
+      required: []
+      properties:
+`+extra+`        logs: {$ref: '#/components/schemas/IacLogs'}
+        metrics: {$ref: '#/components/schemas/IacMetrics'}
+      oneOf:
+        - required: [logs]
+        - required: [metrics]
+        - not:
+            anyOf:
+              - required: [logs]
+              - required: [metrics]
+    IacLogs:
+`,
+				"      required: []\n      properties:\n        logs:\n          $ref: '#/components/schemas/IacLogs'", "      required: []\n      properties:\n"+extra+"        logs:\n          $ref: '#/components/schemas/IacLogs'",
+				"        source: {$ref: '#/components/schemas/IacSource'}\n    IacSearch:", "        source:\n          $ref: '#/components/schemas/IacSource'\n          x-coralogix-iac:\n            examples: "+examples+"\n    IacSearch:")
+		}
+		if report := iacReport(t, spec(`[{"logs": {"query": "a"}}, {}]`)); len(report) != 0 {
+			t.Fatalf("with a field %t: report = %v, want none: Update allows no arm", withField, report)
+		}
+		report := iacReport(t, spec(`[{}, {}]`))
+		if i := slices.IndexFunc(report, func(item issue.Issue) bool {
+			return strings.Contains(item.Message, "examples[0] sets none of logs, metrics")
+		}); i < 0 || len(report) != 1 {
+			t.Fatalf("with a field %t: report = %v, want one issue: the create example needs an arm", withField, report)
+		}
+	}
+}
+
+// A field that Update does not have (it is immutable) cannot be in the update example.
+func TestIaCUpdateExampleHasOnlyFieldsOfTheUpdateRequest(t *testing.T) {
+	spec := func(update string) []byte {
+		return iacSpec(t,
+			"colors:\n                  type: object\n                  additionalProperties: {$ref: '#/components/schemas/IacColor'}\n                search: {$ref: '#/components/schemas/IacSearch'}\n                source: {$ref: '#/components/schemas/IacSource'}"+replaceTail,
+			"colors:\n                  type: object\n                  additionalProperties: {$ref: '#/components/schemas/IacColorUpdate'}\n                search: {$ref: '#/components/schemas/IacSearch'}\n                source: {$ref: '#/components/schemas/IacSource'}"+replaceTail,
+			"    IacColor:\n      type: object\n      required: [color]\n      properties:\n        color: {type: string, minLength: 1, x-coralogix-presence: true}\n",
+			`    IacColorUpdate:
+      type: object
+      required: []
+      properties:
+        label: {type: string, x-coralogix-presence: true}
+    IacColor:
+      type: object
+      required: [color]
+      properties:
+        color: {type: string, minLength: 1, x-coralogix-presence: true}
+        label: {type: string, x-coralogix-presence: true}
+`,
+			`- {"cpu": {"color": "#00ff00"}, "mem": {"color": "#0000ff"}}`, "- "+update)
+	}
+	if report := iacReport(t, spec(`{"cpu": {"label": "x"}}`)); len(report) != 0 {
+		t.Fatalf("report = %v, want none", report)
+	}
+	report := iacReport(t, spec(`{"cpu": {"color": "#00ff00"}}`))
+	if i := slices.IndexFunc(report, func(item issue.Issue) bool {
+		return strings.Contains(item.Message, "examples[1].cpu.color is not in the Update request")
+	}); i < 0 {
+		t.Fatalf("report = %v, want the update example not to set color", report)
+	}
+}
+
+// An example is for a request: examples[1] on a field that Update does not send has no use.
+func TestIaCExampleForARequestWithoutTheField(t *testing.T) {
+	// note is in Create only here: the Replace body loses it, so the field is immutable.
+	spec := iacSpec(t,
+		"                note: {type: string, x-coralogix-presence: true}\n                colors:\n                  type: object\n                  additionalProperties: {$ref: '#/components/schemas/IacColor'}\n                search: {$ref: '#/components/schemas/IacSearch'}\n                source: {$ref: '#/components/schemas/IacSource'}"+replaceTail,
+		"                colors:\n                  type: object\n                  additionalProperties: {$ref: '#/components/schemas/IacColor'}\n                search: {$ref: '#/components/schemas/IacSearch'}\n                source: {$ref: '#/components/schemas/IacSource'}"+replaceTail)
+	report := iacReport(t, spec)
+	if i := slices.IndexFunc(report, func(item issue.Issue) bool {
+		return strings.Contains(item.Message, "examples[1] is for the Update request, which does not have this field") && strings.HasSuffix(item.Location, "IacThing.note")
+	}); i < 0 {
+		t.Fatalf("report = %v, want an issue for examples[1] of note", report)
+	}
+}
+
+// A request can hold a field under another name, and a collection in another wire shape than the
+// model. The model cannot tell what the example means there, so it does not guess.
+func TestIaCExampleKeepsToWhatTheModelKnows(t *testing.T) {
+	str := &Type{Kind: String}
+	renamed := &Type{Kind: Object, Fields: []*Field{{Name: "policyName", Type: str, Create: &Attrs{Required: true}, RequestPath: []string{"policy", "name"}}}}
+	if got := iacValueProblemsOf(renamed, map[string]any{"name": "x"}, "e", false); len(got) != 0 {
+		t.Errorf("renamed field: problems = %v, want none", got)
+	}
+	plain := &Type{Kind: Object, Fields: []*Field{{Name: "policyName", Type: str, Create: &Attrs{}}}}
+	if got := iacValueProblemsOf(plain, map[string]any{"name": "x"}, "e", false); len(got) != 1 {
+		t.Errorf("unknown key: problems = %v, want one", got)
+	}
+	// A set that the API holds as a map is written as a map.
+	object := &Type{Kind: Object, Fields: []*Field{{Name: "a", Type: str, Create: &Attrs{}}}}
+	set := &Type{Kind: Set, WireKind: Map, Elem: object}
+	if got := iacValueProblemsOf(set, map[string]any{"k": map[string]any{"a": "x"}}, "e", false); len(got) != 0 {
+		t.Errorf("set held as a map: problems = %v, want none", got)
+	}
+	set.WireKind = List
+	if got := iacValueProblemsOf(set, map[string]any{"k": map[string]any{"a": "x"}}, "e", false); len(got) != 1 {
+		t.Errorf("set held as a list: problems = %v, want one (not a list)", got)
 	}
 }
