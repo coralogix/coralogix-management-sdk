@@ -130,8 +130,14 @@ func (r *Resource) resultResponse(out Response, proxy *base.SchemaProxy) (Respon
 				"Name the string property that says why an item was not created, or delete message.")
 		}
 	}
+	if line.MatchUsername != "" {
+		if echo, err := schemaOf(propertyOf(results.schema, line.MatchUsername)); err != nil || !slices.Equal(echo.Type, []string{"string"}) {
+			return fail("CREATE_RESULT_MATCH_USERNAME_NOT_STRING", fmt.Sprintf("The result %s has no string property %q.", results.component, line.MatchUsername),
+				"Name the string property of the result that echoes the username of the request item, or delete matchUsername.")
+		}
+	}
 	out.Result = &WriteResult{Items: results.field, Component: results.component, Resource: line.Resource, Status: line.Status,
-		StatusType: statusType, Created: slices.Clone(line.Created), Message: line.Message}
+		StatusType: statusType, Created: slices.Clone(line.Created), Message: line.Message, MatchUsername: line.MatchUsername}
 	return out, nil
 }
 

@@ -256,6 +256,10 @@ type WriteResult struct {
 	StatusType *Type
 	Created    []string
 	Message    string // the string property with a message, "" when the line names none
+	// MatchUsername is the string property of a result that echoes the username of the
+	// request item it belongs to, "" when the contract names none. The create joins the
+	// results to the request on it, so a result of another item cannot pass for this one.
+	MatchUsername string
 }
 
 // Behavior is how a top-level field is managed. See Classify.

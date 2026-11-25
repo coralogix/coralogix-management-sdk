@@ -116,6 +116,9 @@ type CreateResult struct {
 	Created []string `yaml:"created"`
 	// Message is the string property that says why an item was not created, "" for none.
 	Message string `yaml:"message"`
+	// MatchUsername is the string property of the result that echoes the username of the request
+	// item, "" for none: the create joins the results to the request on it.
+	MatchUsername string `yaml:"matchUsername"`
 }
 
 // Methods are the HTTP methods of the Create and Update operations when the API uses PUT for
@@ -434,7 +437,7 @@ func (e Exceptions) Policy() model.Policy {
 		p.GetFromList, p.ListFilters, p.GetQuery = true, maps.Clone(e.API.GetFromList.Filters), maps.Clone(e.API.GetFromList.Query)
 	}
 	if r := e.API.batchCreateResult(); r != nil {
-		p.CreateResult = &model.CreateResultLine{Resource: r.Resource, Status: r.Status, Created: slices.Clone(r.Created), Message: r.Message}
+		p.CreateResult = &model.CreateResultLine{Resource: r.Resource, Status: r.Status, Created: slices.Clone(r.Created), Message: r.Message, MatchUsername: r.MatchUsername}
 	}
 	if m := e.API.Methods; m != nil {
 		p.CreateMethod, p.UpdateMethod = m.Create, m.Update
