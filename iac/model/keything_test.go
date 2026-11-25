@@ -316,3 +316,49 @@ func TestUpdateDefaultValueFitsTheUpdateField(t *testing.T) {
 		}
 	}
 }
+
+// keyDocWithTopLevelGet is the contract with `presets` and `permissions` at the top level of Get
+// only, as a tool that inlines the response object makes it. Create still holds them in
+// `keyPermissions`, and Update holds each list in a one-property wrapper.
+func keyDocWithTopLevelGet(t *testing.T) []byte {
+	t.Helper()
+	spec := string(keyDoc(t))
+	for _, r := range [][2]string{
+		{"required: [id, name, enabled, hashed, keyPermissions]", "required: [id, name, enabled, hashed, presets, permissions]"},
+		{"        keyPermissions: {$ref: '#/components/schemas/KeyThing.KeyPermissions'}\n",
+			"        presets: {type: array, items: {$ref: '#/components/schemas/PresetThing'}}\n        permissions: {type: array, items: {type: string, minLength: 1}}\n"},
+	} {
+		if !strings.Contains(spec, r[0]) {
+			t.Fatalf("the contract has no %q", r[0])
+		}
+		spec = strings.ReplaceAll(spec, r[0], r[1])
+	}
+	return []byte(spec)
+}
+
+// A dotted requestAs path of a resource without a request wrapper goes through an object of the
+// Create body. The model records the component of that object, so a tool can name the SDK type
+// that holds the field, and records no request component, because there is no wrapper.
+func TestRequestObjectsWithoutARequestWrapper(t *testing.T) {
+	p := keyWrapperPolicy()
+	p.RequestNames = map[string]string{"KeyThing.presets": "keyPermissions.presets", "KeyThing.permissions": "keyPermissions.permissions"}
+	p.UpdateNames["KeyThing.presets"] = "presets"
+	p.UpdateNames["KeyThing.permissions"] = "permissions"
+	data := keyDocWithTopLevelGet(t)
+	if got := keyCodes(t, data, p); len(got) != 0 {
+		t.Fatalf("issues = %v, want none", got)
+	}
+	r := buildKey(t, data, p)
+	if r.Create.RequestComponent != "" || r.Update.RequestComponent != "" {
+		t.Errorf("request components = %q and %q, want none without a request wrapper", r.Create.RequestComponent, r.Update.RequestComponent)
+	}
+	for _, name := range []string{"presets", "permissions"} {
+		f := renameField(t, r, name)
+		if !slices.Equal(f.RequestObjects, []string{"CreateKeyThingRequest.KeyPermissions"}) {
+			t.Errorf("%s.RequestObjects = %v, want [CreateKeyThingRequest.KeyPermissions]", name, f.RequestObjects)
+		}
+		if f.RequestPathOf(false) != "keyPermissions."+name || f.RequestPathOf(true) != name || f.UpdateRequestObjects != nil {
+			t.Errorf("%s paths = %q (create), %q (update), update objects %v", name, f.RequestPathOf(false), f.RequestPathOf(true), f.UpdateRequestObjects)
+		}
+	}
+}
