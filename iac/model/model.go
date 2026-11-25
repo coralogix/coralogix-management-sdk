@@ -351,6 +351,9 @@ type Attrs struct {
 	Required  bool    // in the parent "required" list
 	Presence  bool    // x-coralogix-presence: true
 	Default   *string // YAML text of "default", nil when there is none
+	// IaC are the hints of x-coralogix-iac. They change only the tests that a tool generates.
+	// Use ResourceField.IaC or Field.IaC, which look in the response and both requests.
+	IaC *IaCHints
 	// ReadOnly: readOnly: true. In a request, the server sets the field, so the request does not send it.
 	ReadOnly bool
 }
