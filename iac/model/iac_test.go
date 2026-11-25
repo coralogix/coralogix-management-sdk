@@ -189,6 +189,22 @@ func TestIaCHintMistakesAreReported(t *testing.T) {
 		{"example is too short", `examples: ["alpha", "beta"]`, `examples: ["", "beta"]`, "the minimum is 1", "IacThing.name"},
 		{"integer example is a fraction", `examples: [10, 20]`, `examples: [1.5]`, "want an integer", "IacThing.search.limit"},
 		{"integer example is over the maximum", `examples: [10, 20]`, `examples: [101]`, "the maximum is 100", "IacThing.search.limit"},
+		{"int32 example is over the format range", `examples: [10, 20]`, `examples: [2147483648]`, "out of range for int32", "IacThing.search.limit"},
+		{"uint64 example is negative", `examples: ["5", "6"]`, `examples: ["-1"]`, "out of range for uint64", "IacThing.search.count"},
+		{"uint64 example is over the format range", `examples: ["5", "6"]`, `examples: ["18446744073709551616"]`, "out of range for uint64", "IacThing.search.count"},
+		{"uint64 example is text", `examples: ["5", "6"]`, `examples: ["five"]`, "want an integer", "IacThing.search.count"},
+		{"float example is over the format range", `examples: [0.5]`, `examples: [1e39]`, "out of range for float", "IacThing.search.ratio"},
+		{"date example is a time", `examples: ["2026-01-02"]`, `examples: ["2026-01-02T03:04:05Z"]`, "is not a date", "IacThing.search.day"},
+		{"byte example is not base64", `examples: ["aGVsbG8="]`, `examples: ["not base64!"]`, "is not base64 text", "IacThing.search.blob"},
+		{"set example repeats an item", `examples: [["a", "b"]]`, `examples: [["a", "a"]]`, "items of a set are unique", "IacThing.search.tags"},
+		{"knob on a field that no request sends", `        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        name:`, `        id: {type: string, readOnly: true, x-coralogix-presence: true}
+        stamp:
+          type: string
+          readOnly: true
+          x-coralogix-presence: true
+          x-coralogix-iac: {requiredByApi: true}
+        name:`, "No request sends this field", "IacThing.stamp"},
 		{"map example is a list", `{"cpu": {"color": "#ff0000"}}`, `["cpu"]`, "want an object that maps", "IacThing.colors"},
 		{"map value has an unknown key", `{"cpu": {"color": "#ff0000"}}`, `{"cpu": {"colour": "#ff0000"}}`, `the key "colour", which is not a field`, "IacThing.colors"},
 		{"map value is not an object", `{"cpu": {"color": "#ff0000"}}`, `{"cpu": "red"}`, "want an object", "IacThing.colors"},
@@ -258,5 +274,50 @@ func TestIaCSiblingExtensionsKeepOtherCoralogixKeysOutOfRef(t *testing.T) {
           x-coralogix-collection: set`)
 	if report := iacReport(t, spec); len(report) == 0 {
 		t.Fatal("report is empty, want an issue for x-coralogix-collection next to a $ref")
+	}
+}
+
+// The update example (the second one) follows the Update request: a field that Create requires
+// and Update does not can be left out of it. The create example (the first one) cannot leave it out.
+func TestIaCUpdateExampleFollowsUpdateRequiredness(t *testing.T) {
+	update := func(examples string) []byte {
+		return iacSpec(t,
+			// The Replace body has its own color component, where color is optional.
+			`$ref: '#/components/schemas/IacColor'}
+                search: {$ref: '#/components/schemas/IacSearch'}
+                source: {$ref: '#/components/schemas/IacSource'}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/IacThing'}
+    delete:`, `$ref: '#/components/schemas/IacColorUpdate'}
+                search: {$ref: '#/components/schemas/IacSearch'}
+                source: {$ref: '#/components/schemas/IacSource'}
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/IacThing'}
+    delete:`,
+			"    IacColor:\n", `    IacColorUpdate:
+      type: object
+      required: []
+      properties:
+        color: {type: string, minLength: 1, x-coralogix-presence: true}
+    IacColor:
+`,
+			`- {"cpu": {"color": "#00ff00"}, "mem": {"color": "#0000ff"}}`, examples)
+	}
+	if report := iacReport(t, update(`- {"cpu": {}}`)); len(report) != 0 {
+		t.Fatalf("report = %v, want none: the update example may omit color", report)
+	}
+	report := iacReport(t, iacSpec(t, `{"cpu": {"color": "#ff0000"}}`, `{"cpu": {}}`))
+	if i := slices.IndexFunc(report, func(item issue.Issue) bool {
+		return strings.Contains(item.Message, `examples[0].cpu does not set the required field "color"`)
+	}); i < 0 {
+		t.Fatalf("report = %v, want the create example to need color", report)
 	}
 }

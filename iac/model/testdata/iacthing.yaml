@@ -3,7 +3,7 @@
 # - mode: examples on an enum $ref; the hint sits next to the $ref.
 # - priority: requires another field, with and without a value.
 # - colors: a map of objects with an example that holds the keys.
-# - search: an object whose nested fields carry hints.
+# - search: an object whose nested fields carry hints (a string, an int32, a uint64 in a string, a float, a date, base64 bytes, a set).
 # - source: a oneOf whose arms are fixed in an update (arm_fixed).
 # - note: the hint is only in the Create request, not in the response.
 openapi: 3.1.0
@@ -139,6 +139,32 @@ components:
           maximum: 100
           x-coralogix-presence: true
           x-coralogix-iac: {examples: [10, 20]}
+        count:
+          type: string
+          format: uint64
+          x-coralogix-presence: true
+          x-coralogix-iac: {examples: ["5", "6"]}
+        ratio:
+          type: number
+          format: float
+          x-coralogix-presence: true
+          x-coralogix-iac: {examples: [0.5]}
+        day:
+          type: string
+          format: date
+          x-coralogix-presence: true
+          x-coralogix-iac: {examples: ["2026-01-02"]}
+        blob:
+          type: string
+          format: byte
+          x-coralogix-presence: true
+          x-coralogix-iac: {examples: ["aGVsbG8="]}
+        tags:
+          type: array
+          items: {type: string}
+          uniqueItems: true
+          x-coralogix-collection: set
+          x-coralogix-iac: {examples: [["a", "b"]]}
     IacColor:
       type: object
       required: [color]

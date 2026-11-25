@@ -15,13 +15,14 @@
 package model
 
 import (
+	"encoding/base64"
 	"fmt"
 	"math"
+	"math/big"
 	"reflect"
 	"regexp"
 	"slices"
 	"sort"
-	"strconv"
 	"strings"
 	"time"
 	"unicode/utf8"
@@ -245,6 +246,12 @@ func iacOwnIssues(location string, s iacSubject, siblings map[string]*Type, isAr
 	}
 	h := found[0]
 	var problems []iacProblem
+	if s.attrs[1] == nil && s.attrs[2] == nil {
+		problems = append(problems, iacProblem{
+			"No request sends this field, so its iac knobs have no effect.",
+			"Remove the iac knobs, or put them on a field that the Create or Update request has.",
+		})
+	}
 	for _, other := range found[1:] {
 		if !reflect.DeepEqual(h, other) {
 			problems = append(problems, iacProblem{
@@ -268,7 +275,7 @@ func iacOwnIssues(location string, s iacSubject, siblings map[string]*Type, isAr
 func iacValueProblems(h *IaCHints, s iacSubject, siblings map[string]*Type, isArm bool) []iacProblem {
 	var out []iacProblem
 	for i, example := range h.Examples {
-		for _, message := range iacValueProblemsOf(s.typ, example, fmt.Sprintf("examples[%d]", i)) {
+		for _, message := range iacValueProblemsOf(s.typ, example, fmt.Sprintf("examples[%d]", i), i == 1) {
 			out = append(out, iacProblem{message, "Change the example to a value that the API accepts for this field, written as JSON."})
 		}
 	}
@@ -292,7 +299,7 @@ func iacValueProblems(h *IaCHints, s iacSubject, siblings map[string]*Type, isAr
 		if !ok || !req.HasEquals {
 			continue
 		}
-		for _, message := range iacValueProblemsOf(t, req.Equals, key+".equals") {
+		for _, message := range iacValueProblemsOf(t, req.Equals, key+".equals", false) {
 			out = append(out, iacProblem{message, "Change equals to a value that field " + req.Field + " accepts, written as JSON."})
 		}
 	}
@@ -311,10 +318,12 @@ func sortedNames(siblings map[string]*Type) []string {
 	return names
 }
 
-// iacValueProblemsOf returns why v is not a value of t. at names the value in the messages. A
+// iacValueProblemsOf returns why v is not a value of t. at names the value in the messages. update
+// is true for the update example: a field is required there when the Update request requires it,
+// and in any other value when the Create request requires it. A
 // type that the API holds in another shape than the model (a wrapper, a projection, a keyed map)
 // is not checked: its JSON shape is not the one of the model.
-func iacValueProblemsOf(t *Type, v any, at string) []string {
+func iacValueProblemsOf(t *Type, v any, at string, update bool) []string {
 	if t == nil || len(t.Wrappers) != 0 || t.Projected != nil || t.Keyed != nil || t.RequestWrapper != nil {
 		return nil
 	}
@@ -333,11 +342,11 @@ func iacValueProblemsOf(t *Type, v any, at string) []string {
 	case Number, Integer:
 		return iacNumberProblems(t, v, at)
 	case List, Set:
-		return iacListProblems(t, v, at)
+		return iacListProblems(t, v, at, update)
 	case Map:
-		return iacMapProblems(t, v, at)
+		return iacMapProblems(t, v, at, update)
 	case Object, OneOf:
-		return iacObjectProblems(t, v, at)
+		return iacObjectProblems(t, v, at, update)
 	}
 	return nil
 }
@@ -360,12 +369,26 @@ func iacStringProblems(t *Type, v any, at string) []string {
 			out = append(out, fmt.Sprintf("%s does not match the pattern %s.", at, t.Pattern))
 		}
 	}
-	if t.Format == "date-time" {
+	return append(out, iacFormatProblems(t.Format, s, at)...)
+}
+
+// iacFormatProblems checks the string formats that have one exact meaning. Another format is not checked.
+func iacFormatProblems(format, s, at string) []string {
+	switch format {
+	case "date-time":
 		if _, err := time.Parse(time.RFC3339Nano, s); err != nil {
-			out = append(out, fmt.Sprintf("%s is not an RFC 3339 time, for example \"2026-01-02T03:04:05Z\".", at))
+			return []string{fmt.Sprintf("%s is not an RFC 3339 time, for example \"2026-01-02T03:04:05Z\".", at)}
+		}
+	case "date":
+		if _, err := time.Parse(time.DateOnly, s); err != nil {
+			return []string{fmt.Sprintf("%s is not a date, for example \"2026-01-02\".", at)}
+		}
+	case "byte":
+		if _, err := base64.StdEncoding.DecodeString(s); err != nil {
+			return []string{fmt.Sprintf("%s is not base64 text.", at)}
 		}
 	}
-	return out
+	return nil
 }
 
 func iacEnumProblems(t *Type, v any, at string) []string {
@@ -382,22 +405,39 @@ func iacEnumProblems(t *Type, v any, at string) []string {
 }
 
 func iacNumberProblems(t *Type, v any, at string) []string {
-	f, ok := numberOf(v)
-	if !ok && t.WireString {
-		// The API writes a 64-bit number as a string, and accepts digits.
-		if s, isString := v.(string); isString {
-			if n, err := strconv.ParseFloat(s, 64); err == nil && !strings.ContainsAny(s, ".eE") {
-				f, ok = n, true
-			}
-		}
+	if t.Kind == Integer {
+		return iacIntegerProblems(t, v, at)
 	}
+	f, ok := numberOf(v)
 	if !ok {
 		return []string{fmt.Sprintf("%s is %s, want a number.", at, jsonKind(v))}
 	}
-	var out []string
-	if t.Kind == Integer && f != math.Trunc(f) {
-		out = append(out, fmt.Sprintf("%s is %v, want an integer.", at, f))
+	if t.Format == "float" && math.Abs(f) > math.MaxFloat32 {
+		return []string{fmt.Sprintf("%s is %v, which is out of range for float.", at, f)}
 	}
+	return iacLimitProblems(t, f, at)
+}
+
+// iacIntegerProblems checks an integer example. It keeps the exact value, so a 64-bit number is
+// not rounded, and it checks the range of the format (int32, uint32, int64, uint64).
+func iacIntegerProblems(t *Type, v any, at string) []string {
+	n, ok := integerOf(v, t.WireString)
+	if !ok {
+		if f, isNumber := numberOf(v); isNumber {
+			return []string{fmt.Sprintf("%s is %v, want an integer.", at, f)}
+		}
+		return []string{fmt.Sprintf("%s is %s, want an integer.", at, jsonKind(v))}
+	}
+	var out []string
+	if r, known := integerRanges[t.Format]; known && (n.Cmp(r[0]) < 0 || n.Cmp(r[1]) > 0) {
+		out = append(out, fmt.Sprintf("%s is %s, which is out of range for %s (%s to %s).", at, n, t.Format, r[0], r[1]))
+	}
+	f, _ := new(big.Float).SetInt(n).Float64()
+	return append(out, iacLimitProblems(t, f, at)...)
+}
+
+func iacLimitProblems(t *Type, f float64, at string) []string {
+	var out []string
 	if t.Minimum != nil && f < *t.Minimum {
 		out = append(out, fmt.Sprintf("%s is %v, the minimum is %v.", at, f, *t.Minimum))
 	}
@@ -407,7 +447,42 @@ func iacNumberProblems(t *Type, v any, at string) []string {
 	return out
 }
 
-func iacListProblems(t *Type, v any, at string) []string {
+var (
+	wireInteger   = regexp.MustCompile(`^-?[0-9]+$`)
+	integerRanges = map[string][2]*big.Int{
+		"int32":  {big.NewInt(math.MinInt32), big.NewInt(math.MaxInt32)},
+		"uint32": {big.NewInt(0), big.NewInt(math.MaxUint32)},
+		"int64":  {big.NewInt(math.MinInt64), big.NewInt(math.MaxInt64)},
+		"uint64": {big.NewInt(0), new(big.Int).SetUint64(math.MaxUint64)},
+	}
+)
+
+// integerOf returns the exact value of a JSON integer. A 64-bit number can be a string of digits,
+// when wireString is true. A number with a fraction is not an integer.
+func integerOf(v any, wireString bool) (*big.Int, bool) {
+	switch n := v.(type) {
+	case int:
+		return big.NewInt(int64(n)), true
+	case int64:
+		return big.NewInt(n), true
+	case uint64:
+		return new(big.Int).SetUint64(n), true
+	case float64:
+		if n != math.Trunc(n) || math.IsInf(n, 0) || math.IsNaN(n) {
+			return nil, false
+		}
+		i, _ := new(big.Float).SetFloat64(n).Int(nil)
+		return i, true
+	case string:
+		if !wireString || !wireInteger.MatchString(n) {
+			return nil, false
+		}
+		return new(big.Int).SetString(n, 10)
+	}
+	return nil, false
+}
+
+func iacListProblems(t *Type, v any, at string, update bool) []string {
 	items, ok := v.([]any)
 	if !ok {
 		return []string{fmt.Sprintf("%s is %s, want a list.", at, jsonKind(v))}
@@ -420,12 +495,15 @@ func iacListProblems(t *Type, v any, at string) []string {
 		out = append(out, fmt.Sprintf("%s has %d items, the maximum is %d.", at, len(items), *t.MaxItems))
 	}
 	for i, item := range items {
-		out = append(out, iacValueProblemsOf(t.Elem, item, fmt.Sprintf("%s[%d]", at, i))...)
+		out = append(out, iacValueProblemsOf(t.Elem, item, fmt.Sprintf("%s[%d]", at, i), update)...)
+		if t.Kind == Set && slices.ContainsFunc(items[:i], func(earlier any) bool { return reflect.DeepEqual(earlier, item) }) {
+			out = append(out, fmt.Sprintf("%s[%d] repeats an earlier item, but the items of a set are unique.", at, i))
+		}
 	}
 	return out
 }
 
-func iacMapProblems(t *Type, v any, at string) []string {
+func iacMapProblems(t *Type, v any, at string, update bool) []string {
 	entries, ok := v.(map[string]any)
 	if !ok {
 		return []string{fmt.Sprintf("%s is %s, want an object that maps keys to values.", at, jsonKind(v))}
@@ -438,12 +516,12 @@ func iacMapProblems(t *Type, v any, at string) []string {
 		out = append(out, fmt.Sprintf("%s has %d entries, the maximum is %d.", at, len(entries), *t.MaxItems))
 	}
 	for _, key := range sortedKeys(entries) {
-		out = append(out, iacValueProblemsOf(t.Elem, entries[key], at+"."+key)...)
+		out = append(out, iacValueProblemsOf(t.Elem, entries[key], at+"."+key, update)...)
 	}
 	return out
 }
 
-func iacObjectProblems(t *Type, v any, at string) []string {
+func iacObjectProblems(t *Type, v any, at string, update bool) []string {
 	object, ok := v.(map[string]any)
 	if !ok {
 		return []string{fmt.Sprintf("%s is %s, want an object.", at, jsonKind(v))}
@@ -463,10 +541,14 @@ func iacObjectProblems(t *Type, v any, at string) []string {
 			out = append(out, fmt.Sprintf("%s.%s is read only: the server sets it.", at, key))
 			continue
 		}
-		out = append(out, iacValueProblemsOf(f.Type, object[key], at+"."+key)...)
+		out = append(out, iacValueProblemsOf(f.Type, object[key], at+"."+key, update)...)
 	}
 	for _, f := range t.Fields {
-		if _, set := object[f.Name]; !set && f.Create != nil && f.Create.Required && t.Kind == Object && !slices.Contains(armNames(t.Groups, false), f.Name) {
+		attrs := f.Create
+		if update {
+			attrs = f.Update
+		}
+		if _, set := object[f.Name]; !set && attrs != nil && attrs.Required && t.Kind == Object && !slices.Contains(armNames(t.Groups, false), f.Name) {
 			out = append(out, fmt.Sprintf("%s does not set the required field %q.", at, f.Name))
 		}
 	}
