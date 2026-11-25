@@ -224,6 +224,10 @@ func TestMemberBatchWriteIssues(t *testing.T) {
 }
 
 // memberCreateResult is the createResult line of the members contract.
+// memberWithLoginNotString makes the Member's login an integer, so a property named
+// login on the result component is not a string.
+var memberWithLoginNotString = []string{"login: {type: string, minLength: 0}", "login: {type: integer}"}
+
 func memberCreateResult() *CreateResultLine {
 	return &CreateResultLine{Resource: "member", Status: "status", Created: []string{"CREATE_MEMBER_STATUS_CREATED"}, Message: "message"}
 }
@@ -247,6 +251,13 @@ func TestMemberCreateResult(t *testing.T) {
 	if r := buildMember(t, memberSource(t, memberWithItemPaths), p); r.Create.Response.Result.Message != "" {
 		t.Fatalf("message without a line: %+v", r.Create.Response.Result)
 	}
+	p.CreateResult.MatchUsername = "login"
+	r = buildMember(t, memberSource(t, memberWithItemPaths), p)
+	if r.Create.Response.Result.MatchUsername != "login" {
+		t.Fatalf("match username: %+v", r.Create.Response.Result)
+	}
+	p.CreateResult.MatchUsername = "member"
+	memberIssue(t, memberSource(t, memberWithItemPaths, memberWithLoginNotString), p, "CREATE_RESULT_MATCH_USERNAME_NOT_STRING", `no string property "member"`)
 }
 
 func TestMemberCreateResultIssues(t *testing.T) {
@@ -302,6 +313,14 @@ func TestMemberCreateResultIssues(t *testing.T) {
 		"message not string": {
 			policy: line(func(l *CreateResultLine) { l.Message = "member" }),
 			code:   "CREATE_RESULT_MESSAGE_NOT_STRING", message: `no string property "member"`,
+		},
+		"match username not string": {
+			policy: line(func(l *CreateResultLine) { l.MatchUsername = "member" }),
+			code:   "CREATE_RESULT_MATCH_USERNAME_NOT_STRING", message: `no string property "member"`,
+		},
+		"match username not a field": {
+			policy: line(func(l *CreateResultLine) { l.MatchUsername = "nope" }),
+			code:   "CREATE_RESULT_MATCH_USERNAME_NOT_STRING", message: `no string property "nope"`,
 		},
 		"without batch write": {
 			policy: withoutBatch, code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.batchWrite.createResult needs api.batchWrite",

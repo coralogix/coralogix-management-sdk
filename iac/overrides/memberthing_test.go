@@ -52,12 +52,12 @@ func TestBatchWritePolicy(t *testing.T) {
 }
 
 func TestCreateResultPolicy(t *testing.T) {
-	e := exceptionsOf(t, "api:\n  batchWrite:\n    createResult: {resource: member, status: status, created: [CREATED], message: message}\n")
+	e := exceptionsOf(t, "api:\n  batchWrite:\n    createResult: {resource: member, status: status, created: [CREATED], message: message, matchUsername: login}\n")
 	if err := e.API.Check(); err != nil {
 		t.Fatal(err)
 	}
 	r := e.Policy().CreateResult
-	if r == nil || r.Resource != "member" || r.Status != "status" || r.Message != "message" || !slices.Equal(r.Created, []string{"CREATED"}) {
+	if r == nil || r.Resource != "member" || r.Status != "status" || r.Message != "message" || r.MatchUsername != "login" || !slices.Equal(r.Created, []string{"CREATED"}) {
 		t.Fatalf("create result %+v", r)
 	}
 	for _, line := range []string{"{status: status, created: [CREATED]}", "{resource: member, created: [CREATED]}", "{resource: member, status: status}"} {

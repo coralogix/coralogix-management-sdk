@@ -29,7 +29,7 @@ func memberPolicy() model.Policy {
 		Existing: true, RequestWrapper: "template", UpdateIDInBody: true, UpdateIDOutsideWrapper: true, ServerSetID: true,
 		IDProperty: "memberId", ReadOnly: []string{"Member.memberId"},
 		BatchWrite:   true,
-		CreateResult: &model.CreateResultLine{Resource: "member", Status: "status", Created: []string{"CREATE_MEMBER_STATUS_CREATED"}, Message: "message"},
+		CreateResult: &model.CreateResultLine{Resource: "member", Status: "status", Created: []string{"CREATE_MEMBER_STATUS_CREATED"}, Message: "message", MatchUsername: "login"},
 		CreateValues: map[string]string{"onboardingMode": "ONBOARDING_MODE_NO_INVITE"},
 		GetFromList:  true, ListFilters: map[string]string{"login": "login"}, GetQuery: map[string]string{"status": "MEMBER_STATUS_ACTIVE"},
 		DeleteIDs: "memberIds", DeleteValues: map[string]string{"status": "MEMBER_STATUS_INACTIVE"},
@@ -68,6 +68,7 @@ func TestMemberThingSDKNames(t *testing.T) {
 		"create.result.status":                                 {{Kind: KindField, Owner: "CreateMemberResult", Name: "Status", Want: "*CreateMemberStatus"}, {Kind: KindType, Name: "CreateMemberStatus"}},
 		"create.result.status.CREATE_MEMBER_STATUS_CREATED":    {{Kind: KindConst, Name: "CREATEMEMBERSTATUS_CREATE_MEMBER_STATUS_CREATED"}},
 		"create.result.message":                                {{Kind: KindField, Owner: "CreateMemberResult", Name: "Message", Want: "*string"}},
+		"create.result.login":                                  {{Kind: KindField, Owner: "CreateMemberResult", Name: "Login", Want: "*string"}},
 		"get": {
 			{Kind: KindMethod, Owner: "MembersServiceAPIService", Name: "MembersServiceSearchMembers", Want: "func(ctx context.Context) ApiMembersServiceSearchMembersRequest"},
 			{Kind: KindType, Name: "ApiMembersServiceSearchMembersRequest"},
