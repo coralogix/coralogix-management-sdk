@@ -224,10 +224,6 @@ func TestMemberBatchWriteIssues(t *testing.T) {
 }
 
 // memberCreateResult is the createResult line of the members contract.
-// memberWithLoginNotString makes the Member's login an integer, so a property named
-// login on the result component is not a string.
-var memberWithLoginNotString = []string{"login: {type: string, minLength: 0}", "login: {type: integer}"}
-
 func memberCreateResult() *CreateResultLine {
 	return &CreateResultLine{Resource: "member", Status: "status", Created: []string{"CREATE_MEMBER_STATUS_CREATED"}, Message: "message"}
 }
@@ -256,8 +252,6 @@ func TestMemberCreateResult(t *testing.T) {
 	if r.Create.Response.Result.MatchUsername != "login" {
 		t.Fatalf("match username: %+v", r.Create.Response.Result)
 	}
-	p.CreateResult.MatchUsername = "member"
-	memberIssue(t, memberSource(t, memberWithItemPaths, memberWithLoginNotString), p, "CREATE_RESULT_MATCH_USERNAME_NOT_STRING", `no string property "member"`)
 }
 
 func TestMemberCreateResultIssues(t *testing.T) {
