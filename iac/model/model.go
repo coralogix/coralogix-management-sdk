@@ -351,6 +351,9 @@ type Attrs struct {
 	Required  bool    // in the parent "required" list
 	Presence  bool    // x-coralogix-presence: true
 	Default   *string // YAML text of "default", nil when there is none
+	// IaC are the hints of x-coralogix-iac. They change only the tests that a tool generates.
+	// Use ResourceField.IaC or Field.IaC, which look in the response and both requests.
+	IaC *IaCHints
 	// ReadOnly: readOnly: true. In a request, the server sets the field, so the request does not send it.
 	ReadOnly bool
 }
@@ -377,6 +380,10 @@ type OneOfGroup struct {
 	// AllowNone: the value can have no arm set. When Create sends the value,
 	// it is the Create rule, which the client configuration follows.
 	AllowNone bool
+	// UpdateRule: UpdateAllowNone is the "no arm" rule of the Update request. AllowNone is the Create
+	// rule after the merge (the client follows Create), and Update can allow no arm where Create
+	// requires one. Only the test hints read it: it does not change AllowNone or any request type.
+	UpdateRule, UpdateAllowNone bool
 }
 
 // Type is the type of a field.
@@ -414,6 +421,8 @@ type Type struct {
 	Elem        *Type    // List, Set, Map
 	Fields      []*Field // Object: the properties; OneOf: the arms
 	AllowNone   bool     // OneOf: the value can have no arm set, as in OneOfGroup
+	// UpdateRule and UpdateAllowNone are the Update rule of a OneOf, as in OneOfGroup.
+	UpdateRule, UpdateAllowNone bool
 	// Groups are the oneOf groups of an Object that also has normal fields,
 	// or has more than one group. Each arm is one of Fields.
 	Groups []OneOfGroup

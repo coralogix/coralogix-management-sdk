@@ -166,6 +166,44 @@ When Create and Get hold a list and Update holds the same list in a one-property
 
 A `oneOf` arm is a field that is set or not set, so it is allowed to carry `x-coralogix-presence`: the OpenAPI fork writes the mark on a scalar arm (a wrapped bool, string, or number), and it states what the arm already is. Any other attribute on an arm (a default, `required`, `readOnly`) is still an error. An enum of an existing resource may have its zero value only, for example `LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED`: the value is the zero value, as the first value of every other enum of an existing resource is, and the resource names how a tool shows it. A new resource still needs a business value next to the zero value.
 
+## Hints for generated tests
+
+The API owner can put facts about a field in the proto: `openapiv3_field.iac`. The OpenAPI fork writes them as `x-coralogix-iac` on the property schema, next to a `$ref` when the property is one. The model reads them into `Attrs.IaC`. A hint never changes the type, the lifecycle, or any other fact of the resource. It only tells a tool what to put in the tests that it generates.
+
+```yaml
+colors:
+  type: object
+  additionalProperties: {$ref: '#/components/schemas/Color'}
+  x-coralogix-iac:
+    examples: [{"cpu": {"color": "#ff0000"}}, {"cpu": {"color": "#00ff00"}}]
+priority:
+  type: string
+  x-coralogix-iac:
+    conflictsWith: [note]
+    requires: [{field: mode, equals: "FAST"}]
+```
+
+| Key | Field of `IaCHints` | Meaning |
+|---|---|---|
+| `examples` | `Examples []any` | Values as the API writes them. `[0]` is for a create, `[1]` is for an update. A map or an object example holds the whole value. |
+| `requiredByApi` | `RequiredByAPI` | The API refuses a create without the field. |
+| `conflictsWith` | `ConflictsWith` | Sibling fields that the API refuses together with this field. |
+| `requires` | `Requires` | Sibling fields that the API needs when this field is set. `Equals` is set when `HasEquals` is true. |
+| `armFixed` | `ArmFixed` | A oneOf arm: an update cannot switch to or from it. |
+
+A tool reads the hints of a field with `ResourceField.IaC()` or `Field.IaC()`. The hints can sit on the field in the response, in the Create request, or in the Update request. The method returns the first one in that order. Names are JSON names, as in `Field.Name`.
+
+`Validate` reports `IAC_HINT_INVALID` when a hint cannot hold:
+
+- an example does not fit the type of the field: a wrong JSON kind, a value that is not in the enum (or is its zero value), a number that breaks the limits, a string that breaks `minLength`, `maxLength`, or `pattern`, an object key that is not a field, a required field that is missing, or two arms of one oneOf;
+- `requires.equals` does not fit the type of the required field;
+- a name in `conflictsWith` or `requires` is not a sibling field, or is the field itself;
+- `armFixed` is on a field that is not an arm;
+- a key has the wrong shape (for example `requiredByApi: maybe`);
+- the response and a request carry different hints for one field.
+
+A type that the API holds in another shape than the model (a wrapper, a projected list, a keyed map) gets no example check. The reader ignores keys that it does not know, so an older SDK works with a newer fork.
+
 ## A field that only the requests have
 
 A Create or Update body can have a top-level field that the resource component does not have, such as a `teamId` that the API reads only on write. The model reports it as `FIELD_LIFECYCLE_UNSUPPORTED`. A `skip` line of the resource component can name it: the model then skips it before the lifecycle check, the enum checks, and the other field checks, and Build does not add it, so the generated requests never send it. A request that requires the field still makes the line an error (`SKIP_REQUIRED_FIELD`).

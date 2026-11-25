@@ -63,6 +63,7 @@ func ValidateWithPolicy(doc *v3.Document, name string, ids OperationIDs, p Polic
 			report = append(report, buildIssue(err))
 		} else {
 			report = append(report, validateBuiltResource(r)...)
+			report = append(report, iacHintIssues(r)...)
 			report = append(report, componentNameCollisions(resourceType(r))...)
 		}
 		if listErr != nil {

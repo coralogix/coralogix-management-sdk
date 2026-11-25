@@ -1004,7 +1004,8 @@ var refSiblingAllowed = map[string]bool{
 }
 
 // refSiblingConstraints returns the keywords next to a $ref outside refSiblingAllowed, foreign x-
-// extensions, and x-coralogix-presence. The type comes from the target, so these would be lost.
+// extensions, x-coralogix-presence, and x-coralogix-iac. The type comes from the target, so these
+// would be lost.
 func refSiblingConstraints(proxy *base.SchemaProxy) []string {
 	node := proxy.GetValueNode()
 	if node == nil || node.Kind != yaml.MappingNode {
@@ -1017,9 +1018,10 @@ func refSiblingConstraints(proxy *base.SchemaProxy) []string {
 	var out []string
 	for i := 0; i+1 < len(node.Content); i += 2 {
 		key := node.Content[i].Value
-		// A foreign x- extension is never read. Of the Coralogix extensions, only presence
-		// describes the field itself; the others describe the type, which comes from the target.
-		if !refSiblingAllowed[key] && (!strings.HasPrefix(key, "x-") || strings.HasPrefix(key, "x-coralogix-") && key != extPresence) {
+		// A foreign x- extension is never read. Of the Coralogix extensions, only presence and
+		// the iac hints describe the field itself; the others describe the type, which comes
+		// from the target.
+		if !refSiblingAllowed[key] && (!strings.HasPrefix(key, "x-") || strings.HasPrefix(key, "x-coralogix-") && key != extPresence && key != extIac) {
 			out = append(out, key)
 		}
 	}
@@ -1498,6 +1500,7 @@ func attrsOf(parent *base.Schema, name string, proxy *base.SchemaProxy) (Attrs, 
 		v := s.Default.Value
 		a.Default = &v
 	}
+	a.IaC = iacOf(s)
 	return a, nil
 }
 
@@ -1782,6 +1785,7 @@ func oneOfGroups(s *base.Schema, path string, fields []*Field) ([]OneOfGroup, er
 // not. Any other attribute, such as a default or a required mark, would mean something else.
 func armAttrs(a Attrs) Attrs {
 	a.Presence = false
+	a.IaC = nil // test hints, such as arm_fixed, say nothing about the group
 	return a
 }
 
