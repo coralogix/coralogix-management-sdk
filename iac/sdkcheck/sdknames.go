@@ -624,10 +624,17 @@ func (s *resolver) writeResult(r *model.Resource, path, resp string, result *mod
 	for _, v := range result.Created {
 		s.add(Ref{Path: path + ".result." + result.Status + "." + v, Kind: KindConst, Name: enumConstName(status, v), Rule: RuleEnumValue})
 	}
-	if result.Message == "" {
-		return nil
+	if result.Message != "" {
+		if err := s.field(path+".result."+result.Message, item, result.Message, &model.Type{Kind: model.String}, true); err != nil {
+			return err
+		}
 	}
-	return s.field(path+".result."+result.Message, item, result.Message, &model.Type{Kind: model.String}, true)
+	if result.MatchUsername != "" {
+		if err := s.field(path+".result."+result.MatchUsername, item, result.MatchUsername, &model.Type{Kind: model.String}, true); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 // inlineBodyName is the SDK type of an inline request body. openapi-generator

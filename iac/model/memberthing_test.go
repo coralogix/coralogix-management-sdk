@@ -247,6 +247,11 @@ func TestMemberCreateResult(t *testing.T) {
 	if r := buildMember(t, memberSource(t, memberWithItemPaths), p); r.Create.Response.Result.Message != "" {
 		t.Fatalf("message without a line: %+v", r.Create.Response.Result)
 	}
+	p.CreateResult.MatchUsername = "login"
+	r = buildMember(t, memberSource(t, memberWithItemPaths), p)
+	if r.Create.Response.Result.MatchUsername != "login" {
+		t.Fatalf("match username: %+v", r.Create.Response.Result)
+	}
 }
 
 func TestMemberCreateResultIssues(t *testing.T) {
@@ -302,6 +307,14 @@ func TestMemberCreateResultIssues(t *testing.T) {
 		"message not string": {
 			policy: line(func(l *CreateResultLine) { l.Message = "member" }),
 			code:   "CREATE_RESULT_MESSAGE_NOT_STRING", message: `no string property "member"`,
+		},
+		"match username not string": {
+			policy: line(func(l *CreateResultLine) { l.MatchUsername = "member" }),
+			code:   "CREATE_RESULT_MATCH_USERNAME_NOT_STRING", message: `no string property "member"`,
+		},
+		"match username not a field": {
+			policy: line(func(l *CreateResultLine) { l.MatchUsername = "nope" }),
+			code:   "CREATE_RESULT_MATCH_USERNAME_NOT_STRING", message: `no string property "nope"`,
 		},
 		"without batch write": {
 			policy: withoutBatch, code: "RESOURCE_LIFECYCLE_INCOMPLETE", message: "api.batchWrite.createResult needs api.batchWrite",

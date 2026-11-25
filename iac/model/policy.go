@@ -624,6 +624,10 @@ type KeyedLine struct {
 type CreateResultLine struct {
 	Resource, Status, Message string
 	Created                   []string
+	// MatchUsername names the string property of the result that echoes the username of the
+	// request item ("" for none): the create joins the results to the request on it, so a
+	// result of another item cannot pass for this one.
+	MatchUsername string
 }
 
 // EnumValue is an accepted API value of an enum and the name that the generated resource gives it.
