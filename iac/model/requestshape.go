@@ -323,14 +323,14 @@ func copyProperties(obj *base.Schema, skip string) *orderedmap.Map[string, *base
 
 // readRequestComponents records the components of the request wrapper property of the Create and
 // Update bodies, and the objects that each request path goes through, so a tool can name the types
-// that the SDK body holds. Without a request wrapper it records nothing.
+// that the SDK body holds. Without a request wrapper there is no wrapper component, but a path can
+// still go through objects of the body, such as keyPermissions.presets.
 func (r *Resource) readRequestComponents(ops map[verb]foundOp) {
-	if r.Policy.RequestWrapper == "" {
-		return
-	}
-	for v, o := range map[verb]*Operation{opCreate: &r.Create, opUpdate: &r.Update} {
-		if op := ops[v].op; op != nil {
-			o.RequestComponent = r.Policy.wrapperComponent(op)
+	if r.Policy.RequestWrapper != "" {
+		for v, o := range map[verb]*Operation{opCreate: &r.Create, opUpdate: &r.Update} {
+			if op := ops[v].op; op != nil {
+				o.RequestComponent = r.Policy.wrapperComponent(op)
+			}
 		}
 	}
 	for _, f := range r.Fields {
