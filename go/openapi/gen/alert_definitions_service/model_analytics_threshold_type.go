@@ -38,7 +38,7 @@ type AnalyticsThresholdType struct {
 	TargetColumn *string `json:"targetColumn,omitempty" validate:"regexp=^[\\s\\S]*$"`
 	// The evaluation window duration in minutes
 	TimeframeMinutes *int32 `json:"timeframeMinutes,omitempty"`
-	// Whether each result row is treated as a separate permutation. Defaults to true for threshold alerts as permutation count is easier to estimate.
+	// Deprecated: the service derives this value from the DataPrime query. Whether each result row is treated as a separate permutation. When omitted, it is true when the query has group-by keys (for example `groupby`) and false otherwise. A sent value that disagrees with the query is rejected.
 	UseRowsAsPermutations *bool `json:"useRowsAsPermutations,omitempty"`
 	AdditionalProperties map[string]interface{}
 	additionalPropertiesFromUnmarshal bool
