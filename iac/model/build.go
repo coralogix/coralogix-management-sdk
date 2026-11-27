@@ -1434,7 +1434,7 @@ func (r *Resource) resourceField(name string, createBody, updateBody, getSchema 
 			withoutLimits(requests[i])
 		}
 	}
-	if err := mergeRequests(fieldLocation(r.Name, name), f.Type, requests[0], requests[1]); err != nil {
+	if err := mergeFoldedRequests(fieldLocation(r.Name, name), f.Type, requests[0], requests[1], len(r.Policy.CreateAsOf(r.Name, name)) != 0); err != nil {
 		return nil, err
 	}
 	if wrapper != nil {
