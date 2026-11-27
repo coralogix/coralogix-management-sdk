@@ -1326,7 +1326,7 @@ func fieldTypeIssues(p Policy, name, field, location string, gp, cp, up *base.Sc
 			withoutLimits(requests[i])
 		}
 	}
-	if err := mergeRequests(location, get, requests[0], requests[1]); errors.As(err, &contract) {
+	if err := mergeFoldedRequests(location, get, requests[0], requests[1], len(p.CreateAsOf(name, field)) != 0); errors.As(err, &contract) {
 		return issue.Report{contract.issue()}
 	}
 	return nil

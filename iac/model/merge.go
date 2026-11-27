@@ -89,6 +89,13 @@ func cloneType(t *Type) *Type {
 // gets the lifecycle of a top-level field: Create, Update, and Get make it
 // normal, Create and Get immutable, and Get only computed.
 func mergeRequests(location string, get, create, update *Type) error {
+	return mergeFoldedRequests(location, get, create, update, false)
+}
+
+// mergeFoldedRequests is mergeRequests for a field that can have a createAs line. folded tells that
+// create is the object that foldCreateBody built from flat Create fields: it has only those
+// properties.
+func mergeFoldedRequests(location string, get, create, update *Type, folded bool) error {
 	if create != nil {
 		if err := mergeRequest(location, get, create, opCreate); err != nil {
 			return err
@@ -99,7 +106,7 @@ func mergeRequests(location string, get, create, update *Type) error {
 			return err
 		}
 	}
-	return classifyFields(location, get, create != nil, update != nil)
+	return classifyFields(location, get, create != nil, update != nil, folded)
 }
 
 // mergeRequest checks that req, the type of a value in the op request, is the
@@ -374,26 +381,29 @@ func recordUpdateRule(get, update *Type) {
 }
 
 // classifyFields sets the Behavior of the nested fields of t. create and
-// update tell whether the Create and the Update requests send the value of t.
-func classifyFields(location string, t *Type, create, update bool) error {
+// update tell whether the Create and the Update requests send the value of t. folded tells that
+// the Create request sends t as the object that a createAs line folds from flat fields.
+func classifyFields(location string, t *Type, create, update, folded bool) error {
 	if t == nil {
 		return nil
 	}
 	switch t.Kind {
 	case List, Set:
-		return classifyFields(location+"[]", t.Elem, create, update)
+		return classifyFields(location+"[]", t.Elem, create, update, folded)
 	case Map:
-		return classifyFields(location+"{}", t.Elem, create, update)
+		return classifyFields(location+"{}", t.Elem, create, update, folded)
 	case Object, OneOf:
 	default:
 		return nil
 	}
 	for _, f := range t.Fields {
 		at := location + "." + f.Name
-		if err := classifyField(at, f, create, update); err != nil {
+		if err := classifyField(at, f, create, update, folded); err != nil {
 			return err
 		}
-		if err := classifyFields(at, f.Type, create && f.Create != nil, update && f.Update != nil); err != nil {
+		// A property that the fold leaves to the server is a computed value, as one that only Get has.
+		serverSet := folded && f.Create == nil
+		if err := classifyFields(at, f.Type, create && f.Create != nil, update && f.Update != nil && !serverSet, false); err != nil {
 			return err
 		}
 	}
@@ -401,8 +411,8 @@ func classifyFields(location string, t *Type, create, update bool) error {
 }
 
 // classifyField sets the Behavior of f, a field of an object that the
-// Create and the Update requests send when create and update are true.
-func classifyField(at string, f *Field, create, update bool) error {
+// Create and the Update requests send when create and update are true. folded is as in classifyFields.
+func classifyField(at string, f *Field, create, update, folded bool) error {
 	inCreate, inUpdate := create && f.Create != nil, update && f.Update != nil
 	switch {
 	case !create && !update:
@@ -415,6 +425,11 @@ func classifyField(at string, f *Field, create, update bool) error {
 		if inCreate {
 			f.Behavior = Normal
 		}
+		return nil
+	case folded && !inCreate && inUpdate:
+		// A createAs line sends only some properties of the parent at create, as flat fields. The
+		// user cannot set another property then, so the server sets it. Update and Get have it.
+		f.Behavior = Computed
 		return nil
 	}
 	behavior, err := Classify(inCreate, inUpdate, true)
